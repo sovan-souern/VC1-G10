@@ -63,7 +63,7 @@
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
     <li class="menu-item active">
-      <a href="../dashboard/list.php" class="menu-link">
+      <a href="/dashboard" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
@@ -71,29 +71,19 @@
 
     <!-- Layouts -->
     <li class="menu-item">
-      <a href="" class="menu-link menu-toggle">
+      <a href="/E-comerce" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div data-i18n="Layouts">E-Comerce</div>
       </a>
 
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="" class="menu-link">
-            <div data-i18n="Without menu">Product</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="" class="menu-link">
-            <div data-i18n="Without navbar">Category</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="/order" class="menu-link">
             <div data-i18n="Container">Orders</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="/invoice" class="menu-link">
             <div data-i18n="Fluid">Invoice</div>
           </a>
         </li>
@@ -103,16 +93,50 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="/users" class="menu-link">
             <div data-i18n="Blank">User</div>
           </a>
         </li>
       </ul>
-    </li><li class="menu-item active">
-      <a href="" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-        <div data-i18n="Analytics">Inventory</div>
+    </li>
+    <li class="menu-item">
+      <a href="/E-comerce" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div data-i18n="Layouts">Inventory</div>
       </a>
+
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/order" class="menu-link">
+            <div data-i18n="Container">Product List</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/invoice" class="menu-link">
+            <div data-i18n="Fluid">Add Product</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="" class="menu-link">
+            <div data-i18n="Blank">Categories List</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/users" class="menu-link">
+            <div data-i18n="Blank">Add Product</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/users" class="menu-link">
+            <div data-i18n="Blank">Brand</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/users" class="menu-link">
+            <div data-i18n="Blank">Add Brand</div>
+          </a>
+        </li>
+      </ul>
     </li>
 
 
@@ -120,59 +144,59 @@
       <span class="menu-header-text">Pages</span>
     </li>
     <li class="menu-item">
-      <a href="" class="menu-link menu-toggle">
+      <a href="/" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-dock-top"></i>
         <div data-i18n="Account Settings">Account Settings</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="/update-profile" class="menu-link">
             <div data-i18n="Account">Update Profile</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="reset-password" class="menu-link">
             <div data-i18n="Notifications">Reset Password</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="view-login" class="menu-link">
             <div data-i18n="Connections">View Login</div>
           </a>
         </li>
       </ul>
     </li>
     <li class="menu-item">
-      <a href="" class="menu-link menu-toggle">
+      <a href="/" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
         <div data-i18n="Authentications">Authentications</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="" class="menu-link" target="_blank">
+          <a href="login" class="menu-link" target="_blank">
             <div data-i18n="Basic">Login</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link" target="_blank">
+          <a href="forgot-password" class="menu-link" target="_blank">
             <div data-i18n="Basic">Forgot Password</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link" target="_blank">
+          <a href="/logout" class="menu-link" target="_blank">
             <div data-i18n="Basic">Logout</div>
           </a>
         </li>
       </ul>
     </li>
     <li class="menu-item">
-      <a href="" class="menu-link menu-toggle">
+      <a href="/" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-cube-alt"></i>
         <div data-i18n="Misc">Misc</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="/404" class="menu-link">
             <div data-i18n="Error">Error</div>
           </a>
         </li>

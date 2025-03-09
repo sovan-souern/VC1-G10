@@ -1,7 +1,7 @@
 <!-- Code for get data -->
 
 <?php
-require_once 'Models/CategoriesModel.php';
+require_once 'Models/ProductModel.php';
 require_once 'BaseController.php';
 
 class ProductController extends BaseController
