@@ -6,6 +6,7 @@ require_once 'Controllers/ProductController.php';
 require_once 'Controllers/ShopownerController.php'; 
 require_once 'Controllers/OrderController.php'; 
 require_once 'Controllers/DashboardController.php';
+require_once 'Controllers/NotificationController.php';
 
 require_once "Controllers/InvoiceController.php";
 
@@ -34,5 +35,12 @@ $routes->get('/shop-owner', [ShopOwnerController::class, 'index']);
 $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // user
+
+// notification 
+
+$routes->get('/notifications', [NotificationController::class, 'notifications']); 
+
+
+
 $routes->get('/users', [UserController::class, 'index']);
 $routes->dispatch();
