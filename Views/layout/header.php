@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="../Views/assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../Views/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../Views/assets/css/demo.css" />
+    <link rel="stylesheet" href="../Views/assets/css/login.css" />
+    <link rel="stylesheet" href="../Views/assets/css/signup.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../Views/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />

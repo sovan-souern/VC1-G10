@@ -173,7 +173,7 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="login" class="menu-link" target="_blank">
+          <a href="/login" class="menu-link" target="_blank">
             <div data-i18n="Basic">Login</div>
           </a>
         </li>
@@ -183,7 +183,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="/logout" class="menu-link" target="_blank">
+          <a href="/signup" class="menu-link" target="_blank">
             <div data-i18n="Basic">Logout</div>
           </a>
         </li>
@@ -314,7 +314,7 @@
     </li>
     <li><div class="dropdown-divider"></div></li>
     <li>
-      <a class="dropdown-item" href="">
+      <a class="dropdown-item" href="/signup">
         <i class="bx bx-power-off me-2"></i>
         <span class="align-middle">Log Out</span>
       </a>
