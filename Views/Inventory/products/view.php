@@ -62,21 +62,16 @@
                                 <div class="slider-product-details">
                                     <div class="owl-carousel owl-theme product-slide">
                                         <div class="slider-product">
-                                            <img src="assets/img/product/product69.jpg" alt="img">
+                                            <img src="/Views/assets/img1/product/product69.jpg" alt="img">
                                             <h4>macbookpro.jpg</h4>
                                             <h6>581kb</h6>
-                                        </div>
-                                        <div class="slider-product">
-                                            <img src="assets/img/product/product69.jpg" alt="img">
-                                            <h4>macbookpro.jpg</h4>
-                                            <h6>581kb</h6>
-                                        </div>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <button type="button" class="btn btn-warning">Back</button> 
             </div>
         </div>
