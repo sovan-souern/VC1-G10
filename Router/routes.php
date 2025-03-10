@@ -41,7 +41,7 @@ $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // notification 
 
-$routes->get('/notifications', [NotificationController::class, 'notifications']); 
+$routes->get('/notifications', [NotificationController::class, 'index']); 
 
 
 
