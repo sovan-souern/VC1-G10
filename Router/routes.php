@@ -5,7 +5,9 @@ require_once 'Controllers/CategoryController.php';
 require_once 'Controllers/ProductController.php'; 
 require_once 'Controllers/ShopownerController.php'; 
 require_once 'Controllers/OrderController.php'; 
-require_once 'Controllers/DashboardController.php'; 
+require_once 'Controllers/DashboardController.php';
+
+require_once "Controllers/InvoiceController.php";
 
 $routes = new Router();
 
@@ -22,35 +24,15 @@ $routes->put('/user/update', [UserController::class, 'update']);
 $routes->delete('/user/delete', [UserController::class, 'destroy']);
 $routes->get('/user/show', [UserController::class, 'show']);
 
+// Order
+$routes->get('/order', [OrderController::class, 'department']);
 
+// shop owner
+$routes->get('/shop-owner', [ShopOwnerController::class, 'index']);
 
-// department
-$routes->get('/department', [DepartmentController::class, 'department']);
-$routes->get('/department/create', [DepartmentController::class, 'create']);
-$routes->post('/department/store', [DepartmentController::class, 'store']);
-$routes->get('/department/edit', [DepartmentController::class, 'edit']);
-$routes->put('/department/update', [DepartmentController::class, 'update']);
-$routes->delete('/department/delete', [DepartmentController::class, 'destroy']);
+// invoice
+$routes->get('/invoice', [InvoiceController::class, 'index']);
 
-
-
-// employee
-$routes->get('/employee', [EmployeeController::class, 'index']);
-$routes->get('/employees/create', [EmployeeController::class, 'create']);
-$routes->post('/employees/store', [EmployeeController::class, 'store']);
-// Route for editing the employee
-$routes->get('/employees/edit', [EmployeeController::class, 'edit']);
-
-// Route for updating the employee (POST request)
-$routes->post('/employees/update', [EmployeeController::class, 'update']);
-
-$routes->post('/employees/delete', [EmployeeController::class, 'destroy']);
-
-
-// categories
-$routes->get('/categories', [CategoryController::class, 'categories']);
-
-// product
-$routes->get('/product', [ProductController::class, 'product']);
-
+// user
+$routes->get('/users', [UserController::class, 'index']);
 $routes->dispatch();
