@@ -2,6 +2,7 @@
  * Dashboard Analytics
  */
 
+
 'use strict';
 
 (function () {
