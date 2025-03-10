@@ -34,13 +34,7 @@ class ProductController extends BaseController
     function view()
     {
         $this->views('/Inventory/products/view.php');
-        // echo "1:";
+        
 
-    }
-}
-
-
-
-
-// new code
-
+    // }
+}}
