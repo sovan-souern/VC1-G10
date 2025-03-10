@@ -63,7 +63,7 @@
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
     <li class="menu-item active">
-      <a href="/dashboard" class="menu-link">
+      <a href="/" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
@@ -88,7 +88,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="/shop-Owner" class="menu-link">
             <div data-i18n="Blank">Shop owner</div>
           </a>
         </li>
@@ -107,32 +107,32 @@
 
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/order" class="menu-link">
+          <a href="/product" class="menu-link">
             <div data-i18n="Container">Product List</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/invoice" class="menu-link">
+          <a href="/product/add-product" class="menu-link">
             <div data-i18n="Fluid">Add Product</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="/category" class="menu-link">
             <div data-i18n="Blank">Categories List</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/users" class="menu-link">
-            <div data-i18n="Blank">Add Product</div>
+          <a href="/category/create" class="menu-link">
+            <div data-i18n="Blank">Add category</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/users" class="menu-link">
+          <a href="/brand" class="menu-link">
             <div data-i18n="Blank">Brand</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/users" class="menu-link">
+          <a href="/brand/create" class="menu-link">
             <div data-i18n="Blank">Add Brand</div>
           </a>
         </li>

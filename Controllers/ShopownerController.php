@@ -13,7 +13,7 @@ class ShopOwnerController extends BaseController
 
     function index()
     {
-        echo "10";
+        echo "Shop owner";
        
     }
 

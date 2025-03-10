@@ -13,7 +13,7 @@ class InvoiceController extends BaseController
 
     function index()
     {
-        echo "10";
+        echo "Invoice";
     }
    
 }
