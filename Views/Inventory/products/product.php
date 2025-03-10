@@ -6,7 +6,7 @@
                         <h6>Manage your products</h6>
                     </div>
                     <div class="page-btn">
-                        <a href="addproduct.html" class="btn btn-added"><img src="/Views/assets/img1/icons/plus.svg" alt="img"
+                        <a href="products/create" class="btn btn-added"><img src="/Views/assets/img1/icons/plus.svg" alt="img"
                                 class="me-1">Add New Product</a>
                     </div>
                 </div>
@@ -146,13 +146,13 @@
                                         <td>100.00</td>
                                         <td>Admin</td>
                                         <td>
-                                            <a class="me-3" href="product-details.html">
+                                            <a class="me-3" href="products/view">
                                                 <img src="/Views/assets/img1/icons/eye.svg" alt="img">
                                             </a>
-                                            <a class="me-3" href="editproduct.html">
+                                            <a class="me-3" href="products/edit">
                                                 <img src="/Views/assets/img1/icons/edit.svg" alt="img">
                                             </a>
-                                            <a class="confirm-text" href="javascript:void(0);">
+                                            <a class="confirm-text" href="products/">
                                                 <img src="/Views/assets/img1/icons/delete.svg" alt="img">
                                             </a>
                                         </td>

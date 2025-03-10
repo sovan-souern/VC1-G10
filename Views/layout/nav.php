@@ -107,12 +107,12 @@
 
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/product" class="menu-link">
-            <div data-i18n="Container">Product List</div>
+          <a href="/products" class="menu-link">
+            <div data-i18n="Container">P  roduct List</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/product/add-product" class="menu-link">
+          <a href="/products/create" class="menu-link">
             <div data-i18n="Fluid">Add Product</div>
           </a>
         </li>

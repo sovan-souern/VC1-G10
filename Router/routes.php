@@ -48,8 +48,10 @@ $routes->get('/notifications', [NotificationController::class, 'notifications'])
 $routes->get('/users', [UserController::class, 'index']);
 
 // inventory page
-$routes->get('/product', [ProductController::class, 'index']);
-$routes->get('/product/add-product', [ProductController::class, 'create']);
+$routes->get('/products', [ProductController::class, 'index']);
+$routes->get('/products/create', [ProductController::class, 'create']);
+$routes->get('/products/edit', [ProductController::class, 'edit']);
+$routes->get('/products/view', [ProductController::class, 'view']);
 
 // category 
 $routes->get('/category', [CategoryProuductController::class, 'index']);

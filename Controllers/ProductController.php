@@ -21,7 +21,20 @@ class ProductController extends BaseController
     }
     function create()
     {
-        echo "add product";
+        $this->views('/Inventory/products/create.php');
+        // $this->redirect("/product");
+
+    }
+    function edit()
+    {
+        $this->views('/Inventory/products/edit.php');
+        // echo "1:";
+
+    }
+    function view()
+    {
+        $this->views('/Inventory/products/view.php');
+        // echo "1:";
 
     }
 }
