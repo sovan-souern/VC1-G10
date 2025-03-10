@@ -1,5 +1,5 @@
 <?php
-require_once 'Models/OrderModel.php';
+
 require_once 'BaseController.php';
 
 class OrderController extends BaseController
@@ -11,9 +11,10 @@ class OrderController extends BaseController
         
     }
 
-    function department()
+    function index()
     {
-        echo "10";
+        echo "Order";
     }
+
    
 }

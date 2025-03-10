@@ -1,7 +1,7 @@
 <!-- Code for get data -->
 
 <?php
-require_once 'Models/ProductModel.php';
+// require_once 'Models/ProductModel.php';
 require_once 'BaseController.php';
 
 class ProductController extends BaseController
@@ -10,14 +10,18 @@ class ProductController extends BaseController
 
     function __construct()
     {
-        $this->model = new ProductModel();
+        // $this->model = new ProductModel();
     }
 
-    function product()
+    function index()
     {
-        $products = $this->model->getProduct();
-        // require_once 'Views/products/product.php';
-        $this->views('products/product.php',['products' => $products]);
+        echo "product";
+
+    }
+    function create()
+    {
+        echo "add product";
+
     }
 }
 
