@@ -7,9 +7,10 @@ require_once 'Controllers/ShopownerController.php';
 require_once 'Controllers/OrderController.php'; 
 require_once 'Controllers/DashboardController.php';
 require_once 'Controllers/NotificationController.php';
-
+require_once "Controllers/ProductController.php";
 require_once "Controllers/InvoiceController.php";
 require_once "Controllers/BrandController.php";
+require_once "Controllers/ProfileController.php";
 
 $routes = new Router();
 
@@ -60,5 +61,10 @@ $routes->get('/category/create', [CategoryProuductController::class, 'create']);
 // brand
 $routes->get('/brand', [BrandController::class, 'index']);
 $routes->get('/brand/create', [BrandController::class, 'create']);
+
+// update profile
+$routes->get('/update', [ProfileController::class, 'update']);
+// reset password
+$routes->get('/reset', [ProfileController::class, 'reset']);
 
 $routes->dispatch();
