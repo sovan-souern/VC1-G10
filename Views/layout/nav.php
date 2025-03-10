@@ -250,11 +250,20 @@
                 data-show-count="true"
                 aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
             </li>
+
+            <!-- notification  -->
+
+            
             <li class="nav-item dropdown pe-3 d-flex align-items-center">
+              <a href="/notifications" class="text-decoration-none">
+                <span class="material-symbols-outlined">notifications</span>
+              </a>
+            </li>
+            <!-- <li class="nav-item dropdown pe-3 d-flex align-items-center">
                 <span class="material-symbols-outlined">
                   notifications
                 </span>
-            </li>
+            </li> -->
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">

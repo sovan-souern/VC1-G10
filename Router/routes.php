@@ -6,6 +6,7 @@ require_once 'Controllers/ProductController.php';
 require_once 'Controllers/ShopownerController.php'; 
 require_once 'Controllers/OrderController.php'; 
 require_once 'Controllers/DashboardController.php';
+require_once 'Controllers/NotificationController.php';
 
 require_once "Controllers/InvoiceController.php";
 require_once "Controllers/BrandController.php";
@@ -36,6 +37,13 @@ $routes->get('/shop-Owner', [ShopOwnerController::class, 'index']);
 $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // user
+
+// notification 
+
+$routes->get('/notifications', [NotificationController::class, 'notifications']); 
+
+
+
 $routes->get('/users', [UserController::class, 'index']);
 
 // inventory page
