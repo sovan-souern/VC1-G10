@@ -31,7 +31,8 @@ $routes->get('/', [DashboardController::class, 'index']);
 $routes->get('/order', [OrderController::class, 'index']);
 
 // shop owner
-$routes->get('/shop-Owner', [ShopOwnerController::class, 'index']);
+$routes->get('/shop-owner', [ShopOwnerController::class, 'index']);
+
 
 // invoice
 $routes->get('/invoice', [InvoiceController::class, 'index']);

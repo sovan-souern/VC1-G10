@@ -13,7 +13,8 @@ class ShopOwnerController extends BaseController
 
     function index()
     {
-        echo "Shop owner";
+        // echo "Shop owner";
+        $this->views('/E-comerce/shop-owner/shop-owner.php');
        
     }
 

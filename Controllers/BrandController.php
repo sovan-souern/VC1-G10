@@ -13,9 +13,10 @@ class BrandController extends BaseController
 
     function index()
     {
-        echo "Brand list";
+        // echo "Brand list";
         // $categories = $this->model->getCategories();
         // $this->views('categories/category.php',['categories'=>$categories]);
+        $this->views('/Inventory/brands/brand.php');
     }
     function create()
     {

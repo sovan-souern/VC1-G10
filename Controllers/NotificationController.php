@@ -13,6 +13,6 @@ class NotificationController extends BaseController
     function notifications()
     {
         $notifications = $this->model->getnotifications();
-        $this->views('Notifications/notification.php',['notifications'=>$notification]);
+        $this->views('Notifications/notification.php',['notifications'=>$notifications]);
     }
 }

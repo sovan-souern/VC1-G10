@@ -17,33 +17,4 @@ class UserModel
 
     }
 
-    function createUser($data)
-    {
-        $stmt = $this->pdo->query("INSERT INTO users (name) VALUES (:name)",[
-            'name' => $data['name'],
-        ]);
-    }
-
-    function getUser($id)
-    {
-        $stmt = $this->pdo->query("SELECT * FROM users WHERE id = :id", ['id'=> $id]);
-        $user = $stmt->fetch();
-        return $user;
-    }
-    function updateUser($id, $data)
-    {
-        $stmt = $this->pdo->query("UPDATE users SET name = :name WHERE id = :id", ['name' => $data['name'],
-            'id' => $id]);
-    }
-    function deleteUser($id)
-    {
-        $stmt = $this->pdo->query("DELETE FROM users WHERE id = :id", ['id' => $id]);
-    }
-    function getView()
-    {
-        $stmt = $this->pdo->query(
-        "SELECT * FROM users"
-        );
-        return $stmt->fetch();
-    }
 }

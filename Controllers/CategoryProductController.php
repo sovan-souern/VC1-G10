@@ -13,9 +13,10 @@ class CategoryProuductController extends BaseController
 
     function index()
     {
-        echo "category product";
+
         // $categories = $this->model->getCategories();
         // $this->views('categories/category.php',['categories'=>$categories]);
+        $this->views('/Inventory/categories/category.php');
     }
     function create()
     {

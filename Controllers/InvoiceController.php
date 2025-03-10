@@ -13,7 +13,8 @@ class InvoiceController extends BaseController
 
     function index()
     {
-        echo "Invoice";
+        // echo "Invoice";
+        $this->views('/E-comerce/invoice/invoice.php');
     }
    
 }

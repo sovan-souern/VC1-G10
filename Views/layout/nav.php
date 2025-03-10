@@ -88,7 +88,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="/shop-Owner" class="menu-link">
+          <a href="/shop-owner" class="menu-link">
             <div data-i18n="Blank">Shop owner</div>
           </a>
         </li>
@@ -278,7 +278,7 @@
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
-                          <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                          <img src="../Views/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                         </div>
                       </div>
 

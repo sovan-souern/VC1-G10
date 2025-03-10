@@ -13,7 +13,8 @@ class OrderController extends BaseController
 
     function index()
     {
-        echo "Order";
+        // echo "Order";
+        $this->views('/E-comerce/order/order.php');
     }
 
    

@@ -16,6 +16,7 @@ class ProductController extends BaseController
     function index()
     {
         echo "product";
+        $this->views('/Inventory/products/product.php');
 
     }
     function create()

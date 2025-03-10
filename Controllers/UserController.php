@@ -10,7 +10,8 @@ class UserController extends BaseController
     }
     function index()
     {
-        echo "1";
+        // echo "1";
+        $this->views('/E-comerce/users/user.php');
         // $users = $this->model->getUsers();
         // $this->views('user/list.php',['users' => $users]);
     }
