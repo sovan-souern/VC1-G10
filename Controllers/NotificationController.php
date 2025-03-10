@@ -13,7 +13,7 @@ class NotificationController extends BaseController
 
     function index()
     {
-        echo "Order";
+        // echo "Your Notification";
 
         $this->views('/notification/notification.php');
     }
