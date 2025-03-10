@@ -7,7 +7,7 @@ class Database
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname="mvc";
+        $dbname="beauty_store";
         try {
             $this-> pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         } catch (PDOException $e) {
