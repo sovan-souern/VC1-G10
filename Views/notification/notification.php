@@ -1,120 +1,110 @@
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 20px;
-}
-/* .container{
-    background-color:gray;
-} */
-.notification-container {
-    margin-left: 5%;
-    max-width: 90%;
-    /* margin: 0 auto; */
+<?php
+require_once __DIR__ . '/../../Models/NotificationModel.php';
+
+$notificationModel = new NotificationModel();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'];
+    $message = $_POST['message'];
+    $notificationModel->addNotification($title, $message);
+    echo "<script>alert('Notification added successfully');</script>";
 }
 
-.notification {
-    display: flex;
-    align-items: flex-start;
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+$notifications = $notificationModel->getNotifications();
+$notificationModel->closeConnection();
+?>
 
-.notification-icon {
-    font-size: 24px;
-    margin-right: 15px;
-}
-
-.notification-content {
-    flex: 1;
-}
-
-.notification-content h3 {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-}
-
-.notification-content p {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #666;
-}
-
-.notification-time {
-    font-size: 12px;
-    color: #999;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .notification {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .notification-icon {
-        margin-bottom: 10px;
-    }
-}
-</style>
-
-<div class="container">
-    <hr>
-    <!-- <h3>Your Notication</h3> -->
-</div>
-<div class="notification-container">
-        <div class="notification">
-            <div class="notification-icon">✅</div>
-            <div class="notification-content">
-                <h3>Buy Success</h3>
-                <p>Buy already this product skincare #id-003 have been processed</p>
-                <span class="notification-time">1 hour ago</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .notification-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .notification-icon {
+            font-size: 2em;
+            margin-right: 16px;
+        }
+        .notification-content {
+            flex-grow: 1;
+        }
+        .notification-title {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .notification-message {
+            margin-top: 8px;
+        }
+        .notification-time {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Your Notifications</h2>
+        <!-- <form method="POST" action="" class="mb-4">
+            <div class="form-group">
+                <input type="text" name="title" class="form-control" placeholder="Title" required>
             </div>
-        </div>
-        <div class="notification">
-            <div class="notification-icon">💳</div>
-            <div class="notification-content">
-                <h3>Pay money success</h3>
-                <p>You have already paid and sent the invoice by email</p>
-                <span class="notification-time">2 minutes ago</span>
+            <div class="form-group">
+                <textarea name="message" class="form-control" placeholder="Message" required></textarea>
             </div>
-        </div>
-        <div class="notification">
-            <div class="notification-icon">❤️</div>
-            <div class="notification-content">
-                <h3>Favorite my product</h3>
-                <p>My favorite products so that I can buy them before they run out.</p>
-                <span class="notification-time">5 minutes ago</span>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="notification-icon">🎉</div>
-            <div class="notification-content">
-                <h3>Discount my product</h3>
-                <p>You receive an exclusive discount notification.</p>
-                <span class="notification-time">50 minutes ago</span>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="notification-icon">⏰</div>
-            <div class="notification-content">
-                <h3>Reminders</h3>
-                <p>You received a reminder for the items left in your cart to complete my purchase.</p>
-                <span class="notification-time">44 minutes ago</span>
-            </div>
-        </div>
-        <div class="notification">
-            <div class="notification-icon">📦</div>
-            <div class="notification-content">
-                <h3>Know about stock</h3>
-                <p>You get a re-stock notification for out-of-stock products that can be purchased when other products</p>
-                <span class="notification-time">14 minutes ago</span>
-            </div>
+            <button type="submit" class="btn btn-primary">Add Notification</button>
+        </form> -->
+        <div>
+            <?php if (!empty($notifications)): ?>
+                <?php foreach ($notifications as $notification): ?>
+                    <div class="notification-card">
+                        <div class="notification-icon">
+                            <?php
+                            // Display different icons based on the notification type
+                            switch ($notification['type']) {
+                                case 'success':
+                                    echo '✅';
+                                    break;
+                                case 'info':
+                                    echo 'ℹ️';
+                                    break;
+                                case 'warning':
+                                    echo '⚠️';
+                                    break;
+                                case 'error':
+                                    echo '❌';
+                                    break;
+                                default:
+                                    echo '🔔';
+                                    break;
+                            }
+                            ?>
+                        </div>
+                        <div class="notification-content">
+                            <div class="notification-title"><?php echo $notification['title']; ?></div>
+                            <div class="notification-message"><?php echo $notification['message']; ?></div>
+                            <div class="notification-time"><?php echo $notification['created_at']; ?></div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No notifications found</p>
+            <?php endif; ?>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
