@@ -6,7 +6,7 @@
                 <h6>View/Search product Category</h6>
             </div>
             <div class="page-btn">
-                <a href="addcategory.html" class="btn btn-added">
+                <a href="category/create" class="btn btn-added">
                     <img src="/Views/assets/img1/icons/plus.svg" class="me-1" alt="img">Add Category
                 </a>
             </div>
@@ -41,44 +41,8 @@
                     </div>
                 </div>
 
-                <div class="card" id="filter_inputs">
-                    <div class="card-body pb-0">
-                        <div class="row">
-                            <div class="col-lg-2 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <select class="select">
-                                        <option>Choose Category</option>
-                                        <option>Computers</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <select class="select">
-                                        <option>Choose Sub Category</option>
-                                        <option>Fruits</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <select class="select">
-                                        <option>Choose Sub Brand</option>
-                                        <option>Iphone</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-1 col-sm-6 col-12 ms-auto">
-                                <div class="form-group">
-                                    <a class="btn btn-filters ms-auto"><img src=/Views/assets/img1/icons/search-whites.svg" alt="img"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="table-responsive">
-                    <table class="table  datanew">
+                    <table class="table datanew">
                         <thead>
                             <tr>
                                 <th>
@@ -87,39 +51,44 @@
                                         <span class="checkmarks"></span>
                                     </label>
                                 </th>
-                                <th>Category name</th>
-                                <th>Category Code</th>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Category Name</th>
                                 <th>Description</th>
-                                <th>Created By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td class="productimgname">
-                                    <a href="javascript:void(0);" class="product-img">
-                                        <img src="/Views/assets/img1/product/noimage.png" alt="product">
-                                    </a>
-                                    <a href="javascript:void(0);">Computers</a>
-                                </td>
-                                <td>CT001</td>
-                                <td>Computers Description</td>
-                                <td>Admin</td>
-                                <td>
-                                    <a class="me-3" href="editcategory.html">
-                                        <img src="/Views/assets/img1/icons/edit.svg" alt="img">
-                                    </a>
-                                    <a class="me-3 confirm-text" href="javascript:void(0);">
-                                        <img src="/Views/assets/img1/icons/delete.svg" alt="img">
-                                    </a>
-                                </td>
-                            </tr>
+                            <?php foreach ($categories as $index => $category): ?>
+                                <tr>
+                                    <td>
+                                        <label class="checkboxs">
+                                            <input type="checkbox">
+                                            <span class="checkmarks"></span>
+                                        </label>
+                                    </td>
+                                    <td><?= $index + 1 ?></td>
+                                    <td>
+                                        <?php if (!empty($category['image_url'])) : ?>
+                                            <img src="<?= htmlspecialchars($category['image_url'], ENT_QUOTES, 'UTF-8') ?>" width="50" alt="Category Image">
+                                        <?php else : ?>
+                                            <img src="/Views/assets/img1/default-image.jpg" width="50" alt="No Image">
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8') ?>
+                                    </td>
+                                    <td><?= htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8') ?></td>
+                                    <td>
+                                        <a class="me-3" href="/category/edit?id=<?= $category['id']; ?>">
+                                            <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
+                                        </a>
+                                        <!-- <a class="me-3 confirm-text" href="category/delete?id=<?= $category['id']; ?>"> -->
+                                            <img src="/Views/assets/img1/icons/delete.svg" alt="Delete">
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -128,8 +97,5 @@
     </div>
 </div>
 
-
-
 </body>
-
 </html>

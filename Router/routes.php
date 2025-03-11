@@ -58,8 +58,11 @@ $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->get('/products/view', [ProductController::class, 'view']);
 
 // category 
-$routes->get('/category', [CategoryProuductController::class, 'index']);
-$routes->get('/category/create', [CategoryProuductController::class, 'create']);
+$routes->get('/category', [CategoryController::class, 'index']);
+$routes->get('/category/create', [CategoryController::class, 'create']);
+$routes->post('/category/store', [CategoryController::class, 'store']);
+$routes->get('/category/edit', [CategoryController::class, 'edit']);
+$routes->put('/category/update', [CategoryController::class, 'update']);
 
 // brand
 $routes->get('/brand', [BrandController::class, 'index']);
