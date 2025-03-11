@@ -19,11 +19,11 @@ class ProductController extends BaseController
         $this->views('/Inventory/products/product.php');
 
     }
-<<<<<<< HEAD
+
     // function create()
     // {
     //     // echo "add product";
-=======
+
     function create()
     {
         $this->views('/Inventory/products/create.php');
@@ -40,10 +40,10 @@ class ProductController extends BaseController
     {
         $this->views('/Inventory/products/view.php');
         
->>>>>>> 0709267eda15c087d8b2fdcd132ce38d37170e5c
+
 
     // }
-}
+}}
 
 
 
