@@ -59,6 +59,7 @@ $routes->get('/category/create', [CategoryProuductController::class, 'create']);
 
 // brand
 $routes->get('/brand', [BrandController::class, 'index']);
-$routes->get('/brand/create', [BrandController::class, 'create']);
+$routes->get('/brand/create', [BrandController::class, 'create']);  
+$routes->get('/brand/edit', [BrandController::class, 'edit']);  
 
 $routes->dispatch();
