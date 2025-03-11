@@ -1,40 +1,38 @@
 
-// Filter products based on category or brand
-document.getElementById('category-filter-header').addEventListener('change', function() {
-    filterProducts();
-});
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to filter products based on selected category and brand
+        function filterProducts() {
+            const categoryFilter = document.getElementById('category-filter').value;
+            const categoryFilterHeader = document.getElementById('category-filter-header').value;
+            const brandFilter = document.getElementById('brand-filter').value;
+            const brandFilterHeader = document.getElementById('brand-filter-header').value;
 
-document.getElementById('brand-filter-header').addEventListener('change', function() {
-    filterProducts();
-});
+            // Use the value from whichever dropdown was changed (prioritize non-empty value)
+            const selectedCategory = categoryFilter || categoryFilterHeader || '';
+            const selectedBrand = brandFilter || brandFilterHeader || '';
 
-document.getElementById('category-filter').addEventListener('change', function() {
-    filterProducts();
-});
+            const products = document.querySelectorAll('.product');
 
-document.getElementById('brand-filter').addEventListener('change', function() {
-    filterProducts();
-});
+            products.forEach(function(product) {
+                const productCategory = product.getAttribute('data-category');
+                const productBrand = product.getAttribute('data-brand');
 
-function filterProducts() {
-    const category = document.getElementById('category-filter-header').value.toLowerCase() ||
-                     document.getElementById('category-filter').value.toLowerCase();
-    const brand = document.getElementById('brand-filter-header').value.toLowerCase() ||
-                  document.getElementById('brand-filter').value.toLowerCase();
+                // Determine if the product matches the filters
+                const matchesCategory = selectedCategory ? productCategory === selectedCategory : true;
+                const matchesBrand = selectedBrand ? productBrand === selectedBrand : true;
 
-    const products = document.querySelectorAll('.product');
-
-    products.forEach(product => {
-        const productCategory = product.getAttribute('data-category').toLowerCase();
-        const productBrand = product.getAttribute('data-brand').toLowerCase();
-
-        // Show product if it matches the selected filters
-        if ((category === '' || productCategory.includes(category)) &&
-            (brand === '' || productBrand.includes(brand))) {
-            product.style.display = '';  // Show
-        } else {
-            product.style.display = 'none';  // Hide
+                // Show the product only if it matches both filters (or if a filter is not set)
+                if (matchesCategory && matchesBrand) {
+                    product.style.display = ''; // Show the product
+                } else {
+                    product.style.display = 'none'; // Hide the product
+                }
+            });
         }
-    });
-}
 
+        // Add event listeners to all filter dropdowns
+        document.getElementById('category-filter').addEventListener('change', filterProducts);
+        document.getElementById('category-filter-header').addEventListener('change', filterProducts);
+        document.getElementById('brand-filter').addEventListener('change', filterProducts);
+        document.getElementById('brand-filter-header').addEventListener('change', filterProducts);
+    });
