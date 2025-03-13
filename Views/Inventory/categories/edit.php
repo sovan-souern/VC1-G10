@@ -2,12 +2,12 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Product Add Category</h4>
-                <h6>Create new product Category</h6>
+                <h4>Product Edit Category</h4>
+                <h6>Edit product Category</h6>
             </div>
         </div>
 
-        <form action="/category/store" method="POST" enctype="multipart/form-data">
+        <form action="/category/edit" method="POST" enctype="multipart/form-data">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-submit me-2">Submit</button>
-                            <a href="/categories/category.php" class="btn btn-cancel">Cancel</a>
+                            <a href="/category" class="btn btn-cancel">Cancel</a>
                         </div>
                     </div>
                 </div>
