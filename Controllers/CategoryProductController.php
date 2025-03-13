@@ -13,9 +13,8 @@ class CategoryController extends BaseController
 
     function index()
     {
-
-
-        $this->views('/Inventory/categories/category.php');
+        $categories = $this->model->getCategories();
+        $this->views('/Inventory/categories/category.php', ['categories' => $categories]);
     }
 
     function create()
