@@ -115,5 +115,6 @@ class CategoryController extends BaseController
 
         $this->model->deleteCategory($id);
         $this->redirect('/Category');
+        //jub jub
     }
 }
