@@ -1,7 +1,7 @@
 <!-- Code for get data -->
 
 <?php
-// require_once 'Models/ProductModel.php';
+require_once 'Models/ProductModel.php';
 require_once 'BaseController.php';
 
 class ProductController extends BaseController
@@ -10,24 +10,29 @@ class ProductController extends BaseController
 
     function __construct()
     {
-        // $this->model = new ProductModel();
+        $this->model = new ProductModel();
     }
 
     function index()
     {
-        echo "product";
-        $this->views('/Inventory/products/product.php');
-
+        // echo "product";
+        $products=$this->model->getProduct();
+        $brand=$this->model->getBrand();
+        $category=$this->model->getCategory();
+        $this->views('/Inventory/products/product.php',["products"=>$products, "brands"=>$brand,"categories"=>$category]);
+       
     }
     function create()
     {
-        $this->views('/Inventory/products/create.php');
-        // $this->redirect("/product");
+        $brand=$this->model->getBrand();
+        $category=$this->model->getCategory();
+        $this->views('/Inventory/products/create.php',[ "brands"=>$brand,"categories"=>$category]);
+       
 
     }
     function edit()
     {
-        $this->views('/Inventory/products/edit.php');
+        // $this->views('/Inventory/products/edit.php');
         // echo "1:";
 
     }

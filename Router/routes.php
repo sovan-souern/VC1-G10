@@ -69,7 +69,8 @@ $routes->get('/category/delete', [CategoryController::class, 'destroy']);
 
 // brand
 $routes->get('/brand', [BrandController::class, 'index']);
-$routes->get('/brand/create', [BrandController::class, 'create']);
+$routes->get('/brand/create', [BrandController::class, 'create']);  
+$routes->get('/brand/edit', [BrandController::class, 'edit']);  
 
 // update profile
 $routes->get('/update', [ProfileController::class, 'update']);

@@ -21,6 +21,14 @@ class BrandController extends BaseController
     function create()
     {
         echo "create Brand";
+        $this->views('/Inventory/brands/create.php');
+        // $categories = $this->model->getCategories();
+        // $this->views('categories/category.php',['categories'=>$categories]);
+    }
+    function edit()
+    {
+        // echo "create Brand";
+        $this->views('/Inventory/brands/edit.php');
         // $categories = $this->model->getCategories();
         // $this->views('categories/category.php',['categories'=>$categories]);
     }
