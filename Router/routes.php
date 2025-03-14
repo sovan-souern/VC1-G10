@@ -12,6 +12,7 @@ require_once "Controllers/InvoiceController.php";
 require_once "Controllers/BrandController.php";
 require_once "Controllers/ProfileController.php";
 require_once "Controllers/UserController.php";
+// require_once "Controllers/LoginController.php";
 
 
 
@@ -54,6 +55,7 @@ $routes->get('/users', [UserController::class, 'index']);
 // inventory page
 $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);
+$routes->post('/products/store', [ProductController::class, 'store']);
 $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->get('/products/view', [ProductController::class, 'view']);
 
@@ -77,6 +79,7 @@ $routes->get('/update', [ProfileController::class, 'update']);
 // reset password
 $routes->get('/reset', [ProfileController::class, 'reset']);
 //login
+// $routes->get('/login', [LoginController::class, 'login']);
 $routes->get('/login', [UserController::class, 'login']);
 //signup
 $routes->get('/signup', [UserController::class, 'signup']);
