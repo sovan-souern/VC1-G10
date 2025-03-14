@@ -1,4 +1,4 @@
-
+<!-- 
 
 
     <div class="login-container">
@@ -21,8 +21,8 @@
             <button type="submit" class="btn btn-login">Login</button>
         </form>
 
-        <p class="mt-3">Don’t have an account?</p>
-    </div>
+        <p class="mt-3">Dont have an account?</p>
+    </div> -->
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
