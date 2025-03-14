@@ -37,6 +37,7 @@ if (isset($_SESSION['user_id'])) {
             <select name="role" class="form-control">
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
+                <option value="admin">Shop Owner</option>
             </select>
         </div>
         <div class="mb-3">
