@@ -12,6 +12,7 @@ require_once "Controllers/InvoiceController.php";
 require_once "Controllers/BrandController.php";
 require_once "Controllers/ProfileController.php";
 require_once "Controllers/UserController.php";
+// require_once "Controllers/LoginController.php";
 
 
 
@@ -70,6 +71,7 @@ $routes->get('/update', [ProfileController::class, 'update']);
 // reset password
 $routes->get('/reset', [ProfileController::class, 'reset']);
 //login
+// $routes->get('/login', [LoginController::class, 'login']);
 $routes->get('/login', [UserController::class, 'login']);
 //signup
 $routes->get('/signup', [UserController::class, 'signup']);
