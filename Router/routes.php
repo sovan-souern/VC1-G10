@@ -54,6 +54,7 @@ $routes->get('/users', [UserController::class, 'index']);
 // inventory page
 $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);
+$routes->post('/products/store', [ProductController::class, 'store']);
 $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->get('/products/view', [ProductController::class, 'view']);
 
