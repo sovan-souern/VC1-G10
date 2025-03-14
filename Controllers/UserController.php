@@ -12,6 +12,10 @@ class UserController extends BaseController {
         $this->views('/authentication/signup.php');
     }
 
+    public function viewlogin() {
+        $this->views('/accountSetting/viewLogin.php');
+    }
+
     // // Store new user (SignUp)
     // public function store() {
     //     session_start();

@@ -15,6 +15,9 @@ require_once "Controllers/UserController.php";
 
 
 
+
+
+
 $routes = new Router();
 
 
@@ -68,12 +71,17 @@ $routes->get('/brand/edit', [BrandController::class, 'edit']);
 
 // update profile
 $routes->get('/update', [ProfileController::class, 'update']);
+$routes->post('/updateProfile', [ProfileController::class, 'updateProfile']); 
+
 // reset password
 $routes->get('/reset', [ProfileController::class, 'reset']);
 //login
 $routes->get('/login', [UserController::class, 'login']);
 //signup
 $routes->get('/signup', [UserController::class, 'signup']);
+// View login
+$routes->get('/viewlogin', [UserController::class, 'viewlogin']);
+
 
 
 $routes->dispatch();

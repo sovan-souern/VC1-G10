@@ -150,17 +150,17 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/update-profile" class="menu-link">
+          <a href="/update" class="menu-link">
             <div data-i18n="Account">Update Profile</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="reset-password" class="menu-link">
+          <a href="" class="menu-link">
             <div data-i18n="Notifications">Reset Password</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="view-login" class="menu-link">
+          <a href="/viewlogin" class="menu-link">
             <div data-i18n="Connections">View Login</div>
           </a>
         </li>
@@ -178,7 +178,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="forgot-password" class="menu-link" target="_blank">
+          <a href="/reset" class="menu-link" target="_blank">
             <div data-i18n="Basic">Forgot Password</div>
           </a>
         </li>

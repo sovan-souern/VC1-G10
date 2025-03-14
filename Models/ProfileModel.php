@@ -133,4 +133,59 @@
     <!-- / Content -->
 </div>
 <!-- Content wrapper -->
+<?php
+require_once 'c:\Users\Panha.Nhean\Desktop\VC1-G10\Databases\database.php';
+
+class ProfileModel {
+    private $pdo;
+
+    public function __construct() {
+        global $pdo;
+        $this->pdo = $pdo;
+    }
+
+    public function updateUserProfile($data) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE users SET username = ?, email = ?, phone = ?, gender = ?, role_id = ? WHERE id = ?");
+            return $stmt->execute([
+                $data['username'],
+                $data['email'],
+                $data['phone'],
+                $data['gender'],
+                $data['role_id'],
+                $data['user_id']
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function getProfileByAdminId($admin_id) {
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
+            $stmt->execute([$admin_id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updateProfile($data, $admin_id, $image_path = null) {
+        try {
+            $sql = "UPDATE users SET name = ?, username = ?, email = ?, phone = ?, gender = ?";
+            if ($image_path) {
+                $sql .= ", image = ?";
+                $params = [$data['name'], $data['username'], $data['email'], $data['phone'], $data['gender'], $image_path, $admin_id];
+            } else {
+                $params = [$data['name'], $data['username'], $data['email'], $data['phone'], $data['gender'], $admin_id];
+            }
+            $sql .= " WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute($params);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+}
+?>
 
