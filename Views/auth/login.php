@@ -4,7 +4,7 @@ if (isset($_SESSION['admin_ID'])) {
     header("Location: /dashboard");
     exit();
 }
-require_once __DIR__ . "/../layouts/header.php";
+require_once __DIR__ . "/../layout/header.php";
 ?>
 
 <style>

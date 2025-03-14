@@ -63,9 +63,9 @@ $routes->get("/login", [UserController::class, 'login']);
 $routes->get("/register", [UserController::class, 'register']);
 $routes->post("/users/store", [UserController::class, 'store']);
 $routes->post("/users/authenticate", [UserController::class, 'authenticate']);
-$routes->get("/logout", [UserController::class, 'logout']);
+$routes->get("/signup", [UserController::class, 'logout']);
 
 // signup
-$routes->get('/signup', [UserController::class, 'signup']);
+// $routes->get('/signup', [UserController::class, 'signup']);
 
 $routes->dispatch();

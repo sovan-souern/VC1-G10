@@ -108,7 +108,7 @@
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="/products" class="menu-link">
-            <div data-i18n="Container">P  roduct List</div>
+            <div data-i18n="Container">Product List</div>
           </a>
         </li>
         <li class="menu-item">
