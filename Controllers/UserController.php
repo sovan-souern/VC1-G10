@@ -1,86 +1,112 @@
-<?php 
+<?php
 
-class UserController extends BaseController {
+require_once "Models/UserModel.php";
+require_once 'BaseController.php';
 
-    // private $users;
+class UserController extends BaseController
+{
+    private $user;
 
-    // Login page view
-    public function login() {
-        $this->views('/authentication/login.php');
+    public function __construct()
+    {
+        $this->user = new UserModel();
     }
-    public function signup() {
-        $this->views('/authentication/signup.php');
+
+    public function register()
+    {
+        // Display the registration form
+        require_once "Views/auth/register.php";
     }
 
-    // // Store new user (SignUp)
-    // public function store() {
-    //     session_start();
-    //     if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['role'])) {
-    //         $_SESSION['error'] = "All fields are required.";
-    //         $this->redirect("/users/signUp");
-    //         return;
-    //     }
+    public function login()
+    {
+        // Display the login form
+        require_once "Views/auth/login.php";
+    }
 
-    //     $username = htmlentities($_POST['username']);
-    //     $email = htmlentities($_POST['email']);
-    //     $password = htmlentities($_POST['password']);
-    //     $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-    //     $role = htmlentities($_POST['role']);
-        
-    //     if ($this->users->getUserByUsername($username)) {
-    //         $_SESSION['error'] = "Username already exists.";
-    //         $this->redirect("/users/signUp");
-    //         return;
-    //     }
+    public function store()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = htmlspecialchars($_POST['name']);
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+            $profilePicture = null;
 
-    //     if ($this->users->getUserByEmail($email)) {
-    //         $_SESSION['error'] = "Email already exists.";
-    //         $this->redirect("/users/signUp");
-    //         return;
-    //     }
-        
-    //     // Create the user and redirect
-    //     $this->users->createUser($username, $email, $encrypted_password, $role);
-    //     $_SESSION['success'] = "Account created successfully!";
-    //     $this->redirect("/dashboard/sell");
-    // }
+            if (empty($name) || empty($email) || empty($password)) {
+                echo json_encode(["status" => "error", "message" => "All fields are required!"]);
+                exit();
+            }
 
-    // // Authenticate user (SignIn)
-    // public function authenticate() {
-    //     session_start();
-    //     if (empty($_POST['email']) || empty($_POST['password'])) {
-    //         $_SESSION['error'] = "Email and password are required.";
-    //         $this->redirect("/users/signIn");
-    //         return;
-    //     }
+            if ($this->user->getUserByEmail($email)) {
+                echo json_encode(["status" => "error", "message" => "Email already exists!"]);
+                exit();
+            }
 
-    //     $email = htmlspecialchars($_POST['email']);
-    //     $password = htmlspecialchars($_POST['password']);
-    //     $user = $this->users->getUserByEmail($email);
-        
-    //     if ($user && password_verify($password, $user['password'])) {
-    //         // Set session variables
-    //         $_SESSION['user_name'] = $user['username'];
-    //         $_SESSION['user_id'] = $user['id'];
-    //         $_SESSION['user_role'] = $user['role'];
-    //         $_SESSION['success'] = "Welcome back, " . $user['username'];
-    //         $this->redirect("/dashboard/sell");
-    //     } else {
-    //         $_SESSION['error'] = "Invalid email or password.";
-    //         $this->redirect("/users/signIn");
-    //     }
-    // }
+            if (!empty($_FILES['profile_picture']['name'])) {
+                $uploadDir = "uploads/";
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
+                $fileName = time() . "_" . basename($_FILES["profile_picture"]["name"]);
+                $targetFilePath = $uploadDir . $fileName;
 
-    // // SignIn page view
-    // public function signIn() {
-    //     if (isset($_SESSION['user_id'])) {
-    //         $this->redirect("/dashboard/sell");
-    //     } else {
-    //         // Check for any errors in session
-    //         $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-    //         $this->views('users/signIn', ['error' => $error]);
-    //     }
-    // }
+                if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFilePath)) {
+                    $profilePicture = $targetFilePath;
+                } else {
+                    echo json_encode(["status" => "error", "message" => "Failed to upload profile picture!"]);
+                    exit();
+                }
+            }
+
+            $result = $this->user->addUser($name, $email, $password, $profilePicture);
+            if ($result) {
+                echo json_encode(["status" => "success", "message" => "Registration successful!"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Registration failed!"]);
+            }
+            exit();
+        }
+    }
+
+    public function authenticate()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+
+            if (empty($email) || empty($password)) {
+                echo json_encode(["status" => "error", "message" => "Email and password are required!"]);
+                exit();
+            }
+
+            $user = $this->user->getUserByEmail($email);
+            if (!$user) {
+                echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
+                exit();
+            }
+
+            if (password_verify($password, $user['password'])) {
+                session_start();
+                $_SESSION['admin_ID'] = $user['admin_ID'];
+                $_SESSION['name'] = $user['name'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['profile_picture'] = $user['profile_picture'];
+                
+                echo json_encode(["status" => "success", "message" => "Login successful!"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
+            }
+            exit();
+        }
+    }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        header("Location: /login");
+        exit();
+    }
 }
-
 ?>
