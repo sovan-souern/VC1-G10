@@ -13,6 +13,7 @@ require_once "Controllers/BrandController.php";
 require_once "Controllers/ProfileController.php";
 require_once "Controllers/UserController.php";
 require_once "Controllers/LoginRegisterController.php";
+require_once "Controllers/AdminContoller.php";
 
 $routes = new Router();
 
@@ -59,11 +60,11 @@ $routes->get('/update', [ProfileController::class, 'update']);
 $routes->get('/reset', [ProfileController::class, 'reset']);
 
 // login
-$routes->get("/login", [UserController::class, 'login']);
-$routes->get("/register", [UserController::class, 'register']);
-$routes->post("/users/store", [UserController::class, 'store']);
-$routes->post("/users/authenticate", [UserController::class, 'authenticate']);
-$routes->get("/signup", [UserController::class, 'logout']);
+$routes->get("/login", [AdminController::class, 'login']);
+$routes->get("/register", [AdminController::class, 'register']);
+$routes->post("/users/store", [AdminController::class, 'store']);
+$routes->post("/users/authenticate", [AdminController::class, 'authenticate']);
+$routes->get("/signup", [AdminController::class, 'logout']);
 
 // signup
 // $routes->get('/signup', [UserController::class, 'signup']);
