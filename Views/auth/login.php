@@ -1,121 +1,167 @@
 <?php
 session_start();
 if (isset($_SESSION['admin_ID'])) {
-    header("Location: /dashboard");
+    header("Location:/login");
     exit();
 }
 require_once __DIR__ . "/../layout/header.php";
 ?>
 
 <style>
+    /* Page Styling */
+    body {
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    /* Container */
     .container-1 {
-        width: 70%;
-        margin: auto;
+        width: 100%;
+        max-width: 650px;
         background: #fff;
-        padding: 30px;
+        padding: 40px;
         border-radius: 10px;
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        height: 80vh;
+        transform: translateY(30px);
+        animation: slideUp 0.5s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+        0% { transform: translateY(30px); }
+        100% { transform: translateY(0); }
     }
 
     h2 {
-        text-align: center;
         color: #333;
         font-weight: bold;
         margin-bottom: 20px;
+        font-size: 2rem;
     }
 
-    .form-container {
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 10px;
+    /* Input Fields */
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: all 0.3s;
     }
 
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+
+    }
+
+    /* Button Styling */
     .btn-primary {
         width: 100%;
         background: #007bff;
         border: none;
-        padding: 10px;
+        padding: 12px;
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 18px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        margin-top: 20px;   
     }
 
     .btn-primary:hover {
         background: #0056b3;
     }
 
-    .imang img {
-        width: 100%;
-        max-width: 500px;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        display: block;
-        margin: auto;
+    .btn-primary:disabled {
+        background: #aaa;
+        cursor: not-allowed;
     }
 
+    /* Forgot Password */
     .forgot-password {
         display: block;
-        margin-top: 10px;
         text-align: center;
         font-size: 14px;
+        margin-top: 20px;
     }
 
     .forgot-password a {
         color: #007bff;
         text-decoration: none;
+        font-weight: bold;
     }
 
     .forgot-password a:hover {
         text-decoration: underline;
     }
 
-    .remember-me {
-        margin-top: 10px;
+    /* Profile Image */
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* Loader Styling */
+    .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #007bff;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 </style>
 
 <div class="container-1">
     <h2>Admin Login</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-container">
-                <form id="loginForm">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
-                    </div>
+    
+    <form id="loginForm">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+        
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
-                    </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 
-                    <!-- Remember Me checkbox -->
-                    <div class="remember-me">
-                        <label>
-                            <input type="checkbox" name="remember" id="remember"> Remember me
-                        </label>
-                    </div>
+    <div id="message"></div>
 
-                    <button type="submit" class="btn btn-primary">Login</button>
+    <div class="forgot-password">
+        <a href="/reset">Forgot Password?</a>
+    </div>
 
-                    <!-- Forgot password link -->
-                    <div class="forgot-password">
-                        <a href="/forgot-password">Forgot Password?</a>
-                    </div>
-                </form>
-
-                <div id="message"></div>
-                <div class="mt-3 text-center">
-                    Don't have an account? <a href="/register">Register here</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="imang">
-                <img src="/Views/assets/images/login.png" alt="Login Image">
-            </div>
-        </div>
+    <div class="mt-3 text-center">
+        Don't have an account? <a href="/register">Register here</a>
     </div>
 </div>
 
@@ -123,7 +169,11 @@ require_once __DIR__ . "/../layout/header.php";
     document.getElementById("loginForm").addEventListener("submit", function(e) {
         e.preventDefault();
         let formData = new FormData(this);
+        let button = document.querySelector(".btn-primary");
+        let messageDiv = document.getElementById("message");
 
+        button.disabled = true;
+        button.innerHTML = "Logging in... <div class='loader'></div>";
 
         fetch("/users/authenticate", {
                 method: "POST",
@@ -131,19 +181,22 @@ require_once __DIR__ . "/../layout/header.php";
             })
             .then(response => response.json())
             .then(data => {
-                let messageDiv = document.getElementById("message");
                 if (data.status === "success") {
                     messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
                     setTimeout(() => {
-                        window.location.href = "/dashboard";
+                        window.location.href = "/";
                     }, 2000);
                 } else {
                     messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
+                    button.disabled = false;
+                    button.innerHTML = "Login";
                 }
             })
             .catch(error => {
                 console.error("Error:", error);
-                document.getElementById("message").innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+                messageDiv.innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+                button.disabled = false;
+                button.innerHTML = "Login";
             });
     });
 </script>
