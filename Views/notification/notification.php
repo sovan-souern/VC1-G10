@@ -20,20 +20,20 @@ $notificationModel->closeConnection();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
         .notification-card {
             border: 1px solid #ddd;
             border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
+            padding: 10px;
+            margin-bottom: 6px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             flex-wrap: wrap;
         }
         .notification-icon {
-            font-size: 2em;
+            font-size: 1.5em;
             margin-right: 16px;
         }
         .notification-content {
@@ -44,12 +44,12 @@ $notificationModel->closeConnection();
             font-size: 1.2em;
         }
         .notification-message {
-            margin-top: 8px;
+            margin-top: 1px;
         }
         .notification-time {
             color: #888;
-            font-size: 0.9em;
-            margin-top: 8px;
+            font-size: 1.0em;
+            /* margin-top: 19px; */
         }
     </style>
 </head>

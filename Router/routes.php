@@ -72,6 +72,8 @@ $routes->get('/category/delete', [CategoryController::class, 'destroy']);
 // brand
 $routes->get('/brand', [BrandController::class, 'index']);
 $routes->get('/brand/create', [BrandController::class, 'create']);  
+$routes->post('/brand/store', [BrandController::class, 'store']);  
+
 $routes->get('/brand/edit', [BrandController::class, 'edit']);  
 
 // update profile

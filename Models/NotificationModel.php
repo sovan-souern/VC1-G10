@@ -31,6 +31,12 @@ class NotificationModel {
         }
     }
 
+    public function markAllAsRead() {
+        $sql = "UPDATE notifications SET status = 'read' WHERE status = 'unread'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    }
+
     public function closeConnection() {
         $this->conn = null;
     }
