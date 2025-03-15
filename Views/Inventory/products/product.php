@@ -88,12 +88,6 @@
                     <table class="table datanew">
                         <thead>
                             <tr>
-                                <th>
-                                    <label class="checkboxs">
-                                        <input type="checkbox" id="select-all">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </th>
                                 <th>ID</th>
                                 <th>Product Name</th>
                                 <th>
@@ -123,12 +117,6 @@
                             <?php foreach ($products as $index => $product) : ?>
                                 <!-- <?= htmlspecialchars($product["image"]) ?> -->
                                 <tr class="product" data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
                                     <td><?= $index + 1 ?></td>
                                     <td class="productimgname">
                                         <a href="javascript:void(0);" class="product-img">
@@ -141,16 +129,16 @@
                                     <td><?= htmlspecialchars($product["price"]) ?></td>
                                     <td><?= htmlspecialchars($product["quantity"]) ?></td>
                                     <td>
-                                        <a class="me-3" href="products/view">
+                                        <a class="me-3" href="products/view?id=<?= $product['product_id'] ?>">
                                             <img src="/Views/assets/img1/icons/eye.svg" alt="img">
                                         </a>
                                         <a class="me-3" href="products/edit?id=<?= $product['product_id'] ?>">
                                             <img src="/Views/assets/img1/icons/edit.svg" alt="img">
                                         </a>
-                                        
 
 
-                                        <a class="delete-product" href="products/delete?id=<?= $product['product_id']?>">
+
+                                        <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
                                             <img src="/Views/assets/img1/icons/delete.svg" alt="img">
                                             <?php require "delete.php" ?>
                                         </a>
@@ -165,8 +153,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->

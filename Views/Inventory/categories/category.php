@@ -79,6 +79,14 @@
                                     </td>
                                     <td><?= htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8') ?></td>
                                     <td>
+<<<<<<< HEAD
+                                        <a class="me-3" href="/category/edit?id=<?= isset($category['id']) ? htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                            <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
+                                        </a>
+                                        <a class="me-3 confirm-text" href="/category/delete?id=<?= isset($category['id']) ? htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                                            <img src="/Views/assets/img1/icons/delete.svg" alt="Delete">
+                                        </a>
+=======
                                         <a class="me-3" href="/category/edit?id=<?= $category['category_id'] ?>">
                                             <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
                                         </a>
@@ -87,6 +95,7 @@
                                         </a>
                                        
                                        
+>>>>>>> main
                                     </td>
 
                                 </tr>
@@ -101,7 +110,11 @@
 
 </body>
 
+<<<<<<< HEAD
+</html>
+=======
 </html>
 
 
 <!-- <?= isset($category['id']) ? htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8') : ''; ?> -->
+>>>>>>> main
