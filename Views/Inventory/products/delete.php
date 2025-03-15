@@ -7,7 +7,7 @@
                  <i class="material-icons" class="" data-bs-dismiss="modal" aria-label="Close">close</i>
             </div>
             <div class="modal-body text-dark">
-                Are you sure you want to delete this product អាងាប់?
+                Are you sure you want to delete this product ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
