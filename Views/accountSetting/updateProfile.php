@@ -67,16 +67,6 @@
                                         required />
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        id="username"
-                                        name="username"
-                                        value="<?php echo htmlspecialchars($profile['username'] ?? ''); ?>"
-                                        required />
-                                </div>
-                                <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">Email</label>
                                     <input
                                         class="form-control"
@@ -85,38 +75,6 @@
                                         name="email"
                                         value="<?php echo htmlspecialchars($profile['email'] ?? ''); ?>"
                                         required />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="phone" class="form-label">Phone Number</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="phone"
-                                        name="phone"
-                                        value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>" />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label">Gender</label>
-                                    <div class="form-check mt-3">
-                                        <input
-                                            name="gender"
-                                            class="form-check-input"
-                                            type="radio"
-                                            value="male"
-                                            id="male"
-                                            <?php echo ($profile['gender'] ?? '') === 'male' ? 'checked' : ''; ?> />
-                                        <label class="form-check-label" for="male"> Male </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input
-                                            name="gender"
-                                            class="form-check-input"
-                                            type="radio"
-                                            value="female"
-                                            id="female"
-                                            <?php echo ($profile['gender'] ?? '') === 'female' ? 'checked' : ''; ?> />
-                                        <label class="form-check-label" for="female"> Female </label>
-                                    </div>
                                 </div>
                             </div>
                             <div class="mt-4">
@@ -134,3 +92,27 @@
 </div>
 <!-- Content wrapper -->
 
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        fetch('/updateProfile', {
+            method: 'POST',
+            body: formData
+        })  
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Profile updated successfully');
+                window.location.reload();
+            } else {
+                alert('Error updating profile: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+    });
+</script>

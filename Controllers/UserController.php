@@ -61,7 +61,10 @@ class UserController extends BaseController
 
             $result = $this->user->addUser($name, $email, $password, $profilePicture);
             if ($result) {
-                echo json_encode(["status" => "success", "message" => "Registration successful!"]);
+                // Automatically log in the user
+                session_start();
+                $_SESSION['admin_ID'] = $result; // Assuming $result is the user ID
+                echo json_encode(["status" => "success", "message" => "Registration successful!", "admin_ID" => $result]);
             } else {
                 echo json_encode(["status" => "error", "message" => "Registration failed!"]);
             }

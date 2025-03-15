@@ -4,11 +4,10 @@ if (isset($_SESSION['admin_ID'])) {
     header("Location: /dashboard");
     exit();
 }
-require_once __DIR__ . "/../layout/header.php";
+require_once __DIR__ . "/../layout/header.php";  
 ?>
 
 <style>
-    /* Centering and Styling the Form */
     body {
         background: #f8f9fa;
         display: flex;
@@ -35,7 +34,6 @@ require_once __DIR__ . "/../layout/header.php";
         margin-bottom: 20px;
     }
 
-    /* Input Fields */
     .form-control {
         width: 100%;
         padding: 10px;
@@ -45,7 +43,6 @@ require_once __DIR__ . "/../layout/header.php";
         font-size: 14px;
     }
 
-    /* Button Styling */
     .btn-primary {
         width: 100%;
         background: #007bff;
@@ -61,7 +58,6 @@ require_once __DIR__ . "/../layout/header.php";
         background: #0056b3;
     }
 
-    /* Profile Image */
     .profile-image {
         width: 120px;
         height: 120px;
@@ -79,19 +75,14 @@ require_once __DIR__ . "/../layout/header.php";
 </style>
 
 <div class="container-1">
-    <!-- Default Profile Image -->
     <img id="profileImage" src="/Views/assets/images/login.png" alt="Profile Image" class="profile-image">
 
     <h2>Admin Registration</h2>
     
     <form id="registrationForm">
         <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
-        
-        <input type="text" class="form-control" name="name" id="username" placeholder="Username" required>
-        
+        <input type="text" class="form-control" name="name" id="name" placeholder="Full Name" required>
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-
-        <!-- Profile Picture Input -->
         <input type="file" class="form-control" name="profile_picture" id="profilePicture" accept="image/*">
 
         <button type="submit" class="btn btn-primary">Register</button>
@@ -105,45 +96,40 @@ require_once __DIR__ . "/../layout/header.php";
 </div>
 
 <script>
-    // Function to handle file input change event and display the selected image
     document.getElementById("profilePicture").addEventListener("change", function(event) {
         var file = event.target.files[0];
         if (file) {
             var reader = new FileReader();
-
             reader.onload = function(e) {
-                // Update the image source with the selected file's data URL
                 document.getElementById("profileImage").src = e.target.result;
             }
-
             reader.readAsDataURL(file);
         }
     });
 
-    // Form submission handling
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
         e.preventDefault();
         let formData = new FormData(this);
-        
+
         fetch("/users/store", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                let messageDiv = document.getElementById("message");
-                if (data.status === "success") {
-                    messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
-                    setTimeout(() => {
-                        window.location.href = "/login";
-                    }, 2000);
-                } else {
-                    messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                document.getElementById("message").innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
-            });
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            let messageDiv = document.getElementById("message");
+            if (data.status === "success") {
+                messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 2000);
+            } else {
+                messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("message").innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+        });
     });
 </script>
