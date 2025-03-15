@@ -1,7 +1,8 @@
 <?php
+
 session_start();
 if (isset($_SESSION['admin_ID'])) {
-    header("Location: /dashboard");
+    header("Location:/ ");
     exit();
 }
 require_once __DIR__ . "/../layout/header.php";
@@ -100,7 +101,7 @@ require_once __DIR__ . "/../layout/header.php";
 
                     <!-- Forgot password link -->
                     <div class="forgot-password">
-                        <a href="/forgot-password">Forgot Password?</a>
+                        <a href="/reset">Forgot Password?</a>
                     </div>
                 </form>
 
@@ -124,6 +125,9 @@ require_once __DIR__ . "/../layout/header.php";
         e.preventDefault();
         let formData = new FormData(this);
 
+        // Clear any existing messages
+        let messageDiv = document.getElementById("message");
+        messageDiv.innerHTML = "";
 
         fetch("/users/authenticate", {
                 method: "POST",
@@ -131,19 +135,20 @@ require_once __DIR__ . "/../layout/header.php";
             })
             .then(response => response.json())
             .then(data => {
-                let messageDiv = document.getElementById("message");
                 if (data.status === "success") {
                     messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
+                    // Redirect after successful login
                     setTimeout(() => {
-                        window.location.href = "/dashboard";
-                    }, 2000);
+                        window.location.href = data.redirect;
+                    }, 1500);
                 } else {
                     messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
                 }
             })
             .catch(error => {
                 console.error("Error:", error);
-                document.getElementById("message").innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+                messageDiv.innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
             });
     });
 </script>
+

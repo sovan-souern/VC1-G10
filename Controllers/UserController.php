@@ -71,35 +71,65 @@ class UserController extends BaseController
 
     public function authenticate()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = htmlspecialchars($_POST['email']);
-            $password = htmlspecialchars($_POST['password']);
-
+        try {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            
+            // Input validation
             if (empty($email) || empty($password)) {
-                echo json_encode(["status" => "error", "message" => "Email and password are required!"]);
-                exit();
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Email and password are required'
+                ]);
+                return;
             }
-
-            $user = $this->user->getUserByEmail($email);
+    
+            $userModel = new UserModel();
+            $user = $userModel->getUserByEmail($email);
+    
             if (!$user) {
-                echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
-                exit();
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Invalid email or password'
+                ]);
+                return;
             }
-
+    
+            // Verify password
             if (password_verify($password, $user['password'])) {
+                // Start session and set user data
                 session_start();
-                $_SESSION['admin_ID'] = $user['admin_ID'];
-                $_SESSION['name'] = $user['name'];
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['profile_picture'] = $user['profile_picture'];
+                $_SESSION['admin_ID'] = $user['admin_id'];
+                $_SESSION['admin_email'] = $user['email'];
                 
-                echo json_encode(["status" => "success", "message" => "Login successful!"]);
+                // Handle remember me
+                if (isset($_POST['remember']) && $_POST['remember'] == 'on') {
+                    $token = bin2hex(random_bytes(32));
+                    setcookie('remember_token', $token, time() + (86400 * 30), '/'); // 30 days
+                    // You should also store this token in the database
+                }
+    
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Login successful',
+                    'redirect' => '/'
+                ]);
             } else {
-                echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Invalid email or password'
+                ]);
             }
-            exit();
+        } catch (Exception $e) {
+            error_log("Authentication error: " . $e->getMessage());
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'An error occurred during authentication'
+            ]);
         }
     }
+    
+    
 
     public function logout()
     {

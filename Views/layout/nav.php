@@ -150,7 +150,7 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/update-profile" class="menu-link">
+          <a href="/update" class="menu-link">
             <div data-i18n="Account">Update Profile</div>
           </a>
         </li>

@@ -4,10 +4,12 @@ require_once 'Databases/database.php';
 class UserModel
 {
     private $db;
+    private $pdo;
 
     public function __construct()
     {
-        $this->db = new Database("localhost", "beauty_store", "root", "");
+        $this->db = new Database();
+        $this->pdo = $this->db->getConnection();
     }
 
     public function getUsers()
@@ -24,23 +26,40 @@ class UserModel
 
     public function getUserByEmail($email)
     {
-        $result = $this->db->query("SELECT * FROM admins WHERE email = :email", [':email' => $email]);
-        return $result->fetch(PDO::FETCH_ASSOC);
+        try {
+            // Fix table name from 'admin' to 'admins'
+            $sql = "SELECT * FROM admins WHERE email = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if (!$user) {
+                error_log("No user found with email: " . $email);
+                return false;
+            }
+            
+            error_log("User found with email: " . $email . ". Data: " . json_encode($user));
+            return $user;
+        } catch (Exception $e) {
+            error_log("getUserByEmail error: " . $e->getMessage());
+            return false;
+        }
     }
+    
+    
 
     public function addUser($name, $email, $password, $profilePicture = null)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         try {
-            $this->db->query(
-                "INSERT INTO admins (name, email, password, profile_picture) VALUES (:name, :email, :password, :profile_picture)",
-                [
-                    ':name' => $name,
-                    ':email' => $email,
-                    ':password' => $hashedPassword,
-                    ':profile_picture' => $profilePicture
-                ]
-            );
+            $sql = "INSERT INTO admins (name, email, password, profile_picture) VALUES (:name, :email, :password, :profile_picture)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':name' => $name,
+                ':email' => $email,
+                ':password' => $hashedPassword,
+                ':profile_picture' => $profilePicture
+            ]);
             return true;
         } catch (PDOException $e) {
             // Log the exception message for debugging
