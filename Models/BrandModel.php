@@ -5,12 +5,12 @@ class BrandModel {
     private $conn;
 
     public function __construct() {
-        $database = new Database();
+        $database = new Database('picture2'); // Connect to the 'picture2' database
         $this->conn = $database->getConnection();
     }
 
     public function getBrands() {
-        $sql = "SELECT id, brand_name, image_path, description FROM brand";
+        $sql = "SELECT id, brand_name, image_url, description FROM brand"; // Correct column names
         $stmt = $this->conn->query($sql);
 
         $brands = [];
@@ -21,10 +21,11 @@ class BrandModel {
         return $brands;
     }
 
-    public function addBrand($brandName, $brandDescription, $brandImagePath) {
-        $sql = "INSERT INTO brand (brand_name, brand_description, image) VALUES (?, ?, ?)";
+    public function addBrand($brandID,$brandName, $brandDescription, $brandImageUrl) {
+        $sql = "INSERT INTO brand (id , brand_name, description, image_url) VALUES (?, ?, ?)"; // Correct column names
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$brandName, $brandDescription, $brandImagePath]);
+        $stmt->execute([$brandID,$brandName, $brandDescription, $brandImageUrl]);
+        return $this->conn->lastInsertId(); // Return the ID of the newly inserted brand
     }
 
     public function closeConnection() {
@@ -32,3 +33,4 @@ class BrandModel {
     }
 }
 ?>
+

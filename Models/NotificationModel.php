@@ -42,3 +42,17 @@ class NotificationModel {
     }
 }
 ?>
+<?php
+
+$notificationModel = new NotificationModel();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'];
+    $message = $_POST['message'];
+    $notificationModel->addNotification($title, $message);
+    echo "<script>alert('Notification added successfully');</script>";
+}
+
+$notifications = $notificationModel->getNotifications();
+$notificationModel->closeConnection();
+ ?>

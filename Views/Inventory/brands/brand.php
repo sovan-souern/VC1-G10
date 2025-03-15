@@ -9,6 +9,7 @@ try {
     $brandModel = new BrandModel();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_brand'])) {
+        $brandID = $_POST['brand_ID'];
         $brandName = $_POST['brand_name'];
         $brandDescription = $_POST['brand_description'];
         $brandImage = $_FILES['brand_image'];
@@ -141,6 +142,7 @@ try {
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Image</th>
                             <th>Brand Name</th>
                             <th>Brand Description</th>
@@ -151,12 +153,21 @@ try {
                         <?php if (!empty($brands)): ?>
                             <?php foreach ($brands as $brand): ?>
                                 <tr>
-                                    <td><img src="<?php echo $brand['image_path']; ?>" alt="Brand Image" style="width: 50px;"></td>
+                                    <td><?php echo $brand['id']; ?></td>
+                                    <td><img src="<?php echo $brand['image_url']; ?>" alt="Brand Image" style="width: 50px;"></td>
                                     <td><?php echo $brand['brand_name']; ?></td>
                                     <td><?php echo $brand['description']; ?></td>
                                     <td>
-                                    <a href="edit.php?id=<?php echo $brand['id']; ?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> <!-- Edit icon --></a>
-                                    <a href="delete.php?id=<?php echo $brand['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash-alt"></i> <!-- Delete icon --></a>
+                                    <!-- icon                                     -->
+                                    <a class="me-3" href="products/view">
+                                        <img src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                    </a>
+                                    <a class="me-3" href="products/edit">
+                                        <img src="/Views/assets/img1/icons/edit.svg" alt="img">
+                                    </a>
+                                    <a class="confirm-text" href="products/">
+                                        <img src="/Views/assets/img1/icons/delete.svg" alt="img">
+                                    </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

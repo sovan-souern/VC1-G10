@@ -1,25 +1,14 @@
 <?php
 require_once __DIR__ . '/../../Models/NotificationModel.php';
 
-$notificationModel = new NotificationModel();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $message = $_POST['message'];
-    $notificationModel->addNotification($title, $message);
-    echo "<script>alert('Notification added successfully');</script>";
-}
-
-$notifications = $notificationModel->getNotifications();
-$notificationModel->closeConnection();
 ?>
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications</title>
+    <title>Notifications</title> -->
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
         .notification-card {

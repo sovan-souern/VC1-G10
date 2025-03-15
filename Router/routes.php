@@ -12,25 +12,12 @@ require_once "Controllers/InvoiceController.php";
 require_once "Controllers/BrandController.php";
 require_once "Controllers/ProfileController.php";
 require_once "Controllers/UserController.php";
-// require_once "Controllers/LoginController.php";
-
-
+require_once "Controllers/LoginRegisterController.php";
+require_once "Controllers/AdminContoller.php";
 
 $routes = new Router();
 
-
 $routes->get('/', [DashboardController::class, 'index']);
-
-
-
-
-// $routes->get('/user', [UserController::class, 'index']);
-// $routes->get('/user/create', [UserController::class, 'create']);
-// $routes->post('/user/store', [UserController::class, 'store']);
-// $routes->get('/user/edit', [UserController::class, 'edit']);
-// $routes->put('/user/update', [UserController::class, 'update']);
-// $routes->delete('/user/delete', [UserController::class, 'destroy']);
-// $routes->get('/user/show', [UserController::class, 'show']);
 
 // Order
 $routes->get('/order', [OrderController::class, 'index']);
@@ -38,19 +25,14 @@ $routes->get('/order', [OrderController::class, 'index']);
 // shop owner
 $routes->get('/shop-owner', [ShopOwnerController::class, 'index']);
 
-
 // invoice
 $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // user
+$routes->get('/users', [UserController::class, 'index']);
 
 // notification 
-
 $routes->get('/notifications', [NotificationController::class, 'index']); 
-
-
-
-$routes->get('/users', [UserController::class, 'index']);
 
 // inventory page
 $routes->get('/products', [ProductController::class, 'index']);
@@ -67,8 +49,6 @@ $routes->get('/category/edit', [CategoryController::class, 'edit']);
 $routes->put('/category/update', [CategoryController::class, 'update']);
 $routes->get('/category/delete', [CategoryController::class, 'destroy']);
 
-
-
 // brand
 $routes->get('/brand', [BrandController::class, 'index']);
 $routes->get('/brand/create', [BrandController::class, 'create']);  
@@ -80,11 +60,15 @@ $routes->get('/brand/edit', [BrandController::class, 'edit']);
 $routes->get('/update', [ProfileController::class, 'update']);
 // reset password
 $routes->get('/reset', [ProfileController::class, 'reset']);
-//login
-// $routes->get('/login', [LoginController::class, 'login']);
-$routes->get('/login', [UserController::class, 'login']);
-//signup
-$routes->get('/signup', [UserController::class, 'signup']);
 
+// login
+$routes->get("/login", [AdminController::class, 'login']);
+$routes->get("/register", [AdminController::class, 'register']);
+$routes->post("/users/store", [AdminController::class, 'store']);
+$routes->post("/users/authenticate", [AdminController::class, 'authenticate']);
+$routes->get("/signup", [AdminController::class, 'logout']);
+
+// signup
+// $routes->get('/signup', [UserController::class, 'signup']);
 
 $routes->dispatch();
