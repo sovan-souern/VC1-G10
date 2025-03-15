@@ -7,11 +7,11 @@ class ProductModel
 
     function __construct()
     {
-        // try {
+        try {
             $this->pdo = new Database();
-        // } catch (Exception $e) {
-        //     die("Database connection failed: " . $e->getMessage());
-        // }
+        } catch (Exception $e) {
+            die("Database connection failed: " . $e->getMessage());
+        }
     }
 
     function getProducts()
@@ -38,7 +38,7 @@ class ProductModel
         }
     }
 
-    function getBrand()
+    function getBrands()
     {
         try {
             $stmt = $this->pdo->query('SELECT * FROM brand');
@@ -48,7 +48,7 @@ class ProductModel
         }
     }
 
-    function getCategory()
+    function getCategories()
     {
         try {
             $stmt = $this->pdo->query('SELECT * FROM categories');
@@ -73,14 +73,59 @@ class ProductModel
                 'image' => $data['image'],
                 'admin_id' => $data['admin_id']
             ]);
-            return true; // Success
+            return true;
         } catch (Exception $e) {
             echo "Error creating product: " . $e->getMessage();
             return false;
         }
     }
-    function getProduct($id){
-        $stmt=$this->pdo->query('SELECT * FROM products where id=:id', ['id' => $id]);
-        return $stmt->fetch();
+
+    function getProduct($id)
+    {
+        try {
+            $stmt = $this->pdo->query('SELECT * FROM products WHERE product_id = :id', ['id' => $id]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo "Error fetching product: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    function updateProduct($data)
+    {
+        try {
+            $stmt = $this->pdo->query(
+                "UPDATE products SET 
+                    product_name = :product_name, 
+                    quantity = :quantity, 
+                    price = :price, 
+                    category_id = :category_id, 
+                    brand_id = :brand_id, 
+                    product_content = :product_content, 
+                    image = :image 
+                WHERE product_id = :product_id",
+                [
+                    'product_name' => $data['product_name'],
+                    'quantity' => $data['quantity'],
+                    'price' => $data['price'],
+                    'category_id' => $data['category_id'],
+                    'brand_id' => $data['brand_id'],
+                    'product_content' => $data['product_content'],
+                    'image' => $data['image'],
+                    'product_id' => $data['product_id']
+                ]
+            );
+            return true;
+        } catch (Exception $e) {
+            echo "Error updating product: " . $e->getMessage();
+            return false;
+        }
+    }
+    function deleteProduct($id)
+    {
+      
+        $stmt = $this->pdo->query("DELETE FROM products WHERE product_id = :id", [
+            'id' => $id
+        ]);
     }
 }

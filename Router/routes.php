@@ -56,6 +56,9 @@ $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);
 $routes->post('/products/store', [ProductController::class, 'store']);
 $routes->get('/products/edit', [ProductController::class, 'edit']);
+$routes->put('/products/update', [ProductController::class, 'update']);
+$routes->get('/products/delete', [ProductController::class,'destroy']);
+
 $routes->get('/products/view', [ProductController::class, 'view']);
 
 // category 
@@ -64,7 +67,7 @@ $routes->get('/category/create', [CategoryController::class, 'create']);
 $routes->post('/category/store', [CategoryController::class, 'store']);
 $routes->get('/category/edit', [CategoryController::class, 'edit']);
 $routes->put('/category/update', [CategoryController::class, 'update']);
-$routes->get('/category/delete', [CategoryController::class, 'destroy']);
+$routes->delete('/category/delete', [CategoryController::class, 'destroy']);
 
 
 
