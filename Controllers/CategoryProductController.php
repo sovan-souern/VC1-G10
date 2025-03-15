@@ -57,9 +57,9 @@ class CategoryController extends BaseController
     }
     function edit($id)
     {
-        // $categories = $this->model->getCategory($id);
-        // var_dump($_SERVER);
-        $this->views('/Inventory/categories/edit.php');
+        $categories = $this->model->getCategory($id);
+        // var_dump($categories);
+        $this->views('/Inventory/categories/edit.php',["categories" => $categories]);
     }
 
     function update($id)
@@ -105,16 +105,16 @@ class CategoryController extends BaseController
     }
     function destroy($id)
     {
-        $user = $this->model->getCategory($id);
+        $categories = $this->model->getCategory($id);
         if (!empty($category['image_url'])) {
-            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $user['image_url'];
+            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $categories['image_url'];
             if (file_exists($filePath)) {
                 unlink($filePath);
             }
         }
 
         $this->model->deleteCategory($id);
-        $this->redirect('/Category');
+        $this->redirect('/category');
         //jub jub
     }
 }
