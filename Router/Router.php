@@ -31,7 +31,13 @@ class Router
             'action' => $action
         ];
     }
-
+    // function ($uri, $action)
+    // {
+    //     $this->routes[$uri] = [
+    //         'method' => 'POST',
+    //         'action' => $action
+    //     ];
+    // }
 
     public function dispatch()
     {
