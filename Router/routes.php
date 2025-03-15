@@ -13,23 +13,10 @@ require_once "Controllers/BrandController.php";
 require_once "Controllers/ProfileController.php";
 require_once "Controllers/UserController.php";
 
-
-
 $routes = new Router();
 
-
-$routes->get('/', [DashboardController::class, 'index']);
-
-
-
-
-// $routes->get('/user', [UserController::class, 'index']);
-// $routes->get('/user/create', [UserController::class, 'create']);
-// $routes->post('/user/store', [UserController::class, 'store']);
-// $routes->get('/user/edit', [UserController::class, 'edit']);
-// $routes->put('/user/update', [UserController::class, 'update']);
-// $routes->delete('/user/delete', [UserController::class, 'destroy']);
-// $routes->get('/user/show', [UserController::class, 'show']);
+// Redirect to signup page by default
+$routes->get('/', [UserController::class, 'signup']);
 
 // Order
 $routes->get('/order', [OrderController::class, 'index']);
@@ -37,17 +24,11 @@ $routes->get('/order', [OrderController::class, 'index']);
 // shop owner
 $routes->get('/shop-owner', [ShopOwnerController::class, 'index']);
 
-
 // invoice
 $routes->get('/invoice', [InvoiceController::class, 'index']);
 
-// user
-
 // notification 
-
 $routes->get('/notifications', [NotificationController::class, 'index']); 
-
-
 
 $routes->get('/users', [UserController::class, 'index']);
 
@@ -72,8 +53,9 @@ $routes->get('/update', [ProfileController::class, 'update']);
 $routes->get('/reset', [ProfileController::class, 'reset']);
 //login
 $routes->get('/login', [UserController::class, 'login']);
+$routes->post('/login', [UserController::class, 'authenticate']);
 //signup
 $routes->get('/signup', [UserController::class, 'signup']);
-
+$routes->post('/signup', [UserController::class, 'store']);
 
 $routes->dispatch();

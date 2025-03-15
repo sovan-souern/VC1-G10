@@ -45,6 +45,9 @@
                     <input type="file" class="form-control" id="imageInput" accept="image/*" required>
                 </div>
                 <button type="submit" class="btn btn-custom">Sign Up</button>
+                <p>do you have an account? <a href="/login">Login</a></p>
+
+
             </div>
         </form>
     </div>
