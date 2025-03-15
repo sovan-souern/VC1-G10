@@ -4,30 +4,43 @@ if (isset($_SESSION['admin_ID'])) {
     header("Location: /dashboard");
     exit();
 }
-require_once __DIR__ . "/../layout/header.php";
+require_once __DIR__ . "/../layout/header.php";  
 ?>
 
 <style>
+    body {
+        background: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
     .container-1 {
-        width: 70%;
-        margin: auto;
+        width: 100%;
+        max-width: 650px;
         background: #fff;
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
     }
 
     h2 {
-        text-align: center;
         color: #333;
         font-weight: bold;
         margin-bottom: 20px;
     }
 
-    .form-container {
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 10px;
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
     }
 
     .btn-primary {
@@ -37,91 +50,86 @@ require_once __DIR__ . "/../layout/header.php";
         padding: 10px;
         border-radius: 5px;
         font-size: 16px;
+        color: white;
+        cursor: pointer;
     }
 
     .btn-primary:hover {
         background: #0056b3;
     }
 
-    .imang img {
-    width: 100%;
-    max-width: 500px; /* Prevents it from getting too big */
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: block;
-    margin: auto;
-}
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .text-center {
+        text-align: center;
+    }
 </style>
 
 <div class="container-1">
+    <img id="profileImage" src="/Views/assets/images/login.png" alt="Profile Image" class="profile-image">
+
     <h2>Admin Registration</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-container">
-                <form id="registrationForm">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
-                    </div>
+    
+    <form id="registrationForm">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Full Name" required>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+        <input type="file" class="form-control" name="profile_picture" id="profilePicture" accept="image/*">
 
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="name" id="username" placeholder="Choose a username" required>
-                    </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Create a password" required>
-                    </div>
+    <div id="message"></div>
 
-                    <div class="mb-3">
-                        <label for="profilePicture" class="form-label">Profile Picture</label>
-                        <input type="file" class="form-control" name="profile_picture" id="profilePicture">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Register</button>
-                </form>
-
-                <div id="message"></div>
-                <div class="mt-3 text-center">
-                    Already have an account? <a href="/login">Login here</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="imang">
-                <img src="/Views/assets/images/login.png" alt="Profile Image">
-
-            </div>
-        </div>
+    <div class="mt-3 text-center">
+        Already have an account? <a href="/login">Login here</a>
     </div>
 </div>
 
 <script>
+    document.getElementById("profilePicture").addEventListener("change", function(event) {
+        var file = event.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("profileImage").src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
         e.preventDefault();
         let formData = new FormData(this);
 
         fetch("/users/store", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                let messageDiv = document.getElementById("message");
-                if (data.status === "success") {
-                    messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
-                    setTimeout(() => {
-                        window.location.href = "/login";
-                    }, 2000);
-                } else {
-                    messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                document.getElementById("message").innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
-            });
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            let messageDiv = document.getElementById("message");
+            if (data.status === "success") {
+                messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 2000);
+            } else {
+                messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("message").innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+        });
     });
 </script>
