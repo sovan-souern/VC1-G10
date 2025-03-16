@@ -1,10 +1,7 @@
 <?php
 require_once 'Controllers/BaseController.php';
-<<<<<<< HEAD
 require_once 'Models/ProfileModel.php';
-=======
 require_once 'Models\ProfileModel.php';
->>>>>>> 31d43cc6013b85b1249e79e0f6747646e7cd6cf8
 
 class ProfileController extends BaseController {
     private $profileModel;
