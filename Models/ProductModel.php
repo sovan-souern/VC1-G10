@@ -71,7 +71,7 @@ class ProductModel
                 'brand_id' => $data['brand_id'] ?: null,
                 'product_content' => $data['product_content'],
                 'image' => $data['image'],
-                'admin_id' => $data['admin_id']
+                'admin_id' => !empty($data['admin_id']) ? $data['admin_id'] : null
             ]);
             return true;
         } catch (Exception $e) {
@@ -79,7 +79,7 @@ class ProductModel
             return false;
         }
     }
-
+    
     function getProduct($id)
     {
         try {

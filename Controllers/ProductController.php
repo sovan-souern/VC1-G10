@@ -54,14 +54,15 @@
                 }
 
                 $data = [
-                    'product_name' => $_POST['product_name'] ?? '',
-                    'quantity' => $_POST['quantity'] ?? 0,
-                    'price' => $_POST['price'] ?? 0.00,
-                    'category_id' => $_POST['category_id'] ?? null,
-                    'brand_id' => $_POST['brand_id'] ?? null,
-                    'product_content' => $_POST['product_content'] ?? '',
+                    'product_name' => $_POST['product_name'],
+                    'quantity' => $_POST['quantity'],
+                    'price' => $_POST['price'],
+                    'category_id' => $_POST['category_id'],
+                    'brand_id' => $_POST['brand_id'],
+                    'product_content' => $_POST['product_content'],
+                    'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
                     'image' => $imagePath,
-                    'admin_id' => 1 
+                    'created_at' => date('Y-m-d H:i:s')
                 ];
 
                 if ($this->model->createProduct($data)) {
@@ -108,14 +109,15 @@
                 }
                 // Prepare product data for update
                 $data = [
-                    'product_id' => $id,
-                    'product_name' => $_POST['product_name'] ?? '',
-                    'quantity' => $_POST['quantity'] ?? 0,
-                    'price' => $_POST['price'] ?? 0.00,
-                    'category_id' => $_POST['category_id'] ?? null,
-                    'brand_id' => $_POST['brand_id'] ?? null,
-                    'product_content' => $_POST['product_content'] ?? '',
-                    'image' => $imagePath
+                    'product_name' => $_POST['product_name'],
+                    'quantity' => $_POST['quantity'],
+                    'price' => $_POST['price'],
+                    'category_id' => $_POST['category_id'],
+                    'brand_id' => $_POST['brand_id'],
+                    'product_content' => $_POST['product_content'],
+                    'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
+                    'image' => $imagePath,
+                    'created_at' => date('Y-m-d H:i:s')
                 ];
                 // Update the product
                 if ($this->model->updateProduct($data)) {
