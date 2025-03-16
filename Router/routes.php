@@ -13,11 +13,24 @@ require_once "Controllers/BrandController.php";
 require_once "Controllers/ProfileController.php";
 require_once "Controllers/UserController.php";
 require_once "Controllers/LoginRegisterController.php";
-require_once "Controllers/AdminContoller.php";
+require_once "Controllers/AdminController.php";
 
 $routes = new Router();
 
-$routes->get('/', [DashboardController::class, 'index']);
+// Middleware function to check if the user is authenticated
+function checkAuthentication() {
+    session_start();
+    if (!isset($_SESSION['admin_ID']) && $_SERVER['REQUEST_URI'] !== '/login' && $_SERVER['REQUEST_URI'] !== '/register') {
+        header("Location: /login");
+        exit();
+    }
+}
+
+// Call the middleware function before defining the routes
+checkAuthentication();
+
+// Default route to login
+$routes->get('/', [AdminController::class, 'login']);
 
 // Order
 $routes->get('/order', [OrderController::class, 'index']);
@@ -29,7 +42,6 @@ $routes->get('/shop-owner', [ShopOwnerController::class, 'index']);
 $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // user
-// $routes->get('/users', [UserController::class, 'index']);
 $routes->get('/users', [UserController::class, 'index']);
 $routes->get('/user/create', [UserController::class, 'create']);
 $routes->post('/user/store', [UserController::class, 'store']);
@@ -77,9 +89,8 @@ $routes->post("/users/store", [AdminController::class, 'store']);
 $routes->post("/users/authenticate", [AdminController::class, 'authenticate']);
 $routes->get("/signup", [AdminController::class, 'logout']);
 
-// signup
-// $routes->get('/signup', [UserController::class, 'signup']);
 // viewlogin
 $routes->get('/viewlogin', [LoginRegisterController::class, 'viewlogin']);
 
 $routes->dispatch();
+?>

@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 if (isset($_SESSION['admin_ID'])) {
     header("Location: /dashboard");
     exit();
@@ -121,7 +123,7 @@ require_once __DIR__ . "/../layout/header.php";
             if (data.status === "success") {
                 messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
                 setTimeout(() => {
-                    window.location.href = "/";
+                    window.location.href = "/login";
                 }, 2000);
             } else {
                 messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";

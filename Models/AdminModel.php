@@ -28,23 +28,23 @@ class AdminModel
         return $result->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function addUser($name, $email, $password, $profilePicture = null)
-    {
+    public function addUser($name, $email, $password, $profilePicture = null) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         try {
-            $this->db->query(
-                "INSERT INTO admins (name, email, password, profile_picture) VALUES (:name, :email, :password, :profile_picture)",
-                [
-                    ':name' => $name,
-                    ':email' => $email,
-                    ':password' => $hashedPassword,
-                    ':profile_picture' => $profilePicture
-                ]
+            $stmt = $this->db->prepare(
+                "INSERT INTO admins (name, email, password, profile_picture) VALUES (:name, :email, :password, :profile_picture)"
             );
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindParam(':profile_picture', $profilePicture);
+            if (!$stmt->execute()) {
+                error_log("Statement execute failed: " . print_r($stmt->errorInfo(), true));
+                return false;
+            }
             return true;
         } catch (PDOException $e) {
-            // Log the exception message for debugging
-            error_log("Failed to add user: " . $e->getMessage());
+            error_log("PDOException: " . $e->getMessage());
             return false;
         }
     }
