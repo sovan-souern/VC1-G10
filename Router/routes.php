@@ -29,7 +29,13 @@ $routes->get('/shop-owner', [ShopOwnerController::class, 'index']);
 $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // user
+// $routes->get('/users', [UserController::class, 'index']);
 $routes->get('/users', [UserController::class, 'index']);
+$routes->get('/user/create', [UserController::class, 'create']);
+$routes->post('/user/store', [UserController::class, 'store']);
+$routes->get('/user/edit', [UserController::class, 'edit']);
+$routes->put('/user/update', [UserController::class, 'update']);
+$routes->delete('/user/delete', [UserController::class, 'destroy']);
 
 // notification 
 $routes->get('/notifications', [NotificationController::class, 'index']); 
@@ -50,7 +56,7 @@ $routes->get('/category/create', [CategoryController::class, 'create']);
 $routes->post('/category/store', [CategoryController::class, 'store']);
 $routes->get('/category/edit', [CategoryController::class, 'edit']);
 $routes->put('/category/update', [CategoryController::class, 'update']);
-$routes->delete('/category/delete', [CategoryController::class, 'destroy']);
+$routes->get('/category/delete', [CategoryController::class, 'destroy']);
 
 // brand
 $routes->get('/brand', [BrandController::class, 'index']);
