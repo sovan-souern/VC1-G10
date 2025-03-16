@@ -1,109 +1,122 @@
 <?php
-
 require_once "Models/AdminModel.php";
 require_once 'BaseController.php';
 
-class AdminController extends BaseController
-{
+class AdminController extends BaseController {
     private $user;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->user = new AdminModel();
     }
 
-    public function register()
-    {
+    public function register() {
         // Display the registration form
         require_once "Views/auth/register.php";
     }
 
-    public function login()
-    {
+    public function login() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['admin_ID'])) {
+            header("Location: /");
+            exit();
+        }
         // Display the login form
         require_once "Views/auth/login.php";
     }
 
-    public function store()
-    {
+    public function store() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = htmlspecialchars($_POST['name']);
             $email = htmlspecialchars($_POST['email']);
             $password = htmlspecialchars($_POST['password']);
             $profilePicture = null;
-
+    
             if (empty($name) || empty($email) || empty($password)) {
-                echo json_encode(["status" => "error", "message" => "All fields are required!"]);
+                $message = "All fields are required!";
+                error_log($message);
+                echo json_encode(["status" => "error", "message" => $message]);
                 exit();
             }
-
+    
             if ($this->user->getUserByEmail($email)) {
-                echo json_encode(["status" => "error", "message" => "Email already exists!"]);
+                $message = "Email already exists!";
+                error_log($message);
+                echo json_encode(["status" => "error", "message" => $message]);
                 exit();
             }
-
+    
             if (!empty($_FILES['profile_picture']['name'])) {
                 $uploadDir = "uploads/";
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
-                
+    
                 $fileName = time() . "_" . basename($_FILES["profile_picture"]["name"]);
                 $targetFilePath = $uploadDir . $fileName;
-
+    
                 if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFilePath)) {
                     $profilePicture = $targetFilePath;
                 } else {
-                    echo json_encode(["status" => "error", "message" => "Failed to upload profile picture!"]);
+                    $message = "Failed to upload profile picture!";
+                    error_log($message);
+                    echo json_encode(["status" => "error", "message" => $message]);
                     exit();
                 }
             }
-
-            $result = $this->user->addUser($name, $email, $password, $profilePicture);
+    
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $result = $this->user->addUser($name, $email, $hashedPassword, $profilePicture);
+    
             if ($result) {
-                echo json_encode(["status" => "success", "message" => "Registration successful!"]);
+                $message = "Registration successful!";
+                echo json_encode(["status" => "success", "message" => $message, "redirect" => "/login"]);
+                exit();
             } else {
-                echo json_encode(["status" => "error", "message" => "Registration failed!"]);
+                $message = "Registration failed!";
+                error_log($message);
+                echo json_encode(["status" => "error", "message" => $message]);
             }
             exit();
         }
     }
+    
 
-    public function authenticate()
-    {
+    public function authenticate() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = htmlspecialchars($_POST['email']);
             $password = htmlspecialchars($_POST['password']);
-
+    
             if (empty($email) || empty($password)) {
                 echo json_encode(["status" => "error", "message" => "Email and password are required!"]);
                 exit();
             }
-
+    
             $user = $this->user->getUserByEmail($email);
-            if (!$user) {
+            if (!$user || !password_verify($password, $user['password'])) {
                 echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
                 exit();
             }
-
-            if (password_verify($password, $user['password'])) {
+    
+            if (session_status() == PHP_SESSION_NONE) {
                 session_start();
-                $_SESSION['admin_ID'] = $user['admin_ID'];
-                $_SESSION['name'] = $user['name'];
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['profile_picture'] = $user['profile_picture'];
-                
-                echo json_encode(["status" => "success", "message" => "Login successful!"]);
-            } else {
-                echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
             }
+            $_SESSION['admin_ID'] = $user['admin_ID'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['profile_picture'] = $user['profile_picture'];
+    
+            echo json_encode(["status" => "success", "message" => "Login successful!", "redirect" => "/dashboard"]);
             exit();
         }
     }
+    
 
-    public function logout()
-    {
-        session_start();
+    public function logout() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         session_destroy();
         header("Location: /login");
         exit();

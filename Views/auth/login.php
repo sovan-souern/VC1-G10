@@ -1,7 +1,9 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 if (isset($_SESSION['admin_ID'])) {
-    header("Location:/login");
+    header("Location:/");
     exit();
 }
 require_once __DIR__ . "/../layout/header.php";
@@ -173,36 +175,37 @@ require_once __DIR__ . "/../layout/header.php";
 
 <script>
     document.getElementById("loginForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        let formData = new FormData(this);
-        let button = document.querySelector(".btn-primary");
-        let messageDiv = document.getElementById("message");
+    e.preventDefault();
+    let formData = new FormData(this);
+    let button = document.querySelector(".btn-primary");
+    let messageDiv = document.getElementById("message");
 
-        button.disabled = true;
-        button.innerHTML = "Logging in... <div class='loader'></div>";
+    button.disabled = true;
+    button.innerHTML = "Logging in... <div class='loader'></div>";
 
-        fetch("/users/authenticate", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
-                    setTimeout(() => {
-                        window.location.href = "/";
-                    }, 2000);
-                } else {
-                    messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
-                    button.disabled = false;
-                    button.innerHTML = "Login";
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                messageDiv.innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
-                button.disabled = false;
-                button.innerHTML = "Login";
-            });
+    fetch("/users/authenticate", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
+            setTimeout(() => {
+                window.location.href = data.redirect || "/dashboard"; // Redirect from JavaScript
+            }, 2000);
+        } else {
+            messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
+            button.disabled = false;
+            button.innerHTML = "Login";
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        messageDiv.innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+        button.disabled = false;
+        button.innerHTML = "Login";
     });
+});
+
 </script>
