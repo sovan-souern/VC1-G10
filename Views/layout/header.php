@@ -40,7 +40,10 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../Views/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- ... -->
+    
     <link rel="stylesheet" href="../Views/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=notifications" />
 
