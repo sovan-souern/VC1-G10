@@ -79,5 +79,7 @@ $routes->get("/signup", [AdminController::class, 'logout']);
 
 // signup
 // $routes->get('/signup', [UserController::class, 'signup']);
+// viewlogin
+$routes->get('/viewlogin', [LoginRegisterController::class, 'viewlogin']);
 
 $routes->dispatch();
