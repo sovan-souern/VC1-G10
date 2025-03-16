@@ -3,69 +3,94 @@ require_once 'Databases/database.php';
 
 class UserModel
 {
-    private $db;
     private $pdo;
 
-    public function __construct()
+    function __construct()
     {
-        $this->db = new Database();
-        $this->pdo = $this->db->getConnection();
+        $db = new Database();
+        $this->pdo = $db->getConnection(); // Get the PDO instance
     }
 
-    public function getUsers()
+    function getUsers()
     {
-        $result = $this->db->query("SELECT * FROM admins");
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->query("SELECT u.*, r.role_name, a.name as admin_name 
+                                   FROM users u 
+                                   LEFT JOIN roles r ON u.role_id = r.role_id 
+                                   LEFT JOIN admins a ON u.admin_id = a.admin_id 
+                                   ORDER BY u.user_id DESC");
+        return $stmt->fetchAll();
     }
 
-    public function getUserById($admin_id)
+    function getRoles()
     {
-        $result = $this->db->query("SELECT * FROM admins WHERE admin_id = :admin_id", [':admin_id' => $admin_id]);
-        return $result->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->query("SELECT * FROM roles");
+        return $stmt->fetchAll();
     }
 
-    public function getUserByEmail($email)
+    function getAdmins()
     {
-        try {
-            // Fix table name from 'admin' to 'admins'
-            $sql = "SELECT * FROM admins WHERE email = ?";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-            if (!$user) {
-                error_log("No user found with email: " . $email);
-                return false;
-            }
-            
-            error_log("User found with email: " . $email . ". Data: " . json_encode($user));
-            return $user;
-        } catch (Exception $e) {
-            error_log("getUserByEmail error: " . $e->getMessage());
-            return false;
+        $stmt = $this->pdo->query("SELECT admin_id, name FROM admins");
+        return $stmt->fetchAll();
+    }
+
+    function createUser($data)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO users (role_id, username, email, phone, gender, created_at, admin_id, profile) 
+                                     VALUES (:role_id, :username, :email, :phone, :gender, :created_at, :admin_id, :profile)");
+        $result = $stmt->execute([
+            'role_id' => $data['role_id'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'gender' => $data['gender'],
+            'created_at' => $data['created_at'],
+            'admin_id' => $data['admin_id'],
+            'profile' => $data['profile']
+        ]);
+        if (!$result) {
+            throw new Exception("Failed to create user: " . implode(", ", $stmt->errorInfo()));
         }
+        return true;
     }
-    
-    
 
-    public function addUser($name, $email, $password, $profilePicture = null)
+    function getUser($id)
     {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        try {
-            $sql = "INSERT INTO admins (name, email, password, profile_picture) VALUES (:name, :email, :password, :profile_picture)";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([
-                ':name' => $name,
-                ':email' => $email,
-                ':password' => $hashedPassword,
-                ':profile_picture' => $profilePicture
-            ]);
-            return true;
-        } catch (PDOException $e) {
-            // Log the exception message for debugging
-            error_log("Failed to add user: " . $e->getMessage());
-            return false;
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE user_id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch();
+    }
+
+    function updateUser($id, $data)
+    {
+        $stmt = $this->pdo->prepare("UPDATE users 
+                                     SET role_id = :role_id, username = :username, email = :email, 
+                                         phone = :phone, gender = :gender, created_at = :created_at, 
+                                         admin_id = :admin_id, profile = :profile 
+                                     WHERE user_id = :id");
+        $result = $stmt->execute([
+            'role_id' => $data['role_id'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'gender' => $data['gender'],
+            'created_at' => $data['created_at'],
+            'admin_id' => $data['admin_id'],
+            'profile' => $data['profile'],
+            'id' => $id
+        ]);
+        if (!$result) {
+            throw new Exception("Failed to update user: " . implode(", ", $stmt->errorInfo()));
         }
+        return true;
+    }
+
+    function deleteUser($id)
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM users WHERE user_id = :id");
+        $result = $stmt->execute(['id' => $id]);
+        if (!$result) {
+            throw new Exception("Failed to delete user: " . implode(", ", $stmt->errorInfo()));
+        }
+        return true;
     }
 }
-?>

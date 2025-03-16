@@ -105,14 +105,7 @@ class CategoryController extends BaseController
     }
     function destroy($id)
     {
-        $categories = $this->model->getCategory($id);
-        if (!empty($category['image_url'])) {
-            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $categories['image_url'];
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            }
-        }
-
+        // $categories = $this->model->getCategory($id);
         $this->model->deleteCategory($id);
         $this->redirect('/category');
         //jub jub
