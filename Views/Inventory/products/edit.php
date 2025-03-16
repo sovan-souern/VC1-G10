@@ -48,7 +48,7 @@
                             <input type="file" name="image" id="image" class="form-control" accept="image/*">
                             <div class="image-uploads">
                                 <?php if (!empty($product["image"])): ?>
-                                    <img src="<?= htmlspecialchars($product["image"]) ?>" alt="product" style="max-width: 100%; height: auto;">
+                                    <img src="../../../<?=($product["image"]) ?>" alt="product" style="max-width: 20%; height: 50%;">
                                 <?php else: ?>
                                     <h4 class="form-text text-muted">No image uploaded</h4>
                                 <?php endif; ?>

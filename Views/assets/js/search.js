@@ -14,3 +14,22 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById('brandSearch');
+    const brandList = document.getElementById('brand-list');
+    const rows = brandList.getElementsByTagName('tr');
+
+    searchInput.addEventListener('input', function() {
+        const searchValue = searchInput.value.toLowerCase();
+        Array.from(rows).forEach(function(row) {
+            const brandName = row.querySelector('.brand-name').textContent.toLowerCase();
+            if (brandName.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
