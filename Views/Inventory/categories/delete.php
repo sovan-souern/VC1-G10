@@ -1,13 +1,13 @@
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteConfirmLabel">Confirm Deletion</h5>
                  <i class="material-icons" class="" data-bs-dismiss="modal" aria-label="Close">close</i>
             </div>
-            <div class="modal-body text-dark">
-                Are you sure you want to delete this product ?
+            <div class="modal-body text-dark " style="width: 200px;">
+                Are you sure you want to delete <strong><?= $category['category_name'] ?></strong>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
@@ -17,8 +17,3 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script src="../../../Views/assets/js/search.js"></script>
-<script src="../../../Views/assets/js/alerteDelete.js"></script>
-<script src="../../../Views/assets/js/check.js"></script>
-<script src="../../../Views/assets/js/select.js"></script>

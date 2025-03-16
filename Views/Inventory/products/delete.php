@@ -7,7 +7,7 @@
                  <i class="material-icons" class="" data-bs-dismiss="modal" aria-label="Close">close</i>
             </div>
             <div class="modal-body text-dark " style="width: 200px;">
-                Are you sure you want to delete  <?php echo $product["product_name"]?>
+                Are you sure you want to delete <strong><?php echo $product["product_name"]?></strong> ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>

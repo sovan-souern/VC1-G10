@@ -1,4 +1,4 @@
-    <?php
+<?php
     require_once 'Models/ProductModel.php';
     require_once 'BaseController.php';
 
@@ -103,6 +103,7 @@
                     move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
                 }
                 $data = [
+                    'product_id' => $id, // Add this line to include the product ID
                     'product_name' => $_POST['product_name'],
                     'quantity' => $_POST['quantity'],
                     'price' => $_POST['price'],
