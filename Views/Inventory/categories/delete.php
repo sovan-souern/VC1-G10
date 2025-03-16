@@ -1,22 +1,19 @@
-<!-- Modal for Category Deletion -->
-<div class="modal fade" id="category<?= $category['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="deleteConfirmLabel">Confirm Deletion</h5>
+                 <i class="material-icons" class="" data-bs-dismiss="modal" aria-label="Close">close</i>
             </div>
-            <div class="modal-body">
-                Are you sure you want to delete this category?
+            <div class="modal-body text-dark " style="width: 200px;">
+                Are you sure you want to delete <strong><?= $category['category_name'] ?></strong>?
             </div>
             <div class="modal-footer">
-                <!-- Form to submit POST request for deletion -->
-                <form action="/category/delete" method="POST">
-                    <input type="hidden" name="id" value="<?= $category['id'] ?>">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </form>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <button id="confirmDeleteBtn" class="btn btn-primary">Yes, Delete</button>
             </div>
         </div>
     </div>
 </div>
+

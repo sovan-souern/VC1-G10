@@ -31,8 +31,28 @@ class NotificationModel {
         }
     }
 
+    public function markAllAsRead() {
+        $sql = "UPDATE notifications SET status = 'read' WHERE status = 'unread'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    }
+
     public function closeConnection() {
         $this->conn = null;
     }
 }
 ?>
+<?php
+
+$notificationModel = new NotificationModel();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'];
+    $message = $_POST['message'];
+    $notificationModel->addNotification($title, $message);
+    echo "<script>alert('Notification added successfully');</script>";
+}
+
+$notifications = $notificationModel->getNotifications();
+$notificationModel->closeConnection();
+ ?>

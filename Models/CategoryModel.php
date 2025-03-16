@@ -27,12 +27,12 @@ class CategoryModel
 
     function getCategory($id)
     {
-        $stmt = $this->pdo->query("SELECT id, category_name, description, image_url FROM categories WHERE id = :id", ['id' => $id]);
+        $stmt = $this->pdo->query("SELECT * FROM categories");
         return $stmt->fetch();
     }
     function updateCategory($id, $data)
     {
-        $stmt = $this->pdo->query("UPDATE categories SET category_name = :category_name, image_url = :image_url, description = :description WHERE id = :id", [
+        $stmt = $this->pdo->query("UPDATE categories SET category_name = :category_name, image_url = :image_url, description = :description WHERE category_id = :id", [
             'category_name' => $data['category_name'],
             'image_url' => $data['image_url'],
             'description' => $data['description'],
@@ -41,7 +41,7 @@ class CategoryModel
     }
     function deleteCategory($id)
     {
-        $stmt = $this->pdo->query("DELETE FROM categories WHERE id = :id",['id' => $id]);
+        $stmt = $this->pdo->query("DELETE FROM categories WHERE category_id = :id",['id' => $id]);
         return $stmt;
     }
     
