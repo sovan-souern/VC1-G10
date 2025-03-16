@@ -1,88 +1,65 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body> -->
-<?php foreach ($categories as $key => $category) : ?>
-    <?php echo $category["category_name"] ?>
-    <!-- <?php var_dump($category) ?> -->
-
-<?php endforeach ?>
 <div class="container mt-4">
     <div class="card p-4">
         <h4>Add Product</h4>
-        <form class="my-3" action="product/store" method="">
+        <form class="my-3" action="/products/store" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label>Product Name</label>
-                    <input type="text" class="form-control">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" name="product_name" id="product_name" class="form-control" required>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label>Quantity</label>
-                    <input type="text" class="form-control">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" min="0" required>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label>Price</label>
-                    <input type="text" class="form-control">
+                    <label for="price">Price</label>
+                    <input type="number" name="price" id="price" class="form-control" step="0.01" min="0" required>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label>Category</label>
-                    <select class="form-select">
-                        <option>Choose Category</option>
-                        <?php foreach ($categories as $key => $category) : ?>
-
-                            <option><?php echo $category["category_name"] ?></option>
-
-                        <?php endforeach ?>
+                    <label for="category_id">Category</label>
+                    <select name="category_id" id="category_id" class="form-select" required>
+                        <option value="">Choose Category</option>
+                        <?php foreach ($categories as $category) : ?>
+                            <option value="<?php echo $category['category_id']; ?>">
+                                <?php echo htmlspecialchars($category['category_name']); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label>Brand</label>
-                    <select class="form-select">
-                        <option>Choose Brand</option>
-                        <?php foreach ($brands as $key => $brand) : ?>
-
-<option><?php echo $brand["brand_name"] ?></option>
-
-<?php endforeach ?>
-                        <!-- <option>Brand A</option> -->
+                    <label for="brand_id">Brand</label>
+                    <select name="brand_id" id="brand_id" class="form-select">
+                        <option value="">Choose Brand (Optional)</option>
+                        <?php foreach ($brands as $brand) : ?>
+                            <option value="<?php echo $brand['id']; ?>">
+                                <?php echo htmlspecialchars($brand['brand_name']); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
-              
-                <div class="col-md-4 mb-3">
-                    <label>Discount</label>
-                    <select class="form-select">
-                        <option>None</option>
-                        <option>10%</option>
-                    </select>
-                </div>
-                <div class="col-md-6  ">
-                    <label class="">Product Content</label>
-                    <textarea class="form-control mt-2 p-4 " style="height: 100px;"></textarea>
+                <div class="col-md-6">
+                    <label>Product Content</label>
+                    <textarea name="product_content" id="product_content" class="form-control mt-2 p-4" style="height: 100px;"  rows="3"></textarea>
                 </div>
                 <div class="col-lg-6 md-3">
                     <div class="form-group">
-                        <label> Product Image</label>
-                        <div class="image-upload  ">
-                            <input type="file">
-                            <div class="image-uploads ">
+                        <label>Product Image</label>
+                        <div class="image-upload">
+                            <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                            <div class="image-uploads">
                                 <img src="/Views/assets/img1/icons/upload.svg" alt="img">
-                                <h4>Drag and drop a file to upload</h4>
+                                <h4 class="form-text text-muted">Drag and drop a file to upload</h4>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6    ">
+
+                
+                <div class="col-md-12 mb-3">
                     <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-warning">Back</button>
+                    <button type="button" class="btn btn-warning" onclick="window.history.back()">Back</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<!-- </body>
-</html> -->

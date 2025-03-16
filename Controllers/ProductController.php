@@ -1,50 +1,139 @@
-<!-- Code for get data -->
-
 <?php
-require_once 'Models/ProductModel.php';
-require_once 'BaseController.php';
+    require_once 'Models/ProductModel.php';
+    require_once 'BaseController.php';
 
-class ProductController extends BaseController
-{
-    private $model;
+    class ProductController extends BaseController
+    {
+        private $model;
 
-    function __construct()
-    {
-        $this->model = new ProductModel();
-    }
+        function __construct()
+        {
+            $this->model = new ProductModel();
+        }
 
-    function index()
-    {
-        // echo "product";
-        $products=$this->model->getProduct();
-        $brand=$this->model->getBrand();
-        $category=$this->model->getCategory();
-        $this->views('/Inventory/products/product.php',["products"=>$products, "brands"=>$brand,"categories"=>$category]);
-       
-    }
-    function create()
-    {
-        $brand=$this->model->getBrand();
-        $category=$this->model->getCategory();
-        $this->views('/Inventory/products/create.php',[ "brands"=>$brand,"categories"=>$category]);
-       
+        function index()
+        {
+            $products = $this->model->getProducts();
+            $brand = $this->model->getBrands();
+            $category = $this->model->getCategories();
+            $this->views('/Inventory/products/product.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
+        }
+        function create()
+        {
+            $brand = $this->model->getBrands();
+            $category = $this->model->getCategories();
+            if (empty($brand) || empty($category)) {
+                echo "Warning: Brands or Categories not loaded!";
+            }
+            $this->views('/Inventory/products/create.php', ["brands" => $brand, "categories" => $category]);
+        }
 
-    }
-    function edit()
-    {
-        // $this->views('/Inventory/products/edit.php');
-        // echo "1:";
+        function store()
+        {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                echo "<pre>POST Data: ";
+                print_r($_POST);
+                echo "FILES Data: ";
+                print_r($_FILES);
+                echo "</pre>";
+                $imagePath = null;
+                if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                    $target_dir = "uploads/";
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0777, true);
+                    }
+                    $imagePath = $target_dir . basename($_FILES['image']['name']);
+                    if (!move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+                        echo "Error: Failed to upload image.";
+                        return;
+                    }
+                }
 
-    }
-    function view()
-    {
-        $this->views('/Inventory/products/view.php');
+                $data = [
+                    'product_name' => $_POST['product_name'],
+                    'quantity' => $_POST['quantity'],
+                    'price' => $_POST['price'],
+                    'category_id' => $_POST['category_id'],
+                    'brand_id' => $_POST['brand_id'],
+                    'product_content' => $_POST['product_content'],
+                    'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
+                    'image' => $imagePath,
+                    'created_at' => date('Y-m-d H:i:s')
+                ];
+
+                if ($this->model->createProduct($data)) {
+                    $this->redirect('/products');
+                } else {
+                    echo "Failed to create product.";
+                }
+            } else {
+                echo "Error: Invalid request method.";
+            }
+        }
+
+        function edit($id)
+        {
+            $product = $this->model->getProduct($id);
+            $brands = $this->model->getBrands();
+            $categories = $this->model->getCategories();
+            
+            if (!$product) {
+                echo "Error: Product with ID $id not found.";
+                return;
+            }
+            
+            $this->views('/Inventory/products/edit.php', [
+                'product' => $product,
+                'brands' => $brands,
+                'categories' => $categories
+            ]);
+        }
+        function update($id)
+        {
+            echo $id;
+            var_dump($_SERVER);
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $imagePath = $_POST['existing_image']; 
+                if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                    $target_dir = "uploads/";
+                    if (!is_dir($target_dir)) {
+                        mkdir($target_dir, 0777, true);
+                    }
+                    $imagePath = $target_dir . basename($_FILES['image']['name']);
+                    move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
+                }
+                $data = [
+                    'product_id' => $id, // Add this line to include the product ID
+                    'product_name' => $_POST['product_name'],
+                    'quantity' => $_POST['quantity'],
+                    'price' => $_POST['price'],
+                    'category_id' => $_POST['category_id'],
+                    'brand_id' => $_POST['brand_id'],
+                    'product_content' => $_POST['product_content'],
+                    'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
+                    'image' => $imagePath,
+                    'created_at' => date('Y-m-d H:i:s')
+                ];
+                if ($this->model->updateProduct($data)) {
+                    $this->redirect('/products');
+                } else {
+                    echo "Error updating product.";
+                }
+            } else {
+                echo "Invalid request method.";
+            }
+        }
+        function destroy($id){
+ 
+            $this->model->deleteProduct($id);
+            $this->redirect('/products');
+        }
         
-
-    // }
-}}
-
-
-
-
-// 
+        function view($id)
+        {
+            $products=$this->model->getProduct($id);
+            $categories=$this->model->getCategories($id);
+            $brands=$this->model->getBrands($id);
+            $this->views('/Inventory/products/view.php',["products"=>$products,"categories"=>$categories,"brands"=>$brands]);
+        }
+    }

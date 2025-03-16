@@ -108,7 +108,7 @@
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="/products" class="menu-link">
-            <div data-i18n="Container">P  roduct List</div>
+            <div data-i18n="Container">Product List</div>
           </a>
         </li>
         <li class="menu-item">
@@ -150,17 +150,17 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/update-profile" class="menu-link">
+          <a href="/update" class="menu-link">
             <div data-i18n="Account">Update Profile</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="reset-password" class="menu-link">
+          <a href="/reset" class="menu-link">
             <div data-i18n="Notifications">Reset Password</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="view-login" class="menu-link">
+          <a href="/viewlogin" class="menu-link">
             <div data-i18n="Connections">View Login</div>
           </a>
         </li>
@@ -178,7 +178,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="forgot-password" class="menu-link" target="_blank">
+          <a href="/reset" class="menu-link" target="_blank">
             <div data-i18n="Basic">Forgot Password</div>
           </a>
         </li>
@@ -295,7 +295,7 @@
       </a>
     </li>
     <li>
-      <a class="dropdown-item" href="">
+      <a class="dropdown-item" href="/notifications">
         <i class="bx bx-bell me-2"></i>
         <span class="align-middle">Notifications</span>
       </a>
@@ -307,7 +307,7 @@
       </a>
     </li>
     <li>
-      <a class="dropdown-item" href="">
+      <a class="dropdown-item" href="/login">
         <i class="bx bx-user-plus me-2"></i>
         <span class="align-middle">Add Account</span>
       </a>
@@ -327,3 +327,5 @@
       </nav>
 
       <!-- / Navbar -->
+      <!-- Ensure Bootstrap JS is included -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

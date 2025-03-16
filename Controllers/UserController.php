@@ -1,70 +1,143 @@
-<?php 
+<?php
 require_once 'Models/UserModel.php';
+require_once 'BaseController.php';
 
-class UserController extends BaseController {
-    private $users;
+class UserController extends BaseController
+{
+    private $model;
 
-    function __construct() {
-        $this->users = new UserModel();
+    function __construct()
+    {
+        $this->model = new UserModel();
     }
 
-    // Login page view
-    public function login() {
-        $this->views('/authentication/login.php');
+    function index()
+    {
+        $users = $this->model->getUsers();
+        $this->views('/E-comerce/users/user.php', ['users' => $users]);
     }
 
-    // Signup page view
-    public function signup() {
-        $this->views('/authentication/signup.php');
+    function create()
+    {
+        // Fetch roles and admins for the form dropdowns
+        $roles = $this->model->getRoles();
+        $admins = $this->model->getAdmins();
+        $this->views('/E-comerce/users/create.php', [
+            'roles' => $roles,
+            'admins' => $admins
+        ]);
     }
 
-    // Store new user (SignUp)
-    public function store() {
-        if (empty($_POST['firstName']) || empty($_POST['lastName']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['confirmPassword'])) {
-            echo "All fields are required.";
-            return;
+    function store()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $profile = null;
+            if (isset($_FILES['profile']['name']) && $_FILES['profile']['name'] != '') {
+                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                $profile = time() . basename($_FILES['profile']['name']);
+                $targetPath = $uploadDir . $profile;
+
+                if (!move_uploaded_file($_FILES['profile']['tmp_name'], $targetPath)) {
+                    die("File upload failed!");
+                }
+            }
+
+            $data = [
+                'role_id' => $_POST['role_id'],
+                'username' => $_POST['username'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'] ?? null,
+                'gender' => $_POST['gender'] ?? null,
+                'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
+                'profile' => $profile,
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+
+            try {
+                $this->model->createUser($data);
+                $this->redirect('/users');
+            } catch (Exception $e) {
+                // Handle error (e.g., duplicate email)
+                $this->views('/E-comerce/users/create.php', [
+                    'error' => $e->getMessage(),
+                    'data' => $data
+                ]);
+            }
         }
-
-        $firstName = htmlentities($_POST['firstName']);
-        $lastName = htmlentities($_POST['lastName']);
-        $email = htmlentities($_POST['email']);
-        $password = htmlentities($_POST['password']);
-        $confirmPassword = htmlentities($_POST['confirmPassword']);
-
-        if ($password !== $confirmPassword) {
-            echo "Passwords do not match.";
-            return;
-        }
-
-        $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Create the user and redirect
-        $this->users->createUser($firstName, $lastName, $email, $encrypted_password);
-        echo "Account created successfully!";
-        header("Location: /login");
     }
 
-    // Authenticate user (Login)
-    public function authenticate() {
-        if (empty($_POST['email']) || empty($_POST['password'])) {
-            echo "Email and password are required.";
-            return;
+    function edit($id)
+    {
+        $user = $this->model->getUser($id);
+        $roles = $this->model->getRoles();
+        $admins = $this->model->getAdmins();
+        $this->views('/E-comerce/users/edit.php', [
+            'user' => $user,
+            'roles' => $roles,
+            'admins' => $admins
+        ]);
+    }
+
+    function update($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = $this->model->getUser($id);
+            $profile = $user['profile'];
+
+            if (isset($_FILES['profile']['name']) && $_FILES['profile']['name'] != '') {
+                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                $profile = time() . basename($_FILES['profile']['name']);
+                $targetPath = $uploadDir . $profile;
+
+                if (!move_uploaded_file($_FILES['profile']['tmp_name'], $targetPath)) {
+                    die("File upload failed!");
+                }
+            }
+
+            $data = [
+                'role_id' => $_POST['role_id'],
+                'username' => $_POST['username'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'] ?? null,
+                'gender' => $_POST['gender'] ?? null,
+                'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
+                'profile' => $profile,
+                'created_at' => $user['created_at']
+            ];
+
+            try {
+                $this->model->updateUser($id, $data);
+                $this->redirect('/users');
+            } catch (Exception $e) {
+                $this->views('/E-comerce/users/edit.php', [
+                    'error' => $e->getMessage(),
+                    'user' => $data,
+                    'id' => $id
+                ]);
+            }
         }
+    }
 
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
-        $user = $this->users->getUserByEmail($email);
-
-        if ($user && password_verify($password, $user['password'])) {
-            // Set session variables
-            session_start();
-            $_SESSION['user_name'] = $user['first_name'];
-            $_SESSION['user_id'] = $user['id'];
-            echo "Welcome back, " . $user['first_name'];
-            header("Location: /dashboard");
-        } else {
-            echo "Invalid email or password.";
+    function destroy()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'];
+            try {
+                $this->model->deleteUser($id);
+                $this->redirect('/users');
+            } catch (Exception $e) {
+                $users = $this->model->getUsers();
+                $this->views('/E-comerce/users/user.php', [
+                    'users' => $users,
+                    'error' => $e->getMessage()
+                ]);
+            }
         }
     }
 }
-?>

@@ -8,7 +8,7 @@ class BrandController extends BaseController
 
     function __construct()
     {
-        // $this->model = new CategoryModel();
+        $this->model = new CategoryModel();
     }
 
     function index()
@@ -22,6 +22,13 @@ class BrandController extends BaseController
     {
         echo "create Brand";
         $this->views('/Inventory/brands/create.php');
+        // $categories = $this->model->getCategories();
+        $this->views('/Inventory/brands/create.php');
+    }
+    function store()
+    {
+        // echo "create Brand";
+        echo "1";
         // $categories = $this->model->getCategories();
         // $this->views('categories/category.php',['categories'=>$categories]);
     }

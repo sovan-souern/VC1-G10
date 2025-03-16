@@ -88,29 +88,23 @@
                     <table class="table datanew">
                         <thead>
                             <tr>
-                                <th>
-                                    <label class="checkboxs">
-                                        <input type="checkbox" id="select-all">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </th>
                                 <th>ID</th>
                                 <th>Product Name</th>
                                 <th>
                                     <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
                                         style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
                                         <option value="">Category</option>
-                                        <?php foreach ($categories as $key => $category) :?>
-                                        <option value="<?= htmlspecialchars($category["category_name"]) ?>"><?= htmlspecialchars($category["category_name"]) ?></option>
+                                        <?php foreach ($categories as $key => $category) : ?>
+                                            <option value="<?= htmlspecialchars($category["category_name"]) ?>"><?= htmlspecialchars($category["category_name"]) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </th>
                                 <th>
                                     <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
                                         style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="brand-filter-header">
-                                        <option value="">Brand</option> 
-                                        <?php foreach ($brands as $key => $brand) :?>
-                                        <option value="<?= htmlspecialchars($brand["brand_name"]) ?>"><?= htmlspecialchars($brand["brand_name"]) ?></option>
+                                        <option value="">Brand</option>
+                                        <?php foreach ($brands as $key => $brand) : ?>
+                                            <option value="<?= htmlspecialchars($brand["brand_name"]) ?>"><?= htmlspecialchars($brand["brand_name"]) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </th>
@@ -120,38 +114,37 @@
                             </tr>
                         </thead>
                         <tbody id="product-list">
-                            <?php foreach ($products as $index => $product) :?>
+                            <?php foreach ($products as $index => $product) : ?>
                                 <!-- <?= htmlspecialchars($product["image"]) ?> -->
-                            <tr class="product" data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td><?= $index+1 ?></td>
-                                <td class="productimgname">
-                                    <a href="javascript:void(0);" class="product-img">
-                                        <img src="<?= htmlspecialchars($product["image"]) ?>" alt="product">
-                                    </a>
-                                    <a href="javascript:void(0);"><?= htmlspecialchars($product["product_name"]) ?></a>
-                                </td>
-                                <td class="category-name"><?= htmlspecialchars($product["categoryId"]) ?></td>
-                                <td><?= htmlspecialchars($product["brandID"]) ?></td>
-                                <td><?= htmlspecialchars($product["price"]) ?></td>
-                                <td><?= htmlspecialchars($product["quantity"]) ?></td>
-                                <td>
-                                    <a class="me-3" href="products/view">
-                                        <img src="/Views/assets/img1/icons/eye.svg" alt="img">
-                                    </a>
-                                    <a class="me-3" href="products/edit">
-                                        <img src="/Views/assets/img1/icons/edit.svg" alt="img">
-                                    </a>
-                                    <a class="confirm-text" href="products/">
-                                        <img src="/Views/assets/img1/icons/delete.svg" alt="img">
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr class="product" data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
+                                    <td><?= $index + 1 ?></td>
+                                    <td class="productimgname">
+                                        <a href="javascript:void(0);" class="product-img">
+                                            <img src="<?= htmlspecialchars($product["image"]) ?>" alt="product">
+                                        </a>
+                                        <p><?= htmlspecialchars($product["product_name"]) ?></p>
+                                    </td>
+                                    <td class="category-name"><?= htmlspecialchars($product["categoryId"]) ?></td>
+                                    <td><?= htmlspecialchars($product["brandID"]) ?></td>
+                                    <td><?= htmlspecialchars($product["price"]) ?></td>
+                                    <td><?= htmlspecialchars($product["quantity"]) ?></td>
+                                    <td>
+                                        <a class="me-3" href="products/view?id=<?= $product['product_id'] ?>">
+                                            <img src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                        </a>
+                                        <a class="me-3" href="products/edit?id=<?= $product['product_id'] ?>">
+                                            <img src="/Views/assets/img1/icons/edit.svg" alt="img">
+                                        </a>
+
+
+
+                                        <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
+                                            <img src="/Views/assets/img1/icons/delete.svg" alt="img">
+                                            <?php require "delete.php" ?>
+                                        </a>
+
+                                    </td>
+                                </tr>
                             <?php endforeach ?>
                         </tbody>
                     </table>
@@ -160,8 +153,3 @@
         </div>
     </div>
 </div>
-
-
-
-<script src="../../../Views/assets/js/search.js"></script>
-<script src="../../../Views/assets/js/select.js"></script>
