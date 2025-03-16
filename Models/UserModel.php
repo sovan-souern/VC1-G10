@@ -35,22 +35,26 @@ class UserModel
 
     function createUser($data)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (role_id, username, email, phone, gender, created_at, admin_id, profile) 
-                                     VALUES (:role_id, :username, :email, :phone, :gender, :created_at, :admin_id, :profile)");
-        $result = $stmt->execute([
-            'role_id' => $data['role_id'],
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'gender' => $data['gender'],
-            'created_at' => $data['created_at'],
-            'admin_id' => $data['admin_id'],
-            'profile' => $data['profile']
-        ]);
-        if (!$result) {
-            throw new Exception("Failed to create user: " . implode(", ", $stmt->errorInfo()));
+        try {
+            $stmt = $this->pdo->prepare(
+                "INSERT INTO users (role_id, username, email, phone, gender, admin_id, profile, created_at) 
+                VALUES (:role_id, :username, :email, :phone, :gender, :admin_id, :profile, :created_at)"
+            );
+            $stmt->execute([
+                'role_id' => $data['role_id'],
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'gender' => $data['gender'],
+                'admin_id' => $data['admin_id'],
+                'profile' => $data['profile'],
+                'created_at' => $data['created_at']
+            ]);
+            return true;
+        } catch (Exception $e) {
+            echo "Error creating user: " . $e->getMessage();
+            return false;
         }
-        return true;
     }
 
     function getUser($id)

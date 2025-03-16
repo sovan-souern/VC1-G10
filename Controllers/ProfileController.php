@@ -1,6 +1,6 @@
 <?php
 require_once 'Controllers/BaseController.php';
-// require_once 'c:\Users\Panha.Nhean\Desktop\VC1-G10\Models\ProfileModel.php';
+require_once 'Models\ProfileModel.php';
 
 class ProfileController extends BaseController {
     private $profileModel;
