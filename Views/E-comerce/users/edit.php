@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form action="/users/update/<?= $user['user_id'] ?>" method="POST" enctype="multipart/form-data">
+    <form action="/user/update/<?= $user['user_id'] ?>" method="POST" enctype="multipart/form-data">
         <div class="card">
             <div class="card-body">
                 <div class="row">
