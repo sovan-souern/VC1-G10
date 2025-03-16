@@ -82,11 +82,14 @@
                                         <a class="me-3" href="/category/edit?id=<?= $category['category_id'] ?>">
                                             <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
                                         </a>
-                                        <a class="me-3" href="/category/delete?id=<?= $category['category_id'] ?>">
+                                        <!-- <a class="me-3" href="/category/delete?id=<?= $category['category_id'] ?>">
                                             <img src="/Views/assets/img1/icons/delete.svg" alt="Delete">
+                                        </a> -->
+                                       
+                                        <a class="delete-product" href="/category/delete?id=<?= $category['category_id'] ?>">
+                                            <img src="/Views/assets/img1/icons/delete.svg" alt="img">
+                                            <?php require "delete.php" ?>
                                         </a>
-                                       
-                                       
                                     </td>
 
                                 </tr>
