@@ -21,10 +21,10 @@ class BrandModel {
         return $brands;
     }
 
-    public function addBrand($brandID,$brandName, $brandDescription, $brandImageUrl) {
-        $sql = "INSERT INTO brand (id , brand_name, description, image_url) VALUES (?, ?, ?)"; // Correct column names
+    public function addBrand($brandName, $brandDescription, $brandImageUrl) {
+        $sql = "INSERT INTO brand (brand_name, description, image_url) VALUES (?, ?, ?)"; // Correct column names
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$brandID,$brandName, $brandDescription, $brandImageUrl]);
+        $stmt->execute([$brandName, $brandDescription, $brandImageUrl]);
         return $this->conn->lastInsertId(); // Return the ID of the newly inserted brand
     }
 

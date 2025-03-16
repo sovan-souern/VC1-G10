@@ -1,57 +1,45 @@
 <?php
-require_once __DIR__ . '/../../../Models/OrderModel.php';
+require_once '../../../Models/OrderModel.php'; // Correct the path to OrderModel.php
 
-$error = '';
-$orderDetails = null;
-$orderItems = [];
+$orderModel = new OrderModel();
 
-try {
-    // Check if order_id is provided in the URL
-    if (!isset($_GET['order_id']) || empty($_GET['order_id'])) {
-        throw new Exception('Order ID is required.');
-    }
-
+if (isset($_GET['order_id'])) {
     $orderId = $_GET['order_id'];
-
-    // Validate order_id (ensure it's a number)
-    if (!is_numeric($orderId)) {
-        throw new Exception('Invalid Order ID.');
-    }
-
-    $orderModel = new OrderModel();
-
-    // Fetch order details
     $orderDetails = $orderModel->getOrderDetails($orderId);
-    if (!$orderDetails) {
-        throw new Exception('Order not found.');
-    }
-
-    // Fetch order items
     $orderItems = $orderModel->getOrderItems($orderId);
-
     $orderModel->closeConnection();
-} catch (Exception $e) {
-    $error = $e->getMessage();
-    error_log($error); // Log the error for debugging purposes
-    if (isset($orderModel)) {
-        $orderModel->closeConnection(); // Ensure the connection is closed in case of an error
-    }
+} else {
+    echo "Order ID not provided.";
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
         .order-details, .order-items {
-            margin-bottom: 20px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .order-details h1, .order-items h2 {
+            margin-top: 0;
+        }
+        .order-details p, .order-items table {
+            margin: 10px 0;
         }
         .order-items table {
             width: 100%;
+            border-collapse: collapse;
+        }
+        .order-items table, .order-items th, .order-items td {
+            border: 1px solid #ddd;
         }
         .order-items th, .order-items td {
             padding: 8px;
@@ -60,68 +48,51 @@ try {
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Order Details</h2>
-        <?php if ($error): ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $error; ?>
-            </div>
+    <div class="order-details">
+        <h1>Order Details</h1>
+        <?php if ($orderDetails): ?>
+            <p>Order ID: <?php echo htmlspecialchars($orderDetails['id']); ?></p>
+            <p>Invoice ID: <?php echo htmlspecialchars($orderDetails['invoice_id']); ?></p>
+            <p>Order Name: <?php echo htmlspecialchars($orderDetails['order_name']); ?></p>
+            <p>Order Date: <?php echo htmlspecialchars($orderDetails['order_date']); ?></p>
+            <p>Delivery Address: <?php echo htmlspecialchars($orderDetails['delivery_address']); ?></p>
+            <p>Payment Status: <?php echo htmlspecialchars($orderDetails['payment_status']); ?></p>
+            <p>Phone: <?php echo htmlspecialchars($orderDetails['phone']); ?></p>
+            <p>Bill to: <?php echo htmlspecialchars($orderDetails['bill_to']); ?></p>
+            <p>Billing Address: <?php echo htmlspecialchars($orderDetails['billing_address']); ?></p>
         <?php else: ?>
-            <!-- Order Details -->
-            <div class="order-details">
-                <h4>Order Details</h4>
-                <p>Order ID: <?php echo $orderDetails['order_id']; ?></p>
-                <p>Invoice ID: <?php echo $orderDetails['invoice_id']; ?></p>
-                <p>Order Name: <?php echo $orderDetails['order_name']; ?></p>
-                <p>Phone: <?php echo $orderDetails['phone']; ?></p>
-                <p>Order Date: <?php echo $orderDetails['order_date']; ?></p>
-                <p>Payment Status: <?php echo $orderDetails['payment_status']; ?></p>
-                <p>Delivery Address: <?php echo $orderDetails['delivery_address']; ?></p>
-                <p>Bill To: <?php echo $orderDetails['bill_to']; ?></p>
-                <p>Billing Address: <?php echo $orderDetails['billing_address']; ?></p>
-                <p>Pay By: <?php echo $orderDetails['pay_by']; ?></p>
-            </div>
-
-            <!-- Order Items -->
-            <div class="order-items">
-                <h4>Order Items</h4>
-                <?php if (empty($orderItems)): ?>
-                    <div class="alert alert-warning" role="alert">
-                        No items found for this order.
-                    </div>
-                <?php else: ?>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Product Name</th>
-                                    <th>Item</th>
-                                    <th>Sub Total</th>
-                                    <th>Vat</th>
-                                    <th>Total Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($orderItems as $item): ?>
-                                    <tr>
-                                        <td><?php echo $item['id']; ?></td>
-                                        <td><?php echo $item['product_name']; ?></td>
-                                        <td><?php echo $item['item']; ?></td>
-                                        <td><?php echo $item['sub_total']; ?></td>
-                                        <td>10%</td>
-                                        <td><?php echo number_format($item['sub_total'] * 1.1, 2); ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endif; ?>
-            </div>
+            <p>Order not found.</p>
         <?php endif; ?>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="order-items">
+        <h2>Order Items</h2>
+        <?php if ($orderItems): ?>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Item</th>
+                    <th>Sub Total</th>
+                    <th>VAT</th>
+                    <th>Total Price</th>
+                </tr>
+                <?php foreach ($orderItems as $item): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($item['id']); ?></td>
+                        <td><?php echo htmlspecialchars($item['product_name']); ?></td>
+                        <td><?php echo htmlspecialchars($item['quantity']); ?></td>
+                        <td><?php echo htmlspecialchars($item['sub_total']); ?></td>
+                        <td><?php echo htmlspecialchars($item['vat']); ?></td>
+                        <td><?php echo htmlspecialchars($item['total_price']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+            <p>Subtotal: <?php echo htmlspecialchars($orderDetails['subtotal']); ?></p>
+            <p>Shipping Cost: <?php echo htmlspecialchars($orderDetails['shipping_cost']); ?></p>
+            <p>Total: <?php echo htmlspecialchars($orderDetails['total']); ?></p>
+        <?php else: ?>
+            <p>No items found for this order.</p>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

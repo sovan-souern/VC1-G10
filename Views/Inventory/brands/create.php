@@ -9,7 +9,7 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_brand'])) {
         $brandName = $_POST['brand_name'];
-        $brandContent = $_POST['brand_content'];
+        $brandContent = $_POST['brand_content']; 
         $brandImage = $_FILES['brand_image'];
 
         if (empty($brandName)) {
