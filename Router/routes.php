@@ -62,9 +62,14 @@ $routes->get('/category/delete', [CategoryController::class, 'destroy']);
 $routes->get('/brand', [BrandController::class, 'index']);
 $routes->get('/brand/create', [BrandController::class, 'create']);  
 $routes->post('/brand/store', [BrandController::class, 'store']);  
+$routes->get('/brand/edit', [BrandController::class, 'edit']); 
+$routes->put('/brand/update', [BrandController::class, 'update']); 
+$routes->get('/brand/delete', [BrandController::class, 'destroy']);
 
-$routes->get('/brand/edit', [BrandController::class, 'edit']);  
 
+
+
+  
 // update profile
 $routes->get('/update', [ProfileController::class, 'update']);
 // reset password
