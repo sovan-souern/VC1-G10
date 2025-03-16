@@ -124,17 +124,20 @@ class UserController extends BaseController
         }
     }
 
-    function destroy($id)
+    function destroy()
     {
-        try {
-            $this->model->deleteUser($id);
-            $this->redirect('/users');
-        } catch (Exception $e) {
-            $users = $this->model->getUsers();
-            $this->views('/E-comerce/users/user.php', [
-                'users' => $users,
-                'error' => $e->getMessage()
-            ]);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'];
+            try {
+                $this->model->deleteUser($id);
+                $this->redirect('/users');
+            } catch (Exception $e) {
+                $users = $this->model->getUsers();
+                $this->views('/E-comerce/users/user.php', [
+                    'users' => $users,
+                    'error' => $e->getMessage()
+                ]);
+            }
         }
     }
 }

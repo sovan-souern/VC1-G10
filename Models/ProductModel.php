@@ -71,7 +71,7 @@ class ProductModel
                 'brand_id' => $data['brand_id'] ?: null,
                 'product_content' => $data['product_content'],
                 'image' => $data['image'],
-                'admin_id' => $data['admin_id']
+                'admin_id' => !empty($data['admin_id']) ? $data['admin_id'] : null
             ]);
             return true;
         } catch (Exception $e) {
@@ -90,7 +90,7 @@ class ProductModel
             return false;
         }
     }
-    
+
     function updateProduct($data)
     {
         try {
@@ -112,7 +112,7 @@ class ProductModel
                     'brand_id' => $data['brand_id'],
                     'product_content' => $data['product_content'],
                     'image' => $data['image'],
-                    'product_id' => $data['product_id']
+                    'product_id' => $data['product_id'] // Ensure product_id is included in the query
                 ]
             );
             return true;
@@ -123,7 +123,7 @@ class ProductModel
     }
     function deleteProduct($id)
     {
-      
+
         $stmt = $this->pdo->query("DELETE FROM products WHERE product_id = :id", [
             'id' => $id
         ]);

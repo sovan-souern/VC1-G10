@@ -1,4 +1,4 @@
-    <?php
+<?php
     require_once 'Models/ProductModel.php';
     require_once 'BaseController.php';
 
@@ -18,7 +18,6 @@
             $category = $this->model->getCategories();
             $this->views('/Inventory/products/product.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
         }
-
         function create()
         {
             $brand = $this->model->getBrands();
@@ -32,14 +31,11 @@
         function store()
         {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Debug: Check if form data is received
                 echo "<pre>POST Data: ";
                 print_r($_POST);
                 echo "FILES Data: ";
                 print_r($_FILES);
                 echo "</pre>";
-
-                // Handle image upload
                 $imagePath = null;
                 if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
                     $target_dir = "uploads/";
@@ -54,14 +50,15 @@
                 }
 
                 $data = [
-                    'product_name' => $_POST['product_name'] ?? '',
-                    'quantity' => $_POST['quantity'] ?? 0,
-                    'price' => $_POST['price'] ?? 0.00,
-                    'category_id' => $_POST['category_id'] ?? null,
-                    'brand_id' => $_POST['brand_id'] ?? null,
-                    'product_content' => $_POST['product_content'] ?? '',
+                    'product_name' => $_POST['product_name'],
+                    'quantity' => $_POST['quantity'],
+                    'price' => $_POST['price'],
+                    'category_id' => $_POST['category_id'],
+                    'brand_id' => $_POST['brand_id'],
+                    'product_content' => $_POST['product_content'],
+                    'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
                     'image' => $imagePath,
-                    'admin_id' => 1 
+                    'created_at' => date('Y-m-d H:i:s')
                 ];
 
                 if ($this->model->createProduct($data)) {
@@ -96,8 +93,7 @@
             echo $id;
             var_dump($_SERVER);
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Handle image upload
-                $imagePath = $_POST['existing_image']; // Keep old image if no new image is uploaded
+                $imagePath = $_POST['existing_image']; 
                 if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
                     $target_dir = "uploads/";
                     if (!is_dir($target_dir)) {
@@ -106,18 +102,18 @@
                     $imagePath = $target_dir . basename($_FILES['image']['name']);
                     move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
                 }
-                // Prepare product data for update
                 $data = [
-                    'product_id' => $id,
-                    'product_name' => $_POST['product_name'] ?? '',
-                    'quantity' => $_POST['quantity'] ?? 0,
-                    'price' => $_POST['price'] ?? 0.00,
-                    'category_id' => $_POST['category_id'] ?? null,
-                    'brand_id' => $_POST['brand_id'] ?? null,
-                    'product_content' => $_POST['product_content'] ?? '',
-                    'image' => $imagePath
+                    'product_id' => $id, // Add this line to include the product ID
+                    'product_name' => $_POST['product_name'],
+                    'quantity' => $_POST['quantity'],
+                    'price' => $_POST['price'],
+                    'category_id' => $_POST['category_id'],
+                    'brand_id' => $_POST['brand_id'],
+                    'product_content' => $_POST['product_content'],
+                    'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
+                    'image' => $imagePath,
+                    'created_at' => date('Y-m-d H:i:s')
                 ];
-                // Update the product
                 if ($this->model->updateProduct($data)) {
                     $this->redirect('/products');
                 } else {
@@ -133,8 +129,11 @@
             $this->redirect('/products');
         }
         
-        function view()
+        function view($id)
         {
-            $this->views('/Inventory/products/view.php');
+            $products=$this->model->getProduct($id);
+            $categories=$this->model->getCategories($id);
+            $brands=$this->model->getBrands($id);
+            $this->views('/Inventory/products/view.php',["products"=>$products,"categories"=>$categories,"brands"=>$brands]);
         }
     }

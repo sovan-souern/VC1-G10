@@ -160,7 +160,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="view-login" class="menu-link">
+          <a href="/viewlogin" class="menu-link">
             <div data-i18n="Connections">View Login</div>
           </a>
         </li>
@@ -327,3 +327,5 @@
       </nav>
 
       <!-- / Navbar -->
+      <!-- Ensure Bootstrap JS is included -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
