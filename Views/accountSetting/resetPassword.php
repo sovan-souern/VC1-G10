@@ -32,7 +32,7 @@
                         <button class="btn" style="background-color: #d63384; color: white; width: 100%;">Send Reset Link</button>
                     </form>
                     <div class="text-center">
-                        <a href="auth-login-basic.html" class="d-flex align-items-center justify-content-center" style="color:rgb(32, 3, 249);">
+                        <a href="/login" class="d-flex align-items-center justify-content-center" style="color:rgb(32, 3, 249);">
                             <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
                             Back to login
                         </a>
