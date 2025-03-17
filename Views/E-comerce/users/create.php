@@ -1,4 +1,4 @@
-<!-- create.php -->
+<!-- create.php -s->
 <div class="container mt-3">
     <?php if (isset($error)): ?>
         <div class="alert alert-danger"><?= $error ?></div>
