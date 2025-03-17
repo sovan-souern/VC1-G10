@@ -71,6 +71,8 @@
                                         </a>
                                         <a class="delete-product" href="/brand/delete?id=<?= $brand['id'] ?>">
                                             <img src="/Views/assets/img1/icons/delete.svg" alt="img">
+                                            <?php
+                                             require "delete.php"; ?>
                                         </a>
                                     </td>
                                 </tr>
