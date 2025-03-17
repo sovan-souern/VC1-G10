@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once "Models/AdminModel.php";
 require_once 'BaseController.php';
 
@@ -122,4 +122,4 @@ class AdminController extends BaseController {
         exit();
     }
 }
-?>
+?> -->

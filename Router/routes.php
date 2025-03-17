@@ -18,19 +18,19 @@ require_once "Controllers/AdminController.php";
 $routes = new Router();
 
 // Middleware function to check if the user is authenticated
-function checkAuthentication() {
-    session_start();
-    if (!isset($_SESSION['admin_ID']) && $_SERVER['REQUEST_URI'] !== '/login' && $_SERVER['REQUEST_URI'] !== '/register') {
-        header("Location: /login");
-        exit();
-    }
-}
+// function checkAuthentication() {
+//     session_start();
+//     if (!isset($_SESSION['admin_ID']) && $_SERVER['REQUEST_URI'] !== '/login' && $_SERVER['REQUEST_URI'] !== '/register') {
+//         header("Location: /login");
+//         exit();
+//     }
+// }
 
-// Call the middleware function before defining the routes
-checkAuthentication();
+// // Call the middleware function before defining the routes
+// checkAuthentication();
 
 // Default route to login
-$routes->get('/', [AdminController::class, 'login']);
+// $routes->get('/', [AdminController::class, 'login']);
 
 // Order
 $routes->get('/order', [OrderController::class, 'index']);
@@ -59,8 +59,9 @@ $routes->post('/products/store', [ProductController::class, 'store']);
 $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->put('/products/update', [ProductController::class, 'update']);
 $routes->get('/products/delete', [ProductController::class,'destroy']);
+$routes->get('/products/view', [ProductController::class,'view']);
 
-$routes->get('/products/view', [ProductController::class, 'view']);
+$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 
 // category 
 $routes->get('/category', [CategoryController::class, 'index']);
