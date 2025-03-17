@@ -75,6 +75,18 @@ class AdminController extends BaseController {
         }
     }
 
+    public function viewlogin() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (!isset($_SESSION['admin_ID'])) {
+            header("Location: /users/login");
+            exit();
+        }
+        $admins = $this->admin->getAllAdmins();
+        $this->views('accountSetting/viewLogin.php', ['admins' => $admins]);
+    }
+
     private function handleProfilePicture() {
         $uploadDir = "uploads/";
         if (!is_dir($uploadDir)) {

@@ -59,3 +59,6 @@ class Router
         require_once "Views/errors/404.php";
     }
 }
+
+$routes = new Router();
+$routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
