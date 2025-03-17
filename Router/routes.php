@@ -76,7 +76,7 @@ $routes->get('/products/create', [ProductController::class, 'create']);
 $routes->post('/products/store', [ProductController::class, 'store']);
 $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->put('/products/update', [ProductController::class, 'update']);
-$routes->post('/products/delete', [ProductController::class, 'destroy']);
+$routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
 
 // Category Routes
@@ -93,7 +93,7 @@ $routes->get('/brand/create', [BrandController::class, 'create']);
 $routes->post('/brand/store', [BrandController::class, 'store']);  
 $routes->get('/brand/edit', [BrandController::class, 'edit']); 
 $routes->put('/brand/update', [BrandController::class, 'update']); 
-$routes->post('/brand/delete', [BrandController::class, 'destroy']);
+$routes->get('/brand/delete', [BrandController::class, 'destroy']);
 
 // Profile Routes
 $routes->get('/update', [ProfileController::class, 'update']);
