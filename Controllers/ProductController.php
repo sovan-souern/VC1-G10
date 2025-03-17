@@ -126,7 +126,9 @@
         function destroy($id){
  
             $this->model->deleteProduct($id);
-          $this->redirect('/products');
+          
+    
+$this->redirect('/products');
         }
         
         function view($id)
