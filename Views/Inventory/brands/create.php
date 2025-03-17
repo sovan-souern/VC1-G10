@@ -1,10 +1,10 @@
 <div class="container mt-4">
-    <div class="card p-4">
-        <h4>Add Brand</h4>
-        <form class="my-3" action="/brand/store" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label>Brand Name</label>
+        <div class="card p-4">
+            <h4>Add Brand</h4>
+            <form class="my-3" action="/brand/store" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label>Brand Name</label>
                     <input type="text" class="form-control" name="brand_name">
                 </div>
                 <div class="col-md-6">
@@ -25,9 +25,9 @@
                 </div>
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-warning">Back</button>
+                                            <button type="button" class="btn btn-warning">Back</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>

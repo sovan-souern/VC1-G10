@@ -1,8 +1,8 @@
 <div class="container mt-4">
-    <div class="card p-4">
-        <h4>Edit Brand</h4>
-        <form class="my-3" action="/brand/update" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?= $brand['id'] ?>">
+        <div class="card p-4">
+            <h4>Edit Brand</h4>
+            <form class="my-3" action="/brand/update" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="id" value="<?= $brand['id'] ?>">
             <input type="hidden" name="existing_image" value="<?= $brand['brand_image'] ?>">
             <div class="row">
                 <div class="col-md-12 mb-3">
@@ -28,8 +28,8 @@
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-warning">Back</button>
+                              </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
