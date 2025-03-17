@@ -96,7 +96,8 @@ $routes->put('/brand/update', [BrandController::class, 'update']);
 $routes->post('/brand/delete', [BrandController::class, 'destroy']);
 
 // Profile Routes
-$routes->get('/update', [ProfileController::class, 'update']);
+$routes->get('/editProfile', [ProfileController::class, 'edit']); 
+$routes->post('/updateProfile', [ProfileController::class, 'updateProfile']); // Add this line
 $routes->get('/reset', [ProfileController::class, 'reset']);
 
 // Dashboard Route
