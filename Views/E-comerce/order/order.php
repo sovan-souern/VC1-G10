@@ -8,7 +8,7 @@ class OrderManagement {
     public function __construct() {
         $database = new Database('orders'); // Connect to the 'orders' database
         $this->conn = $database->getConnection();
-    }
+    } 
 
     public function getOrders() {
         // Fetch orders directly from the orders table
