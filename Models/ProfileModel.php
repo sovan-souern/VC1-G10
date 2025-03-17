@@ -16,17 +16,17 @@ class ProfileModel {
     }
 
     public function updateAdmin($admin_ID, $data) {
-        $sql = "UPDATE admins SET name = ?, username = ?, email = ?, phone = ?, gender = ?";
-        $params = [$data['name'], $data['username'], $data['email'], $data['phone'], $data['gender']];
-    
+        $sql = "UPDATE admins SET name = ?, email = ?";
+        $params = [$data['name'], $data['email']];
+
         if ($data['profile_picture'] !== null) {
             $sql .= ", profile_picture = ?";
             $params[] = $data['profile_picture'];
         }
-    
+
         $sql .= " WHERE admin_ID = ?";
         $params[] = $admin_ID;
-    
+
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($params);
     }

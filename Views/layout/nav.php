@@ -155,7 +155,7 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/update" class="menu-link">
+          <a href="/editProfile" class="menu-link">
             <div data-i18n="Account">Update Profile</div>
           </a>
         </li>
@@ -294,7 +294,7 @@
     </li>
     <li><div class="dropdown-divider"></div></li>
     <li>
-      <a class="dropdown-item" href="/update">
+      <a class="dropdown-item" href="/updateProfile">
         <i class="bx bx-edit-alt me-2"></i>
         <span class="align-middle">Edit Profile</span>
       </a>
