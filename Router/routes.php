@@ -28,9 +28,16 @@ function checkAuthentication() {
         exit();
     }
 }
+// function checkAuthentication() {
+//     session_start();
+//     if (!isset($_SESSION['admin_ID']) && $_SERVER['REQUEST_URI'] !== '/login' && $_SERVER['REQUEST_URI'] !== '/register') {
+//         header("Location: /login");
+//         exit();
+//     }
+// }
 
-// Call the middleware function before defining the routes
-checkAuthentication();
+// // Call the middleware function before defining the routes
+// checkAuthentication();
 
 // Default route to login
 $routes->get('/', [LoginRegisterController::class, 'login']);
@@ -49,6 +56,7 @@ $routes->get('/admin/edit/(\d+)', [AdminController::class, 'edit']);
 $routes->post('/admin/update/(\d+)', [AdminController::class, 'update']);
 $routes->post('/admin/delete/(\d+)', [AdminController::class, 'delete']);
 $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
+// $routes->get('/', [AdminController::class, 'login']);
 
 // Order Routes
 $routes->get('/order', [OrderController::class, 'index']);
@@ -76,8 +84,12 @@ $routes->get('/products/create', [ProductController::class, 'create']);
 $routes->post('/products/store', [ProductController::class, 'store']);
 $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->put('/products/update', [ProductController::class, 'update']);
-$routes->post('/products/delete', [ProductController::class, 'destroy']);
+$routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
+$routes->get('/products/delete', [ProductController::class,'destroy']);
+$routes->get('/products/view', [ProductController::class,'view']);
+
+$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 
 // Category Routes
 $routes->get('/category', [CategoryController::class, 'index']);
@@ -85,15 +97,15 @@ $routes->get('/category/create', [CategoryController::class, 'create']);
 $routes->post('/category/store', [CategoryController::class, 'store']);
 $routes->get('/category/edit', [CategoryController::class, 'edit']);
 $routes->put('/category/update', [CategoryController::class, 'update']);
-$routes->post('/category/delete', [CategoryController::class, 'destroy']);
+$routes->get('/category/delete', [CategoryController::class, 'destroy']);
 
-// Brand Routes
+// brand
 $routes->get('/brand', [BrandController::class, 'index']);
 $routes->get('/brand/create', [BrandController::class, 'create']);  
 $routes->post('/brand/store', [BrandController::class, 'store']);  
 $routes->get('/brand/edit', [BrandController::class, 'edit']); 
 $routes->put('/brand/update', [BrandController::class, 'update']); 
-$routes->post('/brand/delete', [BrandController::class, 'destroy']);
+$routes->get('/brand/delete', [BrandController::class, 'destroy']);
 
 // Profile Routes
 $routes->get('/update', [ProfileController::class, 'update']);
@@ -104,3 +116,4 @@ $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 // Dispatch the routes
 $routes->dispatch();
+?>
