@@ -13,6 +13,11 @@ require_once __DIR__ . "/../layout/header.php";
     /* Page Styling */
     body {
         background: #f0f2f5;
+        background-image: url('/Views/assets/img/login/login.jpg'); /* Add your background image path here */
+        object-fit: cover;
+        background-size: cover; /* Ensures the image covers the entire background */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -33,6 +38,7 @@ require_once __DIR__ . "/../layout/header.php";
         max-width: 650px;
         background: #fff;
         padding: 40px;
+
         border-radius: 10px;
         box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
         text-align: center;
