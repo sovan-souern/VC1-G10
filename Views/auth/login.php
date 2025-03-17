@@ -42,7 +42,7 @@ require_once __DIR__ . "/../layout/header.php";
         border-radius: 10px;
         box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
         text-align: center;
-        height: 80vh;
+        height: 65vh;
         transform: translateY(30px);
         animation: slideUp 0.5s ease-out forwards;
     }
@@ -165,7 +165,7 @@ require_once __DIR__ . "/../layout/header.php";
     <div id="message"></div>
 
     <div class="forgot-password">
-        <a href="/reset">Forgot Password?</a>
+        <a href="/">Forgot Password?</a>
     </div>
 
     <div class="mt-3 text-center">
