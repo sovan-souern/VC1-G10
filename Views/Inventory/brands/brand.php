@@ -60,18 +60,17 @@
                                     <td><?= $index + 1 ?></td>
                                     <td>
                                         <a class="product-img">
-                                            <img src="../../../<?php echo $brand["brand_image"] ?>" alt="product">
+                                            <img src="/<?= $brand["brand_image"] ?>" alt="product">
                                         </a>
                                     </td>
-                                    <td class="brand-name"> <?php echo $brand["brand_name"] ?> </td>
-                                    <td><?php echo $brand["description"] ?></td>
+                                    <td class="brand-name"> <?= $brand["brand_name"] ?> </td>
+                                    <td><?= $brand["description"] ?></td>
                                     <td>
                                         <a class="me-3" href="brand/edit?id=<?= $brand["id"] ?>">
                                             <img src="/Views/assets/img1/icons/edit.svg" alt="img">
                                         </a>
                                         <a class="delete-product" href="/brand/delete?id=<?= $brand['id'] ?>">
                                             <img src="/Views/assets/img1/icons/delete.svg" alt="img">
-                                            <?php require "delete.php" ?>
                                         </a>
                                     </td>
                                 </tr>
