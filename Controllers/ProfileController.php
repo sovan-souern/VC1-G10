@@ -11,7 +11,7 @@ class ProfileController extends BaseController {
     }
     
     public function update() {
-        session_start();
+        // session_start();
         $admin_ID = $_SESSION['admin_ID'] ?? null;
     
         if ($admin_ID === null) {

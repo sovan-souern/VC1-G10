@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 if (isset($_SESSION['admin_ID'])) {
-    header("Location:/");
+    header("Location:/login");
     exit();
 }
 require_once __DIR__ . "/../layout/header.php";
@@ -13,7 +13,7 @@ require_once __DIR__ . "/../layout/header.php";
     /* Page Styling */
     body {
         background: #f0f2f5;
-        background-image: url('/Views/assets/img/login/login.jpg'); /* Add your background image path here */
+        background-image: url('/Views/assets/img/login/beauty.jpg'); /* Add your background image path here */
         object-fit: cover;
         background-size: cover; /* Ensures the image covers the entire background */
         background-position: center; /* Centers the image */
@@ -42,7 +42,7 @@ require_once __DIR__ . "/../layout/header.php";
         border-radius: 10px;
         box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
         text-align: center;
-        height: 80vh;
+        height: 65vh;
         transform: translateY(30px);
         animation: slideUp 0.5s ease-out forwards;
     }
@@ -165,7 +165,7 @@ require_once __DIR__ . "/../layout/header.php";
     <div id="message"></div>
 
     <div class="forgot-password">
-        <a href="/reset">Forgot Password?</a>
+        <a href="/">Forgot Password?</a>
     </div>
 
     <div class="mt-3 text-center">

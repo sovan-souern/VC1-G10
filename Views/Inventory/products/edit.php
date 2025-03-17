@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-
+<input type="hidden" name="existing_image" value="<?= htmlspecialchars($product["image"]) ?>">
                 <div class="col-md-12 mb-3">
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-warning" onclick="window.history.back()">Back</button>
