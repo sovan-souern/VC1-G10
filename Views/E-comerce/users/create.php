@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <!-- Username -->
+                    <-- Username -->
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="username">Username</label>
