@@ -85,29 +85,47 @@ class AdminController extends BaseController {
 
     public function authenticate() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = htmlspecialchars($_POST['email']);
-            $password = htmlspecialchars($_POST['password']);
+            try {
+                $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+                $password = $_POST['password'];
     
-            if (empty($email) || empty($password)) {
-                echo json_encode(["status" => "error", "message" => "Email and password are required!"]);
-                exit();
+                // Debug logging
+                error_log("Login attempt for email: " . $email);
+    
+                if (empty($email) || empty($password)) {
+                    echo json_encode(["status" => "error", "message" => "Email and password are required!"]);
+                    exit();
+                }
+    
+                $user = $this->user->getUserByEmail($email);
+                
+                if (!$user) {
+                    error_log("No user found with email: " . $email);
+                    echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
+                    exit();
+                }
+    
+                if (password_verify($password, $user['password'])) {
+                    session_start();
+                    $_SESSION['admin_ID'] = $user['admin_id']; // Note: case sensitive column name
+                    $_SESSION['name'] = $user['name'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['profile_picture'] = $user['profile_picture'];
+    
+                    error_log("Login successful for user: " . $user['email']);
+                    echo json_encode([
+                        "status" => "success",
+                        "message" => "Login successful!",
+                        "redirect" => "/dashboard"
+                    ]);
+                } else {
+                    error_log("Invalid password for user: " . $email);
+                    echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
+                }
+            } catch (Exception $e) {
+                error_log("Login error: " . $e->getMessage());
+                echo json_encode(["status" => "error", "message" => "An error occurred during login"]);
             }
-    
-            $user = $this->user->getUserByEmail($email);
-            if (!$user || !password_verify($password, $user['password'])) {
-                echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
-                exit();
-            }
-    
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
-            $_SESSION['admin_ID'] = $user['admin_ID'];
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['profile_picture'] = $user['profile_picture'];
-    
-            echo json_encode(["status" => "success", "message" => "Login successful!", "redirect" => "/dashboard"]);
             exit();
         }
     }

@@ -22,10 +22,26 @@ class AdminModel
         return $result->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getUserByEmail($email)
-    {
-        $result = $this->db->query("SELECT * FROM admins WHERE email = :email", [':email' => $email]);
-        return $result->fetch(PDO::FETCH_ASSOC);
+    public function getUserByEmail($email) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM admins WHERE email = :email LIMIT 1");
+            if (!$stmt) {
+                error_log("Failed to prepare statement");
+                return false;
+            }
+
+            $stmt->execute([':email' => $email]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($result === false) {
+                error_log("No user found with email: " . $email);
+            }
+            
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Database error in getUserByEmail: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function addUser($name, $email, $password, $profilePicture = null) {
