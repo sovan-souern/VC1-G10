@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once "Models/AdminModel.php";
 require_once 'BaseController.php';
 
@@ -79,24 +79,9 @@ class AdminController extends BaseController {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        if (!isset($_SESSION['admin_ID'])) {
-            header("Location: /users/login");
-            exit();
-        }
-        $admins = $this->admin->getAllAdmins();
-        $this->views('accountSetting/viewLogin.php', ['admins' => $admins]);
-    }
-
-    private function handleProfilePicture() {
-        $uploadDir = "uploads/";
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-        $fileName = time() . "_" . basename($_FILES["profile_picture"]["name"]);
-        $targetFilePath = $uploadDir . $fileName;
-        if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFilePath)) {
-            return $targetFilePath;
-        }
-        return null;
+        session_destroy();
+        header("Location: /login");
+        exit();
     }
 }
+?> -->
