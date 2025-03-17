@@ -136,6 +136,11 @@
             <div data-i18n="Blank">Add Brand</div>
           </a>
         </li>
+        <li class="menu-item">
+          <a href="/out-stock" class="menu-link">
+            <div data-i18n="Blank">OutStock</div>
+          </a>
+        </li>
       </ul>
     </li>
 

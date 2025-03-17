@@ -1,5 +1,4 @@
-
-    <style>
+<style>
         body {
             background: #f4f6f9;
             font-family: 'Poppins', sans-serif;
@@ -112,7 +111,7 @@
             <tbody id="user-list">
                 <?php foreach ($admins as $admin): ?>
                 <tr>
-                    <td><?php echo $admin['admin_id']; ?></td>
+                    <td><?php echo isset($admin['admin_id']) ? (int)$admin['admin_id'] : 'N/A'; ?></td>
                     <td><?php echo $admin['name']; ?></td>
                     <td><?php echo $admin['email']; ?></td>
                     <td><?php echo $admin['created_at']; ?></td>
