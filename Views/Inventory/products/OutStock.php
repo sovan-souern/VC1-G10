@@ -1,4 +1,5 @@
-    <div class="page p-4">
+   <?php require_once "Views/assets/css/prodcut_style.php"?>
+   <div class="page p-4">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">

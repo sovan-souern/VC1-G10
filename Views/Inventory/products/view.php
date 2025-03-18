@@ -59,14 +59,14 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-4 col-sm-12 v-img "  >
 
-                <div class="card p-3" style="width: 18rem;">
+                <div class="card p-3">
                     <?php if (!empty($products['image'])) : ?>
                         <img class="rounded" src="../../../<?php echo ($products['image']); ?>" alt="Product Image" />
                         <h3 class="mt-2" style="text-align: center;"><?php echo ($products['product_name']); ?> </h3>
                     <?php else : ?>
-                        <img src="/images/default-image.jpg" width="175" height="200" alt="No Image Available" />
+                        <img src="/images/default-image.jpg"  alt="No Image Available" />
                     <?php endif; ?>
                     <div class="card-body">
 
@@ -76,7 +76,20 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-warning" href="">Back</button>
+        <button type="button" class="btn btn-warning" onclick="window.history.back()">Back</button>
     </div>
 </div>
 <div class="slider-product">
+
+<style>
+    .v-img{
+        width: 15rem;
+        
+    }
+     @media (max-width: 680px) {
+        .v-img{
+            width: 100%;
+        }
+        
+     }
+</style>

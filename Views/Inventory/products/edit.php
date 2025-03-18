@@ -15,7 +15,7 @@
                     <label for="price">Price</label>
                     <input type="number" name="price" id="price" class="form-control" step="0.01" min="0" value="<?= $product["price"] ?>">
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-3 ">
                     <label for="category_id">Category</label>
                     <select name="category_id" id="category_id" class="form-select" required>
                         <option value="">Choose Category</option>
@@ -26,7 +26,7 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-3 ">
                     <label for="brand_id">Brand</label>
                     <select name="brand_id" id="brand_id" class="form-select">
                         <option value="">Choose Brand (Optional)</option>
@@ -39,16 +39,16 @@
                 </div>
                 <div class="col-md-6">
                     <label>Product Content</label>
-                    <textarea name="product_content" value=" " id="product_content" class="form-control mt-2 p-4" style="height: 100px;" rows="3"> <?= $product["product_content"] ?></textarea>
+                    <textarea name="product_content" value=" " id="product_content" style="height=10px  ;" class="form-control mt-2 p-4 h-75"  rows="3"> <?= $product["product_content"] ?></textarea>
                 </div>
-                <div class="col-lg-6 md-3">
-                    <div class="form-group">
-                        <label>Product Image</label>
-                        <div class="image-upload">
+                <div class="col-lg-6 md-3 ">
+                    <div class="form-group ">
+                        <label>Product Image </label>
+                        <div class="image-upload h-75">
                             <input type="file" name="image" id="image" class="form-control" accept="image/*">
                             <div class="image-uploads">
                                 <?php if (!empty($product["image"])): ?>
-                                    <img src="../../../<?=($product["image"]) ?>" alt="product" style="max-width: 20%; height: 50%;">
+                                    <img src="../../../<?= ($product["image"]) ?>" alt="product" style="max-width: 60px ; height: 6 0px;">
                                 <?php else: ?>
                                     <h4 class="form-text text-muted">No image uploaded</h4>
                                 <?php endif; ?>
@@ -57,12 +57,15 @@
                         </div>
                     </div>
                 </div>
-<input type="hidden" name="existing_image" value="<?= htmlspecialchars($product["image"]) ?>">
-                <div class="col-md-12 mb-3">
-                    <button type="submit" class="btn btn-success">Submit</button>
+                <input  type="hidden" name="existing_image" value="<?= htmlspecialchars($product["image"]) ?>">
+                <div class="col-md-12 mb-3 ">
+                    <button type="submit" class="btn btn-success ">Submit</button>
                     <button type="button" class="btn btn-warning" onclick="window.history.back()">Back</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<style>
+    
+</style>
