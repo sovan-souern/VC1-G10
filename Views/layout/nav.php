@@ -245,11 +245,14 @@
           <!-- /Search -->
 
           <ul class="navbar-nav flex-row align-items-center ms-auto">
+          <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="Views/E-Comemrce-user">Online Builder</a>
+            </li>
             <!-- Place this tag where you want the button to render. -->
             <li class="nav-item lh-1 me-3">
               <a
                 class="github-button"
-                href="https://github.com/themeselection/sneat-html-admin-template-free"
+                href="https://github.com/sovan-souern/VC1-G10"
                 data-icon="octicon-star"
                 data-size="large"
                 data-show-count="true"
