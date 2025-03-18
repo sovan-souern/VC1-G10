@@ -79,6 +79,7 @@ $routes->put('/products/update', [ProductController::class, 'update']);
 $routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
 
+$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 // Category Routes
 $routes->get('/category', [CategoryController::class, 'index']);
 $routes->get('/category/create', [CategoryController::class, 'create']);
