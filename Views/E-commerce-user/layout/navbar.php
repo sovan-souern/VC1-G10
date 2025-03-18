@@ -117,7 +117,7 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img src="img/picture2.jpg" class="img-fluid" alt="Image">
+                <img src="/Views/E-commerce-user/img/picture2.jpg" class="img-fluid" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-primary text-uppercase mb-3">Spa & Beauty Center</h4>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/picture3.jpg" class="img-fluid" alt="Image">
+                <img src="/Views/E-commerce-user/img/picture3.jpg" class="img-fluid" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-primary text-uppercase mb-3" style="letter-spacing: 3px;">Spa & Beauty
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="img/picture4.jpg" class="img-fluid" alt="Image">
+                <img src="/Views/E-commerce-user/img/picture4.jpg" class="img-fluid" alt="Image">
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-primary text-uppercase mb-3" style="letter-spacing: 3px;">Spa & Beauty

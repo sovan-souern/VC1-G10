@@ -104,4 +104,10 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 // Dispatch the routes
+
+
+require_once 'Controllers/HomeController.php';
+
+
+$routes->get('/home', [HomeController::class, 'index']);
 $routes->dispatch();
