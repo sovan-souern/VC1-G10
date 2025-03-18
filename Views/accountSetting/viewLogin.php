@@ -1,5 +1,4 @@
-
-    <style>
+<style>
         body {
             background: #f4f6f9;
             font-family: 'Poppins', sans-serif;
@@ -110,15 +109,25 @@
                 </tr>
             </thead>
             <tbody id="user-list">
-                <?php foreach ($admins as $admin): ?>
-                <tr>
-                    <td><?php echo $admin['admin_id']; ?></td>
-                    <td><?php echo $admin['name']; ?></td>
-                    <td><?php echo $admin['email']; ?></td>
-                    <td><?php echo $admin['created_at']; ?></td>
-                    <td><img src="/uploads/<?php echo $admin['profile_picture']; ?>" alt="Profile Picture" class="profile-pic"></td>
-                </tr>
-                <?php endforeach; ?>
+                <?php if (!empty($admins)): ?>
+                    <?php foreach ($admins as $admin): ?>
+                        <tr>
+                            <td><?php echo isset($admin['admin_id']) ? (int)$admin['admin_id'] : 'N/A'; ?></td>
+                            <td><?php echo htmlspecialchars($admin['name']); ?></td>
+                            <td><?php echo htmlspecialchars($admin['email']); ?></td>
+                            <td><?php echo htmlspecialchars($admin['created_at']); ?></td>
+                            <td>
+                                <img src="<?php echo !empty($admin['profile_picture']) ? '/' . $admin['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
+                                     alt="Profile Picture" 
+                                     class="profile-pic">
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center">No accounts found.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
