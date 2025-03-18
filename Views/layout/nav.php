@@ -241,7 +241,7 @@
 
           <ul class="navbar-nav flex-row align-items-center ms-auto">
           <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="Views/E-Comemrce-user/home/home.php">Online Builder</a>
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="Views/E-Comemrce-user">Online Builder</a>
             </li>
             <!-- Place this tag where you want the button to render. -->
             <li class="nav-item lh-1 me-3">
@@ -267,11 +267,12 @@
                   notifications
                 </span>
             </li> -->
-<!-- User -->
+<!-- User --><!-- User Profile Dropdown -->
 <li class="nav-item navbar-dropdown dropdown-user dropdown">
   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
     <div class="avatar avatar-online">
-      <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" alt class="w-px-40 h-auto rounded-circle" />
+      <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
+           alt="User Profile" class="profile-img" />
     </div>
   </a>
   <ul class="dropdown-menu dropdown-menu-end">
@@ -280,11 +281,14 @@
         <div class="d-flex">
           <div class="flex-shrink-0 me-3">
             <div class="avatar avatar-online">
-              <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" alt class="w-px-40 h-auto rounded-circle" />
+              <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
+                   alt="User Profile" class="profile-img" />
             </div>
           </div>
           <div class="flex-grow-1">
-            <span class="fw-semibold d-block"><?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?></span>
+            <span class="fw-semibold d-block">
+              <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
+            </span>
             <small class="text-muted">Admin</small>
           </div>
         </div>
@@ -318,7 +322,8 @@
     </li>
   </ul>
 </li>
-<!--/ User -->
+<!--/ User Profile Dropdown -->
+
           </ul>
         </div>
       </nav>
