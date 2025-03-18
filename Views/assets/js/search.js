@@ -33,3 +33,20 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById('brandSearch');
+    const productList = document.getElementById('product-list'); // Corrected ID
+    const rows = productList.getElementsByTagName('tr');
+
+    searchInput.addEventListener('input', function() {
+        const searchValue = searchInput.value.toLowerCase();
+        Array.from(rows).forEach(function(row) {
+            const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Correct column
+            if (productName.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});

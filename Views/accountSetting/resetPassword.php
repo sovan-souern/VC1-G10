@@ -1,5 +1,5 @@
 
-    <style>
+<style>
         .container {
             max-width: 650px;
             width: 100%;
@@ -274,7 +274,7 @@
             <h2>Password Reset</h2>
             <p>Your password has been successfully reset.</p>
             <p class="subtitle">Click to login magically.</p>
-            <a href="login.html" style="display: inline-block; text-decoration: none; width: 100%;">
+            <a href="/" style="display: inline-block; text-decoration: none; width: 100%;">
                 <button type="button">Continue</button>
             </a>
         </div>
