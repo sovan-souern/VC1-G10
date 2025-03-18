@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 if (isset($_SESSION['admin_ID'])) {
     header("Location: /dashboard");
     exit();
@@ -8,15 +10,17 @@ require_once __DIR__ . "/../layout/header.php";
 ?>
 
 <style>
-    body {
-        background: #f8f9fa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
+   body {
+    background: url('/Views/assets/img/login/beauty.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
 
     .container-1 {
         width: 100%;
@@ -26,6 +30,7 @@ require_once __DIR__ . "/../layout/header.php";
         border-radius: 10px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
         text-align: center;
+        height: 90%;
     }
 
     h2 {
@@ -121,7 +126,7 @@ require_once __DIR__ . "/../layout/header.php";
             if (data.status === "success") {
                 messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
                 setTimeout(() => {
-                    window.location.href = "/";
+                    window.location.href = "/login";
                 }, 2000);
             } else {
                 messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";

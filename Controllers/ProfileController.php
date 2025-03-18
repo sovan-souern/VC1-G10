@@ -1,6 +1,6 @@
 <?php
 require_once 'Controllers/BaseController.php';
-require_once 'Models\ProfileModel.php';
+require_once 'Models/ProfileModel.php';
 
 class ProfileController extends BaseController {
     private $profileModel;
@@ -9,12 +9,11 @@ class ProfileController extends BaseController {
         $this->profileModel = new ProfileModel();
     }
     
-    public function update() {
-        session_start();
+    public function edit() {
+        // session_start();
         $admin_ID = $_SESSION['admin_ID'] ?? null;
     
         if ($admin_ID === null) {
-            // Redirect to login or handle unauthorized access
             header("Location: /login");
             exit();
         }
@@ -22,50 +21,71 @@ class ProfileController extends BaseController {
         $profile = $this->profileModel->getAdminById($admin_ID);
     
         if (!$profile) {
-            // Handle case where profile is not found
             echo "Profile not found.";
             return;
         }
     
         $this->views('/layout/header.php');
         $this->views('/layout/nav.php');
-        $this->views('/accountSetting/updateProfile.php', ['profile' => $profile]);
+        $this->views('/accountSetting/editProfile.php', ['profile' => $profile]);
         $this->views('/layout/footer.php');
     }
 
-    public function updateProfile() {
-        session_start();
+    public function editProfile() {
+        // session_start();
         $admin_ID = $_SESSION['admin_ID'] ?? null;
     
         if ($admin_ID === null) {
-            // Redirect to login or handle unauthorized access
             header("Location: /login");
             exit();
         }
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = htmlspecialchars($_POST['name']);
-            $username = htmlspecialchars($_POST['username']);
-            $email = htmlspecialchars($_POST['email']);
-            $phone = htmlspecialchars($_POST['phone']);
-            $gender = htmlspecialchars($_POST['gender']);
-    
+            // Enable error reporting for debugging
+            error_reporting(E_ALL);
+            ini_set('display_errors', 1);
+
+            $name = htmlspecialchars($_POST['name'] ?? '');
+            $email = htmlspecialchars($_POST['email'] ?? '');
+            $username = htmlspecialchars($_POST['username'] ?? '');
+
             // Validate required fields
-            if (empty($name) || empty($username) || empty($email)) {
-                echo "All fields are required.";
+            if (empty($name) || empty($email)) {
+                echo "All required fields must be filled.";
                 return;
             }
-    
-            // Handle image upload
+
             $profilePicture = null;
+
+            // Check if a new profile picture is uploaded
             if (!empty($_FILES['image']['name'])) {
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 $uploadDir = "uploads/";
+
+                // Ensure the upload directory exists
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
+
+                // Get file info
+                $fileType = mime_content_type($_FILES['image']['tmp_name']);
+                $fileSize = $_FILES['image']['size'];
                 $fileName = time() . "_" . basename($_FILES["image"]["name"]);
                 $targetFilePath = $uploadDir . $fileName;
-    
+
+                // Validate file type
+                if (!in_array($fileType, $allowedTypes)) {
+                    echo "Invalid file type. Only JPG, PNG, and GIF are allowed.";
+                    return;
+                }
+
+                // Validate file size (max 5MB)
+                if ($fileSize > 5 * 1024 * 1024) {
+                    echo "File size too large. Max allowed size is 5MB.";
+                    return;
+                }
+
+                // Move file to uploads directory
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
                     $profilePicture = $targetFilePath;
                 } else {
@@ -73,40 +93,92 @@ class ProfileController extends BaseController {
                     return;
                 }
             }
-    
-            // Update user data
-            $data = [
+
+            // Prepare update data
+            $updateData = [
                 'name' => $name,
                 'username' => $username,
-                'email' => $email,
-                'phone' => $phone,
-                'gender' => $gender,
-                'profile_picture' => $profilePicture
+                'email' => $email
             ];
-    
-            $result = $this->profileModel->updateAdmin($admin_ID, $data);
-    
-            if ($result) {
-                // Update session variables
-                $_SESSION['name'] = $name;
-                $_SESSION['email'] = $email;
-                $_SESSION['profile_picture'] = $profilePicture;
-    
-                echo "Profile updated successfully!";
-                header("Location: /update");
+
+            // Add profile picture only if a new one is uploaded
+            if ($profilePicture) {
+                $updateData['profile_picture'] = $profilePicture;
+            }
+
+            // Update profile
+            if ($this->profileModel->updateAdmin($admin_ID, $updateData)) {
+                $_SESSION['success'] = "Profile updated successfully.";
+                header("Location: /accountSetting/editProfile.php");
                 exit();
             } else {
-                echo "Failed to update profile.";
+                echo "Error updating profile.";
             }
-        } else {
-            echo "Invalid request.";
         }
     }
 
+    public function updateProfile() {
+        $admin_ID = $_SESSION['admin_ID'] ?? null;
+
+        if ($admin_ID === null) {
+            header("Location: /login");
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Collect form data
+            $data = [
+                'name' => $_POST['name'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'profile_picture' => null
+            ];
+
+            // Handle file upload
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $allowedTypes = ['image/png', 'image/jpeg'];
+                $maxFileSize = 2 * 1024 * 1024; // 2MB
+
+                $fileType = $_FILES['image']['type'];
+                $fileSize = $_FILES['image']['size'];
+
+                if (!in_array($fileType, $allowedTypes)) {
+                    echo json_encode(['status' => 'error', 'message' => 'Invalid file type. Only JPG and PNG are allowed.']);
+                    exit();
+                }
+
+                if ($fileSize > $maxFileSize) {
+                    echo json_encode(['status' => 'error', 'message' => 'File size exceeds the maximum limit of 2MB.']);
+                    exit();
+                }
+
+                $uploadDir = 'uploads/profile_pictures/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                $fileName = uniqid() . '-' . basename($_FILES['image']['name']);
+                $uploadPath = $uploadDir . $fileName;
+
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+                    $data['profile_picture'] = $uploadPath;
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Failed to upload profile picture.']);
+                    exit();
+                }
+            }
+
+            // Update the profile in the database
+            if ($this->profileModel->updateAdmin($admin_ID, $data)) {
+                echo json_encode(['status' => 'success', 'message' => 'Profile updated successfully.']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update profile.']);
+            }
+
+            exit();
+        }
+    }
     public function reset() {
-        $this->views('/accountSetting/resetPassword.php');
+        $this->views('accountSetting/resetPassword.php');
     }
 }
 ?>
-
-

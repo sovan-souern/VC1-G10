@@ -48,7 +48,7 @@
                             <input type="file" name="image" id="image" class="form-control" accept="image/*">
                             <div class="image-uploads">
                                 <?php if (!empty($product["image"])): ?>
-                                    <img src="<?= htmlspecialchars($product["image"]) ?>" alt="product" style="max-width: 100%; height: auto;">
+                                    <img src="../../../<?=($product["image"]) ?>" alt="product" style="max-width: 20%; height: 50%;">
                                 <?php else: ?>
                                     <h4 class="form-text text-muted">No image uploaded</h4>
                                 <?php endif; ?>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-
+<input type="hidden" name="existing_image" value="<?= htmlspecialchars($product["image"]) ?>">
                 <div class="col-md-12 mb-3">
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-warning" onclick="window.history.back()">Back</button>

@@ -39,8 +39,11 @@
     <link rel="stylesheet" href="../Views/assets/css/signup.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../Views/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
+    <!-- <link rel="stylesheet" href="../Views/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" /> -->
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- ... -->
+    
     <link rel="stylesheet" href="../Views/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=notifications" />
 
@@ -53,7 +56,7 @@
    
     <script src="../Views/assets/js/config.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
    
     <link rel="stylesheet" href="/Views/assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

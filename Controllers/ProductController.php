@@ -18,7 +18,6 @@
             $category = $this->model->getCategories();
             $this->views('/Inventory/products/product.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
         }
-
         function create()
         {
             $brand = $this->model->getBrands();
@@ -32,14 +31,11 @@
         function store()
         {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Debug: Check if form data is received
                 echo "<pre>POST Data: ";
                 print_r($_POST);
                 echo "FILES Data: ";
                 print_r($_FILES);
                 echo "</pre>";
-
-                // Handle image upload
                 $imagePath = null;
                 if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
                     $target_dir = "uploads/";
@@ -80,12 +76,12 @@
             $product = $this->model->getProduct($id);
             $brands = $this->model->getBrands();
             $categories = $this->model->getCategories();
-            
+
             if (!$product) {
                 echo "Error: Product with ID $id not found.";
                 return;
             }
-            
+
             $this->views('/Inventory/products/edit.php', [
                 'product' => $product,
                 'brands' => $brands,
@@ -97,8 +93,7 @@
             echo $id;
             var_dump($_SERVER);
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Handle image upload
-                $imagePath = $_POST['existing_image']; // Keep old image if no new image is uploaded
+                $imagePath = $_POST['existing_image'];
                 if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
                     $target_dir = "uploads/";
                     if (!is_dir($target_dir)) {
@@ -107,8 +102,8 @@
                     $imagePath = $target_dir . basename($_FILES['image']['name']);
                     move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
                 }
-                // Prepare product data for update
                 $data = [
+                    'product_id' => $id, // Add this line to include the product ID
                     'product_name' => $_POST['product_name'],
                     'quantity' => $_POST['quantity'],
                     'price' => $_POST['price'],
@@ -119,7 +114,6 @@
                     'image' => $imagePath,
                     'created_at' => date('Y-m-d H:i:s')
                 ];
-                // Update the product
                 if ($this->model->updateProduct($data)) {
                     $this->redirect('/products');
                 } else {
@@ -129,14 +123,28 @@
                 echo "Invalid request method.";
             }
         }
-        function destroy($id){
- 
+        function destroy($id)
+        {
+
             $this->model->deleteProduct($id);
+
+
             $this->redirect('/products');
         }
-        
-        function view()
+
+        function view($id)
         {
-            $this->views('/Inventory/products/view.php');
+            // echo "View Product";
+            $products = $this->model->getProduct($id);
+            $categories = $this->model->getCategories($id);
+            $brands = $this->model->getBrands($id);
+            $this->views('/Inventory/products/view.php', ["products" => $products, "categories" => $categories, "brands" => $brands]);
+        }
+        function OutStock(){
+            // echo "Out of Stock";
+                $products = $this->model->getProducts();
+                $brand = $this->model->getBrands();
+                $category = $this->model->getCategories();
+                $this->views('/Inventory/products/outstock.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
         }
     }

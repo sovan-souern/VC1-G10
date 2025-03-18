@@ -1,16 +1,52 @@
-document.getElementById("brandSearch").addEventListener("input", function () {
-    var searchTerm = this.value.toLowerCase();
-    var products = document.querySelectorAll(".product"); // All product rows
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById('brandSearch');
+    const productList = document.getElementById('product-list');
+    searchInput.addEventListener('input', function() {
+        const searchValue = searchInput.value.toLowerCase();
+        const products = productList.getElementsByTagName('tr');
+        Array.from(products).forEach(function(row) {
+            const productName = row.querySelector('.productimgname p').textContent.toLowerCase();
+            if (productName.includes(searchValue)) {
+                row.style.display = ''; 
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
 
-    products.forEach(function (product) {
-        var productName = product.querySelector("td.productimgname a").textContent.toLowerCase();
-        var productBrand = product.querySelector("td:nth-child(4)").textContent.toLowerCase(); // Assuming the brand is in the 4th column
-        
-        // Check if the search term matches the product name or brand
-        if (productName.includes(searchTerm) || productBrand.includes(searchTerm)) {
-            product.style.display = ""; // Show the product
-        } else {
-            product.style.display = "none"; // Hide the product
-        }
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById('brandSearch');
+    const brandList = document.getElementById('brand-list');
+    const rows = brandList.getElementsByTagName('tr');
+
+    searchInput.addEventListener('input', function() {
+        const searchValue = searchInput.value.toLowerCase();
+        Array.from(rows).forEach(function(row) {
+            const brandName = row.querySelector('.brand-name').textContent.toLowerCase();
+            if (brandName.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById('brandSearch');
+    const productList = document.getElementById('product-list'); // Corrected ID
+    const rows = productList.getElementsByTagName('tr');
+
+    searchInput.addEventListener('input', function() {
+        const searchValue = searchInput.value.toLowerCase();
+        Array.from(rows).forEach(function(row) {
+            const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Correct column
+            if (productName.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
     });
 });
