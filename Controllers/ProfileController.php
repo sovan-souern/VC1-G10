@@ -177,5 +177,8 @@ class ProfileController extends BaseController {
             exit();
         }
     }
+    public function reset() {
+        $this->views('accountSetting/resetPassword.php');
+    }
 }
 ?>

@@ -30,5 +30,11 @@ class ProfileModel {
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($params);
     }
+
+    public function getAllAdmins() {
+        $sql = "SELECT admin_id, name, email, profile_picture, created_at FROM admins"; // Include profile_picture
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

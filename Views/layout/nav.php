@@ -173,11 +173,6 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/login" class="menu-link" target="_blank">
-            <div data-i18n="Basic">Login</div>
-          </a>
-        </li>
-        <li class="menu-item">
           <a href="/reset" class="menu-link" target="_blank">
             <div data-i18n="Basic">Forgot Password</div>
           </a>
@@ -268,7 +263,7 @@
 <li class="nav-item navbar-dropdown dropdown-user dropdown">
   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
     <div class="avatar avatar-online">
-      <img src="/Views/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+      <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" alt class="w-px-40 h-auto rounded-circle" />
     </div>
   </a>
   <ul class="dropdown-menu dropdown-menu-end">
@@ -277,11 +272,11 @@
         <div class="d-flex">
           <div class="flex-shrink-0 me-3">
             <div class="avatar avatar-online">
-              <img src="/Views/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+              <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" alt class="w-px-40 h-auto rounded-circle" />
             </div>
           </div>
           <div class="flex-grow-1">
-            <span class="fw-semibold d-block">John Doe</span>
+            <span class="fw-semibold d-block"><?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?></span>
             <small class="text-muted">Admin</small>
           </div>
         </div>
@@ -289,7 +284,7 @@
     </li>
     <li><div class="dropdown-divider"></div></li>
     <li>
-      <a class="dropdown-item" href="/updateProfile">
+      <a class="dropdown-item" href="/editProfile">
         <i class="bx bx-edit-alt me-2"></i>
         <span class="align-middle">Edit Profile</span>
       </a>
@@ -304,12 +299,6 @@
       <a class="dropdown-item" href="/reset">
         <i class="bx bx-lock-alt me-2"></i>
         <span class="align-middle">Reset Password</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="/login">
-        <i class="bx bx-user-plus me-2"></i>
-        <span class="align-middle">Add Account</span>
       </a>
     </li>
     <li><div class="dropdown-divider"></div></li>
