@@ -165,7 +165,7 @@ require_once __DIR__ . "/../layout/header.php";
     <div id="message"></div>
 
     <div class="forgot-password">
-        <a href="/">Forgot Password?</a>
+        <a href="/reset">Forgot Password?</a>
     </div>
 
     <div class="mt-3 text-center">
