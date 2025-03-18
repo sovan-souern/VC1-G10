@@ -1,5 +1,4 @@
-   <?php require_once "Views/assets/css/prodcut_style.php"?>
-   <div class="page p-4">
+    <div class="page p-4">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
@@ -89,9 +88,9 @@
                         <table class="table datanew">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Product Name</th>
-                                    <th>
+                                    <th id="font">ID</th>
+                                    <th id="font">Product Name</th>
+                                    <th id="font">
                                         <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
                                             style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
                                             <option value="">Category</option>
@@ -100,7 +99,7 @@
                                             <?php endforeach ?>
                                         </select>
                                     </th>
-                                    <th>
+                                    <th id="font">
                                         <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
                                             style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="brand-filter-header">
                                             <option value="">Brand</option>
@@ -109,9 +108,9 @@
                                             <?php endforeach ?>
                                         </select>
                                     </th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th>Action</th>
+                                    <th id="font">Price</th>
+                                    <th id="font">Qty</th>
+                                    <th id="font">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="product-list">
@@ -150,11 +149,11 @@
                                                                                         <?= htmlspecialchars($product["quantity"]) ?>
                                                                                 </td>
                                         <td>
-                                                <a class="me-3" href="products/view?id=<?= $product['product_id'] ?>">
-                                                    <img src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                                <a class="me-2" href="products/view?id=<?= $product['product_id'] ?>">
+                                                    <img id="img-action" src="/Views/assets/img1/icons/eye.svg" alt="img">
                                                 </a>
-                                                <a class="me-3" href="products/edit?id=<?= $product['product_id'] ?>">
-                                                    <img src="/Views/assets/img1/icons/edit.svg" alt="img">
+                                                <a class="me-2" href="products/edit?id=<?= $product['product_id'] ?>">
+                                                    <img id="img-delete"  src="/Views/assets/img1/icons/edit.svg" alt="img">
                                                 </a>
                                                 
                                         </td>
@@ -167,4 +166,115 @@
             </div>
         </div>
     </div>
+<style>
+    /* General styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+    }
 
+    #img-product {
+        width: 50px;
+        height: 50px;
+    }
+
+    th, td {
+        white-space: nowrap;
+        padding: 8px;
+        text-align: left;
+    }
+
+    /* Responsive adjustments for small screens */
+    @media (max-width: 680px) {
+        #font{
+            font-size: 8px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            display: table;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tbody {
+            display: table-row-group;
+            width: 100%;
+        }
+
+        tr {
+            display: table-row;
+            margin-bottom: 0;
+            border-bottom: none;
+            padding: 0;
+        }
+
+        td {
+            display: table-cell;
+            justify-content: normal;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        th:nth-child(5), th:nth-child(6) {
+            display: none;
+        }
+
+        td::before {
+            content: none;
+        }
+
+        .btn-added {
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        #font {
+            font-size: 8px;
+        }
+
+        /* Hide Price and Quantity columns on small screens */
+        td:nth-child(5), td:nth-child(6) {
+            display: none;
+        }
+
+        td {
+            font-size: 7px;
+        }
+
+        #img-product {
+        width: 20px;
+        height: 20px;
+    }
+
+        #hight {
+            width: 10px;
+            height: 10px;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+        }
+
+        /* Dropdown effect for delete button */
+        .delete-product {
+            position: relative;
+            display: inline-block;
+        }
+        #img-action{
+            width: 15px;
+        }
+        #img-delete{
+            width: 10px;
+        }
+    }
+</style>
