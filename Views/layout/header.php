@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="../Views/assets/css/signup.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../Views/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <!-- <link rel="stylesheet" href="../Views/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" /> -->
     <!-- icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <!-- ... -->
