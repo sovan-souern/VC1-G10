@@ -92,8 +92,8 @@
                                 <th id="font">ID</th>
                                 <th id="font">Product Name</th>
                                 <th id="font">
-                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
-                                        style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
+                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-10"
+                                        style="font-size: 10px; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
                                         <option value="">Category</option>
                                         <?php foreach ($categories as $key => $category) : ?>
                                             <option value="<?= htmlspecialchars($category["category_name"]) ?>"><?= htmlspecialchars($category["category_name"]) ?></option>
@@ -176,91 +176,52 @@ th, td {
 }
 
 /* Responsive adjustments for small screens */
+/* Responsive adjustments for small screens */
 @media (max-width: 680px) {
-    .table-responsive {
-        overflow-x: auto;
-        display: block;
-    }
-
-    table {
-        width: 100%;
-        display: table;
-    }
-
-    thead {
-        display: table-header-group;
-    }
-
-    tbody {
-        display: table-row-group;
-        width: 100%;
-    }
-
-    tr {
-        display: table-row;
-        margin-bottom: 0;
-        border-bottom: none;
-        padding: 0;
-    }
-
-    td {
-        display: table-cell;
-        justify-content: normal;
-        padding: 5px;
-        font-size: 14px;
-    }
-    th:nth-child(5), th:nth-child(6) {
-        display: none;
-    }
-
-    td::before {
-        content: none;
-    }
-/* 
-    .productimgname {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    } */
-
-        /* .productimgname p {
-            text-align: center;
-            font-size: 14px;
-        } */
-
-    .btn-added {
-        display: block;
-        text-align: center;
-        width: 100%;
-    }
-    #font{
-        font-size: 6px;
-    }
-    /* Hide Price and Quantity columns on small screens */
-    td:nth-child(5), td:nth-child(6) {
-        display: none;
-    }
-    td{
-        font-size: 6px;
-    }
-    /* #img-product{
-        width: 0px;
-        height: 35px;
-        
-    } */
-    #hight{
-        width: 10px;
-        height: 10px;
-    }
-    /* .form-select,.option{
-        font-size: 6px;
-    }
-    select{
-        width: 5px;
-    } */
-    /* Style the select dropdown to replace the default arrow with a custom "play" icon */
-/*  */
-
+    /* Ensure the table container is scrollable */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
 
-</style>
+/* Make table elements more flexible */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* Allow table to resize based on content */
+}
+
+th, td {
+    white-space: nowrap; /* Prevent text wrapping */
+    padding: 8px;
+    text-align: left;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 680px) {
+    .table-responsive {
+    position: relative;
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.table-responsive::after {
+    content: "→"; /* Arrow indicating scroll action */
+    position: absolute;
+    right: 10px; /* Position from the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    z-index: 1000; /* Ensure it appears above other elements */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.table-responsive::after:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+}
+}
