@@ -241,7 +241,7 @@
 
           <ul class="navbar-nav flex-row align-items-center ms-auto">
           <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="Views/E-Comemrce-user">Online Builder</a>
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="Views/E-Comemrce-user/home/home.php">Online Builder</a>
             </li>
             <!-- Place this tag where you want the button to render. -->
             <li class="nav-item lh-1 me-3">

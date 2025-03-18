@@ -104,4 +104,15 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 // Dispatch the routes
+
+
+
+
+
+
+// E-commerce
+
+require_once 'Controllers/E-commerce/HomeController.php';
+
+$routes->get('/home', [HomeController::class, 'index']);
 $routes->dispatch();
