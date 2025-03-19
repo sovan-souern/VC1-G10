@@ -122,37 +122,18 @@
                         <li class="nav-item">
                             <a href="index.html" class="nav-link active">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                                aria-expanded="false">Pages</a>
-                            <ul class="dropdown-menu" aria-labelledby="pages">
-                                <li><a href="index.html" class="dropdown-item">About Us</a></li>
-                                <li><a href="index.html" class="dropdown-item">Shop</a></li>
-                                <li><a href="index.html" class="dropdown-item">Single Product</a></li>
-                                <li><a href="index.html" class="dropdown-item">Cart</a></li>
-                                <li><a href="index.html" class="dropdown-item">Wishlist</a></li>
-                                <li><a href="index.html" class="dropdown-item">Checkout</a></li>
-                                <li><a href="index.html" class="dropdown-item">Blog</a></li>
-                                <li><a href="index.html" class="dropdown-item">Single Post</a></li>
-                                <li><a href="index.html" class="dropdown-item">Contact</a></li>
-                                <li><a href="index.html" class="dropdown-item">FAQs</a></li>
-                                <li><a href="index.html" class="dropdown-item">Account</a></li>
-                                <li><a href="index.html" class="dropdown-item">Thankyou</a></li>
-                                <li><a href="index.html" class="dropdown-item">Error 404</a></li>
-                                <li><a href="index.html" class="dropdown-item">Styles</a></li>
-                            </ul>
+                       
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">About</a>
                         </li>
                         <li class="nav-item">
                             <a href="index.html" class="nav-link">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link">Blog</a>
+                            <a href="index.html" class="nav-link">Products</a>
                         </li>
                         <li class="nav-item">
                             <a href="index.html" class="nav-link">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Others</a>
                         </li>
                     </ul>
 
