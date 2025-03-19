@@ -1,5 +1,4 @@
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
-    aria-labelledby="Search">
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -25,9 +24,9 @@
 
             <div class="col-sm-4 col-lg-3 text-center text-sm-start">
                 <div class="main-logo">
-                    <a href="index.html">
-                        <img src="images/logo.png" alt="logo" class="img-fluid">
-                    </a>
+                    <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg" alt="Brand Logo"
+                        class="logo logo-dark" style="width: 50px; height: 50px; border-radius: 50%;" />
+                    <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: pink;">Skin care</span>
                 </div>
             </div>
 
@@ -47,15 +46,11 @@
             <div
                 class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
                 <div class="support-box text-end d-none d-xl-block">
-                    <span class="fs-6 secondary-font text-muted">Phone</span>
-                    <h5 class="mb-0">+980-34984089</h5>
+                    <h5 class="mb-0">Login</h5>
                 </div>
                 <div class="support-box text-end d-none d-xl-block">
-                    <span class="fs-6 secondary-font text-muted">Email</span>
-                    <h5 class="mb-0">waggy@gmail.com</h5>
+                    <h5 class="mb-0">Phone: +855 86277461</h5>
                 </div>
-
-
 
             </div>
         </div>
@@ -107,7 +102,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
 
                 <div class="offcanvas-header justify-content-center">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -174,10 +170,11 @@
                             </li>
 
                             <li class="">
-                                <a href="index.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                                    aria-controls="offcanvasCart">
+                                <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                                    <span
+                                        class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
                                         03
                                     </span>
                                 </a>
@@ -194,7 +191,7 @@
     </div>
 </header>
 
-<section id="banner" style="background: #F9F3EC;">
+<section id="banner" style="background: #FBDEE7;">
     <div class="container">
         <div class="swiper main-swiper">
             <div class="swiper-wrapper">
@@ -202,11 +199,12 @@
                 <div class="swiper-slide py-5">
                     <div class="row banner-content align-items-center">
                         <div class="img-wrapper col-md-5">
-                            <img src="images/banner-img.png" class="img-fluid">
+                            <img src="https://i.pinimg.com/736x/48/bf/fe/48bffeb7f0c3cd3862e8e3adf23289b9.jpg" class="img-fluid">
                         </div>
                         <div class="content-wrapper col-md-7 p-5 mb-5">
                             <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
+                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
+                                    class="text-primary">your
                                     pets</span>
                             </h2>
                             <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
@@ -225,7 +223,8 @@
                         </div>
                         <div class="content-wrapper col-md-7 p-5 mb-5">
                             <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
+                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
+                                    class="text-primary">your
                                     pets</span>
                             </h2>
                             <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
@@ -244,7 +243,8 @@
                         </div>
                         <div class="content-wrapper col-md-7 p-5 mb-5">
                             <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
+                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
+                                    class="text-primary">your
                                     pets</span>
                             </h2>
                             <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">

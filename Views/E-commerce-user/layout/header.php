@@ -27,15 +27,17 @@
     rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=PT+Serif:wght@400;700&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=PT+Serif:wght@400;700&display=swap"
     rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
 <!-- Icon Font Stylesheet -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
 
@@ -68,6 +70,49 @@
         .copyright {
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             background: var(--bs-dark) !important;
+        }
+
+        .sticky-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+            /* Ensure it stays above other elements */
+            background-color: #fff;
+            /* Optional: Add a background color */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Optional: Add a shadow for better visibility */
+        }
+
+        .navbar .nav-link {
+            color: black !important;
+            /* Change text color to black */
+        }
+
+        .navbar .dropdown-menu .dropdown-item {
+            color: black !important;
+            /* Ensure dropdown items also have black text */
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .dropdown-menu .dropdown-item:hover {
+            color: #555 !important;
+            /* Optional: Add a hover effect with a slightly lighter black */
+        }
+
+        /* Change navbar icons to black */
+        .navbar iconify-icon,
+        .navbar svg {
+            color: black !important;
+            /* Change icon color to black */
+            fill: black !important;
+            /* Ensure SVG icons are also black */
+        }
+
+        .navbar iconify-icon:hover,
+        .navbar svg:hover {
+            color: #555 !important;
+            /* Optional: Add a hover effect with a slightly lighter black */
+            fill: #555 !important;
         }
 
         /*** co
