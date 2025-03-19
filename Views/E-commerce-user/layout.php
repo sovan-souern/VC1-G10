@@ -1,5 +1,4 @@
 <?php require_once 'Views/E-commerce-user/layout/header.php' ?>
 <?php require_once 'Views/E-commerce-user/layout/navbar.php' ?>
-<?php $content ?>
-<?php require_once 'Views/E-commerce-user/layout/footer.php' ?>
-
+<?php $contentuser ?>
+<?php require_once 'Views/E-commerce-user/layout/footer.php' ?>;

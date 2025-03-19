@@ -46,10 +46,13 @@
             <div
                 class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
                 <div class="support-box text-end d-none d-xl-block">
-                    <h5 class="mb-0">Login</h5>
+                    <h5 class="mb-0">Phone: +855 86277461</h5>
                 </div>
                 <div class="support-box text-end d-none d-xl-block">
-                    <h5 class="mb-0">Phone: +855 86277461</h5>
+                    <a href="index.html" class="d-flex align-items-center mx-3 text-decoration-none">
+                        <iconify-icon icon="healthicons:person" class="fs-4 me-2"></iconify-icon>
+                        <h5 class="mb-0">Login</h5>
+                    </a>
                 </div>
 
             </div>
@@ -120,30 +123,26 @@
 
                     <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link active">Home</a>
+                            <a href="/home" class="nav-link active">Home</a>
                         </li>
-                       
+
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Shop</a>
+                            <a href="/about" class="nav-link">About</a>
                         </li>
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link">Products</a>
+                            <a href="/shop" class="nav-link">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link">Contact</a>
+                            <a href="/products" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/contact" class="nav-link">Contact</a>
                         </li>
                     </ul>
 
                     <div class="d-none d-lg-flex align-items-end">
                         <ul class="d-flex justify-content-end list-unstyled m-0">
-                            <li>
-                                <a href="index.html" class="mx-3">
-                                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                                </a>
-                            </li>
+
                             <li>
                                 <a href="index.html" class="mx-3">
                                     <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
@@ -180,7 +179,8 @@
                 <div class="swiper-slide py-5">
                     <div class="row banner-content align-items-center">
                         <div class="img-wrapper col-md-5">
-                            <img src="https://i.pinimg.com/736x/48/bf/fe/48bffeb7f0c3cd3862e8e3adf23289b9.jpg" class="img-fluid">
+                            <img src="https://i.pinimg.com/736x/48/bf/fe/48bffeb7f0c3cd3862e8e3adf23289b9.jpg"
+                                class="img-fluid">
                         </div>
                         <div class="content-wrapper col-md-7 p-5 mb-5">
                             <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>

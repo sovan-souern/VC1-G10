@@ -16,6 +16,11 @@
 
     <!-- Page JS -->
     <script src="../Views/assets/js/dashboards-analytics.js"></script>
+
+    <script src="../../../Views/assets/js/search.js"></script>
+    <script src="../../../Views/assets/js/alerteDelete.js"></script>
+    <script src="../../../Views/assets/js/check.js"></script>
+    <script src="../../../Views/assets/js/select.js"></script>
     
 
     <!-- Place this tag in your head or just before your close body tag. -->

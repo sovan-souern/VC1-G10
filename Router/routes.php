@@ -107,7 +107,16 @@ $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 
 require_once 'Controllers/HomeController.php';
+require_once 'Controllers/AboutController.php';
+require_once 'Controllers/ProductUserController.php';
+require_once 'Controllers/ContactController.php';
+require_once 'Controllers/ShopController.php';
+
 
 
 $routes->get('/home', [HomeController::class, 'index']);
+$routes->get('/about', [AboutController::class, 'index']);
+$routes->get('/products', [ProductUserController::class, 'index']);
+$routes->get('/contact', [ContactController::class, 'index']);
+$routes->get('/shop', [ShopController::class, 'index']);
 $routes->dispatch();
