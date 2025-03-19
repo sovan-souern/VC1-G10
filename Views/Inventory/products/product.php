@@ -1,4 +1,5 @@
-<?php require "style.php"?>
+<?php require_once "Views/assets/css/prodcut_style.php" ?>
+
 <div class="page p-4">
     <div class="content">
         <div class="page-header ">
@@ -51,7 +52,7 @@
                             <div class="col-lg col-sm-6 col-12">
                                 <div class="form-group">
                                     <select class="select" id="category-filter">
-                                        <option value="">Choose Category</option>
+                                        <option  value=""> Choose Category </option>
                                         <option value="Sun screen">Sun screen</option>
                                         <option value="Night screen">Night screen</option>
                                     </select>
@@ -60,7 +61,7 @@
                             <div class="col-lg col-sm-6 col-12">
                                 <div class="form-group">
                                     <select class="select" id="brand-filter">
-                                        <option value="">Choose Brand</option>
+                                        <option value="">▼ Choose Brand</option>
                                         <option value="Addedas">Addedas</option>
                                         <option value="zoon">Zoon</option>
                                     </select>
@@ -120,10 +121,8 @@
                                 <tr class="product" st data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
                                     <td><?= $index + 1 ?></td>
                                     <td class="productimgname">
-                                        <a href="javascript:void(0);" class="product-img" >
-                                        <img id="img-product" src="<?= htmlspecialchars($product["image"]) ?>" alt="product" >
 
-                                        </a>
+                                        <img id="img-product" src="<?= htmlspecialchars($product["image"]) ?>" alt="product">
                                         <?= htmlspecialchars($product["product_name"]) ?>
                                     </td>
                                     <td class="category-name"><?= htmlspecialchars($product["categoryId"]) ?></td>
@@ -155,12 +154,6 @@
         </div>
     </div>
 </div>
-<style>
-    /* Ensure the table container is scrollable */
-.table-responsive {
-    width: 100%;
-    overflow-x: auto;
-}
 
 /* Make table elements more flexible */
 table {

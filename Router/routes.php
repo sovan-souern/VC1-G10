@@ -28,16 +28,9 @@ function checkAuthentication() {
         exit();
     }
 }
-// function checkAuthentication() {
-//     session_start();
-//     if (!isset($_SESSION['admin_ID']) && $_SERVER['REQUEST_URI'] !== '/login' && $_SERVER['REQUEST_URI'] !== '/register') {
-//         header("Location: /login");
-//         exit();
-//     }
-// }
 
-// // Call the middleware function before defining the routes
-// checkAuthentication();
+// Call the middleware function before defining the routes
+checkAuthentication();
 
 // Default route to login
 $routes->get('/', [LoginRegisterController::class, 'login']);
@@ -56,7 +49,6 @@ $routes->get('/admin/edit/(\d+)', [AdminController::class, 'edit']);
 $routes->post('/admin/update/(\d+)', [AdminController::class, 'update']);
 $routes->post('/admin/delete/(\d+)', [AdminController::class, 'delete']);
 $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
-// $routes->get('/', [AdminController::class, 'login']);
 
 // Order Routes
 $routes->get('/order', [OrderController::class, 'index']);
@@ -86,10 +78,6 @@ $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->put('/products/update', [ProductController::class, 'update']);
 $routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
-$routes->get('/products/delete', [ProductController::class,'destroy']);
-$routes->get('/products/view', [ProductController::class,'view']);
-
-$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 
 // Category Routes
 $routes->get('/category', [CategoryController::class, 'index']);
@@ -99,7 +87,7 @@ $routes->get('/category/edit', [CategoryController::class, 'edit']);
 $routes->put('/category/update', [CategoryController::class, 'update']);
 $routes->get('/category/delete', [CategoryController::class, 'destroy']);
 
-// brand
+// Brand Routes
 $routes->get('/brand', [BrandController::class, 'index']);
 $routes->get('/brand/create', [BrandController::class, 'create']);  
 $routes->post('/brand/store', [BrandController::class, 'store']);  
@@ -116,5 +104,10 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 // Dispatch the routes
+
+
+require_once 'Controllers/HomeController.php';
+
+
+$routes->get('/home', [HomeController::class, 'index']);
 $routes->dispatch();
-?>
