@@ -51,7 +51,8 @@
 
     <style>
         .footer {
-            background: var(--bs-dark);
+            background: var(--bs-dark) !important;
+            margin-top: 2%;
         }
 
         .footer .footer-item a,
