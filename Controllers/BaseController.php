@@ -4,7 +4,7 @@ class BaseController{
     public function views($view, $data = []){
         extract($data);
         ob_start();
-        $content = ob_get_clean();
+        // $content = ob_get_clean();
         require_once 'Views/layout.php';
         require_once 'Views/'.$view;
 
@@ -14,9 +14,10 @@ class BaseController{
     public function ViewsUser($view, $data = []){
         extract($data);
         ob_start();
-        $contentuser = ob_get_clean();
+        // $contentuser = ob_get_clean();
         require_once 'Views/E-commerce-user/layout.php';
-        require_once 'Views/'.$view;
+        // require_once 'Views/'.$view;
+       
 
     }
 
