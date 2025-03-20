@@ -98,6 +98,11 @@
             <div data-i18n="Blank">OutStock</div>
           </a>
         </li>
+        <li class="menu-item">
+          <a href="/discount" class="menu-link">
+            <div data-i18n="Blank">Discount</div>
+          </a>
+        </li>
       </ul>
     </li>
 
