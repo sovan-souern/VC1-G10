@@ -40,7 +40,6 @@
     <header>
         <!-- Your header content here -->
     </header>
-
     <main class="flex-grow-1">
         <!-- Your main content here -->
     </main>
@@ -52,7 +51,7 @@
     <style>
         .footer {
             background: var(--bs-dark) !important;
-            margin-top: 2%;
+
         }
 
         .footer .footer-item a,

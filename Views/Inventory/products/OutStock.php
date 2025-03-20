@@ -2,12 +2,7 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Product List</h4>
-                    <h6>Manage your products</h6>
-                </div>
-                <div class="page-btn">
-                    <a href="products/create" class="btn btn-added"><img src="/Views/assets/img1/icons/plus.svg" alt="img"
-                            class="me-1">Add New Product</a>
+                    <h4>Out stock List</h4>
                 </div>
             </div>
             <div class="card">
@@ -26,22 +21,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                            src="/Views/assets/img1/icons/pdf.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                            src="/Views/assets/img1/icons/excel.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                            src="/Views/assets/img1/icons/printer.svg" alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
+                        
                     </div>
 
                     <div class="card mb-0" id="filter_inputs">
@@ -115,47 +95,47 @@
                             </thead>
                             <tbody id="product-list">
                                 <?php foreach ($products as $index => $product) : ?>
-                                    <?php 
-    if ($product['quantity'] > 10) {
-                                            continue;
-                                        }
-                                        $rowClass = '';
-    if ($product['quantity'] < 1) {
-                                            $rowClass = 'table-danger';
-                                        } elseif ($product['quantity'] < 10) {
-                                            $rowClass = 'table-warning';
-                                        }
+                                    <?php
+                                    if ($product['quantity'] > 10) {
+                                        continue;
+                                    }
+                                    $rowClass = '';
+                                    if ($product['quantity'] < 1) {
+                                        $rowClass = 'table-danger';
+                                    } elseif ($product['quantity'] < 10) {
+                                        $rowClass = 'table-warning';
+                                    }
                                     ?>
                                     <tr class="product <?= $rowClass ?>" data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
                                         <td>
-                                                                                        <?= $index + 1 ?>
-                                                                                </td>
+                                            <?= $index + 1 ?>
+                                        </td>
                                         <td class="productimgname">
-                                                                                            <a href="javascript:void(0);" class="product-img">
-                                                        <img src="../../../<?= ($product["image"]) ?>" alt="product">
-                                                    </a>
-    <?= htmlspecialchars($product['product_name']) ?>
+                                            <a href="javascript:void(0);" class="product-img">
+                                                <img src="../../../<?= ($product["image"]) ?>" alt="product">
+                                            </a>
+                                            <?= htmlspecialchars($product['product_name']) ?>
                                         </td>
                                         <td class="category-name">
-                                                                                        <?= htmlspecialchars($product["categoryId"]) ?>
-                                                                                </td>
+                                            <?= htmlspecialchars($product["categoryId"]) ?>
+                                        </td>
                                         <td>
-                                                                                        <?= htmlspecialchars($product["brandID"]) ?>
-                                                                                </td>
+                                            <?= htmlspecialchars($product["brandID"]) ?>
+                                        </td>
                                         <td>
-                                                                                        <?= htmlspecialchars($product["price"]) ?>
-                                                                                </td>
+                                            <?= htmlspecialchars($product["price"]) ?>
+                                        </td>
                                         <td>
-                                                                                        <?= htmlspecialchars($product["quantity"]) ?>
-                                                                                </td>
+                                            <?= htmlspecialchars($product["quantity"]) ?>
+                                        </td>
                                         <td>
-                                                <a class="me-2" href="products/view?id=<?= $product['product_id'] ?>">
-                                                    <img id="img-action" src="/Views/assets/img1/icons/eye.svg" alt="img">
-                                                </a>
-                                                <a class="me-2" href="products/edit?id=<?= $product['product_id'] ?>">
-                                                    <img id="img-delete"  src="/Views/assets/img1/icons/edit.svg" alt="img">
-                                                </a>
-                                                
+                                            <a class="me-2" href="products/view?id=<?= $product['product_id'] ?>">
+                                                <img id="img-action" src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                            </a>
+                                            <!-- <a class="me-2" href="products/edit?id=<?= $product['product_id'] ?>">
+                                                <img id="img-delete" src="/Views/assets/img1/icons/edit.svg" alt="img">
+                                            </a> -->
+
                                         </td>
                                     </tr>
                                 <?php endforeach ?>
@@ -166,115 +146,121 @@
             </div>
         </div>
     </div>
-<style>
-    /* General styles */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: auto;
-    }
-
-    #img-product {
-        width: 50px;
-        height: 50px;
-    }
-
-    th, td {
-        white-space: nowrap;
-        padding: 8px;
-        text-align: left;
-    }
-
-    /* Responsive adjustments for small screens */
-    @media (max-width: 680px) {
-        #font{
-            font-size: 8px;
-        }
-        .table-responsive {
-            overflow-x: auto;
-            display: block;
-        }
-
+    <style>
+        /* General styles */
         table {
             width: 100%;
-            display: table;
-        }
-
-        thead {
-            display: table-header-group;
-        }
-
-        tbody {
-            display: table-row-group;
-            width: 100%;
-        }
-
-        tr {
-            display: table-row;
-            margin-bottom: 0;
-            border-bottom: none;
-            padding: 0;
-        }
-
-        td {
-            display: table-cell;
-            justify-content: normal;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        th:nth-child(5), th:nth-child(6) {
-            display: none;
-        }
-
-        td::before {
-            content: none;
-        }
-
-        .btn-added {
-            display: block;
-            text-align: center;
-            width: 100%;
-        }
-
-        #font {
-            font-size: 8px;
-        }
-
-        /* Hide Price and Quantity columns on small screens */
-        td:nth-child(5), td:nth-child(6) {
-            display: none;
-        }
-
-        td {
-            font-size: 7px;
+            border-collapse: collapse;
+            table-layout: auto;
         }
 
         #img-product {
-        width: 20px;
-        height: 20px;
-    }
-
-        #hight {
-            width: 10px;
-            height: 10px;
+            width: 50px;
+            height: 50px;
         }
 
-        select {
-            cursor: pointer;
-            appearance: none;
+        th,
+        td {
+            white-space: nowrap;
+            padding: 8px;
+            text-align: left;
         }
 
-        /* Dropdown effect for delete button */
-        .delete-product {
-            position: relative;
-            display: inline-block;
+        /* Responsive adjustments for small screens */
+        @media (max-width: 680px) {
+            #font {
+                font-size: 8px;
+            }
+
+            .table-responsive {
+                overflow-x: auto;
+                display: block;
+            }
+
+            table {
+                width: 100%;
+                display: table;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tbody {
+                display: table-row-group;
+                width: 100%;
+            }
+
+            tr {
+                display: table-row;
+                margin-bottom: 0;
+                border-bottom: none;
+                padding: 0;
+            }
+
+            td {
+                display: table-cell;
+                justify-content: normal;
+                padding: 5px;
+                font-size: 14px;
+            }
+
+            th:nth-child(5),
+            th:nth-child(6) {
+                display: none;
+            }
+
+            td::before {
+                content: none;
+            }
+
+            .btn-added {
+                display: block;
+                text-align: center;
+                width: 100%;
+            }
+
+            #font {
+                font-size: 8px;
+            }
+
+            /* Hide Price and Quantity columns on small screens */
+            td:nth-child(5),
+            td:nth-child(6) {
+                display: none;
+            }
+
+            td {
+                font-size: 7px;
+            }
+
+            #img-product {
+                width: 20px;
+                height: 20px;
+            }
+
+            #hight {
+                width: 10px;
+                height: 10px;
+            }
+
+            select {
+                cursor: pointer;
+                appearance: none;
+            }
+
+            /* Dropdown effect for delete button */
+            .delete-product {
+                position: relative;
+                display: inline-block;
+            }
+
+            #img-action {
+                width: 15px;
+            }
+
+            #img-delete {
+                width: 10px;
+            }
         }
-        #img-action{
-            width: 15px;
-        }
-        #img-delete{
-            width: 10px;
-        }
-    }
-</style>
+    </style>
