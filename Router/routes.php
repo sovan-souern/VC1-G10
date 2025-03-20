@@ -69,7 +69,7 @@ $routes->delete('/user/delete', [UserController::class, 'destroy']);
 
 // Notification Routes
 $routes->get('/notifications', [NotificationController::class, 'index']); 
-
+$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 // Product Routes (Inventory)
 $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);

@@ -129,11 +129,14 @@
                                     <td><?= htmlspecialchars($product["brandID"]) ?></td>
                                     <td><?= htmlspecialchars($product["price"]) ?></td>
                                     <td><?= htmlspecialchars($product["quantity"]) ?></td>
-                                    <td>
-                                        <a class="" href="products/view?id=<?= $product['product_id'] ?>">
-                                            <img id="hight" src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                    <td class="actoin">
+                                        <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
+                                         <img id="hight" class="size-image" src="/Views/assets/img/dicount.png" alt="">
                                         </a>
-                                        <a class="" href="products/edit?id=<?= $product['product_id'] ?>">
+                                        <a class="" href="products/view?id=<?= $product['product_id'] ?>">
+                                            <img id="hight"  src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                        </a>
+                                        <a class="edit" href="products/edit?id=<?= $product['product_id'] ?>">
                                             <img id="hight" src="/Views/assets/img1/icons/edit.svg" alt="img">
                                         </a>
 
@@ -143,6 +146,7 @@
                                             <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
                                             <?php require "delete.php" ?>
                                         </a>
+                                        
 
                                     </td>
                                 </tr>
