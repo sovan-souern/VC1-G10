@@ -1,7 +1,7 @@
 
 <style>
         .container {
-            max-width: 650px;
+            max-width: 900px;
             width: 100%;
             background: #fff;
             padding: 30px;
@@ -10,7 +10,7 @@
             text-align: center;
             margin: 0 auto;
             margin-top: 50px;
-
+            height:70vh;
         }
         
         .icon-container {
@@ -66,7 +66,7 @@
         
         input[type="email"]:focus,
         input[type="password"]:focus {
-            border-color: #8E44AD;
+            border-color:rgb(173, 136, 68);
             outline: none;
             box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.2);
         }
@@ -96,7 +96,7 @@
         }
         
         button {
-            background: #8E44AD;
+            background:rgb(255, 174, 0);
             color: white;
             border: none;
             padding: 15px;
@@ -109,7 +109,7 @@
         }
         
         button:hover {
-            background: #732d91;
+            background:rgb(45, 51, 67);
         }
         
         .error {
