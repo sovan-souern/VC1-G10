@@ -226,13 +226,13 @@
             </li> -->
             <!-- User --><!-- User Profile Dropdown -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
                   <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
                     alt="User Profile" class="profile-img" />
                 </div>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end">
+              <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
                 <li>
                   <a class="dropdown-item" href="#">
                     <div class="d-flex">
@@ -335,4 +335,112 @@
       });
     });
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  // Existing menu code...
+  
+  // Add dropdown functionality
+  const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const dropdownMenu = toggle.nextElementSibling;
+      dropdownMenu.classList.toggle('show');
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+        menu.classList.remove('show');
+      });
+    }
+  });
+});
 </script>
+
+<style>
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  min-width: 14rem;
+  margin-top: 0.125rem;
+  background: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-user {
+  position: relative;
+}
+
+.avatar img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-online::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #71dd37;
+  border: 2px solid #fff;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.dropdown-menu {
+  min-width: 14rem;
+  padding: 0.5rem 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.125rem;
+  background: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+  z-index: 1000;
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 0.532rem 1.25rem;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #d9dee3;
+  margin: 0.5rem 0;
+}
+</style>
