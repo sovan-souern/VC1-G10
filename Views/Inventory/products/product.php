@@ -121,14 +121,13 @@
                                 <tr class="product" st data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
                                     <td><?= $index + 1 ?></td>
                                     <td class="productimgname">
-
                                         <img id="img-product" src="<?= htmlspecialchars($product["image"]) ?>" alt="product">
                                         <?= htmlspecialchars($product["product_name"]) ?>
                                     </td>
                                     <td class="category-name"><?= htmlspecialchars($product["categoryId"]) ?></td>
                                     <td><?= htmlspecialchars($product["brandID"]) ?></td>
-                                    <td><?= htmlspecialchars($product["price"]) ?></td>
                                     <td><?= htmlspecialchars($product["quantity"]) ?></td>
+                                    <td><?= htmlspecialchars($product["price"]) ?> $</td>
                                     <td class="actoin">
                                         <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
                                          <img id="hight" class="size-image" src="/Views/assets/img/dicount.png" alt="">
