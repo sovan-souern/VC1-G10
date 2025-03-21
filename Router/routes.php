@@ -52,6 +52,7 @@ $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
 
 // Order Routes
 $routes->get('/order', [OrderController::class, 'index']);
+$routes->get('/order_detail', [OrderController::class, 'view']);
 
 // Shop Owner Routes
 $routes->get('/shop-owner', [ShopownerController::class, 'index']);

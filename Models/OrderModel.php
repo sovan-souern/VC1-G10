@@ -10,9 +10,9 @@ class OrderModel
         $this->pdo = new Database();
     }
 
-    function getCategories()
+    function getOrder()
     {
-        $stmt = $this->pdo->query("SELECT * FROM categories");
+        $stmt = $this->pdo->query("SELECT * FROM orders");
         return $stmt->fetchAll();
     }
 }

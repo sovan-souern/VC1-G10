@@ -40,18 +40,13 @@
           </a>
         </li>
         <li class="menu-item">
+          <a href="/order_detail" class="menu-link">
+            <div data-i18n="Container">Order Detail</div>
+          </a>
+        </li>
+        <li class="menu-item">
           <a href="/invoice" class="menu-link">
             <div data-i18n="Fluid">Invoice</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/shop-owner" class="menu-link">
-            <div data-i18n="Blank">Shop owner</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/users" class="menu-link">
-            <div data-i18n="Blank">User</div>
           </a>
         </li>
       </ul>
@@ -101,6 +96,25 @@
         <li class="menu-item">
           <a href="/discount" class="menu-link">
             <div data-i18n="Blank">Discount</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a href="/E-comerce" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div data-i18n="Layouts">User</div>
+      </a>
+
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/new_user" class="menu-link">
+            <div data-i18n="Container">New User</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/users" class="menu-link">
+            <div data-i18n="Fluid">User List</div>
           </a>
         </li>
       </ul>
