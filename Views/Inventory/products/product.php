@@ -140,8 +140,6 @@
                                             <img id="hight" src="/Views/assets/img1/icons/edit.svg" alt="img">
                                         </a>
 
-
-
                                         <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
                                             <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
                                             <?php require "delete.php" ?>
@@ -161,17 +159,4 @@
 
 </style>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("#product-list tr").forEach(row => {
-            let quantity = parseInt(row.querySelector("td:nth-child(6)").textContent.trim(), 10);
-            let productName = row.querySelector("td:nth-child(2)").textContent.trim();
 
-            if (quantity === 0) {
-                alert(`⚠️ ${productName} is OUT OF STOCK!`);
-            } else if (quantity <= 9) {
-                alert(`⚠️ ${productName} is running LOW on stock (Only ${quantity} left)!`);
-            }
-        });
-    });
-</script>
