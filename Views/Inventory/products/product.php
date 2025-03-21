@@ -93,8 +93,8 @@
                                 <th id="font">ID</th>
                                 <th id="font">Product Name</th>
                                 <th id="font">
-                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
-                                        style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
+                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-10"
+                                        style="font-size: 10px; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
                                         <option value="">Category</option>
                                         <?php foreach ($categories as $key => $category) : ?>
                                             <option value="<?= htmlspecialchars($category["category_name"]) ?>"><?= htmlspecialchars($category["category_name"]) ?></option>
@@ -159,3 +159,19 @@
     </div>
 </div>
 
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("#product-list tr").forEach(row => {
+            let quantity = parseInt(row.querySelector("td:nth-child(6)").textContent.trim(), 10);
+            let productName = row.querySelector("td:nth-child(2)").textContent.trim();
+
+            if (quantity === 0) {
+                alert(`⚠️ ${productName} is OUT OF STOCK!`);
+            } else if (quantity <= 9) {
+                alert(`⚠️ ${productName} is running LOW on stock (Only ${quantity} left)!`);
+            }
+        });
+    });
+</script>

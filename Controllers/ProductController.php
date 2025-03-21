@@ -141,10 +141,18 @@
             $this->views('/Inventory/products/view.php', ["products" => $products, "categories" => $categories, "brands" => $brands]);
         }
         function OutStock(){
-            // echo "Out of Stock";
+            
                 $products = $this->model->getProducts();
                 $brand = $this->model->getBrands();
                 $category = $this->model->getCategories();
                 $this->views('/Inventory/products/outstock.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
         }
+        // notification 
+        function Notification(){           
+                $products = $this->model->getProducts();
+                $brand = $this->model->getBrands();
+                $category = $this->model->getCategories();
+                $this->views('/Inventory/products/outstock.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
+        }
+        
     }
