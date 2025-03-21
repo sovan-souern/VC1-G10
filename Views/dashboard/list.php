@@ -512,6 +512,331 @@
       </div>
     </div>
   </div>
+  <div class="row align-items-stretch">
+  <!-- Product Table -->
+  <div class="col-lg-7 col-xxl-8 mb-6 mb-lg-0">
+    <div class="card h-100">
+      <div class="table-responsive text-nowrap" style="max-height: 400px; overflow-y: auto;">
+        <table class="table table-sm text-nowrap table-border-top-0">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Category</th>
+              <th scope="col">Payment</th>
+              <th scope="col">Order Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/products/oneplus-lg.png" alt="OnePlus 7Pro product image" height="32" width="32" class="me-3" />
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">OnePlus 7Pro</h6>
+                    <small class="text-body">OnePlus</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-label-primary rounded-pill p-1_5 me-3"><i class="icon-base bx bx-mobile-alt icon-xs"></i></span> Smart Phone
+              </td>
+              <td>
+                <div class="text-body"><span class="text-primary fw-medium">$120</span>/499</div>
+                <small class="text-body">Partially Paid</small>
+              </td>
+              <td><span class="badge bg-label-primary">Confirmed</span></td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for OnePlus 7Pro"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/products/magic-mouse.png" alt="Magic Mouse product image" height="32" width="32" class="me-3" />
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">Magic Mouse</h6>
+                    <small class="text-body">Apple</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-label-warning rounded-pill p-1_5 me-3"><i class="icon-base bx bx-mouse icon-xs"></i></span> Mouse
+              </td>
+              <td>
+                <div><span class="text-primary fw-medium">$149</span></div>
+                <small class="text-body">Fully Paid</small>
+              </td>
+              <td><span class="badge bg-label-success">Completed</span></td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for Magic Mouse"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/products/imac-pro.png" alt="iMac Pro product image" height="32" width="32" class="me-3" />
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">iMac Pro</h6>
+                    <small class="text-body">Apple</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-label-info rounded-pill p-1_5 me-3"><i class="icon-base bx bx-desktop icon-xs"></i></span> Computer
+              </td>
+              <td>
+                <div class="text-body"><span class="text-primary fw-medium">$0</span>/899</div>
+                <small class="text-body">Unpaid</small>
+              </td>
+              <td><span class="badge bg-label-danger">Cancelled</span></td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for iMac Pro"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/products/note10.png" alt="Samsung Note 10 product image" height="32" width="32" class="me-3" />
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">Note 10</h6>
+                    <small class="text-body">Samsung</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-label-primary rounded-pill p-1_5 me-3"><i class="icon-base bx bx-mobile-alt icon-xs"></i></span> Smart Phone
+              </td>
+              <td>
+                <div><span class="text-primary fw-medium">$149</span></div>
+                <small class="text-body">Fully Paid</small>
+              </td>
+              <td><span class="badge bg-label-success">Completed</span></td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for Samsung Note 10"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/products/iphone.png" alt="iPhone 11 Pro product image" height="32" width="32" class="me-3" />
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">iPhone 11 Pro</h6>
+                    <small class="text-body">Apple</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-label-primary rounded-pill p-1_5 me-3"><i class="icon-base bx bx-mobile-alt icon-xs"></i></span> Smart Phone
+              </td>
+              <td>
+                <div><span class="text-primary fw-medium">$399</span></div>
+                <small class="text-body">Fully Paid</small>
+              </td>
+              <td><span class="badge bg-label-success">Completed</span></td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for iPhone 11 Pro"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/products/mi-tv.png" alt="Mi LED TV 4X product image" height="32" width="32" class="me-3" />
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">Mi LED TV 4X</h6>
+                    <small class="text-body">Xiaomi</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-label-danger rounded-pill p-1_5 me-3"><i class="icon-base bx bx-tv icon-xs"></i></span> Smart TV
+              </td>
+              <td>
+                <div class="text-body"><span class="text-primary fw-medium">$349</span>/2499</div>
+                <small class="text-body">Partially Paid</small>
+              </td>
+              <td><span class="badge bg-label-primary">Confirmed</span></td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for Mi LED TV 4X"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/products/logitech-mx.png" alt="Logitech MX product image" height="32" width="32" class="me-3" />
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">Logitech MX</h6>
+                    <small class="text-body">Logitech</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge bg-label-warning rounded-pill p-1_5 me-3"><i class="icon-base bx bx-mouse icon-xs"></i></span> Mouse
+              </td>
+              <td>
+                <div><span class="text-primary fw-medium">$89</span></div>
+                <small class="text-body">Fully Paid</small>
+              </td>
+              <td><span class="badge bg-label-primary">Completed</span></td>
+              <td>
+                <div class="dropdown">
+                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for Logitech MX"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
+                    <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversion Rate Card -->
+  <div class="col-md-12 col-xxl-4 mb-6">
+    <div class="card h-100">
+      <div class="card-header d-flex justify-content-between">
+        <div class="card-title mb-0">
+          <h5 class="mb-1 me-2">Conversion Rate</h5>
+          <p class="card-subtitle">Compared To Last Month</p>
+        </div>
+        <div class="dropdown">
+          <button class="btn text-body-secondary p-0" type="button" id="conversionRate" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="More options">
+            <i class="icon-base bx bx-dots-vertical-rounded icon-lg"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="conversionRate">
+            <a class="dropdown-item" href="#">Select All</a>
+            <a class="dropdown-item" href="#">Refresh</a>
+            <a class="dropdown-item" href="#">Share</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body pt-3 d-flex flex-column justify-content-between">
+        <div>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center gap-2">
+              <h3 class="mb-0">8.72%</h3>
+              <small class="text-success">
+                <i class="icon-base bx bx-chevron-up icon-lg"></i>
+                4.8%
+              </small>
+            </div>
+            <div id="conversionRateChart" style="width: 80px; height: 40px;"></div>
+          </div>
+          <ul class="p-0 m-0">
+            <li class="d-flex mb-3">
+              <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
+                <div class="me-2">
+                  <span class="fw-normal">Impressions: 12.4k Visits</span>
+                </div>
+                <div class="user-progress">
+                  <i class="icon-base bx bx-up-arrow-alt text-success me-1"></i>
+                  <span class="fw-bold">12.8%</span>
+                </div>
+              </div>
+            </li>
+            <li class="d-flex mb-3">
+              <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
+                <div class="me-2">
+                  <span class="fw-normal">Added To Cart: 32 Product in cart</span>
+                </div>
+                <div class="user-progress">
+                  <i class="icon-base bx bx-down-arrow-alt text-danger me-1"></i>
+                  <span class="fw-bold">-8.5%</span>
+                </div>
+              </div>
+            </li>
+            <li class="d-flex mb-3">
+              <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
+                <div class="me-2">
+                  <span class="fw-normal">Checkout: 21 Products checkout</span>
+                </div>
+                <div class="user-progress">
+                  <i class="icon-base bx bx-up-arrow-alt text-success me-1"></i>
+                  <span class="fw-bold">9.12%</span>
+                </div>
+              </div>
+            </li>
+            <li class="d-flex">
+              <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
+                <div class="me-2">
+                  <span class="fw-normal">Purchased: 12 Orders</span>
+                </div>
+                <div class="user-progress">
+                  <i class="icon-base bx bx-up-arrow-alt text-success me-1"></i>
+                  <span class="fw-bold">2.83%</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Footer -->
+  <footer class="content-footer footer bg-footer-theme">
+    <div class="container-xxl">
+      <div class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
+        <div class="mb-2 mb-md-0">
+          ©
+          <script>
+            document.write(new Date().getFullYear());
+          </script>, made with ❤️ by <a href="https://themeselection.com" target="_blank" class="footer-link">ThemeSelection</a>
+        </div>
+        <div class="d-none d-lg-inline-block">
+
+          <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+          <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+          <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-4">Documentation</a>
+
+
+          <a href="https://themeselection.com/support/" target="_blank" class="footer-link d-none d-sm-inline-block">Support</a>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- / Footer -->
 
 
   <script src="../Views/assets/js/dashboards-analytics.js"></script>
