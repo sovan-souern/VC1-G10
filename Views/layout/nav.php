@@ -159,7 +159,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="/signup" class="menu-link" target="_blank">
+          <a href="/login" class="menu-link" target="_blank" onclick="confirmLogout(); return false;">
             <div data-i18n="Basic">Logout</div>
           </a>
         </li>
@@ -461,7 +461,7 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/signup">
+                  <a class="dropdown-item" href="#" onclick="confirmLogout(); return false;">
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Log Out</span>
                   </a>
@@ -543,6 +543,24 @@
     }
   });
 });
+
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out of your session!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, logout!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/Views/auth/logout.php';
+        }
+    });
+}
+
 </script>
 
 <style>
