@@ -28,22 +28,6 @@
                             </form>
                         </div>
                     </div>
-                    <div class="wordset">
-                        <ul>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                        src="/Views/assets/img1/icons/pdf.svg" alt="img"></a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                        src="/Views/assets/img1/icons/excel.svg" alt="img"></a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                        src="/Views/assets/img1/icons/printer.svg" alt="img"></a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
 
                 <div class="card mb-0" id="filter_inputs">
@@ -160,17 +144,4 @@
 
 </style>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("#product-list tr").forEach(row => {
-            let quantity = parseInt(row.querySelector("td:nth-child(6)").textContent.trim(), 10);
-            let productName = row.querySelector("td:nth-child(2)").textContent.trim();
 
-            if (quantity === 0) {
-                alert(`⚠️ ${productName} is OUT OF STOCK!`);
-            } else if (quantity <= 9) {
-                alert(`⚠️ ${productName} is running LOW on stock (Only ${quantity} left)!`);
-            }
-        });
-    });
-</script>
