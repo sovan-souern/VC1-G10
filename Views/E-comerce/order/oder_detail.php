@@ -1,31 +1,31 @@
-<div class="page-header">
-    <div class="content p-4">
+<div class="page p-4">
+    <div class="content ">
         <div class="page-header">
             <div class="page-title">
                 <h4>Order Details</h4>
                 <h6>View order details</h6>
             </div>
         </div>
-                        
-        <div class="card">
+
+        <div class="card ">
             <div class="card-body">
-            <div class="card-sales-split">
-                            <h2>Sale Detail : SL0101</h2>
-                            <ul>
-                                <li>
-                                    <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/edit.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/pdf.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/excel.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/printer.svg" alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
+                <div class="card-sales-split">
+                    <h2>Sale Detail : SL0101</h2>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/edit.svg" alt="img"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/pdf.svg" alt="img"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/excel.svg" alt="img"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/printer.svg" alt="img"></a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="invoice-box table-height" style="max-width: 1600px;width:100%;overflow: auto;margin:15px auto;padding: 0;font-size: 14px;line-height: 24px;color: #555;">
                     <table cellpadding="0" cellspacing="0" style="width: 100%;line-height: inherit;text-align: left;">
                         <tbody>
@@ -34,7 +34,7 @@
                                     <table style="width: 100%;line-height: inherit;text-align: left;">
                                         <tbody>
                                             <tr>
-                                               
+
                                                 <td style="padding:5px;vertical-align:top;text-align:left;padding-bottom:20px">
                                                     <font style="vertical-align: inherit;margin-bottom:25px;">
                                                         <font style="vertical-align: inherit;font-size:14px;color:#7367F0;font-weight:600;line-height: 35px;">Order Info</font>
@@ -138,70 +138,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Order Tax</label>
-                            <input type="text">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Discount</label>
-                            <input type="text">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Shipping</label>
-                            <input type="text">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select class="select">
-                                <option>Choose Status</option>
-                                <option>Completed</option>
-                                <option>Inprogress</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="total-order w-100 max-widthauto m-auto mb-4">
-                                <ul>
-                                    <li>
-                                        <h4>Order Tax</h4>
-                                        <h5>$ 0.00 (0.00%)</h5>
-                                    </li>
-                                    <li>
-                                        <h4>Discount</h4>
-                                        <h5>$ 0.00</h5>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="total-order w-100 max-widthauto m-auto mb-4">
-                                <ul>
-                                    <li>
-                                        <h4>Shipping</h4>
-                                        <h5>$ 0.00</h5>
-                                    </li>
-                                    <li class="total">
-                                        <h4>Grand Total</h4>
-                                        <h5>$ 3500.00</h5>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <a href="javascript:void(0);" class="btn btn-submit me-2">Update</a>
-                        <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
