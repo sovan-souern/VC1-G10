@@ -108,11 +108,7 @@
       </a>
 
       <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="/new_user" class="menu-link">
-            <div data-i18n="Container">New User</div>
-          </a>
-        </li>
+        
         <li class="menu-item">
           <a href="/users" class="menu-link">
             <div data-i18n="Fluid">User List</div>
