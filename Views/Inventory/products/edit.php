@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="card p-4">
-        <h4>Add Product</h4>
+        <h4>Add Edit</h4>
         <form class="my-3" action="/products/update?id=<?= $product['product_id'] ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-name">
@@ -57,7 +57,7 @@
 
                 <!-- Fix: Add product-content class -->
                 <div class="product-content">
-                    <label>Product Content</label>
+                    <label>Product Desreption</label>
                     <textarea name="product_content" id="product_content" class="form-control mt-2 p-4" style="height: 100px;" rows="3"><?= $product["product_content"] ?></textarea>
                 </div>
 
