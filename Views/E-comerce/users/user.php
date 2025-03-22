@@ -85,13 +85,13 @@
                                 <th id="font">Username</th>
                                 <th id="font">Phone</th>
                                 <th id="font">Email</th>
-                                <th id="font">Role</th>
+                                <!-- <th id="font">Role</th>
                                 <th id="font">Created On</th>
-                                <th id="font">Status</th>
+                                <th id="font">Status</th> -->
                                 <th id="font">Action</th>
                             </tr>
                         </thead>
-                        <!-- <tbody id="user-list">
+                        <tbody id="user-list">
                             <?php foreach ($users as $index => $user) : ?>
                                 <tr class="user" 
                                     data-username="<?= htmlspecialchars($user["username"]) ?>" 
@@ -102,23 +102,17 @@
                                     <td><?= htmlspecialchars($user["phone"]) ?></td>
                                     <td><a href="mailto:<?= htmlspecialchars($user["email"]) ?>">
                                         <?= htmlspecialchars($user["email"]) ?></a></td>
-                                    <td><?= htmlspecialchars($user["role"]) ?></td>
-                                    <td><?= htmlspecialchars($user["created_on"]) ?></td>
-                                    <td><span class="bg-lightgreen badges">
+                                    <!-- <td><?= htmlspecialchars($user["role"]) ?></td> -->
+                                    <!-- <td><?= htmlspecialchars($user["created_on"]) ?></td> -->
+                                    <!-- <td><span class="bg-lightgreen badges">
                                         <?= htmlspecialchars($user["status"]) ?></span></td>
-                                    <td class="action">
-                                        <a class="" href="users/view?id=<?= $user['id'] ?>">
-                                            <img id="hight" src="/Views/assets/img1/icons/eye.svg" alt="img">
-                                        </a>
-                                        <a class="edit" href="users/edit?id=<?= $user['id'] ?>">
-                                            <img id="hight" src="/Views/assets/img1/icons/edit.svg" alt="img">
-                                        </a>
-                                        <a class="delete-user" href="users/delete?id=<?= $user['id'] ?>">
+                                    <td class="action"> -->
+                                        <a class="delete-user" href="users/delete?id=<?= $user['user_id'] ?>">
                                             <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
                                         </a>
                                     </td>
                                 </tr>
-                            <?php endforeach ?> -->
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>

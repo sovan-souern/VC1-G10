@@ -2,7 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Skin care</title>
+<title>Skin care </title>
+
+<meta name="description" content="" />
+
+<!-- Favicon -->
+<!-- <link rel="icon" type="image/x-icon" href="../Views/assets/img/favicon/favicon.ico" /> -->
+ <link rel="shortcut icon" href="/Views/assets/img/login/logo1 (1).png" type="/Views/assets/img/favicon/favicon.icon">
+<!-- Fonts -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -13,17 +13,12 @@
                     <h2>Sale Detail : SL0101</h2>
                     <ul>
                         <li>
-                            <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/edit.svg" alt="img"></a>
-                        </li>
-                        <li>
                             <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/pdf.svg" alt="img"></a>
                         </li>
                         <li>
                             <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/excel.svg" alt="img"></a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0);"><img src="/Views/assets/img1/icons/printer.svg" alt="img"></a>
-                        </li>
+
                     </ul>
                 </div>
                 <div class="invoice-box table-height" style="max-width: 1600px;width:100%;overflow: auto;margin:15px auto;padding: 0;font-size: 14px;line-height: 24px;color: #555;">
