@@ -97,4 +97,16 @@ class UserModel
         }
         return true;
     }
+
+    public function getUserByUsername($username) {
+        $stmt = $this->pdo->prepare("SELECT * FROM admins WHERE username = ?");
+        $stmt->execute([$username]);
+        return $stmt->fetch();
+    }
+
+    public function getAllAdmins() {
+        $stmt = $this->pdo->query("SELECT * FROM admins");
+        return $stmt->fetchAll();
+    }
 }
+?>

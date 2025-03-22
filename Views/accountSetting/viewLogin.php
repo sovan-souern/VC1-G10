@@ -1,61 +1,57 @@
 <style>
         body {
-            background: #f8f9fa;
+            background: #f4f6f9;
+            font-family: 'Poppins', sans-serif;
         }
-        h3{
-            margin-left: -800px;
 
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
         .container {
             margin-top: 50px;
         }
+        
         .card {
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            background: #ffffff;
+            transition: 0.3s;
         }
-        .table thead {
-            background-color: #007bff;
-            color:rgb(255, 255, 255);
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h3 {
+            font-size: 35px;
+            font-weight: bold;
             text-align: center;
+            margin-bottom: 25px;
+           
         }
-        .table th, .table td {
-            vertical-align: middle;
-            text-align: center;
-            
-        }
-        .badge-user {
-            background-color: #28a745;
-            color: white;
-        }
-        .badge-shop {
-            background-color: #ffc107;
-            color: black;
-        }
+
         .search-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 500px;
+            margin: 0 auto 20px auto;
         }
+
         .search-container input {
             width: 100%;
-            padding: 12px 20px 12px 45px;
+            padding: 12px 15px 12px 45px;
             border: 2px solid #007bff;
-            border-radius: 30px;
+            border-radius: 25px;
             font-size: 16px;
             transition: 0.3s;
             background: #fff;
             box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
         }
+
         .search-container input:focus {
             border-color: #0056b3;
-            box-shadow: 0 0 8px rgba(0, 91, 187, 0.5);
+            box-shadow: 0 0 10px rgba(0, 91, 187, 0.5);
             outline: none;
         }
+
         .search-container .search-icon {
             position: absolute;
             left: 15px;
@@ -65,16 +61,33 @@
             color: #007bff;
         }
 
-        
+        .table th {
+            background-color: #007bff;
+            color: red;
+            text-align: center;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
         .table-hover tbody tr:hover {
             background: #e9ecef;
             transition: 0.3s;
         }
+
+        .profile-pic {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
     </style>
 
-
 <div class="container">
-    <h3 class="text-center mb-4"><i class="fas fa-users"></i> Users & Shop Owners</h3>
+    <h3><i class="fas fa-users"></i> Admin History</h3>
     
     <div class="card">
         <!-- Search Bar -->
@@ -83,7 +96,6 @@
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="form-control" id="searchInput" placeholder="Search by name or email..." onkeyup="filterTable()">
             </div>
-            
         </div>
 
         <table class="table table-bordered table-hover mt-3">
@@ -92,28 +104,30 @@
                     <th>ID</th>
                     <th><i class="fas fa-user"></i> Full Name</th>
                     <th><i class="fas fa-envelope"></i> Email</th>
-                    <th><i class="fas fa-phone"></i> Phone</th>
-                    <th><i class="fas fa-user-tag"></i> Role</th>
                     <th><i class="fas fa-calendar-alt"></i> Created At</th>
+                    <th><i class="fas fa-user-tag"></i> Profile</th>
                 </tr>
             </thead>
             <tbody id="user-list">
-                <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>johndoe@example.com</td>
-                    <td>+1 123 456 7890</td>
-                    <td><span class="badge badge-user">User</span></td>
-                    <td>2024-03-12</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jane Smith</td>
-                    <td>janesmith@example.com</td>
-                    <td>+44 789 456 1230</td>
-                    <td><span class="badge badge-shop">Shop Owner</span></td>
-                    <td>2024-03-10</td>
-                </tr>
+                <?php if (!empty($admins)): ?>
+                    <?php foreach ($admins as $admin): ?>
+                        <tr>
+                            <td><?php echo isset($admin['admin_id']) ? (int)$admin['admin_id'] : 'N/A'; ?></td>
+                            <td><?php echo htmlspecialchars($admin['name']); ?></td>
+                            <td><?php echo htmlspecialchars($admin['email']); ?></td>
+                            <td><?php echo htmlspecialchars($admin['created_at']); ?></td>
+                            <td>
+                                <img src="<?php echo !empty($admin['profile_picture']) ? '/' . $admin['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
+                                     alt="Profile Picture" 
+                                     class="profile-pic">
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center">No accounts found.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
@@ -123,7 +137,6 @@
     function filterTable() {
         var input = document.getElementById("searchInput").value.toLowerCase();
         var rows = document.getElementById("user-list").getElementsByTagName("tr");
-
 
         for (var i = 0; i < rows.length; i++) {
             var name = rows[i].getElementsByTagName("td")[1].textContent.toLowerCase();
@@ -138,3 +151,5 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
