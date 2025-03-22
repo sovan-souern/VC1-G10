@@ -1,190 +1,246 @@
-
-
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
+    <div class="offcanvas-header justify-content-center">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <!-- Spinner End -->
+    <div class="offcanvas-body">
 
-
-    <!-- Navbar start -->
-    <div class="container-fluid sticky-top px-0">
-        <div class="container-fluid topbar d-none d-lg-block">
-            <div class="container px-0">
-                <div class="row align-items-center">
-                    <div class="col-lg-8">
-                        <div class="d-flex flex-wrap bg-pink p-3">
-                            <a href="#" class="me-4 text-light" aria-label="Find A Location">
-                                <i class="fas fa-map-marker-alt me-2"></i>Find A Location
-                            </a>
-                            <a href="tel:+01234567890" class="me-4 text-light" aria-label="Call Us">
-                                <i class="fas fa-phone-alt me-2"></i>+01234567890
-                            </a>
-                            <a href="mailto:Example@gmail.com" class="text-light" aria-label="Send an Email">
-                                <i class="fas fa-envelope me-2"></i>Example@gmail.com
-                            </a>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-lg-4">
-                        <div class="d-flex align-items-center justify-content-end">
-                            <a href="#" class="me-3 btn-square border rounded-circle nav-fill"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="me-3 btn-square border rounded-circle nav-fill"><i
-                                    class="fab fa-twitter"></i></a>
-                            <a href="#" class="me-3 btn-square border rounded-circle nav-fill"><i
-                                    class="fab fa-instagram"></i></a>
-                            <a href="#" class="btn-square border rounded-circle nav-fill"><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
+        <div class="order-md-last">
+            <h4 class="text-primary text-uppercase mb-3">
+                Search
+            </h4>
+            <div class="search-bar border rounded-2 border-dark-subtle">
+                <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
+                    <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here" />
+                    <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
+                </form>
             </div>
         </div>
-        <div class="container-fluid bg-light">
-            <div class="container px-0">
-                <nav class="navbar navbar-light navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand">
-                        <h1 class="text-primary display-4">Sparlex</h1>
+    </div>
+</div>
+
+<header>
+    <div class="container py-2">
+        <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
+
+            <div class="col-sm-4 col-lg-3 text-center text-sm-start">
+                <div class="main-logo">
+                    <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg" alt="Brand Logo"
+                        class="logo logo-dark" style="width: 50px; height: 50px; border-radius: 50%;" />
+                    <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: pink;">Skin care</span>
+                </div>
+            </div>
+
+            <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
+                <div class="search-bar border rounded-2 px-3 border-dark-subtle">
+                    <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
+                        <input type="text" class="form-control border-0 bg-transparent"
+                            placeholder="Search for more than 10,000 products" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+                        </svg>
+                    </form>
+                </div>
+            </div>
+
+            <div
+                class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
+                <div class="support-box text-end d-none d-xl-block">
+                    <h5 class="mb-0">Phone: +855 86277461</h5>
+                </div>
+                <div class="support-box text-end d-none d-xl-block">
+                    <a href="index.html" class="d-flex align-items-center mx-3 text-decoration-none">
+                        <iconify-icon icon="healthicons:person" class="fs-4 me-2"></iconify-icon>
+                        <h5 class="mb-0">Login</h5>
                     </a>
-                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars text-primary"></span>
-                    </button>
-                    <div class="collapse navbar-collapse bg-light py-3" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto border-top">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="service.html" class="nav-item nav-link">Product</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="team.html" class="dropdown-item">Team</a>
-                                    <a href="gallery.html" class="dropdown-item">Gallery</a>
-                                    <a href="404.html" class="dropdown-item">404 page</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact Us</a>
-                        </div>
-                        <div class="d-flex align-items-center flex-nowrap pt-xl-0">
-                            <button
-                                class="btn-search btn btn-primary btn-primary-outline-0 rounded-circle btn-lg-square"
-                                data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                    class="fas fa-search"></i></button>
-                            <a href="appointment.html"
-                                class="btn btn-primary btn-primary-outline-0 rounded-pill py-3 px-4 ms-4">Book
-                                Appointment</a>
-                        </div>
-                    </div>
-                </nav>
+                </div>
+
             </div>
         </div>
     </div>
-    <!-- Navbar End -->
 
-
-    <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h4 class="modal-title mb-0" id="exampleModalLabel">Search by keyword</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="keywords"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container-fluid">
+        <hr class="m-0">
     </div>
-    <!-- Modal Search End -->
 
+    <div class="container">
+        <nav class="main-menu d-flex navbar navbar-expand-lg ">
 
+            <div class="d-flex d-lg-none align-items-end mt-3">
+                <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <li>
+                        <a href="account.html" class="mx-3">
+                            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="wishlist.html" class="mx-3">
+                            <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                        </a>
+                    </li>
 
-    <!-- Carousel Start -->
-    <div class="container-fluid carousel-header px-0">
-        <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
-                <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img src="img/picture2.jpg" class="img-fluid" alt="Image">
-                    <div class="carousel-caption">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-primary text-uppercase mb-3">Spa & Beauty Center</h4>
-                            <h1 class="display-1 text-capitalize text-dark mb-3">Massage Treatment</h1>
-                            <p class="mx-md-5 fs-4 px-4 mb-5 text-dark">Lorem rebum magna dolore amet lorem eirmod magna
-                                erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum</p>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <a class="btn btn-light btn-light-outline-0 rounded-pill py-3 px-5 me-4" href="#">Get
-                                    Start</a>
-                                <a class="btn btn-primary btn-primary-outline-0 rounded-pill py-3 px-5" href="#">Book
-                                    Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="img/picture3.jpg" class="img-fluid" alt="Image">
-                    <div class="carousel-caption">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-primary text-uppercase mb-3" style="letter-spacing: 3px;">Spa & Beauty
-                                Center</h4>
-                            <h1 class="display-1 text-capitalize text-dark mb-3">Facial Treatment</h1>
-                            <p class="mx-md-5 fs-4 px-5 mb-5 text-dark">Lorem rebum magna dolore amet lorem eirmod magna
-                                erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum</p>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <a class="btn btn-light btn-light-outline-0 rounded-pill py-3 px-5 me-4" href="#">Get
-                                    Start</a>
-                                <a class="btn btn-primary btn-primary-outline-0 rounded-pill py-3 px-5" href="#">Book
-                                    Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="img/picture4.jpg" class="img-fluid" alt="Image">
-                    <div class="carousel-caption">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-primary text-uppercase mb-3" style="letter-spacing: 3px;">Spa & Beauty
-                                Center</h4>
-                            <h1 class="display-1 text-capitalize text-dark">Cellulite Treatment</h1>
-                            <p class="mx-md-5 fs-4 px-5 mb-5 text-dark">Lorem rebum magna dolore amet lorem eirmod magna
-                                erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum</p>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <a class="btn btn-light btn-light-outline-0 rounded-pill py-3 px-5 me-4" href="#">Get
-                                    Start</a>
-                                <a class="btn btn-primary btn-primary-outline-0 rounded-pill py-3 px-5" href="#">Book
-                                    Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <li>
+                        <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                            aria-controls="offcanvasCart">
+                            <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+                            <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                                03
+                            </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
+                            aria-controls="offcanvasSearch">
+                            <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+
+                <div class="offcanvas-header justify-content-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body justify-content-between">
+                    <select class="filter-categories border-0 mb-0 me-5">
+                        <option>Shop by Category</option>
+                        <option>Clothes</option>
+                        <option>Food</option>
+                        <option>Food</option>
+                        <option>Toy</option>
+                    </select>
+
+                    <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
+                        <li class="nav-item">
+                            <a href="/home" class="nav-link active">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/about" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/shop" class="nav-link">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/productuser" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/contact" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-none d-lg-flex align-items-end">
+                        <ul class="d-flex justify-content-end list-unstyled m-0">
+
+                            <li>
+                                <a href="index.html" class="mx-3">
+                                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+                                    <span
+                                        class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                                        03
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+<section id="banner" style="background: #FBDEE7;">
+    <div class="container">
+        <div class="swiper main-swiper">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide py-5">
+                    <div class="row banner-content align-items-center">
+                        <div class="img-wrapper col-md-5">
+                            <img src="https://i.pinimg.com/736x/48/bf/fe/48bffeb7f0c3cd3862e8e3adf23289b9.jpg"
+                                class="img-fluid">
+                        </div>
+                        <div class="content-wrapper col-md-7 p-5 mb-5">
+                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
+                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
+                                    class="text-primary">your
+                                    pets</span>
+                            </h2>
+                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                                shop now
+                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="swiper-slide py-5">
+                    <div class="row banner-content align-items-center">
+                        <div class="img-wrapper col-md-5">
+                            <img src="images//banner-img3.png" class="img-fluid">
+                        </div>
+                        <div class="content-wrapper col-md-7 p-5 mb-5">
+                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
+                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
+                                    class="text-primary">your
+                                    pets</span>
+                            </h2>
+                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                                shop now
+                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="swiper-slide py-5">
+                    <div class="row banner-content align-items-center">
+                        <div class="img-wrapper col-md-5">
+                            <img src="images/banner-img4.png" class="img-fluid">
+                        </div>
+                        <div class="content-wrapper col-md-7 p-5 mb-5">
+                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
+                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
+                                    class="text-primary">your
+                                    pets</span>
+                            </h2>
+                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                                shop now
+                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-pagination mb-5"></div>
+
         </div>
     </div>
-
-
-
-
-
-
-
-   
+</section>

@@ -1,4 +1,5 @@
-<?php require "style.php"?>
+<?php require_once "Views/assets/css/prodcut_style.php" ?>
+
 <div class="page p-4">
     <div class="content">
         <div class="page-header ">
@@ -51,7 +52,7 @@
                             <div class="col-lg col-sm-6 col-12">
                                 <div class="form-group">
                                     <select class="select" id="category-filter">
-                                        <option value="">Choose Category</option>
+                                        <option  value=""> Choose Category </option>
                                         <option value="Sun screen">Sun screen</option>
                                         <option value="Night screen">Night screen</option>
                                     </select>
@@ -60,7 +61,7 @@
                             <div class="col-lg col-sm-6 col-12">
                                 <div class="form-group">
                                     <select class="select" id="brand-filter">
-                                        <option value="">Choose Brand</option>
+                                        <option value="">▼ Choose Brand</option>
                                         <option value="Addedas">Addedas</option>
                                         <option value="zoon">Zoon</option>
                                     </select>
@@ -92,8 +93,8 @@
                                 <th id="font">ID</th>
                                 <th id="font">Product Name</th>
                                 <th id="font">
-                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
-                                        style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
+                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-10"
+                                        style="font-size: 10px; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
                                         <option value="">Category</option>
                                         <?php foreach ($categories as $key => $category) : ?>
                                             <option value="<?= htmlspecialchars($category["category_name"]) ?>"><?= htmlspecialchars($category["category_name"]) ?></option>
@@ -120,21 +121,21 @@
                                 <tr class="product" st data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
                                     <td><?= $index + 1 ?></td>
                                     <td class="productimgname">
-                                        <a href="javascript:void(0);" class="product-img" >
-                                        <img id="img-product" src="<?= htmlspecialchars($product["image"]) ?>" alt="product" >
-
-                                        </a>
+                                        <img id="img-product" src="<?= htmlspecialchars($product["image"]) ?>" alt="product">
                                         <?= htmlspecialchars($product["product_name"]) ?>
                                     </td>
                                     <td class="category-name"><?= htmlspecialchars($product["categoryId"]) ?></td>
                                     <td><?= htmlspecialchars($product["brandID"]) ?></td>
-                                    <td><?= htmlspecialchars($product["price"]) ?></td>
                                     <td><?= htmlspecialchars($product["quantity"]) ?></td>
-                                    <td>
-                                        <a class="" href="products/view?id=<?= $product['product_id'] ?>">
-                                            <img id="hight" src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                    <td><?= htmlspecialchars($product["price"]) ?> $</td>
+                                    <td class="actoin">
+                                        <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
+                                         <img id="hight" class="size-image" src="/Views/assets/img/dicount.png" alt="">
                                         </a>
-                                        <a class="" href="products/edit?id=<?= $product['product_id'] ?>">
+                                        <a class="" href="products/view?id=<?= $product['product_id'] ?>">
+                                            <img id="hight"  src="/Views/assets/img1/icons/eye.svg" alt="img">
+                                        </a>
+                                        <a class="edit" href="products/edit?id=<?= $product['product_id'] ?>">
                                             <img id="hight" src="/Views/assets/img1/icons/edit.svg" alt="img">
                                         </a>
 
@@ -144,6 +145,7 @@
                                             <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
                                             <?php require "delete.php" ?>
                                         </a>
+                                        
 
                                     </td>
                                 </tr>
@@ -155,112 +157,7 @@
         </div>
     </div>
 </div>
-<style>
-    /* Ensure the table container is scrollable */
-.table-responsive {
-    width: 100%;
-    overflow-x: auto;
-}
-
-/* Make table elements more flexible */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: auto;
-}
-
-th, td {
-    white-space: nowrap;
-    padding: 8px;
-    text-align: left;
-}
-
-/* Responsive adjustments for small screens */
-@media (max-width: 680px) {
-    .table-responsive {
-        overflow-x: auto;
-        display: block;
-    }
-
-    table {
-        width: 100%;
-        display: table;
-    }
-
-    thead {
-        display: table-header-group;
-    }
-
-    tbody {
-        display: table-row-group;
-        width: 100%;
-    }
-
-    tr {
-        display: table-row;
-        margin-bottom: 0;
-        border-bottom: none;
-        padding: 0;
-    }
-
-    td {
-        display: table-cell;
-        justify-content: normal;
-        padding: 5px;
-        font-size: 14px;
-    }
-    th:nth-child(5), th:nth-child(6) {
-        display: none;
-    }
-
-    td::before {
-        content: none;
-    }
-/* 
-    .productimgname {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    } */
-
-        /* .productimgname p {
-            text-align: center;
-            font-size: 14px;
-        } */
-
-    .btn-added {
-        display: block;
-        text-align: center;
-        width: 100%;
-    }
-    #font{
-        font-size: 6px;
-    }
-    /* Hide Price and Quantity columns on small screens */
-    td:nth-child(5), td:nth-child(6) {
-        display: none;
-    }
-    td{
-        font-size: 6px;
-    }
-    /* #img-product{
-        width: 0px;
-        height: 35px;
-        
-    } */
-    #hight{
-        width: 10px;
-        height: 10px;
-    }
-    /* .form-select,.option{
-        font-size: 6px;
-    }
-    select{
-        width: 5px;
-    } */
-    /* Style the select dropdown to replace the default arrow with a custom "play" icon */
-/*  */
-
-}
 
 </style>
+
+

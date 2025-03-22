@@ -52,6 +52,7 @@ $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
 
 // Order Routes
 $routes->get('/order', [OrderController::class, 'index']);
+$routes->get('/order_detail', [OrderController::class, 'view']);
 
 // Shop Owner Routes
 $routes->get('/shop-owner', [ShopownerController::class, 'index']);
@@ -69,7 +70,7 @@ $routes->delete('/user/delete', [UserController::class, 'destroy']);
 
 // Notification Routes
 $routes->get('/notifications', [NotificationController::class, 'index']); 
-
+$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 // Product Routes (Inventory)
 $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);
@@ -104,4 +105,19 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 // Dispatch the routes
+
+
+require_once 'Controllers/HomeController.php';
+require_once 'Controllers/AboutController.php';
+require_once 'Controllers/ProductUserController.php';
+require_once 'Controllers/ContactController.php';
+require_once 'Controllers/ShopController.php';
+
+
+
+$routes->get('/home', [HomeController::class, 'index']);
+$routes->get('/about', [AboutController::class, 'index']);
+$routes->get('/productuser', [ProductUserController::class, 'index']);
+$routes->get('/contact', [ContactController::class, 'index']);
+$routes->get('/shop', [ShopController::class, 'index']);
 $routes->dispatch();
