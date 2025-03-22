@@ -66,4 +66,6 @@
     <script src="../../../Views/assets/js/alerteDelete.js"></script>
     <script src="../../../Views/assets/js/check.js"></script>
     <script src="../../../Views/assets/js/select.js"></script>
+    <!-- Add SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
