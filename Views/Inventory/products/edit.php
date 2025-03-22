@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="card p-4">
-        <h4>Add Product</h4>
+        <h4>Add Edit</h4>
         <form class="my-3" action="/products/update?id=<?= $product['product_id'] ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-name">
@@ -13,12 +13,12 @@
                 </div>
                 <div class="input-price">
                     <label for="price">Price</label>
-                    <input type="number" name="price" id="price" class="form-control"  min="0" value="<?= $product["price"] ?>">
+                    <input type="number" name="price" id="price" class="form-control" min="0" value="<?= $product["price"] ?>">
                 </div>
                 <div class="input-category">
                     <label for="category_id"> Category</label>
                     <select name="category_id" id="category_id" class="form-select" required>
-                        <option value="">   Choose Category</option>
+                        <option value=""> Choose Category</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?php echo $category['category_id']; ?>" <?php echo $category['category_id'] == $product['category_id'] ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($category['category_name']); ?>
@@ -26,7 +26,7 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                
+
                 <div class="input-brand">
                     <label for="brand_id">Brand</label>
                     <select name="brand_id" id="brand_id" class="form-select">
@@ -45,7 +45,7 @@
                             <input type="file" name="image" id="image" class="form-control" accept="image/*">
                             <div class="image-uploads">
                                 <?php if (!empty($product["image"])): ?>
-                                    <img src="../../../<?=($product["image"]) ?>" alt="product" style="width: 120px; height: 100px;">
+                                    <img src="../../../<?= ($product["image"]) ?>" alt="product" style="width: 120px; height: 100px;">
                                 <?php else: ?>
                                     <h4 class="form-text text-muted">No image uploaded</h4>
                                 <?php endif; ?>
@@ -54,10 +54,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Fix: Add product-content class -->
                 <div class="product-content">
-                    <label>Product Content</label>
+                    <label>Product Desreption</label>
                     <textarea name="product_content" id="product_content" class="form-control mt-2 p-4" style="height: 100px;" rows="3"><?= $product["product_content"] ?></textarea>
                 </div>
 
@@ -67,6 +67,7 @@
                     <button type="button" class="btn btn-warning" onclick="window.history.back()">Back</button>
                 </div>
             </div>
+            <input type="hidden" name="existing_image" value="<?= htmlspecialchars($product["image"]) ?>">
         </form>
     </div>
 </div>
@@ -74,22 +75,46 @@
     .row {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-areas: 
+        grid-template-areas:
             "name quantity price"
             "category brand image"
             "content content image"
-            "buttons buttons image"; 
+            "buttons buttons image";
         gap: 10px;
     }
 
-    .input-name { grid-area: name; }
-    .input-quantity { grid-area: quantity; }
-    .input-price { grid-area: price; }
-    .input-category { grid-area: category; }
-    .input-brand { grid-area: brand; }
-    .input-group { grid-area: image; }
-    .product-content { grid-area: content; }
-    .button-group { grid-area: buttons; text-align: center; }
+    .input-name {
+        grid-area: name;
+    }
+
+    .input-quantity {
+        grid-area: quantity;
+    }
+
+    .input-price {
+        grid-area: price;
+    }
+
+    .input-category {
+        grid-area: category;
+    }
+
+    .input-brand {
+        grid-area: brand;
+    }
+
+    .input-group {
+        grid-area: image;
+    }
+
+    .product-content {
+        grid-area: content;
+    }
+
+    .button-group {
+        grid-area: buttons;
+        text-align: center;
+    }
 
     /* Ensure the image section takes up the same height as the content and brand sections */
     .input-group {
@@ -97,11 +122,13 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    .form-group{
+
+    .form-group {
         height: 72%;
-        
+
     }
-    .form-group{
+
+    .form-group {
         position: relative;
         bottom: 25px;
     }
@@ -129,17 +156,21 @@
     .image-uploads h4 {
         margin: 0;
     }
-    label{
+
+    label {
         font-weight: bold;
     }
-    .button-group { 
-        grid-area: buttons; 
-        text-align: left; /* Align buttons to the left */
+
+    .button-group {
+        grid-area: buttons;
+        text-align: left;
+        /* Align buttons to the left */
     }
+
     @media (max-width: 600px) {
         .row {
             grid-template-columns: 1fr;
-            grid-template-areas: 
+            grid-template-areas:
                 "name"
                 "quantity"
                 "price"
@@ -149,16 +180,18 @@
                 "image"
                 "buttons";
         }
-        .form-group{
-        height: 22vh;
-        
-    }
-    .form-group{
-        position: relative;
-        top: 0px;
-    }
 
-    }   
+        .form-group {
+            height: 22vh;
+
+        }
+
+        .form-group {
+            position: relative;
+            top: 0px;
+        }
+
+    }
 
     /* @media (min-width: 601px) and (max-width: 1024px) {
   body {
