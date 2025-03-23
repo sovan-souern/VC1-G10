@@ -127,13 +127,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/about" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/shop" class="nav-link">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a href="/productuser" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/about" class="nav-link">About</a>
                         </li>
                         <li class="nav-item">
                             <a href="/contact" class="nav-link">Contact</a>
