@@ -13,7 +13,7 @@ class DiscountController extends BaseController
 
     function create($id)
     {
-        echo "Discounts";
+       
         $products = $this->model->getProduct($id);
         
         $this->views('Inventory/Discounts/create.php', ["product" => $products]);
@@ -38,7 +38,7 @@ class DiscountController extends BaseController
             ];
 
             if ($this->model->createDiscount($data)) {
-                $this->redirect('/products');
+                $this->redirect('/discount');
             } else {
                 echo "Failed to create discount.";
             }
@@ -50,12 +50,9 @@ class DiscountController extends BaseController
     {
         
 
-        // echo "1";
+        
         $discounts = $this->model->getDiscount();
-        // var_dump($discounts);
-        // foreach ($discounts as $discount) {
-        //     echo $discount['category'];
-        // }
+        
        
         $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
     }

@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="input-name">
                     <label for="product_name">Product Name</label>
-                    <input type="text" name="product_name" id="product_name" class="form-control" value="<?= $product["product_name"] ?>">
+                    <input type="text" name="product_name" id="product_name" class="form-control" value="<?= $product["product_name"] ?>" >
                 </div>
                 <div class="input-price">
                     <label for="price">Price</label>
@@ -173,11 +173,3 @@
         }
 
     }
-
-    /* @media (min-width: 601px) and (max-width: 1024px) {
-  body {
-    background-color: lightgreen;
-  }
-} */
-</style>
-<!-- <?php var_dump($products)?> -->

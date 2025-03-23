@@ -65,11 +65,14 @@ class DiscountModel
             FROM discounts 
             LEFT JOIN products ON discounts.product_id = products.product_id
             LEFT JOIN categories ON products.category_id = categories.category_id
-            LEFT JOIN brand ON products.brand_id = brand.id");
+            LEFT JOIN brand ON products.brand_id = brand.id
+            ORDER BY discounts.created_at DESC");  
+        
             return $stmt->fetchAll();
         } catch (Exception $e) {
             die("Error fetching discounts: " . $e->getMessage());
         }
+        
     }
 
 
