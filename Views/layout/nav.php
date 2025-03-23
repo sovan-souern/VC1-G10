@@ -230,110 +230,17 @@
 
             
             <!-- navbar.php -->
-            <li class="nav-item dropdown pe-3 d-flex align-items-center">
-                <a href="#" class="text-decoration-none d-flex align-items-center position-relative" id="notification-link">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
-                </a>
-            </li>
+            <!-- navbar.php -->
+            <!-- navbar.php -->
+        <!-- navbar.php -->
+          <li class="nav-item dropdown pe-3 d-flex align-items-center">
+              <a href="/notifications" class="text-decoration-none d-flex align-items-center position-relative" onclick="storeAlerts()">
+                  <span class="material-symbols-outlined">notifications</span>
+                  <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
+              </a>
+          </li>
 
-            <div id="notification-panel" class="notification-panel" style="display: none;">
-                <h5>Your Notifications</h5>
-                <div id="notification-list"></div>
-            </div>
-
-            <style>
-                .notification-panel {
-                    position: absolute;
-                    right: 20px; 
-                    top: 60px; 
-                    background: white;
-                    border: 1px solid #ccc;
-                    border-radius: 8px;
-                    padding: 15px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    z-index: 1000;
-                    width: 300px; 
-                }
-                
-                .notification-item {
-                    padding: 10px;
-                    border-bottom: 1px solid #eee;
-                }
-
-                .notification-item:last-child {
-                    border-bottom: none;
-                }
-            </style>
-
-          <style>
-              .notification-panel {
-                  position: absolute;
-                  right: 20px; /* Adjust based on your layout */
-                  top: 60px;
-                  background: white;
-                  border: 1px solid #ccc;
-                  border-radius: 8px;
-                  padding: 15px;
-                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                  z-index: 1000;
-                  width: 300px; /* Adjust as needed */
-              }
-          </style>
-
-          <script>
-              document.addEventListener("DOMContentLoaded", function () {
-                  const alerts = [];
-                  const alertCountEl = document.getElementById('notification-badge');
-                  const notificationPanel = document.getElementById('notification-panel');
-                  const notificationList = document.getElementById('notification-list');
-
-                  // Add logic to check the stock levels
-                  document.querySelectorAll("#product-list tr").forEach(row => {
-                      let quantity = parseInt(row.querySelector("td:nth-child(6)").textContent.trim(), 10);
-                      let productName = row.querySelector("td:nth-child(2)").textContent.trim();
-                      let alertMessage = '';
-
-                      if (quantity === 0) {
-                          alertMessage = `${productName} is OUT OF STOCK!`;
-                      } else if (quantity <= 9) {
-                          alertMessage = `${productName} is running LOW on stock (Only ${quantity} left)!`;
-                      }
-
-                      if (alertMessage) {
-                          alerts.push(alertMessage);
-                      }
-                  });
-
-                  // Update the badge and panel
-                  function updateNotification() {
-                      const alertCount = alerts.length;
-                      if (alertCount > 0) {
-                          alertCountEl.innerText = alertCount;
-                          alertCountEl.style.display = 'inline';
-                      } else {
-                          alertCountEl.style.display = 'none';
-                      }
-                  }
-
-                  updateNotification();
-
-                  // Toggle notification panel and display alerts
-                  document.getElementById('notification-link').addEventListener('click', function(event) {
-                      event.preventDefault(); // Prevent default link behavior
-                      notificationPanel.style.display = notificationPanel.style.display === 'none' ? 'block' : 'none';
-
-                      // Populate notifications
-                      notificationList.innerHTML = ''; // Clear any existing notifications
-                      alerts.forEach(alert => {
-                          const notificationItem = document.createElement('div');
-                          notificationItem.className = 'notification-item';
-                          notificationItem.innerHTML = `<span>⚠️ ${alert}</span>`;
-                          notificationList.appendChild(notificationItem);
-                      });
-                  });
-              });
-          </script>
+          
           
             <style>
               .nav-item {
@@ -370,33 +277,7 @@
                 }
               }
             </style>
-            <script>
-               document.addEventListener("DOMContentLoaded", function() {
-    const notificationBadge = document.getElementById("notification-badge");
-    const notificationLink = document.getElementById("notification-link");
-
-    function updateNotificationCount(count) {
-      notificationBadge.textContent = count;
-      if (count <= 0) {
-        notificationBadge.style.display = 'none';
-      } else {
-        notificationBadge.style.display = 'flex';
-      }
-    }
-
-    updateNotificationCount(5); // Initial count
-
-    notificationLink.addEventListener("click", function() {
-      updateNotificationCount(0);
-    });
-  });
-            </script>
-
-
-
-
-
-
+            
 
 
 
