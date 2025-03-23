@@ -160,7 +160,6 @@
                                 </a>
                             </li>
                         </ul>
-
                     </div>
 
                 </div>
@@ -244,3 +243,20 @@
         </div>
     </div>
 </section>
+
+<style>
+    .contact-page #banner {
+    display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if the current URL contains "contact"
+        if (window.location.pathname.includes("contact")) {
+            // Hide the banner section
+            document.getElementById("banner").style.display = "none";
+        }
+    });
+</script>
+
