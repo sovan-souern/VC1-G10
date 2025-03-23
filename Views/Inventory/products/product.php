@@ -142,7 +142,7 @@
                                     <td class="price-column"><?= htmlspecialchars($product["price"]) ?> $</td>
                                     <td class="action-column">
                                         <div class="action-buttons">
-                                            <a class="action-btn discount-btn" href="products/discount?id=<?= $product['product_id'] ?>">
+                                            <a class="action-btn discount-btn" href="create-discount?id=<?= $product['product_id'] ?>">
                                                 <img src="/Views/assets/img/descount.png" alt="discount">
                                             </a>
                                             <a class="action-btn view-btn" href="products/view?id=<?= $product['product_id'] ?>">
