@@ -69,6 +69,11 @@
           </a>
         </li>
         <li class="menu-item">
+          <a href="/out-stock" class="menu-link">
+            <div data-i18n="Blank">OutStock</div>
+          </a>
+        </li>
+        <li class="menu-item">
           <a href="/category" class="menu-link">
             <div data-i18n="Blank">Categories List</div>
           </a>
@@ -88,11 +93,7 @@
             <div data-i18n="Blank">Add Brand</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="/out-stock" class="menu-link">
-            <div data-i18n="Blank">OutStock</div>
-          </a>
-        </li>
+       
         <li class="menu-item">
           <a href="/discount" class="menu-link">
             <div data-i18n="Blank">Discount</div>
@@ -107,11 +108,7 @@
       </a>
 
       <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="/new_user" class="menu-link">
-            <div data-i18n="Container">New User</div>
-          </a>
-        </li>
+        
         <li class="menu-item">
           <a href="/users" class="menu-link">
             <div data-i18n="Fluid">User List</div>
@@ -159,7 +156,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="/signup" class="menu-link" target="_blank">
+          <a href="/login" class="menu-link" target="_blank" onclick="confirmLogout(); return false;">
             <div data-i18n="Basic">Logout</div>
           </a>
         </li>
@@ -342,7 +339,7 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/signup">
+                  <a class="dropdown-item" href="#" onclick="confirmLogout(); return false;">
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Log Out</span>
                   </a>
@@ -424,6 +421,24 @@
     }
   });
 });
+
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out of your session!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, logout!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/Views/auth/logout.php';
+        }
+    });
+}
+
 </script>
 
 <style>

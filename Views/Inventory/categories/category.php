@@ -22,7 +22,9 @@
                             </a>
                         </div>
                         <div class="search-input">
-                            <a class="btn btn-searchset"><img src="/Views/assets/img1/icons/search-white.svg" alt="img"></a>
+                            <form class="form-inline">
+                                <input id="brandSearch" class="form-control mr-sm-2" type="search" placeholder="Search Brand Name" aria-label="Search">
+                            </form>
                         </div>
                     </div>
                     <div class="wordset">
