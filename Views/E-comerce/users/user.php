@@ -111,7 +111,7 @@
                                             <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
                                         </a>
                                     </td>
-                                </tr>
+                                </tr> 
                             <?php endforeach ?>
                         </tbody>
                     </table>

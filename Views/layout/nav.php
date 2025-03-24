@@ -8,10 +8,8 @@
       <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: pink;">Skin care</span>
     </a>
 
-
-
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+      <i class="bi bi-chevron-left align-middle"></i>
     </a>
   </div>
 
@@ -21,7 +19,7 @@
     <!-- Dashboard -->
     <li class="menu-item active">
       <a href="/" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <i class="menu-icon tf-icons bi bi-speedometer2"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
     </li>
@@ -29,8 +27,8 @@
     <!-- Layouts -->
     <li class="menu-item">
       <a href="/E-comerce" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div data-i18n="Layouts">E-Comerce</div>
+        <i class="menu-icon tf-icons bi bi-shop"></i>
+        <div data-i18n="Layouts">E-Commerce</div>
       </a>
 
       <ul class="menu-sub">
@@ -53,7 +51,7 @@
     </li>
     <li class="menu-item">
       <a href="/E-comerce" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <i class="menu-icon tf-icons bi bi-box-seam"></i>
         <div data-i18n="Layouts">Inventory</div>
       </a>
 
@@ -94,16 +92,17 @@
           </a>
         </li>
        
-        <li class="menu-item">
-          <a href="/discount" class="menu-link">
-            <div data-i18n="Blank">Discount</div>
-          </a>
-        </li>
       </ul>
+    </li>
+    <li class="menu-item active">
+      <a href="/discount" class="menu-link">
+        <i class="menu-icon tf-icons bi bi-tag"></i>
+        <div data-i18n="Analytics">Discount</div>
+      </a>
     </li>
     <li class="menu-item">
       <a href="/E-comerce" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <i class="menu-icon tf-icons bi bi-people"></i>
         <div data-i18n="Layouts">User</div>
       </a>
 
@@ -123,7 +122,7 @@
     </li>
     <li class="menu-item">
       <a href="/" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <i class="menu-icon tf-icons bi bi-person-gear"></i>
         <div data-i18n="Account Settings">Account Settings</div>
       </a>
       <ul class="menu-sub">
@@ -146,7 +145,7 @@
     </li>
     <li class="menu-item">
       <a href="/" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+        <i class="menu-icon tf-icons bi bi-shield-lock"></i>
         <div data-i18n="Authentications">Authentications</div>
       </a>
       <ul class="menu-sub">
@@ -164,7 +163,7 @@
     </li>
     <li class="menu-item">
       <a href="/" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+        <i class="menu-icon tf-icons bi bi-tools"></i>
         <div data-i18n="Misc">Misc</div>
       </a>
       <ul class="menu-sub">
@@ -180,8 +179,79 @@
         </li>
       </ul>
     </li>
-
+  </ul>
 </aside>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".menu-item a");
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    // Load active menu item from localStorage
+    const savedActiveMenu = localStorage.getItem("activeMenu");
+    if (savedActiveMenu) {
+      document.querySelectorAll(".menu-item.active").forEach(item => item.classList.remove("active"));
+      const activeLink = document.querySelector(`.menu-item a[href="${savedActiveMenu}"]`);
+      if (activeLink) {
+        activeLink.closest(".menu-item").classList.add("active");
+      }
+    }
+
+    // Load expanded dropdown state from localStorage
+    const savedExpandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+    dropdowns.forEach(dropdown => {
+      if (savedExpandedDropdowns.includes(dropdown.getAttribute("data-id"))) {
+        dropdown.classList.add("open");
+      }
+    });
+
+    // Store active menu item
+    menuItems.forEach(link => {
+      link.addEventListener("click", function () {
+        localStorage.setItem("activeMenu", link.getAttribute("href"));
+      });
+    });
+
+    // Store dropdown open/close state
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener("click", function () {
+        const id = dropdown.getAttribute("data-id");
+        let expandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+
+        if (dropdown.classList.contains("open")) {
+          expandedDropdowns = expandedDropdowns.filter(item => item !== id);
+        } else {
+          expandedDropdowns.push(id);
+        }
+
+        localStorage.setItem("expandedDropdowns", JSON.stringify(expandedDropdowns));
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  // Existing menu code...
+  
+  // Add dropdown functionality
+  const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const dropdownMenu = toggle.nextElementSibling;
+      dropdownMenu.classList.toggle('show');
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+        menu.classList.remove('show');
+      });
+    }
+  });
+});
+</script>
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
 
@@ -191,166 +261,168 @@
       <!-- Navbar -->
 
       <nav
-        class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-        id="layout-navbar">
-        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-          <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-            <i class="bx bx-menu bx-sm"></i>
+  class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+  id="layout-navbar">
+  <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+      <i class="bi bi-list fs-4"></i>
+    </a>
+  </div>
+
+  <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    <!-- Search -->
+    <div class="navbar-nav align-items-center">
+      <div class="nav-item d-flex align-items-center">
+        <i class="bi bi-search fs-4 lh-0"></i>
+        <input
+          type="text"
+          class="form-control border-0 shadow-none"
+          placeholder="Search..."
+          aria-label="Search..." />
+      </div>
+    </div>
+    <!-- /Search -->
+
+    <ul class="navbar-nav flex-row align-items-center ms-auto">
+      <li class="nav-item d-flex align-items-center">
+        <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="/home">Online Builder</a>
+      </li>
+      <!-- Place this tag where you want the button to render. -->
+      <li class="nav-item lh-1 me-3">
+        <a
+          class="github-button"
+          href="https://github.com/sovan-souern/VC1-G10"
+          data-icon="octicon-star"
+          data-size="large"
+          data-show-count="true"
+          aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+      </li>
+
+      
+      <!-- navbar.php -->
+      <!-- navbar.php -->
+      <!-- navbar.php -->
+    <!-- navbar.php -->
+      <li class="nav-item dropdown pe-3 d-flex align-items-center">
+          <a href="/notifications" class="text-decoration-none d-flex align-items-center position-relative" onclick="storeAlerts()">
+              <i class="bi bi-bell fs-4"></i>
+              <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
           </a>
-        </div>
+      </li>
 
-        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-          <!-- Search -->
-          <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-              <i class="bx bx-search fs-4 lh-0"></i>
-              <input
-                type="text"
-                class="form-control border-0 shadow-none"
-                placeholder="Search..."
-                aria-label="Search..." />
-            </div>
+      
+      
+      <style>
+        .nav-item {
+          position: relative;
+        }
+
+        .notification-badge {
+          position: absolute;
+          margin-bottom: 150%;
+          right: -10px; 
+          background-color: red; /* Change this color for different badge colors */
+          color: white;
+          border-radius: 50%;
+          padding: 3px 5px;
+          font-size: 12px; /* Base font size */
+          font-weight: bold;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .notification-badge {
+            font-size: 10px; 
+            padding: 4px 8px; 
+          }
+        }
+
+        @media (max-width: 480px) {
+          .notification-badge {
+            font-size: 9px; 
+            padding: 3px 6px; 
+          }
+        }
+      </style>
+      
+
+
+
+
+      <!-- <li class="nav-item dropdown pe-3 d-flex align-items-center">
+          <span class="material-symbols-outlined">
+            notifications
+          </span>
+      </li> -->
+      <!-- User --><!-- User Profile Dropdown -->
+      <li class="nav-item navbar-dropdown dropdown-user dropdown">
+        <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+          <div class="avatar avatar-online">
+            <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
+              alt="User Profile" class="profile-img" />
           </div>
-          <!-- /Search -->
-
-          <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="/home">Online Builder</a>
-            </li>
-            <!-- Place this tag where you want the button to render. -->
-            <li class="nav-item lh-1 me-3">
-              <a
-                class="github-button"
-                href="https://github.com/sovan-souern/VC1-G10"
-                data-icon="octicon-star"
-                data-size="large"
-                data-show-count="true"
-                aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-            </li>
-
-            
-            <!-- navbar.php -->
-            <!-- navbar.php -->
-            <!-- navbar.php -->
-        <!-- navbar.php -->
-          <li class="nav-item dropdown pe-3 d-flex align-items-center">
-              <a href="/notifications" class="text-decoration-none d-flex align-items-center position-relative" onclick="storeAlerts()">
-                  <span class="material-symbols-outlined">notifications</span>
-                  <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
-              </a>
-          </li>
-
-          
-          
-            <style>
-              .nav-item {
-                position: relative;
-              }
-
-              .notification-badge {
-                position: absolute;
-                margin-bottom: 150%;
-                right: -10px; 
-                background-color: red; /* Change this color for different badge colors */
-                color: white;
-                border-radius: 50%;
-                padding: 3px 5px;
-                font-size: 12px; /* Base font size */
-                font-weight: bold;
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-              }
-
-              /* Responsive adjustments */
-              @media (max-width: 768px) {
-                .notification-badge {
-                  font-size: 10px; 
-                  padding: 4px 8px; 
-                }
-              }
-
-              @media (max-width: 480px) {
-                .notification-badge {
-                  font-size: 9px; 
-                  padding: 3px 6px; 
-                }
-              }
-            </style>
-            
-
-
-
-
-            <!-- <li class="nav-item dropdown pe-3 d-flex align-items-center">
-                <span class="material-symbols-outlined">
-                  notifications
-                </span>
-            </li> -->
-            <!-- User --><!-- User Profile Dropdown -->
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-              <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
-                <div class="avatar avatar-online">
-                  <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
-                    alt="User Profile" class="profile-img" />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
+          <li>
+            <a class="dropdown-item" href="#">
+              <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                  <div class="avatar avatar-online">
+                    <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
+                      alt="User Profile" class="profile-img" />
+                  </div>
                 </div>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar avatar-online">
-                          <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
-                            alt="User Profile" class="profile-img" />
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <span class="fw-semibold d-block">
-                          <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
-                        </span>
-                        <small class="text-muted">Admin</small>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <div class="dropdown-divider"></div>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/editProfile">
-                    <i class="bx bx-edit-alt me-2"></i>
-                    <span class="align-middle">Edit Profile</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/notifications">
-                    <i class="bx bx-bell me-2"></i>
-                    <span class="align-middle">Notifications</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/reset">
-                    <i class="bx bx-lock-alt me-2"></i>
-                    <span class="align-middle">Reset Password</span>
-                  </a>
-                </li>
-                <li>
-                  <div class="dropdown-divider"></div>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#" onclick="confirmLogout(); return false;">
-                    <i class="bx bx-power-off me-2"></i>
-                    <span class="align-middle">Log Out</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <!--/ User Profile Dropdown -->
+                <div class="flex-grow-1">
+                  <span class="fw-semibold d-block">
+                    <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
+                  </span>
+                  <small class="text-muted">Admin</small>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/editProfile">
+              <i class="bi bi-pencil-square me-2"></i>
+              <span class="align-middle">Edit Profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/notifications">
+              <i class="bi bi-bell me-2"></i>
+              <span class="align-middle">Notifications</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/reset">
+              <i class="bi bi-key me-2"></i>
+              <span class="align-middle">Reset Password</span>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" onclick="confirmLogout(); return false;">
+              <i class="bi bi-box-arrow-right me-2"></i>
+              <span class="align-middle">Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!--/ User Profile Dropdown -->
 
-          </ul>
-        </div>
-      </nav>
+    </ul>
+  </div>
+</nav>
+
+
 
       <script>
   document.addEventListener("DOMContentLoaded", function () {
