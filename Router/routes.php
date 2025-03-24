@@ -87,6 +87,9 @@ $routes->get('/products/view', [ProductController::class, 'view']);
 $routes->get('/discount', [DiscountController::class, 'index']);
 $routes->get('/create-discount', [DiscountController::class, 'create']);
 $routes->post('/discount/store', [DiscountController::class, 'store']);
+$routes->get('/discount/edit', [DiscountController::class, 'edit']);
+$routes->put('/discount/update', [DiscountController::class, 'update']);
+$routes->get('/discount/delete', [DiscountController::class, 'destroy']);
 
 
 // Category Routes

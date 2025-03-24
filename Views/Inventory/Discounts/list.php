@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discount Page</title>
   <?php require "style.php"?>
-</head>
+ <?php require __DIR__."/../../assets/js/discount.php"?>
 
-<body>
   <div class="container">
     <div class="card-page">
       <h4>Discount List</h4>
@@ -44,10 +37,7 @@
         <input type="text" placeholder="Max Price">
       </div>
       <div class="page" id="productPage">
-        <!-- PHP loop to render product cards -->
         <?php
-        // Sample data based on the screenshot
-       
 
         foreach ($discounts as $discount) : ?>
           <div class="product-card">
@@ -66,14 +56,15 @@
               </span>
             </div>
             <div class="action-buttons">
-              <a class="action-btn view-btn" href="products/view">
+              <a class="action-btn view-btn" href="products/view?id=<?php echo $discount["product_id"]; ?>">
                 <img src="/Views/assets/img1/icons/eye.svg" alt="view">
               </a>
-              <a class="action-btn edit-btn" href="products/edit">
+              <a class="action-btn edit-btn" href="discount/edit?id=<?php echo $discount["product_id"]; ?>">  
                 <img src="/Views/assets/img1/icons/edit.svg" alt="edit">
               </a>
-              <a class="action-btn delete-btn" href="products/delete">
+              <a class="action-btn delete-btn delete-product" href="discount/delete?id=<?php echo $discount["product_id"]; ?>">
                 <img src="/Views/assets/img1/icons/delete.svg" alt="delete">
+                <?php require "delete.php" ?>
               </a>
             </div>
           </div>
@@ -87,95 +78,3 @@
     </div>
   </div>
 
-  <script>document.addEventListener('DOMContentLoaded', function() {
-    const itemsPerPageSelect = document.getElementById('itemsPerPage');
-    const productPage = document.getElementById('productPage');
-    const productCards = Array.from(productPage.querySelectorAll('.product-card'));
-    const prevPageBtn = document.getElementById('prevPage');
-    const nextPageBtn = document.getElementById('nextPage');
-    const pageInfo = document.getElementById('pageInfo');
-    const searchInput = document.getElementById('brandSearch');
-    const filterButton = document.getElementById('filter_search');
-    const filterInputs = document.getElementById('filter_inputs');
-
-    let currentItemsPerPage = parseInt(itemsPerPageSelect.value) || 10;
-    let currentPage = 1;
-    let filteredCards = [...productCards];
-
-    // Function to update the display of product cards
-    function updateDisplay() {
-        const totalItems = filteredCards.length;
-        const totalPages = Math.max(1, Math.ceil(totalItems / currentItemsPerPage));
-        currentPage = Math.min(Math.max(1, currentPage), totalPages);
-
-        const start = (currentPage - 1) * currentItemsPerPage;
-        const end = Math.min(start + currentItemsPerPage, totalItems);
-
-        // Show/hide cards based on current page
-        productCards.forEach(card => {
-            const index = filteredCards.indexOf(card);
-            card.style.display = (index >= start && index < end) ? 'block' : 'none';
-        });
-
-        // Update pagination info
-        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-        prevPageBtn.disabled = currentPage === 1;
-        nextPageBtn.disabled = currentPage === totalPages || totalItems === 0;
-    }
-
-    // Items per page change handler
-    itemsPerPageSelect.addEventListener('change', function() {
-        currentItemsPerPage = parseInt(this.value);
-        currentPage = 1;
-        updateDisplay();
-    });
-
-    // Pagination button handlers
-    prevPageBtn.addEventListener('click', function() {
-        if (currentPage > 1) {
-            currentPage--;
-            updateDisplay();
-        }
-    });
-
-    nextPageBtn.addEventListener('click', function() {
-        if (currentPage < Math.ceil(filteredCards.length / currentItemsPerPage)) {
-            currentPage++;
-            updateDisplay();
-        }
-    });
-
-    // Search functionality
-    searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.trim().toLowerCase();
-        filteredCards = productCards.filter(card => {
-            const productTitle = card.querySelector('.product-title').textContent.toLowerCase();
-            return productTitle.includes(searchTerm);
-        });
-        currentPage = 1;
-        updateDisplay();
-    });
-
-    // Filter toggle
-    filterButton.addEventListener('click', function() {
-        filterInputs.classList.toggle('show-filters');
-    });
-
-    // Initial display update
-    updateDisplay();
-});
-
-// Toggle like button functionality
-function toggleLike(button) {
-    let img = button.querySelector("img");
-    if (button.classList.contains("liked")) {
-        img.src = "/Views/assets/img1/icons/like.svg";
-        button.classList.remove("liked");
-    } else {
-        img.src = "/Views/assets/img1/icons/liked.svg";
-        button.classList.add("liked");
-    }
-}</script>
-</body>
-
-</html>

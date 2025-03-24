@@ -45,7 +45,7 @@ class DiscountModel
         }
     }
     
-    function getDiscount()
+    function getDiscounts()
     {
         try {
             $stmt = $this->pdo->query("SELECT 
@@ -72,7 +72,40 @@ class DiscountModel
         } catch (Exception $e) {
             die("Error fetching discounts: " . $e->getMessage());
         }
-        
+    }
+    function getDiscount($id)
+    {
+    //   var_dump($id );
+            $stmt = $this->pdo->query('SELECT * FROM discounts WHERE product_id = :id', ['id' => $id]);
+            return $stmt->fetch();
+    }
+    function updateDiscount($data)
+    {
+        try {
+            $stmt = "UPDATE discounts SET discount_percentage = :discount_percentage, start_date = :start_date, end_date = :end_date, updated_at = :updated_at WHERE product_id = :product_id";
+            $this->pdo->query($stmt, [
+                'product_id' => $data['product_id'],
+                'discount_percentage' => $data['discount_percentage'],
+                'start_date' => $data['start_date'],
+                'end_date' => $data['end_date'],
+                'updated_at' => $data['updated_at']
+            ]);
+            return true;
+        } catch (Exception $e) {
+            echo "Error updating discount: " . $e->getMessage();
+            return false;
+        }
+    }
+    function delete($id)
+    {
+        try {
+            $stmt = "DELETE FROM discounts WHERE product_id = :id";
+            $this->pdo->query($stmt, ['id' => $id]);
+            return true;
+        } catch (Exception $e) {
+            echo "Error deleting discount: " . $e->getMessage();
+            return false;
+        }
     }
 
 

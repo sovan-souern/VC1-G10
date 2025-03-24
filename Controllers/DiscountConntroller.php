@@ -48,12 +48,51 @@ class DiscountController extends BaseController
     }
     function index()
     {
-        
-
-        
-        $discounts = $this->model->getDiscount();
-        
-       
+        $discounts = $this->model->getDiscounts();  
         $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
+    }
+    function edit($id)
+    {
+       
+        $products = $this->model->getProduct($id);
+        $discount = $this->model->getDiscount($id); 
+        $this->views('Inventory/Discounts/edit.php', ["discount" => $discount, "product" => $products]);  
+        
+    }
+    function update()
+    {
+        echo "1";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            echo "<pre>POST Data: ";
+            print_r($_POST);
+            echo "FILES Data: ";
+            print_r($_FILES);
+            echo "</pre>";
+
+            $data = [
+                'product_id' => $_POST['product_id'],
+                'discount_percentage' => $_POST['discount'],
+                'start_date' => $_POST['start_date'],
+                'end_date' => $_POST['end_date'],
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+
+            if ($this->model->updateDiscount($data)) {
+                $this->redirect('/discount');
+            } else {
+                echo "Failed to update discount.";
+            }
+        } else {
+            echo "Error: Invalid request method.";
+        }
+    }
+    function destroy($id)
+    {
+
+        if ($this->model->delete($id)) {
+            $this->redirect('/discount');
+        } else {
+            echo "Failed to delete discount.";
+        }
     }
 }
