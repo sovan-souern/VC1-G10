@@ -56,7 +56,7 @@
               </span>
             </div>
             <div class="action-buttons">
-              <a class="action-btn view-btn" href="products/view?id=<?php echo $discount["product_id"]; ?>">
+              <a class="action-btn view-btn" href="discount/view?id=<?php echo $discount["product_id"]; ?>">
                 <img src="/Views/assets/img1/icons/eye.svg" alt="view">
               </a>
               <a class="action-btn edit-btn" href="discount/edit?id=<?php echo $discount["product_id"]; ?>">  
