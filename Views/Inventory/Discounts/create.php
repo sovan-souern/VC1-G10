@@ -24,7 +24,7 @@
                     <input type="date" name="end_date" id="end_date" class="form-control">
                 </div>  
                 <div class="total">
-                     <p>Total :100$</p>
+                     <h6>Total: <span id="total-price"><?= $product["price"] ?></span></h6>
                 </div>  
                 <div class="input-group">
                     <label class="file" for="file">Product Image</label>
@@ -50,6 +50,28 @@
             <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['product_id']) ?>">
             <input type="hidden" name="existing_image" value="<?= htmlspecialchars($product['image']) ?>">
         </form>
+
+        <script>
+            // Get DOM elements
+            const priceInput = document.getElementById('price');
+            const discountInput = document.getElementById('discount');
+            const totalPrice = document.getElementById('total-price');
+
+            // Function to calculate and update total
+            function updateTotal() {
+                const price = parseFloat(priceInput.value) || 0;
+                const discount = parseFloat(discountInput.value) || 0;
+                const discountedPrice = price - (price * (discount / 100));
+                totalPrice.textContent = discountedPrice.toFixed(2);
+            }
+
+            // Add event listeners
+            priceInput.addEventListener('input', updateTotal);
+            discountInput.addEventListener('input', updateTotal);
+
+            // Initial calculation
+            updateTotal();
+        </script>
     </div>
 </div>
 <style>
@@ -96,8 +118,6 @@
         grid-area: buttons;
         text-align: center;
     }
-
-    /* Ensure the image section takes up the same height as the content and brand sections */
     .input-group {
         display: flex;
         flex-direction: column;
@@ -145,7 +165,10 @@
     .button-group {
         grid-area: buttons;
         text-align: left;
-        /* Align buttons to the left */
+    }
+    .total{
+        position: relative;
+        top: 25px;
     }
 
     @media (max-width: 600px) {
