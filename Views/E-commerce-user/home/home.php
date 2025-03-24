@@ -154,20 +154,20 @@
         .text-content .cta-button:hover {
             background: #ff3b2f;
         }
-
+/* 
         .image-content-right img {
             width: 100%;
             height: auto;
-            border-radius: 10px 100px 10px 100px;
+            border-radius: 10px 70px 10px 70px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .image-content-left img {
-            width: 80%;
+            width: 100%;
             height: auto;
-            border-radius: 10px 100px 10px 100px;
+            border-radius: 10px 70px 10px 70px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+        } */
 
         /* Full Screen Image */
         .full-screen-image {
@@ -296,7 +296,111 @@
 .discount-card:hover {
     transform: scale(1.05);
 }
-
+ /* Discount Products Styles - Won't affect existing elements */
+ .discount-products {
+        padding: 40px 20px;
+        background: #f9f3f3;
+        margin: 40px 0;
+    }
+    
+    .discount-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .discount-header h2 {
+        font-size: 2.2rem;
+        color: #ff6f61;
+        margin-bottom: 10px;
+    }
+    
+    .discount-header p {
+        color: #666;
+        font-size: 1.1rem;
+    }
+    
+    .discount-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .discount-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        position: relative;
+    }
+    
+    .discount-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff6f61;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        z-index: 2;
+    }
+    
+    .discount-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+    
+    .discount-info {
+        padding: 20px;
+    }
+    
+    .discount-info h3 {
+        margin: 0 0 10px;
+        font-size: 1.3rem;
+        color: #333;
+    }
+    
+    .price {
+        margin: 15px 0;
+    }
+    
+    .original-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1rem;
+        margin-right: 10px;
+    }
+    
+    .sale-price {
+        color: #ff6f61;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+    
+    .add-to-cart {
+        width: 100%;
+        padding: 12px;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    
+    .add-to-cart:hover {
+        background: #ff6f61;
+    }
 
     </style>
 </head>
@@ -309,7 +413,7 @@
     <!-- Cards of Products -->
     <div class="cards">
         <div class="card">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
+            <img src="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg" alt="Hydrating Moisturizer">
             <div class="info">Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</div>
         </div>
         <div class="card">
@@ -348,17 +452,20 @@
         </div>
     </div>
 
-    <!-- Left Image Right Paragraph -->
+    <!-- Left Image  Paragraph -->
     <div class="container">
         <div class="content-section">
             <div class="image-content-left">
-                <img src="https://ocs-k8s-prod.s3.ap-southeast-1.amazonaws.com/PRODUCT_1592372389599.jpeg" alt="Glow Skincare Products">
+                <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="Glow Skincare Products"  style="   border-radius: 10px 70px 10px 70px;
+                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
             </div>
-            <div class="text-content">
-                <h2>Why Choose Glow Skincare?</h2>
-                <p>At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, scientifically proven to nourish and rejuvenate your skin.</p>
-                <a href="#" class="cta-button">Discover Our Story</a>
+            <div class="image-content-left">
+            <img src="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg" 
+                 alt="Glow Skincare Products"
+                 style="   border-radius: 10px 70px 10px 70px;
+                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
             </div>
+           
         </div>
     </div>
 
@@ -382,9 +489,9 @@
     </div>
 
     <!-- Full-Screen Image Section -->
-    <div class="full-screen-image">
+    <!-- <div class="full-screen-image">
         <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Hydrating Moisturizer">
-    </div>
+    </div> -->
 
     <!-- Information Section -->
     <div class="info-section">
@@ -394,6 +501,139 @@
             <a href="#" class="cta-button">Learn More About Us</a>
         </div>
     </div>
+
+
+    
+    <!-- Discount Products Section -->
+<section class="discount-products">
+    <div class="discount-header">
+        <h2>Special Discounts</h2>
+        <p>Limited time offers - save up to 30%</p>
+    </div>
+    
+    <div class="discount-grid">
+        <!-- Product 1 -->
+        <div class="discount-card">
+            <div class="discount-badge">25% OFF</div>
+            <img src="https://media.glamour.com/photos/67c1fff02b9b554064fdfe92/1:1/pass/undefined" alt="Moisturizer">
+            <div class="discount-info">
+                <h3>Hydrating Moisturizer</h3>
+                <div class="price">
+                    <span class="original-price">$29.99</span>
+                    <span class="sale-price">$22.49</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="discount-card">
+            <div class="discount-badge">20% OFF</div>
+            <img src="https://foundationskincare.com/cdn/shop/articles/Makeup_Infused.jpg?v=1702945276" alt="Serum">
+            <div class="discount-info">
+                <h3>Vitamin C Serum</h3>
+                <div class="price">
+                    <span class="original-price">$34.99</span>
+                    <span class="sale-price">$27.99</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        <!-- Product 3 -->
+        <div class="discount-card">
+            <div class="discount-badge">20% OFF</div>
+            <img src="https://static.vecteezy.com/system/resources/previews/007/788/936/non_2x/red-matte-lipstick-in-gold-and-black-tube-package-put-on-dark-table-isolated-on-white-background-in-studio-red-lipstick-with-open-cap-makeup-beauty-cosmetic-for-confident-fashion-women-free-photo.jpg" alt="Serum">
+            <div class="discount-info">
+                <h3>Vitamin C Serum</h3>
+                <div class="price">
+                    <span class="original-price">$34.99</span>
+                    <span class="sale-price">$27.99</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        <!-- Product 4 -->
+        <div class="discount-card">
+            <div class="discount-badge">20% OFF</div>
+            <img src="https://www.keyuanbottle.com/data/watermark/20220905/63157083eabf0_.webp" alt="Serum">
+            <div class="discount-info">
+                <h3>Vitamin C Serum</h3>
+                <div class="price">
+                    <span class="original-price">$34.99</span>
+                    <span class="sale-price">$27.99</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <!-- Product 5 -->
+        <div class="discount-card">
+            <div class="discount-badge">30% OFF</div>
+            <img src="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg" alt="Sunscreen">
+            <div class="discount-info">
+                <h3>Sunscreen SPF 50</h3>
+                <div class="price">
+                    <span class="original-price">$24.99</span>
+                    <span class="sale-price">$17.49</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+         <!-- Product 6 -->
+         <div class="discount-card">
+            <div class="discount-badge">25% OFF</div>
+            <img src="https://media.glamour.com/photos/67c1fff02b9b554064fdfe92/1:1/pass/undefined" alt="Moisturizer">
+            <div class="discount-info">
+                <h3>Hydrating Moisturizer</h3>
+                <div class="price">
+                    <span class="original-price">$29.99</span>
+                    <span class="sale-price">$22.49</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <!-- Product 7 -->
+        <div class="discount-card">
+            <div class="discount-badge">20% OFF</div>
+            <img src="https://foundationskincare.com/cdn/shop/articles/Makeup_Infused.jpg?v=1702945276" alt="Serum">
+            <div class="discount-info">
+                <h3>Vitamin C Serum</h3>
+                <div class="price">
+                    <span class="original-price">$34.99</span>
+                    <span class="sale-price">$27.99</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        <!-- Product 8 -->
+        <div class="discount-card">
+            <div class="discount-badge">20% OFF</div>
+            <img src="https://static.vecteezy.com/system/resources/previews/007/788/936/non_2x/red-matte-lipstick-in-gold-and-black-tube-package-put-on-dark-table-isolated-on-white-background-in-studio-red-lipstick-with-open-cap-makeup-beauty-cosmetic-for-confident-fashion-women-free-photo.jpg" alt="Serum">
+            <div class="discount-info">
+                <h3>Vitamin C Serum</h3>
+                <div class="price">
+                    <span class="original-price">$34.99</span>
+                    <span class="sale-price">$27.99</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <!-- Add more products as needed -->
+    </div>
+</section>
+
+
+<script>
+    // Simple script for the discount section
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+            const productName = this.closest('.discount-card').querySelector('h3').textContent;
+            alert(`Added ${productName} to your cart!`);
+        });
+    });
+</script>
 
     <footer>
         <p>© 2025 Glow Skincare. All rights reserved.</p>
@@ -442,15 +682,6 @@ const images = document.querySelectorAll('.card img');
 images.forEach(img => {
   img.style.animation = 'none';
 });
-
-
-// discount cards
-
-// ----------------- Discount Cards -----------------
-
-// Discount card data
-
-
     </script>
 </body>
 </html>
