@@ -128,8 +128,21 @@ require_once 'Controllers/ShopController.php';
 
 
 $routes->get('/home', [HomeController::class, 'index']);
+
+
 $routes->get('/about', [AboutController::class, 'index']);
+
+
 $routes->get('/productuser', [ProductUserController::class, 'index']);
+// $routes->get('/card', [ProductUserController::class, 'ProductCard']);
+$routes->get('/view-card', [ProductUserController::class, 'ProductDetail']);
+$routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
+
+
 $routes->get('/contact', [ContactController::class, 'index']);
+
+
 $routes->get('/shop', [ShopController::class, 'index']);
+
+
 $routes->dispatch();
