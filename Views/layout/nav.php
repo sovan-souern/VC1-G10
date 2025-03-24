@@ -1,60 +1,15 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
     <a href="index.html" class="app-brand-link">
-      <span class="app-brand-logo demo">
-        <svg
-          width="25"
-          viewBox="0 0 25 42"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink">
-          <defs>
-            <path
-              d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
-              id="path-1"></path>
-            <path
-              d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
-              id="path-3"></path>
-            <path
-              d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
-              id="path-4"></path>
-            <path
-              d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
-              id="path-5"></path>
-          </defs>
-          <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
-              <g id="Icon" transform="translate(27.000000, 15.000000)">
-                <g id="Mask" transform="translate(0.000000, 8.000000)">
-                  <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                  </mask>
-                  <use fill="#696cff" xlink:href="#path-1"></use>
-                  <g id="Path-3" mask="url(#mask-2)">
-                    <use fill="#696cff" xlink:href="#path-3"></use>
-                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
-                  </g>
-                  <g id="Path-4" mask="url(#mask-2)">
-                    <use fill="#696cff" xlink:href="#path-4"></use>
-                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
-                  </g>
-                </g>
-                <g
-                  id="Triangle"
-                  transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
-                  <use fill="#696cff" xlink:href="#path-5"></use>
-                  <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
-      </span>
-      <span class="app-brand-text demo menu-text fw-bolder ms-2">Skin care</span>
+      <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg"
+        alt="Brand Logo"
+        class="logo logo-dark"
+        style="width: 50px; height: 50px; border-radius: 50%;" />
+      <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: pink;">Skin care</span>
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+      <i class="bi bi-chevron-left align-middle"></i>
     </a>
   </div>
 
@@ -64,7 +19,7 @@
     <!-- Dashboard -->
     <li class="menu-item active">
       <a href="/" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <i class="menu-icon tf-icons bi bi-speedometer2"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
     </li>
@@ -72,8 +27,8 @@
     <!-- Layouts -->
     <li class="menu-item">
       <a href="/E-comerce" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div data-i18n="Layouts">E-Comerce</div>
+        <i class="menu-icon tf-icons bi bi-shop"></i>
+        <div data-i18n="Layouts">E-Commerce</div>
       </a>
 
       <ul class="menu-sub">
@@ -83,25 +38,20 @@
           </a>
         </li>
         <li class="menu-item">
+          <a href="/order_detail" class="menu-link">
+            <div data-i18n="Container">Order Detail</div>
+          </a>
+        </li>
+        <li class="menu-item">
           <a href="/invoice" class="menu-link">
             <div data-i18n="Fluid">Invoice</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/shop-owner" class="menu-link">
-            <div data-i18n="Blank">Shop owner</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="/users" class="menu-link">
-            <div data-i18n="Blank">User</div>
           </a>
         </li>
       </ul>
     </li>
     <li class="menu-item">
       <a href="/E-comerce" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <i class="menu-icon tf-icons bi bi-box-seam"></i>
         <div data-i18n="Layouts">Inventory</div>
       </a>
 
@@ -114,6 +64,11 @@
         <li class="menu-item">
           <a href="/products/create" class="menu-link">
             <div data-i18n="Fluid">Add Product</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/out-stock" class="menu-link">
+            <div data-i18n="Blank">OutStock</div>
           </a>
         </li>
         <li class="menu-item">
@@ -136,6 +91,28 @@
             <div data-i18n="Blank">Add Brand</div>
           </a>
         </li>
+       
+      </ul>
+    </li>
+    <li class="menu-item active">
+      <a href="/discount" class="menu-link">
+        <i class="menu-icon tf-icons bi bi-tag"></i>
+        <div data-i18n="Analytics">Discount</div>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href="/E-comerce" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bi bi-people"></i>
+        <div data-i18n="Layouts">User</div>
+      </a>
+
+      <ul class="menu-sub">
+        
+        <li class="menu-item">
+          <a href="/users" class="menu-link">
+            <div data-i18n="Fluid">User List</div>
+          </a>
+        </li>
       </ul>
     </li>
 
@@ -145,12 +122,12 @@
     </li>
     <li class="menu-item">
       <a href="/" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <i class="menu-icon tf-icons bi bi-person-gear"></i>
         <div data-i18n="Account Settings">Account Settings</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/update" class="menu-link">
+          <a href="/editProfile" class="menu-link">
             <div data-i18n="Account">Update Profile</div>
           </a>
         </li>
@@ -168,22 +145,17 @@
     </li>
     <li class="menu-item">
       <a href="/" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+        <i class="menu-icon tf-icons bi bi-shield-lock"></i>
         <div data-i18n="Authentications">Authentications</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="/login" class="menu-link" target="_blank">
-            <div data-i18n="Basic">Login</div>
-          </a>
-        </li>
         <li class="menu-item">
           <a href="/reset" class="menu-link" target="_blank">
             <div data-i18n="Basic">Forgot Password</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="/signup" class="menu-link" target="_blank">
+          <a href="/login" class="menu-link" target="_blank" onclick="confirmLogout(); return false;">
             <div data-i18n="Basic">Logout</div>
           </a>
         </li>
@@ -191,7 +163,7 @@
     </li>
     <li class="menu-item">
       <a href="/" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+        <i class="menu-icon tf-icons bi bi-tools"></i>
         <div data-i18n="Misc">Misc</div>
       </a>
       <ul class="menu-sub">
@@ -207,125 +179,421 @@
         </li>
       </ul>
     </li>
-
+  </ul>
 </aside>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".menu-item a");
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    // Load active menu item from localStorage
+    const savedActiveMenu = localStorage.getItem("activeMenu");
+    if (savedActiveMenu) {
+      document.querySelectorAll(".menu-item.active").forEach(item => item.classList.remove("active"));
+      const activeLink = document.querySelector(`.menu-item a[href="${savedActiveMenu}"]`);
+      if (activeLink) {
+        activeLink.closest(".menu-item").classList.add("active");
+      }
+    }
+
+    // Load expanded dropdown state from localStorage
+    const savedExpandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+    dropdowns.forEach(dropdown => {
+      if (savedExpandedDropdowns.includes(dropdown.getAttribute("data-id"))) {
+        dropdown.classList.add("open");
+      }
+    });
+
+    // Store active menu item
+    menuItems.forEach(link => {
+      link.addEventListener("click", function () {
+        localStorage.setItem("activeMenu", link.getAttribute("href"));
+      });
+    });
+
+    // Store dropdown open/close state
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener("click", function () {
+        const id = dropdown.getAttribute("data-id");
+        let expandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+
+        if (dropdown.classList.contains("open")) {
+          expandedDropdowns = expandedDropdowns.filter(item => item !== id);
+        } else {
+          expandedDropdowns.push(id);
+        }
+
+        localStorage.setItem("expandedDropdowns", JSON.stringify(expandedDropdowns));
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  // Existing menu code...
+  
+  // Add dropdown functionality
+  const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const dropdownMenu = toggle.nextElementSibling;
+      dropdownMenu.classList.toggle('show');
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+        menu.classList.remove('show');
+      });
+    }
+  });
+});
+</script>
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
+
 
     <!-- Layout container -->
     <div class="layout-page">
       <!-- Navbar -->
 
       <nav
-        class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-        id="layout-navbar">
-        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-          <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-            <i class="bx bx-menu bx-sm"></i>
-          </a>
-        </div>
+  class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+  id="layout-navbar">
+  <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+      <i class="bi bi-list fs-4"></i>
+    </a>
+  </div>
 
-        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-          <!-- Search -->
-          <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-              <i class="bx bx-search fs-4 lh-0"></i>
-              <input
-                type="text"
-                class="form-control border-0 shadow-none"
-                placeholder="Search..."
-                aria-label="Search..." />
-            </div>
-          </div>
-          <!-- /Search -->
-
-          <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <!-- Place this tag where you want the button to render. -->
-            <li class="nav-item lh-1 me-3">
-              <a
-                class="github-button"
-                href="https://github.com/themeselection/sneat-html-admin-template-free"
-                data-icon="octicon-star"
-                data-size="large"
-                data-show-count="true"
-                aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-            </li>
-
-            <!-- notification  -->
-
-            
-            <li class="nav-item dropdown pe-3 d-flex align-items-center">
-              <a href="/notifications" class="text-decoration-none">
-                <span class="material-symbols-outlined">notifications</span>
-              </a>
-            </li>
-            <!-- <li class="nav-item dropdown pe-3 d-flex align-items-center">
-                <span class="material-symbols-outlined">
-                  notifications
-                </span>
-            </li> -->
-<!-- User -->
-<li class="nav-item navbar-dropdown dropdown-user dropdown">
-  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-    <div class="avatar avatar-online">
-      <img src="/Views/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+  <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    <!-- Search -->
+    <div class="navbar-nav align-items-center">
+      <div class="nav-item d-flex align-items-center">
+        <i class="bi bi-search fs-4 lh-0"></i>
+        <input
+          type="text"
+          class="form-control border-0 shadow-none"
+          placeholder="Search..."
+          aria-label="Search..." />
+      </div>
     </div>
-  </a>
-  <ul class="dropdown-menu dropdown-menu-end">
-    <li>
-      <a class="dropdown-item" href="#">
-        <div class="d-flex">
-          <div class="flex-shrink-0 me-3">
-            <div class="avatar avatar-online">
-              <img src="/Views/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-            </div>
-          </div>
-          <div class="flex-grow-1">
-            <span class="fw-semibold d-block">John Doe</span>
-            <small class="text-muted">Admin</small>
-          </div>
-        </div>
-      </a>
-    </li>
-    <li><div class="dropdown-divider"></div></li>
-    <li>
-      <a class="dropdown-item" href="/update">
-        <i class="bx bx-edit-alt me-2"></i>
-        <span class="align-middle">Edit Profile</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="/notifications">
-        <i class="bx bx-bell me-2"></i>
-        <span class="align-middle">Notifications</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="/reset">
-        <i class="bx bx-lock-alt me-2"></i>
-        <span class="align-middle">Reset Password</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="/login">
-        <i class="bx bx-user-plus me-2"></i>
-        <span class="align-middle">Add Account</span>
-      </a>
-    </li>
-    <li><div class="dropdown-divider"></div></li>
-    <li>
-      <a class="dropdown-item" href="/signup">
-        <i class="bx bx-power-off me-2"></i>
-        <span class="align-middle">Log Out</span>
-      </a>
-    </li>
-  </ul>
-</li>
-<!--/ User -->
-          </ul>
-        </div>
-      </nav>
+    <!-- /Search -->
 
-      <!-- / Navbar -->
-      <!-- Ensure Bootstrap JS is included -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <ul class="navbar-nav flex-row align-items-center ms-auto">
+      <li class="nav-item d-flex align-items-center">
+        <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="/home">Online Builder</a>
+      </li>
+      <!-- Place this tag where you want the button to render. -->
+      <li class="nav-item lh-1 me-3">
+        <a
+          class="github-button"
+          href="https://github.com/sovan-souern/VC1-G10"
+          data-icon="octicon-star"
+          data-size="large"
+          data-show-count="true"
+          aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+      </li>
+
+      
+      <!-- navbar.php -->
+      <!-- navbar.php -->
+      <!-- navbar.php -->
+    <!-- navbar.php -->
+      <li class="nav-item dropdown pe-3 d-flex align-items-center">
+          <a href="/notifications" class="text-decoration-none d-flex align-items-center position-relative" onclick="storeAlerts()">
+              <i class="bi bi-bell fs-4"></i>
+              <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
+          </a>
+      </li>
+
+      
+      
+      <style>
+        .nav-item {
+          position: relative;
+        }
+
+        .notification-badge {
+          position: absolute;
+          margin-bottom: 150%;
+          right: -10px; 
+          background-color: red; /* Change this color for different badge colors */
+          color: white;
+          border-radius: 50%;
+          padding: 3px 5px;
+          font-size: 12px; /* Base font size */
+          font-weight: bold;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .notification-badge {
+            font-size: 10px; 
+            padding: 4px 8px; 
+          }
+        }
+
+        @media (max-width: 480px) {
+          .notification-badge {
+            font-size: 9px; 
+            padding: 3px 6px; 
+          }
+        }
+      </style>
+      
+
+
+
+
+      <!-- <li class="nav-item dropdown pe-3 d-flex align-items-center">
+          <span class="material-symbols-outlined">
+            notifications
+          </span>
+      </li> -->
+      <!-- User --><!-- User Profile Dropdown -->
+      <li class="nav-item navbar-dropdown dropdown-user dropdown">
+        <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+          <div class="avatar avatar-online">
+            <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
+              alt="User Profile" class="profile-img" />
+          </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
+          <li>
+            <a class="dropdown-item" href="#">
+              <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                  <div class="avatar avatar-online">
+                    <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
+                      alt="User Profile" class="profile-img" />
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <span class="fw-semibold d-block">
+                    <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
+                  </span>
+                  <small class="text-muted">Admin</small>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/editProfile">
+              <i class="bi bi-pencil-square me-2"></i>
+              <span class="align-middle">Edit Profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/notifications">
+              <i class="bi bi-bell me-2"></i>
+              <span class="align-middle">Notifications</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/reset">
+              <i class="bi bi-key me-2"></i>
+              <span class="align-middle">Reset Password</span>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" onclick="confirmLogout(); return false;">
+              <i class="bi bi-box-arrow-right me-2"></i>
+              <span class="align-middle">Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!--/ User Profile Dropdown -->
+
+    </ul>
+  </div>
+</nav>
+
+
+
+      <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".menu-item a");
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    // Load active menu item from localStorage
+    const savedActiveMenu = localStorage.getItem("activeMenu");
+    if (savedActiveMenu) {
+      document.querySelectorAll(".menu-item.active").forEach(item => item.classList.remove("active"));
+      const activeLink = document.querySelector(`.menu-item a[href="${savedActiveMenu}"]`);
+      if (activeLink) {
+        activeLink.closest(".menu-item").classList.add("active");
+      }
+    }
+
+    // Load expanded dropdown state from localStorage
+    const savedExpandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+    dropdowns.forEach(dropdown => {
+      if (savedExpandedDropdowns.includes(dropdown.getAttribute("data-id"))) {
+        dropdown.classList.add("open");
+      }
+    });
+
+    // Store active menu item
+    menuItems.forEach(link => {
+      link.addEventListener("click", function () {
+        localStorage.setItem("activeMenu", link.getAttribute("href"));
+      });
+    });
+
+    // Store dropdown open/close state
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener("click", function () {
+        const id = dropdown.getAttribute("data-id");
+        let expandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+
+        if (dropdown.classList.contains("open")) {
+          expandedDropdowns = expandedDropdowns.filter(item => item !== id);
+        } else {
+          expandedDropdowns.push(id);
+        }
+
+        localStorage.setItem("expandedDropdowns", JSON.stringify(expandedDropdowns));
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  // Existing menu code...
+  
+  // Add dropdown functionality
+  const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const dropdownMenu = toggle.nextElementSibling;
+      dropdownMenu.classList.toggle('show');
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+        menu.classList.remove('show');
+      });
+    }
+  });
+});
+
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out of your session!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, logout!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/Views/auth/logout.php';
+        }
+    });
+}
+
+</script>
+
+<style>
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  min-width: 14rem;
+  margin-top: 0.125rem;
+  background: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-user {
+  position: relative;
+}
+
+.avatar img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-online::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #71dd37;
+  border: 2px solid #fff;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.dropdown-menu {
+  min-width: 14rem;
+  padding: 0.5rem 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.125rem;
+  background: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+  z-index: 1000;
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 0.532rem 1.25rem;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #d9dee3;
+  margin: 0.5rem 0;
+}
+</style>

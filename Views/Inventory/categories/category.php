@@ -22,7 +22,9 @@
                             </a>
                         </div>
                         <div class="search-input">
-                            <a class="btn btn-searchset"><img src="/Views/assets/img1/icons/search-white.svg" alt="img"></a>
+                            <form class="form-inline">
+                                <input id="brandSearch" class="form-control mr-sm-2" type="search" placeholder="Search Brand Name" aria-label="Search">
+                            </form>
                         </div>
                     </div>
                     <div class="wordset">
@@ -44,12 +46,6 @@
                     <table class="table datanew">
                         <thead>
                             <tr>
-                                <th>
-                                    <label class="checkboxs">
-                                        <input type="checkbox" id="select-all">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </th>
                                 <th>ID</th>
                                 <th>Image</th>
                                 <th>Category Name</th>
@@ -60,12 +56,6 @@
                         <tbody>
                             <?php foreach ($categories as $index => $category): ?>
                                 <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
                                     <td><?= $index + 1 ?></td>
                                     <td>
                                         <?php if (!empty($category['image_url'])) : ?>
@@ -79,7 +69,6 @@
                                     </td>
                                     <td><?= htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8') ?></td>
                                     <td>
-                                        
                                         <a class="me-3" href="/category/edit?id=<?= $category['category_id'] ?>">
                                             <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
                                         </a>
@@ -88,7 +77,6 @@
                                             <?php require "delete.php" ?>
                                         </a>
                                     </td>
-
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -100,5 +88,4 @@
 </div>
 
 </body>
-
 </html>

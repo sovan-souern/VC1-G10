@@ -2,35 +2,46 @@
 require_once 'Databases/database.php';
 
 class BrandModel {
-    private $conn;
+    private $pdo;
 
-    public function __construct() {
-        $database = new Database('picture2'); // Connect to the 'picture2' database
-        $this->conn = $database->getConnection();
+    function __construct() {
+        $this->pdo = new Database(); 
     }
 
-    public function getBrands() {
-        $sql = "SELECT id, brand_name, image_url, description FROM brand"; // Correct column names
-        $stmt = $this->conn->query($sql);
-
-        $brands = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $brands[] = $row;
-        }
-
-        return $brands;
+    function getBrands() {
+        $stmt = $this->pdo->query('SELECT * FROM brand');
+        return $stmt->fetchAll();
     }
 
-    public function addBrand($brandName, $brandDescription, $brandImageUrl) {
-        $sql = "INSERT INTO brand (brand_name, description, image_url) VALUES (?, ?, ?)"; // Correct column names
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$brandName, $brandDescription, $brandImageUrl]);
-        return $this->conn->lastInsertId(); // Return the ID of the newly inserted brand
+    function createBrand($data) {
+        $stmt = "INSERT INTO brand (brand_name, brand_image, description) 
+                 VALUES (:brand_name, :brand_image, :description)";
+        $this->pdo->query($stmt, [
+            'brand_name' => $data['brand_name'],
+            'brand_image' => $data['brand_image'],
+            'description' => $data['description'],
+        ]);
     }
 
-    public function closeConnection() {
-        $this->conn = null;
+    function getBrand($id) {
+        $stmt = $this->pdo->query('SELECT * FROM brand WHERE id = :id', ['id' => $id]);
+        return $stmt->fetch();
     }
+
+    function updateBrand($data) {
+        $stmt = "UPDATE brand SET brand_name = :brand_name, brand_image = :brand_image, description = :description WHERE id = :id";
+        $this->pdo->query($stmt, [
+            'brand_name' => $data['brand_name'],
+            'brand_image' => $data['brand_image'],
+            'description' => $data['description'],
+            'id' => $data['id'],
+        ]);
+    }
+
+    function deleteBrand($id) {
+        $stmt = $this->pdo->query('DELETE FROM brand WHERE id = :id', ['id' => $id]);
+    }
+
 }
 ?>
 
