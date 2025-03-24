@@ -127,13 +127,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/about" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/shop" class="nav-link">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a href="/productuser" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/about" class="nav-link">About</a>
                         </li>
                         <li class="nav-item">
                             <a href="/contact" class="nav-link">Contact</a>
@@ -160,7 +160,6 @@
                                 </a>
                             </li>
                         </ul>
-
                     </div>
 
                 </div>
@@ -244,3 +243,20 @@
         </div>
     </div>
 </section>
+
+<style>
+    .contact-page #banner {
+    display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if the current URL contains "contact"
+        if (window.location.pathname.includes("contact")) {
+            // Hide the banner section
+            document.getElementById("banner").style.display = "none";
+        }
+    });
+</script>
+

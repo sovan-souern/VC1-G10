@@ -1,43 +1,31 @@
 <div class="container mt-4">
     <div class="card p-4">
-        <h4>Add Edit</h4>
-        <form class="my-3" action="/products/update?id=<?= $product['product_id'] ?>" method="POST" enctype="multipart/form-data">
+        <h4>Add Discount</h4>
+        <form class="my-3" action="/discount/store" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-name">
                     <label for="product_name">Product Name</label>
-                    <input type="text" name="product_name" id="product_name" class="form-control" value="<?= $product["product_name"] ?>">
-                </div>
-                <div class="input-quantity">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" value="<?= $product["quantity"] ?>" name="quantity" id="quantity" class="form-control" step="0.01" min="0">
+                    <input type="text" name="product_name" id="product_name" class="form-control" value="<?= $product["product_name"] ?>" >
                 </div>
                 <div class="input-price">
                     <label for="price">Price</label>
                     <input type="number" name="price" id="price" class="form-control" min="0" value="<?= $product["price"] ?>">
-                </div>
-                <div class="input-category">
-                    <label for="category_id"> Category</label>
-                    <select name="category_id" id="category_id" class="form-select" required>
-                        <option value=""> Choose Category</option>
-                        <?php foreach ($categories as $category) : ?>
-                            <option value="<?php echo $category['category_id']; ?>" <?php echo $category['category_id'] == $product['category_id'] ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($category['category_name']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="input-brand">
-                    <label for="brand_id">Brand</label>
-                    <select name="brand_id" id="brand_id" class="form-select">
-                        <option value="">Choose Brand (Optional)</option>
-                        <?php foreach ($brands as $brand) : ?>
-                            <option value="<?php echo $brand['id']; ?>" <?php echo $brand['id'] == $product['brand_id'] ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($brand['brand_name']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+                </div>  
+                <div class="input-discount">
+                    <label for="discount">Discount</label>
+                    <input type="number" name="discount" id="discount" class="form-control" min="0" value="">
+                </div>  
+                <div class="input-startDate">
+                    <label for="start_date">Start Date</label>
+                    <input type="date" name="start_date" id="start_date" class="form-control">
+                </div>  
+                <div class="input-endDate">
+                    <label for="end_date">End Date</label>
+                    <input type="date" name="end_date" id="end_date" class="form-control">
+                </div>  
+                <div class="total">
+                     <p>Total :100$</p>
+                </div>  
                 <div class="input-group">
                     <label class="file" for="file">Product Image</label>
                     <div class="form-group ">
@@ -54,20 +42,13 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Fix: Add product-content class -->
-                <div class="product-content">
-                    <label>Product Desreption</label>
-                    <textarea name="product_content" id="product_content" class="form-control mt-2 p-4" style="height: 100px;" rows="3"><?= $product["product_content"] ?></textarea>
-                </div>
-
-                <!-- Fix: Add button-group class -->
                 <div class="button-group">
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-warning" onclick="window.history.back()">Back</button>
                 </div>
             </div>
-            <input type="hidden" name="existing_image" value="<?= htmlspecialchars($product["image"]) ?>">
+            <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['product_id']) ?>">
+            <input type="hidden" name="existing_image" value="<?= htmlspecialchars($product['image']) ?>">
         </form>
     </div>
 </div>
@@ -76,8 +57,8 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-areas:
-            "name quantity price"
-            "category brand image"
+            "name  price image "
+            " descount descount image"
             "content content image"
             "buttons buttons image";
         gap: 10px;
@@ -99,8 +80,8 @@
         grid-area: category;
     }
 
-    .input-brand {
-        grid-area: brand;
+    .input-descount {
+        grid-area: descount;
     }
 
     .input-group {
@@ -192,10 +173,3 @@
         }
 
     }
-
-    /* @media (min-width: 601px) and (max-width: 1024px) {
-  body {
-    background-color: lightgreen;
-  }
-} */
-</style>

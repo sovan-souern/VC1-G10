@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-1.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/89/4b/e1/894be1215c80e3965b0491231bc6075d.jpg">
                                     <div class="label new">New</div>
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-2.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/b4/86/be/b486be4be2fb841b3d47086f2b51633d.jpg">
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -144,7 +144,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-3.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/736x/3e/64/02/3e6402e4eb500ffc0922f5f70b0e4731.jpg">
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -166,7 +166,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-4.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/cf/55/5a/cf555a26c939fe8e1e85046cb498ccaf.jpg">
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -188,7 +188,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-5.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/3c/c0/08/3cc00805f2ce6c4705078480a5916895.jpg">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
@@ -211,7 +211,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-6.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/e9/da/78/e9da7876efb69a798cc268a65bb29bc1.jpg">
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -233,7 +233,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-7.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/69/2c/da/692cda64cbd525c681c08644398ced03.jpg">
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -255,7 +255,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-8.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/7f/17/2f/7f172f19bf98e6e1050511c9748901c2.jpg">
                                     <div class="label stockout stockblue">Out Of Stock</div>
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
@@ -278,7 +278,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="Views/E-commerce-user/assets/img/shop/shop-9.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="https://i.pinimg.com/474x/a0/f2/f0/a0f2f026aae8798bcc72f18617915e41.jpg">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
                                         <li><a href="Views/E-commerce-user/assets/img/shop/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
@@ -384,4 +384,4 @@
     <script src="Views/E-commerce-user/assets/js/main.js"></script>
 </body>
 
-</html>
+</html> 

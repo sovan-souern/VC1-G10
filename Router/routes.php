@@ -12,6 +12,7 @@ require_once 'Controllers/BrandController.php';
 require_once 'Controllers/ProfileController.php';
 require_once 'Controllers/UserController.php';
 require_once 'Controllers/LoginRegisterController.php';
+require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 
 $routes = new Router();
@@ -79,6 +80,14 @@ $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->put('/products/update', [ProductController::class, 'update']);
 $routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
+
+
+
+// Discount Routes
+$routes->get('/discount', [DiscountController::class, 'index']);
+$routes->get('/create-discount', [DiscountController::class, 'create']);
+$routes->post('/discount/store', [DiscountController::class, 'store']);
+
 
 // Category Routes
 $routes->get('/category', [CategoryController::class, 'index']);
