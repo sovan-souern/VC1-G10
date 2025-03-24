@@ -2,7 +2,7 @@
 
 <div class="page p-4">
     <div class="content">
-        <div class="page-header ">
+        <div class="page-header">
             <div class="page-title">
                 <h4>Product List</h4>
                 <h6>Manage your products</h6>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="card bg-none w-100">
-            <div class="card-body ">
+            <div class="card-body">
                 <div class="table-top">
                     <div class="search-set">
                         <div class="search-path">
@@ -28,31 +28,24 @@
                             </form>
                         </div>
                     </div>
-                    <div class="wordset">
-                        <ul>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                        src="/Views/assets/img1/icons/pdf.svg" alt="img"></a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                        src="/Views/assets/img1/icons/excel.svg" alt="img"></a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                        src="/Views/assets/img1/icons/printer.svg" alt="img"></a>
-                            </li>
-                        </ul>
+                    <div class="items-per-page-dropdown">
+                        <label for="itemsPerPage">Show:</label>
+                        <select id="itemsPerPage" class="form-select">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="all">All</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="card mb-0" id="filter_inputs">
+                <div class="card mb-3" id="filter_inputs">
                     <div class="card-body pb-0">
                         <div class="row">
                             <div class="col-lg col-sm-6 col-12">
                                 <div class="form-group">
                                     <select class="select" id="category-filter">
-                                        <option  value=""> Choose Category </option>
+                                        <option value=""> Choose Category </option>
                                         <option value="Sun screen">Sun screen</option>
                                         <option value="Night screen">Night screen</option>
                                     </select>
@@ -86,91 +79,168 @@
                     </div>
                 </div>
 
-                <div class="table-res ponsive">
-                    <table class="table datanew">
+                <div class="table-responsive">
+                    <table class="table datanew product-table">
                         <thead>
                             <tr>
-                                <th id="font">ID</th>
-                                <th id="font">Product Name</th>
-                                <th id="font">
-                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-10"
-                                        style="font-size: 10px; color: inherit; box-shadow: none !important; outline: none !important;" id="category-filter-header">
+                                <th class="id-column">ID</th>
+                                <th class="product-column">Product Name</th>
+                                <th class="category-column">
+                                    <select class="form-select border-0 bg-transparent category-select"
+                                        id="category-filter-header">
                                         <option value="">Category</option>
                                         <?php foreach ($categories as $key => $category) : ?>
                                             <option value="<?= htmlspecialchars($category["category_name"]) ?>"><?= htmlspecialchars($category["category_name"]) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </th>
-                                <th id="font">
-                                    <select class="form-select border-0 bg-transparent text-uppercase fw-bold p-0"
-                                        style="font-size: inherit; color: inherit; box-shadow: none !important; outline: none !important;" id="brand-filter-header">
+                                <th class="brand-column">
+                                    <select class="form-select border-0 bg-transparent brand-select"
+                                        id="brand-filter-header">
                                         <option value="">Brand</option>
                                         <?php foreach ($brands as $key => $brand) : ?>
                                             <option value="<?= htmlspecialchars($brand["brand_name"]) ?>"><?= htmlspecialchars($brand["brand_name"]) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </th>
-                                <th id="font">Price</th>
-                                <th id="font">Qty</th>
-                                <th id="font">Action</th>
+                                <th class="qty-column">Qty</th>
+                                <th class="price-column">Price</th>
+                                <th class="action-column">Action</th>
                             </tr>
                         </thead>
                         <tbody id="product-list">
-                            <?php foreach ($products as $index => $product) : ?>
-                                <!-- <?= htmlspecialchars($product["image"]) ?> -->
-                                <tr class="product" st data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
-                                    <td><?= $index + 1 ?></td>
-                                    <td class="productimgname">
-                                        <img id="img-product" src="<?= htmlspecialchars($product["image"]) ?>" alt="product">
-                                        <?= htmlspecialchars($product["product_name"]) ?>
+                            <?php
+                            // Calculate pagination
+                            $itemsPerPage = isset($_GET['items_per_page']) ? (int)$_GET['items_per_page'] : 10;
+                            $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                            $totalItems = count($products);
+
+                            // If "all" is selected, show all products
+                            $showAll = isset($_GET['items_per_page']) && $_GET['items_per_page'] === 'all';
+
+                            // Calculate start and end indices for the current page
+                            $start = $showAll ? 0 : ($currentPage - 1) * $itemsPerPage;
+                            $end = $showAll ? $totalItems : min($start + $itemsPerPage, $totalItems);
+
+                            // Get products for the current page
+                            $displayProducts = $showAll ? $products : array_slice($products, $start, $itemsPerPage);
+
+                            foreach ($displayProducts as $index => $product) :
+                                $actualIndex = $start + $index + 1; // For displaying the correct ID
+                            ?>
+                                <tr class="product" data-category="<?= htmlspecialchars($product["categoryId"]) ?>" data-brand="<?= htmlspecialchars($product["brandID"]) ?>" data-price="<?= htmlspecialchars($product["price"]) ?>">
+                                    <td class="id-column"><?= $actualIndex ?></td>
+                                    <td class="product-column">
+                                        <div class="product-info">
+                                            <img class="product-image" src="<?= htmlspecialchars($product["image"]) ?>" alt="product">
+                                            <span class="product-name"><?= htmlspecialchars($product["product_name"]) ?></span>
+                                        </div>
                                     </td>
-                                    <td class="category-name"><?= htmlspecialchars($product["categoryId"]) ?></td>
-                                    <td><?= htmlspecialchars($product["brandID"]) ?></td>
-                                    <td><?= htmlspecialchars($product["quantity"]) ?></td>
-                                    <td><?= htmlspecialchars($product["price"]) ?> $</td>
-                                    <td class="actoin">
-                                        <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
-                                         <img id="hight" class="size-image" src="/Views/assets/img/dicount.png" alt="">
-                                        </a>
-                                        <a class="" href="products/view?id=<?= $product['product_id'] ?>">
-                                            <img id="hight"  src="/Views/assets/img1/icons/eye.svg" alt="img">
-                                        </a>
-                                        <a class="edit" href="products/edit?id=<?= $product['product_id'] ?>">
-                                            <img id="hight" src="/Views/assets/img1/icons/edit.svg" alt="img">
-                                        </a>
-
-
-
-                                        <a class="delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
-                                            <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
-                                            <?php require "delete.php" ?>
-                                        </a>
-                                        
-
+                                    <td class="category-column"><?= htmlspecialchars($product["categoryId"]) ?></td>
+                                    <td class="brand-column"><?= htmlspecialchars($product["brandID"]) ?></td>
+                                    <td class="qty-column"><?= htmlspecialchars($product["quantity"]) ?></td>
+                                    <td class="price-column"><?= htmlspecialchars($product["price"]) ?> $</td>
+                                    <td class="action-column">
+                                        <div class="action-buttons">
+                                            <a class="action-btn discount-btn" href="create-discount?id=<?= $product['product_id'] ?>">
+                                                <img src="/Views/assets/img/descount.png" alt="discount">
+                                            </a>
+                                            <a class="action-btn view-btn" href="products/view?id=<?= $product['product_id'] ?>">
+                                                <img src="/Views/assets/img1/icons/eye.svg" alt="view">
+                                            </a>
+                                            <a class="action-btn edit-btn" href="products/edit?id=<?= $product['product_id'] ?>">
+                                                <img src="/Views/assets/img1/icons/edit.svg" alt="edit">
+                                            </a>
+                                            <a class="action-btn delete-btn delete-product" href="products/delete?id=<?= $product['product_id'] ?>">
+                                                <img src="/Views/assets/img1/icons/delete.svg" alt="delete">
+                                                <?php require "delete.php" ?>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>
+
+                <div class="pagination-container">
+                    <div class="pagination-row">
+                        <div class="pagination-info">
+                            <?php if (!$showAll): ?>
+                                Showing <?= $start + 1 ?> to <?= $end ?> of <?= $totalItems ?> entries
+                            <?php else: ?>
+                                Showing all <?= $totalItems ?> entries
+                            <?php endif; ?>
+                        </div>
+                        <div class="pagination-controls">
+                            <?php if (!$showAll && $totalItems > $itemsPerPage): ?>
+                                <div class="pagination">
+                                    <?php
+                                    $totalPages = ceil($totalItems / $itemsPerPage);
+
+                                    // Previous button
+                                    if ($currentPage > 1): ?>
+                                        <a class="page-btn prev-btn" href="?page=<?= $currentPage - 1 ?>&items_per_page=<?= $itemsPerPage ?>" aria-label="Previous">
+                                            &laquo;
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <?php
+                                    // Page numbers
+                                    $startPage = max(1, $currentPage - 2);
+                                    $endPage = min($totalPages, $startPage + 4);
+
+                                    for ($i = $startPage; $i <= $endPage; $i++): ?>
+                                        <a id="next-page" class="page-btn <?= $i === $currentPage ? 'active' : '' ?>" href="?page=<?= $i ?>&items_per_page=<?= $itemsPerPage ?>">
+                                            <?= $i ?>
+                                        </a>
+                                    <?php endfor; ?>
+
+                                    <!-- Next button -->
+                                    <?php if ($currentPage < $totalPages): ?>
+                                        <a class="page-btn next-btn" href="?page=<?= $currentPage + 1 ?>&items_per_page=<?= $itemsPerPage ?>" aria-label="Next">
+                                            &raquo;
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-</style>
-
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("#product-list tr").forEach(row => {
-            let quantity = parseInt(row.querySelector("td:nth-child(6)").textContent.trim(), 10);
-            let productName = row.querySelector("td:nth-child(2)").textContent.trim();
+    document.addEventListener('DOMContentLoaded', function() {
+        // Items per page functionality
+        const itemsPerPageSelect = document.getElementById('itemsPerPage');
 
-            if (quantity === 0) {
-                alert(`⚠️ ${productName} is OUT OF STOCK!`);
-            } else if (quantity <= 9) {
-                alert(`⚠️ ${productName} is running LOW on stock (Only ${quantity} left)!`);
-            }
+        // Set the current selection based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentItemsPerPage = urlParams.get('items_per_page') || '10';
+        itemsPerPageSelect.value = currentItemsPerPage;
+
+        // Handle change in items per page
+        itemsPerPageSelect.addEventListener('change', function() {
+            const selectedValue = this.value;
+            const currentUrl = new URL(window.location.href);
+
+            // Update URL parameters
+            currentUrl.searchParams.set('items_per_page', selectedValue);
+            currentUrl.searchParams.set('page', '1'); // Reset to first page when changing items per page
+
+            // Navigate to the new URL
+            window.location.href = currentUrl.toString();
+        });
+
+        // Filter toggle
+        const filterButton = document.getElementById('filter_search');
+        const filterInputs = document.getElementById('filter_inputs');
+
+        filterButton.addEventListener('click', function() {
+            filterInputs.classList.toggle('show-filters');
         });
     });
 </script>

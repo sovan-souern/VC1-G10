@@ -12,6 +12,7 @@ require_once 'Controllers/BrandController.php';
 require_once 'Controllers/ProfileController.php';
 require_once 'Controllers/UserController.php';
 require_once 'Controllers/LoginRegisterController.php';
+require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 
 $routes = new Router();
@@ -80,6 +81,18 @@ $routes->put('/products/update', [ProductController::class, 'update']);
 $routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
 
+
+
+// Discount Routes
+$routes->get('/discount', [DiscountController::class, 'index']);
+$routes->get('/create-discount', [DiscountController::class, 'create']);
+$routes->post('/discount/store', [DiscountController::class, 'store']);
+$routes->get('/discount/edit', [DiscountController::class, 'edit']);
+$routes->put('/discount/update', [DiscountController::class, 'update']);
+$routes->get('/discount/delete', [DiscountController::class, 'destroy']);
+$routes->get('/discount/view', [DiscountController::class, 'view']);
+
+
 // Category Routes
 $routes->get('/category', [CategoryController::class, 'index']);
 $routes->get('/category/create', [CategoryController::class, 'create']);
@@ -116,8 +129,21 @@ require_once 'Controllers/ShopController.php';
 
 
 $routes->get('/home', [HomeController::class, 'index']);
+
+
 $routes->get('/about', [AboutController::class, 'index']);
+
+
 $routes->get('/productuser', [ProductUserController::class, 'index']);
+// $routes->get('/card', [ProductUserController::class, 'ProductCard']);
+$routes->get('/view-card', [ProductUserController::class, 'ProductDetail']);
+$routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
+
+
 $routes->get('/contact', [ContactController::class, 'index']);
+
+
 $routes->get('/shop', [ShopController::class, 'index']);
+
+
 $routes->dispatch();
