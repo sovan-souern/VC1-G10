@@ -107,6 +107,25 @@ class DiscountModel
             return false;
         }
     }
+    function getCategories()
+    {
+        try {
+            $stmt = $this->pdo->query('SELECT * FROM categories');
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            die("Error fetching categories: " . $e->getMessage());
+        }
+    }
+    function getBrands()
+    {
+        try {
+            $stmt = $this->pdo->query('SELECT * FROM brand');
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            die("Error fetching brands: " . $e->getMessage());
+        }
+    }
+
 
 
 }

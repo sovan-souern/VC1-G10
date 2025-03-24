@@ -15,8 +15,9 @@ class DiscountController extends BaseController
     {
        
         $products = $this->model->getProduct($id);
+        $discount = $this->model->getDiscount($id);
         
-        $this->views('Inventory/Discounts/create.php', ["product" => $products]);
+        $this->views('Inventory/Discounts/create.php', ["product" => $products,"discount"=>$discount]);
     }
 
     function store()
@@ -94,5 +95,13 @@ class DiscountController extends BaseController
         } else {
             echo "Failed to delete discount.";
         }
+    }
+    function view($id){
+        $products = $this->model->getProduct($id);
+        $discount = $this->model->getDiscount($id); 
+        $categories = $this->model->getCategories($id);
+        $brands = $this->model->getBrands($id);
+        $this->views("Inventory/Discounts/view.php", ["discount"=>$discount,"products" => $products, "categories" => $categories, "brands" => $brands]);
+        
     }
 }

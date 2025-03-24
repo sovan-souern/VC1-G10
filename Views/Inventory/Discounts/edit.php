@@ -110,8 +110,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     .total {
         grid-area: total;
-        padding: 10px 0;
+        position: relative;
+        /* left: 10px;   */
+        top: 30px;
+        /* padding: 10px 0; */
     }
+   
 
     .input-group {
         grid-area: image;
