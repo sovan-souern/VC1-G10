@@ -298,7 +298,7 @@
     <div class="col-md-6">
         <div class="contact-container mt-4">
             <h3>Contact Now</h3>
-            <form id="contactForm">
+            <form id="contactForm" action="contact/store" method="POST">
                 <div class="mb-3">
                     <label>First Name</label>
                     <input type="text" class="form-control" required>
@@ -315,7 +315,7 @@
                     <label>Message</label>
                     <textarea class="form-control" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-submit">Submit</button>
+                <button type="submit"  class="btn btn-submit" >Submit</button>
             </form>
         </div>
     </div>
@@ -359,7 +359,7 @@
 
     // Initial animation for banner
     document.addEventListener('DOMContentLoaded', () => {
-        // Form submission animation
+    //     // Form submission animation
         const form = document.getElementById('contactForm');
         form.addEventListener('submit', (e) => {
             e.preventDefault();

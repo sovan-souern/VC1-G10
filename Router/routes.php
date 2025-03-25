@@ -141,6 +141,7 @@ $routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
 
 
 $routes->get('/contact', [ContactController::class, 'index']);
+$routes->post('/contact/store', [NotificationController::class, 'store']);
 
 
 $routes->get('/shop', [ShopController::class, 'index']);

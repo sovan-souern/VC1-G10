@@ -1,62 +1,32 @@
 <?php
 require_once 'Databases/database.php';
-class NotificationModel {
-
-    private $conn;
-
-    public function __construct() {
+class NotificationModel
+{
+    private $pdo;
+    public function __construct()
+    {
         $database = new Database();
-        $this->conn = $database->getConnection();
+        $this->pdo = $database->getConnection(); // Initialize $pdo
     }
 
-    public function getNotifications() {
-        $sql = "SELECT * FROM notifications WHERE is_deleted = FALSE";
-        $stmt = $this->conn->query($sql);
-
-        $notifications = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $notifications[] = $row;
-        }
-
-        return $notifications;
+    public function getNotifications()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM notifications");
+        return $stmt->fetchAll();
     }
+    function createNotification($data)
+    {
+        $stmt = "INSERT INTO notifications (first_name, last_name, phone_number, message, created_at, status) 
+                 VALUES (:first_name, :last_name, :phone_number, :message, :created_at, :status)";
 
-    public function addNotification($title, $message) {
-        $sql = "INSERT INTO notifications (title, message, is_deleted) VALUES (?, ?, FALSE)";
-        $stmt = $this->conn->prepare($sql);
-        if ($stmt->execute([$title, $message])) {
-            echo "<script>console.log('Notification added successfully');</script>";
-        } else {
-            echo "<script>console.log('Failed to add notification');</script>";
-        }
-    }
-
-    public function markAllAsRead() {
-        $sql = "UPDATE notifications SET status = 'read' WHERE status = 'unread'";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-    }
-
-    public function closeConnection() {
-        $this->conn = null;
+        $query = $this->pdo->prepare($stmt); // Prepare the SQL statement
+        $query->execute([
+            "first_name" => $data["first_name"],
+            "last_name" => $data["last_name"],
+            "phone_number" => $data["phone_number"],
+            "message" => $data["message"],
+            "created_at" => $data["created_at"],
+            "status" => $data["status"]
+        ]);
     }
 }
-?>
-<?php
-
-$notificationModel = new NotificationModel();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $message = $_POST['message'];
-    $notificationModel->addNotification($title, $message);
-    echo "<script>alert('Notification added successfully');</script>";
-}
-
-$notifications = $notificationModel->getNotifications();
-$notificationModel->closeConnection();
- ?>
-
-
-
-
