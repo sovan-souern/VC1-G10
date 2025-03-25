@@ -251,7 +251,215 @@
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const profileDropdown = document.getElementById('profileDropdown');
+  const dropdownMenu = profileDropdown.nextElementSibling;
+  let isDropdownOpen = false;
+
+  profileDropdown.addEventListener('click', function(e) {
+    e.preventDefault();
+    isDropdownOpen = !isDropdownOpen;
+    
+    if(isDropdownOpen) {
+      dropdownMenu.classList.add('show');
+      profileDropdown.classList.add('show');
+    } else {
+      dropdownMenu.classList.remove('show');
+      profileDropdown.classList.remove('show');
+    }
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!profileDropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.classList.remove('show');
+      profileDropdown.classList.remove('show');
+      isDropdownOpen = false;
+    }
+  });
+});
+
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out of your session!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, logout!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/Views/auth/logout.php';
+        }
+    });
+}
+
+// Function to update profile image
+function updateProfileImage(newImageUrl) {
+  const profileImages = document.querySelectorAll('.js-profile-img');
+  profileImages.forEach(img => {
+    img.src = newImageUrl;
+  });
+}
+
+// Listen for profile image updates
+window.addEventListener('profile-image-updated', function(e) {
+  if (e.detail && e.detail.imageUrl) {
+    updateProfileImage('/' + e.detail.imageUrl);
+  }
+});
+
+// Add this to your existing DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+  // Check for profile image updates every 30 seconds
+  setInterval(function() {
+    fetch('/api/user/profile-image.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.profile_picture) {
+          updateProfileImage('/' + data.profile_picture);
+        }
+      })
+      .catch(error => console.log('Error checking profile image:', error));
+  }, 30000);
+  
+  // ...existing DOMContentLoaded code...
+});
+
+// Function to update all profile images in the nav bar
+function updateNavProfileImages(newImageUrl) {
+    const profileImages = document.querySelectorAll('.profile-img');
+    profileImages.forEach(img => {
+        img.src = newImageUrl;
+    });
+}
+
+// Listen for profile image updates
+window.addEventListener('profile-image-updated', function(e) {
+    if (e.detail && e.detail.imageUrl) {
+        updateNavProfileImages('/' + e.detail.imageUrl);
+    }
+});
+
+// Update profile image when page loads if there's a new one in session storage
+document.addEventListener('DOMContentLoaded', function() {
+    const storedProfilePicture = sessionStorage.getItem('profile_picture');
+    if (storedProfilePicture) {
+        updateNavProfileImages('/' + storedProfilePicture);
+    }
+});
 </script>
+
+<style>
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  min-width: 14rem;
+  margin-top: 0.125rem;
+  background: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-user {
+  position: relative;
+}
+
+.avatar img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-online::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #71dd37;
+  border: 2px solid #fff;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.dropdown-menu {
+  min-width: 14rem;
+  padding: 0.5rem 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.125rem;
+  background: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+  z-index: 1000;
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 0.532rem 1.25rem;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #d9dee3;
+  margin: 0.5rem 0;
+}
+
+.dropdown-toggle.show {
+  background-color: rgba(67, 89, 113, 0.05);
+}
+
+.dropdown-menu {
+  transform: translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+</style>
+
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
 
@@ -359,10 +567,10 @@
       </li> -->
       <!-- User --><!-- User Profile Dropdown -->
       <li class="nav-item navbar-dropdown dropdown-user dropdown">
-        <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+        <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" id="profileDropdown">
           <div class="avatar avatar-online">
             <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
-              alt="User Profile" class="profile-img" />
+              alt="User Profile" class="profile-img js-profile-img" />
           </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
@@ -494,6 +702,34 @@
   });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const profileDropdown = document.getElementById('profileDropdown');
+  const dropdownMenu = profileDropdown.nextElementSibling;
+  let isDropdownOpen = false;
+
+  profileDropdown.addEventListener('click', function(e) {
+    e.preventDefault();
+    isDropdownOpen = !isDropdownOpen;
+    
+    if(isDropdownOpen) {
+      dropdownMenu.classList.add('show');
+      profileDropdown.classList.add('show');
+    } else {
+      dropdownMenu.classList.remove('show');
+      profileDropdown.classList.remove('show');
+    }
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!profileDropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.classList.remove('show');
+      profileDropdown.classList.remove('show');
+      isDropdownOpen = false;
+    }
+  });
+});
+
 function confirmLogout() {
     Swal.fire({
         title: 'Are you sure?',
@@ -511,6 +747,60 @@ function confirmLogout() {
     });
 }
 
+// Function to update profile image
+function updateProfileImage(newImageUrl) {
+  const profileImages = document.querySelectorAll('.js-profile-img');
+  profileImages.forEach(img => {
+    img.src = newImageUrl;
+  });
+}
+
+// Listen for profile image updates
+window.addEventListener('profile-image-updated', function(e) {
+  if (e.detail && e.detail.imageUrl) {
+    updateProfileImage('/' + e.detail.imageUrl);
+  }
+});
+
+// Add this to your existing DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+  // Check for profile image updates every 30 seconds
+  setInterval(function() {
+    fetch('/api/user/profile-image.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.profile_picture) {
+          updateProfileImage('/' + data.profile_picture);
+        }
+      })
+      .catch(error => console.log('Error checking profile image:', error));
+  }, 30000);
+  
+  // ...existing DOMContentLoaded code...
+});
+
+// Function to update all profile images in the nav bar
+function updateNavProfileImages(newImageUrl) {
+    const profileImages = document.querySelectorAll('.profile-img');
+    profileImages.forEach(img => {
+        img.src = newImageUrl;
+    });
+}
+
+// Listen for profile image updates
+window.addEventListener('profile-image-updated', function(e) {
+    if (e.detail && e.detail.imageUrl) {
+        updateNavProfileImages('/' + e.detail.imageUrl);
+    }
+});
+
+// Update profile image when page loads if there's a new one in session storage
+document.addEventListener('DOMContentLoaded', function() {
+    const storedProfilePicture = sessionStorage.getItem('profile_picture');
+    if (storedProfilePicture) {
+        updateNavProfileImages('/' + storedProfilePicture);
+    }
+});
 </script>
 
 <style>
@@ -595,5 +885,27 @@ function confirmLogout() {
 .dropdown-divider {
   border-top: 1px solid #d9dee3;
   margin: 0.5rem 0;
+}
+
+.dropdown-toggle.show {
+  background-color: rgba(67, 89, 113, 0.05);
+}
+
+.dropdown-menu {
+  transform: translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+
+.dropdown-toggle::after {
+  display: none;
 }
 </style>
