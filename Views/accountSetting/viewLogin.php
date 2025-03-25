@@ -103,7 +103,7 @@
                 <tr>
                     <th>ID</th>
                     <th><i class="fas fa-user"></i> Full Name</th>
-                    <th><i class="fas fa-envelope"></i> Email</th>
+                    <th><i class="fas fa-envelope"></i> Phone</th>
                     <th><i class="fas fa-calendar-alt"></i> Created At</th>
                     <th><i class="fas fa-user-tag"></i> Profile</th>
                 </tr>
@@ -114,7 +114,7 @@
                         <tr>
                             <td><?php echo isset($admin['admin_id']) ? (int)$admin['admin_id'] : 'N/A'; ?></td>
                             <td><?php echo htmlspecialchars($admin['name']); ?></td>
-                            <td><?php echo htmlspecialchars($admin['email']); ?></td>
+                            <td><?php echo htmlspecialchars($admin['phone']); ?></td>
                             <td><?php echo htmlspecialchars($admin['created_at']); ?></td>
                             <td>
                                 <img src="<?php echo !empty($admin['profile_picture']) ? '/' . $admin['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
