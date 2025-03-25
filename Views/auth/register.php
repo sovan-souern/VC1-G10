@@ -353,24 +353,28 @@ require_once __DIR__ . "/../layout/header.php";
     <div class="right-section">
         <h3>Sign Up</h3>
         
-        <div class="profile-image-container">
-            <img id="profileImage" src="/Views/assets/images/login.png" alt="Profile Image" class="profile-image">
-            <label for="profilePicture" class="profile-upload-label">
-                <i class="bx bx-camera"></i>
-            </label>
-            <input type="file" name="profile_picture" id="profilePicture" accept="image/*" hidden>
-        </div>
-        
         <div class="form-section">
-            <form id="registrationForm">
-                <div class="input-group">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+            <form id="registrationForm" enctype="multipart/form-data">
+                <div class="profile-image-container">
+                    <img id="profileImage" src="/Views/assets/images/login.png" alt="Profile Image" class="profile-image">
+                    <label for="profilePicture" class="profile-upload-label">
+                        <i class="bx bx-camera"></i>
+                    </label>
+                    <!-- Remove duplicate input and keep only this one -->
+                    <input type="file" name="profile_picture" id="profilePicture" accept="image/*" hidden>
                 </div>
+
                 <div class="input-group">
                     <input type="text" class="form-control" name="name" id="name" placeholder="Enter your full name" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Choose a password" required>
+                    <input type="tel" class="form-control" name="phone" id="phone" 
+                           placeholder="Enter your phone number (10 digits)" 
+                           pattern="[0-9]{10}" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" class="form-control" name="password" id="password" 
+                           placeholder="Choose a password" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Create Account</button>
@@ -400,10 +404,13 @@ require_once __DIR__ . "/../layout/header.php";
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
         e.preventDefault();
         let formData = new FormData(this);
+        let button = document.querySelector(".btn-primary");
+        button.disabled = true;
+        button.innerHTML = "Creating Account...";
 
         fetch("/users/store", {
             method: "POST",
-            body: formData
+            body: formData // FormData will automatically handle file uploads
         })
         .then(response => response.json())
         .then(data => {
@@ -415,11 +422,16 @@ require_once __DIR__ . "/../layout/header.php";
                 }, 2000);
             } else {
                 messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
+                button.disabled = false;
+                button.innerHTML = "Create Account";
             }
         })
         .catch(error => {
             console.error("Error:", error);
-            document.getElementById("message").innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+            document.getElementById("message").innerHTML = 
+                "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+            button.disabled = false;
+            button.innerHTML = "Create Account";
         });
     });
 </script>

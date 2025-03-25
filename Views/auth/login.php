@@ -254,8 +254,10 @@ h3 {
     <div class="right-section">
         <h3>Admin Login</h3>
 
-        <form id="loginForm">
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+        <form id="loginForm" method="POST">
+            <input type="tel" class="form-control" name="phone" id="phone" 
+                   placeholder="Phone Number (e.g., 0123456789)" 
+                   pattern="[0-9]{10}" required>
             
             <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
 
@@ -284,6 +286,7 @@ h3 {
         button.disabled = true;
         button.innerHTML = "Logging in...";
 
+        // Change endpoint back to /users/authenticate
         fetch("/users/authenticate", {
             method: "POST",
             body: formData
@@ -293,8 +296,8 @@ h3 {
             if (data.status === "success") {
                 messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
                 setTimeout(() => {
-                    window.location.href = data.redirect || "/dashboard"; 
-                }, 2000);
+                    window.location.href = "/dashboard";
+                }, 1000);
             } else {
                 messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
                 button.disabled = false;
@@ -302,8 +305,8 @@ h3 {
             }
         })
         .catch(error => {
-            console.error("Error:", error);
-            messageDiv.innerHTML = "<div class='alert alert-danger'>An error occurred. Please try again.</div>";
+            console.error("Login error:", error);
+            messageDiv.innerHTML = "<div class='alert alert-danger'>Login failed. Please try again.</div>";
             button.disabled = false;
             button.innerHTML = "Login";
         });
