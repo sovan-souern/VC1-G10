@@ -16,8 +16,8 @@ class ProfileModel {
     }
 
     public function updateAdmin($admin_ID, $data) {
-        $sql = "UPDATE admins SET name = ?, email = ?";
-        $params = [$data['name'], $data['email']];
+        $sql = "UPDATE admins SET name = ?, phone = ?";
+        $params = [$data['name'], $data['phone']];
 
         if ($data['profile_picture'] !== null) {
             $sql .= ", profile_picture = ?";
