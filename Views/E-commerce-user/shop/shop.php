@@ -314,7 +314,7 @@
     </section>
     <!-- Shop Section End -->
 
-    <!-- Instagram Begin -->
+    <!-- Instagram Begin
     <div class="instagram">
         <div class="container-fluid">
             <div class="row">
@@ -368,7 +368,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Instagram End -->
 
     <!-- Js Plugins -->
