@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skincare Homepage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             padding: 20px;
@@ -298,10 +291,7 @@
         }
 
 
-        body {
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
+
 
         .products-container {
             display: grid;
@@ -405,20 +395,30 @@
         }
 
         .add-to-cart {
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin-top: 10px;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
+        background-color: pink;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        margin-top: 10px;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        /* Enhanced button transition */
+    }
 
-        .add-to-cart:hover {
-            background-color: #ff3b2f;
-        }
+    .add-to-cart:hover {
+        background-color: #ff6699;
+        /* Darker pink on hover */
+        transform: translateY(-2px);
+        /* Slight lift effect */
+    }
+
+    .add-to-cart a {
+        text-decoration: none;
+        color: white;
+        transition: color 0.3s ease;
+    }
     </style>
 </head>
 
@@ -456,37 +456,55 @@
         </div>
     </div>
     <section class="discount-products">
-        <div class="discount-header">
-            <h2>Special Discounts</h2>
-            <p>Limited time offers - save up to 30%</p>
-        </div>
+    <div class="discount-header">
+        <h2>Special Discounts</h2>
+        <p>Limited time offers - save up to 30%</p>
+    </div>
 
-        <div class="container">
-            <div class="products-container">
-                <!-- Product Card 1 -->
-                <div class="product-card">
-                    <div class="discount-badge">-20%</div>
-                    <div class="product-image" style="background-image: url('https://i.pinimg.com/474x/89/4b/e1/894be1215c80e3965b0491231bc6075d.jpg')"></div>
-                    <div class="product-info">
-                        <h5 class="product-name">Darius Watts</h5>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+    <div class="container">
+        <div class="products-container">
+            <?php
+            if (isset($discounts) && is_array($discounts) && !empty($discounts)) {
+                foreach ($discounts as $discount) {
+                    // Calculate discounted price
+                    $original_price = floatval($discount["price"]);
+                    $discount_percentage = floatval($discount["discount_percentage"]);
+                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
+
+                    // Sanitize and prepare data
+                    $product_name = htmlspecialchars($discount["product_name"]);
+                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                    $original_price_formatted = "$" . number_format($original_price, 2);
+                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+            ?>
+                    <!-- Product Card -->
+                    <div class="product-card">
+                        <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                        <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')"></div>
+                        <div class="product-info">
+                            <h5 class="product-name"><?php echo $product_name; ?></h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="price">
+                                <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                <?php echo $discounted_price_formatted; ?>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
                         </div>
-                        <div class="price">
-                            <span class="original-price">$ 12.50</span>
-                            $ 10.00
-                        </div>
-                        <button class="add-to-cart">Add to Cart</button>
                     </div>
-                </div>
-            </div>
+            <?php
+                }
+            } 
+            ?>
         </div>
-    </section>
-
+    </div>
+</section>
 
 
     <!-- Left Paragraph Right Image -->
