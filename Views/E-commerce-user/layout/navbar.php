@@ -243,7 +243,7 @@
         </div>
     </div>
 </section>
-
+<!-- 
 <style>
     .contact-page #banner {
     display: none;
@@ -258,5 +258,5 @@
             document.getElementById("banner").style.display = "none";
         }
     });
-</script>
+</script> -->
 
