@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skincare Homepage</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        body {
+            padding: 20px;
+        }
+
         /* Header Styles */
         header h1 {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -154,7 +159,8 @@
         .text-content .cta-button:hover {
             background: #ff3b2f;
         }
-/* 
+
+        /* 
         .image-content-right img {
             width: 100%;
             height: auto;
@@ -226,23 +232,15 @@
             padding: 20px;
         }
 
-        .product-card {
-            width: 400px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: relative;
-        }
 
-        .product-card img {
+
+        .product-card1 img {
             width: 100%;
             border-radius: 10px;
             animation: spinFromRight 4s linear infinite;
         }
 
-        .product-card p {
+        .product-card1 p {
             display: none;
             margin-top: 10px;
         }
@@ -258,152 +256,172 @@
             border-radius: 5px;
         }
 
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-        }
-
-        footer a {
-            color: #ff6f61;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
 
         .discount-cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
 
-.discount-card {
-    position: relative;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease;
-}
 
-.discount-card:hover {
-    transform: scale(1.05);
-}
- /* Discount Products Styles - Won't affect existing elements */
- .discount-products {
-        padding: 40px 20px;
-        background: #f9f3f3;
-        margin: 40px 0;
-    }
-    
-    .discount-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    
-    .discount-header h2 {
-        font-size: 2.2rem;
-        color: #ff6f61;
-        margin-bottom: 10px;
-    }
-    
-    .discount-header p {
-        color: #666;
-        font-size: 1.1rem;
-    }
-    
-    .discount-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 25px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .discount-card {
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-        position: relative;
-    }
-    
-    .discount-card:hover {
-        transform: translateY(-5px);
-    }
-    
-    .discount-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #ff6f61;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.9rem;
-        z-index: 2;
-    }
-    
-    .discount-card img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-    }
-    
-    .discount-info {
-        padding: 20px;
-    }
-    
-    .discount-info h3 {
-        margin: 0 0 10px;
-        font-size: 1.3rem;
-        color: #333;
-    }
-    
-    .price {
-        margin: 15px 0;
-    }
-    
-    .original-price {
-        text-decoration: line-through;
-        color: #999;
-        font-size: 1rem;
-        margin-right: 10px;
-    }
-    
-    .sale-price {
-        color: #ff6f61;
-        font-size: 1.3rem;
-        font-weight: bold;
-    }
-    
-    .add-to-cart {
-        width: 100%;
-        padding: 12px;
-        background: #333;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background 0.3s;
-    }
-    
-    .add-to-cart:hover {
-        background: #ff6f61;
-    }
 
+
+        .discount-products {
+            padding: 40px 20px;
+            background: #f9f3f3;
+            margin: 40px 0;
+        }
+
+        .discount-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .discount-header h2 {
+            font-size: 2.2rem;
+            color: #ff6f61;
+            margin-bottom: 10px;
+        }
+
+        .discount-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        @media (max-width: 1199px) {
+            .products-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .products-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 575px) {
+            .products-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+
+
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff5252;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #0d6efd;
+            font-size: 1.1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .product-card1 {
+
+            width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .add-to-cart {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #ff3b2f;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Welcome to Glow Skincare</h1>
@@ -437,6 +455,39 @@
             <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
         </div>
     </div>
+    <section class="discount-products">
+        <div class="discount-header">
+            <h2>Special Discounts</h2>
+            <p>Limited time offers - save up to 30%</p>
+        </div>
+
+        <div class="container">
+            <div class="products-container">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="discount-badge">-20%</div>
+                    <div class="product-image" style="background-image: url('https://i.pinimg.com/474x/89/4b/e1/894be1215c80e3965b0491231bc6075d.jpg')"></div>
+                    <div class="product-info">
+                        <h5 class="product-name">Darius Watts</h5>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="price">
+                            <span class="original-price">$ 12.50</span>
+                            $ 10.00
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- Left Paragraph Right Image -->
     <div class="container">
@@ -452,36 +503,38 @@
         </div>
     </div>
 
+
+
     <!-- Left Image  Paragraph -->
     <div class="container">
         <div class="content-section">
             <div class="image-content-left">
-                <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="Glow Skincare Products"  style="   border-radius: 10px 70px 10px 70px;
+                <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="Glow Skincare Products" style="   border-radius: 10px 70px 10px 70px;
                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
             </div>
             <div class="image-content-left">
-            <img src="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg" 
-                 alt="Glow Skincare Products"
-                 style="   border-radius: 10px 70px 10px 70px;
+                <img src="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
+                    alt="Glow Skincare Products"
+                    style="   border-radius: 10px 70px 10px 70px;
                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
             </div>
-           
+
         </div>
     </div>
 
     <!-- Product Cards -->
     <div class="product-container">
-        <div class="product-card">
+        <div class="product-card1">
             <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
             <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
             <button class="learn-more">Learn More</button>
         </div>
-        <div class="product-card">
+        <div class="product-card1">
             <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
             <p>Brighten your complexion with our powerful Vitamin C serum.</p>
             <button class="learn-more">Learn More</button>
         </div>
-        <div class="product-card">
+        <div class="product-card1">
             <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
             <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
             <button class="learn-more">Learn More</button>
@@ -503,185 +556,65 @@
     </div>
 
 
-    
+
     <!-- Discount Products Section -->
-<section class="discount-products">
-    <div class="discount-header">
-        <h2>Special Discounts</h2>
-        <p>Limited time offers - save up to 30%</p>
-    </div>
-    
-    <div class="discount-grid">
-        <!-- Product 1 -->
-        <div class="discount-card">
-            <div class="discount-badge">25% OFF</div>
-            <img src="https://media.glamour.com/photos/67c1fff02b9b554064fdfe92/1:1/pass/undefined" alt="Moisturizer">
-            <div class="discount-info">
-                <h3>Hydrating Moisturizer</h3>
-                <div class="price">
-                    <span class="original-price">$29.99</span>
-                    <span class="sale-price">$22.49</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-        
-        <!-- Product 2 -->
-        <div class="discount-card">
-            <div class="discount-badge">20% OFF</div>
-            <img src="https://foundationskincare.com/cdn/shop/articles/Makeup_Infused.jpg?v=1702945276" alt="Serum">
-            <div class="discount-info">
-                <h3>Vitamin C Serum</h3>
-                <div class="price">
-                    <span class="original-price">$34.99</span>
-                    <span class="sale-price">$27.99</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-        <!-- Product 3 -->
-        <div class="discount-card">
-            <div class="discount-badge">20% OFF</div>
-            <img src="https://static.vecteezy.com/system/resources/previews/007/788/936/non_2x/red-matte-lipstick-in-gold-and-black-tube-package-put-on-dark-table-isolated-on-white-background-in-studio-red-lipstick-with-open-cap-makeup-beauty-cosmetic-for-confident-fashion-women-free-photo.jpg" alt="Serum">
-            <div class="discount-info">
-                <h3>Vitamin C Serum</h3>
-                <div class="price">
-                    <span class="original-price">$34.99</span>
-                    <span class="sale-price">$27.99</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-        <!-- Product 4 -->
-        <div class="discount-card">
-            <div class="discount-badge">20% OFF</div>
-            <img src="https://www.keyuanbottle.com/data/watermark/20220905/63157083eabf0_.webp" alt="Serum">
-            <div class="discount-info">
-                <h3>Vitamin C Serum</h3>
-                <div class="price">
-                    <span class="original-price">$34.99</span>
-                    <span class="sale-price">$27.99</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-        
-        <!-- Product 5 -->
-        <div class="discount-card">
-            <div class="discount-badge">30% OFF</div>
-            <img src="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg" alt="Sunscreen">
-            <div class="discount-info">
-                <h3>Sunscreen SPF 50</h3>
-                <div class="price">
-                    <span class="original-price">$24.99</span>
-                    <span class="sale-price">$17.49</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-         <!-- Product 6 -->
-         <div class="discount-card">
-            <div class="discount-badge">25% OFF</div>
-            <img src="https://media.glamour.com/photos/67c1fff02b9b554064fdfe92/1:1/pass/undefined" alt="Moisturizer">
-            <div class="discount-info">
-                <h3>Hydrating Moisturizer</h3>
-                <div class="price">
-                    <span class="original-price">$29.99</span>
-                    <span class="sale-price">$22.49</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-        
-        <!-- Product 7 -->
-        <div class="discount-card">
-            <div class="discount-badge">20% OFF</div>
-            <img src="https://foundationskincare.com/cdn/shop/articles/Makeup_Infused.jpg?v=1702945276" alt="Serum">
-            <div class="discount-info">
-                <h3>Vitamin C Serum</h3>
-                <div class="price">
-                    <span class="original-price">$34.99</span>
-                    <span class="sale-price">$27.99</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-        <!-- Product 8 -->
-        <div class="discount-card">
-            <div class="discount-badge">20% OFF</div>
-            <img src="https://static.vecteezy.com/system/resources/previews/007/788/936/non_2x/red-matte-lipstick-in-gold-and-black-tube-package-put-on-dark-table-isolated-on-white-background-in-studio-red-lipstick-with-open-cap-makeup-beauty-cosmetic-for-confident-fashion-women-free-photo.jpg" alt="Serum">
-            <div class="discount-info">
-                <h3>Vitamin C Serum</h3>
-                <div class="price">
-                    <span class="original-price">$34.99</span>
-                    <span class="sale-price">$27.99</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-        
-        <!-- Add more products as needed -->
-    </div>
-</section>
 
 
-<script>
-    // Simple script for the discount section
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function() {
-            const productName = this.closest('.discount-card').querySelector('h3').textContent;
-            alert(`Added ${productName} to your cart!`);
-        });
-    });
-</script>
-
-    <footer>
-        <p>© 2025 Glow Skincare. All rights reserved.</p>
-    </footer>
 
     <script>
-// Select the container with class 'cards'
-const container = document.querySelector('.cards');
+        // Simple script for the discount section
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.closest('.discount-card').querySelector('h3').textContent;
+                alert(`Added ${productName} to your cart!`);
+            });
+        });
+    </script>
 
-// Hide the scroll bar to keep the UI clean
-container.style.overflowX = 'hidden';
+    <script>
+        // Select the container with class 'cards'
+        const container = document.querySelector('.cards');
 
-// Get the width of the original set of cards
-const originalScrollWidth = container.scrollWidth;
+        // Hide the scroll bar to keep the UI clean
+        container.style.overflowX = 'hidden';
 
-// Clone all existing cards and append them for seamless looping
-const cards = Array.from(container.querySelectorAll('.card'));
-cards.forEach(card => {
-  const clone = card.cloneNode(true);
-  container.appendChild(clone);
-});
+        // Get the width of the original set of cards
+        const originalScrollWidth = container.scrollWidth;
 
-// Set the initial scroll position
-container.scrollLeft = originalScrollWidth;
+        // Clone all existing cards and append them for seamless looping
+        const cards = Array.from(container.querySelectorAll('.card'));
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            container.appendChild(clone);
+        });
 
-// Define the speed of the animation (pixels per second)
-const speed = 100;
-let lastTime = performance.now();
+        // Set the initial scroll position
+        container.scrollLeft = originalScrollWidth;
 
-// Animation function for continuous movement
-function animate(currentTime) {
-  const deltaTime = (currentTime - lastTime) / 1000;
-  container.scrollLeft -= speed * deltaTime;
-  if (container.scrollLeft <= 0) {
-    container.scrollLeft += originalScrollWidth;
-  }
-  lastTime = currentTime;
-  requestAnimationFrame(animate);
-}
+        // Define the speed of the animation (pixels per second)
+        const speed = 100;
+        let lastTime = performance.now();
 
-// Start the animation
-requestAnimationFrame(animate);
+        // Animation function for continuous movement
+        function animate(currentTime) {
+            const deltaTime = (currentTime - lastTime) / 1000;
+            container.scrollLeft -= speed * deltaTime;
+            if (container.scrollLeft <= 0) {
+                container.scrollLeft += originalScrollWidth;
+            }
+            lastTime = currentTime;
+            requestAnimationFrame(animate);
+        }
 
-// Ensure images have no animations
-const images = document.querySelectorAll('.card img');
-images.forEach(img => {
-  img.style.animation = 'none';
-});
+        // Start the animation
+        requestAnimationFrame(animate);
+
+        // Ensure images have no animations
+        const images = document.querySelectorAll('.card img');
+        images.forEach(img => {
+            img.style.animation = 'none';
+        });
     </script>
 </body>
+
 </html>
