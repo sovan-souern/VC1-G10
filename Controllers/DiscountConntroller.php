@@ -10,7 +10,12 @@ class DiscountController extends BaseController
     {
         $this->model = new DiscountModel();
     }
-
+    function index()
+    {
+        $discounts = $this->model->getDiscounts();  
+        $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
+    }
+    
     function create($id)
     {
        
@@ -47,11 +52,7 @@ class DiscountController extends BaseController
             echo "Error: Invalid request method.";
         }
     }
-    function index()
-    {
-        $discounts = $this->model->getDiscounts();  
-        $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
-    }
+
     function edit($id)
     {
        
