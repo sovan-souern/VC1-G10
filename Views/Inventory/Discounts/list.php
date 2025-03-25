@@ -56,15 +56,14 @@
               </span>
             </div>
             <div class="action-buttons">
-              <a class="action-btn view-btn" href="products/view?id=<?php echo $discount["product_id"]; ?>">
+              <a class="action-btn view-btn" href="discount/view?id=<?php echo $discount["product_id"]; ?>">
                 <img src="/Views/assets/img1/icons/eye.svg" alt="view">
               </a>
               <a class="action-btn edit-btn" href="discount/edit?id=<?php echo $discount["product_id"]; ?>">  
                 <img src="/Views/assets/img1/icons/edit.svg" alt="edit">
               </a>
               <a class="action-btn delete-btn delete-product" href="discount/delete?id=<?php echo $discount["product_id"]; ?>">
-                <img src="/Views/assets/img1/icons/delete.svg" alt="delete">
-                <?php require "delete.php" ?>
+                <img src="/Views/assets/img1/icons/delete.svg" alt="delete" >
               </a>
             </div>
           </div>
@@ -77,4 +76,70 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmLabel">Confirm Deletion</h5>
+                <i class="material-icons" data-bs-dismiss="modal" aria-label="Close">close</i>
+            </div>
+            <div class="modal-body text-dark">
+                Are you sure you want to delete this product?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                <button id="confirmDeleteBtn" type="button" class="btn btn-danger">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all delete buttons
+    const deleteButtons = document.querySelectorAll('.delete-product');
+    let deleteUrl = '';
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            deleteUrl = this.getAttribute('href');
+
+            // Show Bootstrap modal instead of default alert
+            const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            modal.show();
+        });
+    });
+
+    // Handle confirm delete button click
+    document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+        // Make AJAX request to delete
+        fetch(deleteUrl, {
+            method: 'GET' // or 'POST' depending on your backend
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Hide modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+                modal.hide();
+
+                // Show success alert
+                alert('Product successfully deleted!');
+                
+                // Optionally remove the product card from the DOM
+                const productCard = document.querySelector(`a[href="${deleteUrl}"]`).closest('.product-card');
+                if (productCard) {
+                    productCard.remove();
+                }
+            } else {
+                alert('Error deleting product: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

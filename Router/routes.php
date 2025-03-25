@@ -90,6 +90,7 @@ $routes->post('/discount/store', [DiscountController::class, 'store']);
 $routes->get('/discount/edit', [DiscountController::class, 'edit']);
 $routes->put('/discount/update', [DiscountController::class, 'update']);
 $routes->get('/discount/delete', [DiscountController::class, 'destroy']);
+$routes->get('/discount/view', [DiscountController::class, 'view']);
 
 
 // Category Routes

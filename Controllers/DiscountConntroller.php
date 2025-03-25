@@ -10,13 +10,19 @@ class DiscountController extends BaseController
     {
         $this->model = new DiscountModel();
     }
-
+    function index()
+    {
+        $discounts = $this->model->getDiscounts();  
+        $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
+    }
+    
     function create($id)
     {
        
         $products = $this->model->getProduct($id);
+        $discount = $this->model->getDiscount($id);
         
-        $this->views('Inventory/Discounts/create.php', ["product" => $products]);
+        $this->views('Inventory/Discounts/create.php', ["product" => $products,"discount"=>$discount]);
     }
 
     function store()
@@ -46,11 +52,7 @@ class DiscountController extends BaseController
             echo "Error: Invalid request method.";
         }
     }
-    function index()
-    {
-        $discounts = $this->model->getDiscounts();  
-        $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
-    }
+
     function edit($id)
     {
        
@@ -94,5 +96,13 @@ class DiscountController extends BaseController
         } else {
             echo "Failed to delete discount.";
         }
+    }
+    function view($id){
+        $products = $this->model->getProduct($id);
+        $discount = $this->model->getDiscount($id); 
+        $categories = $this->model->getCategories($id);
+        $brands = $this->model->getBrands($id);
+        $this->views("Inventory/Discounts/view.php", ["discount"=>$discount,"products" => $products, "categories" => $categories, "brands" => $brands]);
+        
     }
 }
