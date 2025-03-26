@@ -34,88 +34,108 @@ class LoginRegisterController extends BaseController {
     public function store() {
         header('Content-Type: application/json');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = htmlspecialchars($_POST['name'] ?? '');
-            $email = htmlspecialchars($_POST['email'] ?? '');
-            $password = htmlspecialchars($_POST['password'] ?? '');
-            $profilePicture = null;
+            try {
+                $name = htmlspecialchars($_POST['name'] ?? '');
+                $phone = htmlspecialchars($_POST['phone'] ?? '');
+                $password = htmlspecialchars($_POST['password'] ?? '');
+                $profilePicture = null;
 
-            error_log("Store method called - Name: $name, Email: $email");
-
-            if (empty($name) || empty($email) || empty($password)) {
-                $message = "All fields are required!";
-                error_log($message);
-                echo json_encode(["status" => "error", "message" => $message]);
-                exit();
-            }
-
-            if ($this->user->getAdminByEmail($email)) {
-                $message = "Email already exists!";
-                error_log($message);
-                echo json_encode(["status" => "error", "message" => $message]);
-                exit();
-            }
-
-            if (!empty($_FILES['profile_picture']['name'])) {
-                $uploadDir = "uploads/";
-                if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0777, true);
-                    error_log("Created uploads directory: $uploadDir");
+                // Validate required fields
+                if (empty($name) || empty($phone) || empty($password)) {
+                    throw new Exception("All fields are required!");
                 }
 
-                $fileName = time() . "_" . basename($_FILES["profile_picture"]["name"]);
-                $targetFilePath = $uploadDir . $fileName;
+                // Handle profile picture upload
+                if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = "uploads/profiles/"; // Changed directory structure
+                    
+                    // Create directory if it doesn't exist
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
 
-                error_log("Attempting to move file to: $targetFilePath");
-                if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $targetFilePath)) {
+                    // Generate unique filename
+                    $fileExtension = strtolower(pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION));
+                    $uniqueFileName = uniqid('profile_') . '.' . $fileExtension;
+                    $targetFilePath = $uploadDir . $uniqueFileName;
+
+                    // Validate file type
+                    $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                    if (!in_array($fileExtension, $allowedTypes)) {
+                        throw new Exception("Invalid file type. Only JPG, JPEG, PNG & GIF files are allowed.");
+                    }
+
+                    // Move the uploaded file
+                    if (!move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetFilePath)) {
+                        throw new Exception("Failed to upload profile picture.");
+                    }
+
                     $profilePicture = $targetFilePath;
-                    error_log("File uploaded successfully: $profilePicture");
-                } else {
-                    $message = "Failed to upload profile picture! Error: " . print_r($_FILES, true);
-                    error_log($message);
-                    echo json_encode(["status" => "error", "message" => $message]);
-                    exit();
+                    error_log("Profile picture saved at: " . $profilePicture);
                 }
-            }
+                
+                // Register user
+                $result = $this->user->registerAdmin($name, $phone, $password, $profilePicture);
+                
+                if (!$result) {
+                    throw new Exception("Registration failed!");
+                }
 
-            $result = $this->user->registerAdmin($name, $email, $password, $profilePicture);
+                echo json_encode([
+                    "status" => "success",
+                    "message" => "Registration successful! Please login.",
+                    "redirect" => "/login"
+                ]);
 
-            if ($result) {
-                $message = "Registration successful! Please login.";
-                error_log($message . " - User: $name, Email: $email");
-                echo json_encode(["status" => "success", "message" => $message, "redirect" => "/login"]);
-            } else {
-                $message = "Registration failed!";
-                error_log($message . " - User: $name, Email: $email");
-                echo json_encode(["status" => "error", "message" => $message]);
+            } catch (Exception $e) {
+                error_log("Registration error: " . $e->getMessage());
+                echo json_encode([
+                    "status" => "error",
+                    "message" => $e->getMessage()
+                ]);
             }
-            exit();
-        } else {
-            error_log("Invalid request method: " . $_SERVER['REQUEST_METHOD']);
-            echo json_encode(["status" => "error", "message" => "Invalid request method"]);
-            exit();
         }
+        exit();
     }
 
     public function authenticate() {
         header('Content-Type: application/json');
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = htmlspecialchars($_POST['email'] ?? '');
-            $password = htmlspecialchars($_POST['password'] ?? '');
-
-            if (empty($email) || empty($password)) {
-                echo json_encode(["status" => "error", "message" => "Email and password are required!"]);
-                exit();
+        
+        try {
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                throw new Exception('Invalid request method');
             }
 
-            $user = $this->user->authenticateAdmin($email, $password);
+            $phone = trim($_POST['phone'] ?? '');
+            $password = trim($_POST['password'] ?? '');
+
+            error_log("Debug - Login attempt with phone: " . $phone);
+
+            if (empty($phone) || empty($password)) {
+                throw new Exception('Phone number and password are required');
+            }
+
+            // Additional phone validation if needed
+            if (!preg_match("/^[0-9]{10}$/", $phone)) {
+                throw new Exception('Invalid phone number format');
+            }
+
+            $user = $this->user->authenticateAdmin($phone, $password);
+            error_log("Debug - Authentication result: " . ($user ? 'success' : 'failed'));
+
             if ($user) {
+                // Start session if not already started
                 if (session_status() == PHP_SESSION_NONE) {
                     session_start();
                 }
+
+                // Set session variables
                 $_SESSION['admin_ID'] = $user['admin_ID'];
                 $_SESSION['name'] = $user['name'];
-                $_SESSION['email'] = $user['email'];
+                $_SESSION['phone'] = $user['phone'];
                 $_SESSION['profile_picture'] = $user['profile_picture'];
+
+                error_log("Debug - Login successful for user: " . $user['name']);
 
                 echo json_encode([
                     "status" => "success",
@@ -123,9 +143,15 @@ class LoginRegisterController extends BaseController {
                     "redirect" => "/dashboard"
                 ]);
             } else {
-                echo json_encode(["status" => "error", "message" => "Invalid email or password!"]);
+                throw new Exception('Invalid phone number or password');
             }
-            exit();
+
+        } catch (Exception $e) {
+            error_log("Login error: " . $e->getMessage());
+            echo json_encode([
+                "status" => "error",
+                "message" => $e->getMessage()
+            ]);
         }
     }
 

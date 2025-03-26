@@ -170,32 +170,78 @@
     </div>
 </header>
 
+<<<<<<< HEAD
 
 <!-- 
 <section id="banner" style="background: #FBDEE7;">
     <div class="container">
         <div class="swiper main-swiper">
             <div class="swiper-wrapper">
+=======
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      overflow-x: hidden;
+    }
+    .slideshow-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000; /* Fallback background */
+    }
+    .mySlides {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .mySlides.active {
+      display: block; /* Show active slide */
+    }
+    .mySlides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0; /* Start hidden */
+      transition: opacity 1.5s ease-in-out; /* Slow fade for image only */
+    }
+    .mySlides.active img {
+      opacity: 1; /* Fade in when active */
+    }
+>>>>>>> 9469813a5b1c3a0ff94b34ff8c96e2018c623373
 
-                <div class="swiper-slide py-5">
-                    <div class="row banner-content align-items-center">
-                        <div class="img-wrapper col-md-5">
-                            <img src="https://i.pinimg.com/736x/48/bf/fe/48bffeb7f0c3cd3862e8e3adf23289b9.jpg"
-                                class="img-fluid">
-                        </div>
-                        <div class="content-wrapper col-md-7 p-5 mb-5">
-                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
-                                    class="text-primary">your
-                                    pets</span>
-                            </h2>
-                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                shop now
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#arrow-right"></use>
-                                </svg></a>
-                        </div>
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      /* font-size: 24px; */
+      background: rgba(0, 0, 0, 0.5);
+      transition: background-color 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      z-index: 10;
+    }
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    /* .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    } */
 
+<<<<<<< HEAD
                     </div>
                 </div>
               
@@ -396,6 +442,102 @@
 </script>
 
 
+=======
+    .dot-container {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+    }
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+    .dot.active, .dot:hover {
+      background-color: #717171; /* Active/hover state for dots */
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow-container">
+    <div class="mySlides">
+      <div class="numbertext"></div>
+      <img src="https://i.pinimg.com/736x/8e/34/11/8e341193c5c38567efda4986e48a211c.jpg" alt="Slide 1">
+      <div class="text"></div>
+    </div>
+    <div class="mySlides">
+      <div class="numbertext"></div>
+      <img src="https://i.pinimg.com/736x/a6/03/80/a60380ae1b5e9674d50e9f104a1c330b.jpg" alt="Slide 2">
+      <div class="text"></div>
+    </div>
+    <div class="mySlides">
+      <div class="numbertext"></div>
+      <img src="https://i.pinimg.com/736x/65/a1/56/65a156eb330b016c1648fe63e66e9658.jpg" alt="Slide 3">
+      <div class="text"></div>
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+  </div>
+  <div class="dot-container">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+
+  <script>
+    let slideIndex = 1;
+    let slideInterval;
+
+    // Show slides
+    function showSlides(n) {
+      const slides = document.querySelectorAll(".mySlides");
+      const dots = document.querySelectorAll(".dot");
+
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        dots[i].classList.remove("active");
+      });
+
+      slides[slideIndex - 1].classList.add("active");
+      dots[slideIndex - 1].classList.add("active");
+    }
+
+    // Next/Previous controls
+    function plusSlides(n) {
+      clearInterval(slideInterval);
+      showSlides(slideIndex += n);
+      startSlideshow();
+    }
+
+    // Dot controls
+    function currentSlide(n) {
+      clearInterval(slideInterval);
+      showSlides(slideIndex = n);
+      startSlideshow();
+    }
+
+    // Start automatic slideshow
+    function startSlideshow() {
+      slideInterval = setInterval(() => plusSlides(1), 4000); // Adjusted to 2s for smoother feel
+    }
+
+    // Initial setup
+    showSlides(slideIndex);
+    startSlideshow();
+  </script>
+
+<!-- 
+>>>>>>> 9469813a5b1c3a0ff94b34ff8c96e2018c623373
 <style>
     .contact-page #banner {
     display: none;
@@ -410,5 +552,77 @@
             document.getElementById("banner").style.display = "none";
         }
     });
-</script>
+</script> -->
 
+<style>
+    /* Banner Section */
+    #banner {
+        background: #FBDEE7;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #banner .container {
+        padding: 0;
+    }
+
+    #banner .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    #banner .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+        /* Adjust height as needed */
+    }
+
+    #banner .img-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #banner .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Ensures the image covers the area without distortion */
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        /* Smooth transition for scale and opacity */
+    }
+
+    /* Hover effect on the image */
+    #banner .banner-image:hover {
+        transform: scale(1.05);
+        /* Slight zoom on hover */
+        opacity: 0.9;
+        /* Slight fade on hover */
+    }
+
+    /* Smooth transition for Swiper slides */
+    #banner .swiper-slide {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    #banner .swiper-slide-active {
+        opacity: 1;
+    }
+
+    /* Optional: Style the pagination dots */
+    #banner .swiper-pagination-bullet {
+        background: #fff;
+        opacity: 0.5;
+    }
+
+    #banner .swiper-pagination-bullet-active {
+        background: #ff6f61;
+        /* Matches your theme color */
+        opacity: 1;
+    }
+</style>

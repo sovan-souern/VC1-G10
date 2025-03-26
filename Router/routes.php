@@ -71,8 +71,12 @@ $routes->delete('/user/delete', [UserController::class, 'destroy']);
 
 // Notification Routes
 $routes->get('/notifications', [NotificationController::class, 'index']); 
+$routes->get('/notifications/view', [NotificationController::class, 'view']); 
+$routes->get('/notifications/delete', [NotificationController::class, 'destroy']); 
+$routes->get('/notifications/update', [NotificationController::class, 'update']); 
 $routes->get('/out-stock', [ProductController::class, 'OutStock']);
 // Product Routes (Inventory)
+
 $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);
 $routes->post('/products/store', [ProductController::class, 'store']);
@@ -135,11 +139,12 @@ $routes->get('/about', [AboutController::class, 'index']);
 
 
 $routes->get('/productuser', [ProductUserController::class, 'index']);
-// $routes->get('/card', [ProductUserController::class, 'ProductCard']);
+$routes->get('/card', [ProductUserController::class, 'ProductCard']);
 $routes->get('/view-card', [ProductUserController::class, 'ProductDetail']);
 $routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
 
 
+$routes->post('/contact/store', [NotificationController::class, 'store']);
 $routes->get('/contact', [ContactController::class, 'index']);
 
 
