@@ -7,12 +7,12 @@ require_once "Models/NotificationModel.php";
 class NotificationController extends BaseController
 {
     private $model;
-    // private $product_model;  // Add your ProductModel here for out of stock notification.
+   
 
     function __construct()
     {
         $this->model = new NotificationModel;
-        // $this->product_model = new ProductModel;
+        
     }
 
     function index()
@@ -21,6 +21,7 @@ class NotificationController extends BaseController
         $this->views('/notification/notification.php', ["notifications" => $notifications]);
         $this->views('/layout/nav.php', ["notifications" => $notifications]);
     }
+
     function store()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -35,5 +36,31 @@ class NotificationController extends BaseController
             $this->model->createNotification($data);
             $this->redirect('/home');
         }
+    }
+
+    function view($id)
+    {
+        $notification = $this->model->getNotification($id);
+        if ($notification) {
+            $this->views('/notification/view.php', ["notification" => $notification]);
+        } else {
+            echo "Notification not found.";
+        }
+    }
+
+    function destroy($id)
+    {
+        $this->model->delete($id); // Call the delete method from the model
+        $this->redirect('/notifications'); // Fix the redirect URL
+    }
+
+    function update($id)
+    {
+        $data = [
+            'status' => "read", // Set the status to "read"
+            'id' => $id
+        ];
+        $this->model->updateRead($data); 
+        $this->redirect('/notifications'); 
     }
 }
