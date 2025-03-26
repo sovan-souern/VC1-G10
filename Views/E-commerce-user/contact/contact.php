@@ -126,7 +126,7 @@
         }
 
         .contact-container {
-            background: #CC88D8;
+            background:#FBDEE7;
             padding: 20px;
             border-radius: 10px;
             width: 100%;
@@ -388,6 +388,13 @@
             lat: 11.562108, // National Police Headquarters, Phnom Penh
             lng: 104.916009,
             name: 'National Police Headquarters, Phnom Penh'
+        },
+        {
+            english: 'PNC',
+            khmer: 'អង្គការប៊ាសឺរ៉ែលនុយមេរិក',
+            lat: 11.562108, // National Police Headquarters, Phnom Penh
+            lng: 104.916009,
+            name: 'borey sorla , 371'
         },
         {
             english: 'the university of cambodia',
