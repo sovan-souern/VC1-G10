@@ -14,6 +14,7 @@ class DiscountController extends BaseController
     {
         $discounts = $this->model->getDiscounts();  
         $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
+
     }
     
     function create($id)

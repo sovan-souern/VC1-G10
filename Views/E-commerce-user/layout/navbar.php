@@ -174,72 +174,25 @@
     <div class="container">
         <div class="swiper main-swiper">
             <div class="swiper-wrapper">
-
                 <div class="swiper-slide py-5">
                     <div class="row banner-content align-items-center">
-                        <div class="img-wrapper col-md-5">
+                        <div class="img-wrapper col-md-12">
                             <img src="https://i.pinimg.com/736x/48/bf/fe/48bffeb7f0c3cd3862e8e3adf23289b9.jpg"
-                                class="img-fluid">
+                                 class="img-fluid banner-image" alt="Banner Image">
                         </div>
-                        <div class="content-wrapper col-md-7 p-5 mb-5">
-                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
-                                    class="text-primary">your
-                                    pets</span>
-                            </h2>
-                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                shop now
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#arrow-right"></use>
-                                </svg></a>
-                        </div>
-
                     </div>
                 </div>
+                <!-- Add more slides if needed -->
                 <div class="swiper-slide py-5">
                     <div class="row banner-content align-items-center">
-                        <div class="img-wrapper col-md-5">
-                            <img src="images//banner-img3.png" class="img-fluid">
+                        <div class="img-wrapper col-md-12">
+                            <img src="https://i.pinimg.com/736x/48/bf/fe/48bffeb7f0c3cd3862e8e3adf23289b9.jpg"
+                                 class="img-fluid banner-image" alt="Banner Image">
                         </div>
-                        <div class="content-wrapper col-md-7 p-5 mb-5">
-                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
-                                    class="text-primary">your
-                                    pets</span>
-                            </h2>
-                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                shop now
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#arrow-right"></use>
-                                </svg></a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="swiper-slide py-5">
-                    <div class="row banner-content align-items-center">
-                        <div class="img-wrapper col-md-5">
-                            <img src="images/banner-img4.png" class="img-fluid">
-                        </div>
-                        <div class="content-wrapper col-md-7 p-5 mb-5">
-                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
-                                    class="text-primary">your
-                                    pets</span>
-                            </h2>
-                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                shop now
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#arrow-right"></use>
-                                </svg></a>
-                        </div>
-
                     </div>
                 </div>
             </div>
-
             <div class="swiper-pagination mb-5"></div>
-
         </div>
     </div>
 </section>
@@ -260,3 +213,69 @@
     });
 </script> -->
 
+<style>
+    /* Banner Section */
+#banner {
+    background: #FBDEE7;
+    padding: 0;
+    overflow: hidden;
+}
+
+#banner .container {
+    padding: 0;
+}
+
+#banner .swiper {
+    width: 100%;
+    height: 100%;
+}
+
+#banner .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px; /* Adjust height as needed */
+}
+
+#banner .img-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transition for scale and opacity */
+}
+
+/* Hover effect on the image */
+#banner .banner-image:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    opacity: 0.9; /* Slight fade on hover */
+}
+
+/* Smooth transition for Swiper slides */
+#banner .swiper-slide {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#banner .swiper-slide-active {
+    opacity: 1;
+}
+
+/* Optional: Style the pagination dots */
+#banner .swiper-pagination-bullet {
+    background: #fff;
+    opacity: 0.5;
+}
+
+#banner .swiper-pagination-bullet-active {
+    background: #ff6f61; /* Matches your theme color */
+    opacity: 1;
+}
+</style>
