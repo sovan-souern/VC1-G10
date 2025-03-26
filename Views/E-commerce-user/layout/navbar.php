@@ -170,6 +170,8 @@
     </div>
 </header>
 
+
+<!-- 
 <section id="banner" style="background: #FBDEE7;">
     <div class="container">
         <div class="swiper main-swiper">
@@ -196,53 +198,203 @@
 
                     </div>
                 </div>
-                <div class="swiper-slide py-5">
-                    <div class="row banner-content align-items-center">
-                        <div class="img-wrapper col-md-5">
-                            <img src="images//banner-img3.png" class="img-fluid">
-                        </div>
-                        <div class="content-wrapper col-md-7 p-5 mb-5">
-                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
-                                    class="text-primary">your
-                                    pets</span>
-                            </h2>
-                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                shop now
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#arrow-right"></use>
-                                </svg></a>
-                        </div>
+              
 
-                    </div>
-                </div>
-                <div class="swiper-slide py-5">
-                    <div class="row banner-content align-items-center">
-                        <div class="img-wrapper col-md-5">
-                            <img src="images/banner-img4.png" class="img-fluid">
-                        </div>
-                        <div class="content-wrapper col-md-7 p-5 mb-5">
-                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
-                                    class="text-primary">your
-                                    pets</span>
-                            </h2>
-                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                shop now
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#arrow-right"></use>
-                                </svg></a>
-                        </div>
-
-                    </div>
-                </div>
             </div>
 
             <div class="swiper-pagination mb-5"></div>
 
         </div>
     </div>
+</section> -->
+<!-- Slideshow section -->
+
+<!-- Add this within your .container div -->
+<!-- Place this within your .container div -->
+<section class="slideshow-section">
+    <div class="slideshow-container">
+        <div class="slides-wrapper">
+            <div class="mySlides">
+                <div class="numbertext">1 / 3</div>
+                <img src="https://www.lorealparisusa.com/-/media/project/loreal/brand-sites/oap/americas/us/beauty-magazine/articles/how-to-organize-skin-care-products/loreal-paris-bmag-article-how-to-organize-your-skin-care-products-d.jpg">
+                <div class="text">Glow with Korean Skincare</div>
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 3</div>
+                <img src="https://cdn.thewirecutter.com/wp-content/media/2024/12/ROUNDUP-KOREAN-SKINCARE-2048px-9577.jpg" alt="Skincare 2">
+                <div class="text">Hydrate & Radiate</div>
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 3</div>
+                <img src="https://hips.hearstapps.com/hmg-prod/images/gh-best-skincare-products-6557978b58b57.png?crop=0.6666666666666666xw:1xh;center,top&resize=1200:*" alt="Skincare 3">
+                <div class="text">Pure Bliss in Every Drop</div>
+            </div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+
+    <div class="dots-container">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
 </section>
+
+<!-- Add this CSS to your existing <style> tag -->
+<style>
+    .slideshow-section {
+        margin: 0; /* Remove margin to allow full-screen */
+        width: 100vw; /* Full viewport width */
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw; /* Offset to extend beyond container */
+        margin-right: -50vw;
+    }
+
+    .slideshow-container {
+        width: 100%; /* Full width */
+        height: 100vh; /* Full viewport height */
+        position: relative;
+        overflow: hidden;
+        border-radius: 0; /* Remove rounding for full-screen */
+        box-shadow: none; /* Remove shadow for cleaner look */
+    }
+
+    .slides-wrapper {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 100%;
+        height: 100%; /* Match container height */
+    }
+
+    .mySlides {
+        min-width: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 100%; /* Full height of container */
+    }
+
+    .mySlides img {
+        width: 100%;
+        height: 100%; /* Full height of slide */
+        object-fit: cover; /* Cover entire area */
+        transition: transform 0.5s ease;
+    }
+
+    .mySlides:hover img {
+        transform: scale(1.05);
+    }
+
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 20px;
+        color: white;
+        font-size: 30px; /* Larger for full-screen */
+        background: rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .prev { left: 20px; border-radius: 0 10px 10px 0; }
+    .next { right: 20px; border-radius: 10px 0 0 10px; }
+
+    .prev:hover, .next:hover {
+        background: rgba(0, 0, 0, 0.9);
+        padding: 20px 30px;
+    }
+
+    .text, .numbertext {
+        position: absolute;
+        color: white;
+        padding: 20px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .text {
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 24px; /* Larger for full-screen */
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    }
+
+    .numbertext {
+        top: 20px;
+        left: 20px;
+        font-size: 16px;
+    }
+
+    .dots-container {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+    }
+
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 8px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        display: inline-block;
+        transition: all 0.3s ease;
+        border: 2px solid #fff;
+    }
+
+    .dot:hover, .dot.active {
+        background-color: #ff9a9e;
+        transform: scale(1.2);
+    }
+
+    @media (max-width: 600px) {
+        .text { font-size: 18px; }
+        .prev, .next { font-size: 24px; padding: 15px; }
+        .numbertext { font-size: 14px; }
+        .dot { height: 12px; width: 12px; }
+    }
+</style>
+
+<!-- Add this JavaScript at the bottom of your <body> tag -->
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let slidesWrapper = document.querySelector(".slides-wrapper");
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+
+        slidesWrapper.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
+
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
+
 
 <style>
     .contact-page #banner {
