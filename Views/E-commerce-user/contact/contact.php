@@ -63,7 +63,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 15px;
+            gap: 14px;
             width: 100%;
             margin-top: 30px;
         }
