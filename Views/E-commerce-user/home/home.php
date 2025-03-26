@@ -738,6 +738,13 @@
         .view-cart-btn:hover {
             background-color: #ff9eb5;
         }
+        #cart-item-count {
+            font-size: 20px;
+            color: white;
+        }
+        .cart-header h3{
+            color: white;
+        }
     </style>
 
     <!-- JavaScript -->
@@ -801,7 +808,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <img src="${item.image}" alt="${item.name}">
             <div class="cart-item-details">
                 <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">$${item.price.toFixed(2)}${item.discount ? ` <span class="discount-text">(Discount: -${item.discount}%)</span>` : ''}</div>
+                <div class="cart-item-price">$${item.price.toFixed(2)}${item.discount ? ` <span class="discount-text"> Discount: ${item.discount}%</span>` : ''}</div>
                 <div class="cart-item-quantity">
                     <button class="quantity-btn decrease-btn">-</button>
                     <input type="number" class="quantity-input" value="${item.quantity}" min="1">
