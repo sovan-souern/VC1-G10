@@ -24,8 +24,13 @@ class LoginRegisterController extends BaseController {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        if (isset($_SESSION['admin_ID'])) {
-            header("Location: /dashboard");
+        if (isset($_SESSION['admin_ID']) && isset($_SESSION['role'])) {
+            $role = $_SESSION['role'];
+            if ($role === 'admin' || $role === 'shopowner') {
+                header("Location: /dashboard");
+            } else {
+                header("Location: /home");
+            }
             exit();
         }
         require_once "Views/auth/login.php";
@@ -38,7 +43,14 @@ class LoginRegisterController extends BaseController {
                 $name = htmlspecialchars($_POST['name'] ?? '');
                 $phone = htmlspecialchars($_POST['phone'] ?? '');
                 $password = htmlspecialchars($_POST['password'] ?? '');
+                $role = htmlspecialchars($_POST['role'] ?? 'user');
                 $profilePicture = null;
+
+                // Validate role
+                $validRoles = ['user', 'shopowner', 'admin'];
+                if (!in_array($role, $validRoles)) {
+                    throw new Exception("Invalid role selected!");
+                }
 
                 // Validate required fields
                 if (empty($name) || empty($phone) || empty($password)) {
@@ -74,8 +86,8 @@ class LoginRegisterController extends BaseController {
                     error_log("Profile picture saved at: " . $profilePicture);
                 }
                 
-                // Register user
-                $result = $this->user->registerAdmin($name, $phone, $password, $profilePicture);
+                // Register user with role
+                $result = $this->user->registerAdmin($name, $phone, $password, $profilePicture, $role);
                 
                 if (!$result) {
                     throw new Exception("Registration failed!");
@@ -100,7 +112,6 @@ class LoginRegisterController extends BaseController {
 
     public function authenticate() {
         header('Content-Type: application/json');
-        
         try {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 throw new Exception('Invalid request method');
@@ -109,45 +120,33 @@ class LoginRegisterController extends BaseController {
             $phone = trim($_POST['phone'] ?? '');
             $password = trim($_POST['password'] ?? '');
 
-            error_log("Debug - Login attempt with phone: " . $phone);
-
             if (empty($phone) || empty($password)) {
                 throw new Exception('Phone number and password are required');
             }
 
-            // Additional phone validation if needed
-            if (!preg_match("/^[0-9]{10}$/", $phone)) {
-                throw new Exception('Invalid phone number format');
-            }
-
             $user = $this->user->authenticateAdmin($phone, $password);
-            error_log("Debug - Authentication result: " . ($user ? 'success' : 'failed'));
 
             if ($user) {
-                // Start session if not already started
                 if (session_status() == PHP_SESSION_NONE) {
                     session_start();
                 }
 
-                // Set session variables
                 $_SESSION['admin_ID'] = $user['admin_ID'];
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['phone'] = $user['phone'];
                 $_SESSION['profile_picture'] = $user['profile_picture'];
-
-                error_log("Debug - Login successful for user: " . $user['name']);
+                $_SESSION['role'] = $user['role'];
 
                 echo json_encode([
                     "status" => "success",
                     "message" => "Login successful!",
-                    "redirect" => "/dashboard"
+                    "role" => $user['role'],
+                    "redirect" => ($user['role'] === 'admin' || $user['role'] === 'shopowner') ? '/dashboard' : '/home'
                 ]);
             } else {
                 throw new Exception('Invalid phone number or password');
             }
-
         } catch (Exception $e) {
-            error_log("Login error: " . $e->getMessage());
             echo json_encode([
                 "status" => "error",
                 "message" => $e->getMessage()
@@ -159,7 +158,32 @@ class LoginRegisterController extends BaseController {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+
+        // Store any data you want to keep in database before destroying session
+        $user_data = [
+            'last_logout' => date('Y-m-d H:i:s'),
+            'admin_ID' => $_SESSION['admin_ID'] ?? null
+        ];
+
+        // Clear all session variables
+        $_SESSION = array();
+
+        // Destroy the session cookie
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', time()-3600, '/');
+        }
+
+        // Destroy the session
         session_destroy();
+
+        // Return JSON response for AJAX calls
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            echo json_encode(['status' => 'success', 'redirect' => '/login']);
+            exit;
+        }
+
+        // Regular redirect for non-AJAX calls
         header("Location: /login");
         exit();
     }

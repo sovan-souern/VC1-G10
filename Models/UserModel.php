@@ -26,7 +26,7 @@ class UserModel
         $stmt = $this->pdo->query("SELECT * FROM roles");
         return $stmt->fetchAll();
     }
-
+    
     function getAdmins()
     {
         $stmt = $this->pdo->query("SELECT admin_id, name FROM admins");

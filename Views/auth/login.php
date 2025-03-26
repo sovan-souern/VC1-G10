@@ -2,8 +2,14 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-if (isset($_SESSION['admin_ID'])) {
-    header("Location:/login");
+// Remove the role check from here since we'll get it from database
+if (isset($_SESSION['user_ID'])) {
+    // Redirect based on role stored in session
+    if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'shopowner') {
+        header("Location: /dashboard");
+    } else {
+        header("Location: /home");
+    }
     exit();
 }
 require_once __DIR__ . "/../layout/header.php";
@@ -252,7 +258,7 @@ h3 {
 
     <!-- Right Section (Login Form) -->
     <div class="right-section">
-        <h3>Admin Login</h3>
+        <h3>Login</h3>
 
         <form id="loginForm" method="POST">
             <input type="tel" class="form-control" name="phone" id="phone" 
@@ -260,7 +266,7 @@ h3 {
                    pattern="[0-9]{10}" required>
             
             <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-
+            <!-- Remove role selection as it will come from database -->
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
@@ -286,7 +292,6 @@ h3 {
         button.disabled = true;
         button.innerHTML = "Logging in...";
 
-        // Change endpoint back to /users/authenticate
         fetch("/users/authenticate", {
             method: "POST",
             body: formData
@@ -295,8 +300,14 @@ h3 {
         .then(data => {
             if (data.status === "success") {
                 messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
+                
+                // Use role from server response
                 setTimeout(() => {
-                    window.location.href = "/dashboard";
+                    if (data.role === 'admin' || data.role === 'shopowner') {
+                        window.location.href = "/dashboard";
+                    } else {
+                        window.location.href = "/home";
+                    }
                 }, 1000);
             } else {
                 messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
