@@ -368,8 +368,8 @@ require_once __DIR__ . "/../layout/header.php";
                 </div>
                 <div class="input-group">
                     <input type="tel" class="form-control" name="phone" id="phone" 
-                           placeholder="Enter your phone number (10 digits)" 
-                           pattern="[0-9]{10}" required>
+                           placeholder="Enter your phone number (9-10 digits)" 
+                           pattern="[0-9]{9,10}" required>
                 </div>
                 <div class="input-group">
                     <input type="password" class="form-control" name="password" id="password" 

@@ -913,12 +913,11 @@ function confirmLogout() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    // Clear any stored data in localStorage/sessionStorage
-                    localStorage.removeItem('activeMenu');
-                    localStorage.removeItem('expandedDropdowns');
+                    // Clear all stored data
+                    localStorage.clear();
                     sessionStorage.clear();
 
-                    // Show success message before redirecting
+                    // Show success message then force redirect
                     Swal.fire({
                         title: 'Success!',
                         text: 'You have been logged out successfully',
@@ -926,17 +925,15 @@ function confirmLogout() {
                         timer: 1500,
                         showConfirmButton: false
                     }).then(() => {
-                        window.location.href = data.redirect;
+                        // Force redirect to login page
+                        window.location.replace('/login');
                     });
                 }
             })
             .catch(error => {
                 console.error('Logout error:', error);
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Failed to logout. Please try again.',
-                    icon: 'error'
-                });
+                // If there's an error, force redirect to login anyway
+                window.location.replace('/login');
             });
         }
     });
@@ -1169,7 +1166,7 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
                             <span>Dashboard</span>
                         </a>
                     <?php endif; ?>
-                    <a href="#" onclick="confirmLogout()" class="settings-item text-danger">
+                    <a href="#" onclick="confirmLogout(); return false;" class="settings-item text-danger">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Logout</span>
                     </a>
@@ -1199,7 +1196,7 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
                                     <form id="adminLoginForm" class="admin-login-form">
                                         <div class="form-group mb-3">
                                             <input type="tel" class="form-control" name="phone" 
-                                                   placeholder="Phone Number" pattern="[0-9]{10}" required>
+                                                   placeholder="Phone Number" pattern="[0-9]{9,10}" required>
                                         </div>
                                         
                                         <div class="form-group mb-3">
@@ -1238,13 +1235,16 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
                         <form id="adminLoginForm" class="admin-login-form">
                             <div class="form-group mb-3">
                                 <input type="tel" class="form-control" name="phone" 
-                                       placeholder="Phone Number" pattern="[0-9]{10}" required>
+                                       placeholder="Phone Number" pattern="[0-9]{9,10}" required>
                             </div>
                             
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control" name="password" 
                                        placeholder="Password" required>
                             </div>
+
+                            <!-- Add hidden field to identify admin login -->
+                            <input type="hidden" name="admin_login" value="true">
 
                             <div id="adminLoginMessage" class="mb-3"></div>
                             
@@ -1278,8 +1278,7 @@ document.getElementById('adminLoginForm').addEventListener('submit', function(e)
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            // Check role from response
-            if (data.role === 'admin' || data.role === 'shopowner') {
+            if (data.role === 'Admin' || data.role === 'shopowner') {
                 messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
                 setTimeout(() => {
                     window.location.href = '/dashboard';

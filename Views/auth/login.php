@@ -262,8 +262,8 @@ h3 {
 
         <form id="loginForm" method="POST">
             <input type="tel" class="form-control" name="phone" id="phone" 
-                   placeholder="Phone Number (e.g., 0123456789)" 
-                   pattern="[0-9]{10}" required>
+                   placeholder="Phone Number (e.g., 012345678)" 
+                   pattern="[0-9]{9,10}" required>
             
             <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
             <!-- Remove role selection as it will come from database -->

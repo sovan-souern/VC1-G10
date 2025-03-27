@@ -120,6 +120,8 @@ class LoginRegisterController extends BaseController {
             $phone = trim($_POST['phone'] ?? '');
             $password = trim($_POST['password'] ?? '');
 
+            error_log("Attempting admin login with phone: $phone");
+
             if (empty($phone) || empty($password)) {
                 throw new Exception('Phone number and password are required');
             }
@@ -137,6 +139,13 @@ class LoginRegisterController extends BaseController {
                 $_SESSION['profile_picture'] = $user['profile_picture'];
                 $_SESSION['role'] = $user['role'];
 
+                // Check if this is an admin login from modal
+                $isAdminLogin = isset($_POST['admin_login']) && $_POST['admin_login'] === 'true';
+
+                if ($isAdminLogin && ($user['role'] !== 'admin' && $user['role'] !== 'shopowner')) {
+                    throw new Exception('Access denied. Admin privileges required.');
+                }
+
                 echo json_encode([
                     "status" => "success",
                     "message" => "Login successful!",
@@ -147,6 +156,7 @@ class LoginRegisterController extends BaseController {
                 throw new Exception('Invalid phone number or password');
             }
         } catch (Exception $e) {
+            error_log("Login error: " . $e->getMessage());
             echo json_encode([
                 "status" => "error",
                 "message" => $e->getMessage()
@@ -173,17 +183,25 @@ class LoginRegisterController extends BaseController {
             setcookie(session_name(), '', time()-3600, '/');
         }
 
+        // Clear any other custom cookies if they exist
+        setcookie('user_id', '', time()-3600, '/');
+        setcookie('remember_me', '', time()-3600, '/');
+
         // Destroy the session
         session_destroy();
 
-        // Return JSON response for AJAX calls
+        // For AJAX requests
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
             strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-            echo json_encode(['status' => 'success', 'redirect' => '/login']);
+            echo json_encode([
+                'status' => 'success',
+                'redirect' => '/login',
+                'forceRedirect' => true
+            ]);
             exit;
         }
 
-        // Regular redirect for non-AJAX calls
+        // For regular requests, always redirect to login
         header("Location: /login");
         exit();
     }
