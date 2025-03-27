@@ -6,9 +6,8 @@ $notifications = $model->getNotifications();
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
-    <a href="index.html" class="app-brand-link">
-      <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg"
-        alt="Brand Logo"
+    <!-- <a href="index.html" class="app-brand-link"> -->
+      <img src="Views/E-commerce-user/assets/img/logo/logo-pu.jpg"alt="Brand Logo"
         class="logo logo-dark"
         style="width: 50px; height: 50px; border-radius: 50%;" />
       <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: pink;">Skin care</span>
