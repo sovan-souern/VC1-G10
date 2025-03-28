@@ -18,7 +18,7 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css" type="text/css">
+    <!-- <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css" type="text/css"> -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css" type="text/css">
 </head>
 
@@ -32,46 +32,48 @@
                             <?php $hasDiscount = false; ?>
                             <?php foreach ($discounts as $key => $discount): ?>
                                 <?php if ($product["product_id"] == $discount["product_id"]): ?>
-                                    <?php
-                                    $original_price = floatval($discount["price"]);
-                                    $discount_percentage = floatval($discount["discount_percentage"]);
-                                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
+                                    <?php if ($discount["end_date"] >= date("Y-m-d")): ?>
+                                        <?php
+                                        $original_price = floatval($discount["price"]);
+                                        $discount_percentage = floatval($discount["discount_percentage"]);
+                                        $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                                    $product_name = htmlspecialchars($discount["product_name"]);
-                                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
-                                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                                    $original_price_formatted = "$" . number_format($original_price, 2);
-                                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-                                    ?>
-                                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                                        <div class="discount-product-card">
-                                            <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                                                <ul class="discount-product-hover">
-                                                    <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
-                                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-info">
-                                                <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                                        $product_name = htmlspecialchars($discount["product_name"]);
+                                        $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                                        $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                                        $original_price_formatted = "$" . number_format($original_price, 2);
+                                        $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                                        ?>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                            <div class="discount-product-card">
+                                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                                    <ul class="discount-product-hover">
+                                                        <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
+                                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                                    </ul>
                                                 </div>
-                                                <div class="price">
-                                                    <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                                    <?php echo $discounted_price_formatted; ?>
+                                                <div class="product-info">
+                                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                    <div class="price">
+                                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                                        <?php echo $discounted_price_formatted; ?>
+                                                    </div>
+                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                                 </div>
-                                                <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <?php $hasDiscount = true; ?>
-                                    <?php break; ?>
+                                        <?php $hasDiscount = true; ?>
+                                        <?php break; ?>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                             <?php if (!$hasDiscount): ?>
@@ -405,9 +407,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .discount-product-hover {
