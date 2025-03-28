@@ -216,63 +216,103 @@
             </div>
             
             <!-- Right Column - Order Summary -->
-            <div class="col-md-5">
-                <div class="order-summary">
-                    <div class="order-header">
-                        <h5 class="mb-0">Order summary (6)</h5>
-                        <a href="#" class="edit-link">Edit Cart</a>
-                    </div>
-                    
-                    <!-- Product 1 -->
-                    <div class="product-item">
-                        <div class="product-image pink"></div>
-                        <div class="product-details">
-                            <div class="fw-bold">Hydrating Serum Cleanser</div>
-                            <div class="text-muted">Qty: 5</div>
-                        </div>
-                        <div class="product-price">$175.00</div>
-                    </div>
-                    
-                    <!-- Product 2 -->
-                    <div class="product-item">
-                        <div class="product-image pink"></div>
-                        <div class="product-details">
-                            <div class="fw-bold">Cica Glow Mist</div>
-                            <div class="text-muted">Qty: 1</div>
-                            <div class="text-muted">
-                                <a href="#" class="text-decoration-none">More Details ▼</a>
-                            </div>
-                        </div>
-                        <div class="product-price">$35.00</div>
-                    </div>
-                    
-                    <!-- Price Summary -->
-                    <div class="summary-row">
-                        <div>Subtotal</div>
-                        <div>$210.00</div>
-                    </div>
-                    
-                    <div class="summary-row">
-                        <div>Delivery</div>
-                        <div>pay by yourself</div>
-                    </div>
-                    <div class="total-row">
-                        <div>Total</div>
-                        <div>$210.00</div>
-                    </div>
-                    
-                    <!-- Secure Checkout -->
-                    <div class="d-flex align-items-center justify-content-center mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill me-2" viewBox="0 0 16 16">
-                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-                        </svg>
-                        Secure Checkout
-                    </div>
-                </div>
-            </div>
+<!-- Right Column - Order Summary -->
+<div class="col-md-5">
+    <div class="order-summary">
+        <div class="order-header">
+            <h5 class="mb-0">Order summary (<span id="order-item-count">0</span>)</h5>
+            <a href="#" class="edit-link">Edit Cart</a>
+        </div>
+        
+        <!-- Product Items (Dynamically Populated) -->
+        <div id="order-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        
+        <!-- Price Summary -->
+        <div class="summary-row">
+            <div>Subtotal</div>
+            <div id="subtotal">$0.00</div>
+        </div>
+        
+        <div class="summary-row">
+            <div>Delivery</div>
+            <div>pay by yourself</div>
+        </div>
+        <div class="total-row">
+            <div>Total</div>
+            <div id="total">$0.00</div>
+        </div>
+        
+        <!-- Secure Checkout -->
+        <div class="d-flex align-items-center justify-content-center mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill me-2" viewBox="0 0 16 16">
+                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+            </svg>
+            Secure Checkout
         </div>
     </div>
+</div>
+        </div>
+    </div>
+    
+<!-- JavaScript for Checkout -->
+<script>
+    // Load cart from localStorage
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (e) {
+        console.error("Error parsing cart from localStorage:", e);
+        cart = [];
+    }
 
+    // Debug: Log the cart to console to verify data
+    console.log("Cart loaded from localStorage in checkout:", cart);
+
+    // Render cart items in the order summary
+    function renderOrderSummary() {
+        const orderItemsContainer = document.getElementById('order-items');
+        orderItemsContainer.innerHTML = '';
+        if (cart.length === 0) {
+            orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            cart.forEach(item => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.innerHTML = `
+                    <div class="product-image">
+                        <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
+                    <div class="product-details">
+                        <div class="fw-bold">${item.name}</div>
+                        <div class="text-muted">Qty: ${item.quantity}</div>
+                        <div class="text-muted">
+                            <a href="#" class="text-decoration-none">More Details ▼</a>
+                        </div>
+                    </div>
+                    <div class="product-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                `;
+                orderItemsContainer.appendChild(productItem);
+            });
+        }
+        updateOrderSummary();
+    }
+
+    // Update order summary (item count, subtotal, total)
+    function updateOrderSummary() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = subtotal; // Add delivery fees or taxes if applicable
+
+        document.getElementById('order-item-count').textContent = totalItems;
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Initial render
+    renderOrderSummary();
+</script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
