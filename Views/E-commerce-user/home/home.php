@@ -475,7 +475,7 @@
                 $product_name = htmlspecialchars($discount["product_name"]);
                 $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
                 $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                $original_price_formatted = "$" . number_format($original_price, 2);
+                $original_price_formatted = "$" . number_format($original_price, 2); 
                 $discounted_price_formatted = "$" . number_format($discounted_price, 2);
         ?>
                 <!-- Product Card -->
