@@ -84,7 +84,8 @@
                                 <th id="font">ID</th>
                                 <th id="font">Username</th>
                                 <th id="font">Phone</th>
-                                <th id="font">Email</th>
+                                <th id="font">Status</th>
+                                <!-- <th id="font">Email</th> -->
                                 <!-- <th id="font">Role</th>
                                 <th id="font">Created On</th>
                                 <th id="font">Status</th> -->
