@@ -1,3 +1,9 @@
+<?php require_once "Models/NotificationModel.php";
+$model = new  NotificationModel;
+$notifications = $model->getNotifications();
+?>
+
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
     <!-- <a href="index.html" class="app-brand-link"> -->
@@ -90,7 +96,7 @@
             <div data-i18n="Blank">Add Brand</div>
           </a>
         </li>
-       
+
       </ul>
     </li>
     <li class="menu-item active">
@@ -106,7 +112,7 @@
       </a>
 
       <ul class="menu-sub">
-        
+
         <li class="menu-item">
           <a href="/users" class="menu-link">
             <div data-i18n="Fluid">User List</div>
@@ -182,7 +188,7 @@
 </aside>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
     const menuItems = document.querySelectorAll(".menu-item a");
     const dropdowns = document.querySelectorAll(".dropdown");
 
@@ -206,14 +212,14 @@
 
     // Store active menu item
     menuItems.forEach(link => {
-      link.addEventListener("click", function () {
+      link.addEventListener("click", function() {
         localStorage.setItem("activeMenu", link.getAttribute("href"));
       });
     });
 
     // Store dropdown open/close state
     dropdowns.forEach(dropdown => {
-      dropdown.addEventListener("click", function () {
+      dropdown.addEventListener("click", function() {
         const id = dropdown.getAttribute("data-id");
         let expandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
 
@@ -229,234 +235,234 @@
   });
 
   document.addEventListener('DOMContentLoaded', function() {
-  // Existing menu code...
-  
-  // Add dropdown functionality
-  const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const dropdownMenu = toggle.nextElementSibling;
-      dropdownMenu.classList.toggle('show');
-    });
-  });
+    // Existing menu code...
 
-  // Close dropdowns when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-        menu.classList.remove('show');
+    // Add dropdown functionality
+    const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dropdownMenu = toggle.nextElementSibling;
+        dropdownMenu.classList.toggle('show');
       });
-    }
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const profileDropdown = document.getElementById('profileDropdown');
-  const dropdownMenu = profileDropdown.nextElementSibling;
-  let isDropdownOpen = false;
-
-  profileDropdown.addEventListener('click', function(e) {
-    e.preventDefault();
-    isDropdownOpen = !isDropdownOpen;
-    
-    if(isDropdownOpen) {
-      dropdownMenu.classList.add('show');
-      profileDropdown.classList.add('show');
-    } else {
-      dropdownMenu.classList.remove('show');
-      profileDropdown.classList.remove('show');
-    }
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!profileDropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
-      dropdownMenu.classList.remove('show');
-      profileDropdown.classList.remove('show');
-      isDropdownOpen = false;
-    }
-  });
-});
-
-function confirmLogout() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You will be logged out of your session!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, logout!',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = '/Views/auth/logout.php';
-        }
     });
-}
 
-// Function to update profile image
-function updateProfileImage(newImageUrl) {
-  const profileImages = document.querySelectorAll('.js-profile-img');
-  profileImages.forEach(img => {
-    img.src = newImageUrl;
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+          menu.classList.remove('show');
+        });
+      }
+    });
   });
-}
 
-// Listen for profile image updates
-window.addEventListener('profile-image-updated', function(e) {
-  if (e.detail && e.detail.imageUrl) {
-    updateProfileImage('/' + e.detail.imageUrl);
+  document.addEventListener('DOMContentLoaded', function() {
+    const profileDropdown = document.getElementById('profileDropdown');
+    const dropdownMenu = profileDropdown.nextElementSibling;
+    let isDropdownOpen = false;
+
+    profileDropdown.addEventListener('click', function(e) {
+      e.preventDefault();
+      isDropdownOpen = !isDropdownOpen;
+
+      if (isDropdownOpen) {
+        dropdownMenu.classList.add('show');
+        profileDropdown.classList.add('show');
+      } else {
+        dropdownMenu.classList.remove('show');
+        profileDropdown.classList.remove('show');
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!profileDropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.remove('show');
+        profileDropdown.classList.remove('show');
+        isDropdownOpen = false;
+      }
+    });
+  });
+
+  function confirmLogout() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You will be logged out of your session!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, logout!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/Views/auth/logout.php';
+      }
+    });
   }
-});
 
-// Add this to your existing DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', function() {
-  // Check for profile image updates every 30 seconds
-  setInterval(function() {
-    fetch('/api/user/profile-image.php')
-      .then(response => response.json())
-      .then(data => {
-        if (data.profile_picture) {
-          updateProfileImage('/' + data.profile_picture);
-        }
-      })
-      .catch(error => console.log('Error checking profile image:', error));
-  }, 30000);
-  
-  // ...existing DOMContentLoaded code...
-});
+  // Function to update profile image
+  function updateProfileImage(newImageUrl) {
+    const profileImages = document.querySelectorAll('.js-profile-img');
+    profileImages.forEach(img => {
+      img.src = newImageUrl;
+    });
+  }
 
-// Function to update all profile images in the nav bar
-function updateNavProfileImages(newImageUrl) {
+  // Listen for profile image updates
+  window.addEventListener('profile-image-updated', function(e) {
+    if (e.detail && e.detail.imageUrl) {
+      updateProfileImage('/' + e.detail.imageUrl);
+    }
+  });
+
+  // Add this to your existing DOMContentLoaded event
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check for profile image updates every 30 seconds
+    setInterval(function() {
+      fetch('/api/user/profile-image.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.profile_picture) {
+            updateProfileImage('/' + data.profile_picture);
+          }
+        })
+        .catch(error => console.log('Error checking profile image:', error));
+    }, 30000);
+
+    // ...existing DOMContentLoaded code...
+  });
+
+  // Function to update all profile images in the nav bar
+  function updateNavProfileImages(newImageUrl) {
     const profileImages = document.querySelectorAll('.profile-img');
     profileImages.forEach(img => {
-        img.src = newImageUrl;
+      img.src = newImageUrl;
     });
-}
+  }
 
-// Listen for profile image updates
-window.addEventListener('profile-image-updated', function(e) {
+  // Listen for profile image updates
+  window.addEventListener('profile-image-updated', function(e) {
     if (e.detail && e.detail.imageUrl) {
-        updateNavProfileImages('/' + e.detail.imageUrl);
+      updateNavProfileImages('/' + e.detail.imageUrl);
     }
-});
+  });
 
-// Update profile image when page loads if there's a new one in session storage
-document.addEventListener('DOMContentLoaded', function() {
+  // Update profile image when page loads if there's a new one in session storage
+  document.addEventListener('DOMContentLoaded', function() {
     const storedProfilePicture = sessionStorage.getItem('profile_picture');
     if (storedProfilePicture) {
-        updateNavProfileImages('/' + storedProfilePicture);
+      updateNavProfileImages('/' + storedProfilePicture);
     }
-});
+  });
 </script>
 
 <style>
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  min-width: 14rem;
-  margin-top: 0.125rem;
-  background: white;
-  border-radius: 0.375rem;
-  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-  z-index: 1000;
-}
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 14rem;
+    margin-top: 0.125rem;
+    background: white;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+    z-index: 1000;
+  }
 
-.dropdown-menu.show {
-  display: block;
-}
+  .dropdown-menu.show {
+    display: block;
+  }
 
-.dropdown-user {
-  position: relative;
-}
+  .dropdown-user {
+    position: relative;
+  }
 
-.avatar img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-}
+  .avatar img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 
-.avatar {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-}
+  .avatar {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
 
-.avatar-online::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #71dd37;
-  border: 2px solid #fff;
-}
+  .avatar-online::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #71dd37;
+    border: 2px solid #fff;
+  }
 
-.profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 
-.dropdown-menu {
-  min-width: 14rem;
-  padding: 0.5rem 0;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  margin-top: 0.125rem;
-  background: white;
-  border-radius: 0.375rem;
-  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-  z-index: 1000;
-  display: none;
-}
+  .dropdown-menu {
+    min-width: 14rem;
+    padding: 0.5rem 0;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.125rem;
+    background: white;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+    z-index: 1000;
+    display: none;
+  }
 
-.dropdown-menu.show {
-  display: block;
-}
+  .dropdown-menu.show {
+    display: block;
+  }
 
-.dropdown-item {
-  padding: 0.532rem 1.25rem;
-}
+  .dropdown-item {
+    padding: 0.532rem 1.25rem;
+  }
 
-.dropdown-divider {
-  border-top: 1px solid #d9dee3;
-  margin: 0.5rem 0;
-}
+  .dropdown-divider {
+    border-top: 1px solid #d9dee3;
+    margin: 0.5rem 0;
+  }
 
-.dropdown-toggle.show {
-  background-color: rgba(67, 89, 113, 0.05);
-}
+  .dropdown-toggle.show {
+    background-color: rgba(67, 89, 113, 0.05);
+  }
 
-.dropdown-menu {
-  transform: translateY(10px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
-}
+  .dropdown-menu {
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+  }
 
-.dropdown-menu.show {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-  display: block;
-}
+  .dropdown-menu.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    display: block;
+  }
 
-.dropdown-toggle::after {
-  display: none;
-}
+  .dropdown-toggle::after {
+    display: none;
+  }
 </style>
 
 <div class="layout-wrapper layout-content-navbar">
@@ -468,443 +474,448 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Navbar -->
 
       <nav
-  class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-  id="layout-navbar">
-  <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-      <i class="bi bi-list fs-4"></i>
-    </a>
-  </div>
-
-  <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-    <!-- Search -->
-    <div class="navbar-nav align-items-center">
-      <div class="nav-item d-flex align-items-center">
-        <i class="bi bi-search fs-4 lh-0"></i>
-        <input
-          type="text"
-          class="form-control border-0 shadow-none"
-          placeholder="Search..."
-          aria-label="Search..." />
-      </div>
-    </div>
-    <!-- /Search -->
-
-    <ul class="navbar-nav flex-row align-items-center ms-auto">
-      <li class="nav-item d-flex align-items-center">
-        <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="/home">Online Builder</a>
-      </li>
-      <!-- Place this tag where you want the button to render. -->
-      <li class="nav-item lh-1 me-3">
-        <a
-          class="github-button"
-          href="https://github.com/sovan-souern/VC1-G10"
-          data-icon="octicon-star"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-      </li>
-
-      
-      <!-- navbar.php -->
-      <!-- navbar.php -->
-      <!-- navbar.php -->
-    <!-- navbar.php -->
-      <li class="nav-item dropdown pe-3 d-flex align-items-center">
-          <a href="/notifications" class="text-decoration-none d-flex align-items-center position-relative" onclick="storeAlerts()">
-              <i class="bi bi-bell fs-4"></i>
-              <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
+        class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+        id="layout-navbar">
+        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+          <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bi bi-list fs-4"></i>
           </a>
-      </li>
+        </div>
 
-      
-      
-      <style>
-        .nav-item {
-          position: relative;
-        }
-
-        .notification-badge {
-          position: absolute;
-          margin-bottom: 150%;
-          right: -10px; 
-          background-color: red; /* Change this color for different badge colors */
-          color: white;
-          border-radius: 50%;
-          padding: 3px 5px;
-          font-size: 12px; /* Base font size */
-          font-weight: bold;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-          .notification-badge {
-            font-size: 10px; 
-            padding: 4px 8px; 
-          }
-        }
-
-        @media (max-width: 480px) {
-          .notification-badge {
-            font-size: 9px; 
-            padding: 3px 6px; 
-          }
-        }
-      </style>
-      
-
-
-
-
-      <!-- <li class="nav-item dropdown pe-3 d-flex align-items-center">
-          <span class="material-symbols-outlined">
-            notifications
-          </span>
-      </li> -->
-      <!-- User --><!-- User Profile Dropdown -->
-      <li class="nav-item navbar-dropdown dropdown-user dropdown">
-        <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" id="profileDropdown">
-          <div class="avatar avatar-online">
-            <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
-              alt="User Profile" class="profile-img js-profile-img" />
+        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+          <!-- Search -->
+          <div class="navbar-nav align-items-center">
+            <div class="nav-item d-flex align-items-center">
+              <i class="bi bi-search fs-4 lh-0"></i>
+              <input
+                type="text"
+                class="form-control border-0 shadow-none"
+                placeholder="Search..."
+                aria-label="Search..." />
+            </div>
           </div>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
-          <li>
-            <a class="dropdown-item" href="#">
-              <div class="d-flex">
-                <div class="flex-shrink-0 me-3">
-                  <div class="avatar avatar-online">
-                    <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
-                      alt="User Profile" class="profile-img" />
-                  </div>
-                </div>
-                <div class="flex-grow-1">
-                  <span class="fw-semibold d-block">
-                    <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
-                  </span>
-                  <small class="text-muted">Admin</small>
-                </div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <a class="dropdown-item" href="/editProfile">
-              <i class="bi bi-pencil-square me-2"></i>
-              <span class="align-middle">Edit Profile</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="/notifications">
-              <i class="bi bi-bell me-2"></i>
-              <span class="align-middle">Notifications</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="/reset">
-              <i class="bi bi-key me-2"></i>
-              <span class="align-middle">Reset Password</span>
-            </a>
-          </li>
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#" onclick="confirmLogout(); return false;">
-              <i class="bi bi-box-arrow-right me-2"></i>
-              <span class="align-middle">Log Out</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <!--/ User Profile Dropdown -->
+          <!-- /Search -->
 
-    </ul>
-  </div>
-</nav>
+          <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" style="border: red; color: wite;" target="_blank" href="/home">Online Builder</a>
+            </li>
+            <!-- Place this tag where you want the button to render. -->
+            <li class="nav-item lh-1 me-3">
+              <a
+                class="github-button"
+                href="https://github.com/sovan-souern/VC1-G10"
+                data-icon="octicon-star"
+                data-size="large"
+                data-show-count="true"
+                aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+            </li>
+
+
+            <!-- navbar.php -->
+            <!-- navbar.php -->
+            <!-- navbar.php -->
+            <!-- navbar.php -->
+            <li class="nav-item dropdown pe-3 d-flex align-items-center">
+              <a href="/notifications" class="text-decoration-none d-flex align-items-center position-relative" onclick="storeAlerts()">
+                <i class="bi bi-bell fs-4"></i>
+                <span class="notification-badge" id="notification-badge">
+
+                  <?php
+                  $totalIndex = 0;
+                  foreach ($notifications as $index => $notification) {
+                    if ($notification["status"] == "unread") {
+                      $totalIndex++;
+                    }
+                  }
+                  echo $totalIndex;
+                  ?>
+
+
+
+                </span>
+              </a>
+            </li>
+
+
+
+            <style>
+              .nav-item {
+                position: relative;
+              }
+
+              .notification-badge {
+                position: absolute;
+                margin-bottom: 22px;
+                left: 11px;
+                background-color: red;
+                /* Change this color for different badge colors */
+                color: white;
+                border-radius: 100%;
+                 padding: 0px 6px; 
+                font-size: 12px; 
+                /* Base font size */
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              /* Responsive adjustments */
+              @media (max-width: 768px) {
+                .notification-badge {
+                  font-size: 10px;
+                  padding: 4px 8px;
+                }
+              }
+
+              @media (max-width: 480px) {
+                .notification-badge {
+                  font-size: 9px;
+                  padding: 3px 6px;
+                }
+              }
+            </style>
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" id="profileDropdown">
+                <div class="avatar avatar-online">
+                  <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
+                    alt="User Profile" class="profile-img js-profile-img" />
+                </div>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar avatar-online">
+                          <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
+                            alt="User Profile" class="profile-img" />
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <span class="fw-semibold d-block">
+                          <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
+                        </span>
+                        <small class="text-muted">Admin</small>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/editProfile">
+                    <i class="bi bi-pencil-square me-2"></i>
+                    <span class="align-middle">Edit Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/notifications">
+                    <i class="bi bi-bell me-2"></i>
+                    <span class="align-middle">Notifications</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/reset">
+                    <i class="bi bi-key me-2"></i>
+                    <span class="align-middle">Reset Password</span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" onclick="confirmLogout(); return false;">
+                    <i class="bi bi-box-arrow-right me-2"></i>
+                    <span class="align-middle">Log Out</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--/ User Profile Dropdown -->
+
+          </ul>
+        </div>
+      </nav>
 
 
 
       <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const menuItems = document.querySelectorAll(".menu-item a");
-    const dropdowns = document.querySelectorAll(".dropdown");
+        document.addEventListener("DOMContentLoaded", function() {
+          const menuItems = document.querySelectorAll(".menu-item a");
+          const dropdowns = document.querySelectorAll(".dropdown");
 
-    // Load active menu item from localStorage
-    const savedActiveMenu = localStorage.getItem("activeMenu");
-    if (savedActiveMenu) {
-      document.querySelectorAll(".menu-item.active").forEach(item => item.classList.remove("active"));
-      const activeLink = document.querySelector(`.menu-item a[href="${savedActiveMenu}"]`);
-      if (activeLink) {
-        activeLink.closest(".menu-item").classList.add("active");
-      }
-    }
+          // Load active menu item from localStorage
+          const savedActiveMenu = localStorage.getItem("activeMenu");
+          if (savedActiveMenu) {
+            document.querySelectorAll(".menu-item.active").forEach(item => item.classList.remove("active"));
+            const activeLink = document.querySelector(`.menu-item a[href="${savedActiveMenu}"]`);
+            if (activeLink) {
+              activeLink.closest(".menu-item").classList.add("active");
+            }
+          }
 
-    // Load expanded dropdown state from localStorage
-    const savedExpandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
-    dropdowns.forEach(dropdown => {
-      if (savedExpandedDropdowns.includes(dropdown.getAttribute("data-id"))) {
-        dropdown.classList.add("open");
-      }
-    });
+          // Load expanded dropdown state from localStorage
+          const savedExpandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+          dropdowns.forEach(dropdown => {
+            if (savedExpandedDropdowns.includes(dropdown.getAttribute("data-id"))) {
+              dropdown.classList.add("open");
+            }
+          });
 
-    // Store active menu item
-    menuItems.forEach(link => {
-      link.addEventListener("click", function () {
-        localStorage.setItem("activeMenu", link.getAttribute("href"));
-      });
-    });
+          // Store active menu item
+          menuItems.forEach(link => {
+            link.addEventListener("click", function() {
+              localStorage.setItem("activeMenu", link.getAttribute("href"));
+            });
+          });
 
-    // Store dropdown open/close state
-    dropdowns.forEach(dropdown => {
-      dropdown.addEventListener("click", function () {
-        const id = dropdown.getAttribute("data-id");
-        let expandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
+          // Store dropdown open/close state
+          dropdowns.forEach(dropdown => {
+            dropdown.addEventListener("click", function() {
+              const id = dropdown.getAttribute("data-id");
+              let expandedDropdowns = JSON.parse(localStorage.getItem("expandedDropdowns")) || [];
 
-        if (dropdown.classList.contains("open")) {
-          expandedDropdowns = expandedDropdowns.filter(item => item !== id);
-        } else {
-          expandedDropdowns.push(id);
+              if (dropdown.classList.contains("open")) {
+                expandedDropdowns = expandedDropdowns.filter(item => item !== id);
+              } else {
+                expandedDropdowns.push(id);
+              }
+
+              localStorage.setItem("expandedDropdowns", JSON.stringify(expandedDropdowns));
+            });
+          });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+          // Existing menu code...
+
+          // Add dropdown functionality
+          const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+          dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+              e.preventDefault();
+              const dropdownMenu = toggle.nextElementSibling;
+              dropdownMenu.classList.toggle('show');
+            });
+          });
+
+          // Close dropdowns when clicking outside
+          document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+              document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+              });
+            }
+          });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+          const profileDropdown = document.getElementById('profileDropdown');
+          const dropdownMenu = profileDropdown.nextElementSibling;
+          let isDropdownOpen = false;
+
+          profileDropdown.addEventListener('click', function(e) {
+            e.preventDefault();
+            isDropdownOpen = !isDropdownOpen;
+
+            if (isDropdownOpen) {
+              dropdownMenu.classList.add('show');
+              profileDropdown.classList.add('show');
+            } else {
+              dropdownMenu.classList.remove('show');
+              profileDropdown.classList.remove('show');
+            }
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener('click', function(e) {
+            if (!profileDropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
+              dropdownMenu.classList.remove('show');
+              profileDropdown.classList.remove('show');
+              isDropdownOpen = false;
+            }
+          });
+        });
+
+        function confirmLogout() {
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out of your session!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, logout!',
+            cancelButtonText: 'Cancel'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/Views/auth/logout.php';
+            }
+          });
         }
 
-        localStorage.setItem("expandedDropdowns", JSON.stringify(expandedDropdowns));
-      });
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded', function() {
-  // Existing menu code...
-  
-  // Add dropdown functionality
-  const dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const dropdownMenu = toggle.nextElementSibling;
-      dropdownMenu.classList.toggle('show');
-    });
-  });
-
-  // Close dropdowns when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-        menu.classList.remove('show');
-      });
-    }
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const profileDropdown = document.getElementById('profileDropdown');
-  const dropdownMenu = profileDropdown.nextElementSibling;
-  let isDropdownOpen = false;
-
-  profileDropdown.addEventListener('click', function(e) {
-    e.preventDefault();
-    isDropdownOpen = !isDropdownOpen;
-    
-    if(isDropdownOpen) {
-      dropdownMenu.classList.add('show');
-      profileDropdown.classList.add('show');
-    } else {
-      dropdownMenu.classList.remove('show');
-      profileDropdown.classList.remove('show');
-    }
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!profileDropdown.contains(e.target) && !dropdownMenu.contains(e.target)) {
-      dropdownMenu.classList.remove('show');
-      profileDropdown.classList.remove('show');
-      isDropdownOpen = false;
-    }
-  });
-});
-
-function confirmLogout() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You will be logged out of your session!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, logout!',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = '/Views/auth/logout.php';
+        // Function to update profile image
+        function updateProfileImage(newImageUrl) {
+          const profileImages = document.querySelectorAll('.js-profile-img');
+          profileImages.forEach(img => {
+            img.src = newImageUrl;
+          });
         }
-    });
-}
 
-// Function to update profile image
-function updateProfileImage(newImageUrl) {
-  const profileImages = document.querySelectorAll('.js-profile-img');
-  profileImages.forEach(img => {
-    img.src = newImageUrl;
-  });
-}
+        // Listen for profile image updates
+        window.addEventListener('profile-image-updated', function(e) {
+          if (e.detail && e.detail.imageUrl) {
+            updateProfileImage('/' + e.detail.imageUrl);
+          }
+        });
 
-// Listen for profile image updates
-window.addEventListener('profile-image-updated', function(e) {
-  if (e.detail && e.detail.imageUrl) {
-    updateProfileImage('/' + e.detail.imageUrl);
-  }
-});
+        // Add this to your existing DOMContentLoaded event
+        document.addEventListener('DOMContentLoaded', function() {
+          // Check for profile image updates every 30 seconds
+          setInterval(function() {
+            fetch('/api/user/profile-image.php')
+              .then(response => response.json())
+              .then(data => {
+                if (data.profile_picture) {
+                  updateProfileImage('/' + data.profile_picture);
+                }
+              })
+              .catch(error => console.log('Error checking profile image:', error));
+          }, 30000);
 
-// Add this to your existing DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', function() {
-  // Check for profile image updates every 30 seconds
-  setInterval(function() {
-    fetch('/api/user/profile-image.php')
-      .then(response => response.json())
-      .then(data => {
-        if (data.profile_picture) {
-          updateProfileImage('/' + data.profile_picture);
+          // ...existing DOMContentLoaded code...
+        });
+
+        // Function to update all profile images in the nav bar
+        function updateNavProfileImages(newImageUrl) {
+          const profileImages = document.querySelectorAll('.profile-img');
+          profileImages.forEach(img => {
+            img.src = newImageUrl;
+          });
         }
-      })
-      .catch(error => console.log('Error checking profile image:', error));
-  }, 30000);
-  
-  // ...existing DOMContentLoaded code...
-});
 
-// Function to update all profile images in the nav bar
-function updateNavProfileImages(newImageUrl) {
-    const profileImages = document.querySelectorAll('.profile-img');
-    profileImages.forEach(img => {
-        img.src = newImageUrl;
-    });
-}
+        // Listen for profile image updates
+        window.addEventListener('profile-image-updated', function(e) {
+          if (e.detail && e.detail.imageUrl) {
+            updateNavProfileImages('/' + e.detail.imageUrl);
+          }
+        });
 
-// Listen for profile image updates
-window.addEventListener('profile-image-updated', function(e) {
-    if (e.detail && e.detail.imageUrl) {
-        updateNavProfileImages('/' + e.detail.imageUrl);
-    }
-});
+        // Update profile image when page loads if there's a new one in session storage
+        document.addEventListener('DOMContentLoaded', function() {
+          const storedProfilePicture = sessionStorage.getItem('profile_picture');
+          if (storedProfilePicture) {
+            updateNavProfileImages('/' + storedProfilePicture);
+          }
+        });
+      </script>
 
-// Update profile image when page loads if there's a new one in session storage
-document.addEventListener('DOMContentLoaded', function() {
-    const storedProfilePicture = sessionStorage.getItem('profile_picture');
-    if (storedProfilePicture) {
-        updateNavProfileImages('/' + storedProfilePicture);
-    }
-});
-</script>
+      <style>
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          right: 0;
+          top: 100%;
+          min-width: 14rem;
+          margin-top: 0.125rem;
+          background: white;
+          border-radius: 0.375rem;
+          box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+          z-index: 1000;
+        }
 
-<style>
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  min-width: 14rem;
-  margin-top: 0.125rem;
-  background: white;
-  border-radius: 0.375rem;
-  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-  z-index: 1000;
-}
+        .dropdown-menu.show {
+          display: block;
+        }
 
-.dropdown-menu.show {
-  display: block;
-}
+        .dropdown-user {
+          position: relative;
+        }
 
-.dropdown-user {
-  position: relative;
-}
+        .avatar img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
 
-.avatar img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-}
+        .avatar {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+        }
 
-.avatar {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-}
+        .avatar-online::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #71dd37;
+          border: 2px solid #fff;
+        }
 
-.avatar-online::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #71dd37;
-  border: 2px solid #fff;
-}
+        .profile-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
 
-.profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
+        .dropdown-menu {
+          min-width: 14rem;
+          padding: 0.5rem 0;
+          position: absolute;
+          right: 0;
+          top: 100%;
+          margin-top: 0.125rem;
+          background: white;
+          border-radius: 0.375rem;
+          box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+          z-index: 1000;
+          display: none;
+        }
 
-.dropdown-menu {
-  min-width: 14rem;
-  padding: 0.5rem 0;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  margin-top: 0.125rem;
-  background: white;
-  border-radius: 0.375rem;
-  box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-  z-index: 1000;
-  display: none;
-}
+        .dropdown-menu.show {
+          display: block;
+        }
 
-.dropdown-menu.show {
-  display: block;
-}
+        .dropdown-item {
+          padding: 0.532rem 1.25rem;
+        }
 
-.dropdown-item {
-  padding: 0.532rem 1.25rem;
-}
+        .dropdown-divider {
+          border-top: 1px solid #d9dee3;
+          margin: 0.5rem 0;
+        }
 
-.dropdown-divider {
-  border-top: 1px solid #d9dee3;
-  margin: 0.5rem 0;
-}
+        .dropdown-toggle.show {
+          background-color: rgba(67, 89, 113, 0.05);
+        }
 
-.dropdown-toggle.show {
-  background-color: rgba(67, 89, 113, 0.05);
-}
+        .dropdown-menu {
+          transform: translateY(10px);
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.2s ease;
+        }
 
-.dropdown-menu {
-  transform: translateY(10px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
-}
+        .dropdown-menu.show {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+          display: block;
+        }
 
-.dropdown-menu.show {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-  display: block;
-}
-
-.dropdown-toggle::after {
-  display: none;
-}
-</style>
+        .dropdown-toggle::after {
+          display: none;
+        }
+      </style>

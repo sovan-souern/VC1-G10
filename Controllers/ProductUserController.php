@@ -1,15 +1,26 @@
 <?php
 require_once 'Controllers/BaseController.php';
 require_once 'Models/ProductModel.php';
+require_once "Models/DiscountModel.php";
 
 class ProductUserController extends BaseController {
+    private $modle;
+    function __construct()
+    {
+        $this->modle=new DiscountModel();   
+        
+    }
     function index() {
         $productModel = new ProductModel();
-        // $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        // $limit = 10; // Products per page
-        // $offset = ($page - 1) * $limit;
+        $discounts=$this->modle->getDiscounts();
         $products = $productModel->getProducts();
-        $this->ViewsUser('E-commerce-user/products/product.php', ['products' => $products]);
+  
+
+
+
+
+        $this->ViewsUser('E-commerce-user/products/product.php', ['products' => $products,"discounts"=>$discounts]);
+        
     }
     function ProductCard() {
         require_once 'Views/E-commerce-user/products/card.php';
