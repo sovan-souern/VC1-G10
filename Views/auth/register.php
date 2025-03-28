@@ -360,7 +360,6 @@ require_once __DIR__ . "/../layout/header.php";
                     <label for="profilePicture" class="profile-upload-label">
                         <i class="bx bx-camera"></i>
                     </label>
-                    <!-- Remove duplicate input and keep only this one -->
                     <input type="file" name="profile_picture" id="profilePicture" accept="image/*" hidden>
                 </div>
 
@@ -369,13 +368,14 @@ require_once __DIR__ . "/../layout/header.php";
                 </div>
                 <div class="input-group">
                     <input type="tel" class="form-control" name="phone" id="phone" 
-                           placeholder="Enter your phone number (10 digits)" 
-                           pattern="[0-9]{10}" required>
+                           placeholder="Enter your phone number (9-10 digits)" 
+                           pattern="[0-9]{9,10}" required>
                 </div>
                 <div class="input-group">
                     <input type="password" class="form-control" name="password" id="password" 
                            placeholder="Choose a password" required>
                 </div>
+                <input type="hidden" name="role" value="user">
 
                 <button type="submit" class="btn btn-primary">Create Account</button>
             </form>
