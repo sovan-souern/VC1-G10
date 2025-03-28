@@ -106,7 +106,7 @@ $notifications = $model->getNotifications();
       </a>
     </li>
     <li class="menu-item">
-      <a href="/E-comerce" class="menu-link menu-toggle">
+      <a href="/" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bi bi-people"></i>
         <div data-i18n="Layouts">User</div>
       </a>
