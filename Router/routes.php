@@ -22,8 +22,8 @@ function checkAuthentication() {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    // Allow access to login, register, store, authenticate, and logout routes without authentication
-    $allowedRoutes = ['/login', '/register', '/users/store', '/users/authenticate', '/signup', '/logout', '/reset'];
+    // Add '/' to allowed routes since home is now default
+    $allowedRoutes = ['/', '/home', '/login', '/register', '/users/store', '/users/authenticate', '/signup', '/logout', '/reset'];
     if (!isset($_SESSION['admin_ID']) && !in_array($_SERVER['REQUEST_URI'], $allowedRoutes)) {
         header("Location: /login");
         exit();
@@ -33,8 +33,8 @@ function checkAuthentication() {
 // Call the middleware function before defining the routes
 checkAuthentication();
 
-// Default route to login
-$routes->get('/', [LoginRegisterController::class, 'login']);
+// Change default route to home page instead of login
+$routes->get('/', [HomeController::class, 'index']);
 
 // Login and Registration Routes
 $routes->get('/login', [LoginRegisterController::class, 'login']);
