@@ -32,7 +32,7 @@ class ProductModel
             FROM products 
             LEFT JOIN categories ON products.category_id = categories.category_id
             LEFT JOIN brand ON products.brand_id = brand.id 
-            ORDER BY products.created_at DESC");
+            ORDER BY products.created_at ");
     
             return $stmt->fetchAll();
         } catch (Exception $e) {
