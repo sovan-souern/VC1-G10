@@ -7,12 +7,11 @@ require_once "Models/NotificationModel.php";
 class NotificationController extends BaseController
 {
     private $model;
-   
+
 
     function __construct()
     {
         $this->model = new NotificationModel;
-        
     }
 
     function index()
@@ -60,7 +59,7 @@ class NotificationController extends BaseController
             'status' => "read", // Set the status to "read"
             'id' => $id
         ];
-        $this->model->updateRead($data); 
-        $this->redirect('/notifications'); 
+        $this->model->updateRead($data);
+        $this->redirect('/notifications');
     }
 }

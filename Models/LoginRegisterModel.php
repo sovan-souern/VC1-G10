@@ -1,4 +1,4 @@
-    <?php
+<?php
 require_once 'Databases/database.php';
 
 class LoginRegisterModel {
@@ -8,21 +8,22 @@ class LoginRegisterModel {
         $this->db = new Database("localhost", "beauty_store", "root", "");
     }
 
-    public function registerAdmin($name, $phone, $password, $profilePicture = null) {
+    public function registerAdmin($name, $phone, $password, $profilePicture = null, $role = 'user') {
         try {
-            error_log("Starting registration for phone: $phone");
+            error_log("Starting registration for phone: $phone with role: $role");
             error_log("Profile picture path: " . ($profilePicture ?? 'none'));
             
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             
-            $query = "INSERT INTO admins (name, phone, password, profile_picture) 
-                     VALUES (:name, :phone, :password, :profile_picture)";
+            $query = "INSERT INTO admins (name, phone, password, profile_picture, role) 
+                     VALUES (:name, :phone, :password, :profile_picture, :role)";
             
             $params = [
                 ':name' => $name,
                 ':phone' => $phone,
                 ':password' => $hashedPassword,
-                ':profile_picture' => $profilePicture
+                ':profile_picture' => $profilePicture,
+                ':role' => $role
             ];
 
             $stmt = $this->db->query($query, $params);
@@ -55,8 +56,8 @@ class LoginRegisterModel {
         try {
             error_log("Debug - Attempting to authenticate with phone: " . $phone);
             
-            // Modify query to be more explicit
-            $sql = "SELECT admin_ID, name, phone, password, profile_picture FROM admins WHERE phone = :phone LIMIT 1";
+            // Update query to include role
+            $sql = "SELECT admin_ID, name, phone, password, profile_picture, role FROM admins WHERE phone = :phone LIMIT 1";
             $result = $this->db->query($sql, [':phone' => $phone]);
             $user = $result->fetch(PDO::FETCH_ASSOC);
 
