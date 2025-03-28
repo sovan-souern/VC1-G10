@@ -49,20 +49,12 @@
                     <h5 class="mb-0">Phone: +855 86277461</h5>
                 </div>
                 <div class="support-box text-end d-none d-xl-block">
-                    <?php if (isset($_SESSION['admin_ID'])): ?>
-                        <a href="#" class="d-flex align-items-center text-decoration-none" data-bs-toggle="offcanvas" data-bs-target="#profileOffcanvas">
-                            <div class="avatar avatar-online">
-                                <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
-                                     alt="Profile" class="user-avatar">
-                            </div>
-                        </a>
-                    <?php else: ?>
-                        <a href="/login" class="d-flex align-items-center mx-3 text-decoration-none">
-                            <iconify-icon icon="healthicons:person" class="fs-4 me-2"></iconify-icon>
-                            <h5 class="mb-0">Login</h5>
-                        </a>
-                    <?php endif; ?>
+                    <a href="index.html" class="d-flex align-items-center mx-3 text-decoration-none">
+                        <iconify-icon icon="healthicons:person" class="fs-4 me-2"></iconify-icon>
+                        <h5 class="mb-0">Login</h5>
+                    </a>
                 </div>
+
             </div>
         </div>
     </div>
@@ -77,26 +69,9 @@
             <div class="d-flex d-lg-none align-items-end mt-3">
                 <ul class="d-flex justify-content-end list-unstyled m-0">
                     <li>
-                        <?php if (isset($_SESSION['admin_ID'])): ?>
-                            <div class="dropdown">
-                                <a href="#" class="mx-3 dropdown-toggle" id="mobileUserDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php if (!empty($_SESSION['profile_picture'])): ?>
-                                        <img src="/<?php echo $_SESSION['profile_picture']; ?>" alt="Profile" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover;">
-                                    <?php else: ?>
-                                        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                                    <?php endif; ?>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="mobileUserDropdown">
-                                    <li><a class="dropdown-item" href="/editProfile">Edit Profile</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                                </ul>
-                            </div>
-                        <?php else: ?>
-                            <a href="/login" class="mx-3">
-                                <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                            </a>
-                        <?php endif; ?>
+                        <a href="account.html" class="mx-3">
+                            <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+                        </a>
                     </li>
                     <li>
                         <a href="wishlist.html" class="mx-3">
@@ -305,1076 +280,137 @@
     <span class="dot" onclick="currentSlide(3)"></span>
   </div>
 
-                    </div>
-                </div>
-                <div class="swiper-slide py-5">
-                    <div class="row banner-content align-items-center">
-                        <div class="img-wrapper col-md-5">
-                            <img src="images/banner-img4.png" class="img-fluid">
-                        </div>
-                        <div class="content-wrapper col-md-7 p-5 mb-5">
-                            <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>
-                            <h2 class="banner-title display-1 fw-normal">Best destination for <span
-                                    class="text-primary">your
-                                    pets</span>
-                            </h2>
-                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                shop now
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#arrow-right"></use>
-                                </svg></a>
-                        </div>
+  <script>
+    let slideIndex = 1;
+    let slideInterval;
 
-                    </div>
-                </div>
-            </div>
+    // Show slides
+    function showSlides(n) {
+      const slides = document.querySelectorAll(".mySlides");
+      const dots = document.querySelectorAll(".dot");
 
-            <div class="swiper-pagination mb-5"></div>
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
 
-        </div>
-    </div>
-</section>
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        dots[i].classList.remove("active");
+      });
+
+      slides[slideIndex - 1].classList.add("active");
+      dots[slideIndex - 1].classList.add("active");
+    }
+
+    // Next/Previous controls
+    function plusSlides(n) {
+      clearInterval(slideInterval);
+      showSlides(slideIndex += n);
+      startSlideshow();
+    }
+
+    // Dot controls
+    function currentSlide(n) {
+      clearInterval(slideInterval);
+      showSlides(slideIndex = n);
+      startSlideshow();
+    }
+
+    // Start automatic slideshow
+    function startSlideshow() {
+      slideInterval = setInterval(() => plusSlides(1), 4000); // Adjusted to 2s for smoother feel
+    }
+
+    // Initial setup
+    showSlides(slideIndex);
+    startSlideshow();
+  </script>
+
+<!-- 
 <style>
-    .dropdown-user .dropdown-toggle::after {
-        display: none;
-    }
-    
-    .dropdown-menu {
-        min-width: 240px;
-        padding: 0.5rem 0;
-        margin-top: 0.5rem !important;
-        animation: dropdownFade 0.2s ease;
-    }
-
-    @keyframes dropdownFade {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .avatar-online {
-        position: relative;
-    }
-
-    .avatar-online::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #28a745;
-        border: 2px solid #fff;
-    }
-    .profile-dropdown {
-        position: relative;
-    }
-
-    .profile-menu {
-        min-width: 300px;
-        padding: 1rem;
-    }
-
-    .profile-header {
-        display: flex;
-        align-items: center;
-        padding: 1rem;
-        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
-        margin: -1rem -1rem 1rem -1rem;
-        border-radius: 0.5rem 0.5rem 0 0;
-    }
-
-    .profile-img-lg {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        border: 3px solid #fff;
-        object-fit: cover;
-    }
-
-    .profile-info {
-        margin-left: 1rem;
-        color: #fff;
-    }
-
-    .profile-links a {
-        display: flex;
-        align-items: center;
-        padding: 0.75rem 1rem;
-        color: #333;
-        transition: all 0.3s ease;
-        border-radius: 0.5rem;
-    }
-
-    .profile-links a:hover {
-        background-color: #f8f9fa;
-        color: #FF69B4;
-    }
-
-    .profile-links i {
-        margin-right: 0.75rem;
-        font-size: 1.1rem;
-        width: 20px;
-    }
-    .profile-dropdown {
-        position: relative;
-    }
-
-    .profile-menu {
-        min-width: 250px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-    }
-
-    .profile-header {
-        padding: 20px;
-        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
-        border-radius: 10px 10px 0 0;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .profile-pic {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 3px solid white;
-        object-fit: cover;
-    }
-
-    .profile-info h6 {
-        color: white;
-        margin: 0;
-        font-size: 1.1rem;
-    }
-
-    .profile-info span {
-        color: rgba(255,255,255,0.9);
-        font-size: 0.9rem;
-    }
-
-    .menu-items {
-        padding: 10px 0;
-    }
-
-    .menu-items a {
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: #666;
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .menu-items a:hover {
-        background: #f8f9fa;
-        color: #FF69B4;
-    }
-
-    .menu-items i {
-        font-size: 1.2rem;
-        width: 20px;
-        text-align: center;
-    }
-
-    .divider {
-        height: 1px;
-        background: #eee;
-        margin: 10px 0;
-    }
-
-    .notification-badge {
-        background: #ff4757;
-        color: white;
-        padding: 2px 8px;
-        border-radius: 10px;
-        font-size: 0.8rem;
-        margin-left: auto;
-    }
-
-    /* User Dropdown Styles */
-    .user-dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    .user-dropdown-content {
-        position: absolute;
-        right: 0;
-        background: white;
-        min-width: 280px;
-        border-radius: 10px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: all 0.3s ease;
-    }
-
-    .user-dropdown-content.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    .user-header {
-        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
-        padding: 15px;
-        border-radius: 10px 10px 0 0;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .user-avatar {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        border: 3px solid white;
-        object-fit: cover;
-    }
-
-    .user-info {
-        color: white;
-    }
-
-    .user-info h6 {
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    .user-info span {
-        font-size: 0.85rem;
-        opacity: 0.9;
-    }
-
-    .user-menu {
-        padding: 8px 0;
-    }
-
-    .user-menu a {
-        padding: 10px 20px;
-        display: flex;
-        align-items: center;
-        color: #666;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .user-menu a:hover {
-        background: #f8f9fa;
-        color: #FF69B4;
-    }
-
-    .user-menu i {
-        margin-right: 12px;
-        font-size: 1.1rem;
-        width: 20px;
-        text-align: center;
-    }
-
-    .menu-divider {
-        height: 1px;
-        background: #eee;
-        margin: 8px 0;
-    }
-    .profile-panel {
-        width: 380px;
-        border: none;
-    }
-
-    .profile-header {
-        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
-        padding: 20px;
-        color: white;
-    }
-
-    .profile-pic {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        border: 2px solid white;
-        object-fit: cover;
-    }
-
-    .profile-pic-lg {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 4px solid #FFB6C1;
-        object-fit: cover;
-    }
-
-    .list-group-item {
-        border: none;
-        padding: 15px 20px;
-        display: flex;
-        align-items: center;
-        color: #666;
-        transition: all 0.3s ease;
-    }
-
-    .list-group-item:hover {
-        background-color: #f8f9fa;
-        color: #FF69B4;
-    }
-
-    .section-header {
-        padding: 15px 20px;
-        border-bottom: 1px solid #eee;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .back-btn {
-        padding: 0;
-        color: #666;
-        text-decoration: none;
-    }
-
-    .back-btn:hover {
-        color: #FF69B4;
-    }
-
-    .profile-section {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        transition: transform 0.3s ease;
-    }
-
-    .profile-section.d-none {
-        transform: translateX(100%);
-    }
-
-    /* Profile Panel Styles */
-    .profile-panel {
-        width: 380px;
-        border: none;
-        background: #fff;
-    }
-
-    .profile-header {
-        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
-        padding: 25px;
-        border: none;
-    }
-
-    .profile-image-container {
-        position: relative;
-        width: 60px;
-        height: 60px;
-    }
-
-    .profile-pic {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        border: 3px solid rgba(255, 255, 255, 0.8);
-        object-fit: cover;
-    }
-
-    .profile-pic-lg {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 4px solid #FFB6C1;
-        object-fit: cover;
-    }
-
-    .online-status {
-        position: absolute;
-        bottom: 2px;
-        right: 2px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #22c55e;
-        border: 2px solid #fff;
-    }
-
-    .profile-tabs {
-        border-bottom: 1px solid #eee;
-        padding: 0 10px;
-    }
-
-    .nav-tabs .nav-link {
-        border: none;
-        color: #666;
-        padding: 15px 20px;
-        font-weight: 500;
-        position: relative;
-    }
-
-    .nav-tabs .nav-link.active {
-        color: #FF69B4;
-        background: none;
-    }
-
-    .nav-tabs .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #FF69B4;
-    }
-
-    .profile-form .form-control {
-        border: 1px solid #eee;
-        padding: 12px;
-        border-radius: 8px;
-    }
-
-    .profile-form .form-control:focus {
-        border-color: #FF69B4;
-        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
-    }
-
-    .profile-picture-upload {
-        position: relative;
-        display: inline-block;
-        margin-bottom: 20px;
-    }
-
-    .upload-btn {
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-        width: 35px;
-        height: 35px;
-        background: #FF69B4;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .upload-btn:hover {
-        transform: scale(1.1);
-    }
-
-    .notification-item {
-        display: flex;
-        align-items: center;
-        padding: 15px;
-        border-bottom: 1px solid #eee;
-        transition: background-color 0.3s ease;
-    }
-
-    .notification-item:hover {
-        background-color: #f8f9fa;
-    }
-
-    .notification-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        margin-right: 15px;
-    }
-
-    .settings-item {
-        display: flex;
-        align-items: center;
-        padding: 15px;
-        color: #666;
-        text-decoration: none;
-        border-bottom: 1px solid #eee;
-        transition: all 0.3s ease;
-    }
-
-    .settings-item:hover {
-        background-color: #f8f9fa;
-        color: #FF69B4;
-    }
-
-    .settings-item i {
-        margin-right: 15px;
-        font-size: 1.2rem;
-    }
-    .admin-login-panel {
-        max-width: 400px;
-        background: linear-gradient(145deg, #fff, #FFF5F6);
-    }
-
-    .admin-login-panel .offcanvas-header {
-        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
-        color: white;
-        padding: 1.5rem;
-    }
-
-    .admin-login-panel .offcanvas-title {
-        font-weight: 600;
-        font-size: 1.25rem;
-    }
-
-    .admin-login-form {
-        padding: 1rem;
-    }
-
-    .admin-login-form label {
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        color: #666;
-    }
-
-    .admin-login-form .form-control {
-        padding: 0.75rem;
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .admin-login-form .form-control:focus {
-        border-color: #FF69B4;
-        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
-    }
-
-    .admin-login-form .btn-primary {
-        background: linear-gradient(45deg, #FF69B4, #FFB6C1);
-        border: none;
-        padding: 0.75rem;
-        font-weight: 600;
-        margin-top: 1rem;
-    }
-    .admin-modal-header {
-        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
-        color: white;
-        border-radius: 0.5rem 0.5rem 0 0;
-    }
-
-    .admin-login-form {
-        padding: 1rem 0;
-    }
-
-    .admin-login-form .form-group label {
-        font-weight: 500;
-        color: #666;
-        margin-bottom: 0.5rem;
-    }
-
-    .admin-login-form .form-control {
-        padding: 0.75rem;
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .admin-login-form .form-control:focus {
-        border-color: #FF69B4;
-        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
-    }
-
-    .admin-login-form .btn-primary {
-        background: linear-gradient(45deg, #FF69B4, #FFB6C1);
-        border: none;
-        padding: 0.75rem;
-        font-weight: 600;
-        margin-top: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .admin-login-form .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
-    }
-    .login-container {
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .left-section {
-        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
-    }
-
-    .admin-logo {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: 3px solid rgba(255, 255, 255, 0.8);
-        object-fit: cover;
-    }
-
-    .admin-login-form .form-control {
-        border: 1px solid rgba(255, 182, 193, 0.3);
-        padding: 12px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .admin-login-form .form-control:focus {
-        border-color: #FF69B4;
-        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
-    }
-
-    .admin-login-form .btn-primary {
-        background: linear-gradient(45deg, #FF69B4, #FFB6C1);
-        border: none;
-        padding: 12px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-
-    .admin-login-form .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
-    }
-
-    .admin-modal-header {
-        border-bottom: none;
-        padding: 1rem;
-    }
-
-    .modal-content {
-        border: none;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    .contact-page #banner {
+    display: none;
     }
 </style>
 
 <script>
-function confirmLogout() {
-    Swal.fire({
-        title: 'Ready to Leave?',
-        text: "You will be logged out of your session",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#FF69B4',
-        cancelButtonColor: '#6c757d',
-        confirmButtonText: 'Yes, logout'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Show loading state
-            Swal.fire({
-                title: 'Logging out...',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            // Make AJAX call to logout
-            fetch('/logout', {
-                method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Clear all stored data
-                    localStorage.clear();
-                    sessionStorage.clear();
-
-                    // Show success message then force redirect
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'You have been logged out successfully',
-                        icon: 'success',
-                        timer: 1500,
-                        showConfirmButton: false
-                    }).then(() => {
-                        // Force redirect to login page
-                        window.location.replace('/login');
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Logout error:', error);
-                // If there's an error, force redirect to login anyway
-                window.location.replace('/login');
-            });
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if the current URL contains "contact"
+        if (window.location.pathname.includes("contact")) {
+            // Hide the banner section
+            document.getElementById("banner").style.display = "none";
         }
     });
-}
+</script> -->
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all dropdowns
-    var dropdownElementList = document.querySelectorAll('.dropdown-toggle');
-    dropdownElementList.forEach(function(dropdownToggleEl) {
-        new bootstrap.Dropdown(dropdownToggleEl);
-    });
+<style>
+    /* Banner Section */
+    #banner {
+        background: #FBDEE7;
+        padding: 0;
+        overflow: hidden;
+    }
 
-    const dropdownToggle = document.querySelector('.user-dropdown > a');
-    const dropdownContent = document.querySelector('.user-dropdown-content');
+    #banner .container {
+        padding: 0;
+    }
 
-    dropdownToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        dropdownContent.classList.toggle('show');
-    });
+    #banner .swiper {
+        width: 100%;
+        height: 100%;
+    }
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.user-dropdown')) {
-            dropdownContent.classList.remove('show');
-        }
-    });
-});
+    #banner .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+        /* Adjust height as needed */
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Handle section navigation
-    document.querySelectorAll('[data-section]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (this.getAttribute('data-section') !== 'main') {
-                e.preventDefault();
-                const targetSection = this.getAttribute('data-section');
-                showSection(targetSection);
-            }
-        });
-    });
+    #banner .img-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-    // Handle back buttons
-    document.querySelectorAll('.back-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            showSection('main');
-        });
-    });
-});
+    #banner .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Ensures the image covers the area without distortion */
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        /* Smooth transition for scale and opacity */
+    }
 
-function showSection(sectionId) {
-    document.querySelectorAll('.profile-section').forEach(section => {
-        if (section.getAttribute('data-section') === sectionId) {
-            section.classList.remove('d-none');
-        } else {
-            section.classList.add('d-none');
-        }
-    });
-}
+    /* Hover effect on the image */
+    #banner .banner-image:hover {
+        transform: scale(1.05);
+        /* Slight zoom on hover */
+        opacity: 0.9;
+        /* Slight fade on hover */
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Profile image upload preview
-    const profileUpload = document.getElementById('profile-upload');
-    const profileImage = document.querySelector('.profile-pic-lg');
-    
-    profileUpload?.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                profileImage.src = e.target.result;
-            }
-            reader.readAsDataURL(file);
-        }
-    });
+    /* Smooth transition for Swiper slides */
+    #banner .swiper-slide {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
 
-    // Profile form submission
-    const profileForm = document.getElementById('profile-form');
-    profileForm?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Add your profile update logic here
-        Swal.fire({
-            title: 'Success!',
-            text: 'Profile updated successfully',
-            icon: 'success',
-            confirmButtonColor: '#FF69B4'
-        });
-    });
-});
+    #banner .swiper-slide-active {
+        opacity: 1;
+    }
 
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
+    /* Optional: Style the pagination dots */
+    #banner .swiper-pagination-bullet {
+        background: #fff;
+        opacity: 0.5;
+    }
 
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Logging in...';
-
-    fetch('/users/authenticate', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            if (data.role === 'admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Login successful! Redirecting...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1000);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
-            }
-        } else {
-            messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
-            button.disabled = false;
-            button.innerHTML = 'Login as Admin';
-        }
-    })
-    .catch(error => {
-        console.error('Login error:', error);
-        messageDiv.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-        button.disabled = false;
-        button.innerHTML = 'Login as Admin';
-    });
-});
-
-// Close modal when clicked outside
-document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
-    document.getElementById('adminLoginMessage').innerHTML = '';
-    document.getElementById('adminLoginForm').reset();
-    document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
-    document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
-});
-</script>
-
-<!-- Profile Panel -->
-<div class="offcanvas offcanvas-end profile-panel" tabindex="-1" id="profileOffcanvas">
-    <div class="offcanvas-header profile-header">
-        <div class="d-flex align-items-center w-100">
-            <div class="profile-image-container">
-                <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
-                     alt="Profile" class="profile-pic">
-                <div class="online-status"></div>
-            </div>
-            <div class="profile-info ms-3">
-                <h5 class="mb-1 fw-bold"><?php echo htmlspecialchars($_SESSION['name']); ?></h5>
-                <span class="text-white-50"><?php echo ucfirst($_SESSION['role']); ?></span>
-            </div>
-        </div>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-    </div>
-
-    <div class="offcanvas-body p-0">
-        <!-- Navigation Tabs -->
-        <ul class="nav nav-tabs profile-tabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-tab" type="button">Profile</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#notification-tab" type="button">Notifications</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#settings-tab" type="button">Settings</button>
-            </li>
-        </ul>
-
-        <!-- Tab Content -->
-        <div class="tab-content p-3">
-            <!-- Profile Tab -->
-            <div class="tab-pane fade show active" id="profile-tab">
-                <form id="profile-form" class="profile-form">
-                    <div class="text-center mb-4">
-                        <div class="profile-picture-upload">
-                            <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
-                                 alt="Profile" class="profile-pic-lg">
-                            <label for="profile-upload" class="upload-btn">
-                                <i class="bi bi-camera"></i>
-                            </label>
-                            <input type="file" id="profile-upload" hidden accept="image/*">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mb-3">
-                        <label>Full Name</label>
-                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
-                    </div>
-                    
-                    <div class="form-group mb-3">
-                        <label>Phone</label>
-                        <input type="tel" class="form-control" value="<?php echo htmlspecialchars($_SESSION['phone']); ?>">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Update Profile</button>
-                </form>
-            </div>
-
-            <!-- Notifications Tab -->
-            <div class="tab-pane fade" id="notification-tab">
-                <div class="notification-list">
-                    <?php for($i = 0; $i < 3; $i++): ?>
-                        <div class="notification-item">
-                            <div class="notification-icon bg-primary">
-                                <i class="bi bi-bell"></i>
-                            </div>
-                            <div class="notification-content">
-                                <h6 class="mb-1">New Order Received</h6>
-                                <p class="small text-muted mb-0">30 minutes ago</p>
-                            </div>
-                        </div>
-                    <?php endfor; ?>
-                </div>
-            </div>
-
-            <!-- Settings Tab -->
-            <div class="tab-pane fade" id="settings-tab">
-                <div class="settings-list">
-                    <a href="/reset" class="settings-item">
-                        <i class="bi bi-shield-lock"></i>
-                        <span>Change Password</span>
-                    </a>
-                    <a href="#" class="settings-item" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Admin Login</span>
-                    </a>
-                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'shopowner'): ?>
-                        <a href="/dashboard" class="settings-item">
-                            <i class="bi bi-speedometer2"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    <?php endif; ?>
-                    <a href="#" onclick="confirmLogout(); return false;" class="settings-item text-danger">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Add Admin Login Modal -->
-            <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header admin-modal-header">
-                            <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body p-0">
-                            <div class="login-container">
-                                <!-- Left Section -->
-                                <div class="left-section text-center p-4">
-                                    <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg" 
-                                         alt="App Logo" class="admin-logo mb-3">
-                                    <h6 class="text-white mb-2">Admin Portal</h6>
-                                    <p class="text-white-50 small">Access your administrative dashboard</p>
-                                </div>
-
-                                <!-- Right Section -->
-                                <div class="right-section p-4">
-                                    <form id="adminLoginForm" class="admin-login-form">
-                                        <div class="form-group mb-3">
-                                            <input type="tel" class="form-control" name="phone" 
-                                                   placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                                        </div>
-                                        
-                                        <div class="form-group mb-3">
-                                            <input type="password" class="form-control" name="password" 
-                                                   placeholder="Password" required>
-                                        </div>
-
-                                        <div id="adminLoginMessage" class="mb-3"></div>
-                                        
-                                        <button type="submit" class="btn btn-primary w-100">
-                                            Login as Admin
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<!-- Add Admin Login Modal -->
-<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header admin-modal-header">
-                <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-                <div class="login-container">
-                    <div class="right-section p-4">
-                        <form id="adminLoginForm" class="admin-login-form">
-                            <div class="form-group mb-3">
-                                <input type="tel" class="form-control" name="phone" 
-                                       placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                            </div>
-                            
-                            <div class="form-group mb-3">
-                                <input type="password" class="form-control" name="password" 
-                                       placeholder="Password" required>
-                            </div>
-
-                            <!-- Add hidden field to identify admin login -->
-                            <input type="hidden" name="admin_login" value="true">
-
-                            <div id="adminLoginMessage" class="mb-3"></div>
-                            
-                            <button type="submit" class="btn btn-primary w-100">
-                                Login as Admin
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
-
-    // Clear previous messages
-    messageDiv.innerHTML = '';
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
-
-    fetch('/users/authenticate', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            if (data.role === 'Admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1500);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
-            }
-        } else {
-            messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
-            button.disabled = false;
-            button.innerHTML = 'Login as Admin';
-        }
-    })
-    .catch(error => {
-        console.error('Login error:', error);
-        messageDiv.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-        button.disabled = false;
-        button.innerHTML = 'Login as Admin';
-    });
-});
-
-// Close modal handler
-document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
-    document.getElementById('adminLoginMessage').innerHTML = '';
-    document.getElementById('adminLoginForm').reset();
-    const button = document.querySelector('#adminLoginForm button[type="submit"]');
-    button.disabled = false;
-    button.innerHTML = 'Login as Admin';
-});
-</script>
-
+    #banner .swiper-pagination-bullet-active {
+        background: #ff6f61;
+        /* Matches your theme color */
+        opacity: 1;
+    }
+</style>
