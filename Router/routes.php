@@ -139,7 +139,7 @@ $routes->get('/about', [AboutController::class, 'index']);
 
 
 $routes->get('/productuser', [ProductUserController::class, 'index']);
-$routes->get('/card', [ProductUserController::class, 'ProductCard']);
+$routes->get('/addcart', [ProductUserController::class, 'ProductCard']);
 $routes->get('/view-card', [ProductUserController::class, 'ProductDetail']);
 $routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
 

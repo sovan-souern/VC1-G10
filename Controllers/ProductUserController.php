@@ -23,13 +23,10 @@ class ProductUserController extends BaseController {
         
     }
     function ProductCard() {
-        require_once 'Views/E-commerce-user/products/card.php';
-    }
-    function ProductDetail() {
-        require_once 'Views/E-commerce-user/products/view-card.php';
+        require_once 'Views/E-commerce-user/card/addcart.php';
     }
 
     function ProductCheckout() {
-        require_once 'Views/E-commerce-user/products/checkout.php';
+        require_once 'Views/E-commerce-user/card/checkout.php';
     }
 }
