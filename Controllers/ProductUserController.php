@@ -14,9 +14,6 @@ class ProductUserController extends BaseController {
         $productModel = new ProductModel();
         $discounts=$this->modle->getDiscounts();
         $products = $productModel->getProducts();
-  
-
-
 
 
         $this->ViewsUser('E-commerce-user/products/product.php', ['products' => $products,"discounts"=>$discounts]);
