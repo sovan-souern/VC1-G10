@@ -912,6 +912,65 @@
             font-size: 16px;
             line-height: 40px;
         }
+        /* Add this media query to your existing <style> section */
+@media (max-width: 736px) {
+    /* Shop Section - 2 cards per row */
+    .col-lg-3, .col-md-4, .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Adjust product card styling for smaller screens */
+    .discount-product-card, .general-product-item {
+        margin-bottom: 15px;
+    }
+
+    .product-image, .general-product-pic {
+        height: 200px; /* Reduce height for smaller screens */
+    }
+
+    .product-info, .general-product-text {
+        padding: 10px; /* Reduce padding */
+    }
+
+    .product-name, .general-product-text h6 {
+        font-size: 14px; /* Slightly smaller text */
+    }
+
+    .price, .general-product-price {
+        font-size: 1rem; /* Adjust price font size */
+    }
+
+    .add-to-cart {
+        padding: 6px 10px; /* Smaller button */
+        font-size: 14px;
+    }
+
+    /* Trend Section - Stack items vertically */
+    .trend .col-lg-4, .trend .col-md-4, .trend .col-sm-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .trend__item__pic img {
+        width: 150px; /* Reduce image size */
+        height: 100px;
+    }
+
+    .trend__item__text h6 {
+        font-size: 13px;
+    }
+
+    .product__price {
+        font-size: 14px;
+    }
+
+    /* Cart Panel - Adjust width */
+    .cart-panel {
+        width: 100%; /* Full width on small screens */
+    }
+}
     </style>
 
     <!-- JavaScript -->
