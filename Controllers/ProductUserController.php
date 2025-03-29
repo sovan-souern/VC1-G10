@@ -19,14 +19,8 @@ class ProductUserController extends BaseController {
         $this->ViewsUser('E-commerce-user/products/product.php', ['products' => $products,"discounts"=>$discounts]);
         
     }
-    function ProductCard() {
-        require_once 'Views/E-commerce-user/card/addcart.php';
-    }
-    function ProductDetail() {
-        require_once 'Views/E-commerce-user/card/view-card.php';
-    }
+  
+ 
 
-    function ProductCheckout() {
-        require_once 'Views/E-commerce-user/card/checkout.php';
-    }
+
 }

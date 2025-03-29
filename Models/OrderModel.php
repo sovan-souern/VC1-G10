@@ -7,15 +7,11 @@ class OrderModel
 
     function __construct()
     {
-        $this->pdo = new Database();
+        $this->pdo = (new Database())->getConnection(); // Ensure getConnection() returns a PDO instance
     }
 
-    function getOrder($id = null)
+    function getOrder()
     {
-        if ($id) {
-            $stmt = $this->pdo->query("SELECT * FROM orders WHERE order_id = :id", ['id' => $id]);
-            return $stmt->fetch();
-        }
         $stmt = $this->pdo->query("SELECT * FROM orders");
         return $stmt->fetchAll();
     }
@@ -23,30 +19,27 @@ class OrderModel
     function createOrder($data)
     {
         try {
-            $stmt = $this->pdo->query(
-                "INSERT INTO orders (first_name, last_name, phone, address, city, country, items, total, order_status) 
-                VALUES (:first_name, :last_name, :phone, :address, :city, :country, :items, :total, :order_status)",
-                [
-                    'first_name' => $data['first_name'],
-                    'last_name' => $data['last_name'],
-                    'phone' => $data['phone'],
-                    'address' => $data['address'],
-                    'city' => $data['city'],
-                    'country' => $data['country'],
-                    'items' => $data['items'], // JSON string of cart items
-                    'total' => $data['total'],
-                    'order_status' => 'pending'
-                ]
-            );
-
-            // Check if the insert was successful
-            if ($stmt->rowCount() > 0) {
-                // return $this->pdo->lastInsertId(); // Return the ID of the newly created order
-            } else {
-                throw new Exception("Failed to insert order into the database.");
-            }
+            $sql = "INSERT INTO orders (first_name, last_name, product_id, phone, order_status, city, country, address, total, buy_at, admin_id) 
+                VALUES (:first_name, :last_name, :product_id, :phone, :order_status, :city, :country, :address, :total, :buy_at, :admin_id)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':first_name' => $data['first_name'],
+                ':last_name' => $data['last_name'],
+                ':product_id' => $data['product_id'], // Map items to product_id
+                ':phone' => $data['phone'],
+                ':order_status' => $data['order_status'],
+                ':city' => $data['city'],
+                ':country' => $data['country'],
+                ':address' => $data['address'], // Include address
+                ':total' => $data['total'],
+                ':buy_at' => $data['buy_at'],
+                ':admin_id' => $data['admin_id'] // Include admin_id
+            ]);
+            return $this->pdo->lastInsertId(); // Return the ID of the inserted order
         } catch (Exception $e) {
-            error_log("Error in createOrder: " . $e->getMessage());
+            error_log("Failed to create order: " . $e->getMessage());
+            error_log("SQL Query: " . $sql);
+            error_log("Data: " . print_r($data, true));
             return false;
         }
     }

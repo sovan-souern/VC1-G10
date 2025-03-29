@@ -2,8 +2,8 @@
 require_once "Models/NotificationModel.php";
 require_once "Views/auth/login_handler.php";
 
-// Check admin access before loading dashboard
-checkAdminAccess();
+// // Check admin access before loading dashboard
+// checkAdminAccess();
 
 $model = new NotificationModel;
 $notifications = $model->getNotifications();

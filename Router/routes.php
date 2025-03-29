@@ -14,6 +14,7 @@ require_once 'Controllers/UserController.php';
 require_once 'Controllers/LoginRegisterController.php';
 require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
+require_once "Controllers/checkoutUser.php";
 
 $routes = new Router();
 
@@ -139,9 +140,9 @@ $routes->get('/about', [AboutController::class, 'index']);
 
 
 $routes->get('/productuser', [ProductUserController::class, 'index']);
-$routes->get('/addcart', [ProductUserController::class, 'ProductCard']);
-$routes->get('/view-card', [ProductUserController::class, 'ProductDetail']);
-$routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
+
+$routes->get('/checkout', [CheckoutUserController::class, 'ProductCheckout']);
+$routes->post('/checkout/store', [CheckoutUserController::class, 'store']);
 
 
 $routes->post('/contact/store', [NotificationController::class, 'store']);

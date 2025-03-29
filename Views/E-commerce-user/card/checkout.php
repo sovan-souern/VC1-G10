@@ -219,6 +219,14 @@
                             <label for="city" class="form-label">City <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="city" name="city" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="order_status" class="form-label">Order Status <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="order_status" name="order_status" value="Pending" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="buy_at" class="form-label">Buy At <span class="text-danger">*</span></label>
+                            <input type="datetime-local" class="form-control" id="buy_at" name="buy_at" required>
+                        </div>
                         <!-- Hidden inputs for cart items and total -->
                         <input type="hidden" name="items" id="items">
                         <input type="hidden" name="total" id="total_input">
@@ -335,15 +343,19 @@
         function updateOrderSummary() {
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            const total = subtotal; // Add delivery fees or taxes if applicable
+            const total = subtotal;
 
             document.getElementById('order-item-count').textContent = totalItems;
             document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
             document.getElementById('total').textContent = `$${total.toFixed(2)}`;
 
-            // Update hidden inputs with cart items and total
-            document.getElementById('items').value = JSON.stringify(cart);
+            // Update hidden inputs
+            const itemsValue = cart.map(item => item.id).join(',');
+            document.getElementById('items').value = itemsValue;
             document.getElementById('total_input').value = total.toFixed(2);
+
+            // Debug: Log the items value
+            console.log("Items being submitted: ", itemsValue);
         }
 
         // Setup "Show All" button functionality
