@@ -173,58 +173,64 @@
         }
     </style>
 </head>
-<form action="/checkout/store" method="POST" enctype="multipart/form-data">
-
-    <body>
-        <div class="container checkout-container">
-            <div class="row">
-                <!-- Left Column - Forms -->
-                <div class="col-md-7">
+<body>
+    <div class="container checkout-container">
+        <div class="row">
+            <!-- Left Column - Forms -->
+            <div class="col-md-7">
+            <form action="/checkout/store" method="POST" id="checkout-form">
                     <!-- Customer Details -->
                     <div class="form-section">
                         <div class="section-title">Customer Checkout</div>
-                        <form>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="firstName" class="form-label">First name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="firstName" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="lastName" class="form-label">Last name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="lastName" required>
-                                </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label">First name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="firstName" name="first_name" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
-                                <input type="tel" class="form-control" id="phone" required>
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label">Last name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lastName" name="last_name" required>
                             </div>
-                        </form>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
                     </div>
 
                     <!-- Delivery Details -->
                     <div class="form-section">
                         <div class="section-title">Delivery details</div>
-                        <form>
-                            <div class="mb-3">
-                                <label for="country" class="form-label">Country/Region <span class="text-danger">*</span></label>
-                                <div class="dropdown-select">
-                                    <select class="form-select" id="country" required>
-                                        <option value="US">Cambodai</option>
-                                        <option value="CA">Canada</option>
-                                        <option value="UK">United Kingdom</option>
-                                    </select>
-                                </div>
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country/Region <span class="text-danger">*</span></label>
+                            <div class="dropdown-select">
+                                <select class="form-select" id="country" name="country" required>
+                                    <option value="Cambodia">Cambodia</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="address1" class="form-label">Address <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="address1" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="city" class="form-label">City <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="city" required>
-                            </div>
-                            <button type="submit" class="continue-btn">Continue</button>
-                        </form>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address1" class="form-label">Address <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="address1" name="address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="city" name="city" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="order_status" class="form-label">Order Status <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="order_status" name="order_status" value="Pending" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="buy_at" class="form-label">Buy At <span class="text-danger">*</span></label>
+                            <input type="datetime-local" class="form-control" id="buy_at" name="buy_at" required>
+                        </div>
+                        <!-- Hidden inputs for cart items and total -->
+                        <input type="hidden" name="items" id="items">
+                        <input type="hidden" name="total" id="total_input">
+                        <button type="submit" class="continue-btn">Continue</button>
                     </div>
 
                     <!-- Delivery Method -->
@@ -232,76 +238,77 @@
                         <div class="section-title">Delivery method</div>
                         <!-- This section is empty in the image -->
                     </div>
-                </div>
+                </form>
+            </div>
 
-                <!-- Right Column - Order Summary -->
-                <div class="col-md-5">
-                    <div class="order-summary">
-                        <div class="order-header">
-                            <h5 class="mb-0">Order summary (<span id="order-item-count">0</span>)</h5>
-                            <a href="#" class="edit-link">Edit Cart</a>
-                        </div>
+            <!-- Right Column - Order Summary -->
+            <div class="col-md-5">
+                <div class="order-summary">
+                    <div class="order-header">
+                        <h5 class="mb-0">Order summary (<span id="order-item-count">0</span>)</h5>
+                        <a href="#" class="edit-link">Edit Cart</a>
+                    </div>
 
-                        <!-- Show All Button -->
-                        <button class="show-all-btn" id="show-all-btn">Show All</button>
+                    <!-- Show All Button -->
+                    <button class="show-all-btn" id="show-all-btn">Show All</button>
 
-                        <!-- Product Items (Dynamically Populated) -->
-                        <div id="order-items" class="order-items-container">
-                            <!-- Cart items will be dynamically added here -->
-                        </div>
+                    <!-- Product Items (Dynamically Populated) -->
+                    <div id="order-items" class="order-items-container">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
 
-                        <!-- Price Summary -->
-                        <div class="summary-row">
-                            <div>Subtotal</div>
-                            <div id="subtotal">$0.00</div>
-                        </div>
-                        <div class="summary-row">
-                            <div>Delivery</div>
-                            <div>pay by yourself</div>
-                        </div>
-                        <div class="total-row">
-                            <div>Total</div>
-                            <div id="total">$0.00</div>
-                        </div>
+                    <!-- Price Summary -->
+                    <div class="summary-row">
+                        <div>Subtotal</div>
+                        <div id="subtotal">$0.00</div>
+                    </div>
+                    <div class="summary-row">
+                        <div>Delivery</div>
+                        <div>pay by yourself</div>
+                    </div>
+                    <div class="total-row">
+                        <div>Total</div>
+                        <div id="total">$0.00</div>
+                    </div>
 
-                        <!-- Secure Checkout -->
-                        <div class="d-flex align-items-center justify-content-center mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill me-2" viewBox="0 0 16 16">
-                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-                            </svg>
-                            Secure Checkout
-                        </div>
+                    <!-- Secure Checkout -->
+                    <div class="d-flex align-items-center justify-content-center mt-4" href='confirmation'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill me-2" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg>
+                        Secure Checkout
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- JavaScript for Checkout -->
-        <script>
-            // Load cart from localStorage
-            let cart = [];
-            try {
-                cart = JSON.parse(localStorage.getItem('cart')) || [];
-            } catch (e) {
-                console.error("Error parsing cart from localStorage:", e);
-                cart = [];
-            }
+    <!-- JavaScript for Checkout -->
+    <script>
+        // Load cart from localStorage
+        let cart = [];
+        try {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (e) {
+            console.error("Error parsing cart from localStorage:", e);
+            cart = [];
+        }
 
-            // Debug: Log the cart to console to verify data
-            console.log("Cart loaded from localStorage in checkout:", cart);
+        // Debug: Log the cart to console to verify data
+        console.log("Cart loaded from localStorage in checkout:", cart);
 
-            // Render cart items in the order summary
-            function renderOrderSummary() {
-                const orderItemsContainer = document.getElementById('order-items');
-                orderItemsContainer.innerHTML = '';
-                if (cart.length === 0) {
-                    orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
-                } else {
-                    cart.forEach((item, index) => {
-                        const collapseId = `product-details-${index}`; // Unique ID for each item
-                        const productItem = document.createElement('div');
-                        productItem.classList.add('product-item');
-                        productItem.innerHTML = `
+        // Render cart items in the order summary
+        function renderOrderSummary() {
+            const orderItemsContainer = document.getElementById('order-items');
+            orderItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    const collapseId = `product-details-${index}`; // Unique ID for each item
+                    const productItem = document.createElement('div');
+                    productItem.classList.add('product-item');
+                    productItem.innerHTML = `
                         <div class="product-image">
                             <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
                         </div>
@@ -325,53 +332,62 @@
                         </div>
                         <div class="product-price">$${(item.price * item.quantity).toFixed(2)}</div>
                     `;
-                        orderItemsContainer.appendChild(productItem);
-                    });
-                }
-                updateOrderSummary();
-                setupShowAllButton(); // Setup the "Show All" button functionality
+                    orderItemsContainer.appendChild(productItem);
+                });
             }
+            updateOrderSummary();
+            setupShowAllButton(); // Setup the "Show All" button functionality
+        }
 
-            // Update order summary (item count, subtotal, total)
-            function updateOrderSummary() {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-                const total = subtotal; // Add delivery fees or taxes if applicable
+        // Update order summary (item count, subtotal, total)
+        function updateOrderSummary() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const total = subtotal;
 
-                document.getElementById('order-item-count').textContent = totalItems;
-                document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-                document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('order-item-count').textContent = totalItems;
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
+            // Update hidden inputs
+            const itemsValue = cart.map(item => item.id).join(',');
+            document.getElementById('items').value = itemsValue;
+            document.getElementById('total_input').value = total.toFixed(2);
+
+            // Debug: Log the items value
+            console.log("Items being submitted: ", itemsValue);
+        }
+
+        // Setup "Show All" button functionality
+        function setupShowAllButton() {
+            const showAllBtn = document.getElementById('show-all-btn');
+            const orderItemsContainer = document.getElementById('order-items');
+            let isExpanded = false;
+
+            if (cart.length > 0) { // Only show button if there are items
+                showAllBtn.style.display = 'block';
+                showAllBtn.addEventListener('click', () => {
+                    isExpanded = !isExpanded;
+                    if (isExpanded) {
+                        orderItemsContainer.classList.add('expanded');
+                        showAllBtn.textContent = 'Hide All';
+                    } else {
+                        orderItemsContainer.classList.remove('expanded');
+                        showAllBtn.textContent = 'Show All';
+                    }
+                });
+            } else {
+                showAllBtn.style.display = 'none'; // Hide button if cart is empty
             }
+        }
 
-            // Setup "Show All" button functionality
-            function setupShowAllButton() {
-                const showAllBtn = document.getElementById('show-all-btn');
-                const orderItemsContainer = document.getElementById('order-items');
-                let isExpanded = false;
-
-                if (cart.length > 0) { // Only show button if there are items
-                    showAllBtn.style.display = 'block';
-                    showAllBtn.addEventListener('click', () => {
-                        isExpanded = !isExpanded;
-                        if (isExpanded) {
-                            orderItemsContainer.classList.add('expanded');
-                            showAllBtn.textContent = 'Hide All';
-                        } else {
-                            orderItemsContainer.classList.remove('expanded');
-                            showAllBtn.textContent = 'Show All';
-                        }
-                    });
-                } else {
-                    showAllBtn.style.display = 'none'; // Hide button if cart is empty
-                }
-            }
-
-            // Initial render
-            renderOrderSummary();
-        </script>
-        <!-- Bootstrap JS Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+        // Initial render
+        renderOrderSummary();
+    </script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
 
     <style>

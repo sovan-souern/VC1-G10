@@ -14,19 +14,13 @@ class ProductUserController extends BaseController {
         $productModel = new ProductModel();
         $discounts=$this->modle->getDiscounts();
         $products = $productModel->getProducts();
-  
-
-
 
 
         $this->ViewsUser('E-commerce-user/products/product.php', ['products' => $products,"discounts"=>$discounts]);
         
     }
-    function ProductCard() {
-        require_once 'Views/E-commerce-user/card/addcart.php';
-    }
+  
+ 
 
-    function ProductCheckout() {
-        require_once 'Views/E-commerce-user/card/checkout.php';
-    }
+
 }
