@@ -13,7 +13,7 @@ class UserModel
 
     function getUsers()
     {
-        $stmt = $this->pdo->query('SELECT * FROM users');
+        $stmt = $this->pdo->query('SELECT * FROM admins WHERE role = "User"');
         return $stmt->fetchAll();
     }
 

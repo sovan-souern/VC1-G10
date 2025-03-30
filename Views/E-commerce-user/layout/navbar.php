@@ -1602,21 +1602,23 @@
     fetch('/users/authenticate', {
         method: 'POST',
         body: formData,
-        credentials: 'include' // Include cookies for session handling
+        credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            if (data.role === 'admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1500);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. You do not have admin privileges.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
+            const userRole = data.role.toLowerCase();
+            
+            if (userRole === 'admin' || userRole === 'shopowner') {
+                // Store role and redirect immediately
+                sessionStorage.setItem('dashboard_access', 'true');
+                window.location.replace('/dashboard');
+                return;
             }
+            
+            messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
+            button.disabled = false;
+            button.innerHTML = 'Login';
         } else {
             throw new Error(data.message || 'Invalid credentials');
         }
@@ -1624,15 +1626,17 @@
     .catch(error => {
         messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
         button.disabled = false;
-        button.innerHTML = 'Login as Admin';
+        button.innerHTML = 'Login';
     });
 
 
-// Close modal when clicked outside
-document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
-    document.getElementById('adminLoginMessage').innerHTML = '';
-    document.getElementById('adminLoginForm').reset();
-    document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
-    document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
+// Check role and redirect on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const dashboardAccess = sessionStorage.getItem('dashboard_access');
+    const userRole = sessionStorage.getItem('userRole');
+    
+    if (dashboardAccess === 'true' && (userRole === 'admin' || userRole === 'shopowner')) {
+        window.location.replace('/dashboard');
+    }
 });
 </script>
