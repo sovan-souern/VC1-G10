@@ -911,8 +911,8 @@
     }
 
     .settings-item i {
-        margin-right: 15px;
         font-size: 1.2rem;
+        margin-right: 15px;
     }
     .admin-login-panel {
         max-width: 400px;
@@ -1426,7 +1426,7 @@ function handleLogout(event) {
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header admin-modal-header">
-                <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
+                <h5 class="modal-title" id="adminLoginModalLabel">Admin/Shop Owner Access</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
@@ -1449,7 +1449,7 @@ function handleLogout(event) {
                             <div id="adminLoginMessage" class="mb-3"></div>
                             
                             <button type="submit" class="btn btn-primary w-100">
-                                Login as Admin
+                                Login
                             </button>
                         </form>
                     </div>
@@ -1466,7 +1466,6 @@ document.getElementById('adminLoginForm').addEventListener('submit', function(e)
     const button = this.querySelector('button[type="submit"]');
     const messageDiv = document.getElementById('adminLoginMessage');
 
-    // Clear previous messages
     messageDiv.innerHTML = '';
     button.disabled = true;
     button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
@@ -1474,21 +1473,23 @@ document.getElementById('adminLoginForm').addEventListener('submit', function(e)
     fetch('/users/authenticate', {
         method: 'POST',
         body: formData,
-        credentials: 'include' // Include cookies for session handling
+        credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            if (data.role === 'admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1500);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. You do not have admin privileges.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
+            const userRole = data.role.toLowerCase();
+            
+            if (userRole === 'admin' || userRole === 'shopowner') {
+                // Store role and redirect immediately
+                sessionStorage.setItem('dashboard_access', 'true');
+                window.location.replace('/dashboard');
+                return;
             }
+            
+            messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
+            button.disabled = false;
+            button.innerHTML = 'Login';
         } else {
             throw new Error(data.message || 'Invalid credentials');
         }
@@ -1496,15 +1497,17 @@ document.getElementById('adminLoginForm').addEventListener('submit', function(e)
     .catch(error => {
         messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
         button.disabled = false;
-        button.innerHTML = 'Login as Admin';
+        button.innerHTML = 'Login';
     });
 });
 
-// Close modal when clicked outside
-document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
-    document.getElementById('adminLoginMessage').innerHTML = '';
-    document.getElementById('adminLoginForm').reset();
-    document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
-    document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
+// Check role and redirect on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const dashboardAccess = sessionStorage.getItem('dashboard_access');
+    const userRole = sessionStorage.getItem('userRole');
+    
+    if (dashboardAccess === 'true' && (userRole === 'admin' || userRole === 'shopowner')) {
+        window.location.replace('/dashboard');
+    }
 });
 </script>

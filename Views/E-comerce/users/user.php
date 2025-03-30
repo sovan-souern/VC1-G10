@@ -84,36 +84,36 @@
                                 <th id="font">ID</th>
                                 <th id="font">Username</th>
                                 <th id="font">Phone</th>
+                                <th id="font">Create At</th>
                                 <th id="font">Status</th>
-                                <!-- <th id="font">Email</th> -->
-                                <!-- <th id="font">Role</th>
-                                <th id="font">Created On</th>
-                                <th id="font">Status</th> -->
                                 <th id="font">Action</th>
                             </tr>
                         </thead>
                         <tbody id="user-list">
-                            <?php foreach ($users as $index => $user) : ?>
-                                <tr class="user" 
-                                    data-username="<?= htmlspecialchars($user["username"]) ?>" 
-                                    data-phone="<?= htmlspecialchars($user["phone"]) ?>"
-                                    data-email="<?= htmlspecialchars($user["email"]) ?>">
-                                    <td><?= $index + 1 ?></td>
-                                    <td><?= htmlspecialchars($user["username"]) ?></td>
-                                    <td><?= htmlspecialchars($user["phone"]) ?></td>
-                                    <td><a href="mailto:<?= htmlspecialchars($user["email"]) ?>">
-                                        <?= htmlspecialchars($user["email"]) ?></a></td>
-                                    <!-- <td><?= htmlspecialchars($user["role"]) ?></td> -->
-                                    <!-- <td><?= htmlspecialchars($user["created_on"]) ?></td> -->
-                                    <!-- <td><span class="bg-lightgreen badges">
-                                        <?= htmlspecialchars($user["status"]) ?></span></td>
-                                    <td class="action"> -->
-                                        <a class="delete-user" href="users/delete?id=<?= $user['user_id'] ?>">
-                                            <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
-                                        </a>
-                                    </td>
-                                </tr> 
-                            <?php endforeach ?>
+                            <?php if (!empty($users)) : ?>
+                                <?php foreach ($users as $index => $user) : ?>
+                                    <tr class="user">
+                                        <td><?= $index + 1 ?></td>
+                                        <td><?= htmlspecialchars($user["name"]) ?></td>
+                                        <td><?= htmlspecialchars($user["phone"]) ?></td>
+                                        <td><?= htmlspecialchars($user["created_at"]) ?></td>
+                                        <td>
+                                            <?php if ($user["status"] == 1) : ?>
+                                                <span class="badge bg-success">Active</span>
+                                            <?php else : ?>
+                                                <span class="badge bg-danger">Inactive</span>
+                                            <?php endif ?>
+                                        </td>
+                                        <td class="action">
+                                            <a class="delete-user" href="users/delete?id=<?= $user['admin_id'] ?>">
+                                                <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            <?php else: ?>
+                                <tr><td colspan="6" class="text-center">No users found</td></tr>
+                            <?php endif ?>
                         </tbody>
                     </table>
                 </div>
