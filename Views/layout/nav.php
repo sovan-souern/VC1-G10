@@ -29,7 +29,7 @@ $notifications = $model->getNotifications();
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
     <li class="menu-item active">
-      <a href="/" class="menu-link">
+      <a href="/dashboard" class="menu-link">
         <i class="menu-icon tf-icons bi bi-speedometer2"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
