@@ -6,8 +6,6 @@
   <title>Message Detail</title>
 
   <style>
-    /* Base Reset & Typography */
-/* Base Reset & Typography */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f5f7fa;
@@ -18,13 +16,13 @@ body {
 
 /* Container */
 .container {
-  max-width: 1390px;
-  width: 97%; /* Allow container to scale with screen width */
-  margin: 230px auto; /* Reduced margin for better mobile fit */
+  max-width: 1210px;
+  width: 97%;
+  margin: 50px auto;
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  padding: 60px;
   opacity: 0;
   animation: fadeIn 0.5s ease-in-out forwards;
   transform: scale(0.95);
@@ -111,7 +109,7 @@ body {
   font-size: 16px;
   opacity: 0;
   animation: slideUp 0.5s ease-in-out forwards 0.2s;
-  word-wrap: break-word; /* Ensure long text wraps properly */
+  word-wrap: break-word;
 }
 
 @keyframes slideUp {
@@ -128,22 +126,23 @@ body {
 /* Actions/Buttons */
 .actions {
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
+  justify-content: flex-start;
+  gap: 20px; /* Reduced gap for better alignment */
+  margin-top: 20px;
 }
 
 .btn {
-  /* flex: 0; */
-  width: 200px;
-  padding: 7px;
+  padding: 10px 20px; /* Adjusted padding for better button size */
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the text */
   transition: all 0.3s ease-in-out;
-  font-weight: bold;
-  text-decoration: none; /* Remove underline for anchor tags */
+  text-decoration: none;
 }
 
 .btn:hover {
@@ -153,6 +152,8 @@ body {
 .btn-danger {
   background-color: #f97316;
   color: white;
+  width: 120px; /* Fixed width for consistency */
+  height: 40px; /* Fixed height for consistency */
 }
 
 .btn-danger:hover {
@@ -161,7 +162,9 @@ body {
 
 .btn-secondary {
   background-color: #e5e7eb;
-  color: #374151;
+  color: #4b5563;
+  width: 225px; /* Increased to 1.5 times the original 150px (150 * 1.5 = 225) */
+  height: 40px; /* Match height with Delete button */
 }
 
 .btn-secondary:hover {
@@ -192,8 +195,14 @@ body {
   }
 
   .btn {
-    font-size: 15px;
-    padding: 10px;
+    font-size: 13px;
+    padding: 8px 16px;
+    width: 100px; /* Slightly smaller width */
+    height: 36px;
+  }
+
+  .btn-secondary {
+    width: 195px; /* 1.5 times the adjusted width (130 * 1.5 = 195) */
   }
 }
 
@@ -232,14 +241,19 @@ body {
   }
 
   .actions {
-    flex-direction: column;
+    flex-direction: row; /* Keep buttons in a row for better UX */
     gap: 10px;
   }
 
   .btn {
-    width: 100%;
+    width: 48%; /* Buttons take up nearly half the width each */
     font-size: 14px;
-    padding: 10px;
+    padding: 8px;
+    height: 40px;
+  }
+
+  .btn-secondary {
+    width: 48%; /* Match width with Delete button */
   }
 }
 
@@ -248,7 +262,7 @@ body {
   .container {
     margin: 20px auto;
     padding: 15px;
-    width: 95%;
+    width: 93%;
   }
 
   .sender-name {
@@ -265,9 +279,20 @@ body {
     padding: 10px;
   }
 
+  .actions {
+    flex-direction: column; /* Stack buttons on very small screens */
+    gap: 10px;
+  }
+
   .btn {
+    width: 100%; /* Full width on small screens */
     font-size: 13px;
     padding: 8px;
+    height: 40px;
+  }
+
+  .btn-secondary {
+    width: 100%; /* Full width on small screens */
   }
 }
   </style>
@@ -283,21 +308,21 @@ body {
         <h2 class="sender-name">
           <?php echo htmlspecialchars($notification['first_name'] . ' ' . $notification['last_name']); ?>
         </h2>
-        <?php if (!empty($message['sender_email'])): ?>
-          <p class="sender-email"><?php echo ($notification['phone_number']); ?></p>
+        <?php if (!empty($notification['phone_number'])): ?>
+          <p class="sender-email"><?php echo htmlspecialchars($notification['phone_number']); ?></p>
         <?php endif; ?>
-        <p class="message-date"><?php echo ($notification['created_at']); ?></p>
+        <p class="message-date"><?php echo htmlspecialchars($notification['created_at']); ?></p>
       </div>
     </div>
 
     <div class="message-content">
       <strong>Message: </strong> 
-      <?php echo ($notification['message']); ?>
+      <?php echo htmlspecialchars($notification['message']); ?>
     </div>
 
     <div class="actions">
-      <a href="/notifications/delete?id=<?= $notification['id'] ?>" class="btn btn-danger">Delete</a>
-      <a href="notifications.php" class="btn btn-secondary">Back to Notifications</a>
+      <a href="/notifications/delete?id=<?= htmlspecialchars($notification['id']) ?>" class="btn btn-danger">Delete</a>
+      <button  onclick="window.history.back()" class="btn btn-secondary">Back to Notifications</button>
     </div>
   </div>
 </body>

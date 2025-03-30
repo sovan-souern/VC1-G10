@@ -132,7 +132,7 @@
     <div class="cart-panel">
         <div class="cart-header">
             <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
-            <div class="close-cart">×</div>
+            <div class="close-cart">x</div>
         </div>
         <div class="cart-items">
             <!-- Cart items will be dynamically added here -->
@@ -142,7 +142,7 @@
                 <span>Subtotal</span>
                 <span id="subtotal-amount">$0.00</span>
             </div>
-            <button class="view-cart-btn" onclick="window.location.href='view-card';">View Cart</button>
+            <button class="view-cart-btn" onclick="window.location.href='checkout';">Checkout</button>
         </div>
     </div>
 
@@ -922,157 +922,240 @@
             font-size: 16px;
             line-height: 40px;
         }
+        /* Add this media query to your existing <style> section */
+@media (max-width: 736px) {
+    /* Shop Section - 2 cards per row */
+    .col-lg-3, .col-md-4, .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Adjust product card styling for smaller screens */
+    .discount-product-card, .general-product-item {
+        margin-bottom: 15px;
+    }
+
+    .product-image, .general-product-pic {
+        height: 200px; /* Reduce height for smaller screens */
+    }
+
+    .product-info, .general-product-text {
+        padding: 10px; /* Reduce padding */
+    }
+
+    .product-name, .general-product-text h6 {
+        font-size: 14px; /* Slightly smaller text */
+    }
+
+    .price, .general-product-price {
+        font-size: 1rem; /* Adjust price font size */
+    }
+
+    .add-to-cart {
+        padding: 6px 10px; /* Smaller button */
+        font-size: 14px;
+    }
+
+    /* Trend Section - Stack items vertically */
+    .trend .col-lg-4, .trend .col-md-4, .trend .col-sm-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .trend__item__pic img {
+        width: 150px; /* Reduce image size */
+        height: 100px;
+    }
+
+    .trend__item__text h6 {
+        font-size: 13px;
+    }
+
+    .product__price {
+        font-size: 14px;
+    }
+
+    /* Cart Panel - Adjust width */
+    .cart-panel {
+        width: 100%; /* Full width on small screens */
+    }
+}
     </style>
 
     <!-- JavaScript -->
-    <script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="Views/E-commerce-user/assets/js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cartPanel = document.querySelector('.cart-panel');
-            const closeCart = document.querySelector('.close-cart');
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const cartItemsContainer = document.querySelector('.cart-items');
-            const cartItemCount = document.querySelector('#cart-item-count');
-            const subtotalAmount = document.querySelector('#subtotal-amount');
-            const imageZoomModal = document.querySelector('.image-zoom-modal');
-            const zoomedImage = document.querySelector('#zoomed-image');
-            const backBtn = document.querySelector('.back-btn');
-            const zoomButtons = document.querySelectorAll('.image-zoom');
-            let cartItems = [];
+<!-- JavaScript -->
+<script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
+<script src="Views/E-commerce-user/assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cartPanel = document.querySelector('.cart-panel');
+    const closeCart = document.querySelector('.close-cart');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartItemCount = document.querySelector('#cart-item-count');
+    const subtotalAmount = document.querySelector('#subtotal-amount');
+    const imageZoomModal = document.querySelector('.image-zoom-modal');
+    const zoomedImage = document.querySelector('#zoomed-image');
+    const backBtn = document.querySelector('.back-btn');
+    const zoomButtons = document.querySelectorAll('.image-zoom');
+    let cartItems = [];
 
-            // Cart Functionality
-            function toggleCart() {
-                cartPanel.classList.toggle('active');
+    // Load cart from localStorage on page load
+    try {
+        cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (e) {
+        console.error("Error parsing cart from localStorage:", e);
+        cartItems = [];
+    }
+
+    // Render cart items on page load
+    cartItems.forEach(item => addCartItem(item));
+    updateCartSummary();
+
+    // Cart Functionality
+    function toggleCart() {
+        cartPanel.classList.toggle('active');
+    }
+
+    closeCart.addEventListener('click', toggleCart);
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productName = this.getAttribute('data-product-name');
+            const productPrice = parseFloat(this.getAttribute('data-product-price'));
+            const productImage = this.getAttribute('data-product-image');
+
+            const existingItem = cartItems.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+                updateCartItem(existingItem);
+            } else {
+                const newItem = {
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                };
+                cartItems.push(newItem);
+                addCartItem(newItem);
             }
 
-            closeCart.addEventListener('click', toggleCart);
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            console.log("Cart after adding item:", cartItems);
 
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const productName = this.getAttribute('data-product-name');
-                    const productPrice = parseFloat(this.getAttribute('data-product-price'));
-                    const productImage = this.getAttribute('data-product-image');
-
-                    const existingItem = cartItems.find(item => item.name === productName);
-                    if (existingItem) {
-                        existingItem.quantity += 1;
-                        updateCartItem(existingItem);
-                    } else {
-                        const newItem = {
-                            name: productName,
-                            price: productPrice,
-                            image: productImage,
-                            quantity: 1
-                        };
-                        cartItems.push(newItem);
-                        addCartItem(newItem);
-                    }
-
-                    if (!cartPanel.classList.contains('active')) {
-                        toggleCart();
-                    }
-                    updateCartSummary();
-                });
-            });
-
-            function addCartItem(item) {
-                const cartItem = document.createElement('div');
-                cartItem.classList.add('cart-item');
-                cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn decrease-btn">-</button>
-                            <input type="number" class="quantity-input" value="${item.quantity}" min="1">
-                            <button class="quantity-btn increase-btn">+</button>
-                        </div>
-                    </div>
-                    <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
-                    <div class="delete-btn"><i class="fa fa-trash"></i></div>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-
-                attachItemListeners(cartItem, item);
+            if (!cartPanel.classList.contains('active')) {
+                toggleCart();
             }
-
-            function updateCartItem(item) {
-                const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
-                    el => el.querySelector('.cart-item-name').textContent === item.name
-                );
-                const input = cartItem.querySelector('.quantity-input');
-                input.value = item.quantity;
-                cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-                updateCartSummary();
-            }
-
-            function attachItemListeners(cartItem, item) {
-                const decreaseBtn = cartItem.querySelector('.decrease-btn');
-                const increaseBtn = cartItem.querySelector('.increase-btn');
-                const quantityInput = cartItem.querySelector('.quantity-input');
-                const deleteBtn = cartItem.querySelector('.delete-btn');
-
-                decreaseBtn.addEventListener('click', () => {
-                    if (item.quantity > 1) {
-                        item.quantity--;
-                        updateCartItem(item);
-                    }
-                });
-
-                increaseBtn.addEventListener('click', () => {
-                    item.quantity++;
-                    updateCartItem(item);
-                });
-
-                quantityInput.addEventListener('change', () => {
-                    let value = parseInt(quantityInput.value);
-                    if (value < 1 || isNaN(value)) value = 1;
-                    item.quantity = value;
-                    updateCartItem(item);
-                });
-
-                deleteBtn.addEventListener('click', () => {
-                    cartItem.remove();
-                    cartItems = cartItems.filter(i => i.name !== item.name);
-                    updateCartSummary();
-                });
-            }
-
-            function updateCartSummary() {
-                const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-                const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-                cartItemCount.textContent = `${totalItems} items`;
-                subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
-            }
-
-            // Image Zoom Functionality
-            zoomButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const imageUrl = this.getAttribute('data-image');
-                    zoomedImage.src = imageUrl;
-                    imageZoomModal.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                });
-            });
-
-            backBtn.addEventListener('click', function() {
-                imageZoomModal.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Restore scrolling
-            });
-
-            // Close modal when clicking outside the image
-            imageZoomModal.addEventListener('click', function(e) {
-                if (e.target === imageZoomModal) {
-                    imageZoomModal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
+            updateCartSummary();
         });
-    </script>
+    });
+
+    function addCartItem(item) {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-details">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                <div class="cart-item-quantity">
+                    <button class="quantity-btn decrease-btn">-</button>
+                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+                    <button class="quantity-btn increase-btn">+</button>
+                </div>
+            </div>
+            <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+            <div class="delete-btn"><i class="fa fa-trash"></i></div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+
+        attachItemListeners(cartItem, item);
+    }
+
+    function updateCartItem(item) {
+        const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
+            el => el.querySelector('.cart-item-name').textContent === item.name
+        );
+        const input = cartItem.querySelector('.quantity-input');
+        input.value = item.quantity;
+        cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+        updateCartSummary();
+        // Save to localStorage
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+
+    function attachItemListeners(cartItem, item) {
+        const decreaseBtn = cartItem.querySelector('.decrease-btn');
+        const increaseBtn = cartItem.querySelector('.increase-btn');
+        const quantityInput = cartItem.querySelector('.quantity-input');
+        const deleteBtn = cartItem.querySelector('.delete-btn');
+
+        decreaseBtn.addEventListener('click', () => {
+            if (item.quantity > 1) {
+                item.quantity--;
+                updateCartItem(item);
+            }
+        });
+
+        increaseBtn.addEventListener('click', () => {
+            item.quantity++;
+            updateCartItem(item);
+        });
+
+        quantityInput.addEventListener('change', () => {
+            let value = parseInt(quantityInput.value);
+            if (value < 1 || isNaN(value)) value = 1;
+            item.quantity = value;
+            updateCartItem(item);
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            cartItem.remove();
+            cartItems = cartItems.filter(i => i.name !== item.name);
+            updateCartSummary();
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        });
+    }
+
+    function updateCartSummary() {
+        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        cartItemCount.textContent = `${totalItems} items`;
+        subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    // Image Zoom Functionality
+    zoomButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const imageUrl = this.getAttribute('data-image');
+            zoomedImage.src = imageUrl;
+            imageZoomModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+    });
+
+    backBtn.addEventListener('click', function() {
+        imageZoomModal.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the image
+    imageZoomModal.addEventListener('click', function(e) {
+        if (e.target === imageZoomModal) {
+            imageZoomModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+
+
+
 </body>
 
 </html>

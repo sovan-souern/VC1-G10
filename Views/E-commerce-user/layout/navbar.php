@@ -92,6 +92,8 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="">Logout</a></li>
                                 </ul>
                             </div>
                         <?php else: ?>
@@ -1236,6 +1238,10 @@
 
             button.disabled = true;
             button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Logging in...';
+    // Clear previous messages
+    messageDiv.innerHTML = '';
+    button.disabled = true;
+    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
 
             fetch('/users/authenticate', {
                     method: 'POST',
@@ -1267,6 +1273,33 @@
                     button.innerHTML = 'Login as Admin';
                 });
         });
+    fetch('/users/authenticate', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include' // Include cookies for session handling
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            if (data.role === 'admin' || data.role === 'shopowner') {
+                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 1500);
+            } else {
+                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. You do not have admin privileges.</div>';
+                button.disabled = false;
+                button.innerHTML = 'Login as Admin';
+            }
+        } else {
+            throw new Error(data.message || 'Invalid credentials');
+        }
+    })
+    .catch(error => {
+        messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+        button.disabled = false;
+        button.innerHTML = 'Login as Admin';
+    });
 
         // Close modal when clicked outside
         document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
@@ -1275,7 +1308,43 @@
             document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
             document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
         });
+        // Close modal when clicked outside
+        document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
+            document.getElementById('adminLoginMessage').innerHTML = '';
+            document.getElementById('adminLoginForm').reset();
+            document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
+            document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
+        });
+        
+        function handleLogout(event) {
+            event.preventDefault();
+            
+            fetch('/Views/auth/logout_handler.php', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(() => {
+                // Clear local storage
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Force reload and redirect
+                window.location.href = '/';
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 100);
+            })
+            .catch(() => {
+                window.location.href = '/';
+                window.location.reload(true);
+            });
+        }
     </script>
+</script>
 
     <!-- Profile Panel -->
     <div class="offcanvas offcanvas-end profile-panel" tabindex="-1" id="profileOffcanvas">
@@ -1378,6 +1447,29 @@
                         </a>
                     </div>
                 </div>
+            <!-- Settings Tab -->
+            <div class="tab-pane fade" id="settings-tab">
+                <div class="settings-list">
+                    <a href="/reset" class="settings-item">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Change Password</span>
+                    </a>
+                    <a href="#" class="settings-item" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Admin Login</span>
+                    </a>
+                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'shopowner'): ?>
+                        <a href="/dashboard" class="settings-item">
+                            <i class="bi bi-speedometer2"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    <?php endif; ?>
+                    <a href="#" onclick="handleLogout(event)" class="settings-item text-danger">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
 
                 <!-- Add Admin Login Modal -->
                 <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
@@ -1507,13 +1599,40 @@
                     button.innerHTML = 'Login as Admin';
                 });
         });
+    fetch('/users/authenticate', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include' // Include cookies for session handling
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            if (data.role === 'admin' || data.role === 'shopowner') {
+                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 1500);
+            } else {
+                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. You do not have admin privileges.</div>';
+                button.disabled = false;
+                button.innerHTML = 'Login as Admin';
+            }
+        } else {
+            throw new Error(data.message || 'Invalid credentials');
+        }
+    })
+    .catch(error => {
+        messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+        button.disabled = false;
+        button.innerHTML = 'Login as Admin';
+    });
 
-        // Close modal handler
-        document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
-            document.getElementById('adminLoginMessage').innerHTML = '';
-            document.getElementById('adminLoginForm').reset();
-            const button = document.querySelector('#adminLoginForm button[type="submit"]');
-            button.disabled = false;
-            button.innerHTML = 'Login as Admin';
-        });
-    </script>
+
+// Close modal when clicked outside
+document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
+    document.getElementById('adminLoginMessage').innerHTML = '';
+    document.getElementById('adminLoginForm').reset();
+    document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
+    document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
+});
+</script>
