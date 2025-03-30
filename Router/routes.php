@@ -143,6 +143,8 @@ $routes->get('/productuser', [ProductUserController::class, 'index']);
 
 $routes->get('/checkout', [CheckoutUserController::class, 'ProductCheckout']);
 $routes->post('/checkout/store', [CheckoutUserController::class, 'store']);
+$routes->get('/favorite', [CheckoutUserController::class, 'favorite']);
+$routes->get('/shopping', [CheckoutUserController::class, 'shopping']);
 
 
 $routes->post('/contact/store', [NotificationController::class, 'store']);

@@ -1,6 +1,7 @@
 <?php
 require_once "Models/OrderModel.php";
-class CheckoutUserController{
+require_once "Controllers/BaseController.php";
+class CheckoutUserController extends BaseController{
     private $model;
     function __construct()
     {
@@ -31,5 +32,17 @@ class CheckoutUserController{
 
     // }
     echo "1";
+  }
+
+
+
+
+  function favorite(){
+    // $this->ViewsUser('Views/E-commerce-user/card/favorite.php');
+    require_once 'Views/E-commerce-user/card/favorite.php';
+
+  }
+  function shopping(){
+    require_once 'Views/E-commerce-user/card/shopping.php';
   }
 }
