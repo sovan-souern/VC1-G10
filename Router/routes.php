@@ -45,6 +45,10 @@ $routes->post('/users/authenticate', [LoginRegisterController::class, 'authentic
 $routes->get('/signup', [LoginRegisterController::class, 'register']); // Changed to register
 $routes->get('/signup', [LoginRegisterController::class, 'logout']);
 
+// Admin Registration Routes
+$routes->get('/admin-register', [LoginRegisterController::class, 'adminRegister']);
+$routes->post('/users/store-admin', [LoginRegisterController::class, 'storeAdmin']);
+
 // Admin Routes (for admin management)
 $routes->get('/admin', [AdminController::class, 'index']);
 $routes->get('/admin/edit/(\d+)', [AdminController::class, 'edit']);
@@ -56,8 +60,6 @@ $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
 $routes->get('/order', [OrderController::class, 'index']);
 $routes->get('/order_detail', [OrderController::class, 'view']);
 
-// Shop Owner Routes
-$routes->get('/shop-owner', [ShopownerController::class, 'index']);
 
 // Invoice Routes
 $routes->get('/invoice', [InvoiceController::class, 'index']);
