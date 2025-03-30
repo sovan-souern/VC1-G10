@@ -629,6 +629,12 @@ $notifications = $model->getNotifications();
                     <span class="align-middle">Reset Password</span>
                   </a>
                 </li>
+                <!-- create admin -->
+                 <li>
+                  <a class="dropdown-item" href="/admin-register">
+                    <i class="bi bi-person-plus me-2"></i>
+                    <span class="align-middle">Create Admin</span>
+                  </a>
                 <li>
                   <div class="dropdown-divider"></div>
                 </li>

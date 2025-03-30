@@ -10,23 +10,25 @@ class LoginRegisterModel {
 
     public function registerAdmin($name, $phone, $password, $profilePicture = null, $role = 'user') {
         try {
-            error_log("Starting registration for phone: $phone with role: $role");
-            error_log("Profile picture path: " . ($profilePicture ?? 'none'));
-            
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            
-            $query = "INSERT INTO admins (name, phone, password, profile_picture, role) 
-                     VALUES (:name, :phone, :password, :profile_picture, :role)";
+            // Check if phone number already exists
+            $stmt = $this->db->query("SELECT admin_ID FROM admins WHERE phone = :phone", [':phone' => $phone]);
+            if ($stmt->rowCount() > 0) {
+                throw new Exception("Phone number already registered!");
+            }
+
+            // Insert new admin
+            $sql = "INSERT INTO admins (name, phone, password, profile_picture, role, created_at) 
+                    VALUES (:name, :phone, :password, :profile_picture, :role, NOW())";
             
             $params = [
                 ':name' => $name,
                 ':phone' => $phone,
-                ':password' => $hashedPassword,
+                ':password' => password_hash($password, PASSWORD_DEFAULT),
                 ':profile_picture' => $profilePicture,
                 ':role' => $role
             ];
 
-            $stmt = $this->db->query($query, $params);
+            $stmt = $this->db->query($sql, $params);
             
             if ($stmt->rowCount() > 0) {
                 error_log("Successfully registered user with phone: $phone");
