@@ -118,78 +118,87 @@ class ProfileController extends BaseController {
     }
 
     public function updateProfile() {
-        $admin_ID = $_SESSION['admin_ID'] ?? null;
-
-        if ($admin_ID === null) {
-            header("Location: /login");
-            exit();
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Collect form data
-            $data = [
-                'name' => $_POST['name'] ?? '',
-                'phone' => $_POST['phone'] ?? '',
-                'profile_picture' => null
-            ];
-
-            // Validate phone number
-            if (!preg_match('/^[0-9]+$/', $data['phone'])) {
-                echo json_encode(['status' => 'error', 'message' => 'Invalid phone number format']);
-                exit();
+        header('Content-Type: application/json');
+        
+        try {
+            if (!isset($_SESSION['admin_ID'])) {
+                throw new Exception('Not authenticated');
             }
 
-            // Handle file upload
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $allowedTypes = ['image/png', 'image/jpeg'];
-                $maxFileSize = 2 * 1024 * 1024; // 2MB
+            $admin_ID = $_SESSION['admin_ID'];
+            $name = htmlspecialchars($_POST['name'] ?? '');
+            
+            // Only process phone updates from dashboard
+            $phone = null;
+            $isDashboard = isset($_POST['is_dashboard']) && $_POST['is_dashboard'] === 'true';
+            if ($isDashboard) {
+                $phone = htmlspecialchars($_POST['phone'] ?? '');
+            }
 
-                $fileType = $_FILES['image']['type'];
-                $fileSize = $_FILES['image']['size'];
-
-                if (!in_array($fileType, $allowedTypes)) {
-                    echo json_encode(['status' => 'error', 'message' => 'Invalid file type. Only JPG and PNG are allowed.']);
-                    exit();
-                }
-
-                if ($fileSize > $maxFileSize) {
-                    echo json_encode(['status' => 'error', 'message' => 'File size exceeds the maximum limit of 2MB.']);
-                    exit();
-                }
-
-                $uploadDir = 'uploads/profile_pictures/';
+            // Handle profile picture
+            $profilePicture = null;
+            if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = "uploads/profiles/";
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
 
-                $fileName = uniqid() . '-' . basename($_FILES['image']['name']);
-                $uploadPath = $uploadDir . $fileName;
+                $fileExtension = pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION);
+                $fileName = 'profile_' . time() . '.' . $fileExtension;
+                $targetPath = $uploadDir . $fileName;
 
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
-                    $data['profile_picture'] = $uploadPath;
-                } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Failed to upload profile picture.']);
-                    exit();
+                if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetPath)) {
+                    $profilePicture = $targetPath;
                 }
             }
 
-            // Update the profile in the database
-            if ($this->profileModel->updateAdmin($admin_ID, $data)) {
-                $_SESSION['phone'] = $data['phone'];
-                if ($data['profile_picture']) {
-                    $_SESSION['profile_picture'] = $data['profile_picture'];
+            $updateData = ['name' => $name];
+            
+            // Only include phone in update if from dashboard
+            if ($isDashboard && $phone) {
+                $updateData['phone'] = $phone;
+            }
+
+            if ($profilePicture) {
+                $updateData['profile_picture'] = $profilePicture;
+            }
+
+            if ($this->profileModel->updateAdmin($admin_ID, $updateData)) {
+                // Update session
+                $_SESSION['name'] = $name;
+                if ($isDashboard && $phone) {
+                    $_SESSION['phone'] = $phone;
                 }
-                echo json_encode([
+                if ($profilePicture) {
+                    $_SESSION['profile_picture'] = $profilePicture;
+                }
+
+                $response = [
                     'status' => 'success',
                     'message' => 'Profile updated successfully',
-                    'profile_picture' => $data['profile_picture']
-                ]);
+                    'data' => [
+                        'name' => $name,
+                        'profile_picture' => $profilePicture ? '/' . $profilePicture : null
+                    ]
+                ];
+                
+                // Include phone in response only if from dashboard
+                if ($isDashboard && $phone) {
+                    $response['data']['phone'] = $phone;
+                }
+
+                echo json_encode($response);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to update profile']);
+                throw new Exception('Failed to update profile');
             }
 
-            exit();
+        } catch (Exception $e) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
         }
+        exit();
     }
 
     public function reset() {

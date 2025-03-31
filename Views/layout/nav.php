@@ -362,6 +362,69 @@ $notifications = $model->getNotifications();
       updateNavProfileImages('/' + storedProfilePicture);
     }
   });
+
+  // Add this function to update all profile images
+  function updateAllProfileImages(imageUrl) {
+    // Update both navbar and dropdown profile images
+    document.querySelectorAll('.nav-profile-img, .profile-img').forEach(img => {
+        img.src = imageUrl;
+    });
+}
+
+// Modify the existing profile form submit handler
+document.getElementById('profile-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('/updateProfile', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Update all profile images
+            const profilePicture = data.data.profile_picture || '/Views/assets/img/avatars/1.png';
+            updateAllProfileImages(profilePicture);
+            
+            // Update displayed name
+            document.querySelectorAll('.profile-info h5, .profile-info h6').forEach(el => {
+                if (el.classList.contains('fw-bold')) {
+                    el.textContent = data.data.name;
+                }
+            });
+
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: error.message,
+            confirmButtonColor: '#FF69B4'
+        });
+    });
+});
+
+// Add real-time preview for profile image upload
+document.getElementById('profile-upload').addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imageUrl = e.target.result;
+            updateAllProfileImages(imageUrl);
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
 </script>
 
 <style>
@@ -823,6 +886,69 @@ $notifications = $model->getNotifications();
             updateNavProfileImages('/' + storedProfilePicture);
           }
         });
+
+        // Add this function to update all profile images
+        function updateAllProfileImages(imageUrl) {
+          // Update both navbar and dropdown profile images
+          document.querySelectorAll('.nav-profile-img, .profile-img').forEach(img => {
+              img.src = imageUrl;
+          });
+      }
+
+      // Modify the existing profile form submit handler
+      document.getElementById('profile-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+
+          fetch('/updateProfile', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.status === 'success') {
+                  // Update all profile images
+                  const profilePicture = data.data.profile_picture || '/Views/assets/img/avatars/1.png';
+                  updateAllProfileImages(profilePicture);
+                  
+                  // Update displayed name
+                  document.querySelectorAll('.profile-info h5, .profile-info h6').forEach(el => {
+                      if (el.classList.contains('fw-bold')) {
+                          el.textContent = data.data.name;
+                      }
+                  });
+
+                  // Show success message
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Success!',
+                      text: data.message,
+                      timer: 2000,
+                      showConfirmButton: false
+                  });
+              }
+          })
+          .catch(error => {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error!',
+                  text: error.message,
+                  confirmButtonColor: '#FF69B4'
+              });
+          });
+      });
+
+      // Add real-time preview for profile image upload
+      document.getElementById('profile-upload').addEventListener('change', function(e) {
+          if (this.files && this.files[0]) {
+              const reader = new FileReader();
+              reader.onload = function(e) {
+                  const imageUrl = e.target.result;
+                  updateAllProfileImages(imageUrl);
+              }
+              reader.readAsDataURL(this.files[0]);
+          }
+      });
       </script>
 
       <style>
