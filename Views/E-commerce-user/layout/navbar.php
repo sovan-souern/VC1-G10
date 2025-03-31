@@ -1194,46 +1194,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
-
-    // Clear previous messages
-    messageDiv.innerHTML = '';
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
-
-    fetch('/users/authenticate', {
-        method: 'POST',
-        body: formData,
-        credentials: 'include' // Include cookies for session handling
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            if (data.role === 'admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1500);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. You do not have admin privileges.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
-            }
-        } else {
-            throw new Error(data.message || 'Invalid credentials');
-        }
-    })
-    .catch(error => {
-        messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
-        button.disabled = false;
-        button.innerHTML = 'Login as Admin';
-    });
-});
-
 // Close modal when clicked outside
 document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
     document.getElementById('adminLoginMessage').innerHTML = '';
@@ -1310,22 +1270,17 @@ function handleLogout(event) {
                     <div class="text-center mb-4">
                         <div class="profile-picture-upload">
                             <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
-                                 alt="Profile" class="profile-pic-lg">
+                                 alt="Profile" class="profile-pic-lg" id="preview-profile-pic">
                             <label for="profile-upload" class="upload-btn">
                                 <i class="bi bi-camera"></i>
                             </label>
-                            <input type="file" id="profile-upload" hidden accept="image/*">
+                            <input type="file" id="profile-upload" name="profile_picture" hidden accept="image/*">
                         </div>
                     </div>
                     
                     <div class="form-group mb-3">
                         <label>Full Name</label>
-                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
-                    </div>
-                    
-                    <div class="form-group mb-3">
-                        <label>Phone</label>
-                        <input type="tel" class="form-control" value="<?php echo htmlspecialchars($_SESSION['phone']); ?>">
+                        <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Update Profile</button>
@@ -1356,16 +1311,14 @@ function handleLogout(event) {
                         <i class="bi bi-shield-lock"></i>
                         <span>Change Password</span>
                     </a>
-                    <a href="#" class="settings-item" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Admin Login</span>
-                    </a>
-                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'shopowner'): ?>
+
+                    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Shopowner')): ?>
                         <a href="/dashboard" class="settings-item">
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
                         </a>
                     <?php endif; ?>
+
                     <a href="#" onclick="handleLogout(event)" class="settings-item text-danger">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Logout</span>
@@ -1373,133 +1326,12 @@ function handleLogout(event) {
                 </div>
             </div>
 
-            <!-- Add Admin Login Modal -->
-            <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header admin-modal-header">
-                            <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body p-0">
-                            <div class="login-container">
-                                <!-- Left Section -->
-                                <div class="left-section text-center p-4">
-                                    <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg" 
-                                         alt="App Logo" class="admin-logo mb-3">
-                                    <h6 class="text-white mb-2">Admin Portal</h6>
-                                    <p class="text-white-50 small">Access your administrative dashboard</p>
-                                </div>
-
-                                <!-- Right Section -->
-                                <div class="right-section p-4">
-                                    <form id="adminLoginForm" class="admin-login-form">
-                                        <div class="form-group mb-3">
-                                            <input type="tel" class="form-control" name="phone" 
-                                                   placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                                        </div>
-                                        
-                                        <div class="form-group mb-3">
-                                            <input type="password" class="form-control" name="password" 
-                                                   placeholder="Password" required>
-                                        </div>
-
-                                        <div id="adminLoginMessage" class="mb-3"></div>
-                                        
-                                        <button type="submit" class="btn btn-primary w-100">
-                                            Login as Admin
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
 
-<!-- Add Admin Login Modal -->
-<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header admin-modal-header">
-                <h5 class="modal-title" id="adminLoginModalLabel">Admin/Shop Owner Access</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-                <div class="login-container">
-                    <div class="right-section p-4">
-                        <form id="adminLoginForm" class="admin-login-form">
-                            <div class="form-group mb-3">
-                                <input type="tel" class="form-control" name="phone" 
-                                       placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                            </div>
-                            
-                            <div class="form-group mb-3">
-                                <input type="password" class="form-control" name="password" 
-                                       placeholder="Password" required>
-                            </div>
-
-                            <!-- Add hidden field to identify admin login -->
-                            <input type="hidden" name="admin_login" value="true">
-
-                            <div id="adminLoginMessage" class="mb-3"></div>
-                            
-                            <button type="submit" class="btn btn-primary w-100">
-                                Login
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
-
-    messageDiv.innerHTML = '';
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
-
-    fetch('/users/authenticate', {
-        method: 'POST',
-        body: formData,
-        credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            const userRole = data.role.toLowerCase();
-            
-            if (userRole === 'admin' || userRole === 'shopowner') {
-                // Store role and redirect immediately
-                sessionStorage.setItem('dashboard_access', 'true');
-                window.location.replace('/dashboard');
-                return;
-            }
-            
-            messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
-            button.disabled = false;
-            button.innerHTML = 'Login';
-        } else {
-            throw new Error(data.message || 'Invalid credentials');
-        }
-    })
-    .catch(error => {
-        messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
-        button.disabled = false;
-        button.innerHTML = 'Login';
-    });
-});
 
 // Check role and redirect on page load
 document.addEventListener('DOMContentLoaded', function() {
@@ -1508,6 +1340,72 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (dashboardAccess === 'true' && (userRole === 'admin' || userRole === 'shopowner')) {
         window.location.replace('/dashboard');
+    }
+});
+
+document.getElementById('profile-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    // Show loading indicator
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
+
+    fetch('/updateProfile', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Update profile images
+            const profilePicture = data.data.profile_picture || '/Views/assets/img/avatars/1.png';
+            document.querySelectorAll('.profile-pic, .user-avatar, .profile-pic-lg').forEach(img => {
+                img.src = profilePicture;
+            });
+
+            // Update displayed name only
+            document.querySelectorAll('.profile-info h5, .profile-info h6').forEach(el => {
+                if (el.classList.contains('fw-bold')) {
+                    el.textContent = data.data.name;
+                }
+            });
+
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } else {
+            throw new Error(data.message);
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: error.message,
+            confirmButtonColor: '#FF69B4'
+        });
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Update Profile';
+    });
+});
+
+// Preview image before upload
+document.getElementById('profile-upload').addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview-profile-pic').src = e.target.result;
+        }
+        reader.readAsDataURL(this.files[0]);
     }
 });
 </script>
