@@ -498,7 +498,7 @@
                             <button class="add-to-cart" 
                                     data-product-name="<?php echo $product_name; ?>" 
                                     data-product-price="<?php echo $discounted_price; ?>" 
-                                    data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                                    data-product-image="<?php echo $image_url; ?>" >Add to Cart</button>
                         </div>
                     </div>
             <?php
@@ -649,8 +649,7 @@
 
 
 
-
-    <div class="cart-panel">
+<div class="cart-panel">
         <div class="cart-header">
             <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
             <div class="close-cart">x</div>
@@ -663,7 +662,8 @@
                 <span>Subtotal</span>
                 <span id="subtotal-amount">$0.00</span>
             </div>
-            <button class="view-cart-btn" onclick="window.location.href='checkout';">Checkout</button>
+            <button class="view-cart-btn" onclick="window.location.href='cart';">Views Cart</button>
+            <!-- onclick="window.location.href='checkout'; -->
         </div>
     </div>
 
@@ -1003,9 +1003,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
-
-
 </body>
 
 </html>

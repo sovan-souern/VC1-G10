@@ -11,6 +11,11 @@ class CheckoutUserController extends BaseController{
     function ProductCheckout() {
       require_once 'Views/E-commerce-user/card/checkout.php';
   }
+  function cartview(){
+    require_once 'Views/E-commerce-user/card/cart.php';
+    // $this->ViewsUser('Views/E-commerce-user/card/cart.php');
+
+  }
 
 
   function store() {
