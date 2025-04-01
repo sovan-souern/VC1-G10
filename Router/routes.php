@@ -24,12 +24,37 @@ function checkAuthentication() {
         session_start();
     }
     // Add '/' to allowed routes since home is now default
-    $allowedRoutes = ['/', '/home', '/login', '/register', '/users/store', '/users/authenticate', '/signup', '/logout', '/reset'];
+    $allowedRoutes = [
+        '/', '/home', '/login', '/register', '/users/store', '/users/authenticate', 
+        '/signup', '/logout', '/reset', '/productuser', '/about', '/contact'
+    ];
+    $adminRoutes = [
+        '/admin', '/admin-register', '/admin/edit', '/admin/update', '/admin/delete',
+        '/order', '/order_detail', '/invoice', '/users', '/user/create', '/user/edit',
+        '/notifications', '/out-stock', '/products', '/category', '/brand', '/discount','/dashboard',
+        '/products/create', '/products/edit', '/products/update', '/products/delete',
+        '/category/create', '/category/edit', '/category/update', '/category/delete',
+        '/brand/create', '/brand/edit', '/brand/update', '/brand/delete',
+        '/dashboard',
+    ];
+
+    // Redirect if not authenticated
     if (!isset($_SESSION['admin_ID']) && !in_array($_SERVER['REQUEST_URI'], $allowedRoutes)) {
         header("Location: /login");
         exit();
     }
+
+    // Restrict access to admin routes for users with the "user" role
+    if (isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'user') {
+        foreach ($adminRoutes as $adminRoute) {
+            if (strpos($_SERVER['REQUEST_URI'], $adminRoute) === 0) {
+                header("Location: /home");
+                exit();
+            }
+        }
+    }
 }
+
 
 // Call the middleware function before defining the routes
 checkAuthentication();
