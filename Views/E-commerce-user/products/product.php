@@ -18,7 +18,7 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css" type="text/css">
+    <!-- <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css" type="text/css"> -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css" type="text/css">
 </head>
 
@@ -32,46 +32,48 @@
                             <?php $hasDiscount = false; ?>
                             <?php foreach ($discounts as $key => $discount): ?>
                                 <?php if ($product["product_id"] == $discount["product_id"]): ?>
-                                    <?php
-                                    $original_price = floatval($discount["price"]);
-                                    $discount_percentage = floatval($discount["discount_percentage"]);
-                                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
+                                    <?php if ($discount["end_date"] >= date("Y-m-d")): ?>
+                                        <?php
+                                        $original_price = floatval($discount["price"]);
+                                        $discount_percentage = floatval($discount["discount_percentage"]);
+                                        $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                                    $product_name = htmlspecialchars($discount["product_name"]);
-                                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
-                                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                                    $original_price_formatted = "$" . number_format($original_price, 2);
-                                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-                                    ?>
-                                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                                        <div class="discount-product-card">
-                                            <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                                                <ul class="discount-product-hover">
-                                                    <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
-                                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-info">
-                                                <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                                        $product_name = htmlspecialchars($discount["product_name"]);
+                                        $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                                        $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                                        $original_price_formatted = "$" . number_format($original_price, 2);
+                                        $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                                        ?>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                            <div class="discount-product-card">
+                                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                                    <ul class="discount-product-hover">
+                                                        <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
+                                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                                    </ul>
                                                 </div>
-                                                <div class="price">
-                                                    <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                                    <?php echo $discounted_price_formatted; ?>
+                                                <div class="product-info">
+                                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                    <div class="price">
+                                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                                        <?php echo $discounted_price_formatted; ?>
+                                                    </div>
+                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                                 </div>
-                                                <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <?php $hasDiscount = true; ?>
-                                    <?php break; ?>
+                                        <?php $hasDiscount = true; ?>
+                                        <?php break; ?>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                             <?php if (!$hasDiscount): ?>
@@ -126,23 +128,7 @@
         </div>
     </section>
 
-    <!-- Cart Panel -->
-    <div class="cart-panel">
-        <div class="cart-header">
-            <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
-            <div class="close-cart">×</div>
-        </div>
-        <div class="cart-items">
-            <!-- Cart items will be dynamically added here -->
-        </div>
-        <div class="cart-footer">
-            <div class="subtotal">
-                <span>Subtotal</span>
-                <span id="subtotal-amount">$0.00</span>
-            </div>
-            <button class="view-cart-btn" onclick="window.location.href='view-card';">View Cart</button>
-        </div>
-    </div>
+
 
     <!-- Image Zoom Modal -->
     <div class="image-zoom-modal">
@@ -405,9 +391,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .discount-product-hover {
@@ -627,158 +621,6 @@
         }
 
         /* Cart Panel Styles */
-        .cart-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 350px;
-            height: 100%;
-            background: #fff;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .cart-panel.active {
-            transform: translateX(0);
-        }
-
-        .cart-header {
-            background-color: #ffb6c1;
-            color: #000;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .close-cart {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #000;
-            transition: transform 0.3s ease;
-        }
-
-        .close-cart:hover {
-            transform: rotate(90deg);
-        }
-
-        .cart-items {
-            padding: 20px;
-            max-height: calc(100% - 150px);
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            margin-right: 15px;
-            border-radius: 5px;
-        }
-
-        .cart-item-details {
-            flex-grow: 1;
-        }
-
-        .cart-item-name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .cart-item-price {
-            font-weight: bold;
-            color: #ff6699;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            margin-top: 5px;
-        }
-
-        .quantity-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #333;
-            padding: 0 5px;
-        }
-
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            margin: 0 5px;
-        }
-
-        .cart-item-total {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .delete-btn {
-            margin-left: 10px;
-            cursor: pointer;
-            color: #777;
-            transition: color 0.3s ease;
-        }
-
-        .delete-btn:hover {
-            color: #ff3333;
-        }
-
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid #eee;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: #fff;
-        }
-
-        .subtotal {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .view-cart-btn {
-            background-color: #ffb6c1;
-            color: #000;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-
-        .view-cart-btn:hover {
-            background-color: #ff9eb5;
-        }
-
-        /* Image Zoom Modal Styles */
         .image-zoom-modal {
             display: none;
             position: fixed;
@@ -912,157 +754,442 @@
             font-size: 16px;
             line-height: 40px;
         }
+
+        /* Add this media query to your existing <style> section */
+        @media (max-width: 736px) {
+
+            /* Shop Section - 2 cards per row */
+            .col-lg-3,
+            .col-md-4,
+            .col-sm-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+
+            /* Adjust product card styling for smaller screens */
+            .discount-product-card,
+            .general-product-item {
+                margin-bottom: 15px;
+            }
+
+            .product-image,
+            .general-product-pic {
+                height: 200px;
+                /* Reduce height for smaller screens */
+            }
+
+            .product-info,
+            .general-product-text {
+                padding: 10px;
+                /* Reduce padding */
+            }
+
+            .product-name,
+            .general-product-text h6 {
+                font-size: 14px;
+                /* Slightly smaller text */
+            }
+
+            .price,
+            .general-product-price {
+                font-size: 1rem;
+                /* Adjust price font size */
+            }
+
+            .add-to-cart {
+                padding: 6px 10px;
+                /* Smaller button */
+                font-size: 14px;
+            }
+
+            /* Trend Section - Stack items vertically */
+            .trend .col-lg-4,
+            .trend .col-md-4,
+            .trend .col-sm-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .trend__item__pic img {
+                width: 150px;
+                /* Reduce image size */
+                height: 100px;
+            }
+
+            .trend__item__text h6 {
+                font-size: 13px;
+            }
+
+            .product__price {
+                font-size: 14px;
+            }
+        }
     </style>
 
+
+
+
+
+
+
+<div class="cart-panel">
+        <div class="cart-header">
+            <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
+            <div class="close-cart">x</div>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span id="subtotal-amount">$0.00</span>
+            </div>
+            <button class="view-cart-btn" onclick="window.location.href='cart';">Views Cart</button>
+            <!-- onclick="window.location.href='checkout'; -->
+        </div>
+    </div>
+
+
+    <!-- Inline CSS -->
+    <style>
+     
+
+
+
+
+     /* Cart Panel Styles */
+     .cart-panel {
+         position: fixed;
+         top: 0;
+         right: 0;
+         width: 350px;
+         height: 100%;
+         background: #fff;
+         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+         z-index: 1000;
+         transform: translateX(100%);
+         transition: transform 0.3s ease;
+     }
+
+     .cart-panel.active {
+         transform: translateX(0);
+     }
+
+     .cart-header {
+         background-color: #ffb6c1;
+         color: #000;
+         padding: 15px 20px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+     }
+
+     .cart-header h3 {
+         margin: 0;
+         font-size: 1.5rem;
+         font-weight: bold;
+     }
+
+     .close-cart {
+         font-size: 1.5rem;
+         cursor: pointer;
+         color: #000;
+         transition: transform 0.3s ease;
+     }
+
+     .close-cart:hover {
+         transform: rotate(90deg);
+     }
+
+     .cart-items {
+         padding: 20px;
+         max-height: calc(100% - 150px);
+         overflow-y: auto;
+     }
+
+     .cart-item {
+         display: flex;
+         align-items: center;
+         padding: 10px 0;
+         border-bottom: 1px solid #eee;
+     }
+
+     .cart-item img {
+         width: 60px;
+         height: 60px;
+         object-fit: cover;
+         margin-right: 15px;
+         border-radius: 5px;
+     }
+
+     .cart-item-details {
+         flex-grow: 1;
+     }
+
+     .cart-item-name {
+         font-weight: bold;
+         color: #333;
+         margin-bottom: 5px;
+     }
+
+     .cart-item-price {
+         font-weight: bold;
+         color: #ff6699;
+     }
+
+     .cart-item-quantity {
+         display: flex;
+         align-items: center;
+         margin-top: 5px;
+     }
+
+     .quantity-btn {
+         background: none;
+         border: none;
+         font-size: 1.2rem;
+         cursor: pointer;
+         color: #333;
+         padding: 0 5px;
+     }
+
+     .quantity-input {
+         width: 40px;
+         text-align: center;
+         border: 1px solid #ddd;
+         border-radius: 3px;
+         margin: 0 5px;
+     }
+
+     .cart-item-total {
+         font-weight: bold;
+         color: #333;
+     }
+
+     .delete-btn {
+         margin-left: 10px;
+         cursor: pointer;
+         color: #777;
+         transition: color 0.3s ease;
+     }
+
+     .delete-btn:hover {
+         color: #ff3333;
+     }
+
+     .cart-footer {
+         padding: 20px;
+         border-top: 1px solid #eee;
+         position: absolute;
+         bottom: 0;
+         width: 100%;
+         background: #fff;
+     }
+
+     .subtotal {
+         display: flex;
+         justify-content: space-between;
+         font-size: 1.2rem;
+         font-weight: bold;
+         margin-bottom: 15px;
+     }
+
+     .view-cart-btn {
+         background-color: #ffb6c1;
+         color: #000;
+         border: none;
+         padding: 10px;
+         width: 100%;
+         font-weight: bold;
+         cursor: pointer;
+         border-radius: 5px;
+         transition: background 0.3s ease;
+     }
+
+     .view-cart-btn:hover {
+         background-color: #ff9eb5;
+     }
+
+  
+   
+
+ 
+ </style>
+
     <!-- JavaScript -->
-    <script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="Views/E-commerce-user/assets/js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cartPanel = document.querySelector('.cart-panel');
-            const closeCart = document.querySelector('.close-cart');
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const cartItemsContainer = document.querySelector('.cart-items');
-            const cartItemCount = document.querySelector('#cart-item-count');
-            const subtotalAmount = document.querySelector('#subtotal-amount');
-            const imageZoomModal = document.querySelector('.image-zoom-modal');
-            const zoomedImage = document.querySelector('#zoomed-image');
-            const backBtn = document.querySelector('.back-btn');
-            const zoomButtons = document.querySelectorAll('.image-zoom');
-            let cartItems = [];
+<!-- JavaScript -->
+<script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
+<script src="Views/E-commerce-user/assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cartPanel = document.querySelector('.cart-panel');
+    const closeCart = document.querySelector('.close-cart');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartItemCount = document.querySelector('#cart-item-count');
+    const subtotalAmount = document.querySelector('#subtotal-amount');
+    const imageZoomModal = document.querySelector('.image-zoom-modal');
+    const zoomedImage = document.querySelector('#zoomed-image');
+    const backBtn = document.querySelector('.back-btn');
+    const zoomButtons = document.querySelectorAll('.image-zoom');
+    let cartItems = [];
 
-            // Cart Functionality
-            function toggleCart() {
-                cartPanel.classList.toggle('active');
+    // Load cart from localStorage on page load
+    try {
+        cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (e) {
+        console.error("Error parsing cart from localStorage:", e);
+        cartItems = [];
+    }
+
+    // Render cart items on page load
+    cartItems.forEach(item => addCartItem(item));
+    updateCartSummary();
+
+    // Cart Functionality
+    function toggleCart() {
+        cartPanel.classList.toggle('active');
+    }
+
+    closeCart.addEventListener('click', toggleCart);
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productName = this.getAttribute('data-product-name');
+            const productPrice = parseFloat(this.getAttribute('data-product-price'));
+            const productImage = this.getAttribute('data-product-image');
+
+            const existingItem = cartItems.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+                updateCartItem(existingItem);
+            } else {
+                const newItem = {
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                };
+                cartItems.push(newItem);
+                addCartItem(newItem);
             }
 
-            closeCart.addEventListener('click', toggleCart);
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            console.log("Cart after adding item:", cartItems);
 
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const productName = this.getAttribute('data-product-name');
-                    const productPrice = parseFloat(this.getAttribute('data-product-price'));
-                    const productImage = this.getAttribute('data-product-image');
-
-                    const existingItem = cartItems.find(item => item.name === productName);
-                    if (existingItem) {
-                        existingItem.quantity += 1;
-                        updateCartItem(existingItem);
-                    } else {
-                        const newItem = {
-                            name: productName,
-                            price: productPrice,
-                            image: productImage,
-                            quantity: 1
-                        };
-                        cartItems.push(newItem);
-                        addCartItem(newItem);
-                    }
-
-                    if (!cartPanel.classList.contains('active')) {
-                        toggleCart();
-                    }
-                    updateCartSummary();
-                });
-            });
-
-            function addCartItem(item) {
-                const cartItem = document.createElement('div');
-                cartItem.classList.add('cart-item');
-                cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn decrease-btn">-</button>
-                            <input type="number" class="quantity-input" value="${item.quantity}" min="1">
-                            <button class="quantity-btn increase-btn">+</button>
-                        </div>
-                    </div>
-                    <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
-                    <div class="delete-btn"><i class="fa fa-trash"></i></div>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-
-                attachItemListeners(cartItem, item);
+            if (!cartPanel.classList.contains('active')) {
+                toggleCart();
             }
-
-            function updateCartItem(item) {
-                const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
-                    el => el.querySelector('.cart-item-name').textContent === item.name
-                );
-                const input = cartItem.querySelector('.quantity-input');
-                input.value = item.quantity;
-                cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-                updateCartSummary();
-            }
-
-            function attachItemListeners(cartItem, item) {
-                const decreaseBtn = cartItem.querySelector('.decrease-btn');
-                const increaseBtn = cartItem.querySelector('.increase-btn');
-                const quantityInput = cartItem.querySelector('.quantity-input');
-                const deleteBtn = cartItem.querySelector('.delete-btn');
-
-                decreaseBtn.addEventListener('click', () => {
-                    if (item.quantity > 1) {
-                        item.quantity--;
-                        updateCartItem(item);
-                    }
-                });
-
-                increaseBtn.addEventListener('click', () => {
-                    item.quantity++;
-                    updateCartItem(item);
-                });
-
-                quantityInput.addEventListener('change', () => {
-                    let value = parseInt(quantityInput.value);
-                    if (value < 1 || isNaN(value)) value = 1;
-                    item.quantity = value;
-                    updateCartItem(item);
-                });
-
-                deleteBtn.addEventListener('click', () => {
-                    cartItem.remove();
-                    cartItems = cartItems.filter(i => i.name !== item.name);
-                    updateCartSummary();
-                });
-            }
-
-            function updateCartSummary() {
-                const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-                const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-                cartItemCount.textContent = `${totalItems} items`;
-                subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
-            }
-
-            // Image Zoom Functionality
-            zoomButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const imageUrl = this.getAttribute('data-image');
-                    zoomedImage.src = imageUrl;
-                    imageZoomModal.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                });
-            });
-
-            backBtn.addEventListener('click', function() {
-                imageZoomModal.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Restore scrolling
-            });
-
-            // Close modal when clicking outside the image
-            imageZoomModal.addEventListener('click', function(e) {
-                if (e.target === imageZoomModal) {
-                    imageZoomModal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
+            updateCartSummary();
         });
-    </script>
+    });
+
+    function addCartItem(item) {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-details">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                <div class="cart-item-quantity">
+                    <button class="quantity-btn decrease-btn">-</button>
+                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+                    <button class="quantity-btn increase-btn">+</button>
+                </div>
+            </div>
+            <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+            <div class="delete-btn"><i class="fa fa-trash"></i></div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+
+        attachItemListeners(cartItem, item);
+    }
+
+    function updateCartItem(item) {
+        const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
+            el => el.querySelector('.cart-item-name').textContent === item.name
+        );
+        const input = cartItem.querySelector('.quantity-input');
+        input.value = item.quantity;
+        cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+        updateCartSummary();
+        // Save to localStorage
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+
+    function attachItemListeners(cartItem, item) {
+        const decreaseBtn = cartItem.querySelector('.decrease-btn');
+        const increaseBtn = cartItem.querySelector('.increase-btn');
+        const quantityInput = cartItem.querySelector('.quantity-input');
+        const deleteBtn = cartItem.querySelector('.delete-btn');
+
+        decreaseBtn.addEventListener('click', () => {
+            if (item.quantity > 1) {
+                item.quantity--;
+                updateCartItem(item);
+            }
+        });
+
+        increaseBtn.addEventListener('click', () => {
+            item.quantity++;
+            updateCartItem(item);
+        });
+
+        quantityInput.addEventListener('change', () => {
+            let value = parseInt(quantityInput.value);
+            if (value < 1 || isNaN(value)) value = 1;
+            item.quantity = value;
+            updateCartItem(item);
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            cartItem.remove();
+            cartItems = cartItems.filter(i => i.name !== item.name);
+            updateCartSummary();
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        });
+    }
+
+    function updateCartSummary() {
+        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        cartItemCount.textContent = `${totalItems} items`;
+        subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    // Image Zoom Functionality
+    zoomButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const imageUrl = this.getAttribute('data-image');
+            zoomedImage.src = imageUrl;
+            imageZoomModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+    });
+
+    backBtn.addEventListener('click', function() {
+        imageZoomModal.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the image
+    imageZoomModal.addEventListener('click', function(e) {
+        if (e.target === imageZoomModal) {
+            imageZoomModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+
+
+
 </body>
 
 </html>

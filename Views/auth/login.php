@@ -290,36 +290,49 @@ h3 {
         let messageDiv = document.getElementById("message");
 
         button.disabled = true;
-        button.innerHTML = "Logging in...";
+        button.innerHTML = "Verifying...";
 
         fetch("/users/authenticate", {
             method: "POST",
-            body: formData
+            body: formData,
+            credentials: 'include'
         })
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                messageDiv.innerHTML = "<div class='alert alert-success'>" + data.message + "</div>";
+                const userRole = data.role.toLowerCase();
                 
-                // Use role from server response
-                setTimeout(() => {
-                    if (data.role === 'admin' || data.role === 'shopowner') {
-                        window.location.href = "/dashboard";
-                    } else {
-                        window.location.href = "/home";
-                    }
-                }, 1000);
+                // Immediate redirect for admin/shopowner
+                if (userRole === 'admin' || userRole === 'shopowner') {
+                    sessionStorage.setItem('userRole', userRole);
+                    sessionStorage.setItem('dashboardAccess', 'true');
+                    window.location.replace('/dashboard');
+                    return;
+                }
+                
+                // Regular user redirect
+                window.location.replace('/home');
             } else {
-                messageDiv.innerHTML = "<div class='alert alert-danger'>" + data.message + "</div>";
-                button.disabled = false;
-                button.innerHTML = "Login";
+                throw new Error(data.message || 'Login failed');
             }
         })
         .catch(error => {
-            console.error("Login error:", error);
-            messageDiv.innerHTML = "<div class='alert alert-danger'>Login failed. Please try again.</div>";
+            messageDiv.innerHTML = `<div class='alert alert-danger'>${error.message}</div>`;
             button.disabled = false;
             button.innerHTML = "Login";
+            sessionStorage.removeItem('dashboardAccess');
         });
+    });
+
+    // Check authentication on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        if (sessionStorage.getItem('isAuthenticated')) {
+            const role = sessionStorage.getItem('userRole');
+            if (role === 'admin' || role === 'shopowner') {
+                window.location.replace('/dashboard');
+            } else {
+                window.location.replace('/home');
+            }
+        }
     });
 </script>

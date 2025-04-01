@@ -14,6 +14,7 @@ require_once 'Controllers/UserController.php';
 require_once 'Controllers/LoginRegisterController.php';
 require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
+require_once "Controllers/checkoutUser.php";
 
 $routes = new Router();
 
@@ -44,6 +45,10 @@ $routes->post('/users/authenticate', [LoginRegisterController::class, 'authentic
 $routes->get('/signup', [LoginRegisterController::class, 'register']); // Changed to register
 $routes->get('/signup', [LoginRegisterController::class, 'logout']);
 
+// Admin Registration Routes
+$routes->get('/admin-register', [LoginRegisterController::class, 'adminRegister']);
+$routes->post('/users/store-admin', [LoginRegisterController::class, 'storeAdmin']);
+
 // Admin Routes (for admin management)
 $routes->get('/admin', [AdminController::class, 'index']);
 $routes->get('/admin/edit/(\d+)', [AdminController::class, 'edit']);
@@ -55,8 +60,6 @@ $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
 $routes->get('/order', [OrderController::class, 'index']);
 $routes->get('/order_detail', [OrderController::class, 'view']);
 
-// Shop Owner Routes
-$routes->get('/shop-owner', [ShopownerController::class, 'index']);
 
 // Invoice Routes
 $routes->get('/invoice', [InvoiceController::class, 'index']);
@@ -139,9 +142,12 @@ $routes->get('/about', [AboutController::class, 'index']);
 
 
 $routes->get('/productuser', [ProductUserController::class, 'index']);
-$routes->get('/card', [ProductUserController::class, 'ProductCard']);
-$routes->get('/view-card', [ProductUserController::class, 'ProductDetail']);
-$routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
+
+$routes->get('/checkout', [CheckoutUserController::class, 'ProductCheckout']);
+$routes->post('/checkout/store', [CheckoutUserController::class, 'store']);
+$routes->get('/favorite', [CheckoutUserController::class, 'favorite']);
+$routes->get('/shopping', [CheckoutUserController::class, 'shopping']);
+$routes->get('/cart', [CheckoutUserController::class, 'cartview']);
 
 
 $routes->post('/contact/store', [NotificationController::class, 'store']);
@@ -149,6 +155,9 @@ $routes->get('/contact', [ContactController::class, 'index']);
 
 
 $routes->get('/shop', [ShopController::class, 'index']);
+
+
+
 
 
 $routes->dispatch();
