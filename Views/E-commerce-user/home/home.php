@@ -291,7 +291,14 @@
         }
 
 
+<<<<<<< HEAD
+        body {
+            
+            padding: 20px;
+        }
+=======
 
+>>>>>>> 9469813a5b1c3a0ff94b34ff8c96e2018c623373
 
         .products-container {
             display: grid;
@@ -742,6 +749,7 @@
             </div>
         </div>
     </div>
+
 
 
 
