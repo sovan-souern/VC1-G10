@@ -169,6 +169,7 @@
                     <!-- icon -->
 
                <div class="d-none d-lg-flex align-items-end">
+
                     <ul class="d-flex justify-content-end list-unstyled m-0">
                         <li class="">
                             <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
@@ -180,6 +181,9 @@
                             </a>
                         </li>
                         
+                           
+                       
+
                         <li>
                             <a href="index.html" class="mx-3">
                                 <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
@@ -293,25 +297,6 @@
         font-size: 16px;
     }
 
-    .dots-container {
-        position: absolute;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        z-index: 10;
-    }
-
-    .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 8px;
-        background-color: rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
-        display: inline-block;
-        transition: all 0.3s ease;
-        border: 2px solid #fff;
-    }
 
     .dot:hover, .dot.active {
         background-color: #ff9a9e;
