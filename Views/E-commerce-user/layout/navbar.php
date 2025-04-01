@@ -89,7 +89,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="mobileUserDropdown">
                                     <li><a class="dropdown-item" href="/editProfile">Edit Profile</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                    <li><a class="dropdown-item" href="">Logout</a></li>
                                 </ul>
                             </div>
                         <?php else: ?>
@@ -169,14 +169,14 @@
                         <ul class="d-flex justify-content-end list-unstyled m-0">
 
                             <li>
-                                <a href="index.html" class="mx-3">
+                                <a href="/favorite" class="mx-3">
                                     <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                                 </a>
                             </li>
 
                             <li class="">
-                                <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                <a href="/shopping" class="mx-3" data-bs-toggle="offcanvas"
+                                    data-bs-target="/shopping" aria-controls="offcanvasCart">
                                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                                     <span
                                         class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
@@ -911,8 +911,8 @@
     }
 
     .settings-item i {
-        margin-right: 15px;
         font-size: 1.2rem;
+        margin-right: 15px;
     }
     .admin-login-panel {
         max-width: 400px;
@@ -1194,46 +1194,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
-
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Logging in...';
-
-    fetch('/users/authenticate', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            if (data.role === 'admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Login successful! Redirecting...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1000);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
-            }
-        } else {
-            messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
-            button.disabled = false;
-            button.innerHTML = 'Login as Admin';
-        }
-    })
-    .catch(error => {
-        console.error('Login error:', error);
-        messageDiv.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-        button.disabled = false;
-        button.innerHTML = 'Login as Admin';
-    });
-});
-
 // Close modal when clicked outside
 document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
     document.getElementById('adminLoginMessage').innerHTML = '';
@@ -1241,6 +1201,34 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
     document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
     document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
 });
+
+function handleLogout(event) {
+    event.preventDefault();
+    
+    fetch('/Views/auth/logout_handler.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(() => {
+        // Clear local storage
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        // Force reload and redirect
+        window.location.href = '/';
+        setTimeout(() => {
+            window.location.reload(true);
+        }, 100);
+    })
+    .catch(() => {
+        window.location.href = '/';
+        window.location.reload(true);
+    });
+}
 </script>
 
 <!-- Profile Panel -->
@@ -1282,22 +1270,17 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
                     <div class="text-center mb-4">
                         <div class="profile-picture-upload">
                             <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
-                                 alt="Profile" class="profile-pic-lg">
+                                 alt="Profile" class="profile-pic-lg" id="preview-profile-pic">
                             <label for="profile-upload" class="upload-btn">
                                 <i class="bi bi-camera"></i>
                             </label>
-                            <input type="file" id="profile-upload" hidden accept="image/*">
+                            <input type="file" id="profile-upload" name="profile_picture" hidden accept="image/*">
                         </div>
                     </div>
                     
                     <div class="form-group mb-3">
                         <label>Full Name</label>
-                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
-                    </div>
-                    
-                    <div class="form-group mb-3">
-                        <label>Phone</label>
-                        <input type="tel" class="form-control" value="<?php echo htmlspecialchars($_SESSION['phone']); ?>">
+                        <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Update Profile</button>
@@ -1328,158 +1311,101 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
                         <i class="bi bi-shield-lock"></i>
                         <span>Change Password</span>
                     </a>
-                    <a href="#" class="settings-item" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Admin Login</span>
-                    </a>
-                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'shopowner'): ?>
+
+                    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Shopowner')): ?>
                         <a href="/dashboard" class="settings-item">
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
                         </a>
                     <?php endif; ?>
-                    <a href="#" onclick="confirmLogout(); return false;" class="settings-item text-danger">
+
+                    <a href="#" onclick="handleLogout(event)" class="settings-item text-danger">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Logout</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Add Admin Login Modal -->
-            <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header admin-modal-header">
-                            <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body p-0">
-                            <div class="login-container">
-                                <!-- Left Section -->
-                                <div class="left-section text-center p-4">
-                                    <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg" 
-                                         alt="App Logo" class="admin-logo mb-3">
-                                    <h6 class="text-white mb-2">Admin Portal</h6>
-                                    <p class="text-white-50 small">Access your administrative dashboard</p>
-                                </div>
-
-                                <!-- Right Section -->
-                                <div class="right-section p-4">
-                                    <form id="adminLoginForm" class="admin-login-form">
-                                        <div class="form-group mb-3">
-                                            <input type="tel" class="form-control" name="phone" 
-                                                   placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                                        </div>
-                                        
-                                        <div class="form-group mb-3">
-                                            <input type="password" class="form-control" name="password" 
-                                                   placeholder="Password" required>
-                                        </div>
-
-                                        <div id="adminLoginMessage" class="mb-3"></div>
-                                        
-                                        <button type="submit" class="btn btn-primary w-100">
-                                            Login as Admin
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
 
-<!-- Add Admin Login Modal -->
-<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header admin-modal-header">
-                <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-                <div class="login-container">
-                    <div class="right-section p-4">
-                        <form id="adminLoginForm" class="admin-login-form">
-                            <div class="form-group mb-3">
-                                <input type="tel" class="form-control" name="phone" 
-                                       placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                            </div>
-                            
-                            <div class="form-group mb-3">
-                                <input type="password" class="form-control" name="password" 
-                                       placeholder="Password" required>
-                            </div>
-
-                            <!-- Add hidden field to identify admin login -->
-                            <input type="hidden" name="admin_login" value="true">
-
-                            <div id="adminLoginMessage" class="mb-3"></div>
-                            
-                            <button type="submit" class="btn btn-primary w-100">
-                                Login as Admin
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+
+// Check role and redirect on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const dashboardAccess = sessionStorage.getItem('dashboard_access');
+    const userRole = sessionStorage.getItem('userRole');
+    
+    if (dashboardAccess === 'true' && (userRole === 'admin' || userRole === 'shopowner')) {
+        window.location.replace('/dashboard');
+    }
+});
+
+document.getElementById('profile-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
 
-    // Clear previous messages
-    messageDiv.innerHTML = '';
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
+    // Show loading indicator
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
 
-    fetch('/users/authenticate', {
+    fetch('/updateProfile', {
         method: 'POST',
         body: formData
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            if (data.role === 'Admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1500);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
-            }
+            // Update profile images
+            const profilePicture = data.data.profile_picture || '/Views/assets/img/avatars/1.png';
+            document.querySelectorAll('.profile-pic, .user-avatar, .profile-pic-lg').forEach(img => {
+                img.src = profilePicture;
+            });
+
+            // Update displayed name only
+            document.querySelectorAll('.profile-info h5, .profile-info h6').forEach(el => {
+                if (el.classList.contains('fw-bold')) {
+                    el.textContent = data.data.name;
+                }
+            });
+
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                timer: 2000,
+                showConfirmButton: false
+            });
         } else {
-            messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
-            button.disabled = false;
-            button.innerHTML = 'Login as Admin';
+            throw new Error(data.message);
         }
     })
     .catch(error => {
-        console.error('Login error:', error);
-        messageDiv.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-        button.disabled = false;
-        button.innerHTML = 'Login as Admin';
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: error.message,
+            confirmButtonColor: '#FF69B4'
+        });
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Update Profile';
     });
 });
 
-// Close modal handler
-document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
-    document.getElementById('adminLoginMessage').innerHTML = '';
-    document.getElementById('adminLoginForm').reset();
-    const button = document.querySelector('#adminLoginForm button[type="submit"]');
-    button.disabled = false;
-    button.innerHTML = 'Login as Admin';
+// Preview image before upload
+document.getElementById('profile-upload').addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview-profile-pic').src = e.target.result;
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
 });
 </script>

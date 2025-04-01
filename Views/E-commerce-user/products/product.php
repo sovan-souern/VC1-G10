@@ -18,7 +18,7 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css" type="text/css">
+    <!-- <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css" type="text/css"> -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css" type="text/css">
 </head>
 
@@ -32,46 +32,48 @@
                             <?php $hasDiscount = false; ?>
                             <?php foreach ($discounts as $key => $discount): ?>
                                 <?php if ($product["product_id"] == $discount["product_id"]): ?>
-                                    <?php
-                                    $original_price = floatval($discount["price"]);
-                                    $discount_percentage = floatval($discount["discount_percentage"]);
-                                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
+                                    <?php if ($discount["end_date"] >= date("Y-m-d")): ?>
+                                        <?php
+                                        $original_price = floatval($discount["price"]);
+                                        $discount_percentage = floatval($discount["discount_percentage"]);
+                                        $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                                    $product_name = htmlspecialchars($discount["product_name"]);
-                                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
-                                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                                    $original_price_formatted = "$" . number_format($original_price, 2);
-                                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-                                    ?>
-                                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                                        <div class="discount-product-card">
-                                            <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                                                <ul class="discount-product-hover">
-                                                    <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
-                                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-info">
-                                                <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                                        $product_name = htmlspecialchars($discount["product_name"]);
+                                        $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                                        $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                                        $original_price_formatted = "$" . number_format($original_price, 2);
+                                        $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                                        ?>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                            <div class="discount-product-card">
+                                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                                    <ul class="discount-product-hover">
+                                                        <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
+                                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                                    </ul>
                                                 </div>
-                                                <div class="price">
-                                                    <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                                    <?php echo $discounted_price_formatted; ?>
+                                                <div class="product-info">
+                                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                    <div class="price">
+                                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                                        <?php echo $discounted_price_formatted; ?>
+                                                    </div>
+                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                                 </div>
-                                                <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <?php $hasDiscount = true; ?>
-                                    <?php break; ?>
+                                        <?php $hasDiscount = true; ?>
+                                        <?php break; ?>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                             <?php if (!$hasDiscount): ?>
@@ -126,23 +128,7 @@
         </div>
     </section>
 
-    <!-- Cart Panel -->
-    <div class="cart-panel">
-        <div class="cart-header">
-            <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
-            <div class="close-cart">x</div>
-        </div>
-        <div class="cart-items">
-            <!-- Cart items will be dynamically added here -->
-        </div>
-        <div class="cart-footer">
-            <div class="subtotal">
-                <span>Subtotal</span>
-                <span id="subtotal-amount">$0.00</span>
-            </div>
-            <button class="view-cart-btn" onclick="window.location.href='checkout';">Checkout</button>
-        </div>
-    </div>
+
 
     <!-- Image Zoom Modal -->
     <div class="image-zoom-modal">
@@ -405,9 +391,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .discount-product-hover {
@@ -627,158 +621,6 @@
         }
 
         /* Cart Panel Styles */
-        .cart-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 350px;
-            height: 100%;
-            background: #fff;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .cart-panel.active {
-            transform: translateX(0);
-        }
-
-        .cart-header {
-            background-color: #ffb6c1;
-            color: #000;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .close-cart {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #000;
-            transition: transform 0.3s ease;
-        }
-
-        .close-cart:hover {
-            transform: rotate(90deg);
-        }
-
-        .cart-items {
-            padding: 20px;
-            max-height: calc(100% - 150px);
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            margin-right: 15px;
-            border-radius: 5px;
-        }
-
-        .cart-item-details {
-            flex-grow: 1;
-        }
-
-        .cart-item-name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .cart-item-price {
-            font-weight: bold;
-            color: #ff6699;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            margin-top: 5px;
-        }
-
-        .quantity-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #333;
-            padding: 0 5px;
-        }
-
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            margin: 0 5px;
-        }
-
-        .cart-item-total {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .delete-btn {
-            margin-left: 10px;
-            cursor: pointer;
-            color: #777;
-            transition: color 0.3s ease;
-        }
-
-        .delete-btn:hover {
-            color: #ff3333;
-        }
-
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid #eee;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: #fff;
-        }
-
-        .subtotal {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .view-cart-btn {
-            background-color: #ffb6c1;
-            color: #000;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-
-        .view-cart-btn:hover {
-            background-color: #ff9eb5;
-        }
-
-        /* Image Zoom Modal Styles */
         .image-zoom-modal {
             display: none;
             position: fixed;
@@ -912,66 +754,268 @@
             font-size: 16px;
             line-height: 40px;
         }
+
         /* Add this media query to your existing <style> section */
-@media (max-width: 736px) {
-    /* Shop Section - 2 cards per row */
-    .col-lg-3, .col-md-4, .col-sm-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+        @media (max-width: 736px) {
 
-    /* Adjust product card styling for smaller screens */
-    .discount-product-card, .general-product-item {
-        margin-bottom: 15px;
-    }
+            /* Shop Section - 2 cards per row */
+            .col-lg-3,
+            .col-md-4,
+            .col-sm-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
 
-    .product-image, .general-product-pic {
-        height: 200px; /* Reduce height for smaller screens */
-    }
+            /* Adjust product card styling for smaller screens */
+            .discount-product-card,
+            .general-product-item {
+                margin-bottom: 15px;
+            }
 
-    .product-info, .general-product-text {
-        padding: 10px; /* Reduce padding */
-    }
+            .product-image,
+            .general-product-pic {
+                height: 200px;
+                /* Reduce height for smaller screens */
+            }
 
-    .product-name, .general-product-text h6 {
-        font-size: 14px; /* Slightly smaller text */
-    }
+            .product-info,
+            .general-product-text {
+                padding: 10px;
+                /* Reduce padding */
+            }
 
-    .price, .general-product-price {
-        font-size: 1rem; /* Adjust price font size */
-    }
+            .product-name,
+            .general-product-text h6 {
+                font-size: 14px;
+                /* Slightly smaller text */
+            }
 
-    .add-to-cart {
-        padding: 6px 10px; /* Smaller button */
-        font-size: 14px;
-    }
+            .price,
+            .general-product-price {
+                font-size: 1rem;
+                /* Adjust price font size */
+            }
 
-    /* Trend Section - Stack items vertically */
-    .trend .col-lg-4, .trend .col-md-4, .trend .col-sm-6 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
+            .add-to-cart {
+                padding: 6px 10px;
+                /* Smaller button */
+                font-size: 14px;
+            }
 
-    .trend__item__pic img {
-        width: 150px; /* Reduce image size */
-        height: 100px;
-    }
+            /* Trend Section - Stack items vertically */
+            .trend .col-lg-4,
+            .trend .col-md-4,
+            .trend .col-sm-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
 
-    .trend__item__text h6 {
-        font-size: 13px;
-    }
+            .trend__item__pic img {
+                width: 150px;
+                /* Reduce image size */
+                height: 100px;
+            }
 
-    .product__price {
-        font-size: 14px;
-    }
+            .trend__item__text h6 {
+                font-size: 13px;
+            }
 
-    /* Cart Panel - Adjust width */
-    .cart-panel {
-        width: 100%; /* Full width on small screens */
-    }
-}
+            .product__price {
+                font-size: 14px;
+            }
+        }
     </style>
+
+
+
+
+
+
+
+<div class="cart-panel">
+        <div class="cart-header">
+            <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
+            <div class="close-cart">x</div>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span id="subtotal-amount">$0.00</span>
+            </div>
+            <button class="view-cart-btn" onclick="window.location.href='cart';">Views Cart</button>
+            <!-- onclick="window.location.href='checkout'; -->
+        </div>
+    </div>
+
+
+    <!-- Inline CSS -->
+    <style>
+     
+
+
+
+
+     /* Cart Panel Styles */
+     .cart-panel {
+         position: fixed;
+         top: 0;
+         right: 0;
+         width: 350px;
+         height: 100%;
+         background: #fff;
+         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+         z-index: 1000;
+         transform: translateX(100%);
+         transition: transform 0.3s ease;
+     }
+
+     .cart-panel.active {
+         transform: translateX(0);
+     }
+
+     .cart-header {
+         background-color: #ffb6c1;
+         color: #000;
+         padding: 15px 20px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+     }
+
+     .cart-header h3 {
+         margin: 0;
+         font-size: 1.5rem;
+         font-weight: bold;
+     }
+
+     .close-cart {
+         font-size: 1.5rem;
+         cursor: pointer;
+         color: #000;
+         transition: transform 0.3s ease;
+     }
+
+     .close-cart:hover {
+         transform: rotate(90deg);
+     }
+
+     .cart-items {
+         padding: 20px;
+         max-height: calc(100% - 150px);
+         overflow-y: auto;
+     }
+
+     .cart-item {
+         display: flex;
+         align-items: center;
+         padding: 10px 0;
+         border-bottom: 1px solid #eee;
+     }
+
+     .cart-item img {
+         width: 60px;
+         height: 60px;
+         object-fit: cover;
+         margin-right: 15px;
+         border-radius: 5px;
+     }
+
+     .cart-item-details {
+         flex-grow: 1;
+     }
+
+     .cart-item-name {
+         font-weight: bold;
+         color: #333;
+         margin-bottom: 5px;
+     }
+
+     .cart-item-price {
+         font-weight: bold;
+         color: #ff6699;
+     }
+
+     .cart-item-quantity {
+         display: flex;
+         align-items: center;
+         margin-top: 5px;
+     }
+
+     .quantity-btn {
+         background: none;
+         border: none;
+         font-size: 1.2rem;
+         cursor: pointer;
+         color: #333;
+         padding: 0 5px;
+     }
+
+     .quantity-input {
+         width: 40px;
+         text-align: center;
+         border: 1px solid #ddd;
+         border-radius: 3px;
+         margin: 0 5px;
+     }
+
+     .cart-item-total {
+         font-weight: bold;
+         color: #333;
+     }
+
+     .delete-btn {
+         margin-left: 10px;
+         cursor: pointer;
+         color: #777;
+         transition: color 0.3s ease;
+     }
+
+     .delete-btn:hover {
+         color: #ff3333;
+     }
+
+     .cart-footer {
+         padding: 20px;
+         border-top: 1px solid #eee;
+         position: absolute;
+         bottom: 0;
+         width: 100%;
+         background: #fff;
+     }
+
+     .subtotal {
+         display: flex;
+         justify-content: space-between;
+         font-size: 1.2rem;
+         font-weight: bold;
+         margin-bottom: 15px;
+     }
+
+     .view-cart-btn {
+         background-color: #ffb6c1;
+         color: #000;
+         border: none;
+         padding: 10px;
+         width: 100%;
+         font-weight: bold;
+         cursor: pointer;
+         border-radius: 5px;
+         transition: background 0.3s ease;
+     }
+
+     .view-cart-btn:hover {
+         background-color: #ff9eb5;
+     }
+
+  
+   
+
+ 
+ </style>
 
     <!-- JavaScript -->
 <!-- JavaScript -->
