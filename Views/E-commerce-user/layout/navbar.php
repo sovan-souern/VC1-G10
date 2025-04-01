@@ -165,27 +165,37 @@
                         </li>
                     </ul>
 
-                    <div class="d-none d-lg-flex align-items-end">
-                        <ul class="d-flex justify-content-end list-unstyled m-0">
+                    
+                    <!-- icon -->
 
-                            <li>
-                                <a href="index.html" class="mx-3">
-                                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                                </a>
-                            </li>
+               <div class="d-none d-lg-flex align-items-end">
+                    <ul class="d-flex justify-content-end list-unstyled m-0">
+                        <li class="">
+                            <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+                                <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                                    03
+                                </span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="index.html" class="mx-3">
+                                <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="index.html" class="mx-3">
+                                <i class="fa fa-history" style="font-size: 24px; color: black;"></i>
+                            </a>
+                        </li>
+                    </ul>
 
-                            <li class="">
-                                <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                    <span
-                                        class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                        03
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+
+                    <!-- icon end -->
 
                 </div>
 
@@ -346,29 +356,6 @@
     }
 </script>
 
-
-=======
-    .dot-container {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      z-index: 10;
-    }
-    .dot {
-      cursor: pointer;
-      height: 15px;
-      width: 15px;
-      margin: 0 5px;
-      background: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-    }
-    .dot.active, .dot:hover {
-      background-color: #717171; /* Active/hover state for dots */
-    }
-  </style>
 </head>
 <body>
   <div class="slideshow-container">
