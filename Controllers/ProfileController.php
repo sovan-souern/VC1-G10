@@ -129,9 +129,15 @@ class ProfileController extends BaseController {
             // Collect form data
             $data = [
                 'name' => $_POST['name'] ?? '',
-                'email' => $_POST['email'] ?? '',
+                'phone' => $_POST['phone'] ?? '',
                 'profile_picture' => null
             ];
+
+            // Validate phone number
+            if (!preg_match('/^[0-9]+$/', $data['phone'])) {
+                echo json_encode(['status' => 'error', 'message' => 'Invalid phone number format']);
+                exit();
+            }
 
             // Handle file upload
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -169,14 +175,23 @@ class ProfileController extends BaseController {
 
             // Update the profile in the database
             if ($this->profileModel->updateAdmin($admin_ID, $data)) {
-                echo json_encode(['status' => 'success', 'message' => 'Profile updated successfully.']);
+                $_SESSION['phone'] = $data['phone'];
+                if ($data['profile_picture']) {
+                    $_SESSION['profile_picture'] = $data['profile_picture'];
+                }
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Profile updated successfully',
+                    'profile_picture' => $data['profile_picture']
+                ]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to update profile.']);
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update profile']);
             }
 
             exit();
         }
     }
+
     public function reset() {
         $this->views('accountSetting/resetPassword.php');
     }

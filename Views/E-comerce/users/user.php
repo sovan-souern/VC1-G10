@@ -1,18 +1,20 @@
-<!-- user.php -->
+<?php require_once "Views/assets/css/prodcut_style.php" ?>
+
 <div class="page p-4">
     <div class="content">
-        <div class="page-header">
+        <div class="page-header ">
             <div class="page-title">
                 <h4>User List</h4>
-                <h6>View/Search Users</h6>
+                <h6>Manage your User</h6>
             </div>
             <div class="page-btn">
-                <a href="user/create" class="btn btn-added">
-                    <img src="/Views/assets/img1/icons/plus.svg" class="me-1" alt="img">Add User
+                <a href="users/create" class="btn btn-added">
+                    <img src="/Views/assets/img1/icons/plus.svg" alt="img" class="me-1">Add New User
                 </a>
             </div>
         </div>
-        <div class="card">
+
+        <div class="card bg-none w-100">
             <div class="card-body">
                 <div class="table-top">
                     <div class="search-set">
@@ -23,21 +25,55 @@
                             </a>
                         </div>
                         <div class="search-input">
-                            <a class="btn btn-searchset"><img src="/Views/assets/img1/icons/search-white.svg" alt="img"></a>
+                            <form class="form-inline">
+                                <input id="brandSearch" class="form-control mr-sm-2" type="search" 
+                                       placeholder="Search Username" aria-label="Search">
+                            </form>
                         </div>
                     </div>
                     <div class="wordset">
                         <ul>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="/Views/assets/img1/icons/pdf.svg" alt="img"></a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="/Views/assets/img1/icons/excel.svg" alt="img"></a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="/Views/assets/img1/icons/printer.svg" alt="img"></a>
-                            </li>
+                            <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf">
+                                <img src="/Views/assets/img1/icons/pdf.svg" alt="img"></a></li>
+                            <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="excel">
+                                <img src="/Views/assets/img1/icons/excel.svg" alt="img"></a></li>
+                            <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="print">
+                                <img src="/Views/assets/img1/icons/printer.svg" alt="img"></a></li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="card mb-0" id="filter_inputs">
+                    <div class="card-body pb-0">
+                        <div class="row">
+                            <div class="col-lg col-sm-6 col-12">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Enter User Name">
+                                </div>
+                            </div>
+                            <div class="col-lg col-sm-6 col-12">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Enter Phone">
+                                </div>
+                            </div>
+                            <div class="col-lg col-sm-6 col-12">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Enter Email">
+                                </div>
+                            </div>
+                            <div class="col-lg col-sm-6 col-12">
+                                <div class="form-group">
+                                    <input type="text" class="datetimepicker cal-icon" placeholder="Choose Date">
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <a class="btn btn-filters ms-auto">
+                                        <img src="/Views/assets/img1/icons/search-whites.svg" alt="img">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -45,75 +81,39 @@
                     <table class="table datanew">
                         <thead>
                             <tr>
-                                <th>
-                                    <label class="checkboxs">
-                                        <input type="checkbox" id="select-all">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </th>
-                                <th>ID</th>
-                                <th>Profile Image</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Role</th>
-                                <th>Action</th>
+                                <th id="font">ID</th>
+                                <th id="font">Username</th>
+                                <th id="font">Phone</th>
+                                <th id="font">Status</th>
+                                <!-- <th id="font">Email</th> -->
+                                <!-- <th id="font">Role</th>
+                                <th id="font">Created On</th>
+                                <th id="font">Status</th> -->
+                                <th id="font">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php foreach ($users as $index => $user): ?>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
+                        <tbody id="user-list">
+                            <?php foreach ($users as $index => $user) : ?>
+                                <tr class="user" 
+                                    data-username="<?= htmlspecialchars($user["username"]) ?>" 
+                                    data-phone="<?= htmlspecialchars($user["phone"]) ?>"
+                                    data-email="<?= htmlspecialchars($user["email"]) ?>">
                                     <td><?= $index + 1 ?></td>
-                                    <td>
-                                        <?php if (!empty($user['profile'])) : ?>
-                                            <img src="/uploads/<?= htmlspecialchars($user['profile'], ENT_QUOTES, 'UTF-8') ?>" width="50" alt="User Profile Image">
-                                        <?php else : ?>
-                                            <img src="/Views/assets/img1/default-image.jpg" width="50" alt="No Image">
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?= htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') ?>
-                                    </td>
-                                    <td><?= htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td><?= htmlspecialchars($user['phone'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td><?= htmlspecialchars($user['role_name'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
-                                        <a class="me-3" href="/user/edit?id=<?= $user['user_id'] ?>">
-                                            <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
+                                    <td><?= htmlspecialchars($user["username"]) ?></td>
+                                    <td><?= htmlspecialchars($user["phone"]) ?></td>
+                                    <td><a href="mailto:<?= htmlspecialchars($user["email"]) ?>">
+                                        <?= htmlspecialchars($user["email"]) ?></a></td>
+                                    <!-- <td><?= htmlspecialchars($user["role"]) ?></td> -->
+                                    <!-- <td><?= htmlspecialchars($user["created_on"]) ?></td> -->
+                                    <!-- <td><span class="bg-lightgreen badges">
+                                        <?= htmlspecialchars($user["status"]) ?></span></td>
+                                    <td class="action"> -->
+                                        <a class="delete-user" href="users/delete?id=<?= $user['user_id'] ?>">
+                                            <img id="hight" src="/Views/assets/img1/icons/delete.svg" alt="img">
                                         </a>
-                                        <a class="me-3" href="#" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal<?= $user['user_id'] ?>">
-                                            <img src="/Views/assets/img1/icons/delete.svg" alt="Delete">
-                                        </a>
-                                        <!-- Delete Confirmation Modal -->
-                                        <div class="modal fade" id="deleteConfirmModal<?= $user['user_id'] ?>" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="deleteConfirmLabel">Confirm Deletion</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body text-dark">
-                                                        Are you sure you want to delete this user?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                                        <form action="/user/delete" method="POST">
-                                                            <input type="hidden" name="id" value="<?= $user['user_id'] ?>">
-                                                            <button type="submit" class="btn btn-primary">Yes, Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </td>
-                                </tr>
-                            <?php endforeach; ?>
+                                </tr> 
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>

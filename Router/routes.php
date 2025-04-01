@@ -12,6 +12,7 @@ require_once 'Controllers/BrandController.php';
 require_once 'Controllers/ProfileController.php';
 require_once 'Controllers/UserController.php';
 require_once 'Controllers/LoginRegisterController.php';
+require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 
 $routes = new Router();
@@ -21,8 +22,8 @@ function checkAuthentication() {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    // Allow access to login, register, store, authenticate, and logout routes without authentication
-    $allowedRoutes = ['/login', '/register', '/users/store', '/users/authenticate', '/signup', '/logout', '/reset'];
+    // Add '/' to allowed routes since home is now default
+    $allowedRoutes = ['/', '/home', '/login', '/register', '/users/store', '/users/authenticate', '/signup', '/logout', '/reset'];
     if (!isset($_SESSION['admin_ID']) && !in_array($_SERVER['REQUEST_URI'], $allowedRoutes)) {
         header("Location: /login");
         exit();
@@ -32,8 +33,8 @@ function checkAuthentication() {
 // Call the middleware function before defining the routes
 checkAuthentication();
 
-// Default route to login
-$routes->get('/', [LoginRegisterController::class, 'login']);
+// Change default route to home page instead of login
+$routes->get('/', [HomeController::class, 'index']);
 
 // Login and Registration Routes
 $routes->get('/login', [LoginRegisterController::class, 'login']);
@@ -52,6 +53,7 @@ $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
 
 // Order Routes
 $routes->get('/order', [OrderController::class, 'index']);
+$routes->get('/order_detail', [OrderController::class, 'view']);
 
 // Shop Owner Routes
 $routes->get('/shop-owner', [ShopownerController::class, 'index']);
@@ -69,8 +71,12 @@ $routes->delete('/user/delete', [UserController::class, 'destroy']);
 
 // Notification Routes
 $routes->get('/notifications', [NotificationController::class, 'index']); 
-
+$routes->get('/notifications/view', [NotificationController::class, 'view']); 
+$routes->get('/notifications/delete', [NotificationController::class, 'destroy']); 
+$routes->get('/notifications/update', [NotificationController::class, 'update']); 
+$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 // Product Routes (Inventory)
+
 $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);
 $routes->post('/products/store', [ProductController::class, 'store']);
@@ -78,6 +84,18 @@ $routes->get('/products/edit', [ProductController::class, 'edit']);
 $routes->put('/products/update', [ProductController::class, 'update']);
 $routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
+
+
+
+// Discount Routes
+$routes->get('/discount', [DiscountController::class, 'index']);
+$routes->get('/create-discount', [DiscountController::class, 'create']);
+$routes->post('/discount/store', [DiscountController::class, 'store']);
+$routes->get('/discount/edit', [DiscountController::class, 'edit']);
+$routes->put('/discount/update', [DiscountController::class, 'update']);
+$routes->get('/discount/delete', [DiscountController::class, 'destroy']);
+$routes->get('/discount/view', [DiscountController::class, 'view']);
+
 
 // Category Routes
 $routes->get('/category', [CategoryController::class, 'index']);
@@ -104,4 +122,33 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 // Dispatch the routes
+
+
+require_once 'Controllers/HomeController.php';
+require_once 'Controllers/AboutController.php';
+require_once 'Controllers/ProductUserController.php';
+require_once 'Controllers/ContactController.php';
+require_once 'Controllers/ShopController.php';
+
+
+
+$routes->get('/home', [HomeController::class, 'index']);
+
+
+$routes->get('/about', [AboutController::class, 'index']);
+
+
+$routes->get('/productuser', [ProductUserController::class, 'index']);
+$routes->get('/card', [ProductUserController::class, 'ProductCard']);
+$routes->get('/view-card', [ProductUserController::class, 'ProductDetail']);
+$routes->get('/checkout', [ProductUserController::class, 'ProductCheckout']);
+
+
+$routes->post('/contact/store', [NotificationController::class, 'store']);
+$routes->get('/contact', [ContactController::class, 'index']);
+
+
+$routes->get('/shop', [ShopController::class, 'index']);
+
+
 $routes->dispatch();

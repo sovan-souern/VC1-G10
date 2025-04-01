@@ -10,8 +10,8 @@
                 Are you sure you want to delete <strong><?php echo $product["product_name"]?></strong> ?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                <button id="confirmDeleteBtn" class="btn btn-primary">Yes, Delete</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+            <button id="confirmDeleteBtn" class="btn btn-danger">Yes, Delete</button>
             </div>
         </div>
     </div>

@@ -31,12 +31,15 @@ class ProductModel
                 brand.brand_name AS brandID
             FROM products 
             LEFT JOIN categories ON products.category_id = categories.category_id
-            LEFT JOIN brand ON products.brand_id = brand.id");
+            LEFT JOIN brand ON products.brand_id = brand.id 
+            ORDER BY products.created_at DESC");
+    
             return $stmt->fetchAll();
         } catch (Exception $e) {
             die("Error fetching products: " . $e->getMessage());
         }
     }
+    
 
     function getBrands()
     {
