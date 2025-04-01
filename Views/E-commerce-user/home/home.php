@@ -1,5 +1,191 @@
 
-    <style>
+<style>
+    @media (max-width: 575px) {
+    /* General adjustments */
+    body {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+        padding: 15px;
+    }
+    
+    header p {
+        font-size: 1.2rem;
+    }
+    
+    /* Product cards container */
+    .products-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    /* Product cards */
+    .product-card {
+        width: 100%;
+        margin: 0;
+        height: auto;
+    }
+    
+    .product-image {
+        height: 150px !important; /* Adjusted for better proportions */
+        border-radius: 8px 8px 0 0;
+        object-fit:cover;
+    }
+    
+    .product-info {
+        padding: 10px;
+    }
+    
+    .product-name {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        font-family:serif;
+    }
+    
+    .price {
+        font-size: 1.5rem;
+    }
+    
+    .add-to-cart {
+        padding: 5px;
+        font-size: 0.9rem;
+    }
+    
+    /* Discount section */
+    .discount-products {
+        padding: 20px 10px;
+    }
+    
+    .discount-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Content sections */
+    .content-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .text-content {
+        order: 2;
+    }
+    
+    .image-content-right,
+    .image-content-left,
+    .image-content-lefts {
+        order: 1;
+        width: 100%;
+    }
+    
+    .image-content-right img,
+    .image-content-left img,
+    .image-content-lefts img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 10px !important;
+    }
+    
+    /* Product cards in product-container */
+    .product-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .product-card1 {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    
+    .product-card1 img {
+        height: 180px;
+        object-fit: cover;
+    }
+    
+    /* Cards carousel */
+    .cards {
+        gap: 10px;
+        padding-bottom: 15px;
+    }
+    
+    .card {
+        width: 200px;
+        flex: 0 0 auto;
+    }
+    
+    .card img {
+        height: 150px;
+    }
+    
+    /* Info overlay */
+    .info {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+    
+    /* Info section */
+    .info-section {
+        padding: 20px 10px;
+    }
+    
+    .info-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Buttons */
+    .cta-button, 
+    .info-section .cta-button,
+    .learn-more {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Ensure all images maintain aspect ratio */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Cart panel adjustments */
+    .cart-panel {
+        width: 90%;
+        max-width: none;
+    }
+    
+    /* Discount badge */
+    .discount-badge {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+    
+    /* Remove animations on mobile */
+    .card img {
+        animation: none !important;
+    }
+    
+    /* Adjust spacing */
+    .container {
+        padding: 10px;
+    }
+    
+    /* Full width for text content */
+    .text-content {
+        width: 100%;
+    }
+    
+    .text-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .text-content p {
+        font-size: 0.95rem;
+    }
+}
         body {
             padding: 20px;
         }
@@ -310,10 +496,232 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
-        @media (max-width: 575px) {
+/* phone */
+        /* @media (max-width: 575px) {
+            
             .products-container {
                 grid-template-columns: 1fr;
+            }
+
+            .text-content{
+                h2{
+                    width: 30vh;
+                    font-size :25px;
+                }
+                p{
+                    width: 20vh;
+                    margin-bottom: 50%;
+                    font-size :15px;
+                }
+                .cta-button{
+                    a{
+                        width: 20vh;
+                        margin-bottom: 40%;
+                    }
+                }
+            }
+            .image-content-right{
+                img{
+                }
+            }
+        } */
+        /* Existing styles remain unchanged except for the media query and related adjustments */
+
+/* Phone-specific styles */
+/* Phone-specific styles */
+@media (max-width: 575px) {
+    /* General adjustments */
+    body {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+        padding: 15px;
+    }
+    
+    header p {
+        font-size: 1.2rem;
+    }
+    
+    /* Product cards container */
+    .products-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    /* Product cards */
+    .product-card {
+        width: 100%;
+        margin: 0;
+        height: auto;
+    }
+    
+    .product-image {
+        height: 150px !important; /* Adjusted for better proportions */
+        border-radius: 8px 8px 0 0;
+        object-fit:cover;
+    }
+    
+    .product-info {
+        padding: 10px;
+    }
+    
+    .product-name {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        font-family:serif;
+    }
+    
+    .price {
+        font-size: 1.5rem;
+    }
+    
+    .add-to-cart {
+        padding: 5px;
+        font-size: 0.9rem;
+    }
+    
+    /* Discount section */
+    .discount-products {
+        padding: 20px 10px;
+    }
+    
+    .discount-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Content sections */
+    .content-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .text-content {
+        order: 2;
+    }
+    
+    .image-content-right,
+    .image-content-left,
+    .image-content-lefts {
+        order: 1;
+        width: 100%;
+    }
+    
+    .image-content-right img,
+    .image-content-left img,
+    .image-content-lefts img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 10px !important;
+    }
+    
+    /* Product cards in product-container */
+    .product-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .product-card1 {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    
+    .product-card1 img {
+        height: 180px;
+        object-fit: cover;
+    }
+    
+    /* Cards carousel */
+    .cards {
+        gap: 10px;
+        padding-bottom: 15px;
+    }
+    
+    .card {
+        width: 200px;
+        flex: 0 0 auto;
+    }
+    
+    .card img {
+        height: 150px;
+    }
+    
+    /* Info overlay */
+    .info {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+    
+    /* Info section */
+    .info-section {
+        padding: 20px 10px;
+    }
+    
+    .info-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Buttons */
+    .cta-button, 
+    .info-section .cta-button,
+    .learn-more {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Ensure all images maintain aspect ratio */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Cart panel adjustments */
+    .cart-panel {
+        width: 90%;
+        max-width: none;
+    }
+    
+    /* Discount badge */
+    .discount-badge {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+    
+    /* Remove animations on mobile */
+    .card img {
+        animation: none !important;
+    }
+    
+    /* Adjust spacing */
+    .container {
+        padding: 10px;
+    }
+    
+    /* Full width for text content */
+    .text-content {
+        width: 100%;
+    }
+    
+    .text-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .text-content p {
+        font-size: 0.95rem;
+    }
+}
+        /* card */
+        .product-card{
+            /* height: 70vh; */
+            .product-info{
+                display: flex;
+                flex-direction:column;
+                flex:wrap;
             }
         }
 
@@ -514,10 +922,6 @@
 
 
 
-
-
-
-
     <!-- Left Paragraph Right Image -->
     <div class="container">
         <div class="content-section">
@@ -541,7 +945,7 @@
                 <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="Glow Skincare Products" style="   border-radius: 10px 70px 10px 70px;
                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
             </div>
-            <div class="image-content-left">
+            <div class="image-content-lefts">
                 <img src="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
                     alt="Glow Skincare Products"
                     style="   border-radius: 10px 70px 10px 70px;
