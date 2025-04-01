@@ -56,13 +56,7 @@
                                                 </div>
                                                 <div class="product-info">
                                                     <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                                    <div class="rating">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
+                                                    
                                                     <div class="price">
                                                         <span class="original-price"><?php echo $original_price_formatted; ?></span>
                                                         <?php echo $discounted_price_formatted; ?>
@@ -86,21 +80,15 @@
                                     <div class="general-product-item">
                                         <div class="general-product-pic">
                                             <img src="<?php echo $image; ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="width: 100%; height: 300px; object-fit: cover;">
-                                            <ul class="general-product-hover">
-                                                <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
-                                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                            <ul class="general-product-hover product-hover-shared">
+                                                    <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
+                                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                             </ul>
                                         </div>
                                         <div class="general-product-text">
                                             <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
+                                            
                                             <div class="general-product-price">$<?php echo $price; ?></div>
                                             <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>">Add to Cart</button>
                                         </div>
@@ -325,11 +313,11 @@
             background-color: pink;
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 8px 15px;  
             margin-top: 10px;
             cursor: pointer;
             width: 100%;
-            border-radius: 5px;
+            /* border-radius: 5px; */
             transition: all 0.3s ease;
         }
 
@@ -621,37 +609,63 @@
         }
 
         /* Cart Panel Styles */
-        .image-zoom-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s ease;
-        }
+        .product-hover-shared {
+    position: absolute;
+    bottom: 5px; /* Reduced from 10px */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 15px; /* Reduced from 10px */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 0;
+    z-index: 2;
+}
 
-        .image-zoom-modal.active {
-            display: flex;
-            opacity: 1;
-        }
+.discount-product-card:hover .discount-product-hover,
+.general-product-item:hover .general-product-hover {
+    opacity: 1;
+    visibility: visible;
+}
 
-        .image-zoom-content {
-            position: relative;
-            text-align: center;
-        }
+.product-hover-shared li {
+    list-style: none;
+    margin: 0;
+    transition: all 0.3s ease;
+}
 
-        #zoomed-image {
-            max-width: 90%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
+.product-hover-shared li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Reduced from 40px */
+    height: 30px; /* Reduced from 40px */
+    background: #ffffff;
+    border-radius: 50%;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-hover-shared li a:hover {
+    background: #ff5252;
+    color: #ffffff;
+    transform: scale(1.15);
+}
+
+.product-hover-shared li a .icon {
+    color: #333;
+    transition: color 0.3s ease;
+    font-size: 12px; /* Added smaller font size */
+}
+
+.product-hover-shared li a:hover .icon {
+    color: #fff;
+}
+
 
         .back-btn {
             position: absolute;

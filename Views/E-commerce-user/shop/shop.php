@@ -91,13 +91,7 @@
                                                     </div>
                                                     <div class="product-info">
                                                         <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                                        <div class="rating">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
+                                                     
                                                         <div class="price">
                                                             <span class="original-price"><?php echo $original_price_formatted; ?></span>
                                                             <?php echo $discounted_price_formatted; ?>
@@ -129,13 +123,7 @@
                                             </div>
                                             <div class="general-product-text">
                                                 <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
-                                                <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
+                                              
                                                 <span>Category: <?php echo htmlspecialchars($product["categoryId"]); ?></span>
                                                 <div class="general-product-price">$<?php echo $price; ?></div>
                                                 <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>">Add to Cart</button>
@@ -514,7 +502,7 @@ body {
     margin-top: 5px; /* Reduced from 10px */
     cursor: pointer;
     width: 100%;
-    border-radius: 4px; /* Reduced from 5px */
+
     transition: all 0.3s ease;
     font-weight: 500;
     font-size: 12px; /* Added smaller font size */

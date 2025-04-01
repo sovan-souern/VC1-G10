@@ -401,7 +401,6 @@
         margin-top: 10px;
         cursor: pointer;
         width: 100%;
-        border-radius: 5px;
         transition: all 0.3s ease;
         /* Enhanced button transition */
     }
@@ -483,13 +482,7 @@
                         <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')"></div>
                         <div class="product-info">
                             <h5 class="product-name"><?php echo $product_name; ?></h5>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                          
                             <div class="price">
                                 <span class="original-price"><?php echo $original_price_formatted; ?></span>
                                 <?php echo $discounted_price_formatted; ?>
@@ -510,12 +503,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
 
     <!-- Left Paragraph Right Image -->
     <div class="container">
