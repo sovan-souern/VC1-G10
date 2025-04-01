@@ -45,9 +45,5 @@ class CheckoutUserController extends BaseController{
   function favorite(){
     // $this->ViewsUser('Views/E-commerce-user/card/favorite.php');
     require_once 'Views/E-commerce-user/card/favorite.php';
-
-  }
-  function shopping(){
-    require_once 'Views/E-commerce-user/card/shopping.php';
   }
 }

@@ -118,13 +118,7 @@
 
 
 
-    <!-- Image Zoom Modal -->
-    <div class="image-zoom-modal">
-        <div class="image-zoom-content">
-            <img id="zoomed-image" src="" alt="Zoomed Image">
-            <button class="back-btn">Back</button>
-        </div>
-    </div>
+
 
     <!-- Trend Section -->
     <section class="trend spad">
