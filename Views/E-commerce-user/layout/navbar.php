@@ -165,27 +165,37 @@
                         </li>
                     </ul>
 
-                    <div class="d-none d-lg-flex align-items-end">
-                        <ul class="d-flex justify-content-end list-unstyled m-0">
+                    
+                    <!-- icon -->
 
-                            <li>
-                                <a href="/favorite" class="mx-3">
-                                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                                </a>
-                            </li>
+               <div class="d-none d-lg-flex align-items-end">
+                    <ul class="d-flex justify-content-end list-unstyled m-0">
+                        <li class="">
+                            <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+                                <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                                    03
+                                </span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="index.html" class="mx-3">
+                                <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="index.html" class="mx-3">
+                                <i class="fa fa-history" style="font-size: 24px; color: black;"></i>
+                            </a>
+                        </li>
+                    </ul>
 
-                            <li class="">
-                                <a href="#" class="mx-3" data-bs-toggle="offcanvas"
-                                    data-bs-target="#" aria-controls="offcanvasCart">
-                                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                    <span
-                                        class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                        03
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+
+                    <!-- icon end -->
 
                 </div>
 
@@ -195,89 +205,157 @@
     </div>
 </header>
 
+<!-- Add this CSS to your existing <style> tag -->
 <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    .slideshow-section {
+        margin: 0; /* Remove margin to allow full-screen */
+        width: 100vw; /* Full viewport width */
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw; /* Offset to extend beyond container */
+        margin-right: -50vw;
     }
-    body {
-      overflow-x: hidden;
-    }
+
     .slideshow-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background: #000; /* Fallback background */
+        width: 100%; /* Full width */
+        height: 100vh; /* Full viewport height */
+        position: relative;
+        overflow: hidden;
+        border-radius: 0; /* Remove rounding for full-screen */
+        box-shadow: none; /* Remove shadow for cleaner look */
     }
+
+    .slides-wrapper {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 100%;
+        height: 100%; /* Match container height */
+    }
+
     .mySlides {
-      display: none;
-      width: 100%;
-      height: 100%;
-      position: relative;
+        min-width: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 100%; /* Full height of container */
     }
-    .mySlides.active {
-      display: block; /* Show active slide */
-    }
+
     .mySlides img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0; /* Start hidden */
-      transition: opacity 1.5s ease-in-out; /* Slow fade for image only */
+        width: 100%;
+        height: 100%; /* Full height of slide */
+        object-fit: cover; /* Cover entire area */
+        transition: transform 0.5s ease;
     }
-    .mySlides.active img {
-      opacity: 1; /* Fade in when active */
+
+    .mySlides:hover img {
+        transform: scale(1.05);
     }
 
     .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 16px;
-      color: white;
-      font-weight: bold;
-      /* font-size: 24px; */
-      background: rgba(0, 0, 0, 0.5);
-      transition: background-color 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-      z-index: 10;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 20px;
+        color: white;
+        font-size: 30px; /* Larger for full-screen */
+        background: rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        z-index: 10;
     }
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
-    /* .prev:hover, .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    } */
 
-    .dot-container {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      z-index: 10;
+    .prev { left: 20px; border-radius: 0 10px 10px 0; }
+    .next { right: 20px; border-radius: 10px 0 0 10px; }
+
+    .prev:hover, .next:hover {
+        background: rgba(0, 0, 0, 0.9);
+        padding: 20px 30px;
     }
+
+    .text, .numbertext {
+        position: absolute;
+        color: white;
+        padding: 20px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .text {
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 24px; /* Larger for full-screen */
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    }
+
+    .numbertext {
+        top: 20px;
+        left: 20px;
+        font-size: 16px;
+    }
+
+    .dots-container {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+    }
+
     .dot {
-      cursor: pointer;
-      height: 15px;
-      width: 15px;
-      margin: 0 5px;
-      background: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 8px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        display: inline-block;
+        transition: all 0.3s ease;
+        border: 2px solid #fff;
     }
-    .dot.active, .dot:hover {
-      background-color: #717171; /* Active/hover state for dots */
+
+    .dot:hover, .dot.active {
+        background-color: #ff9a9e;
+        transform: scale(1.2);
     }
-  </style>
+
+    @media (max-width: 600px) {
+        .text { font-size: 18px; }
+        .prev, .next { font-size: 24px; padding: 15px; }
+        .numbertext { font-size: 14px; }
+        .dot { height: 12px; width: 12px; }
+    }
+</style>
+
+<!-- Add this JavaScript at the bottom of your <body> tag -->
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let slidesWrapper = document.querySelector(".slides-wrapper");
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+
+        slidesWrapper.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
+
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
+
 </head>
 <body>
   <div class="slideshow-container">
@@ -351,6 +429,7 @@
   </script>
 
 <!-- 
+>>>>>>> 9469813a5b1c3a0ff94b34ff8c96e2018c623373
 <style>
     .contact-page #banner {
     display: none;
