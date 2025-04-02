@@ -14,7 +14,6 @@
             font-family: Arial, sans-serif;
             overflow-x: hidden;
             margin: 0;
-            background-color: #f5f5f5;
         }
 
         .row {
