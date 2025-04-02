@@ -121,6 +121,8 @@
                             </span>
                         </a>
                     </li>
+                    
+                    </ul>
                 </ul>
 
             </div>
@@ -175,8 +177,8 @@
                             </li>
 
                             <li class="">
-                                <a href="/shopping" class="mx-3" data-bs-toggle="offcanvas"
-                                    data-bs-target="/shopping" aria-controls="offcanvasCart">
+                                <a href="#" class="mx-3" data-bs-toggle="offcanvas"
+                                    data-bs-target="#" aria-controls="offcanvasCart">
                                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                                     <span
                                         class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
@@ -184,6 +186,11 @@
                                     </span>
                                 </a>
                             </li>
+                            <li>
+                        <a href="#" class="mx-3">
+                            <i class="fa fa-history" style="font-size: 24px; color: black;"></i>
+                        </a>
+                        </li>
                         </ul>
                     </div>
 
