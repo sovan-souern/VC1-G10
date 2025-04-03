@@ -15,6 +15,7 @@ require_once 'Controllers/LoginRegisterController.php';
 require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 require_once "Controllers/checkoutUser.php";
+require_once "Controllers/HistoryController.php";
 
 $routes = new Router();
 
@@ -182,6 +183,8 @@ $routes->get('/contact', [ContactController::class, 'index']);
 $routes->get('/shop', [ShopController::class, 'index']);
 
 
+//history
+$routes->get('/history', [HistoryController::class, 'index']); 
 
 
 

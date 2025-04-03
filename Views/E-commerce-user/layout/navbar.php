@@ -187,7 +187,7 @@
                                 </a>
                             </li>
                             <li>
-                        <a href="#" class="mx-3">
+                        <a href="/history" class="mx-3">
                             <i class="fa fa-history" style="font-size: 24px; color: black;"></i>
                         </a>
                         </li>
