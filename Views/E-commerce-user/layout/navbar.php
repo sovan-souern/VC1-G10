@@ -602,9 +602,6 @@
 </header>
 
 
-<!-- end icon -->
-
-
 <style>
     * {
       box-sizing: border-box;
