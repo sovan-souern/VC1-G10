@@ -291,6 +291,10 @@
         }
 
 
+        body {
+            
+            padding: 20px;
+        }
 
         .products-container {
             display: grid;

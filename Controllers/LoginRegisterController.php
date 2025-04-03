@@ -207,7 +207,7 @@ class LoginRegisterController extends BaseController {
     }
 
     public function adminRegister() {
-        require 'Views/auth/admin-register.php';
+       $this->views('auth/admin-register.php') ;
     }
 
     public function storeAdmin() {
