@@ -331,7 +331,7 @@
 .product-hover-shared li {
     list-style: none;
     margin: 0;
-    transition: all 0.3s ease; /* Added transition for all properties */
+
 }
 
 .product-hover-shared li a {

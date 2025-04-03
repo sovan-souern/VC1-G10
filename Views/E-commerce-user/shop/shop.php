@@ -179,7 +179,7 @@
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: relative;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease; /* Increased duration to 0.4s, added opacity */
+
     opacity: 1; /* Default opacity */
 }
 
