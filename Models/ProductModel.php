@@ -32,7 +32,7 @@ class ProductModel
             FROM products 
             LEFT JOIN categories ON products.category_id = categories.category_id
             LEFT JOIN brand ON products.brand_id = brand.id 
-            ORDER BY products.created_at DESC");
+            ORDER BY products.created_at ");
     
             return $stmt->fetchAll();
         } catch (Exception $e) {
@@ -130,5 +130,17 @@ class ProductModel
         $stmt = $this->pdo->query("DELETE FROM products WHERE product_id = :id", [
             'id' => $id
         ]);
+    }
+
+    public function getAllProducts()
+    {
+        try {
+            $query = "SELECT * FROM products";
+            $stmt = $this->pdo->query($query);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo "Error fetching all products: " . $e->getMessage();
+            return false;
+        }
     }
 }

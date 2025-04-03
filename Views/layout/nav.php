@@ -1,5 +1,11 @@
-<?php require_once "Models/NotificationModel.php";
-$model = new  NotificationModel;
+<?php 
+require_once "Models/NotificationModel.php";
+require_once "Views/auth/login_handler.php";
+
+// // Check admin access before loading dashboard
+// checkAdminAccess();
+
+$model = new NotificationModel;
 $notifications = $model->getNotifications();
 ?>
 
@@ -23,7 +29,7 @@ $notifications = $model->getNotifications();
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
     <li class="menu-item active">
-      <a href="/" class="menu-link">
+      <a href="/dashboard" class="menu-link">
         <i class="menu-icon tf-icons bi bi-speedometer2"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
@@ -186,6 +192,29 @@ $notifications = $model->getNotifications();
     </li>
   </ul>
 </aside>
+
+<style>
+  .menu-icon {
+  font-size: 1rem !important; /* Reduce from default size */
+}
+
+/* If you need even smaller icons */
+.menu-item .menu-icon {
+  font-size: 1.2rem !important;
+}
+
+/* Adjust spacing around icons for better alignment */
+.menu-link {
+  align-items: center;
+}
+
+/* Ensure proper vertical alignment */
+.menu-icon.tf-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -356,6 +385,69 @@ $notifications = $model->getNotifications();
       updateNavProfileImages('/' + storedProfilePicture);
     }
   });
+
+  // Add this function to update all profile images
+  function updateAllProfileImages(imageUrl) {
+    // Update both navbar and dropdown profile images
+    document.querySelectorAll('.nav-profile-img, .profile-img').forEach(img => {
+        img.src = imageUrl;
+    });
+}
+
+// Modify the existing profile form submit handler
+document.getElementById('profile-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('/updateProfile', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Update all profile images
+            const profilePicture = data.data.profile_picture || '/Views/assets/img/avatars/1.png';
+            updateAllProfileImages(profilePicture);
+            
+            // Update displayed name
+            document.querySelectorAll('.profile-info h5, .profile-info h6').forEach(el => {
+                if (el.classList.contains('fw-bold')) {
+                    el.textContent = data.data.name;
+                }
+            });
+
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: error.message,
+            confirmButtonColor: '#FF69B4'
+        });
+    });
+});
+
+// Add real-time preview for profile image upload
+document.getElementById('profile-upload').addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imageUrl = e.target.result;
+            updateAllProfileImages(imageUrl);
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
 </script>
 
 <style>
@@ -580,7 +672,7 @@ $notifications = $model->getNotifications();
               <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" id="profileDropdown">
                 <div class="avatar avatar-online">
                   <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
-                    alt="User Profile" class="profile-img js-profile-img" />
+                    alt="User Profile" class="profile-img js-profile-img" id="nav-profile-img" />
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
@@ -597,7 +689,9 @@ $notifications = $model->getNotifications();
                         <span class="fw-semibold d-block">
                           <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
                         </span>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                          <?php echo $_SESSION['role'] === 'ShopOwner' ? 'Shop Owner' : 'Admin'; ?>
+                        </small>
                       </div>
                     </div>
                   </a>
@@ -623,6 +717,12 @@ $notifications = $model->getNotifications();
                     <span class="align-middle">Reset Password</span>
                   </a>
                 </li>
+                <!-- create admin -->
+                 <li>
+                  <a class="dropdown-item" href="/admin-register">
+                    <i class="bi bi-person-plus me-2"></i>
+                    <span class="align-middle">Create ShopOwner</span>
+                  </a>
                 <li>
                   <div class="dropdown-divider"></div>
                 </li>
@@ -811,6 +911,69 @@ $notifications = $model->getNotifications();
             updateNavProfileImages('/' + storedProfilePicture);
           }
         });
+
+        // Add this function to update all profile images
+        function updateAllProfileImages(imageUrl) {
+          // Update both navbar and dropdown profile images
+          document.querySelectorAll('.nav-profile-img, .profile-img').forEach(img => {
+              img.src = imageUrl;
+          });
+      }
+
+      // Modify the existing profile form submit handler
+      document.getElementById('profile-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+
+          fetch('/updateProfile', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.status === 'success') {
+                  // Update all profile images
+                  const profilePicture = data.data.profile_picture || '/Views/assets/img/avatars/1.png';
+                  updateAllProfileImages(profilePicture);
+                  
+                  // Update displayed name
+                  document.querySelectorAll('.profile-info h5, .profile-info h6').forEach(el => {
+                      if (el.classList.contains('fw-bold')) {
+                          el.textContent = data.data.name;
+                      }
+                  });
+
+                  // Show success message
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Success!',
+                      text: data.message,
+                      timer: 2000,
+                      showConfirmButton: false
+                  });
+              }
+          })
+          .catch(error => {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error!',
+                  text: error.message,
+                  confirmButtonColor: '#FF69B4'
+              });
+          });
+      });
+
+      // Add real-time preview for profile image upload
+      document.getElementById('profile-upload').addEventListener('change', function(e) {
+          if (this.files && this.files[0]) {
+              const reader = new FileReader();
+              reader.onload = function(e) {
+                  const imageUrl = e.target.result;
+                  updateAllProfileImages(imageUrl);
+              }
+              reader.readAsDataURL(this.files[0]);
+          }
+      });
       </script>
 
       <style>

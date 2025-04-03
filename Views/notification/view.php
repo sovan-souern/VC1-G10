@@ -6,270 +6,241 @@
   <title>Message Detail</title>
 
   <style>
-    /* Base Reset & Typography */
-/* Base Reset & Typography */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f7fa;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-}
+    /* Base styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
 
-/* Container */
-.container {
-  max-width: 1390px;
-  width: 97%; /* Allow container to scale with screen width */
-  margin: 230px auto; /* Reduced margin for better mobile fit */
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  opacity: 0;
-  animation: fadeIn 0.5s ease-in-out forwards;
-  transform: scale(0.95);
-}
+    /* Container */
+    .container {
+      max-width: 900px; /* Reduced max-width for better readability */
+      width: 95%;
+      margin: 40px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+    }
 
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+    /* Message Header */
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e5e7eb; /* Added divider for separation */
+    }
 
-/* Message Header */
-.message-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: slideIn 0.6s ease-out forwards;
-}
+    .sender-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #e0e7ff; /* Softer blue background */
+      color: #4f46e5; /* Matching text color */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+    .sender-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-.sender-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #e5e7eb;
-  color: #6b7280;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 18px;
-  margin-right: 15px;
-  transition: transform 0.4s ease-in-out;
-}
+    .sender-name {
+      font-size: 1.25rem; /* Slightly larger for emphasis */
+      font-weight: 600;
+      margin: 0;
+      color: #1f2937;
+    }
 
-.sender-avatar:hover {
-  transform: rotate(360deg);
-}
+    .sender-email,
+    .message-date {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin: 2px 0;
+    }
 
-.sender-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+    /* Message Content */
+    .message-content {
+      background-color: #f9fafb;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      color: #4b5563;
+      font-size: 1rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
 
-.sender-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
-  color: #1f2937;
-}
+    .message-content strong {
+      color: #1f2937;
+      font-weight: 600;
+    }
 
-.sender-email,
-.message-date {
-  font-size: 14px;
-  color: #6b7280;
-  margin: 2px 0;
-}
+    /* Actions/Buttons */
+    .actions {
+      display: flex;
+      justify-content: flex-start;
+      gap: 12px;
+      margin-top: 20px;
+    }
 
-/* Message Content */
-.message-content {
-  background-color: #f9fafb;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  color: #4b5563;
-  font-size: 16px;
-  opacity: 0;
-  animation: slideUp 0.5s ease-in-out forwards 0.2s;
-  word-wrap: break-word; /* Ensure long text wraps properly */
-}
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      min-width: 120px; /* Consistent width for buttons */
+      height: 40px;
+    }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    .btn-danger {
+      background-color: #f97316;
+      color: white;
+    }
 
-/* Actions/Buttons */
-.actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-}
+    .btn-secondary {
+      background-color: #e5e7eb;
+      color: #4b5563;
+    }
 
-.btn {
-  /* flex: 0; */
-  width: 200px;
-  padding: 7px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-  font-weight: bold;
-  text-decoration: none; /* Remove underline for anchor tags */
-}
+    /* Responsive Design */
 
-.btn:hover {
-  transform: scale(1.05);
-}
+    /* Tablets and smaller desktops (max-width: 1024px) */
+    @media (max-width: 1024px) {
+      .container {
+        margin: 30px auto;
+        padding: 20px;
+      }
 
-.btn-danger {
-  background-color: #f97316;
-  color: white;
-}
+      .sender-name {
+        font-size: 1.1rem;
+      }
 
-.btn-danger:hover {
-  background-color: #ea580c;
-}
+      .sender-email,
+      .message-date {
+        font-size: 0.8rem;
+      }
 
-.btn-secondary {
-  background-color: #e5e7eb;
-  color: #374151;
-}
+      .message-content {
+        font-size: 0.95rem;
+        padding: 15px;
+      }
 
-.btn-secondary:hover {
-  background-color: #d1d5db;
-}
+      .btn {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+        min-width: 100px;
+        height: 36px;
+      }
+    }
 
-/* Responsive Design */
+    /* Mobile devices (max-width: 768px) */
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px auto;
+        padding: 15px;
+      }
 
-/* Tablets and smaller desktops (max-width: 1024px) */
-@media (max-width: 1024px) {
-  .container {
-    margin: 80px auto;
-    padding: 25px;
-  }
+      .message-header {
+        flex-direction: row; /* Keep row layout for better UX */
+        align-items: center;
+        gap: 12px;
+      }
 
-  .sender-name {
-    font-size: 16px;
-  }
+      .sender-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
 
-  .sender-email,
-  .message-date {
-    font-size: 13px;
-  }
+      .sender-name {
+        font-size: 1rem;
+      }
 
-  .message-content {
-    font-size: 15px;
-    padding: 15px;
-  }
+      .sender-email,
+      .message-date {
+        font-size: 0.75rem;
+      }
 
-  .btn {
-    font-size: 15px;
-    padding: 10px;
-  }
-}
+      .message-content {
+        font-size: 0.9rem;
+        padding: 12px;
+      }
 
-/* Mobile devices (max-width: 768px) */
-@media (max-width: 768px) {
-  .container {
-    margin: 40px auto;
-    padding: 20px;
-  }
+      .actions {
+        gap: 10px;
+      }
 
-  .message-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+      .btn {
+        min-width: 90px;
+        font-size: 0.85rem;
+        padding: 8px;
+        height: 36px;
+      }
+    }
 
-  .sender-avatar {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    margin-right: 0;
-  }
+    /* Small mobile devices (max-width: 480px) */
+    @media (max-width: 480px) {
+      .container {
+        margin: 15px auto;
+        padding: 12px;
+        width: 92%;
+      }
 
-  .sender-name {
-    font-size: 16px;
-  }
+      .message-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
 
-  .sender-email,
-  .message-date {
-    font-size: 12px;
-  }
+      .sender-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+      }
 
-  .message-content {
-    font-size: 14px;
-    padding: 15px;
-  }
+      .sender-name {
+        font-size: 0.95rem;
+      }
 
-  .actions {
-    flex-direction: column;
-    gap: 10px;
-  }
+      .sender-email,
+      .message-date {
+        font-size: 0.7rem;
+      }
 
-  .btn {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px;
-  }
-}
+      .message-content {
+        font-size: 0.85rem;
+        padding: 10px;
+      }
 
-/* Small mobile devices (max-width: 480px) */
-@media (max-width: 480px) {
-  .container {
-    margin: 20px auto;
-    padding: 15px;
-    width: 95%;
-  }
+      .actions {
+        flex-direction: column;
+        gap: 8px;
+      }
 
-  .sender-name {
-    font-size: 14px;
-  }
-
-  .sender-email,
-  .message-date {
-    font-size: 11px;
-  }
-
-  .message-content {
-    font-size: 13px;
-    padding: 10px;
-  }
-
-  .btn {
-    font-size: 13px;
-    padding: 8px;
-  }
-}
+      .btn {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 8px;
+        height: 40px;
+      }
+    }
   </style>
 </head>
 
@@ -283,21 +254,21 @@ body {
         <h2 class="sender-name">
           <?php echo htmlspecialchars($notification['first_name'] . ' ' . $notification['last_name']); ?>
         </h2>
-        <?php if (!empty($message['sender_email'])): ?>
-          <p class="sender-email"><?php echo ($notification['phone_number']); ?></p>
+        <?php if (!empty($notification['phone_number'])): ?>
+          <p class="sender-email"><?php echo htmlspecialchars($notification['phone_number']); ?></p>
         <?php endif; ?>
-        <p class="message-date"><?php echo ($notification['created_at']); ?></p>
+        <p class="message-date"><?php echo htmlspecialchars($notification['created_at']); ?></p>
       </div>
     </div>
 
     <div class="message-content">
       <strong>Message: </strong> 
-      <?php echo ($notification['message']); ?>
+      <?php echo htmlspecialchars($notification['message']); ?>
     </div>
 
     <div class="actions">
-      <a href="/notifications/delete?id=<?= $notification['id'] ?>" class="btn btn-danger">Delete</a>
-      <a href="notifications.php" class="btn btn-secondary">Back to Notifications</a>
+      <a href="/notifications/delete?id=<?= htmlspecialchars($notification['id']) ?>" class="btn btn-danger">Delete</a>
+      <button onclick="window.history.back()" class="btn btn-dark">Back</button>
     </div>
   </div>
 </body>

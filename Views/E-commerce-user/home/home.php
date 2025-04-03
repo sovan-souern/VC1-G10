@@ -1,9 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
 
-    <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashion | Shop</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+     <!-- tre 3 nav bar -->
+    <!-- <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css">
+    <!-- Font Awesome for rating stars -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
         body {
             padding: 20px;
         }
-
+        .discount-product-card:hover .price {
+            color: #e7ab3c; /* Added hover effect for price in discount card */
+        }
         /* Header Styles */
         header h1 {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -153,7 +173,7 @@
             background: #ff3b2f;
         }
 
-        /* 
+        
         .image-content-right img {
             width: 100%;
             height: auto;
@@ -166,7 +186,7 @@
             height: auto;
             border-radius: 10px 70px 10px 70px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        } */
+        }
 
         /* Full Screen Image */
         .full-screen-image {
@@ -215,7 +235,21 @@
         .info-section .cta-button:hover {
             background: #ff3b2f;
         }
-
+        .product-name:hover{
+            color: #e7ab3c;
+        }
+        .price:hover{
+            color: #e7ab3c;
+        }
+        .add-to-cart:hover{
+            color:white;
+        }
+        .original-price:hover{
+                color: #e7ab3c;
+        }
+        .product-card:hover{
+            color: #e7ab3c;
+        }
         /* Product Container */
         .product-container {
             display: flex;
@@ -224,9 +258,6 @@
             gap: 20px;
             padding: 20px;
         }
-
-
-
         .product-card1 img {
             width: 100%;
             border-radius: 10px;
@@ -309,10 +340,288 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
-        @media (max-width: 575px) {
+/* phone */
+        /* @media (max-width: 575px) {
+            
             .products-container {
                 grid-template-columns: 1fr;
+            }
+
+            .text-content{
+                h2{
+                    width: 30vh;
+                    font-size :25px;
+                }
+                p{
+                    width: 20vh;
+                    margin-bottom: 50%;
+                    font-size :15px;
+                }
+                .cta-button{
+                    a{
+                        width: 20vh;
+                        margin-bottom: 40%;
+                    }
+                }
+            }
+            .image-content-right{
+                img{
+                }
+            }
+        } */
+        /* Existing styles remain unchanged except for the media query and related adjustments */
+
+/* Phone-specific styles */
+/* Phone-specific styles */
+@media (max-width: 575px) {
+    /* General adjustments */
+    body {
+        
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+        padding: 15px;
+    }
+    
+    header p {
+        font-size: 1.2rem;
+    }
+    
+    /* Product cards container */
+    .products-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    /* Product cards */
+    .product-card {
+        object-fit:cover;
+        width: 100%;
+        margin: 0;
+        height: auto;
+    }
+    
+    .product-image {
+        object-fit:cover;
+        height: 150px !important; /* Adjusted for better proportions */
+        border-radius: 8px 8px 0 0;
+        object-fit:cover;
+    }
+    
+    .product-info {
+        padding: 10px;
+    }
+    
+    .product-name {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        font-family:serif;
+    }
+    
+    .price {
+        font-size: 1.5rem;
+    }
+    
+    .add-to-cart {
+        padding: 5px;
+        font-size: 0.9rem;
+    }
+    
+    /* Discount section */
+    .discount-products {
+        padding: 20px 10px;
+    }
+    
+    .discount-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Content sections */
+    .content-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .text-content {
+        order: 2;
+    }
+    
+    .image-content-right,
+    .image-content-left,
+    .image-content-lefts {
+        order: 1;
+        width: 100%;
+    }
+    
+    .image-content-right img,
+    .image-content-left img,
+    .image-content-lefts img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 10px !important;
+    }
+    
+    /* Product cards in product-container */
+    .product-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .product-card1 {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    
+    .product-card1 img {
+        height: 180px;
+        object-fit: cover;
+    }
+    
+    /* Cards carousel */
+    .cards {
+        gap: 10px;
+        padding-bottom: 15px;
+    }
+    
+    .card {
+        width: 200px;
+        flex: 0 0 auto;
+    }
+    
+    .card img {
+        height: 150px;
+    }
+    
+    /* Info overlay */
+    .info {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+    
+    /* Info section */
+    .info-section {
+        padding: 20px 10px;
+    }
+    
+    .info-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Buttons */
+    .cta-button, 
+    .info-section .cta-button,
+    .learn-more {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Ensure all images maintain aspect ratio */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Cart panel adjustments */
+    .cart-panel {
+        width: 90%;
+        max-width: none;
+    }
+    
+    /* Discount badge */
+    .discount-badge {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+    
+    /* Remove animations on mobile */
+    .card img {
+        animation: none !important;
+    }
+    
+    /* Adjust spacing */
+    .container {
+        padding: 10px;
+    }
+    
+    /* Full width for text content */
+    .text-content {
+        width: 100%;
+    }
+    
+    .text-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .text-content p {
+        font-size: 0.95rem;
+    }
+    .product-card {
+        position: relative; /* Required for absolutely positioned children */
+        }
+
+        .general-product-hover {
+            display: flex;
+            justify-content: center; /* Center icons */
+            gap: 15px; /* Space between icons */
+            opacity: 0; /* Hide icons initially */
+            transition: opacity 0.3s ease; /* Smooth fade effect */
+            position: absolute; /* Position the icons absolutely */
+            bottom: 15px; /* Position from the bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Correct centering of icons */
+            pointer-events: none; /* Prevent mouse events when hidden */
+        }
+
+        .product-card:hover .general-product-hover {
+            opacity: 1; /* Show icons when hovering over the card */
+            pointer-events: auto; /* Enable interactions on hover */
+        }
+
+        .general-product-hover li {
+            list-style: none; /* Remove bullet points */
+        }
+
+        .general-product-hover a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px; /* Width for circular icons */
+            height: 50px; /* Height for circular icons */
+            border-radius: 50%; /* Create circular shape */
+            background-color: white; /* Set background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s ease; /* Transition for hover */
+            color: black; /* Set default icon color */
+        }
+
+        .general-product-hover a:hover {
+            background-color: #f0f0f0; /* Background color on hover */
+        }
+
+        /* Specific icon size adjustment if needed */
+        .general-product-hover a span {
+            font-size: 1.5em; /* Adjust font size to fit within circle */
+            height: 100%; /* Ensure it takes full height */
+            width: 100%; /* Ensure it takes full width */
+            display: flex; /* Center the icon within the circle */
+            justify-content: center;
+            align-items: center;
+        }
+}
+        /* card */
+        .product-card{
+            /* height: 70vh; */
+            .product-info{
+                display: flex;
+                flex-direction:column;
+                flex:wrap;
             }
         }
 
@@ -401,7 +710,6 @@
         margin-top: 10px;
         cursor: pointer;
         width: 100%;
-        border-radius: 5px;
         transition: all 0.3s ease;
         /* Enhanced button transition */
     }
@@ -418,7 +726,102 @@
         color: white;
         transition: color 0.3s ease;
     }
-    </style>
+    .product-card {
+        position: relative; /* Required for absolutely positioned children */
+    }
+/* icon */
+    .general-product-hover {
+        display: flex;
+        justify-content: center; /* Center icons */
+        gap: 15px; /* Space between icons */
+        opacity: 0; /* Hide icons initially */
+        transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; /* Smooth effect */
+        visibility: hidden; /* Hide elements from interactions */
+        position: absolute; /* Position the icons absolutely */
+        bottom: 15px; /* Position from the bottom */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Ensure perfect centering */
+        pointer-events: none; /* Prevent mouse events when hidden */
+    }
+
+    /* When hovering over the product card, show the icons */
+    .product-card:hover .general-product-hover {
+        opacity: 1; /* Show icons */
+        visibility: visible; /* Make it interactable */
+        pointer-events: auto; /* Allow clicking */
+    }
+
+    /* Smooth delay to keep icons visible even after hover */
+    .product-card:hover .general-product-hover {
+        animation: stay-visible 3s forwards; /* Icons remain visible */
+        color: #ff5252;
+    }
+    .general-product-hover :hover{
+        color: green;
+    }
+    
+    /* Define the stay-visible effect */
+
+    .general-product-hover li {
+        list-style: none; /* Remove bullet points */
+    }
+
+    .general-product-hover a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px; /* Width for circular icons */
+        height: 50px; /* Height for circular icons */
+        border-radius: 50%; /* Create circular shape */
+        background-color: white; /* Set background color */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        text-decoration: none; /* Remove underline */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+        color: black; /* Default icon color */
+    }
+
+    .general-product-hover a:hover {
+        background-color: #f0f0f0; /* Background color on hover */
+        transform: scale(1.2); /* Slightly enlarge on hover */
+    }
+
+    /* Icon styling */
+    .general-product-hover a span {
+        font-size: 1.5em; /* Adjust font size to fit within circle */
+        height: 100%; /* Ensure full height */
+        width: 100%; /* Ensure full width */
+        display: flex; /* Center the icon within the circle */
+        justify-content: center;
+        align-items: center;
+    }
+    /* Default icon styling */
+.general-product-hover a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* Icon button size */
+    height: 20px;
+    border-radius: 50%;
+    background-color: white; /* Default background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; /* Smooth effect */
+    color: black; /* Default icon color */
+}
+
+/* Change color on hover */
+.general-product-hover a:hover {
+    background-color: #ff5252; /* Background changes to red */
+    transform: scale(1.2); /* Slightly enlarge */
+}
+
+/* Ensure icon inside the button also changes color */
+.general-product-hover a:hover span,
+.general-product-hover a:hover i {
+    color: white !important; /* White icon inside */
+}
+
+</style>
 </head>
 
 <body>
@@ -512,57 +915,65 @@
     <div class="container">
         <div class="products-container">
             <?php
-           if (isset($discounts) && is_array($discounts) && !empty($discounts)) {
-            foreach ($discounts as $discount) {
-                // Calculate discounted price
-                $original_price = floatval($discount["price"]);
-                $discount_percentage = floatval($discount["discount_percentage"]);
-                $discounted_price = $original_price * (1 - $discount_percentage / 100);
+            if (isset($discounts) && is_array($discounts) && !empty($discounts)) {
+                foreach ($discounts as $discount) {
+                    // Calculate discounted price
+                    $original_price = floatval($discount["price"]);
+                    $discount_percentage = floatval($discount["discount_percentage"]);
+                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                // Sanitize and prepare data
-                $product_name = htmlspecialchars($discount["product_name"]);
-                $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
-                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                $original_price_formatted = "$" . number_format($original_price, 2); 
-                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-        ?>
-                <!-- Product Card -->
-                <div class="product-card">
-                    <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')"></div>
-                    <div class="product-info">
-                        <h5 class="product-name"><?php echo $product_name; ?></h5>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                    // Sanitize and prepare data
+                    $product_name = htmlspecialchars($discount["product_name"]);
+                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                    $original_price_formatted = "$" . number_format($original_price, 2); 
+                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+            ?>
+                    <!-- Product Card -->
+                    <div class="product-card">
+                        <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                        <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                            <!--icon favorite , view   -->
+                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                            <!--icon favorite , view   -->
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
+                                        <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon_bag_alt"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="price">
-                            <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                            <?php echo $discounted_price_formatted; ?>
                         </div>
-                        <button class="add-to-cart" 
-                                data-product-name="<?php echo $product_name; ?>" 
-                                data-product-price="<?php echo $discounted_price; ?>" 
-                                data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                        <div class="product-info">
+                            <h5 class="product-name"><?php echo $product_name; ?></h5>
+                          
+                            <div class="price">
+                                <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                <?php echo $discounted_price_formatted; ?>
+                            </div>
+                            <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                        </div>
                     </div>
-                </div>
-        <?php
+            <?php
+                }
+            } else {
+                echo '<p>No discounted products available.</p>';
             }
-        }
-        ?>
+            ?>
+        </div>
     </div>
-</div>
 </section>
-
-
-
-
-
-
-
     <!-- Left Paragraph Right Image -->
     <div class="container">
         <div class="content-section">
@@ -576,10 +987,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <!-- Left Image  Paragraph -->
     <div class="container">
         <div class="content-section">
@@ -587,7 +994,7 @@
                 <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="Glow Skincare Products" style="   border-radius: 10px 70px 10px 70px;
                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
             </div>
-            <div class="image-content-left">
+            <div class="image-content-lefts">
                 <img src="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
                     alt="Glow Skincare Products"
                     style="   border-radius: 10px 70px 10px 70px;
@@ -706,13 +1113,7 @@
             <a href="#" class="cta-button">Learn More About Us</a>
         </div>
     </div>
-
-
-
     <!-- Discount Products Section -->
-
-
-
     <script>
         // Simple script for the discount section
         document.querySelectorAll('.add-to-cart').forEach(button => {
@@ -722,7 +1123,22 @@
             });
         });
     </script>
+    <!-- icon -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const productCards = document.querySelectorAll('.product-card'); // Select all product cards
 
+    productCards.forEach(card => {
+        const iconsContainer = card.querySelector('.general-product-hover'); // Select the container for icons
+
+        card.addEventListener('click', function() {
+            // Toggle the 'visible' class
+            iconsContainer.classList.toggle('visible');
+        });
+    });
+});
+</script>
+<!-- icon -->
     <script>
         // Select the container with class 'cards'
         const container = document.querySelector('.cards');
@@ -767,6 +1183,796 @@
             img.style.animation = 'none';
         });
     </script>
+
+
+
+
+
+
+
+    <div class="cart-panel">
+        <div class="cart-header">
+            <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
+            <div class="close-cart">x</div>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span id="subtotal-amount">$0.00</span>
+            </div>
+            <button class="view-cart-btn" onclick="window.location.href='checkout';">Checkout</button>
+        </div>
+    </div>
+
+
+    <!-- Inline CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Shared Styles for Add to Cart Button */
+        .add-to-cart {
+            background-color: pink;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #ff6699;
+            transform: translateY(-2px);
+        }
+
+        .add-to-cart a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        /* Discounted Product Card Styles */
+        .discount-product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .discount-product-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            transition: filter 0.3s ease;
+        }
+
+        .discount-product-card:hover .product-image {
+            filter: brightness(110%);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff5252;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .discount-product-card:hover .discount-badge {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .discount-product-hover {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 0;
+            z-index: 2;
+        }
+
+        .discount-product-card:hover .discount-product-hover {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .discount-product-hover li {
+            list-style: none;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+
+        .discount-product-hover li a {
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: #ffffff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .discount-product-hover li a:hover {
+            background: #ff5252;
+            color: #ffffff;
+            transform: scale(1.15);
+        }
+
+        .discount-product-hover li a span {
+            font-size: 16px;
+            color: #111111;
+            transition: color 0.3s ease;
+        }
+
+        .discount-product-hover li a:hover span {
+            color: #ffffff;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .discount-product-card:hover .product-name {
+            color: #ff5252;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #0d6efd;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .discount-product-card:hover .price {
+            color: #ff5252;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        /* General Product Item Styles */
+        .general-product-item {
+            position: relative;
+            background: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .general-product-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .general-product-pic {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .general-product-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .general-product-item:hover .general-product-pic img {
+            transform: scale(1.1);
+        }
+
+        .general-product-hover {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 0;
+            z-index: 2;
+        }
+
+        .general-product-item:hover .general-product-hover {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .general-product-hover li {
+            list-style: none;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+
+        .general-product-hover li a {
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: #ffffff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .general-product-hover li a:hover {
+            background: #e7ab3c;
+            color: #ffffff;
+            transform: scale(1.15);
+        }
+
+        .general-product-hover li a span {
+            font-size: 16px;
+            color: #111111;
+            transition: color 0.3s ease;
+        }
+
+        .general-product-hover li a:hover span {
+            color: #ffffff;
+        }
+
+        .general-product-text {
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .general-product-text h6 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .general-product-text h6 a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .general-product-item:hover .general-product-text h6 a {
+            color: #e7ab3c;
+        }
+
+        .general-product-price {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .general-product-item:hover .general-product-price {
+            color: #e7ab3c;
+        }
+        .discount-product-card:hover .price {
+            color: #e7ab3c; /* Added hover effect for price in discount card */
+        } 
+        .general-product-item:hover .general-product-price {
+            color: #e7ab3c;
+        }
+        /* Cart Panel Styles */
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-panel.active {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            background-color: #ffb6c1;
+            color: #000;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .close-cart {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #000;
+            transition: transform 0.3s ease;
+        }
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            padding: 20px;
+            max-height: calc(100% - 150px);
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: #ff6699;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #333;
+            padding: 0 5px;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+
+        .cart-item-total {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .delete-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            color: #ff3333;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+        }
+
+        .subtotal {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .view-cart-btn {
+            background-color: #ffb6c1;
+            color: #000;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .view-cart-btn:hover {
+            background-color: #ff9eb5;
+        }
+
+        /* Image Zoom Modal Styles */
+        .image-zoom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-zoom-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .image-zoom-content {
+            position: relative;
+            text-align: center;
+        }
+
+        #zoomed-image {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffffff;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #ff5252;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Trend Section Styles */
+        .trend {
+            padding: 30px 0;
+        }
+
+        .section-title h4 {
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .section-title h4::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: red;
+            margin-top: 5px;
+        }
+
+        .trend__content {
+            padding: 10px;
+        }
+
+        .trend__item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .trend__item__pic img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .trend__item__text {
+            margin-left: 15px;
+        }
+
+        .trend__item__text h6 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .product__price {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Pagination Styles */
+        .pagination__option {
+            margin-top: 30px;
+        }
+
+        .pagination__option a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            margin: 0 5px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .pagination__option a.active,
+        .pagination__option a:hover {
+            background: #e7ab3c;
+            color: #fff;
+        }
+
+        .pagination__option i {
+            font-size: 16px;
+            line-height: 40px;
+        }
+    </style>
+
+    <!-- JavaScript -->
+<!-- JavaScript -->
+<script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
+<script src="Views/E-commerce-user/assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cartPanel = document.querySelector('.cart-panel');
+    const closeCart = document.querySelector('.close-cart');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartItemCount = document.querySelector('#cart-item-count');
+    const subtotalAmount = document.querySelector('#subtotal-amount');
+    const imageZoomModal = document.querySelector('.image-zoom-modal');
+    const zoomedImage = document.querySelector('#zoomed-image');
+    const backBtn = document.querySelector('.back-btn');
+    const zoomButtons = document.querySelectorAll('.image-zoom');
+    let cartItems = [];
+
+    // Load cart from localStorage on page load
+    try {
+        cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (e) {
+        console.error("Error parsing cart from localStorage:", e);
+        cartItems = [];
+    }
+
+    // Render cart items on page load
+    cartItems.forEach(item => addCartItem(item));
+    updateCartSummary();
+
+    // Cart Functionality
+    function toggleCart() {
+        cartPanel.classList.toggle('active');
+    }
+
+    closeCart.addEventListener('click', toggleCart);
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productName = this.getAttribute('data-product-name');
+            const productPrice = parseFloat(this.getAttribute('data-product-price'));
+            const productImage = this.getAttribute('data-product-image');
+
+            const existingItem = cartItems.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+                updateCartItem(existingItem);
+            } else {
+                const newItem = {
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                };
+                cartItems.push(newItem);
+                addCartItem(newItem);
+            }
+
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            console.log("Cart after adding item:", cartItems);
+
+            if (!cartPanel.classList.contains('active')) {
+                toggleCart();
+            }
+            updateCartSummary();
+        });
+    });
+
+    function addCartItem(item) {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-details">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                <div class="cart-item-quantity">
+                    <button class="quantity-btn decrease-btn">-</button>
+                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+                    <button class="quantity-btn increase-btn">+</button>
+                </div>
+            </div>
+            <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+            <div class="delete-btn"><i class="fa fa-trash"></i></div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+
+        attachItemListeners(cartItem, item);
+    }
+
+    function updateCartItem(item) {
+        const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
+            el => el.querySelector('.cart-item-name').textContent === item.name
+        );
+        const input = cartItem.querySelector('.quantity-input');
+        input.value = item.quantity;
+        cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+        updateCartSummary();
+        // Save to localStorage
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+
+    function attachItemListeners(cartItem, item) {
+        const decreaseBtn = cartItem.querySelector('.decrease-btn');
+        const increaseBtn = cartItem.querySelector('.increase-btn');
+        const quantityInput = cartItem.querySelector('.quantity-input');
+        const deleteBtn = cartItem.querySelector('.delete-btn');
+
+        decreaseBtn.addEventListener('click', () => {
+            if (item.quantity > 1) {
+                item.quantity--;
+                updateCartItem(item);
+            }
+        });
+
+        increaseBtn.addEventListener('click', () => {
+            item.quantity++;
+            updateCartItem(item);
+        });
+
+        quantityInput.addEventListener('change', () => {
+            let value = parseInt(quantityInput.value);
+            if (value < 1 || isNaN(value)) value = 1;
+            item.quantity = value;
+            updateCartItem(item);
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            cartItem.remove();
+            cartItems = cartItems.filter(i => i.name !== item.name);
+            updateCartSummary();
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        });
+    }
+
+    function updateCartSummary() {
+        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        cartItemCount.textContent = `${totalItems} items`;
+        subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    // Image Zoom Functionality
+    zoomButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const imageUrl = this.getAttribute('data-image');
+            zoomedImage.src = imageUrl;
+            imageZoomModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+    });
+
+    backBtn.addEventListener('click', function() {
+        imageZoomModal.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the image
+    imageZoomModal.addEventListener('click', function(e) {
+        if (e.target === imageZoomModal) {
+            imageZoomModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+
 </body>
 
 </html>

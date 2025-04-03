@@ -22,7 +22,7 @@ class CategoryController extends BaseController
         $categories = $this->model->getCategories();
         $this->views('/Inventory/categories/create.php', ['categories' => $categories]);
     }
-
+    
     function store()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

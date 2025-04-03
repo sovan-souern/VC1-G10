@@ -205,4 +205,71 @@ class LoginRegisterController extends BaseController {
         header("Location: /login");
         exit();
     }
+
+    public function adminRegister() {
+       $this->views('auth/admin-register.php') ;
+    }
+
+    public function storeAdmin() {
+        header('Content-Type: application/json');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                $name = htmlspecialchars($_POST['name'] ?? '');
+                $phone = htmlspecialchars($_POST['phone'] ?? '');
+                $password = htmlspecialchars($_POST['password'] ?? '');
+                $confirmPassword = htmlspecialchars($_POST['confirm_password'] ?? '');
+                $role = htmlspecialchars($_POST['role'] ?? '');
+                $profilePicture = null;
+
+                // Validate passwords match
+                if ($password !== $confirmPassword) {
+                    throw new Exception("Passwords do not match!");
+                }
+
+                // Validate role
+                $allowedRoles = ['admin', 'shopowner'];
+                if (!in_array($role, $allowedRoles)) {
+                    throw new Exception("Invalid role selected!");
+                }
+
+                // Handle profile picture upload if provided
+                if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = "uploads/admin_profiles/";
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
+
+                    $fileExtension = strtolower(pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION));
+                    $uniqueFileName = uniqid('admin_') . '.' . $fileExtension;
+                    $targetFilePath = $uploadDir . $uniqueFileName;
+
+                    if (!move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetFilePath)) {
+                        throw new Exception("Failed to upload profile picture.");
+                    }
+
+                    $profilePicture = $targetFilePath;
+                }
+
+                // Register admin
+                $result = $this->user->registerAdmin($name, $phone, $password, $profilePicture, $role);
+                
+                if (!$result) {
+                    throw new Exception("Registration failed!");
+                }
+
+                echo json_encode([
+                    "status" => "success",
+                    "message" => "Admin registration successful!",
+                    "redirect" => "/login"
+                ]);
+
+            } catch (Exception $e) {
+                echo json_encode([
+                    "status" => "error",
+                    "message" => $e->getMessage()
+                ]);
+            }
+        }
+        exit();
+    }
 }

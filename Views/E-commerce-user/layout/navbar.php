@@ -89,7 +89,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="mobileUserDropdown">
                                     <li><a class="dropdown-item" href="/editProfile">Edit Profile</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                    <li><a class="dropdown-item" href="">Logout</a></li>
                                 </ul>
                             </div>
                         <?php else: ?>
@@ -121,6 +121,8 @@
                             </span>
                         </a>
                     </li>
+                    
+                    </ul>
                 </ul>
 
             </div>
@@ -165,37 +167,406 @@
                         </li>
                     </ul>
 
-                    
-                    <!-- icon -->
+            <!-- Navbar -->
+            <div class="d-none d-lg-flex align-items-end">
+                <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <!-- Favorite Icon -->
+                    <li class="d-flex align-items-center">
+                        <a href="/favorite" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                        </a>
+                    </li>
 
-               <div class="d-none d-lg-flex align-items-end">
-                    <ul class="d-flex justify-content-end list-unstyled m-0">
-                        <li class="">
-                            <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                                <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                    03
-                                </span>
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="index.html" class="mx-3">
-                                <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="index.html" class="mx-3">
-                                <i class="fa fa-history" style="font-size: 24px; color: black;"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <!-- Cart Icon with Adjusted Badge -->
+                    <li class="position-relative d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <a href="#" class="cart-toggle text-decoration-none d-flex flex-column align-items-center position-relative">
+                            <iconify-icon icon="mdi:cart" class="fs-4"></iconify-icon>
+                            <span class="position-absolute badge rounded-circle bg-primary"
+                                style="width: 24px; height: 24px; font-size: 12px; top: -14px; right: -14px; display: flex; align-items: center; justify-content: center;">
+                               03 <a href="#" class="text-white text-decoration-none cart-badge-toggle" id="nav-cart-count"></a>
+                            </span>
+                        </a>
+                    </li>
 
+                    <!-- History Icon -->
+                    <li class="d-flex align-items-center">
+                        <a href="#" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <i class="fa fa-history fs-4 text-dark"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="cart-panel">
+                <div class="cart-header">
+                    <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
+                    <div class="close-cart">x</div>
                 </div>
+                <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-footer">
+                    <div class="subtotal">
+                        <span>Subtotal</span>
+                        <span id="subtotal-amount">$0.00</span>
+                    </div>
+                    <button class="view-cart-btn" onclick="window.location.href='cart';">Views Cart</button>
+                </div>
+            </div>
 
-                    <!-- icon end -->
+            <!-- Inline CSS -->
+            <style>
+                .badge {
+                    min-width: 20px;
+                    height: 20px;
+                    line-height: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 2px;
+                }
+
+                .cart-panel {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    width: 350px;
+                    height: 100%;
+                    background: #fff;
+                    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                    z-index: 1000;
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                }
+
+                .cart-panel.active {
+                    transform: translateX(0);
+                }
+
+                .cart-header {
+                    background-color: #ffb6c1;
+                    color: #000;
+                    padding: 15px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .cart-header h3 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+
+
+        
+
+
+                .close-cart {
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    color: #000;
+           }
+
+                .close-cart:hover {
+                   color: #ff3333; /* Just change color on hover, no movement */
+            }
+
+                /* Remove wiggle animation */
+                .close-cart.wiggle {
+                    animation: none; /* No animation on hover */
+                }
+
+                /* Remove wiggle animation on hover */
+                .close-cart:hover {
+                    transform: none; /* No rotation on hover */
+                }
+
+          /* Remove wiggle animation */
+
+                .close-cart:hover {
+                    transform: rotate(90deg);
+                }
+
+                /* Add wiggle animation for the "X" icon */
+                @keyframes wiggle {
+                    0% { transform: rotate(0deg); }
+                    25% { transform: rotate(-5deg); }
+                    50% { transform: rotate(5deg); }
+                    75% { transform: rotate(-5deg); }
+                    100% { transform: rotate(0deg); }
+                }
+
+                .close-cart.wiggle {
+                    animation: wiggle 0.3s ease-in-out;
+                }
+
+                .cart-items {
+                    padding: 20px;
+                    max-height: calc(100% - 150px);
+                    overflow-y: auto;
+                }
+
+                .cart-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px 0;
+                    border-bottom: 1px solid #eee;
+                }
+
+                .cart-item img {
+                    width: 60px;
+                    height: 60px;
+                    object-fit: cover;
+                    margin-right: 15px;
+                    border-radius: 5px;
+                }
+
+                .cart-item-details {
+                    flex-grow: 1;
+                }
+
+                .cart-item-name {
+                    font-weight: bold;
+                    color: #333;
+                    margin-bottom: 5px;
+                }
+
+                .cart-item-price {
+                    font-weight: bold;
+                    color: #ff6699;
+                }
+
+                .cart-item-quantity {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 5px;
+                }
+
+                .quantity-btn {
+                    background: none;
+                    border: none;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    color: #333;
+                    padding: 0 5px;
+                }
+
+                .quantity-input {
+                    width: 40px;
+                    text-align: center;
+                    border: 1px solid #ddd;
+                    border-radius: 3px;
+                    margin: 0 5px;
+                }
+
+                .cart-item-total {
+                    font-weight: bold;
+                    color: #333;
+                }
+
+                .delete-btn {
+                    margin-left: 10px;
+                    cursor: pointer;
+                    color: #777;
+                    transition: color 0.3s ease;
+                }
+
+                .delete-btn:hover {
+                    color: #ff3333;
+                }
+
+                .cart-footer {
+                    padding: 20px;
+                    border-top: 1px solid #eee;
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    background: #fff;
+                }
+
+                .subtotal {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                }
+
+                .view-cart-btn {
+                    background-color: #ffb6c1;
+                    color: #000;
+                    border: none;
+                    padding: 10px;
+                    width: 100%;
+                    font-weight: bold;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    transition: background 0.3s ease;
+                }
+
+                .view-cart-btn:hover {
+                    background-color: #ff9eb5;
+                }
+            </style>
+
+            <!-- JavaScript -->
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cartPanel = document.querySelector('.cart-panel');
+                const closeCart = document.querySelector('.close-cart');
+                const cartToggle = document.querySelector('.cart-toggle');
+                const cartBadgeToggle = document.querySelector('.cart-badge-toggle');
+                const addToCartButtons = document.querySelectorAll('.add-to-cart');
+                const cartItemsContainer = document.querySelector('.cart-items');
+                const cartItemCount = document.querySelector('#cart-item-count');
+                const subtotalAmount = document.querySelector('#subtotal-amount');
+                const navCartCount = document.querySelector('#nav-cart-count');
+                let cartItems = [];
+
+                // Load cart from localStorage
+                try {
+                    cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+                } catch (e) {
+                    console.error("Error parsing cart from localStorage:", e);
+                    cartItems = [];
+                }
+
+                // Render initial cart items
+                cartItems.forEach(item => addCartItem(item));
+                updateCartSummary();
+
+                // Cart toggle functionality
+                function toggleCart() {
+                    cartPanel.classList.toggle('active');
+                }
+
+                // Open cart when clicking the cart toggle or badge
+                cartToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleCart();
+                });
+
+                cartBadgeToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleCart();
+                });
+
+                // Add animation to the "X" icon when clicked (no closing)
+                closeCart.addEventListener('click', () => {
+                    closeCart.classList.add('wiggle'); // Trigger the wiggle animation
+                });
+
+                // Add to cart functionality
+                addToCartButtons.forEach(button => {
+                    button.removeEventListener('click', handleAddToCart); // Prevent duplicate listeners
+                    
+                    function handleAddToCart(e) {
+                        e.preventDefault();
+                        const productName = button.getAttribute('data-product-name');
+                        const productPrice = parseFloat(button.getAttribute('data-product-price'));
+                        const productImage = button.getAttribute('data-product-image');
+
+                        const existingItem = cartItems.find(item => item.name === productName);
+                        if (!existingItem) {
+                            const newItem = {
+                                name: productName,
+                                price: productPrice,
+                                image: productImage,
+                                quantity: 1
+                            };
+                            cartItems.push(newItem);
+                            addCartItem(newItem);
+                            localStorage.setItem('cart', JSON.stringify(cartItems));
+                            if (!cartPanel.classList.contains('active')) {
+                                toggleCart();
+                            }
+                            updateCartSummary();
+                        }
+                    }
+
+                    button.addEventListener('click', handleAddToCart);
+                });
+
+                function addCartItem(item) {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn decrease-btn">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+                                <button class="quantity-btn increase-btn">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div class="delete-btn"><i class="fa fa-trash"></i></div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                    attachItemListeners(cartItem, item);
+                }
+
+                function updateCartItem(item) {
+                    const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
+                        el => el.querySelector('.cart-item-name').textContent === item.name
+                    );
+                    const input = cartItem.querySelector('.quantity-input');
+                    input.value = item.quantity;
+                    cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+                    updateCartSummary();
+                    localStorage.setItem('cart', JSON.stringify(cartItems));
+                }
+
+                function attachItemListeners(cartItem, item) {
+                    const decreaseBtn = cartItem.querySelector('.decrease-btn');
+                    const increaseBtn = cartItem.querySelector('.increase-btn');
+                    const quantityInput = cartItem.querySelector('.quantity-input');
+                    const deleteBtn = cartItem.querySelector('.delete-btn');
+
+                    decreaseBtn.addEventListener('click', () => {
+                        if (item.quantity > 1) {
+                            item.quantity--;
+                            updateCartItem(item);
+                        }
+                    });
+
+                    increaseBtn.addEventListener('click', () => {
+                        item.quantity++;
+                        updateCartItem(item);
+                    });
+
+                    quantityInput.addEventListener('change', () => {
+                        let value = parseInt(quantityInput.value);
+                        if (value < 1 || isNaN(value)) value = 1;
+                        item.quantity = value;
+                        updateCartItem(item);
+                    });
+
+                    deleteBtn.addEventListener('click', () => {
+                        cartItem.remove();
+                        cartItems = cartItems.filter(i => i.name !== item.name);
+                        updateCartSummary();
+                        localStorage.setItem('cart', JSON.stringify(cartItems));
+                    });
+                }
+
+                function updateCartSummary() {
+                    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                    cartItemCount.textContent = `${totalItems} items`;
+                    subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
+                    navCartCount.textContent = totalItems < 10 ? `0${totalItems}` : totalItems;
+                }
+            });
+            </script>
+
+            <!-- end icon -->
+
+
 
                 </div>
 
@@ -205,157 +576,90 @@
     </div>
 </header>
 
-<!-- Add this CSS to your existing <style> tag -->
+
 <style>
-    .slideshow-section {
-        margin: 0; /* Remove margin to allow full-screen */
-        width: 100vw; /* Full viewport width */
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw; /* Offset to extend beyond container */
-        margin-right: -50vw;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-
+    body {
+      overflow-x: hidden;
+    }
     .slideshow-container {
-        width: 100%; /* Full width */
-        height: 100vh; /* Full viewport height */
-        position: relative;
-        overflow: hidden;
-        border-radius: 0; /* Remove rounding for full-screen */
-        box-shadow: none; /* Remove shadow for cleaner look */
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000; /* Fallback background */
     }
-
-    .slides-wrapper {
-        display: flex;
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        width: 100%;
-        height: 100%; /* Match container height */
-    }
-
     .mySlides {
-        min-width: 100%;
-        position: relative;
-        overflow: hidden;
-        height: 100%; /* Full height of container */
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
     }
-
+    .mySlides.active {
+      display: block; /* Show active slide */
+    }
     .mySlides img {
-        width: 100%;
-        height: 100%; /* Full height of slide */
-        object-fit: cover; /* Cover entire area */
-        transition: transform 0.5s ease;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0; /* Start hidden */
+      transition: opacity 1.5s ease-in-out; /* Slow fade for image only */
     }
-
-    .mySlides:hover img {
-        transform: scale(1.05);
+    .mySlides.active img {
+      opacity: 1; /* Fade in when active */
     }
 
     .prev, .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 20px;
-        color: white;
-        font-size: 30px; /* Larger for full-screen */
-        background: rgba(0, 0, 0, 0.5);
-        transition: all 0.3s ease;
-        z-index: 10;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      /* font-size: 24px; */
+      background: rgba(0, 0, 0, 0.5);
+      transition: background-color 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      z-index: 10;
     }
-
-    .prev { left: 20px; border-radius: 0 10px 10px 0; }
-    .next { right: 20px; border-radius: 10px 0 0 10px; }
-
-    .prev:hover, .next:hover {
-        background: rgba(0, 0, 0, 0.9);
-        padding: 20px 30px;
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
     }
+    /* .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    } */
 
-    .text, .numbertext {
-        position: absolute;
-        color: white;
-        padding: 20px;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    .dot-container {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
     }
-
-    .text {
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        font-size: 24px; /* Larger for full-screen */
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    }
-
-    .numbertext {
-        top: 20px;
-        left: 20px;
-        font-size: 16px;
-    }
-
-    .dots-container {
-        position: absolute;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        z-index: 10;
-    }
-
     .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 8px;
-        background-color: rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
-        display: inline-block;
-        transition: all 0.3s ease;
-        border: 2px solid #fff;
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
     }
-
-    .dot:hover, .dot.active {
-        background-color: #ff9a9e;
-        transform: scale(1.2);
+    .dot.active, .dot:hover {
+      background-color: #717171; /* Active/hover state for dots */
     }
-
-    @media (max-width: 600px) {
-        .text { font-size: 18px; }
-        .prev, .next { font-size: 24px; padding: 15px; }
-        .numbertext { font-size: 14px; }
-        .dot { height: 12px; width: 12px; }
-    }
-</style>
-
-<!-- Add this JavaScript at the bottom of your <body> tag -->
-<script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        let slidesWrapper = document.querySelector(".slides-wrapper");
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-
-        if (n > slides.length) slideIndex = 1;
-        if (n < 1) slideIndex = slides.length;
-
-        slidesWrapper.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
-
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        dots[slideIndex - 1].className += " active";
-    }
-</script>
-
+  </style>
 </head>
 <body>
   <div class="slideshow-container">
@@ -429,7 +733,6 @@
   </script>
 
 <!-- 
->>>>>>> 9469813a5b1c3a0ff94b34ff8c96e2018c623373
 <style>
     .contact-page #banner {
     display: none;
@@ -976,7 +1279,7 @@
 
     .settings-item {
         display: flex;
-        align-items: center;
+        align-items: center;    
         padding: 15px;
         color: #666;
         text-decoration: none;
@@ -990,8 +1293,8 @@
     }
 
     .settings-item i {
-        margin-right: 15px;
         font-size: 1.2rem;
+        margin-right: 15px;
     }
     .admin-login-panel {
         max-width: 400px;
@@ -1273,46 +1576,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
-
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Logging in...';
-
-    fetch('/users/authenticate', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            if (data.role === 'admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Login successful! Redirecting...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1000);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
-            }
-        } else {
-            messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
-            button.disabled = false;
-            button.innerHTML = 'Login as Admin';
-        }
-    })
-    .catch(error => {
-        console.error('Login error:', error);
-        messageDiv.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-        button.disabled = false;
-        button.innerHTML = 'Login as Admin';
-    });
-});
-
 // Close modal when clicked outside
 document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
     document.getElementById('adminLoginMessage').innerHTML = '';
@@ -1320,6 +1583,34 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
     document.querySelector('#adminLoginForm button[type="submit"]').disabled = false;
     document.querySelector('#adminLoginForm button[type="submit"]').innerHTML = 'Login as Admin';
 });
+
+function handleLogout(event) {
+    event.preventDefault();
+    
+    fetch('/Views/auth/logout_handler.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(() => {
+        // Clear local storage
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        // Force reload and redirect
+        window.location.href = '/';
+        setTimeout(() => {
+            window.location.reload(true);
+        }, 100);
+    })
+    .catch(() => {
+        window.location.href = '/';
+        window.location.reload(true);
+    });
+}
 </script>
 
 <!-- Profile Panel -->
@@ -1361,22 +1652,17 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
                     <div class="text-center mb-4">
                         <div class="profile-picture-upload">
                             <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
-                                 alt="Profile" class="profile-pic-lg">
+                                 alt="Profile" class="profile-pic-lg" id="preview-profile-pic">
                             <label for="profile-upload" class="upload-btn">
                                 <i class="bi bi-camera"></i>
                             </label>
-                            <input type="file" id="profile-upload" hidden accept="image/*">
+                            <input type="file" id="profile-upload" name="profile_picture" hidden accept="image/*">
                         </div>
                     </div>
                     
                     <div class="form-group mb-3">
                         <label>Full Name</label>
-                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
-                    </div>
-                    
-                    <div class="form-group mb-3">
-                        <label>Phone</label>
-                        <input type="tel" class="form-control" value="<?php echo htmlspecialchars($_SESSION['phone']); ?>">
+                        <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Update Profile</button>
@@ -1407,158 +1693,101 @@ document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', fun
                         <i class="bi bi-shield-lock"></i>
                         <span>Change Password</span>
                     </a>
-                    <a href="#" class="settings-item" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Admin Login</span>
-                    </a>
-                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'shopowner'): ?>
+
+                    <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Shopowner')): ?>
                         <a href="/dashboard" class="settings-item">
                             <i class="bi bi-speedometer2"></i>
                             <span>Dashboard</span>
                         </a>
                     <?php endif; ?>
-                    <a href="#" onclick="confirmLogout(); return false;" class="settings-item text-danger">
+
+                    <a href="#" onclick="handleLogout(event)" class="settings-item text-danger">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Logout</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Add Admin Login Modal -->
-            <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header admin-modal-header">
-                            <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body p-0">
-                            <div class="login-container">
-                                <!-- Left Section -->
-                                <div class="left-section text-center p-4">
-                                    <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg" 
-                                         alt="App Logo" class="admin-logo mb-3">
-                                    <h6 class="text-white mb-2">Admin Portal</h6>
-                                    <p class="text-white-50 small">Access your administrative dashboard</p>
-                                </div>
-
-                                <!-- Right Section -->
-                                <div class="right-section p-4">
-                                    <form id="adminLoginForm" class="admin-login-form">
-                                        <div class="form-group mb-3">
-                                            <input type="tel" class="form-control" name="phone" 
-                                                   placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                                        </div>
-                                        
-                                        <div class="form-group mb-3">
-                                            <input type="password" class="form-control" name="password" 
-                                                   placeholder="Password" required>
-                                        </div>
-
-                                        <div id="adminLoginMessage" class="mb-3"></div>
-                                        
-                                        <button type="submit" class="btn btn-primary w-100">
-                                            Login as Admin
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
 
-<!-- Add Admin Login Modal -->
-<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header admin-modal-header">
-                <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-                <div class="login-container">
-                    <div class="right-section p-4">
-                        <form id="adminLoginForm" class="admin-login-form">
-                            <div class="form-group mb-3">
-                                <input type="tel" class="form-control" name="phone" 
-                                       placeholder="Phone Number" pattern="[0-9]{9,10}" required>
-                            </div>
-                            
-                            <div class="form-group mb-3">
-                                <input type="password" class="form-control" name="password" 
-                                       placeholder="Password" required>
-                            </div>
-
-                            <!-- Add hidden field to identify admin login -->
-                            <input type="hidden" name="admin_login" value="true">
-
-                            <div id="adminLoginMessage" class="mb-3"></div>
-                            
-                            <button type="submit" class="btn btn-primary w-100">
-                                Login as Admin
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
-document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+
+// Check role and redirect on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const dashboardAccess = sessionStorage.getItem('dashboard_access');
+    const userRole = sessionStorage.getItem('userRole');
+    
+    if (dashboardAccess === 'true' && (userRole === 'admin' || userRole === 'shopowner')) {
+        window.location.replace('/dashboard');
+    }
+});
+
+document.getElementById('profile-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this);
-    const button = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('adminLoginMessage');
 
-    // Clear previous messages
-    messageDiv.innerHTML = '';
-    button.disabled = true;
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
+    // Show loading indicator
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
 
-    fetch('/users/authenticate', {
+    fetch('/updateProfile', {
         method: 'POST',
         body: formData
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            if (data.role === 'Admin' || data.role === 'shopowner') {
-                messageDiv.innerHTML = '<div class="alert alert-success">Access granted! Redirecting to dashboard...</div>';
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1500);
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">Access denied. Admin privileges required.</div>';
-                button.disabled = false;
-                button.innerHTML = 'Login as Admin';
-            }
+            // Update profile images
+            const profilePicture = data.data.profile_picture || '/Views/assets/img/avatars/1.png';
+            document.querySelectorAll('.profile-pic, .user-avatar, .profile-pic-lg').forEach(img => {
+                img.src = profilePicture;
+            });
+
+            // Update displayed name only
+            document.querySelectorAll('.profile-info h5, .profile-info h6').forEach(el => {
+                if (el.classList.contains('fw-bold')) {
+                    el.textContent = data.data.name;
+                }
+            });
+
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                timer: 2000,
+                showConfirmButton: false
+            });
         } else {
-            messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
-            button.disabled = false;
-            button.innerHTML = 'Login as Admin';
+            throw new Error(data.message);
         }
     })
     .catch(error => {
-        console.error('Login error:', error);
-        messageDiv.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-        button.disabled = false;
-        button.innerHTML = 'Login as Admin';
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: error.message,
+            confirmButtonColor: '#FF69B4'
+        });
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Update Profile';
     });
 });
 
-// Close modal handler
-document.getElementById('adminLoginModal').addEventListener('hide.bs.modal', function() {
-    document.getElementById('adminLoginMessage').innerHTML = '';
-    document.getElementById('adminLoginForm').reset();
-    const button = document.querySelector('#adminLoginForm button[type="submit"]');
-    button.disabled = false;
-    button.innerHTML = 'Login as Admin';
+// Preview image before upload
+document.getElementById('profile-upload').addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview-profile-pic').src = e.target.result;
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
 });
 </script>

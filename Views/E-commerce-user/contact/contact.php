@@ -1,200 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Add Leaflet CSS for OpenStreetMap -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
+        .slideshow-container {
+            display: none;
+        }
+        .dot-container{
+            display: none;
+        }
         body {
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
+            font-family: 'Poppins', Arial, sans-serif;
+
             margin: 0;
-            background-color: #f5f5f5;
         }
 
-        .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 50px 15px;
+        .contact-wrapper {
             width: 100%;
-            margin: 0;
+        } 
+
+        .contact-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 60px 0;
+            align-items: stretch;
+        } 
+
+        .col-md-7 {
+            flex: 0 0 48%;
+            max-width: 48%;
         }
 
         .banner {
             position: relative;
-            color: white;
-            width: 100vw;
-            height: 60vh;
-            overflow: hidden;
-        }
-
-        .banner video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-        }
-
-        .banner-content {
-            position: relative;
-            z-index: 1;
-            padding: 60px 50px;
-            opacity: 1;
-            transform: translateY(0);
+            height: 50vh;
+            background: linear-gradient(135deg, #CC88D8, #5CB58D);
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .banner-content h1 {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
         .banner-content h2 {
-            font-size: 24px;
-            font-weight: normal;
+            font-size: 20px;
+            font-weight: 300;
         }
 
         .contact-info {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 14px;
-            width: 100%;
-            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            height: 100%;
         }
 
         .contact-info h3 {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
             color: #333;
-            margin-bottom: 20px;
-            opacity: 1;
-            transform: translateX(0);
+            margin-bottom: 25px;
         }
 
         .contact-card {
             display: flex;
             align-items: center;
             gap: 15px;
-            background-color: #f8f9fa;
             padding: 15px;
+            margin-bottom: 15px;
+            /* background: #f8f9fa; */
             border-radius: 10px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.6s ease-in-out;
-            opacity: 1;
-            transform: translateX(0);
+            transition: all 0.3s ease;
         }
 
         .contact-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
 
         .contact-card i {
-            font-size: 20px;
-            color: #CC88D8;
-            width: 40px;
-            height: 40px;
+            font-size: 22px;
+            color: black;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #fce4ec;
+            /* background: #fce4ec; */
             border-radius: 50%;
-            transition: 0.3s ease-in-out;
+            transition: all 0.4s ease;
         }
 
         .contact-card:hover i {
-            background-color: rgba(119, 212, 69, 0.73);
-            color: white;
-            transform: scale(1.1) rotate(360deg);
-        }
-
-        .contact-card .info {
-            display: flex;
-            flex-direction: column;
+            /* background: #5CB58D; */
+            color: black;
+            transform: rotate(360deg);
         }
 
         .contact-card .info span {
             font-size: 16px;
-            color: #333;
+            color: #555;
         }
 
         .contact-card .info .label {
-            font-weight: bold;
-        }
-
-        .contact-card .info .value {
-            font-weight: normal;
+            font-weight: 600;
+            color: #333;
         }
 
         .contact-container {
-            background:#FBDEE7;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            opacity: 1;
-            transform: translateX(0);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            height: 100%;
         }
 
         .contact-container h3 {
-            margin-right: 30%;
-            font-size: 24px;
-            color: #fff;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
         }
 
-        .contact-container input,
-        .contact-container textarea {
-            transition: 0.3s;
-            transform: translateX(0);
-            opacity: 1;
+        .contact-container .form-control {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 12px;
+            transition: border-color 0.3s ease;
         }
 
-        .contact-container input:focus,
-        .contact-container textarea:focus {
-            border-color: rgb(69, 173, 79);
+        .contact-container .form-control:focus {
+            border-color: #5CB58D;
+            box-shadow: 0 0 5px rgba(92, 181, 141, 0.3);
         }
 
         .btn-submit {
-            background-color: rgb(92, 181, 141);
+            background: #5CB58D;
             color: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
             width: 100%;
-            transition: 0.3s;
-            transform: translateY(0);
-            opacity: 1;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
         .btn-submit:hover {
-            background-color: rgb(41, 173, 85);
-            transform: scale(1.05) translateY(0);
+            background: #41AD55;
+            transform: translateY(-2px);
+        }
+
+        .map-container {
+            width: 100%;
+            padding: 10px;
+            margin: 0;
+            position: relative;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
         }
 
         .search-container {
+            position: absolute;
+            top: 20px;
+            right: 20px; /* Position on the right side */
             display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            opacity: 1;
-            transform: scale(1);
-            position: relative;
+            justify-content: flex-end;
+            z-index: 1000;
+            width: 300px; /* Fixed width for the search bar */
         }
 
         .search-container input {
-            width: 50%;
+            width: 100%;
             padding: 10px;
             border-radius: 5px 0 0 5px;
             border: 1px solid #ccc;
-            transition: width 0.5s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        .search-container input:focus {
+            border-color: #5CB58D;
+            outline: none;
         }
 
         .search-container button {
@@ -204,6 +206,7 @@
             color: white;
             border: none;
             cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
@@ -215,8 +218,8 @@
         .suggestions {
             position: absolute;
             top: 100%;
-            left: 25%;
-            width: 50%;
+            right: 0; /* Align suggestions with the right edge of the search bar */
+            width: 100%;
             background-color: white;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -224,6 +227,7 @@
             overflow-y: auto;
             z-index: 1000;
             display: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .suggestions div {
@@ -236,22 +240,10 @@
             background-color: #f0f0f0;
         }
 
-        .map-container {
-            width: 100%;
-            padding: 10px;
-            margin: 0;
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        #map {
-            width: 100%;
-            height: 350px;
-            border-radius: 10px;
-        }
+       
 
         @media (max-width: 768px) {
-            .row {
+            .contact-layout {
                 flex-direction: column;
                 padding: 20px 10px;
             }
@@ -273,13 +265,9 @@
                 font-size: 18px;
             }
 
-            .search-container input {
-                width: 70%;
-            }
-
-            .suggestions {
-                left: 15%;
-                width: 70%;
+            .search-container {
+                width: 250px; /* Slightly smaller on smaller screens */
+                right: 10px;
             }
 
             .contact-card {
@@ -288,6 +276,15 @@
 
             .contact-container h3 {
                 margin-right: 0;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-column {
+                margin-bottom: 30px;
             }
         }
 
@@ -300,13 +297,9 @@
                 font-size: 16px;
             }
 
-            .search-container input {
-                width: 60%;
-            }
-
-            .suggestions {
-                left: 20%;
-                width: 60%;
+            .search-container {
+                width: 200px; /* Even smaller on very small screens */
+                right: 10px;
             }
 
             #map {
@@ -321,88 +314,84 @@
         }
     </style>
 </head>
-
 <body>
-
     <div class="banner">
-        <video autoplay muted loop>
-            <source src="Views/E-commerce-user/assets/video/promote.mp4" type="video/mp4">
-        </video>
-        <div class="banner-content mt-5">
-            <h1>Get in touch with us easily!</h1>
-            <h2>Find out where to visit us and how to contact us.</h2>
+        <div class="banner-content">
+            <h1>Contact Us</h1>
+            <h2>We'd love to hear from you!</h2>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="contact-info">
-                <h3>Contact Information</h3>
-                <div class="contact-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="info">
-                        <span class="label">Address:</span>
-                        <span class="value">Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh</span>
+    <div class="contact-wrapper">
+        <div class="contact-layout">
+            <div class="col-md-7">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="info">
+                            <span class="label">Address:</span>
+                            <span class="value">Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh</span>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <div class="info">
+                            <span class="label">Phone:</span>
+                            <span class="value">016 224 335</span>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fab fa-facebook"></i>
+                        <div class="info">
+                            <span class="label">Facebook:</span>
+                            <span class="value">Yin Cheariddeth</span>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fab fa-telegram"></i>
+                        <div class="info">
+                            <span class="label">Telegram:</span>
+                            <span class="value">016 224 335</span>
+                        </div>
                     </div>
                 </div>
-                <div class="contact-card">
-                    <i class="fas fa-phone"></i>
-                    <div class="info">
-                        <span class="label">Phone:</span>
-                        <span class="value">016 224 335</span>
-                    </div>
-                </div>
-                <div class="contact-card">
-                    <i class="fab fa-facebook"></i>
-                    <div class="info">
-                        <span class="label">Facebook:</span>
-                        <span class="value">Yin Cheariddeth</span>
-                    </div>
-                </div>
-                <div class="contact-card">
-                    <i class="fab fa-telegram"></i>
-                    <div class="info">
-                        <span class="label">Telegram:</span>
-                        <span class="value">016 224 335</span>
-                    </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="contact-container">
+                    <h3>Get in Touch</h3>
+                    <form id="contactForm" action="/contact/store" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" name="phone_number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="contact-container mt-4">
-                <h3>Contact Now</h3>
-                <form id="contactForm" action="/contact/store" method="POST">
-                    <div class="mb-3">
-                        <label>First Name</label>
-                        <input type="text" name="first_name" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Last Name</label>
-                        <input type="text" name="last_name" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Phone Number</label>
-                        <input type="text" name="phone_number" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Message</label>
-                        <textarea name="message" class="form-control" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-submit">Submit</button>
-                </form>
+        <div class="map-container mt-4">
+            <div id="map"></div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a location...">
+                <button onclick="searchLocation()">Search</button>
+                <div class="suggestions" id="suggestions"></div>
             </div>
         </div>
-    </div>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search for a location...">
-        <button onclick="searchLocation()">Search</button>
-        <div class="suggestions" id="suggestions"></div>
-    </div>
-
-    <div class="map-container mt-4">
-        <div id="map"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -617,5 +606,4 @@
         });
     </script>
 </body>
-
 </html>

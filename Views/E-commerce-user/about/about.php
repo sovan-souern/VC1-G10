@@ -178,9 +178,7 @@
   }
 
   /* Rest of your existing styles remain unchanged */
-  .site-section {
-    /* padding: 2.5em 0; */
-  }
+
 
   /* ... rest of your existing styles ... */
 </style>
