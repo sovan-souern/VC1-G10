@@ -663,21 +663,28 @@
 </head>
 <body>
   <div class="slideshow-container">
-    <div class="mySlides">
+     
+
+  <div class="mySlides">
       <div class="numbertext"></div>
-      <img src="https://i.pinimg.com/736x/8e/34/11/8e341193c5c38567efda4986e48a211c.jpg" alt="Slide 1">
+      <img src="https://www.beautybyearth.com/cdn/shop/articles/effect-of-alcohol-on-skin.png?v=1647462852" alt="Slide 3">
       <div class="text"></div>
     </div>
+
     <div class="mySlides">
       <div class="numbertext"></div>
-      <img src="https://i.pinimg.com/736x/a6/03/80/a60380ae1b5e9674d50e9f104a1c330b.jpg" alt="Slide 2">
+      <img src="https://images.moneycontrol.com/static-mcnews/2024/11/20241125093723_Benefits-of-skin-cleansing.jpg?impolicy=website&width=1280&height=720" alt="Slide 2">
       <div class="text"></div>
     </div>
+
+
     <div class="mySlides">
       <div class="numbertext"></div>
-      <img src="https://i.pinimg.com/736x/65/a1/56/65a156eb330b016c1648fe63e66e9658.jpg" alt="Slide 3">
+      <img src="https://www.sheknows.com/wp-content/uploads/2023/12/youth-to-the-people-best-products-FI.jpg?w=3000" alt="Slide 1">
       <div class="text"></div>
     </div>
+
+
     <a class="prev" onclick="plusSlides(-1)">❮</a>
     <a class="next" onclick="plusSlides(1)">❯</a>
   </div>
