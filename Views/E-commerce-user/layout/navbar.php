@@ -167,32 +167,406 @@
                         </li>
                     </ul>
 
-                    <div class="d-none d-lg-flex align-items-end">
-                        <ul class="d-flex justify-content-end list-unstyled m-0">
-
-                            <li>
-                                <a href="/favorite" class="mx-3">
-                                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href="#" class="mx-3" data-bs-toggle="offcanvas"
-                                    data-bs-target="#" aria-controls="offcanvasCart">
-                                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                    <span
-                                        class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                        03
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                        <a href="#" class="mx-3">
-                            <i class="fa fa-history" style="font-size: 24px; color: black;"></i>
+            <!-- Navbar -->
+            <div class="d-none d-lg-flex align-items-end">
+                <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <!-- Favorite Icon -->
+                    <li class="d-flex align-items-center">
+                        <a href="/favorite" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                         </a>
-                        </li>
-                        </ul>
+                    </li>
+
+                    <!-- Cart Icon with Adjusted Badge -->
+                    <li class="position-relative d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <a href="#" class="cart-toggle text-decoration-none d-flex flex-column align-items-center position-relative">
+                            <iconify-icon icon="mdi:cart" class="fs-4"></iconify-icon>
+                            <span class="position-absolute badge rounded-circle bg-primary"
+                                style="width: 24px; height: 24px; font-size: 12px; top: -14px; right: -14px; display: flex; align-items: center; justify-content: center;">
+                               03 <a href="#" class="text-white text-decoration-none cart-badge-toggle" id="nav-cart-count"></a>
+                            </span>
+                        </a>
+                    </li>
+
+                    <!-- History Icon -->
+                    <li class="d-flex align-items-center">
+                        <a href="#" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <i class="fa fa-history fs-4 text-dark"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="cart-panel">
+                <div class="cart-header">
+                    <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
+                    <div class="close-cart">x</div>
+                </div>
+                <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-footer">
+                    <div class="subtotal">
+                        <span>Subtotal</span>
+                        <span id="subtotal-amount">$0.00</span>
                     </div>
+                    <button class="view-cart-btn" onclick="window.location.href='cart';">Views Cart</button>
+                </div>
+            </div>
+
+            <!-- Inline CSS -->
+            <style>
+                .badge {
+                    min-width: 20px;
+                    height: 20px;
+                    line-height: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 2px;
+                }
+
+                .cart-panel {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    width: 350px;
+                    height: 100%;
+                    background: #fff;
+                    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                    z-index: 1000;
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                }
+
+                .cart-panel.active {
+                    transform: translateX(0);
+                }
+
+                .cart-header {
+                    background-color: #ffb6c1;
+                    color: #000;
+                    padding: 15px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .cart-header h3 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+
+
+        
+
+
+                .close-cart {
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    color: #000;
+           }
+
+                .close-cart:hover {
+                   color: #ff3333; /* Just change color on hover, no movement */
+            }
+
+                /* Remove wiggle animation */
+                .close-cart.wiggle {
+                    animation: none; /* No animation on hover */
+                }
+
+                /* Remove wiggle animation on hover */
+                .close-cart:hover {
+                    transform: none; /* No rotation on hover */
+                }
+
+          /* Remove wiggle animation */
+
+                .close-cart:hover {
+                    transform: rotate(90deg);
+                }
+
+                /* Add wiggle animation for the "X" icon */
+                @keyframes wiggle {
+                    0% { transform: rotate(0deg); }
+                    25% { transform: rotate(-5deg); }
+                    50% { transform: rotate(5deg); }
+                    75% { transform: rotate(-5deg); }
+                    100% { transform: rotate(0deg); }
+                }
+
+                .close-cart.wiggle {
+                    animation: wiggle 0.3s ease-in-out;
+                }
+
+                .cart-items {
+                    padding: 20px;
+                    max-height: calc(100% - 150px);
+                    overflow-y: auto;
+                }
+
+                .cart-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px 0;
+                    border-bottom: 1px solid #eee;
+                }
+
+                .cart-item img {
+                    width: 60px;
+                    height: 60px;
+                    object-fit: cover;
+                    margin-right: 15px;
+                    border-radius: 5px;
+                }
+
+                .cart-item-details {
+                    flex-grow: 1;
+                }
+
+                .cart-item-name {
+                    font-weight: bold;
+                    color: #333;
+                    margin-bottom: 5px;
+                }
+
+                .cart-item-price {
+                    font-weight: bold;
+                    color: #ff6699;
+                }
+
+                .cart-item-quantity {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 5px;
+                }
+
+                .quantity-btn {
+                    background: none;
+                    border: none;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    color: #333;
+                    padding: 0 5px;
+                }
+
+                .quantity-input {
+                    width: 40px;
+                    text-align: center;
+                    border: 1px solid #ddd;
+                    border-radius: 3px;
+                    margin: 0 5px;
+                }
+
+                .cart-item-total {
+                    font-weight: bold;
+                    color: #333;
+                }
+
+                .delete-btn {
+                    margin-left: 10px;
+                    cursor: pointer;
+                    color: #777;
+                    transition: color 0.3s ease;
+                }
+
+                .delete-btn:hover {
+                    color: #ff3333;
+                }
+
+                .cart-footer {
+                    padding: 20px;
+                    border-top: 1px solid #eee;
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    background: #fff;
+                }
+
+                .subtotal {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                }
+
+                .view-cart-btn {
+                    background-color: #ffb6c1;
+                    color: #000;
+                    border: none;
+                    padding: 10px;
+                    width: 100%;
+                    font-weight: bold;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    transition: background 0.3s ease;
+                }
+
+                .view-cart-btn:hover {
+                    background-color: #ff9eb5;
+                }
+            </style>
+
+            <!-- JavaScript -->
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cartPanel = document.querySelector('.cart-panel');
+                const closeCart = document.querySelector('.close-cart');
+                const cartToggle = document.querySelector('.cart-toggle');
+                const cartBadgeToggle = document.querySelector('.cart-badge-toggle');
+                const addToCartButtons = document.querySelectorAll('.add-to-cart');
+                const cartItemsContainer = document.querySelector('.cart-items');
+                const cartItemCount = document.querySelector('#cart-item-count');
+                const subtotalAmount = document.querySelector('#subtotal-amount');
+                const navCartCount = document.querySelector('#nav-cart-count');
+                let cartItems = [];
+
+                // Load cart from localStorage
+                try {
+                    cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+                } catch (e) {
+                    console.error("Error parsing cart from localStorage:", e);
+                    cartItems = [];
+                }
+
+                // Render initial cart items
+                cartItems.forEach(item => addCartItem(item));
+                updateCartSummary();
+
+                // Cart toggle functionality
+                function toggleCart() {
+                    cartPanel.classList.toggle('active');
+                }
+
+                // Open cart when clicking the cart toggle or badge
+                cartToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleCart();
+                });
+
+                cartBadgeToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleCart();
+                });
+
+                // Add animation to the "X" icon when clicked (no closing)
+                closeCart.addEventListener('click', () => {
+                    closeCart.classList.add('wiggle'); // Trigger the wiggle animation
+                });
+
+                // Add to cart functionality
+                addToCartButtons.forEach(button => {
+                    button.removeEventListener('click', handleAddToCart); // Prevent duplicate listeners
+                    
+                    function handleAddToCart(e) {
+                        e.preventDefault();
+                        const productName = button.getAttribute('data-product-name');
+                        const productPrice = parseFloat(button.getAttribute('data-product-price'));
+                        const productImage = button.getAttribute('data-product-image');
+
+                        const existingItem = cartItems.find(item => item.name === productName);
+                        if (!existingItem) {
+                            const newItem = {
+                                name: productName,
+                                price: productPrice,
+                                image: productImage,
+                                quantity: 1
+                            };
+                            cartItems.push(newItem);
+                            addCartItem(newItem);
+                            localStorage.setItem('cart', JSON.stringify(cartItems));
+                            if (!cartPanel.classList.contains('active')) {
+                                toggleCart();
+                            }
+                            updateCartSummary();
+                        }
+                    }
+
+                    button.addEventListener('click', handleAddToCart);
+                });
+
+                function addCartItem(item) {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn decrease-btn">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+                                <button class="quantity-btn increase-btn">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div class="delete-btn"><i class="fa fa-trash"></i></div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                    attachItemListeners(cartItem, item);
+                }
+
+                function updateCartItem(item) {
+                    const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
+                        el => el.querySelector('.cart-item-name').textContent === item.name
+                    );
+                    const input = cartItem.querySelector('.quantity-input');
+                    input.value = item.quantity;
+                    cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+                    updateCartSummary();
+                    localStorage.setItem('cart', JSON.stringify(cartItems));
+                }
+
+                function attachItemListeners(cartItem, item) {
+                    const decreaseBtn = cartItem.querySelector('.decrease-btn');
+                    const increaseBtn = cartItem.querySelector('.increase-btn');
+                    const quantityInput = cartItem.querySelector('.quantity-input');
+                    const deleteBtn = cartItem.querySelector('.delete-btn');
+
+                    decreaseBtn.addEventListener('click', () => {
+                        if (item.quantity > 1) {
+                            item.quantity--;
+                            updateCartItem(item);
+                        }
+                    });
+
+                    increaseBtn.addEventListener('click', () => {
+                        item.quantity++;
+                        updateCartItem(item);
+                    });
+
+                    quantityInput.addEventListener('change', () => {
+                        let value = parseInt(quantityInput.value);
+                        if (value < 1 || isNaN(value)) value = 1;
+                        item.quantity = value;
+                        updateCartItem(item);
+                    });
+
+                    deleteBtn.addEventListener('click', () => {
+                        cartItem.remove();
+                        cartItems = cartItems.filter(i => i.name !== item.name);
+                        updateCartSummary();
+                        localStorage.setItem('cart', JSON.stringify(cartItems));
+                    });
+                }
+
+                function updateCartSummary() {
+                    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                    cartItemCount.textContent = `${totalItems} items`;
+                    subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
+                    navCartCount.textContent = totalItems < 10 ? `0${totalItems}` : totalItems;
+                }
+            });
+            </script>
+
+            <!-- end icon -->
+
+
 
                 </div>
 
@@ -203,6 +577,12 @@
 </header>
 
 
+<<<<<<< HEAD
+=======
+<!-- end icon -->
+
+
+>>>>>>> feature/shopping
 <style>
     * {
       box-sizing: border-box;
