@@ -173,7 +173,7 @@
             background: #ff3b2f;
         }
 
-        /* 
+        
         .image-content-right img {
             width: 100%;
             height: auto;
@@ -186,7 +186,7 @@
             height: auto;
             border-radius: 10px 70px 10px 70px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        } */
+        }
 
         /* Full Screen Image */
         .full-screen-image {

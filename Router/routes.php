@@ -15,6 +15,7 @@ require_once 'Controllers/LoginRegisterController.php';
 require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 require_once "Controllers/checkoutUser.php";
+require_once "Controllers/HistoryController.php";
 
 $routes = new Router();
 
@@ -91,11 +92,15 @@ $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // User Routes
 $routes->get('/users', [UserController::class, 'index']);
-$routes->get('/user/create', [UserController::class, 'create']);
+// $routes->get('/user/create', [UserController::class, 'create']);
 $routes->post('/user/store', [UserController::class, 'store']);
+$routes->post('/user/create', [UserController::class, 'create']);
 $routes->get('/user/edit', [UserController::class, 'edit']);
 $routes->put('/user/update', [UserController::class, 'update']);
-$routes->delete('/user/delete', [UserController::class, 'destroy']);
+$routes->delete('/user/delete', [UserController::class, 'delete']);
+$routes->get('/user/delete', [UserController::class, 'delete']); // Ensure this route exists
+$routes->get('/users/active', [UserController::class, 'getActiveUsers']); // Add this line
+$routes->get('/user/profile', [UserController::class, 'profile']); // Add this line
 
 // Notification Routes
 $routes->get('/notifications', [NotificationController::class, 'index']); 
@@ -172,7 +177,7 @@ $routes->get('/checkout', [CheckoutUserController::class, 'ProductCheckout']);
 $routes->post('/checkout/store', [CheckoutUserController::class, 'store']);
 $routes->get('/favorite', [CheckoutUserController::class, 'favorite']);
 $routes->get('/shopping', [CheckoutUserController::class, 'shopping']);
-$routes->get('/cart', [CheckoutUserController::class, 'cartview']);
+$routes->get('/cart', [CheckoutUserController::class, 'viewcart']);
 
 
 $routes->post('/contact/store', [NotificationController::class, 'store']);
@@ -182,6 +187,8 @@ $routes->get('/contact', [ContactController::class, 'index']);
 $routes->get('/shop', [ShopController::class, 'index']);
 
 
+//history
+$routes->get('/history', [HistoryController::class, 'index']); 
 
 
 
