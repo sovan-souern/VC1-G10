@@ -35,7 +35,7 @@ function checkAuthentication() {
         '/products/create', '/products/edit', '/products/update', '/products/delete',
         '/category/create', '/category/edit', '/category/update', '/category/delete',
         '/brand/create', '/brand/edit', '/brand/update', '/brand/delete',
-        '/dashboard',
+        '/dashboard','/reset', 
     ];
 
     // Redirect if not authenticated

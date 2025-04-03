@@ -766,6 +766,7 @@
                                             <div class="discount-product-card">
                                                 <div class="discount-badge"><?php echo $discount_badge; ?></div>
                                                 <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                                    <!-- icon  -->
                                                     <ul class="discount-product-hover">
                                                         <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
                                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>

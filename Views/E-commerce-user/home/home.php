@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashion | Shop</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+     <!-- tre 3 nav bar -->
+    <!-- <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css">
+    <!-- Font Awesome for rating stars -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <style>
         body {
@@ -543,6 +561,59 @@
     .text-content p {
         font-size: 0.95rem;
     }
+    .product-card {
+        position: relative; /* Required for absolutely positioned children */
+        }
+
+        .general-product-hover {
+            display: flex;
+            justify-content: center; /* Center icons */
+            gap: 15px; /* Space between icons */
+            opacity: 0; /* Hide icons initially */
+            transition: opacity 0.3s ease; /* Smooth fade effect */
+            position: absolute; /* Position the icons absolutely */
+            bottom: 15px; /* Position from the bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Correct centering of icons */
+            pointer-events: none; /* Prevent mouse events when hidden */
+        }
+
+        .product-card:hover .general-product-hover {
+            opacity: 1; /* Show icons when hovering over the card */
+            pointer-events: auto; /* Enable interactions on hover */
+        }
+
+        .general-product-hover li {
+            list-style: none; /* Remove bullet points */
+        }
+
+        .general-product-hover a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px; /* Width for circular icons */
+            height: 50px; /* Height for circular icons */
+            border-radius: 50%; /* Create circular shape */
+            background-color: white; /* Set background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s ease; /* Transition for hover */
+            color: black; /* Set default icon color */
+        }
+
+        .general-product-hover a:hover {
+            background-color: #f0f0f0; /* Background color on hover */
+        }
+
+        /* Specific icon size adjustment if needed */
+        .general-product-hover a span {
+            font-size: 1.5em; /* Adjust font size to fit within circle */
+            height: 100%; /* Ensure it takes full height */
+            width: 100%; /* Ensure it takes full width */
+            display: flex; /* Center the icon within the circle */
+            justify-content: center;
+            align-items: center;
+        }
 }
         /* card */
         .product-card{
@@ -655,7 +726,102 @@
         color: white;
         transition: color 0.3s ease;
     }
-    </style>
+    .product-card {
+        position: relative; /* Required for absolutely positioned children */
+    }
+/* icon */
+    .general-product-hover {
+        display: flex;
+        justify-content: center; /* Center icons */
+        gap: 15px; /* Space between icons */
+        opacity: 0; /* Hide icons initially */
+        transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; /* Smooth effect */
+        visibility: hidden; /* Hide elements from interactions */
+        position: absolute; /* Position the icons absolutely */
+        bottom: 15px; /* Position from the bottom */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Ensure perfect centering */
+        pointer-events: none; /* Prevent mouse events when hidden */
+    }
+
+    /* When hovering over the product card, show the icons */
+    .product-card:hover .general-product-hover {
+        opacity: 1; /* Show icons */
+        visibility: visible; /* Make it interactable */
+        pointer-events: auto; /* Allow clicking */
+    }
+
+    /* Smooth delay to keep icons visible even after hover */
+    .product-card:hover .general-product-hover {
+        animation: stay-visible 3s forwards; /* Icons remain visible */
+        color: #ff5252;
+    }
+    .general-product-hover :hover{
+        color: green;
+    }
+    
+    /* Define the stay-visible effect */
+
+    .general-product-hover li {
+        list-style: none; /* Remove bullet points */
+    }
+
+    .general-product-hover a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px; /* Width for circular icons */
+        height: 50px; /* Height for circular icons */
+        border-radius: 50%; /* Create circular shape */
+        background-color: white; /* Set background color */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        text-decoration: none; /* Remove underline */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+        color: black; /* Default icon color */
+    }
+
+    .general-product-hover a:hover {
+        background-color: #f0f0f0; /* Background color on hover */
+        transform: scale(1.2); /* Slightly enlarge on hover */
+    }
+
+    /* Icon styling */
+    .general-product-hover a span {
+        font-size: 1.5em; /* Adjust font size to fit within circle */
+        height: 100%; /* Ensure full height */
+        width: 100%; /* Ensure full width */
+        display: flex; /* Center the icon within the circle */
+        justify-content: center;
+        align-items: center;
+    }
+    /* Default icon styling */
+.general-product-hover a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* Icon button size */
+    height: 20px;
+    border-radius: 50%;
+    background-color: white; /* Default background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; /* Smooth effect */
+    color: black; /* Default icon color */
+}
+
+/* Change color on hover */
+.general-product-hover a:hover {
+    background-color: #ff5252; /* Background changes to red */
+    transform: scale(1.2); /* Slightly enlarge */
+}
+
+/* Ensure icon inside the button also changes color */
+.general-product-hover a:hover span,
+.general-product-hover a:hover i {
+    color: white !important; /* White icon inside */
+}
+
+</style>
 </head>
 
 <body>
@@ -719,12 +885,26 @@
                         <div class="discount-badge"><?php echo $discount_badge; ?></div>
                         <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
                             <!--icon favorite , view   -->
+                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                            <!--icon favorite , view   -->
                             <ul class="general-product-hover product-hover-shared">
-                            
-                                <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                <li>
+                                    <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
+                                        <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon_bag_alt"></span>
+                                    </a>
+                                </li>
                             </ul>
+                        </div>
                         </div>
                         <div class="product-info">
                             <h5 class="product-name"><?php echo $product_name; ?></h5>
@@ -749,9 +929,6 @@
         </div>
     </div>
 </section>
-
-
-
     <!-- Left Paragraph Right Image -->
     <div class="container">
         <div class="content-section">
@@ -765,10 +942,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <!-- Left Image  Paragraph -->
     <div class="container">
         <div class="content-section">
@@ -818,13 +991,7 @@
             <a href="#" class="cta-button">Learn More About Us</a>
         </div>
     </div>
-
-
-
     <!-- Discount Products Section -->
-
-
-
     <script>
         // Simple script for the discount section
         document.querySelectorAll('.add-to-cart').forEach(button => {
@@ -834,7 +1001,22 @@
             });
         });
     </script>
+    <!-- icon -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const productCards = document.querySelectorAll('.product-card'); // Select all product cards
 
+    productCards.forEach(card => {
+        const iconsContainer = card.querySelector('.general-product-hover'); // Select the container for icons
+
+        card.addEventListener('click', function() {
+            // Toggle the 'visible' class
+            iconsContainer.classList.toggle('visible');
+        });
+    });
+});
+</script>
+<!-- icon -->
     <script>
         // Select the container with class 'cards'
         const container = document.querySelector('.cards');
@@ -1668,8 +1850,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
-
 
 </body>
 
