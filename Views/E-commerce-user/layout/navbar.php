@@ -1,3 +1,5 @@
+
+
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -167,30 +169,6 @@
                         </li>
                     </ul>
 
-<<<<<<< HEAD
-                    <div class="d-none d-lg-flex align-items-end">
-                        <ul class="d-flex justify-content-end list-unstyled m-0">
-
-                            <li>
-                                <a href="/favorite" class="mx-3">
-                                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href="#" class="mx-3" data-bs-toggle="offcanvas"
-                                    data-bs-target="#" aria-controls="offcanvasCart">
-                                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                    <span
-                                        class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                        03
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                        <a href="/history" class="mx-3">
-                            <i class="fa fa-history" style="font-size: 24px; color: black;"></i>
-=======
             <!-- Navbar -->
             <div class="d-none d-lg-flex align-items-end">
                 <ul class="d-flex justify-content-end list-unstyled m-0">
@@ -198,7 +176,6 @@
                     <li class="d-flex align-items-center">
                         <a href="/favorite" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                             <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
->>>>>>> d8c6b592b3b7c3b1335e69854e2a6ee2c4bb66c9
                         </a>
                     </li>
 
@@ -215,7 +192,7 @@
 
                     <!-- History Icon -->
                     <li class="d-flex align-items-center">
-                        <a href="#" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <a href="/history" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                             <i class="fa fa-history fs-4 text-dark"></i>
                         </a>
                     </li>
@@ -1304,7 +1281,7 @@
 
     .settings-item {
         display: flex;
-        align-items: center;
+        align-items: center;    
         padding: 15px;
         color: #666;
         text-decoration: none;
