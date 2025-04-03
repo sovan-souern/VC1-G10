@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications</title>
     <style>
-        /* Base styles */
+        Base styles
         * {
             margin: 0;
             padding: 0;
@@ -163,7 +163,7 @@
             display: block;
         }
 
-        .menu-item {
+        .menu-item1 {
             display: flex;
             align-items: center;
             padding: 8px 12px;
@@ -173,23 +173,23 @@
             border-bottom: 1px solid #e5e7eb;
         }
 
-        .menu-item:last-child {
+        .menu-item1:last-child {
             border-bottom: none;
         }
 
-        .menu-item.view-details {
+        .menu-item1.view-details {
             color: #3b82f6;
         }
 
-        .menu-item.mark-read {
+        .menu-item1.mark-read {
             color: #f97316;
         }
 
-        .menu-item.delete {
+        .menu-item1.delete {
             color: #f97316;
         }
 
-        .menu-item svg {
+        .menu-item1 svg {
             width: 16px;
             height: 16px;
             margin-right: 8px;
@@ -296,12 +296,12 @@
                 min-width: 110px;
             }
 
-            .menu-item {
+            .menu-item1 {
                 padding: 6px 8px;
                 font-size: 0.75rem;
             }
 
-            .menu-item svg {
+            .menu-item1 svg {
                 width: 14px;
                 height: 14px;
                 margin-right: 6px;
@@ -342,17 +342,17 @@
                                 </svg>
                             </button>
                             <div class="menu-dropdown">
-                                <div class="menu-item view-details">
+                                <div class="menu-item1 view-details">
                                    
                                     <a href="notifications/view?id=<?= $notification['id'] ?>">View Details</a>
                                 </div>
                                 <?php if ($notification['status'] === 'unread'): ?>
-                                    <div class="menu-item mark-read">
+                                    <div class="menu-item1 mark-read">
                                         
                                         <a href="notifications/update?id=<?= $notification['id'] ?>">Mark as read</a>
                                     </div>
                                 <?php endif; ?>
-                                <div class="menu-item delete">
+                                <div class="menu-item1 delete">
                                   
                                     <a href="notifications/delete?id=<?= $notification['id'] ?>">Delete</a>
                                 </div>

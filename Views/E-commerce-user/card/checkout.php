@@ -173,13 +173,17 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container checkout-container">
         <div class="row">
             <!-- Left Column - Forms -->
             <div class="col-md-7">
-            <form action="/checkout/store" method="POST" id="checkout-form">
+                <form action="/checkout/store?id=<?php echo htmlspecialchars($admin_id ?? ''); ?>" method="POST" id="checkout-form">
+                    <!-- Add a hidden input for admin_id -->
+                    <input type="hidden" name="admin_id" value="<?php echo htmlspecialchars($admin_id ?? ''); ?>">
                     <!-- Customer Details -->
+
                     <div class="form-section">
                         <div class="section-title">Customer Checkout</div>
                         <div class="row mb-3">
@@ -230,6 +234,7 @@
                         <!-- Hidden inputs for cart items and total -->
                         <input type="hidden" name="items" id="items">
                         <input type="hidden" name="total" id="total_input">
+                        <input type="hidden" name="product_id" id="product_id">
                         <button type="submit" class="continue-btn">Continue</button>
                     </div>
 
@@ -339,7 +344,7 @@
             setupShowAllButton(); // Setup the "Show All" button functionality
         }
 
-        // Update order summary (item count, subtotal, total)
+        // Update order summary and prepare data for submission
         function updateOrderSummary() {
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -349,13 +354,18 @@
             document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
             document.getElementById('total').textContent = `$${total.toFixed(2)}`;
 
-            // Update hidden inputs
-            const itemsValue = cart.map(item => item.id).join(',');
-            document.getElementById('items').value = itemsValue;
+            // Prepare data for submission
+            const productIds = cart.map(item => item.id).filter(id => id).join(','); // Collect valid product IDs
+            const amountProducts = cart.map(item => item.quantity || 1); // Default to 1 if quantity is missing
+            document.getElementById('items').value = JSON.stringify(cart); // Store full cart details as JSON
+            document.getElementById('product_id').value = productIds; // Store product IDs in product_id field
             document.getElementById('total_input').value = total.toFixed(2);
 
-            // Debug: Log the items value
-            console.log("Items being submitted: ", itemsValue);
+            // Debug: Log the quantities being submitted
+            console.log("Quantities being submitted:", amountProducts);
+
+            // Debug: Log the cart being submitted
+            console.log("Cart being submitted:", cart);
         }
 
         // Setup "Show All" button functionality
@@ -387,39 +397,40 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
 
 
-    <style>
-        /* Add this to your existing <style> */
-        .order-items-container {
-            max-height: 300px;
-            /* Limit initial height */
-            overflow-y: auto;
-            /* Add scrollbar if content exceeds height */
-            transition: max-height 0.3s ease;
-            /* Smooth transition for expansion */
-        }
+<style>
+    /* Add this to your existing <style> */
+    .order-items-container {
+        max-height: 300px;
+        /* Limit initial height */
+        overflow-y: auto;
+        /* Add scrollbar if content exceeds height */
+        transition: max-height 0.3s ease;
+        /* Smooth transition for expansion */
+    }
 
-        .order-items-container.expanded {
-            max-height: none;
-            /* Remove height restriction when expanded */
-        }
+    .order-items-container.expanded {
+        max-height: none;
+        /* Remove height restriction when expanded */
+    }
 
-        .show-all-btn {
-            background: none;
-            border: none;
-            color: #007bff;
-            text-decoration: underline;
-            cursor: pointer;
-            padding: 0;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
+    .show-all-btn {
+        background: none;
+        border: none;
+        color: #007bff;
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
 
-        .show-all-btn:hover {
-            color: #0056b3;
-        }
-    </style>
+    .show-all-btn:hover {
+        color: #0056b3;
+    }
+</style>
 
 </html>
