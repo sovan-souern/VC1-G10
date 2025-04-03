@@ -71,7 +71,7 @@
         }
 
         .notification-card {
-            background: linear-gradient(145deg, #ffffff, #f7fafc);
+            /* background: linear-gradient(145deg, #ffffff, #f7fafc); */
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -101,8 +101,9 @@
         }
 
         .notification-card.unread {
-            background: linear-gradient(145deg, #f0f7ff, #e0e7ff);
-            border-left: 5px solid #3b82f6;
+            background: linear-gradient(145deg, #fff, #fff);
+            background-color: white;
+            /* border-left: 5px solid #3b82f6; */
             position: relative;
         }
 
@@ -569,3 +570,4 @@
 </body>
 
 </html>
+

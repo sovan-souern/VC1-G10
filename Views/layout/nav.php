@@ -193,6 +193,29 @@ $notifications = $model->getNotifications();
   </ul>
 </aside>
 
+<style>
+  .menu-icon {
+  font-size: 1rem !important; /* Reduce from default size */
+}
+
+/* If you need even smaller icons */
+.menu-item .menu-icon {
+  font-size: 1.2rem !important;
+}
+
+/* Adjust spacing around icons for better alignment */
+.menu-link {
+  align-items: center;
+}
+
+/* Ensure proper vertical alignment */
+.menu-icon.tf-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const menuItems = document.querySelectorAll(".menu-item a");
