@@ -369,7 +369,7 @@
                                 <div class="notification-icon">⚠️</div>
                                 <div class="notification-title-container">
                                     <div class="notification-title">
-                                        Low Stock Alert: <?= htmlspecialchars($product['product_name']) ?>
+                                        Low Stock Notification: <?= htmlspecialchars($product['product_name']) ?>
                                         <span class="dot"></span>
                                     </div>
                                     <div class="notification-time"><?= date('Y-m-d H:i:s') ?></div>
@@ -390,7 +390,7 @@
                                 <div class="notification-icon">❌</div>
                                 <div class="notification-title-container">
                                     <div class="notification-title">
-                                        Out of Stock Alert: <?= htmlspecialchars($product['product_name']) ?>
+                                        Out of Stock Notification: <?= htmlspecialchars($product['product_name']) ?>
                                         <span class="dot"></span>
                                     </div>
                                     <div class="notification-time"><?= date('Y-m-d H:i:s') ?></div>
@@ -518,3 +518,4 @@
     </script>
 </body>
 </html>
+

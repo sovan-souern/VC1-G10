@@ -1,18 +1,5 @@
 <?php require_once "Views/assets/css/prodcut_style.php" ?>
 
-<?php
-// Identify low stock and out-of-stock products
-$lowStockProducts = array_filter($products, function ($product) {
-    return $product['quantity'] > 0 && $product['quantity'] < 10;
-});
-
-$outStockProducts = array_filter($products, function ($product) {
-    return $product['quantity'] == 0;
-});
-
-// Pass these arrays to the notification view
-require_once "Views/notification/notification.php";
-?>
 
 <div class="page p-4">
     <div class="content">
