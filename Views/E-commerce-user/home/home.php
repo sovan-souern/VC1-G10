@@ -833,29 +833,78 @@
     <!-- Cards of Products -->
     <div class="cards">
         <div class="card">
-            <img src="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg" alt="Hydrating Moisturizer">
-            <div class="info">Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</div>
+            <img src="https://m.media-amazon.com/images/I/61tBEdmPRcL._AC_UF350,350_QL80_.jpg" alt="Hydrating Moisturizer">
+            <div class="info">lipstick Vaseline.</div>
+        </div>
+        <div class="card">
+            <img src="https://www.thaibynature.com/export/image/cache/catalog/wholesale/health-beauty/body-cream-lotion/vaseline/vaseline-gluta-hya/vaseline-gluta-hya-all-1200x800.jpg" alt="Hydrating Moisturizer">
+            <div class="info">Vaseline.</div>
+        </div>
+
+        <div class="card">
+            <img src="https://i0.wp.com/callalilly.shop/wp-content/uploads/2023/09/lotion-serum-1-1.jpg?fit=460%2C460" alt="Hydrating Moisturizer">
+            <div class="info">Callalilly.</div>
+        </div>
+        <div class="card">
+            <img src="https://i0.wp.com/callalilly.shop/wp-content/uploads/2023/09/Brand-Ambassador-Album-02.png?fit=1500%2C1500" alt="Hydrating Moisturizer">
+            <div class="info">Callalilly.</div>
         </div>
         <div class="card">
             <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <div class="info">Brighten your complexion with our powerful Vitamin C serum.</div>
+            <div class="info">Dove.</div>
         </div>
         <div class="card">
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
-            <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
+            <div class="info">Miss sunflower.</div>
         </div>
         <div class="card">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <div class="info">Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</div>
+            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lt6p39pn7bgk55" alt="Sunscreen SPF 50">
+            <div class="info">Miss sunflower body lotion.</div>
         </div>
         <div class="card">
-            <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <div class="info">Brighten your complexion with our powerful Vitamin C serum.</div>
+            <img src="https://www.thaibynature.com/export/image/cache/catalog/discover/beauty-products/body-care/body-lotion/citra-whitening-lotion/citra-lotion-all-1200x800.jpg" alt="Sunscreen SPF 50">
+            <div class="info">SPF citra.</div>
         </div>
         <div class="card">
-            <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
-            <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
+            <img src="https://www.thaibynature.com/export/image/cache/catalog/startup-sme/beauty/body-care/soap/citra-bar-soap/Main-1200x800.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Soap citra.</div>
         </div>
+        <div class="card">
+            <img src="https://www.beautypackaging.com/wp-content/uploads/sites/8/2024/11/017_main-13.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Nivea.</div>
+        </div>
+        <div class="card">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20230130/8F8S/63d803e2aeb269c6510329d0/-473Wx593H-4915693380-multi-MODEL.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Nivea.</div>
+        </div>
+        <div class="card">
+            <img src="https://down-vn.img.susercontent.com/file/e51b7974a1af0f2ea03f5a96804217f5" alt="Sunscreen SPF 50">
+            <div class="info">Body oil.</div>
+        </div>
+        <div class="card">
+            <img src="https://s9.kh1.co/__image/w=600,h=600,fit=cover/1b/1be5d7c51a56e185757cc60b646d9e97d51a3a71.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Felix hair.</div>
+        </div>
+        <div class="card">
+            <img src="https://m.media-amazon.com/images/I/51Z2sQyCB-L.jpg" alt="Sunscreen SPF 50">
+            <div class="info">lipstick.</div>
+        </div>
+        <div class="card">
+            <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98p-lyt0fqimk128fd" alt="Sunscreen SPF 50">
+            <div class="info">Yasaka.</div>
+        </div>
+        <div class="card">
+            <img src="https://bellavitaorganic.com/cdn/shop/files/download_0315aafb-8c5d-4b3d-a00e-6cc8cc1b00b2.jpg?v=1732609831&width=1000" alt="Sunscreen SPF 50">
+            <div class="info">Nail​​​​​​ polish.</div>
+        </div>
+        <div class="card">
+            <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
+            <div class="info">Nail​​​​​​ polish.</div>
+        </div>
+
+
+
+
     </div>
     <section class="discount-products">
     <div class="discount-header">
@@ -955,30 +1004,107 @@
         </div>
     </div>
 
+
     <!-- Product Cards -->
-    <div class="product-container">
-        <div class="product-card1">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-        <div class="product-card1">
-            <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <p>Brighten your complexion with our powerful Vitamin C serum.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-        <div class="product-card1">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-    </div>
 
-    <!-- Full-Screen Image Section -->
-    <!-- <div class="full-screen-image">
-        <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Hydrating Moisturizer">
-    </div> -->
+            <style>
+                .product-card1 {
+            position: relative;
+        }
 
+        .learn-more {
+            background-color:rgb(228, 148, 155);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .learn-more:hover {
+            background-color:rgb(201, 102, 105);
+        }
+
+        .usage-text {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .usage-text.show {
+            display: block;
+            opacity: 1;
+        }
+            </style>
+
+
+
+        <!-- Product Cards -->
+        <div class="product-container">
+            <div class="product-card1">
+                <img src="https://m.media-amazon.com/images/I/61Vr3ovoCNL.jpg" alt="Hydrating Moisturizer">
+                <p>Dove lotion.</p>
+                <button class="learn-more">Learn More</button>
+                <div class="usage-text">
+                    How to use:<br>
+                    1. Cleanse skin<br>
+                    2. Apply small amount<br>
+                    3. Massage gently<br>
+                    4. Use twice daily
+                </div>
+            </div>
+            <div class="product-card1">
+                <img src="https://m.media-amazon.com/images/I/61amvGt0SCL.jpg" alt="Vitamin C Serum">
+                <p>Vaseline lotion.</p>
+                <button class="learn-more">Learn More</button>
+                <div class="usage-text">
+                    How to use:<br>
+                    1. Wash and dry skin<br>
+                    2. Apply dime-sized amount<br>
+                    3. Rub in circles<br>
+                    4. Use as needed
+                </div>
+            </div>
+            <div class="product-card1">
+                <img src="https://m.media-amazon.com/images/I/51buz-ebuCL.jpg" alt="Hydrating Moisturizer">
+                <p>Nivea lotion.</p>
+                <button class="learn-more">Learn More</button>
+                <div class="usage-text">
+                    How to use:<br>
+                    1. Start with dry skin<br>
+                    2. Apply lotion<br>
+                    3. Massage into skin<br>
+                    4. Use after shower
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.learn-more').forEach(button => {
+                button.addEventListener('click', function() {
+                    const usageText = this.nextElementSibling;
+                    const isShown = usageText.classList.contains('show');
+                    
+                    // Hide all other usage texts
+                    document.querySelectorAll('.usage-text').forEach(text => {
+                        text.classList.remove('show');
+                    });
+                    
+                    // Toggle the clicked one
+                    if (!isShown) {
+                        usageText.classList.add('show');
+                    }
+                });
+            });
+        </script>
+        
     <!-- Information Section -->
     <div class="info-section">
         <div class="container">
