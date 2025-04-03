@@ -51,9 +51,7 @@
         <!-- Your main content here -->
     </main>
 
-    <footer class="footer mt-auto">
-        <!-- Your footer content here -->
-    </footer>
+
 
     <style>
         .footer {

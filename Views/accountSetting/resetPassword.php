@@ -1,4 +1,3 @@
-
 <style>
         .container {
             max-width: 900px;
@@ -69,6 +68,28 @@
             border-color:rgb(173, 136, 68);
             outline: none;
             box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.2);
+        }
+
+        input[type="tel"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        input[type="tel"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        input[type="tel"]::placeholder {
+            color: #aaa;
+            font-style: italic;
         }
         
         .code-inputs {
@@ -183,12 +204,55 @@
         .step.active {
             display: block;
         }
+
+        /* Update form colors to match the app theme */
+        input[type="tel"],
+        input[type="password"],
+        .code-input {
+            border: 1px solid #ccc;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        input[type="tel"]:focus,
+        input[type="password"]:focus,
+        .code-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        button {
+            background: #007bff;
+            color: #fff;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .error {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 3px solid #dc3545;
+            color: #dc3545;
+        }
+
+        .reset-link a {
+            color: #007bff;
+        }
+
+        .reset-link a:hover {
+            color: #0056b3;
+        }
+
+        .checkmark svg {
+            stroke: #007bff;
+        }
     </style>
 
     <div class="container">
         <div id="error-message" class="error"></div>
         
-        <!-- Step 1: Email Form -->
+        <!-- Step 1: Phone Number Form -->
         <div id="step1" class="step active">
             <div class="checkmark">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -199,9 +263,9 @@
             <h2>Reset Password</h2>
             <p>Forgot your password? No worries, we'll send you a 4-digit code.</p>
             
-            <form id="email-form">
+            <form id="phone-form">
                 <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your Phone Number" required>
                 </div>
                 <button type="submit">Get a 4-digit Code</button>
             </form>
@@ -216,7 +280,7 @@
                 </svg>
             </div>
             <h2>Enter Your Confirmation Code</h2>
-            <p>We sent you on your email <span id="email-display"></span></p>
+            <p>We sent you on your phone number <span id="phone-display"></span></p>
             
             <form id="code-form">
                 <div class="code-inputs">
@@ -289,11 +353,11 @@
         // DOM Elements
         const steps = document.querySelectorAll('.step');
         const errorMessage = document.getElementById('error-message');
-        const emailForm = document.getElementById('email-form');
+        const phoneForm = document.getElementById('phone-form');
         const codeForm = document.getElementById('code-form');
         const passwordForm = document.getElementById('password-form');
         const resetFlowLink = document.getElementById('reset-flow');
-        const emailDisplay = document.getElementById('email-display');
+        const phoneDisplay = document.getElementById('phone-display'); // Update to display phone number
         
         // Current step
         let currentStep = 1;
@@ -321,20 +385,20 @@
             errorMessage.style.display = 'none';
         }
         
-        // Email form submission
-        emailForm.addEventListener('submit', function(e) {
+        // Phone form submission
+        phoneForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
             
-            // Validate email
-            if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-                showError('Please enter a valid email address');
+            // Validate phone number
+            if (!phone || !/^\d{10,15}$/.test(phone)) {
+                showError('Please enter a valid phone number');
                 return;
             }
             
             // In a real app, you would call an API to send the code
             // For demo purposes, we'll just move to the next step
-            emailDisplay.textContent = email;
+            phoneDisplay.textContent = phone;
             hideError();
             showStep(2);
             
@@ -390,7 +454,7 @@
             e.preventDefault();
             
             // Reset forms
-            emailForm.reset();
+            phoneForm.reset();
             codeForm.reset();
             passwordForm.reset();
             

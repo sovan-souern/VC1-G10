@@ -1,7 +1,7 @@
 <style>
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #f5f5f5;
+        background-color: #f8f9fa;
         color: #333;
         margin: 0;
         padding: 0;
@@ -21,7 +21,7 @@
     .card {
         background: #ffffff;
         border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         padding: 2rem;
         width: 100%;
         max-width: 1000px;
@@ -31,11 +31,10 @@
     .card-header {
         margin: -2rem -2rem 2rem;
         padding: 2rem;
-        background: #0d6efd;
-        border-bottom: none;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
         border-radius: 12px 12px 0 0;
-        position: relative;
-        overflow: hidden;
+        text-align: center;
     }
 
     .card-header::before {
@@ -50,14 +49,10 @@
     }
 
     .card-header h4 {
-        color: black;
         margin: 0;
         font-size: 1.5rem;
         font-weight: 600;
         letter-spacing: 0.5px;
-        text-transform: uppercase;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-
     }
 
     .profile-picture {
@@ -93,13 +88,13 @@
         width: 100%;
         padding: 0.75rem 1rem;
         font-size: 0.95rem;
-        border: 1px solid #dee2e6;
+        border: 1px solid #ced4da;
         border-radius: 6px;
-        transition: border-color 0.2s ease;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .form-control:focus {
-        border-color: #80bdff;
+        border-color: #007bff;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         outline: none;
     }
@@ -113,13 +108,13 @@
     }
 
     .btn-primary {
-        background-color: #0d6efd;
+        background-color: #007bff;
         border: none;
         color: white;
     }
 
     .btn-primary:hover {
-        background-color: #0b5ed7;
+        background-color: #0056b3;
         transform: translateY(-1px);
     }
 
@@ -127,6 +122,11 @@
         border: 1px solid #6c757d;
         color: #6c757d;
         background: transparent;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-radius: 6px;
+        transition: all 0.2s ease;
     }
 
     .btn-outline-secondary:hover {
@@ -135,16 +135,17 @@
     }
 
     .btn-upload {
-        background-color: #0d6efd;
+        background-color: #007bff;
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 6px;
         cursor: pointer;
         font-size: 0.9rem;
+        transition: all 0.2s ease;
     }
 
     .btn-upload:hover {
-        background-color: #0b5ed7;
+        background-color: #0056b3;
     }
 
     .text-muted {

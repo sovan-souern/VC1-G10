@@ -202,6 +202,7 @@
     </div>
 </header>
 
+
 <style>
     * {
       box-sizing: border-box;
@@ -271,27 +272,6 @@
       text-align: center;
       z-index: 10;
     }
-<<<<<<< HEAD
-
-    .text {
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        font-size: 24px; /* Larger for full-screen */
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    }
-
-    .numbertext {
-        top: 20px;
-        left: 20px;
-        font-size: 16px;
-    }
-
-
-    .dot:hover, .dot.active {
-        background-color: #ff9a9e;
-        transform: scale(1.2);
-=======
     .dot {
       cursor: pointer;
       height: 15px;
@@ -304,7 +284,6 @@
     }
     .dot.active, .dot:hover {
       background-color: #717171; /* Active/hover state for dots */
->>>>>>> 0f93c4b25e7300a73abd287c8e8a919fe8d561bd
     }
   </style>
 </head>

@@ -131,4 +131,16 @@ class ProductModel
             'id' => $id
         ]);
     }
+
+    public function getAllProducts()
+    {
+        try {
+            $query = "SELECT * FROM products";
+            $stmt = $this->pdo->query($query);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo "Error fetching all products: " . $e->getMessage();
+            return false;
+        }
+    }
 }
