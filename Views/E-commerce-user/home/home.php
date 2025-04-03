@@ -713,11 +713,7 @@
                                 <span class="original-price"><?php echo $original_price_formatted; ?></span>
                                 <?php echo $discounted_price_formatted; ?>
                             </div>
-                            <!-- Updated add-to-cart button with correct variables -->
-                            <button class="add-to-cart" 
-                                    data-product-name="<?php echo $product_name; ?>" 
-                                    data-product-price="<?php echo $discounted_price; ?>" 
-                                    data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                            <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                         </div>
                     </div>
             <?php
