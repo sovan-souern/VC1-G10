@@ -167,6 +167,7 @@
                         </li>
                     </ul>
 
+
             <!-- Navbar -->
             <div class="d-none d-lg-flex align-items-end">
                 <ul class="d-flex justify-content-end list-unstyled m-0">
@@ -215,6 +216,7 @@
                 </div>
             </div>
 
+
             <!-- Inline CSS -->
             <style>
                 .badge {
@@ -258,10 +260,6 @@
                     font-size: 1.5rem;
                     font-weight: bold;
                 }
-
-
-        
-
 
                 .close-cart {
                     font-size: 1.5rem;
@@ -567,7 +565,6 @@
             <!-- end icon -->
 
 
-
                 </div>
 
             </div>
@@ -578,6 +575,8 @@
 
 
 <!-- end icon -->
+
+
 
 
 <style>
