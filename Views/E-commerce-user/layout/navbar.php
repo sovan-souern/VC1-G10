@@ -577,12 +577,6 @@
 </header>
 
 
-<<<<<<< HEAD
-=======
-<!-- end icon -->
-
-
->>>>>>> feature/shopping
 <style>
     * {
       box-sizing: border-box;
