@@ -11,11 +11,6 @@ class CheckoutUserController extends BaseController{
     function ProductCheckout() {
       require_once 'Views/E-commerce-user/card/checkout.php';
   }
-  function cartview(){
-    require_once 'Views/E-commerce-user/card/cart.php';
-    // $this->ViewsUser('Views/E-commerce-user/card/cart.php');
-
-  }
 
 
   function store() {
@@ -45,5 +40,12 @@ class CheckoutUserController extends BaseController{
   function favorite(){
     // $this->ViewsUser('Views/E-commerce-user/card/favorite.php');
     require_once 'Views/E-commerce-user/card/favorite.php';
+
+  }
+  function shopping(){
+    require_once 'Views/E-commerce-user/card/shopping.php';
+  }
+  function viewcart(){
+    require_once 'Views/E-commerce-user/card/cart.php';
   }
 }

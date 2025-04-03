@@ -423,7 +423,7 @@
         <h2>Your Notifications</h2>
 
         <div class="notifications-container">
-            <?php if (!empty($notifications)): ?>
+            <?php if (!empty($notifications) || (isset($lowStockProducts) && !empty($lowStockProducts)) || (isset($outStockProducts) && !empty($outStockProducts))): ?>
                 <?php foreach ($notifications as $index => $notification): ?>
                     <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>" style="--index: <?= $index ?>;">
                         <div class="notification-header">
@@ -472,6 +472,48 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+
+                <!-- Low stock notifications -->
+                <?php if (isset($lowStockProducts)): ?>
+                    <?php foreach ($lowStockProducts as $index => $product): ?>
+                        <div class="notification-card unread" style="--index: <?= count($notifications) + $index ?>;">
+                            <div class="notification-header">
+                                <div class="notification-icon">⚠️</div>
+                                <div class="notification-title-container">
+                                    <div class="notification-title">
+                                        Low Stock Alert: <?= htmlspecialchars($product['product_name']) ?>
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="notification-time"><?= date('Y-m-d H:i:s') ?></div>
+                                </div>
+                            </div>
+                            <div class="notification-message">
+                                The product "<?= htmlspecialchars($product['product_name']) ?>" has low stock (<?= htmlspecialchars($product['quantity']) ?> left).
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <!-- Out-of-stock notifications -->
+                <?php if (isset($outStockProducts)): ?>
+                    <?php foreach ($outStockProducts as $index => $product): ?>
+                        <div class="notification-card unread" style="--index: <?= count($notifications) + count($lowStockProducts ?? []) + $index ?>;">
+                            <div class="notification-header">
+                                <div class="notification-icon">❌</div>
+                                <div class="notification-title-container">
+                                    <div class="notification-title">
+                                        Out of Stock Alert: <?= htmlspecialchars($product['product_name']) ?>
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="notification-time"><?= date('Y-m-d H:i:s') ?></div>
+                                </div>
+                            </div>
+                            <div class="notification-message">
+                                The product "<?= htmlspecialchars($product['product_name']) ?>" is out of stock.
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php else: ?>
                 <div class="empty-state">
                     <p>No notifications found</p>

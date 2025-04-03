@@ -259,11 +259,23 @@
         document.querySelectorAll(".product-card").forEach(card => {
             let quantity = parseInt(card.dataset.quantity, 10);
             if (quantity < 10 && quantity > 0) {
-                console.warn("Warning: A product is running low on stock!");
+                console.warn("Warning: Low stock for product!");
             } else if (quantity === 0) {
-                console.error("Alert: A product is out of stock!");
+                console.error("Alert: Product is out of stock!");
             }
         });
+
+        // Notify user for low stock and out-of-stock products
+        const lowStockProducts = <?= json_encode($lowStockProducts) ?>;
+        const outStockProducts = <?= json_encode($outStockProducts) ?>;
+
+        if (lowStockProducts.length > 0) {
+            alert("Low stock alert for " + lowStockProducts.length + " products.");
+        }
+
+        if (outStockProducts.length > 0) {
+            alert("Out of stock alert for " + outStockProducts.length + " products.");
+        }
 
         // Restock button functionality
         document.querySelectorAll(".restock-btn").forEach(button => {
