@@ -329,31 +329,43 @@
 <!-- Add this JavaScript at the bottom of your <body> tag -->
 <script>
     let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
+    let slideInterval;
 
     function showSlides(n) {
-        let slidesWrapper = document.querySelector(".slides-wrapper");
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
+        const slides = document.querySelectorAll(".mySlides");
+        const dots = document.querySelectorAll(".dot");
 
         if (n > slides.length) slideIndex = 1;
         if (n < 1) slideIndex = slides.length;
 
-        slidesWrapper.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
-
-        for (let i = 0; i < dots.length; i++) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === slideIndex - 1 ? "block" : "none";
             dots[i].className = dots[i].className.replace(" active", "");
-        }
+        });
+
         dots[slideIndex - 1].className += " active";
     }
+
+    function plusSlides(n) {
+        clearInterval(slideInterval);
+        showSlides(slideIndex += n);
+        startSlideshow();
+    }
+
+    function currentSlide(n) {
+        clearInterval(slideInterval);
+        showSlides(slideIndex = n);
+        startSlideshow();
+    }
+
+    function startSlideshow() {
+        slideInterval = setInterval(() => plusSlides(1), 4000);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        showSlides(slideIndex);
+        startSlideshow();
+    });
 </script>
 
 </head>
@@ -382,51 +394,6 @@
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
   </div>
-
-  <script>
-    let slideIndex = 1;
-    let slideInterval;
-
-    // Show slides
-    function showSlides(n) {
-      const slides = document.querySelectorAll(".mySlides");
-      const dots = document.querySelectorAll(".dot");
-
-      if (n > slides.length) slideIndex = 1;
-      if (n < 1) slideIndex = slides.length;
-
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        dots[i].classList.remove("active");
-      });
-
-      slides[slideIndex - 1].classList.add("active");
-      dots[slideIndex - 1].classList.add("active");
-    }
-
-    // Next/Previous controls
-    function plusSlides(n) {
-      clearInterval(slideInterval);
-      showSlides(slideIndex += n);
-      startSlideshow();
-    }
-
-    // Dot controls
-    function currentSlide(n) {
-      clearInterval(slideInterval);
-      showSlides(slideIndex = n);
-      startSlideshow();
-    }
-
-    // Start automatic slideshow
-    function startSlideshow() {
-      slideInterval = setInterval(() => plusSlides(1), 4000); // Adjusted to 2s for smoother feel
-    }
-
-    // Initial setup
-    showSlides(slideIndex);
-    startSlideshow();
-  </script>
 
 <!-- 
 >>>>>>> 9469813a5b1c3a0ff94b34ff8c96e2018c623373
