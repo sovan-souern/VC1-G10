@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS Styles -->
-    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css">
+     <!-- tre 3 nav bar -->
+    <!-- <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css">
     <!-- Font Awesome for rating stars -->
@@ -116,6 +117,7 @@
                                             <div class="general-product-pic">
                                                 <img src="<?php echo $image; ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
                                                 <ul class="general-product-hover product-hover-shared">
+                                                    <!--icon favorite , view   -->
                                                     <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
                                                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                                     <li><a href="#"><span class="icon_bag_alt"></span></a></li>
@@ -124,7 +126,7 @@
                                             <div class="general-product-text">
                                                 <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
                                               <!-- change style -->
-                                                <span>Category: <?php echo htmlspecialchars($product["categoryId"]); ?></span>
+                                               
                                                 <div class="general-product-price">$<?php echo $price; ?></div>
                                                 <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>">Add to Cart</button>
                                             </div>
@@ -163,10 +165,147 @@
 <style>
   /* Base Styles */
 /* Base Styles */
+/* Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Discount Product Card Styles */
+.discount-product-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease; /* Increased duration to 0.4s, added opacity */
+    opacity: 1; /* Default opacity */
+}
+
+.discount-product-card:hover {
+    transform: scale(1.03); /* Increased from 1.011 to 1.03 for a more noticeable effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* More dramatic shadow */
+    opacity: 0.95; /* Slight fade effect */
+}
+
+.discount-product-card:hover .product-info h5 {
+    color: #e7ab3c;
+    transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
+}
+
+.discount-product-card:hover .price {
+    color: #e7ab3c;
+    transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
+}
+
+.discount-product-card:hover .original-price {
+    color: #999 !important;
+}
+
+/* General Product Item Styles */
+.general-product-item {
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease; /* Increased duration to 0.4s, added opacity */
+    opacity: 1; /* Default opacity */
+}
+
+.general-product-item:hover {
+    transform: scale(1.03); /* Increased from 1.011 to 1.03 for a more noticeable effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* More dramatic shadow */
+    opacity: 0.95; /* Slight fade effect */
+}
+
+.general-product-item:hover .general-product-text h6 a {
+    color: #e7ab3c;
+    transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
+}
+
+.general-product-item:hover .general-product-price {
+    color: #e7ab3c;
+    transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
+}
+
+/* Product Hover Shared Styles */
+.product-hover-shared {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    padding: 0;
+    z-index: 2;
+    transition: opacity 0.33s ease;
+}
+
+.discount-product-card:hover .discount-product-hover,
+.general-product-item:hover .general-product-hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+.product-hover-shared li {
+    list-style: none;
+    margin: 0;
+}
+
+.product-hover-shared li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: #ffffff;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background 0.33s ease, transform 0.33s ease;
+}
+
+.product-hover-shared li a:hover {
+    background: #ff5252;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.product-hover-shared li a .arrow_expand,
+.product-hover-shared li a .icon_heart_alt,
+.product-hover-shared li a .icon_bag_alt {
+    color: #333;
+    font-size: 14px;
+}
+
+.product-hover-shared li a:hover .arrow_expand,
+.product-hover-shared li a:hover .icon_heart_alt,
+.product-hover-shared li a:hover .icon_bag_alt {
+    color: #fff;
+}
+
+/* Add to Cart Button */
+.add-to-cart {
+    background-color: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    margin-top: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+    font-size: 12px;
+    transition: background-color 0.33s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #ff6699;
 }
 
 body {
@@ -312,6 +451,7 @@ body {
     font-size: 14px;
     color: #333;
     margin: 5px 0;
+    transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
 }
 
 /* Discount Product Card Styles */
@@ -421,6 +561,8 @@ body {
 .price {
     margin: 5px 0;
     font-size: 14px;
+    color: #333;
+    transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
 }
 
 .original-price {
@@ -441,6 +583,7 @@ body {
     width: 100%;
     font-weight: 500;
     font-size: 12px;
+    transition: background-color 0.33s ease;
 }
 
 .add-to-cart:hover {
@@ -473,6 +616,106 @@ body {
 }
 
 /* Responsive Styles */
+/* General Product Item Styles */
+.general-product-item {
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+    opacity: 1;
+    display: flex; /* Use flex to control layout */
+    flex-direction: column; /* Stack image and text vertically */
+    min-height: 300px; /* Ensure a minimum height for consistency */
+}
+
+.general-product-pic {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Maintain a consistent aspect ratio (e.g., 4:3) */
+    overflow: hidden;
+}
+
+.general-product-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.general-product-text {
+    padding: 10px;
+    text-align: center;
+    flex-grow: 1; /* Allow text area to take remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space evenly */
+}
+
+.general-product-text h6 {
+    font-size: 14px;
+    margin-bottom: 5px;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate long product names */
+}
+
+.general-product-text h6 a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.general-product-price {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0;
+    transition: color 0.5s ease;
+}
+
+/* Discount Product Card Styles */
+.discount-product-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+    opacity: 1;
+    display: flex; /* Use flex to control layout */
+    flex-direction: column; /* Stack image and text vertically */
+    min-height: 300px; /* Ensure a minimum height for consistency */
+}
+
+.product-image {
+    aspect-ratio: 4 / 3; /* Maintain a consistent aspect ratio (e.g., 4:3) */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.product-info {
+    padding: 10px;
+    text-align: center;
+    flex-grow: 1; /* Allow text area to take remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space evenly */
+}
+
+.product-info h5 {
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 3px;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate long product names */
+}
+
+/* Responsive Styles */
 @media (min-width: 768px) {
     .col-lg-2.custom-width {
         flex: 0 0 20%;
@@ -495,9 +738,52 @@ body {
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
     }
+
+    .general-product-item,
+    .discount-product-card {
+        min-height: 280px; /* Slightly smaller min-height for tablets */
+    }
+
+    .general-product-pic,
+    .product-image {
+        aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+    }
+
+    .general-product-text,
+    .product-info {
+        padding: 8px;
+    }
+
+    .general-product-text h6,
+    .product-info h5 {
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+
+    .general-product-price,
+    .price {
+        font-size: 13px;
+    }
+
+    .add-to-cart {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
 }
 
 @media (max-width: 767px) {
+    /* Hide the sidebar on mobile */
+    .col-lg-2.custom-width {
+        display: none;
+    }
+
+    /* Make the product grid take full width */
+    .col-lg-10.custom-width {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    /* Two columns for product cards */
     .product-col {
         flex: 0 0 50%;
         max-width: 50%;
@@ -508,9 +794,35 @@ body {
         max-width: 100%;
     }
     
+    .general-product-item,
+    .discount-product-card {
+        min-height: 260px; /* Smaller min-height for mobile */
+    }
+
     .general-product-pic,
     .product-image {
-        height: 150px;
+        aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+    }
+
+    .general-product-text,
+    .product-info {
+        padding: 6px; /* Reduced padding for compactness */
+    }
+
+    .general-product-text h6,
+    .product-info h5 {
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    .general-product-price,
+    .price {
+        font-size: 11px;
+    }
+
+    .add-to-cart {
+        padding: 4px 8px;
+        font-size: 10px;
     }
 }
 
@@ -520,20 +832,204 @@ body {
         max-width: 50%;
     }
     
+    .general-product-item,
+    .discount-product-card {
+        min-height: 240px; /* Even smaller min-height for very small screens */
+    }
+
     .general-product-pic,
     .product-image {
-        height: 120px;
+        aspect-ratio: 4 / 3; /* Maintain aspect ratio */
     }
-    
+
     .general-product-text,
     .product-info {
-        padding: 8px;
+        padding: 5px; /* Further reduced padding */
     }
-    
+
     .general-product-text h6,
     .product-info h5 {
-        font-size: 12px;
+        font-size: 11px;
     }
+
+    .general-product-price,
+    .price {
+        font-size: 10px;
+    }
+
+    .add-to-cart {
+        padding: 3px 6px;
+        font-size: 9px;
+    }
+}
+
+/* Remove unnecessary hover on the entire product container */
+#product-container:hover {
+    color: initial;
+}
+
+/* Cart Panel Styles */
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.33s ease;
+}
+
+.cart-panel.active {
+    transform: translateX(0);
+}
+
+.cart-header {
+    background-color: #ffb6c1;
+    color: #000;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.close-cart {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #000;
+    transition: transform 0.33s ease;
+}
+
+.close-cart:hover {
+    transform: rotate(90deg);
+}
+
+.cart-items {
+    padding: 20px;
+    max-height: calc(100% - 150px);
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    color: #ff6699;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.quantity-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #333;
+    padding: 0 5px;
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+
+.cart-item-total {
+    font-weight: bold;
+    color: #333;
+}
+
+.delete-btn {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #777;
+    transition: color 0.33s ease;
+}
+
+.delete-btn:hover {
+    color: #ff3333;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+}
+
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.view-cart-btn {
+    background-color: #ffb6c1;
+    color: #000;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.33s ease;
+}
+
+.view-cart-btn:hover {
+    background-color: #ff9eb5;
+}
+.general-product-item:hover .general-product-text h6 a {
+    color: #e7ab3c;
+}
+.general-product-item:hover {
+    color: #e7ab3c;
+}
+#product-container:hover{
+    color: #e7ab3c;
+}
+.general-product-item:hover .general-product-price {
+    color: #e7ab3c;
 }
 
 /* Cart Panel Styles */

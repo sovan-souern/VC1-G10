@@ -3,7 +3,9 @@
         body {
             padding: 20px;
         }
-
+        .discount-product-card:hover .price {
+            color: #e7ab3c; /* Added hover effect for price in discount card */
+        }
         /* Header Styles */
         header h1 {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -215,7 +217,21 @@
         .info-section .cta-button:hover {
             background: #ff3b2f;
         }
-
+        .product-name:hover{
+            color: #e7ab3c;
+        }
+        .price:hover{
+            color: #e7ab3c;
+        }
+        .add-to-cart:hover{
+            color:white;
+        }
+        .original-price:hover{
+                color: #e7ab3c;
+        }
+        .product-card:hover{
+            color: #e7ab3c;
+        }
         /* Product Container */
         .product-container {
             display: flex;
@@ -224,9 +240,6 @@
             gap: 20px;
             padding: 20px;
         }
-
-
-
         .product-card1 img {
             width: 100%;
             border-radius: 10px;
@@ -345,6 +358,7 @@
 @media (max-width: 575px) {
     /* General adjustments */
     body {
+        
         padding: 10px;
         font-size: 14px;
     }
@@ -366,12 +380,14 @@
     
     /* Product cards */
     .product-card {
+        object-fit:cover;
         width: 100%;
         margin: 0;
         height: auto;
     }
     
     .product-image {
+        object-fit:cover;
         height: 150px !important; /* Adjusted for better proportions */
         border-radius: 8px 8px 0 0;
         object-fit:cover;
@@ -701,7 +717,15 @@
                     <!-- Product Card -->
                     <div class="product-card">
                         <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                        <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')"></div>
+                        <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                            <!--icon favorite , view   -->
+                            <ul class="general-product-hover product-hover-shared">
+                            
+                                <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
                         <div class="product-info">
                             <h5 class="product-name"><?php echo $product_name; ?></h5>
                           
@@ -1180,7 +1204,12 @@
         .general-product-item:hover .general-product-price {
             color: #e7ab3c;
         }
-
+        .discount-product-card:hover .price {
+            color: #e7ab3c; /* Added hover effect for price in discount card */
+        } 
+        .general-product-item:hover .general-product-price {
+            color: #e7ab3c;
+        }
         /* Cart Panel Styles */
         .cart-panel {
             position: fixed;
