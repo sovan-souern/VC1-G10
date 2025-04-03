@@ -1,5 +1,5 @@
 <!-- delete.php -->
-<div class="modal fade" id="user<?= $user['user_id'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="user<?= $user['Admin_id'] ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a href="/user/destroy/<?= $user['user_id'] ?>" class="btn btn-danger">Delete</a>
+                <a href="/user/delete<?= $user['Admin_id'] ?>" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>

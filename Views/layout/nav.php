@@ -193,6 +193,29 @@ $notifications = $model->getNotifications();
   </ul>
 </aside>
 
+<style>
+  .menu-icon {
+  font-size: 1rem !important; /* Reduce from default size */
+}
+
+/* If you need even smaller icons */
+.menu-item .menu-icon {
+  font-size: 1.2rem !important;
+}
+
+/* Adjust spacing around icons for better alignment */
+.menu-link {
+  align-items: center;
+}
+
+/* Ensure proper vertical alignment */
+.menu-icon.tf-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const menuItems = document.querySelectorAll(".menu-item a");
@@ -649,7 +672,7 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
               <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" id="profileDropdown">
                 <div class="avatar avatar-online">
                   <img src="<?php echo !empty($_SESSION['profile_picture']) ? '/' . $_SESSION['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>"
-                    alt="User Profile" class="profile-img js-profile-img" />
+                    alt="User Profile" class="profile-img js-profile-img" id="nav-profile-img" />
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end shadow" style="position: absolute; right: 0; top: 100%; margin-top: 0.125rem;">
@@ -666,7 +689,9 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                         <span class="fw-semibold d-block">
                           <?php echo htmlspecialchars($_SESSION['name'] ?? 'John Doe'); ?>
                         </span>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                          <?php echo $_SESSION['role'] === 'ShopOwner' ? 'Shop Owner' : 'Admin'; ?>
+                        </small>
                       </div>
                     </div>
                   </a>
@@ -696,7 +721,7 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                  <li>
                   <a class="dropdown-item" href="/admin-register">
                     <i class="bi bi-person-plus me-2"></i>
-                    <span class="align-middle">Create Admin</span>
+                    <span class="align-middle">Create ShopOwner</span>
                   </a>
                 <li>
                   <div class="dropdown-divider"></div>
