@@ -163,6 +163,12 @@
 </html>
 
 <style>
+      .slideshow-container {
+            display: none;
+        }
+        .dot-container{
+            display: none;
+        }
   /* Base Styles */
 /* Base Styles */
 /* Base Styles */
@@ -173,9 +179,12 @@
 }
 
 /* Discount Product Card Styles */
+
+
+/* Discount Product Card Styles */
 .discount-product-card {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 0; /* Sharp corners */
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: relative;
@@ -207,7 +216,7 @@
 .general-product-item {
     position: relative;
     background: #fff;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease; /* Increased duration to 0.4s, added opacity */
@@ -457,7 +466,7 @@ body {
 /* Discount Product Card Styles */
 .discount-product-card {
     background-color: white;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: relative;
@@ -677,7 +686,7 @@ body {
 /* Discount Product Card Styles */
 .discount-product-card {
     background-color: white;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: relative;
@@ -1168,7 +1177,7 @@ body {
     width: 100%;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .view-cart-btn:hover {
