@@ -18,8 +18,6 @@
             font-family: 'Poppins', Arial, sans-serif;
 
             margin: 0;
-            padding: 0;
-            overflow-x: hidden;
         }
 
         .contact-wrapper {
@@ -608,5 +606,4 @@
         });
     </script>
 </body>
-
 </html>

@@ -11,7 +11,8 @@ class CheckoutUserController extends BaseController
     $this->model = new  OrderModel();
     $this->model_product = new  ProductModel();
   }
-  function cartview(){
+  function cartview()
+  {
     require_once 'Views/E-commerce-user/card/cart.php';
     // $this->ViewsUser('Views/E-commerce-user/card/cart.php');
 
@@ -70,6 +71,20 @@ class CheckoutUserController extends BaseController
         return $item['quantity'] ?? 1; // Default to 1 if quantity is not provided
       }, $items);
 
+      $addressData = [
+        'city' => $_POST['city'] ?? '',
+        'admin_id' => $id,
+        'address_text' => $_POST['address'] ?? '',
+        'country' => $_POST['country'] ?? ''
+      ];
+
+      // Create the address and get its ID
+      $addressId = $this->model->createAddress($addressData);
+      if (!$addressId) {
+        echo "Failed to create address.";
+        return;
+      }
+
       $data = [
         'admin_id' => $id, // Ensure admin_id is included in the data array
         'firstName' => $_POST['first_name'] ?? '',
@@ -77,10 +92,11 @@ class CheckoutUserController extends BaseController
         'phone' => $_POST['phone'] ?? '',
         'order_status' => $_POST['order_status'] ?? 'Pending',
         'total' => $_POST['total'] ?? '',
-        'address' => $_POST['address'] ?? '',
+        // 'address' => $_POST['address'] ?? '',
         'buy_at' => $_POST['buy_at'] ?? date('Y-m-d H:i:s'),
         'amount_products' => $amountProducts, // Pass amount_product for each product
         'product_ids' => $selectedProductIds, // Pass product IDs as an array
+        'address_id' => $addressId // Pass the created address_id
       ];
 
       $orderId = $this->model->createOrder($data, $id);
@@ -99,13 +115,5 @@ class CheckoutUserController extends BaseController
   {
     // $this->ViewsUser('Views/E-commerce-user/card/favorite.php');
     require_once 'Views/E-commerce-user/card/favorite.php';
-
   }
-  function shopping(){
-    require_once 'Views/E-commerce-user/card/shopping.php';
-  }
-  function viewcart(){
-    require_once 'Views/E-commerce-user/card/cart.php';
-  }
- 
 }

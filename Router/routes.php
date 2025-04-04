@@ -15,6 +15,7 @@ require_once 'Controllers/LoginRegisterController.php';
 require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 require_once "Controllers/checkoutUser.php";
+require_once "Controllers/HistoryController.php";
 
 $routes = new Router();
 
@@ -176,7 +177,7 @@ $routes->get('/checkout', [CheckoutUserController::class, 'ProductCheckout']);
 $routes->post('/checkout/store', [CheckoutUserController::class, 'store']);
 $routes->get('/favorite', [CheckoutUserController::class, 'favorite']);
 $routes->get('/shopping', [CheckoutUserController::class, 'shopping']);
-$routes->get('/cart', [CheckoutUserController::class, 'viewcart']);
+$routes->get('/cart', [CheckoutUserController::class, 'cartview']);
 
 
 $routes->post('/contact/store', [NotificationController::class, 'store']);
@@ -186,6 +187,8 @@ $routes->get('/contact', [ContactController::class, 'index']);
 $routes->get('/shop', [ShopController::class, 'index']);
 
 
+//history
+$routes->get('/history', [HistoryController::class, 'index']); 
 
 
 
