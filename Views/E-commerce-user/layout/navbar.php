@@ -179,7 +179,7 @@
 
                     <!-- Cart Icon with Adjusted Badge -->
                     <li class="position-relative d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                        <a href="#" class="cart-toggle text-decoration-none d-flex flex-column align-items-center position-relative">
+                        <a href="/history" class="cart-toggle text-decoration-none d-flex flex-column align-items-center position-relative">
                             <iconify-icon icon="mdi:cart" class="fs-4"></iconify-icon>
                             <span class="position-absolute badge rounded-circle bg-primary"
                                 style="width: 24px; height: 24px; font-size: 12px; top: -14px; right: -14px; display: flex; align-items: center; justify-content: center;">
