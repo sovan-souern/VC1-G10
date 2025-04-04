@@ -22,6 +22,12 @@
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css" type="text/css">
 </head>
 <style>
+  .slideshow-container {
+            display: none;
+        }
+        .dot-container{
+            display: none;
+        }
 /* Shared Styles for Add to Cart Button */
 .add-to-cart {
     background-color: pink;
@@ -331,7 +337,7 @@
 .product-hover-shared li {
     list-style: none;
     margin: 0;
-    transition: all 0.3s ease; /* Added transition for all properties */
+
 }
 
 .product-hover-shared li a {
@@ -547,36 +553,7 @@
 /* Media query for smaller screens (adjust breakpoint as needed) */
 
 }
-.promo-banner {
-            background-color: pink;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
 
-        .promo-banner h2 {
-            font-size: 24px;
-            margin: 0;
-            font-weight: 700;
-        }
-
-        .promo-banner p {
-            font-size: 16px;
-            margin: 5px 0 0;
-        }
-
-        .promo-banner a {
-            color: #fff;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-
-        .promo-banner a:hover {
-            color: #e7ab3c;
-        }
 </style>
 
 
@@ -584,10 +561,7 @@
 <body>
     <section class="shop spad">
         <div class="container">
-        <div class="promo-banner">
-                <h2>Spring Sale - Up to 50% Off!</h2>
-                <p>Shop now and enjoy exclusive discounts on all products. <a href="#">Learn More</a></p>
-            </div>
+      
             <div class="row">
                 <div class="col-12">
                     <div class="row">

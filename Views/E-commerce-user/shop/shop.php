@@ -163,6 +163,12 @@
 </html>
 
 <style>
+      .slideshow-container {
+            display: none;
+        }
+        .dot-container{
+            display: none;
+        }
   /* Base Styles */
 /* Base Styles */
 /* Base Styles */
@@ -182,50 +188,8 @@
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: relative;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
-    opacity: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
-}
 
-/* General Product Item Styles */
-.general-product-item {
-    position: relative;
-    background: #fff;
-    border-radius: 0; /* Sharp corners */
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
-    opacity: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
-}
-
-/* Responsive Styles */
-@media (max-width: 991px) and (min-width: 768px) {
-    .general-product-item,
-    .discount-product-card {
-        min-height: 280px;
-        border-radius: 0; /* Sharp corners */
-    }
-}
-
-@media (max-width: 767px) {
-    .general-product-item,
-    .discount-product-card {
-        min-height: 260px;
-        border-radius: 0; /* Sharp corners */
-    }
-}
-
-@media (max-width: 480px) {
-    .general-product-item,
-    .discount-product-card {
-        min-height: 240px;
-        border-radius: 0; /* Sharp corners */
-    }
+    opacity: 1; /* Default opacity */
 }
 
 .discount-product-card:hover {
