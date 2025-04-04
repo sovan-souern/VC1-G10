@@ -671,16 +671,16 @@
       <div class="text"></div>
     </div>
 
-    <div class="mySlides">
-      <div class="numbertext"></div>
-      <img src="https://images.moneycontrol.com/static-mcnews/2024/11/20241125093723_Benefits-of-skin-cleansing.jpg?impolicy=website&width=1280&height=720" alt="Slide 2">
-      <div class="text"></div>
-    </div>
-
-
+    
     <div class="mySlides">
       <div class="numbertext"></div>
       <img src="https://www.sheknows.com/wp-content/uploads/2023/12/youth-to-the-people-best-products-FI.jpg?w=3000" alt="Slide 1">
+      <div class="text"></div>
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext"></div>
+      <img src="https://www.anveya.com/cdn/shop/articles/shutterstock_1235838889.jpg?v=1669022970" alt="Slide 2">
       <div class="text"></div>
     </div>
 
