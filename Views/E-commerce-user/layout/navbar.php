@@ -1,3 +1,12 @@
+<style>
+    /* style position sticky and z-index */
+    .navbar-item{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+</style>
+
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -19,7 +28,7 @@
 </div>
 <header>
     <div class="container py-2">
-        <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
+        <div class="row py-4 pb-0 pb-sm-4 align-items-center">
             <div class="col-sm-4 col-lg-3 text-center text-sm-start">
                 <div class="main-logo">
                     <img src="https://i.pinimg.com/736x/4e/cc/64/4ecc644e07133109fc0e1048e787d1e5.jpg" alt="Brand Logo"
@@ -41,28 +50,22 @@
                 </div>
             </div>
 
-            <!-- Right Side Icons with Profile Moved Here -->
             <div class="col-6 col-lg-3 d-flex justify-content-end align-items-center gap-3">
-                <!-- Search Icon (Visible on Mobile) -->
                 <a href="#" class="d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch">
                     <i class="bi bi-search fs-5 text-dark"></i>
                 </a>
-                <!-- Favorite Icon -->
                 <a href="/favorite" class="position-relative">
                     <i class="bi bi-heart fs-5 text-dark"></i>
                 </a>
-                <!-- Cart Icon -->
                 <div class="position-relative d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                     <a href="#" class="cart-toggle text-decoration-none d-flex flex-column align-items-center position-relative">
                         <i class="bi bi-cart fs-5 text-dark"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
                     </a>
                 </div>
-                <!-- History Icon -->
                 <a href="/history" class="position-relative">
                     <i class="bi bi-clock-history fs-5 text-dark"></i>
                 </a>
-                <!-- Profile Icon Moved Here -->
                 <?php if (isset($_SESSION['admin_ID'])): ?>
                     <a href="#" class="d-flex align-items-center text-decoration-none" data-bs-toggle="offcanvas" data-bs-target="#profileOffcanvas">
                         <div class="avatar avatar-online">
@@ -79,10 +82,8 @@
         </div>
     </div>
 
-    <!-- Removed <div class="container-fluid"><hr class="m-0"></div> -->
-
     <div class="container">
-        <nav class="main-menu d-flex navbar navbar-expand-lg">
+        <nav class="main-menu d-flex navbar navbar-expand-lg sticky-top">
             <div class="d-flex d-lg-none align-items-end mt-3">
                 <ul class="d-flex justify-content-end list-unstyled m-0">
                     <li>
@@ -97,9 +98,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="mobileUserDropdown">
                                     <li><a class="dropdown-item" href="/editProfile">Edit Profile</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="">Logout</a></li>
                                 </ul>
                             </div>
@@ -118,9 +117,7 @@
                         <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                             aria-controls="offcanvasCart">
                             <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                            <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                03
-                            </span>
+                            <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">03</span>
                         </a>
                     </li>
                     <li>
@@ -146,19 +143,19 @@
                 <div class="offcanvas-body justify-content-between">
                     <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
                         <li class="nav-item">
-                            <a href="/home" class="nav-link active">Home</a>
+                            <a href="/home" class="nav-link" data-navigate="/home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/shop" class="nav-link">Shop</a>
+                            <a href="/shop" class="nav-link" data-navigate="/shop">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/productuser" class="nav-link">Products</a>
+                            <a href="/productuser" class="nav-link" data-navigate="/productuser">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/about" class="nav-link">About</a>
+                            <a href="/about" class="nav-link" data-navigate="/about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/contact" class="nav-link">Contact</a>
+                            <a href="/contact" class="nav-link" data-navigate="/contact">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -168,7 +165,6 @@
 </header>
 
 <style>
-   /* General Styles */
 :root {
     --primary-color: #ff85a2;
     --primary-light: #ffedf1;
@@ -183,19 +179,19 @@
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
+    transition: opacity 0.5s ease;
 }
 
-/* Header Styles */
- header {
+header {
     background-color: var(--white);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
+}
+
+.main-menu.navbar.sticky-top {
+    background-color: var(--white);
     z-index: 1000;
-} 
+}
 
-
-/* Logo Styling */
 .main-logo {
     display: flex;
     align-items: center;
@@ -222,7 +218,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Search Bar Styling */
 .search-bar.border {
     border: 2px solid var(--light-gray) !important;
     border-radius: 50px !important;
@@ -256,7 +251,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Icon Styling */
 .col-6.col-lg-3 a {
     position: relative;
     display: inline-flex;
@@ -283,7 +277,6 @@ body {
     transform: translateY(-3px);
 }
 
-/* Cart Badge */
 .badge.rounded-pill.bg-primary {
     background-color: var(--primary-color) !important;
     color: white;
@@ -297,7 +290,6 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Profile Styling */
 .col-6.col-lg-3 a:last-child {
     width: 45px;
     height: 45px;
@@ -319,7 +311,6 @@ body {
     box-shadow: 0 0 0 4px var(--primary-light);
 }
 
-/* Navigation Menu */
 .main-menu.navbar {
     background-color: var(--light-gray);
     border-radius: 12px;
@@ -343,12 +334,15 @@ body {
 
 .navbar-nav.menu-list .nav-link:hover {
     color: var(--primary-color);
+    /* background-color: var(--primary-light); */
+    border-radius: 8px;
 }
 
-/* IMPORTANT: Active state styling for navigation links */
 .navbar-nav.menu-list .nav-link.active {
     color: var(--primary-color) !important;
     font-weight: 600;
+    /* background-color: var(--primary-light); */
+    border-radius: 8px;
 }
 
 .navbar-nav.menu-list .nav-link.active::after {
@@ -362,7 +356,11 @@ body {
     border-radius: 3px;
 }
 
-/* Offcanvas Styling */
+.navbar-nav.menu-list .nav-link.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
 .offcanvas {
     border-radius: 0 0 15px 15px;
 }
@@ -380,7 +378,6 @@ body {
     opacity: 1;
 }
 
-/* Mobile Adjustments */
 @media (max-width: 991px) {
     .col-6.col-lg-3 a {
         width: 35px;
@@ -432,11 +429,6 @@ body {
     }
 }
 
-/* Add tooltip functionality with CSS */
-.col-6.col-lg-3 a {
-    position: relative;
-}
-
 .col-6.col-lg-3 a::after {
     content: attr(href);
     visibility: hidden;
@@ -462,12 +454,10 @@ body {
     opacity: 1;
 }
 
-/* Fix for cart icon */
 .cart-toggle {
     position: relative;
 }
 
-/* Enhance dropdown menu */
 .dropdown-menu {
     border-radius: 12px;
     box-shadow: var(--shadow);
@@ -490,12 +480,10 @@ body {
     margin: 8px 0;
 }
 
-/* Add subtle animation to the search bar */
 .search-bar.border input.form-control:focus {
     transform: translateX(5px);
 }
 
-/* Enhance mobile menu */
 @media (max-width: 991px) {
     .offcanvas-body .navbar-nav.menu-list {
         padding: 20px 0;
@@ -513,135 +501,151 @@ body {
         background-color: var(--primary-light);
     }
 }
-    
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Set active navigation link based on current URL
-        function setActiveNavLink() {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.navbar-nav.menu-list .nav-link');
+document.addEventListener('DOMContentLoaded', function() {
+    // Navigation handling
+    const navLinks = document.querySelectorAll('.navbar-nav.menu-list .nav-link');
+    const offcanvasNavbar = document.getElementById('offcanvasNavbar');
+    let isNavigating = false;
 
-            // Remove active class from all links
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Add active class to the matching link
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPath ||
-                    (currentPath === '/' && href === '/home') ||
-                    (href !== '/home' && currentPath.includes(href.substring(1)))) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Call this function when the page loads
-        setActiveNavLink();
-
-        // Add click event listeners to navigation links
-        const navLinks = document.querySelectorAll('.navbar-nav.menu-list .nav-link');
+    function updateActiveLink(targetPath) {
         navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // We don't prevent default here to allow actual navigation
-
-                // Remove active class from all links
-                navLinks.forEach(l => l.classList.remove('active'));
-
-                // Add active class to clicked link
-                this.classList.add('active');
-
-                // Store the active link in localStorage for persistence
-                localStorage.setItem('activePage', this.getAttribute('href'));
-            });
+            link.classList.remove('active', 'loading');
+            const navPath = link.getAttribute('data-navigate');
+            if (navPath === targetPath || (targetPath === '/' && navPath === '/home')) {
+                link.classList.add('active');
+            }
         });
+    }
 
-        // Check if there's a stored active page and apply it
-        const storedActivePage = localStorage.getItem('activePage');
-        if (storedActivePage) {
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === storedActivePage) {
-                    link.classList.add('active');
-                }
-            });
-        }
+    function setInitialActiveLink() {
+        const currentPath = window.location.pathname;
+        updateActiveLink(currentPath);
+    }
 
-        // Add hover effects to the search bar
-        const searchBar = document.querySelector('.search-bar');
-        if (searchBar) {
-            const searchInput = searchBar.querySelector('input');
-            const searchIcon = searchBar.querySelector('svg');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (isNavigating) return;
+            
+            const targetPath = this.getAttribute('data-navigate');
+            const isActive = this.classList.contains('active');
 
-            searchInput.addEventListener('focus', function() {
-                searchBar.style.borderColor = '#ff85a2';
-                searchBar.style.boxShadow = '0 0 0 4px #ffedf1';
-            });
+            if (!isActive) {
+                isNavigating = true;
+                this.classList.add('loading');
+                
+                // Update active states
+                updateActiveLink(targetPath);
+                
+                // Store in localStorage
+                localStorage.setItem('activePage', targetPath);
 
-            searchInput.addEventListener('blur', function() {
-                searchBar.style.borderColor = '';
-                searchBar.style.boxShadow = '';
-            });
-
-            // Add click effect to search icon
-            if (searchIcon) {
-                searchIcon.addEventListener('click', function() {
-                    this.style.transform = 'scale(0.9)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 200);
-
-                    // Submit the form if there's text
-                    if (searchInput.value.trim() !== '') {
-                        searchInput.form.submit();
+                // Close mobile menu if open
+                if (offcanvasNavbar && offcanvasNavbar.classList.contains('show')) {
+                    const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasNavbar);
+                    if (bsOffcanvas) {
+                        bsOffcanvas.hide();
                     }
-                });
-            }
-        }
-
-        // Add animation to cart badge
-        const cartBadge = document.querySelector('.badge.rounded-pill.bg-primary');
-        const cartIcon = document.querySelector('.bi-cart');
-
-        if (cartBadge && cartIcon) {
-            const cartLink = cartIcon.closest('a');
-
-            if (cartLink) {
-                cartLink.addEventListener('mouseenter', function() {
-                    cartBadge.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        cartBadge.style.transform = 'scale(1)';
-                    }, 300);
-                });
-            }
-        }
-
-        // Add subtle shadow effect on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-
-            if (header) {
-                if (window.scrollY > 10) {
-                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-                } else {
-                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
                 }
+
+                // Simple fade transition
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.href = targetPath;
+                }, 500);
             }
         });
+    });
 
-        // Enhance mobile menu toggle
-        const navbarToggler = document.querySelector('.navbar-toggler');
+    // Initial setup
+    setInitialActiveLink();
 
-        if (navbarToggler) {
-            navbarToggler.addEventListener('click', function() {
-                this.classList.toggle('active');
+    // Handle browser back/forward navigation
+    window.addEventListener('popstate', setInitialActiveLink);
+
+    // Search bar handling
+    const searchBar = document.querySelector('.search-bar');
+    if (searchBar) {
+        const searchInput = searchBar.querySelector('input');
+        const searchIcon = searchBar.querySelector('svg');
+
+        searchInput.addEventListener('focus', function() {
+            searchBar.style.borderColor = '#ff85a2';
+            searchBar.style.boxShadow = '0 0 0 4px #ffedf1';
+        });
+
+        searchInput.addEventListener('blur', function() {
+            searchBar.style.borderColor = '';
+            searchBar.style.boxShadow = '';
+        });
+
+        if (searchIcon) {
+            searchIcon.addEventListener('click', function() {
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+                if (searchInput.value.trim() !== '') {
+                    searchInput.form.submit();
+                }
             });
+        }
+    }
+
+    // Cart badge animation
+    const cartBadge = document.querySelector('.badge.rounded-pill.bg-primary');
+    const cartIcon = document.querySelector('.bi-cart');
+    if (cartBadge && cartIcon) {
+        const cartLink = cartIcon.closest('a');
+        if (cartLink) {
+            cartLink.addEventListener('mouseenter', function() {
+                cartBadge.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    cartBadge.style.transform = 'scale(1)';
+                }, 300);
+            });
+        }
+    }
+
+    // Header shadow on scroll
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.main-menu.navbar');
+        if (navbar) {
+            if (window.scrollY > 10) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            }
         }
     });
-</script>
 
+    // Navbar toggler
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    if (navbarToggler) {
+        navbarToggler.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    }
+
+    // Page load animation
+    window.addEventListener('load', function() {
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 100);
+    });
+
+    // Reset navigation state
+    window.addEventListener('pageshow', function() {
+        isNavigating = false;
+        navLinks.forEach(link => link.classList.remove('loading'));
+    });
+});
+</script>
 
 
 
