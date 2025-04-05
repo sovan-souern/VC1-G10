@@ -12,7 +12,10 @@ require_once 'Controllers/BrandController.php';
 require_once 'Controllers/ProfileController.php';
 require_once 'Controllers/UserController.php';
 require_once 'Controllers/LoginRegisterController.php';
+require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
+require_once "Controllers/checkoutUser.php";
+require_once "Controllers/HistoryController.php";
 
 $routes = new Router();
 
@@ -21,19 +24,44 @@ function checkAuthentication() {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    // Allow access to login, register, store, authenticate, and logout routes without authentication
-    $allowedRoutes = ['/login', '/register', '/users/store', '/users/authenticate', '/signup', '/logout', '/reset'];
+    // Add '/' to allowed routes since home is now default
+    $allowedRoutes = [
+        '/', '/home', '/login', '/register', '/users/store', '/users/authenticate', 
+        '/signup', '/logout', '/reset', '/productuser', '/about', '/contact'
+    ];
+    $adminRoutes = [
+        '/admin', '/admin-register', '/admin/edit', '/admin/update', '/admin/delete',
+        '/order', '/order_detail', '/invoice', '/users', '/user/create', '/user/edit',
+        '/notifications', '/out-stock', '/products', '/category', '/brand', '/discount','/dashboard',
+        '/products/create', '/products/edit', '/products/update', '/products/delete',
+        '/category/create', '/category/edit', '/category/update', '/category/delete',
+        '/brand/create', '/brand/edit', '/brand/update', '/brand/delete',
+        '/dashboard','/reset', 
+    ];
+
+    // Redirect if not authenticated
     if (!isset($_SESSION['admin_ID']) && !in_array($_SERVER['REQUEST_URI'], $allowedRoutes)) {
         header("Location: /login");
         exit();
     }
+
+    // Restrict access to admin routes for users with the "user" role
+    if (isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'user') {
+        foreach ($adminRoutes as $adminRoute) {
+            if (strpos($_SERVER['REQUEST_URI'], $adminRoute) === 0) {
+                header("Location: /home");
+                exit();
+            }
+        }
+    }
 }
+
 
 // Call the middleware function before defining the routes
 checkAuthentication();
 
-// Default route to login
-$routes->get('/', [LoginRegisterController::class, 'login']);
+// Change default route to home page instead of login
+$routes->get('/', [HomeController::class, 'index']);
 
 // Login and Registration Routes
 $routes->get('/login', [LoginRegisterController::class, 'login']);
@@ -42,6 +70,10 @@ $routes->post('/users/store', [LoginRegisterController::class, 'store']);
 $routes->post('/users/authenticate', [LoginRegisterController::class, 'authenticate']);
 $routes->get('/signup', [LoginRegisterController::class, 'register']); // Changed to register
 $routes->get('/signup', [LoginRegisterController::class, 'logout']);
+
+// Admin Registration Routes
+$routes->get('/admin-register', [LoginRegisterController::class, 'adminRegister']);
+$routes->post('/users/store-admin', [LoginRegisterController::class, 'storeAdmin']);
 
 // Admin Routes (for admin management)
 $routes->get('/admin', [AdminController::class, 'index']);
@@ -52,25 +84,32 @@ $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
 
 // Order Routes
 $routes->get('/order', [OrderController::class, 'index']);
+$routes->get('/order_detail', [OrderController::class, 'view']);
 
-// Shop Owner Routes
-$routes->get('/shop-owner', [ShopownerController::class, 'index']);
 
 // Invoice Routes
 $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // User Routes
 $routes->get('/users', [UserController::class, 'index']);
-$routes->get('/user/create', [UserController::class, 'create']);
+// $routes->get('/user/create', [UserController::class, 'create']);
 $routes->post('/user/store', [UserController::class, 'store']);
+$routes->post('/user/create', [UserController::class, 'create']);
 $routes->get('/user/edit', [UserController::class, 'edit']);
 $routes->put('/user/update', [UserController::class, 'update']);
-$routes->delete('/user/delete', [UserController::class, 'destroy']);
+$routes->delete('/user/delete', [UserController::class, 'delete']);
+$routes->get('/user/delete', [UserController::class, 'delete']); // Ensure this route exists
+$routes->get('/users/active', [UserController::class, 'getActiveUsers']); // Add this line
+$routes->get('/user/profile', [UserController::class, 'profile']); // Add this line
 
 // Notification Routes
 $routes->get('/notifications', [NotificationController::class, 'index']); 
-
+$routes->get('/notifications/view', [NotificationController::class, 'view']); 
+$routes->get('/notifications/delete', [NotificationController::class, 'destroy']); 
+$routes->get('/notifications/update', [NotificationController::class, 'update']); 
+$routes->get('/out-stock', [ProductController::class, 'OutStock']);
 // Product Routes (Inventory)
+
 $routes->get('/products', [ProductController::class, 'index']);
 $routes->get('/products/create', [ProductController::class, 'create']);
 $routes->post('/products/store', [ProductController::class, 'store']);
@@ -79,7 +118,18 @@ $routes->put('/products/update', [ProductController::class, 'update']);
 $routes->get('/products/delete', [ProductController::class, 'destroy']);
 $routes->get('/products/view', [ProductController::class, 'view']);
 
-$routes->get('/out-stock', [ProductController::class, 'OutStock']);
+
+
+// Discount Routes
+$routes->get('/discount', [DiscountController::class, 'index']);
+$routes->get('/create-discount', [DiscountController::class, 'create']);
+$routes->post('/discount/store', [DiscountController::class, 'store']);
+$routes->get('/discount/edit', [DiscountController::class, 'edit']);
+$routes->put('/discount/update', [DiscountController::class, 'update']);
+$routes->get('/discount/delete', [DiscountController::class, 'destroy']);
+$routes->get('/discount/view', [DiscountController::class, 'view']);
+
+
 // Category Routes
 $routes->get('/category', [CategoryController::class, 'index']);
 $routes->get('/category/create', [CategoryController::class, 'create']);
@@ -105,4 +155,41 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
 // Dispatch the routes
+
+
+require_once 'Controllers/HomeController.php';
+require_once 'Controllers/AboutController.php';
+require_once 'Controllers/ProductUserController.php';
+require_once 'Controllers/ContactController.php';
+require_once 'Controllers/ShopController.php';
+
+
+
+$routes->get('/home', [HomeController::class, 'index']);
+
+
+$routes->get('/about', [AboutController::class, 'index']);
+
+
+$routes->get('/productuser', [ProductUserController::class, 'index']);
+
+$routes->get('/checkout', [CheckoutUserController::class, 'ProductCheckout']);
+$routes->post('/checkout/store', [CheckoutUserController::class, 'store']);
+$routes->get('/favorite', [CheckoutUserController::class, 'favorite']);
+$routes->get('/shopping', [CheckoutUserController::class, 'shopping']);
+$routes->get('/cart', [CheckoutUserController::class, 'cartview']);
+
+
+$routes->post('/contact/store', [NotificationController::class, 'store']);
+$routes->get('/contact', [ContactController::class, 'index']);
+
+
+$routes->get('/shop', [ShopController::class, 'index']);
+
+
+//history
+$routes->get('/history', [HistoryController::class, 'index']); 
+
+
+
 $routes->dispatch();

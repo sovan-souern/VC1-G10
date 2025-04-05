@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Models/OrderModel.php';
 require_once 'BaseController.php';
 
 class OrderController extends BaseController
@@ -8,15 +8,25 @@ class OrderController extends BaseController
 
     function __construct()
     {
-        
+        $this->model = new OrderModel();
     }
 
     function index()
     {
         // echo "Order";
-        $this->views('/E-comerce/order/order.php');
+        $orders = $this->model->getOrder();
+        $this->views('/E-comerce/order/order.php', ['orders' => $orders]);
+    }
+    
+    function view($id)
+    {
+        // echo "View Product";
+        $orders = $this->model->getOrder($id);
+        $this->views('/E-comerce/order/oder_detail.php', ['orders' => $orders]);
     }
 
    
 }
+
+
 

@@ -16,19 +16,40 @@ class ProfileModel {
     }
 
     public function updateAdmin($admin_ID, $data) {
-        $sql = "UPDATE admins SET name = ?, email = ?";
-        $params = [$data['name'], $data['email']];
+        try {
+            $fields = [];
+            $params = [];
 
-        if ($data['profile_picture'] !== null) {
-            $sql .= ", profile_picture = ?";
-            $params[] = $data['profile_picture'];
+            // Add name if provided
+            if (isset($data['name'])) {
+                $fields[] = "name = ?";
+                $params[] = $data['name'];
+            }
+
+            // Add phone if provided
+            if (isset($data['phone'])) {
+                $fields[] = "phone = ?";
+                $params[] = $data['phone'];
+            }
+
+            // Add profile picture if provided
+            if (!empty($data['profile_picture'])) {
+                $fields[] = "profile_picture = ?";
+                $params[] = $data['profile_picture'];
+            }
+
+            // Add admin_ID to params
+            $params[] = $admin_ID;
+
+            // Build the SQL query
+            $sql = "UPDATE admins SET " . implode(", ", $fields) . " WHERE admin_ID = ?";
+            
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute($params);
+        } catch (PDOException $e) {
+            error_log("Error updating admin profile: " . $e->getMessage());
+            return false;
         }
-
-        $sql .= " WHERE admin_ID = ?";
-        $params[] = $admin_ID;
-
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute($params);
     }
 
     public function getAllAdmins() {

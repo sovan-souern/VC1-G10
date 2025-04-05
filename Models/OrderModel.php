@@ -1,60 +1,58 @@
 <?php
-require_once 'Databases/database.php';
+require_once 'Databases/database.php'; // Adjust this path as needed
 
-class OrderModel {
-    private $conn;
+class OrderModel
+{
+    private $pdo;
 
-    public function __construct() {
+    function __construct()
+    {
+        $this->pdo = (new Database())->getConnection(); // Ensure getConnection() returns a PDO instance
+    }
+
+    function getOrder()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM orders");
+        return $stmt->fetchAll();
+    }
+
+    function createOrder($data, $id)
+    {
         try {
-            $database = new Database();
-            $this->conn = $database->getConnection();
-            if (!$this->conn) {
-                throw new Exception("Failed to establish database connection.");
+            // Prepare the SQL statement for inserting each row
+            $sql = "INSERT INTO orders (firstName, lastName, phone, order_status, total, address, buy_at, admin_id, amount_product, product_id) 
+                    VALUES (:firstName, :lastName, :phone, :order_status, :total, :address, :buy_at, :admin_id, :amount_product, :product_id)";
+            $stmt = $this->pdo->prepare($sql);
+
+            // Log the SQL query and parameters for debugging
+            error_log("Executing SQL: $sql");
+            error_log("With data: " . print_r($data, true));
+
+            // Insert a row for each product_id
+            foreach ($data['product_ids'] as $index => $productId) {
+                $stmt->execute([
+                    ':firstName' => $data['firstName'],
+                    ':lastName' => $data['lastName'],
+                    ':phone' => $data['phone'],
+                    ':order_status' => $data['order_status'],
+                    ':total' => $data['total'],
+                    ':address' => $data['address'],
+                    ':buy_at' => $data['buy_at'],
+                    ':admin_id' => $id,
+                    ':amount_product' => $data['amount_products'][$index], // Store amount_product for each product
+                    ':product_id' => $productId, // Insert each product_id in a separate row
+                ]);
             }
-        } catch (PDOException $e) {
-            throw new Exception("Database connection failed: " . $e->getMessage());
+            return true; // Return true if all rows are inserted successfully
+        } catch (Exception $e) {
+            error_log("Failed to create order: " . $e->getMessage());
+            return false;
         }
     }
 
-    public function getOrderDetails($orderId) {
-        try {
-            $sql = "SELECT * FROM orders WHERE order_id = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$orderId]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (!$result) {
-                return null; // Return null if no order is found
-            }
-            return $result;
-        } catch (PDOException $e) {
-            error_log("Failed to fetch order details: " . $e->getMessage());
-            return null; // Return null on error
-        }
-    }
-
-    public function getOrderItems($orderId) {
-        try {
-            $sql = "SELECT od.order_detail_id as id, p.product_name, od.quantity as item, od.price as sub_total, 0 as vat, od.price as total_price
-                    FROM order_details od
-                    JOIN products p ON od.product_id = p.product_id
-                    WHERE od.order_id = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$orderId]);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            if (!$result) {
-                return []; // Return an empty array if no items are found
-            }
-            return $result;
-        } catch (PDOException $e) {
-            error_log("Failed to fetch order items: " . $e->getMessage());
-            return []; // Return an empty array on error
-        }
-    }
-
-    public function closeConnection() {
-        $this->conn = null;
+    function getUser()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM admins");
+        return $stmt->fetchAll();
     }
 }
-?>

@@ -1,132 +1,174 @@
 <style>
     body {
         font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fa;
         color: #333;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .content-wrapper {
-        margin: 0 300px;
-        padding: 40px 20px;
-        display: flex;
-        justify-content: center;
+        width: 100%;
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 20px;
     }
 
     .card {
-        border-radius: 15px;
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-        padding: 25px;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        transition: 0.3s ease-in-out;
-        max-width: 600px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
         width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
     }
 
-    .card:hover {
-        transform: translateY(-5px);
-    }
-
-    .fw-bold {
-        color: rgb(255, 69, 0);
-        text-align: center;
-        font-size: 28px;
-    }
-
-    .alert {
-        border-radius: 10px;
-        font-size: 16px;
-        text-align: center;
-        padding: 10px 20px;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .form-label {
-        font-weight: 600;
-        color: #333;
-    }
-
-    .form-control {
-        border-radius: 8px;
-        border: 2px solid #ff4500;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-        padding: 12px;
-        transition: 0.3s;
-        font-size: 16px;
-    }
-
-    .form-control:focus {
-        border-color: #cc3700;
-        box-shadow: 0 0 12px rgba(255, 69, 0, 0.5);
-        outline: none;
-    }
-
-    .btn-primary {
-        background: linear-gradient(45deg, #ff4500, #ff7f50);
-        border: none;
-        padding: 12px 20px;
-        transition: 0.3s;
-        border-radius: 10px;
-        font-size: 18px;
-    }
-
-    .btn-primary:hover {
-        background: linear-gradient(45deg, #cc3700, #ff4500);
-        transform: scale(1.05);
-    }
-
-    .btn-outline-secondary {
-        border-radius: 10px;
-        border: 2px solid #ff4500;
-        color: #ff4500;
-        transition: 0.3s;
-        padding: 12px 20px;
-        font-size: 18px;
-    }
-
-    .btn-outline-secondary:hover {
-        background-color: #ff4500;
+    .card-header {
+        margin: -2rem -2rem 2rem;
+        padding: 2rem;
+        background: linear-gradient(135deg, #007bff, #0056b3);
         color: white;
+        border-radius: 12px 12px 0 0;
+        text-align: center;
+    }
+
+    .card-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        pointer-events: none;
+    }
+
+    .card-header h4 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
     .profile-picture {
         display: flex;
-        align-items: center;
         flex-direction: column;
-        gap: 15px;
-        text-align: center;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
     }
 
     .profile-picture img {
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease-in-out;
-        border: 4px solid #ff4500;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
     }
 
-    .profile-picture img:hover {
-        transform: scale(1.1);
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        outline: none;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+    }
+
+    .btn-outline-secondary {
+        border: 1px solid #6c757d;
+        color: #6c757d;
+        background: transparent;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #6c757d;
+        color: white;
     }
 
     .btn-upload {
-        background: linear-gradient(45deg, #ff4500, #ff7f50);
+        background-color: #007bff;
         color: white;
-        padding: 10px 15px;
-        border-radius: 10px;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
         cursor: pointer;
-        transition: 0.3s;
-        text-align: center;
-        font-size: 16px;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
     }
 
     .btn-upload:hover {
-        background: linear-gradient(45deg, #cc3700, #ff4500);
-        transform: scale(1.05);
+        background-color: #0056b3;
     }
 
     .text-muted {
-        font-size: 14px;
+        color: #6c757d !important;
+        font-size: 0.875rem;
+    }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+    }
+
+    .alert-success {
+        background-color: #d1e7dd;
+        border: 1px solid #badbcc;
+        color: #0f5132;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border: 1px solid #f5c2c7;
+        color: #842029;
     }
 </style>
 
@@ -152,7 +194,12 @@
         <?php endif; ?>
 
         <div class="card">
-            <h5 class="card-header text-center">Edit Profile</h5>
+            <div class="card-header">
+                <h4 class="text-center">
+                    <i class="fas fa-user-edit me-2"></i>
+                    Edit Profile
+                </h4>
+            </div>
             <div class="card-body">
                 <form action="/updateProfile" method="POST" enctype="multipart/form-data">
                     <div class="profile-picture">
@@ -168,31 +215,32 @@
                         <p class="text-muted">Allowed JPG or PNG. Max size: 2MB</p>
                     </div>
                     <hr class="my-4" />
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="name" class="form-label">Name</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                id="name"
-                                name="name"
-                                value="<?php echo htmlspecialchars($profile['name'] ?? ''); ?>"
-                                required />
-                        </div>
-                        <div class="mb-3 col-md-12">
-                            <label for="email" class="form-label">Email</label>
-                            <input
-                                class="form-control"
-                                type="email"
-                                id="email"
-                                name="email"
-                                value="<?php echo htmlspecialchars($profile['email'] ?? ''); ?>"
-                                required />
-                        </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="<?php echo htmlspecialchars($profile['name'] ?? ''); ?>"
+                            required />
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input
+                            class="form-control"
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            pattern="[0-9]+"
+                            value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>"
+                            required />
+                        <small class="text-muted">Enter numbers only, no spaces or special characters</small>
                     </div>
                     <div class="mt-4 text-center">
-                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary me-2">Save Changes</button>
+                        <button type="button" onclick="window.location.href='/'" class="btn btn-outline-secondary">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -209,8 +257,13 @@
         reader.readAsDataURL(event.target.files[0]);
     });
 
+    document.getElementById('phone').addEventListener('input', function(e) {
+        // Remove any non-numeric characters
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
     document.querySelector('form').addEventListener('submit', function(e) {
-        // Remove e.preventDefault() to allow form submission
+        e.preventDefault(); // Prevent default form submission
         let formData = new FormData(this);
 
         fetch('/updateProfile', {
@@ -220,6 +273,15 @@
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
+                // Dispatch event for nav bar profile update
+                const event = new CustomEvent('profile-image-updated', {
+                    detail: { imageUrl: data.profile_picture }
+                });
+                window.dispatchEvent(event);
+                
+                // Update the session storage
+                sessionStorage.setItem('profile_picture', data.profile_picture);
+                
                 alert('Profile updated successfully');
                 window.location.reload();
             } else {

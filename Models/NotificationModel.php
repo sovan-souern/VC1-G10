@@ -1,58 +1,45 @@
 <?php
 require_once 'Databases/database.php';
-class NotificationModel {
-
-    private $conn;
-
-    public function __construct() {
+class NotificationModel
+{
+    private $pdo;
+    public function __construct()
+    {
         $database = new Database();
-        $this->conn = $database->getConnection();
+        $this->pdo = $database->getConnection(); // Initialize $pdo
     }
 
-    public function getNotifications() {
-        $sql = "SELECT * FROM notifications WHERE is_deleted = FALSE";
-        $stmt = $this->conn->query($sql);
-
-        $notifications = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $notifications[] = $row;
-        }
-
-        return $notifications;
+    public function getNotifications()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM notifications");
+        return $stmt->fetchAll();
     }
 
-    public function addNotification($title, $message) {
-        $sql = "INSERT INTO notifications (title, message, is_deleted) VALUES (?, ?, FALSE)";
-        $stmt = $this->conn->prepare($sql);
-        if ($stmt->execute([$title, $message])) {
-            echo "<script>console.log('Notification added successfully');</script>";
-        } else {
-            echo "<script>console.log('Failed to add notification');</script>";
-        }
+    function createNotification($data)
+    {
+        $stmt = "INSERT INTO notifications (first_name, last_name, phone_number, message, created_at, status) 
+                 VALUES ('{$data["first_name"]}', '{$data["last_name"]}', '{$data["phone_number"]}', 
+                         '{$data["message"]}', '{$data["created_at"]}', '{$data["status"]}')";
+        $this->pdo->query($stmt); // Execute the query directly
     }
 
-    public function markAllAsRead() {
-        $sql = "UPDATE notifications SET status = 'read' WHERE status = 'unread'";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
+    function getNotification($id)
+    {
+        $stmt = $this->pdo->query("SELECT * FROM notifications WHERE id = $id");
+        return $stmt->fetch();
     }
 
-    public function closeConnection() {
-        $this->conn = null;
+    function delete($id)
+    {
+        $this->pdo->query("DELETE FROM notifications WHERE id = $id"); // Execute the query directly
+    }
+
+    function updateRead($data)
+    {
+        $stmt = $this->pdo->prepare("UPDATE notifications SET status = :status WHERE id = :id");
+        $stmt->execute([
+            "status" => $data["status"], // Use the status from the data array
+            "id" => $data["id"] // Use the ID from the data array
+        ]);
     }
 }
-?>
-<?php
-
-$notificationModel = new NotificationModel();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $message = $_POST['message'];
-    $notificationModel->addNotification($title, $message);
-    echo "<script>alert('Notification added successfully');</script>";
-}
-
-$notifications = $notificationModel->getNotifications();
-$notificationModel->closeConnection();
- ?>
