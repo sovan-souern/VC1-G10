@@ -32,40 +32,41 @@
         }
 
         .management-header {
-            padding: 25px 30px; /* Increased padding for better balance */
+            padding: 25px 30px;
             border-radius: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px; /* Increased margin for spacing */
+            margin-bottom: 30px;
             color: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .management-header h1 {
-            font-size: 1.75em; /* Increased font size for balance */
+            font-size: 1.92em; /* Kept smaller as requested */
             font-weight: 600;
             margin: 0;
         }
 
         .management-controls {
             display: flex;
-            gap: 25px; /* Increased gap for better spacing */
+            gap: 25px; /* Increased gap for more spacing between search input and filter */
             align-items: center;
         }
 
         .search-wrapper {
             position: relative;
+            margin: 0 10px; /* Added margin around search input for extra gap */
         }
 
         .search-input {
-            padding: 14px 45px 14px 18px; /* Increased padding for larger input */
+            padding: 14px 45px 14px 18px;
             border: none;
             border-radius: 50px;
-            width: 300px; /* Slightly increased width */
+            width: 500px;
             background: rgba(255, 255, 255, 0.95);
             transition: all 0.3s ease;
-            font-size: 1em; /* Increased font size */
+            font-size: 1em;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
@@ -77,20 +78,20 @@
 
         .search-icon {
             position: absolute;
-            right: 18px; /* Adjusted position */
+            right: 18px;
             top: 50%;
             transform: translateY(-50%);
             color: #6b7280;
-            font-size: 1.1em; /* Increased icon size */
+            font-size: 1.1em;
         }
 
         .filter-select {
-            padding: 14px 18px; /* Increased padding */
+            padding: 14px 18px;
             border: none;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.95);
             cursor: pointer;
-            font-size: 1em; /* Increased font size */
+            font-size: 1em;
             transition: all 0.3s ease;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
@@ -105,22 +106,22 @@
         .stock-overview {
             background: #ffffff;
             border-radius: 15px;
-            padding: 30px; /* Increased padding */
-            margin-bottom: 30px; /* Increased margin for spacing */
+            padding: 30px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .stock-overview h2 {
             color: #1f2937;
-            font-size: 1.8em; /* Increased font size */
+            font-size: 1.8em;
             font-weight: 600;
-            margin: 0 0 25px; /* Increased margin */
+            margin: 0 0 25px;
         }
 
         .stats-container {
             display: flex;
             justify-content: space-between;
-            gap: 25px; /* Increased gap for larger cards */
+            gap: 25px;
             margin-bottom: 25px;
         }
 
@@ -128,10 +129,10 @@
             flex: 1;
             background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
             border-radius: 15px;
-            padding: 20px; /* Increased padding for larger cards */
+            padding: 20px;
             display: flex;
             align-items: center;
-            gap: 20px; /* Increased gap between icon and text */
+            gap: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #e5e7eb;
             position: relative;
@@ -163,10 +164,10 @@
         }
 
         .stat-icon {
-            font-size: 1.3em; /* Increased icon size */
+            font-size: 1.3em;
             color: #4f46e5;
             background: rgba(79, 70, 229, 0.1);
-            padding: 15px; /* Increased padding for larger icon */
+            padding: 15px;
             border-radius: 50%;
             transition: transform 0.3s ease;
         }
@@ -180,7 +181,7 @@
         }
 
         .stat-value {
-            font-size: 1.5em; /* Increased font size for larger display */
+            font-size: 1.5em;
             font-weight: 700;
             color: #1f2937;
             display: block;
@@ -193,7 +194,7 @@
 
         .stat-label {
             color: #6b7280;
-            font-size: 1.1em; /* Increased font size */
+            font-size: 1.1em;
             font-weight: 500;
         }
 
@@ -229,7 +230,6 @@
             cursor: pointer;
             transition: background 0.3s ease;
         }
-
 
         .product-table tr:nth-child(even) {
             background: #f9fafb;
@@ -339,41 +339,45 @@
             .management-header {
                 flex-direction: column;
                 gap: 15px;
-                padding: 20px; /* Adjusted for smaller screens */
+                padding: 20px;
             }
 
             .management-header h1 {
-                font-size: 1.4em; /* Adjusted for smaller screens */
+                font-size: 1.4em; /* Kept smaller for responsive design */
             }
 
             .management-controls {
                 flex-direction: column;
                 width: 100%;
-                gap: 15px; /* Adjusted gap */
+                gap: 20px; /* Adjusted gap for mobile */
+            }
+
+            .search-wrapper {
+                margin: 0; /* Reset margin for mobile */
             }
 
             .search-input {
                 width: 100%;
-                padding: 12px 40px 12px 15px; /* Adjusted padding */
-                font-size: 0.95em; /* Adjusted font size */
+                padding: 12px 40px 12px 15px;
+                font-size: 0.95em;
             }
 
             .search-icon {
-                font-size: 1em; /* Adjusted icon size */
+                font-size: 1em;
             }
 
             .filter-select {
                 width: 100%;
-                padding: 12px 15px; /* Adjusted padding */
-                font-size: 0.95em; /* Adjusted font size */
+                padding: 12px 15px;
+                font-size: 0.95em;
             }
 
             .stock-overview {
-                padding: 20px; /* Adjusted padding */
+                padding: 20px;
             }
 
             .stock-overview h2 {
-                font-size: 1.5em; /* Adjusted font size */
+                font-size: 1.5em;
             }
 
             .stats-container {
@@ -382,20 +386,20 @@
             }
 
             .stat-card {
-                padding: 20px; /* Adjusted padding for smaller screens */
+                padding: 20px;
             }
 
             .stat-icon {
-                font-size: 2em; /* Adjusted icon size */
-                padding: 10px; /* Adjusted padding */
+                font-size: 2em;
+                padding: 10px;
             }
 
             .stat-value {
-                font-size: 2em; /* Adjusted font size */
+                font-size: 2em;
             }
 
             .stat-label {
-                font-size: 0.95em; /* Adjusted font size */
+                font-size: 0.95em;
             }
 
             .product-table th, .product-table td {
@@ -474,7 +478,7 @@
                         if ($product['quantity'] >= 10) continue;
                         $statusClass = $product['quantity'] == 0 ? 'out-of-stock' : 'low-stock';
                         $statusText = $product['quantity'] == 0 ? 'Out of Stock' : 'Low Stock';
-                        $actionText = $product['quantity'] == 0 ? 'Restock Now' : 'Order More W';
+                        $actionText = $product['quantity'] == 0 ? 'Restock Now' : 'Order More';
                         $actionClass = $product['quantity'] == 0 ? 'btn-restock' : 'btn-order';
                         ?>
                         <tr class="product-row <?= $statusClass ?>" 
