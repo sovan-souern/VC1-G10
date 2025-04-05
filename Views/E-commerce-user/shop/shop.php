@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,16 +62,14 @@
 
                 <div class="col-lg-10 col-md-10 col-sm-12 custom-width">
                     <div class="row" id="product-container">
-                        <?php
-                        // Sample products - replace with your actual data
-                        $discounts = []; // Add your discount data here if needed
-
-                        if (isset($products) && is_array($products) && !empty($products)) {
-                            foreach ($products as $index => $product) {
-                                $hasDiscount = false;
-                                if (isset($discounts) && is_array($discounts)) {
-                                    foreach ($discounts as $discount) {
-                                        if ($product["product_id"] == $discount["product_id"] && $discount["end_date"] >= date("Y-m-d")) {
+                        <?php foreach ($products as $index => $product): ?>
+                            <?php 
+                                $hasDiscount = false; // Reset $hasDiscount for each product
+                            ?>
+                            <?php foreach ($discounts as $key => $discount): ?>
+                                <?php if ($product["product_id"] == $discount["product_id"]): ?>
+                                    <?php if ($discount["end_date"] >= date("Y-m-d")): ?>
+                                        <?php
                                             $original_price = floatval($discount["price"]);
                                             $discount_percentage = floatval($discount["discount_percentage"]);
                                             $discounted_price = $original_price * (1 - $discount_percentage / 100);
@@ -79,66 +78,59 @@
                                             $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
                                             $original_price_formatted = "$" . number_format($original_price, 2);
                                             $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-                        ?>
-                                            <div class="col product-col mb-4" data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>">
-                                                <div class="discount-product-card">
-                                                    <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                                                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                                                        <ul class="discount-product-hover product-hover-shared">
-                                                            <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
-                                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                                        </ul>
+                                        ?>
+                                        <div class="col product-col mb-4" data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>">
+                                            <div class="discount-product-card">
+                                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                                    <ul class="discount-product-hover product-hover-shared">
+                                                        <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
+                                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="product-info">
+                                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                                    <div class="price">
+                                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                                        <?php echo $discounted_price_formatted; ?>
                                                     </div>
-                                                    <div class="product-info">
-                                                        <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                                     
-                                                        <div class="price">
-                                                            <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                                            <?php echo $discounted_price_formatted; ?>
-                                                        </div>
-                                                        <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
-                                                    </div>
+                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                                 </div>
                                             </div>
-                                    <?php
-                                            $hasDiscount = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (!$hasDiscount) {
+                                        </div>
+                                        <?php 
+                                            $hasDiscount = true; 
+                                            break; 
+                                        ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <?php if (!$hasDiscount): ?>
+                                <?php
                                     $price = number_format(floatval($product['price']), 2);
                                     $image = !empty($product['image']) ? htmlspecialchars($product['image']) : 'https://via.placeholder.com/150';
                                     $productLink = "product-page.php?id=" . htmlspecialchars($product['product_id']);
-                                    ?>
-                                    <div class="col product-col mb-4" data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>">
-                                        <div class="general-product-item">
-                                            <div class="general-product-pic">
-                                                <img src="<?php echo $image; ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                                                <ul class="general-product-hover product-hover-shared">
-                                                    <!--icon favorite , view   -->
-                                                    <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
-                                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="general-product-text">
-                                                <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
-                                              <!-- change style -->
-                                               
-                                                <div class="general-product-price">$<?php echo $price; ?></div>
-                                                <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>">Add to Cart</button>
-                                            </div>
+                                ?>
+                                <div class="col product-col mb-4" data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>">
+                                    <div class="general-product-item">
+                                        <div class="general-product-pic">
+                                            <img src="<?php echo $image; ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                            <ul class="general-product-hover product-hover-shared">
+                                                <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
+                                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="general-product-text">
+                                            <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
+                                            <div class="general-product-price">$<?php echo $price; ?></div>
+                                            <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>">Add to Cart</button>
                                         </div>
                                     </div>
-                        <?php
-                                }
-                            }
-                        } else {
-                            echo '<p>No products available.</p>';
-                        }
-                        ?>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                         <div class="col-12 text-center">
                             <div class="pagination__option">
                                 <a href="#" class="active">1</a>
@@ -203,7 +195,7 @@
     transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
 }
 
-.discount-product-card:hover .price {
+discount-product-card:hover .price {
     color: #e7ab3c;
     transition: color 0.5s ease; /* Increased to 0.5s for a more gradual change */
 }

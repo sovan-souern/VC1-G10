@@ -93,18 +93,7 @@
             background: #ff3b2f;
         }
 
-        /* Spinning Animation Starting from Right */
-
-        /* @keyframes spinFromRight {
-            0% {
-                transform: rotate(90deg); Starts from right
-            }
-            100% {
-                transform: rotate(450deg); Completes full circle + starting point
-            } 
-        }  */
-
-        /* Info Overlay */
+    
         .info {
             position: absolute;
             bottom: 0;
@@ -939,63 +928,70 @@
 
     <div class="container">
         <div class="products-container">
-            <?php
-            if (isset($discounts) && is_array($discounts) && !empty($discounts)) {
-                foreach ($discounts as $discount) {
-                    // Calculate discounted price
-                    $original_price = floatval($discount["price"]);
-                    $discount_percentage = floatval($discount["discount_percentage"]);
-                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
+        <?php foreach ($products as $index => $product): ?>
+            <?php $hasDiscount = false; ?>
+                <?php foreach ($discounts as $key => $discount): ?>
+                    <?php if ($product["product_id"] == $discount["product_id"]): ?>
+                        <?php if ($discount["end_date"] >= date("Y-m-d")): ?>
+                            <?php 
+                            
+                                // Calculate discounted price
+                                $original_price = floatval($discount["price"]);
+                                $discount_percentage = floatval($discount["discount_percentage"]);
+                                $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                    // Sanitize and prepare data
-                    $product_name = htmlspecialchars($discount["product_name"]);
-                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
-                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                    $original_price_formatted = "$" . number_format($original_price, 2); 
-                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-            ?>
+                                // Sanitize and prepare data
+                                $product_name = htmlspecialchars($discount["product_name"]);
+                                $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                                $original_price_formatted = "$" . number_format($original_price, 2); 
+                                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                            ?>
+
                     <!-- Product Card -->
-                    <div class="product-card">
-                        <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                        <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                            <!--icon favorite , view   -->
-                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                            <!--icon favorite , view   -->
-                            <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
-                                        <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon_heart_alt"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon_bag_alt"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name"><?php echo $product_name; ?></h5>
-                          
-                            <div class="price">
-                                <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                <?php echo $discounted_price_formatted; ?>
+                            <div class="product-card">
+                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                    <!--icon favorite , view   -->
+                                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                    <!--icon favorite , view   -->
+                                    <ul class="general-product-hover product-hover-shared">
+                                        <li>
+                                            <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
+                                                <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon_heart_alt"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon_bag_alt"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                
+                                    <div class="price">
+                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                        <?php echo $discounted_price_formatted; ?>
+                                    </div>
+                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                                </div>
                             </div>
-                            <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
-                        </div>
-                    </div>
-            <?php
-                }
-            } else {
-                echo '<p>No discounted products available.</p>';
-            }
-            ?>
+        
+            
+                            <?php $hasDiscount = true; ?>
+                             <?php break; ?>
+                          <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
         </div>
     </div>
 </section>

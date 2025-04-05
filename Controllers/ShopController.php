@@ -2,6 +2,7 @@
 require_once 'Controllers/BaseController.php';
 require_once "Controllers/CategoryProductController.php";
 require_once "Controllers/ProductController.php";
+require_once "Models/DiscountModel.php";    
 
 
 class ShopController extends BaseController {
@@ -19,7 +20,7 @@ class ShopController extends BaseController {
         $products=$this->model_Product->getProducts();
         $discounts=$this->model_Discount->getDiscounts();
        
-        $this->ViewsUser('E-commerce-user/shop/shop.php',["categories"=>$categories,"products"=>$products,"discounts",$discounts]); 
-        
+        $this->ViewsUser('E-commerce-user/shop/shop.php',["categories"=>$categories,"products"=>$products,"discounts"=>$discounts]); 
+       
     }
 }   
