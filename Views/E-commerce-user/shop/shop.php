@@ -68,7 +68,7 @@
                             ?>
                             <?php foreach ($discounts as $key => $discount): ?>
                                 <?php if ($product["product_id"] == $discount["product_id"]): ?>
-                                    <?php if ($discount["end_date"] >= date("Y-m-d")): ?>
+                                    <?php if ($discount["end_date"] >= date("Y-m-d")&& $discount["start_date"] <= date("Y-m-d") ): ?>
                                         <?php
                                             $original_price = floatval($discount["price"]);
                                             $discount_percentage = floatval($discount["discount_percentage"]);

@@ -932,7 +932,7 @@
             <?php $hasDiscount = false; ?>
                 <?php foreach ($discounts as $key => $discount): ?>
                     <?php if ($product["product_id"] == $discount["product_id"]): ?>
-                        <?php if ($discount["end_date"] >= date("Y-m-d")): ?>
+                        <?php if ($discount["end_date"] >= date("Y-m-d")&& $discount["start_date"] <= date("Y-m-d")     ): ?>
                             <?php 
                             
                                 // Calculate discounted price
@@ -947,7 +947,6 @@
                                 $original_price_formatted = "$" . number_format($original_price, 2); 
                                 $discounted_price_formatted = "$" . number_format($discounted_price, 2);
                             ?>
-
                     <!-- Product Card -->
                             <div class="product-card">
                                 <div class="discount-badge"><?php echo $discount_badge; ?></div>
@@ -984,8 +983,7 @@
                                     <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                                 </div>
                             </div>
-        
-            
+
                             <?php $hasDiscount = true; ?>
                              <?php break; ?>
                           <?php endif; ?>
