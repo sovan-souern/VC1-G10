@@ -225,18 +225,29 @@
                             value="<?php echo htmlspecialchars($profile['name'] ?? ''); ?>"
                             required />
                     </div>
-                   
                     <div class="form-group">
-                        <label for="phone" class="form-label">Phone Number</label>
-                        <input
-                            class="form-control"
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            pattern="[0-9]+"
-                            value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>"
-                            required />
-                        <small class="text-muted">Enter numbers only, no spaces or special characters</small>
+                        <?php if (!empty($profile['phone'])): ?>
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input
+                                class="form-control"
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                pattern="[0-9]+"
+                                value="<?php echo htmlspecialchars($profile['phone']); ?>"
+                                required />
+                            <small class="text-muted">Enter numbers only, no spaces or special characters</small>
+                        <?php elseif (!empty($profile['email'])): ?>
+                            <label for="email" class="form-label">Email Address</label>
+                            <input
+                                class="form-control"
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="<?php echo htmlspecialchars($profile['email']); ?>"
+                                required />
+                            <small class="text-muted">Enter a valid email address without spaces</small>
+                        <?php endif; ?>
                     </div>
                     <div class="mt-4 text-center">
                         <button type="submit" class="btn btn-primary me-2">Save Changes</button>
@@ -257,9 +268,9 @@
         reader.readAsDataURL(event.target.files[0]);
     });
 
-    document.getElementById('phone').addEventListener('input', function(e) {
-        // Remove any non-numeric characters
-        this.value = this.value.replace(/[^0-9]/g, '');
+    document.getElementById('email')?.addEventListener('input', function(e) {
+        // Remove any spaces or invalid characters
+        this.value = this.value.replace(/\s/g, '');
     });
 
     document.querySelector('form').addEventListener('submit', function(e) {
@@ -273,19 +284,9 @@
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                // Dispatch event for nav bar profile update
-                const event = new CustomEvent('profile-image-updated', {
-                    detail: { imageUrl: data.profile_picture }
-                });
-                window.dispatchEvent(event);
-                
-                // Update the session storage
-                sessionStorage.setItem('profile_picture', data.profile_picture);
-                
-                alert('Profile updated successfully');
-                window.location.reload();
+                alert('update Success');
             } else {
-                alert('Error updating profile: ' + data.message);
+                alert('An error occurred. Please try again.');
             }
         })
         .catch(error => {
