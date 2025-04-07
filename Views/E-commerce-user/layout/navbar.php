@@ -36,21 +36,7 @@
                     <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: pink;">Skin care</span>
                 </div>
             </div>
-            <!-- <script>
-                const logoText = document.querySelector('.app-brand-text');
-                if (logoText) {
-                    const text = logoText.textContent;
-                    const coloredText = text
-                    .split('')
-                    .map((char, i) => {
-                        const colors =  ['#FF69B4', '#FFD700', '#800080']; // dark red, purple, orange
-                        return `<span style="color: ${colors[i % colors.length]};">${char}</span>`;
-                    })
-                    .join('');
-                    logoText.innerHTML = coloredText;
-                }
-                </script>
- -->
+      
 
             <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
                 <div class="search-bar border rounded-2 px-3 border-dark-subtle">

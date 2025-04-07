@@ -317,39 +317,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-/* phone */
-        /* @media (max-width: 575px) {
-            
-            .products-container {
-                grid-template-columns: 1fr;
-            }
 
-            .text-content{
-                h2{
-                    width: 30vh;
-                    font-size :25px;
-                }
-                p{
-                    width: 20vh;
-                    margin-bottom: 50%;
-                    font-size :15px;
-                }
-                .cta-button{
-                    a{
-                        width: 20vh;
-                        margin-bottom: 40%;
-                    }
-                }
-            }
-            .image-content-right{
-                img{
-                }
-            }
-        } */
-        /* Existing styles remain unchanged except for the media query and related adjustments */
-
-/* Phone-specific styles */
-/* Phone-specific styles */
 @media (max-width: 575px) {
     /* General adjustments */
     body {

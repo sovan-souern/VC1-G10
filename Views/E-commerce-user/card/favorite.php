@@ -48,3 +48,33 @@
     </script>
 </body>
 </html>
+
+<div class="product-list">
+    <div class="product-card">
+        <span class="favorite-icon" data-id="1">★</span>
+        <img src="https://via.placeholder.com/250x150" alt="Product 1">
+        <div class="product-details">
+            <h3>Boris Savage</h3>
+            <p class="price"><span class="discount">-25%</span> $544.50</p>
+            <a href="#" class="add-to-cart">Add to Cart</a>
+        </div>
+    </div>
+    <div class="product-card">
+        <span class="favorite-icon" data-id="2">★</span>
+        <img src="https://via.placeholder.com/250x150" alt="Product 2">
+        <div class="product-details">
+            <h3>Imani Hull</h3>
+            <p class="price"><span class="discount">-14%</span> $686.28</p>
+            <a href="#" class="add-to-cart">Add to Cart</a>
+        </div>
+    </div>
+    <div class="product-card">
+        <span class="favorite-icon" data-id="3">★</span>
+        <img src="https://via.placeholder.com/250x150" alt="Product 3">
+        <div class="product-details">
+            <h3>Product 3</h3>
+            <p class="price">$798.00</p>
+            <a href="#" class="add-to-cart">Add to Cart</a>
+        </div>
+    </div>
+</div>
