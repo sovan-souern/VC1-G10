@@ -730,10 +730,6 @@ document.addEventListener('DOMContentLoaded', function() {
         font-weight: bold;
     }
 
-
-
-
-
     .close-cart {
         font-size: 1.5rem;
         cursor: pointer;
