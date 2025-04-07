@@ -37,7 +37,11 @@
                     <td>2</td>
                     <td>$254</td>
                     <td>
-                        <button class="btn view-details-btn" onclick="showDetails()">View Details</button>
+                        <button class="btn view-details-btn"
+                            onclick="showDetails('1', 'Michael Holz', 'Jun 15, 2017', '2', '$254')">
+                            View Details
+                        </button>
+
                     </td>
                 </tr>
             </tbody>
@@ -48,9 +52,12 @@
     <div id="orderDetailsModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
+            <!-- <div class="text-center">
+                <button class="btn" onclick="downloadReceipt()">Download Receipt</button>
+            </div> -->
             <div class="card" style="border-radius: 10px;">
                 <div class="card-header px-4 py-5">
-                    <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">Anna</span>!</h5>
+                    <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">Sreylet</span>!</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -203,6 +210,10 @@
         margin-bottom: 15px;
     }
 
+    .h2 {
+        font-size: 25px;
+    }
+
     input,
     select,
     button {
@@ -271,10 +282,18 @@
 
     .modal-content {
         background-color: #fff;
-        margin: 15% auto;
+        /* margin: 15% auto; */
         padding: 20px;
+        /* padding-top: 30px; */
         width: 50%;
         border-radius: 10px;
+        max-height: 10vh;
+        /* limit height to 80% of viewport */
+        min-height: 95vh;
+        /* limit height to 80% of viewport */
+        /* allow internal scroll if content exceeds */
+        margin: 10px auto;
+        /* margin: 10px; */
     }
 
     .close {
@@ -292,5 +311,14 @@
 
     .d-flex {
         color: black;
+        text-align: center;
+    }
+
+    .card-footer {
+        height: 2vh;
+    }
+
+    .card-header {
+        height: 2vh;
     }
 </style>
