@@ -102,7 +102,9 @@ class UserModel
 
     function getActiveUsers()
     {
-        $stmt = $this->pdo->query("SELECT admin_id, name, phone, role, status, created_at 
+        $stmt = $this->pdo->query("SELECT admin_id, name, phone, role, profile_picture, 
+                                          last_activity AS login_at, 
+                                          TIMESTAMPDIFF(MINUTE, last_activity, NOW()) AS minutes_ago 
                                    FROM admins 
                                    WHERE TIMESTAMPDIFF(MINUTE, last_activity, NOW()) <= 10");
         return $stmt->fetchAll(); // Fetch users active in the last 10 minutes

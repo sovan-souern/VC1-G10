@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,21 +27,7 @@
             color: #e7ab3c; /* Added hover effect for price in discount card */
         }
         /* Header Styles */
-        header h1 {
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            margin: 0;
-            font-size: 2.5rem;
-        }
-
-        header p {
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            color: white;
-            font-size: 1.2rem;
-            text-align: center;
-        }
+      
 
         /* Container */
         .container {
@@ -105,18 +93,7 @@
             background: #ff3b2f;
         }
 
-        /* Spinning Animation Starting from Right */
-
-        /* @keyframes spinFromRight {
-            0% {
-                transform: rotate(90deg); Starts from right
-            }
-            100% {
-                transform: rotate(450deg); Completes full circle + starting point
-            } 
-        }  */
-
-        /* Info Overlay */
+    
         .info {
             position: absolute;
             bottom: 0;
@@ -627,7 +604,7 @@
 
         .product-card {
             background-color: white;
-            border-radius: 10px;
+            /* border-radius: 10px; */
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -696,7 +673,7 @@
             width: 400px;
             background: white;
             padding: 20px;
-            border-radius: 10px;
+            /* border-radius: 10px; */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             position: relative;
@@ -730,20 +707,60 @@
         position: relative; /* Required for absolutely positioned children */
     }
 /* icon */
-    .general-product-hover {
-        display: flex;
-        justify-content: center; /* Center icons */
-        gap: 15px; /* Space between icons */
-        opacity: 0; /* Hide icons initially */
-        transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; /* Smooth effect */
-        visibility: hidden; /* Hide elements from interactions */
-        position: absolute; /* Position the icons absolutely */
-        bottom: 15px; /* Position from the bottom */
-        left: 50%; /* Center horizontally */
-        transform: translateX(-50%); /* Ensure perfect centering */
-        pointer-events: none; /* Prevent mouse events when hidden */
-    }
+.general-product-hover {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease; /* Added transition for all properties */
+    padding: 0;
+    z-index: 2;
+}
 
+.general-product-item:hover .general-product-hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+.general-product-hover li {
+    list-style: none;
+    margin: 0;
+    transition: all 0.3s ease; /* Added transition for all properties */
+}
+
+.general-product-hover li a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    transition: all 0.3s ease; /* Added transition for all properties */
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.general-product-hover li a:hover {
+    background: #e7ab3c;
+    color: #ffffff;
+    transform: scale(1.15);
+}
+
+.general-product-hover li a span {
+    font-size: 16px;
+    color: #111111;
+    transition: color 0.3s ease; /* Added transition for color */
+}
+
+.general-product-hover li a:hover span {
+    color: #ffffff;
+}
     /* When hovering over the product card, show the icons */
     .product-card:hover .general-product-hover {
         opacity: 1; /* Show icons */
@@ -825,37 +842,83 @@
 </head>
 
 <body>
-    <header>
-        <h1>Welcome to Glow Skincare</h1>
-        <p>Your journey to radiant skin starts here!</p>
-    </header>
+
 
     <!-- Cards of Products -->
     <div class="cards">
         <div class="card">
-            <img src="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg" alt="Hydrating Moisturizer">
-            <div class="info">Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</div>
+            <img src="https://m.media-amazon.com/images/I/61tBEdmPRcL._AC_UF350,350_QL80_.jpg" alt="Hydrating Moisturizer">
+            <div class="info">lipstick Vaseline.</div>
+        </div>
+        <div class="card">
+            <img src="https://www.thaibynature.com/export/image/cache/catalog/wholesale/health-beauty/body-cream-lotion/vaseline/vaseline-gluta-hya/vaseline-gluta-hya-all-1200x800.jpg" alt="Hydrating Moisturizer">
+            <div class="info">Vaseline.</div>
+        </div>
+
+        <div class="card">
+            <img src="https://i0.wp.com/callalilly.shop/wp-content/uploads/2023/09/lotion-serum-1-1.jpg?fit=460%2C460" alt="Hydrating Moisturizer">
+            <div class="info">Callalilly.</div>
+        </div>
+        <div class="card">
+            <img src="https://i0.wp.com/callalilly.shop/wp-content/uploads/2023/09/Brand-Ambassador-Album-02.png?fit=1500%2C1500" alt="Hydrating Moisturizer">
+            <div class="info">Callalilly.</div>
         </div>
         <div class="card">
             <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <div class="info">Brighten your complexion with our powerful Vitamin C serum.</div>
+            <div class="info">Dove.</div>
         </div>
         <div class="card">
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
-            <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
+            <div class="info">Miss sunflower.</div>
         </div>
         <div class="card">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <div class="info">Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</div>
+            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lt6p39pn7bgk55" alt="Sunscreen SPF 50">
+            <div class="info">Miss sunflower body lotion.</div>
         </div>
         <div class="card">
-            <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <div class="info">Brighten your complexion with our powerful Vitamin C serum.</div>
+            <img src="https://www.thaibynature.com/export/image/cache/catalog/discover/beauty-products/body-care/body-lotion/citra-whitening-lotion/citra-lotion-all-1200x800.jpg" alt="Sunscreen SPF 50">
+            <div class="info">SPF citra.</div>
         </div>
         <div class="card">
-            <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
-            <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
+            <img src="https://www.thaibynature.com/export/image/cache/catalog/startup-sme/beauty/body-care/soap/citra-bar-soap/Main-1200x800.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Soap citra.</div>
         </div>
+        <div class="card">
+            <img src="https://www.beautypackaging.com/wp-content/uploads/sites/8/2024/11/017_main-13.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Nivea.</div>
+        </div>
+        <div class="card">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20230130/8F8S/63d803e2aeb269c6510329d0/-473Wx593H-4915693380-multi-MODEL.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Nivea.</div>
+        </div>
+        <div class="card">
+            <img src="https://down-vn.img.susercontent.com/file/e51b7974a1af0f2ea03f5a96804217f5" alt="Sunscreen SPF 50">
+            <div class="info">Body oil.</div>
+        </div>
+        <div class="card">
+            <img src="https://s9.kh1.co/__image/w=600,h=600,fit=cover/1b/1be5d7c51a56e185757cc60b646d9e97d51a3a71.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Felix hair.</div>
+        </div>
+        <div class="card">
+            <img src="https://m.media-amazon.com/images/I/51Z2sQyCB-L.jpg" alt="Sunscreen SPF 50">
+            <div class="info">lipstick.</div>
+        </div>
+        <div class="card">
+            <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98p-lyt0fqimk128fd" alt="Sunscreen SPF 50">
+            <div class="info">Yasaka.</div>
+        </div>
+        <div class="card">
+            <img src="https://bellavitaorganic.com/cdn/shop/files/download_0315aafb-8c5d-4b3d-a00e-6cc8cc1b00b2.jpg?v=1732609831&width=1000" alt="Sunscreen SPF 50">
+            <div class="info">Nail​​​​​​ polish.</div>
+        </div>
+        <div class="card">
+            <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
+            <div class="info">Nail​​​​​​ polish.</div>
+        </div>
+
+
+
+
     </div>
     <section class="discount-products">
     <div class="discount-header">
@@ -865,63 +928,68 @@
 
     <div class="container">
         <div class="products-container">
-            <?php
-            if (isset($discounts) && is_array($discounts) && !empty($discounts)) {
-                foreach ($discounts as $discount) {
-                    // Calculate discounted price
-                    $original_price = floatval($discount["price"]);
-                    $discount_percentage = floatval($discount["discount_percentage"]);
-                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
+        <?php foreach ($products as $index => $product): ?>
+            <?php $hasDiscount = false; ?>
+                <?php foreach ($discounts as $key => $discount): ?>
+                    <?php if ($product["product_id"] == $discount["product_id"]): ?>
+                        <?php if ($discount["end_date"] >= date("Y-m-d")&& $discount["start_date"] <= date("Y-m-d")     ): ?>
+                            <?php 
+                            
+                                // Calculate discounted price
+                                $original_price = floatval($discount["price"]);
+                                $discount_percentage = floatval($discount["discount_percentage"]);
+                                $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                    // Sanitize and prepare data
-                    $product_name = htmlspecialchars($discount["product_name"]);
-                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
-                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                    $original_price_formatted = "$" . number_format($original_price, 2); 
-                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-            ?>
+                                // Sanitize and prepare data
+                                $product_name = htmlspecialchars($discount["product_name"]);
+                                $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                                $original_price_formatted = "$" . number_format($original_price, 2); 
+                                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                            ?>
                     <!-- Product Card -->
-                    <div class="product-card">
-                        <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                        <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                            <!--icon favorite , view   -->
-                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                            <!--icon favorite , view   -->
-                            <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
-                                        <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon_heart_alt"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon_bag_alt"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name"><?php echo $product_name; ?></h5>
-                          
-                            <div class="price">
-                                <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                <?php echo $discounted_price_formatted; ?>
+                            <div class="product-card">
+                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                    <!--icon favorite , view   -->
+                                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                    <!--icon favorite , view   -->
+                                    <ul class="general-product-hover product-hover-shared">
+                                        <li>
+                                            <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
+                                                <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon_heart_alt"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon_bag_alt"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                
+                                    <div class="price">
+                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                        <?php echo $discounted_price_formatted; ?>
+                                    </div>
+                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                                </div>
                             </div>
-                            <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
-                        </div>
-                    </div>
-            <?php
-                }
-            } else {
-                echo '<p>No discounted products available.</p>';
-            }
-            ?>
+
+                            <?php $hasDiscount = true; ?>
+                             <?php break; ?>
+                          <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -955,30 +1023,107 @@
         </div>
     </div>
 
+
     <!-- Product Cards -->
-    <div class="product-container">
-        <div class="product-card1">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-        <div class="product-card1">
-            <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <p>Brighten your complexion with our powerful Vitamin C serum.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-        <div class="product-card1">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-    </div>
 
-    <!-- Full-Screen Image Section -->
-    <!-- <div class="full-screen-image">
-        <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Hydrating Moisturizer">
-    </div> -->
+            <style>
+                .product-card1 {
+            position: relative;
+        }
 
+        .learn-more {
+            background-color:rgb(228, 148, 155);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .learn-more:hover {
+            background-color:rgb(201, 102, 105);
+        }
+
+        .usage-text {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .usage-text.show {
+            display: block;
+            opacity: 1;
+        }
+            </style>
+
+
+
+        <!-- Product Cards -->
+        <div class="product-container">
+            <div class="product-card1">
+                <img src="https://m.media-amazon.com/images/I/61Vr3ovoCNL.jpg" alt="Hydrating Moisturizer">
+                <p>Dove lotion.</p>
+                <button class="learn-more">Learn More</button>
+                <div class="usage-text">
+                    How to use:<br>
+                    1. Cleanse skin<br>
+                    2. Apply small amount<br>
+                    3. Massage gently<br>
+                    4. Use twice daily
+                </div>
+            </div>
+            <div class="product-card1">
+                <img src="https://m.media-amazon.com/images/I/61amvGt0SCL.jpg" alt="Vitamin C Serum">
+                <p>Vaseline lotion.</p>
+                <button class="learn-more">Learn More</button>
+                <div class="usage-text">
+                    How to use:<br>
+                    1. Wash and dry skin<br>
+                    2. Apply dime-sized amount<br>
+                    3. Rub in circles<br>
+                    4. Use as needed
+                </div>
+            </div>
+            <div class="product-card1">
+                <img src="https://m.media-amazon.com/images/I/51buz-ebuCL.jpg" alt="Hydrating Moisturizer">
+                <p>Nivea lotion.</p>
+                <button class="learn-more">Learn More</button>
+                <div class="usage-text">
+                    How to use:<br>
+                    1. Start with dry skin<br>
+                    2. Apply lotion<br>
+                    3. Massage into skin<br>
+                    4. Use after shower
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.learn-more').forEach(button => {
+                button.addEventListener('click', function() {
+                    const usageText = this.nextElementSibling;
+                    const isShown = usageText.classList.contains('show');
+                    
+                    // Hide all other usage texts
+                    document.querySelectorAll('.usage-text').forEach(text => {
+                        text.classList.remove('show');
+                    });
+                    
+                    // Toggle the clicked one
+                    if (!isShown) {
+                        usageText.classList.add('show');
+                    }
+                });
+            });
+        </script>
+        
     <!-- Information Section -->
     <div class="info-section">
         <div class="container">
@@ -1063,264 +1208,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-    <div class="cart-panel">
-        <div class="cart-header">
-            <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
-            <div class="close-cart">x</div>
-        </div>
-        <div class="cart-items">
-            <!-- Cart items will be dynamically added here -->
-        </div>
-        <div class="cart-footer">
-            <div class="subtotal">
-                <span>Subtotal</span>
-                <span id="subtotal-amount">$0.00</span>
-            </div>
-            <button class="view-cart-btn" onclick="window.location.href='checkout';">Checkout</button>
-        </div>
-    </div>
-
-
-    <!-- Inline CSS -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+     
 
-        /* Shared Styles for Add to Cart Button */
-        .add-to-cart {
-            background-color: pink;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin-top: 10px;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
+  
 
-        .add-to-cart:hover {
-            background-color: #ff6699;
-            transform: translateY(-2px);
-        }
 
-        .add-to-cart a {
-            text-decoration: none;
-            color: white;
-            transition: color 0.3s ease;
-        }
 
-        /* Discounted Product Card Styles */
-        .discount-product-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-
-        .discount-product-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-image {
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            transition: filter 0.3s ease;
-        }
-
-        .discount-product-card:hover .product-image {
-            filter: brightness(110%);
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff5252;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            z-index: 1;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .discount-product-card:hover .discount-badge {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .discount-product-hover {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 0;
-            z-index: 2;
-        }
-
-        .discount-product-card:hover .discount-product-hover {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .discount-product-hover li {
-            list-style: none;
-            margin: 0;
-            transition: all 0.3s ease;
-        }
-
-        .discount-product-hover li a {
-            display: block;
-            width: 40px;
-            height: 40px;
-            background: #ffffff;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .discount-product-hover li a:hover {
-            background: #ff5252;
-            color: #ffffff;
-            transform: scale(1.15);
-        }
-
-        .discount-product-hover li a span {
-            font-size: 16px;
-            color: #111111;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-hover li a:hover span {
-            color: #ffffff;
-        }
-
-        .product-info {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .product-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-card:hover .product-name {
-            color: #ff5252;
-        }
-
-        .rating {
-            color: #ffc107;
-            margin-bottom: 5px;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #0d6efd;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-card:hover .price {
-            color: #ff5252;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-right: 8px;
-        }
-
-        /* General Product Item Styles */
-        .general-product-item {
-            position: relative;
-            background: #fff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .general-product-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .general-product-pic {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .general-product-pic img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .general-product-item:hover .general-product-pic img {
-            transform: scale(1.1);
-        }
-
-        .general-product-hover {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 0;
-            z-index: 2;
-        }
-
-        .general-product-item:hover .general-product-hover {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .general-product-hover li {
-            list-style: none;
-            margin: 0;
-            transition: all 0.3s ease;
-        }
+      
+     
 
         .general-product-hover li a {
             display: block;
@@ -1341,511 +1237,8 @@ document.addEventListener('DOMContentLoaded', function() {
             transform: scale(1.15);
         }
 
-        .general-product-hover li a span {
-            font-size: 16px;
-            color: #111111;
-            transition: color 0.3s ease;
-        }
-
-        .general-product-hover li a:hover span {
-            color: #ffffff;
-        }
-
-        .general-product-text {
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .general-product-text h6 {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .general-product-text h6 a {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .general-product-item:hover .general-product-text h6 a {
-            color: #e7ab3c;
-        }
-
-        .general-product-price {
-            font-weight: bold;
-            font-size: 16px;
-            color: #333;
-            transition: color 0.3s ease;
-        }
-
-        .general-product-item:hover .general-product-price {
-            color: #e7ab3c;
-        }
-        .discount-product-card:hover .price {
-            color: #e7ab3c; /* Added hover effect for price in discount card */
-        } 
-        .general-product-item:hover .general-product-price {
-            color: #e7ab3c;
-        }
-        /* Cart Panel Styles */
-        .cart-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 350px;
-            height: 100%;
-            background: #fff;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .cart-panel.active {
-            transform: translateX(0);
-        }
-
-        .cart-header {
-            background-color: #ffb6c1;
-            color: #000;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .close-cart {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #000;
-            transition: transform 0.3s ease;
-        }
-
-        .close-cart:hover {
-            transform: rotate(90deg);
-        }
-
-        .cart-items {
-            padding: 20px;
-            max-height: calc(100% - 150px);
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            margin-right: 15px;
-            border-radius: 5px;
-        }
-
-        .cart-item-details {
-            flex-grow: 1;
-        }
-
-        .cart-item-name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .cart-item-price {
-            font-weight: bold;
-            color: #ff6699;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            margin-top: 5px;
-        }
-
-        .quantity-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #333;
-            padding: 0 5px;
-        }
-
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            margin: 0 5px;
-        }
-
-        .cart-item-total {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .delete-btn {
-            margin-left: 10px;
-            cursor: pointer;
-            color: #777;
-            transition: color 0.3s ease;
-        }
-
-        .delete-btn:hover {
-            color: #ff3333;
-        }
-
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid #eee;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: #fff;
-        }
-
-        .subtotal {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .view-cart-btn {
-            background-color: #ffb6c1;
-            color: #000;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-
-        .view-cart-btn:hover {
-            background-color: #ff9eb5;
-        }
-
-        /* Image Zoom Modal Styles */
-        .image-zoom-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s ease;
-        }
-
-        .image-zoom-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .image-zoom-content {
-            position: relative;
-            text-align: center;
-        }
-
-        #zoomed-image {
-            max-width: 90%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ffffff;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #ff5252;
-            color: #ffffff;
-            transform: scale(1.05);
-        }
-
-        /* Trend Section Styles */
-        .trend {
-            padding: 30px 0;
-        }
-
-        .section-title h4 {
-            font-size: 20px;
-            font-weight: bold;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        .section-title h4::after {
-            content: "";
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: red;
-            margin-top: 5px;
-        }
-
-        .trend__content {
-            padding: 10px;
-        }
-
-        .trend__item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .trend__item__pic img {
-            width: 200px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .trend__item__text {
-            margin-left: 15px;
-        }
-
-        .trend__item__text h6 {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .product__price {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* Pagination Styles */
-        .pagination__option {
-            margin-top: 30px;
-        }
-
-        .pagination__option a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            border-radius: 50%;
-            margin: 0 5px;
-            color: #333;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .pagination__option a.active,
-        .pagination__option a:hover {
-            background: #e7ab3c;
-            color: #fff;
-        }
-
-        .pagination__option i {
-            font-size: 16px;
-            line-height: 40px;
-        }
-    </style>
-
-    <!-- JavaScript -->
-<!-- JavaScript -->
-<script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
-<script src="Views/E-commerce-user/assets/js/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cartPanel = document.querySelector('.cart-panel');
-    const closeCart = document.querySelector('.close-cart');
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const cartItemCount = document.querySelector('#cart-item-count');
-    const subtotalAmount = document.querySelector('#subtotal-amount');
-    const imageZoomModal = document.querySelector('.image-zoom-modal');
-    const zoomedImage = document.querySelector('#zoomed-image');
-    const backBtn = document.querySelector('.back-btn');
-    const zoomButtons = document.querySelectorAll('.image-zoom');
-    let cartItems = [];
-
-    // Load cart from localStorage on page load
-    try {
-        cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (e) {
-        console.error("Error parsing cart from localStorage:", e);
-        cartItems = [];
-    }
-
-    // Render cart items on page load
-    cartItems.forEach(item => addCartItem(item));
-    updateCartSummary();
-
-    // Cart Functionality
-    function toggleCart() {
-        cartPanel.classList.toggle('active');
-    }
-
-    closeCart.addEventListener('click', toggleCart);
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productName = this.getAttribute('data-product-name');
-            const productPrice = parseFloat(this.getAttribute('data-product-price'));
-            const productImage = this.getAttribute('data-product-image');
-
-            const existingItem = cartItems.find(item => item.name === productName);
-            if (existingItem) {
-                existingItem.quantity += 1;
-                updateCartItem(existingItem);
-            } else {
-                const newItem = {
-                    name: productName,
-                    price: productPrice,
-                    image: productImage,
-                    quantity: 1
-                };
-                cartItems.push(newItem);
-                addCartItem(newItem);
-            }
-
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-            console.log("Cart after adding item:", cartItems);
-
-            if (!cartPanel.classList.contains('active')) {
-                toggleCart();
-            }
-            updateCartSummary();
-        });
-    });
-
-    function addCartItem(item) {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <div class="cart-item-details">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                <div class="cart-item-quantity">
-                    <button class="quantity-btn decrease-btn">-</button>
-                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
-                    <button class="quantity-btn increase-btn">+</button>
-                </div>
-            </div>
-            <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
-            <div class="delete-btn"><i class="fa fa-trash"></i></div>
-        `;
-        cartItemsContainer.appendChild(cartItem);
-
-        attachItemListeners(cartItem, item);
-    }
-
-    function updateCartItem(item) {
-        const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
-            el => el.querySelector('.cart-item-name').textContent === item.name
-        );
-        const input = cartItem.querySelector('.quantity-input');
-        input.value = item.quantity;
-        cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-        updateCartSummary();
-        // Save to localStorage
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-    }
-
-    function attachItemListeners(cartItem, item) {
-        const decreaseBtn = cartItem.querySelector('.decrease-btn');
-        const increaseBtn = cartItem.querySelector('.increase-btn');
-        const quantityInput = cartItem.querySelector('.quantity-input');
-        const deleteBtn = cartItem.querySelector('.delete-btn');
-
-        decreaseBtn.addEventListener('click', () => {
-            if (item.quantity > 1) {
-                item.quantity--;
-                updateCartItem(item);
-            }
-        });
-
-        increaseBtn.addEventListener('click', () => {
-            item.quantity++;
-            updateCartItem(item);
-        });
-
-        quantityInput.addEventListener('change', () => {
-            let value = parseInt(quantityInput.value);
-            if (value < 1 || isNaN(value)) value = 1;
-            item.quantity = value;
-            updateCartItem(item);
-        });
-
-        deleteBtn.addEventListener('click', () => {
-            cartItem.remove();
-            cartItems = cartItems.filter(i => i.name !== item.name);
-            updateCartSummary();
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-        });
-    }
-
-    function updateCartSummary() {
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        cartItemCount.textContent = `${totalItems} items`;
-        subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
-    }
-
-    // Image Zoom Functionality
-    zoomButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const imageUrl = this.getAttribute('data-image');
-            zoomedImage.src = imageUrl;
-            imageZoomModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        });
-    });
-
-    backBtn.addEventListener('click', function() {
-        imageZoomModal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Restore scrolling
-    });
-
-    // Close modal when clicking outside the image
-    imageZoomModal.addEventListener('click', function(e) {
-        if (e.target === imageZoomModal) {
-            imageZoomModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-});
-</script>
+      
+</style>
 
 </body>
 

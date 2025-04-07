@@ -83,18 +83,32 @@
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent; /* Default border */
+        }
+
+        .profile-pic.active {
+            border-color: lightgreen; /* Green border for active users */
+        }
+
+        .inactive {
+            color: gray; /* Optional: Set a color for inactive users */
+        }
+
+        .active-now {
+            color: lightgreen; /* Set the color for "Active now" text */
+            font-weight: bold;
         }
     </style>
 
 <div class="container">
-    <h3><i class="fas fa-users"></i> Admin History</h3>
+<h3><i class="fas fa-users"></i> Active Admins and shopOwners</h3>
     
     <div class="card">
         <!-- Search Bar -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="form-control" id="searchInput" placeholder="Search by name or email..." onkeyup="filterTable()">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by name or phone..." onkeyup="filterTable()">
             </div>
         </div>
 
@@ -103,31 +117,68 @@
                 <tr>
                     <th>ID</th>
                     <th><i class="fas fa-user"></i> Full Name</th>
-                    <th><i class="fas fa-envelope"></i> Phone</th>
-                    <th><i class="fas fa-calendar-alt"></i> Created At</th>
+                    <th><i class="fas fa-phone"></i> Phone/Email</th>
+                    <th><i class="fas fa-user-tag"></i> Role</th>
+                    <th><i class="fas fa-calendar-alt"></i> Login At</th>
                     <th><i class="fas fa-user-tag"></i> Profile</th>
                 </tr>
             </thead>
             <tbody id="user-list">
-                <?php if (!empty($admins)): ?>
-                    <?php foreach ($admins as $admin): ?>
+                <?php 
+                require_once __DIR__ . '/../../Models/UserModel.php';   
+                $userModel = new UserModel();
+
+                try {
+                    $activeUsers = $userModel->getActiveUsers();
+
+                    // Filter to show only admins and shopowners
+                    $filteredUsers = array_filter($activeUsers, function($user) {
+                        return in_array(strtolower($user['role']), ['admin', 'shopowner']);
+                    });
+
+                    if (!empty($filteredUsers)): ?>
+                        <?php foreach ($filteredUsers as $user): ?>
+                            <tr>
+                                <td><?php echo isset($user['admin_id']) ? (int)$user['admin_id'] : 'N/A'; ?></td>
+                                <td><?php echo htmlspecialchars($user['name']); ?></td>
+                                <td>
+                                    <?php if (!empty($user['email'])): ?>
+                                        <?php echo htmlspecialchars($user['email']); ?>
+                                    <?php elseif (!empty($user['phone'])): ?>
+                                        <?php echo htmlspecialchars($user['phone']); ?>
+                                    <?php else: ?>
+                                        <span class="text-muted">N/A</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($user['role']); ?></td>
+                                <td><?php echo htmlspecialchars($user['login_at']); ?></td>
+                                <td>
+                                    <img src="<?php echo !empty($user['profile_picture']) ? '/' . $user['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
+                                         alt="Profile Picture" 
+                                         class="profile-pic <?php echo $user['minutes_ago'] <= 3 ? 'active' : ''; ?>">
+                                    <div>
+                                        <?php 
+                                        if ($user['minutes_ago'] <= 3) {
+                                            echo "<span class='active-now'>Active now</span>";
+                                        } elseif ($user['minutes_ago'] > 3 && $user['minutes_ago'] <= 10) {
+                                            echo "<span class='inactive'>Active " . $user['minutes_ago'] . "m ago</span>";
+                                        }
+                                        ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <tr>
-                            <td><?php echo isset($admin['admin_id']) ? (int)$admin['admin_id'] : 'N/A'; ?></td>
-                            <td><?php echo htmlspecialchars($admin['name']); ?></td>
-                            <td><?php echo htmlspecialchars($admin['phone']); ?></td>
-                            <td><?php echo htmlspecialchars($admin['created_at']); ?></td>
-                            <td>
-                                <img src="<?php echo !empty($admin['profile_picture']) ? '/' . $admin['profile_picture'] : '/Views/assets/img/avatars/1.png'; ?>" 
-                                     alt="Profile Picture" 
-                                     class="profile-pic">
-                            </td>
+                            <td colspan="6" class="text-center">No active users found.</td>
                         </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
+                    <?php endif; ?>
+                <?php 
+                } catch (Exception $e) { ?>
                     <tr>
-                        <td colspan="5" class="text-center">No accounts found.</td>
+                        <td colspan="6" class="text-center text-danger">Error fetching user list: <?php echo htmlspecialchars($e->getMessage()); ?></td>
                     </tr>
-                <?php endif; ?>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -140,8 +191,8 @@
 
         for (var i = 0; i < rows.length; i++) {
             var name = rows[i].getElementsByTagName("td")[1].textContent.toLowerCase();
-            var email = rows[i].getElementsByTagName("td")[2].textContent.toLowerCase();
-            if (name.includes(input) || email.includes(input)) {
+            var phone = rows[i].getElementsByTagName("td")[2].textContent.toLowerCase();
+            if (name.includes(input) || phone.includes(input)) {
                 rows[i].style.display = "";
             } else {
                 rows[i].style.display = "none";
