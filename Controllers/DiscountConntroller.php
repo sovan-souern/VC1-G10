@@ -15,6 +15,12 @@ class DiscountController extends BaseController
         $discounts = $this->model->getDiscounts();
         $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
     }
+    function history()
+    {
+        $discounts = $this->model->getDiscounts();
+        $this->views('/Inventory/Discounts/history.php', ["discounts" => $discounts]);
+        // require_once 'Views/Inventory/Discounts/history.php';
+    }
 
     function create($id)
     {

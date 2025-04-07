@@ -78,7 +78,6 @@
         font-size: 14px;
         border-radius: 4px;
     }
-
     .btn-success {
         background-color: #28a745;
         border-color: #28a745;

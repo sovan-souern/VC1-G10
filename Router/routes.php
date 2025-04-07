@@ -123,6 +123,7 @@ $routes->get('/products/view', [ProductController::class, 'view']);
 // Discount Routes
 $routes->get('/discount', [DiscountController::class, 'index']);
 $routes->get('/create-discount', [DiscountController::class, 'create']);
+$routes->get('/discount/history', [DiscountController::class, 'history']);
 $routes->get('/diescoutCategory', [DiscountController::class, 'discountProductCategory']);
 $routes->post('/discount/storeCategory', [DiscountController::class, 'storeCategory']);
 $routes->get('/descount/brand', [DiscountController::class, 'discountBrand']);
