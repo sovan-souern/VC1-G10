@@ -102,6 +102,12 @@
 </html>
 
 <style>
+      .slideshow-container {
+        display: none;
+    }
+    .dot-container {
+        display: none;
+    }
   .shop-container {
     text-align: center;
     max-width: 1100px;

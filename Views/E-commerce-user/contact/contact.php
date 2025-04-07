@@ -14,9 +14,12 @@
         }
 
         /* Navbar Styles */
-        .navbar {
-        
-        }
+        .slideshow-container {
+        display: none;
+    }
+    .dot-container {
+        display: none;
+    }
 
         .navbar-brand, .nav-link {
             color: white !important;

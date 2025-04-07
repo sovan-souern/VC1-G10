@@ -5,6 +5,7 @@
         top: 0;
         z-index: 1000;
     }
+   
 </style>
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
@@ -882,6 +883,8 @@ document.addEventListener('DOMContentLoaded', function() {
     .view-cart-btn:hover {
         background-color: #ff9eb5;
     }
+        
+        
 </style>
 
 <!-- JavaScript (Corrected) -->
@@ -2338,7 +2341,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span>Change Password</span>
                         </a>
 
-                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Shopowner')): ?>
+                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'ShopOwner')): ?>
                             <a href="/dashboard" class="settings-item">
                                 <i class="bi bi-speedometer2"></i>
                                 <span>Dashboard</span>

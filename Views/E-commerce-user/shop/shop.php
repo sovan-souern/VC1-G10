@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-heading">
                             <a data-toggle="collapse" data-target="#collapseOne" class="category-toggle">
-                                <span>Skin Care Serum</span>
+                                <span>Type Products</span>
                                 <i class="fas fa-chevron-down toggle-icon"></i>
                             </a>
                         </div>
@@ -66,7 +66,7 @@
             </div>
 
             <!-- Quick Filters -->
-            <div class="quick-filters">
+            <!-- <div class="quick-filters">
                 <div class="filter-item" data-filter="new">
                     <i class="fas fa-star"></i> New Arrivals
                 </div>
@@ -76,7 +76,7 @@
                 <div class="filter-item" data-filter="sale">
                     <i class="fas fa-tag"></i> On Sale
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
