@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+
+=======
 <style>
     /* style position sticky and z-index */
     .navbar-item{
@@ -6,6 +9,7 @@
         z-index: 1000;
     }
 </style>
+>>>>>>> 2fbfc2039bdd777ebc02c41e88ce09f7246f967f
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
@@ -158,6 +162,55 @@
                             <a href="/contact" class="nav-link" data-navigate="/contact">Contact</a>
                         </li>
                     </ul>
+<<<<<<< HEAD
+
+            <!-- Navbar -->
+            <div class="d-none d-lg-flex align-items-end">
+                <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <!-- Favorite Icon -->
+                    <li class="d-flex align-items-center">
+                        <a href="/favorite" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                        </a>
+                    </li>
+
+                    <!-- Cart Icon with Adjusted Badge -->
+                    <li class="position-relative d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <a href="#" class="cart-toggle text-decoration-none d-flex flex-column align-items-center position-relative">
+                            <iconify-icon icon="mdi:cart" class="fs-4"></iconify-icon>
+                            <span class="position-absolute badge rounded-circle bg-primary"
+                                style="width: 24px; height: 24px; font-size: 12px; top: -14px; right: -14px; display: flex; align-items: center; justify-content: center;">
+                               03 <a href="#" class="text-white text-decoration-none cart-badge-toggle" id="nav-cart-count"></a>
+                            </span>
+                        </a>
+                    </li>
+
+                    <!-- History Icon -->
+                    <li class="d-flex align-items-center">
+                        <a href="/history" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <i class="fa fa-history fs-4 text-dark"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="cart-panel">
+                <div class="cart-header">
+                    <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
+                    <div class="close-cart">x</div>
+                </div>
+                <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-footer">
+                    <div class="subtotal">
+                        <span>Subtotal</span>
+                        <span id="subtotal-amount">$0.00</span>
+                    </div>
+                    <button class="view-cart-btn" onclick="window.location.href='cart';">Views Cart</button>
+=======
+>>>>>>> 2fbfc2039bdd777ebc02c41e88ce09f7246f967f
                 </div>
             </div>
         </nav>
@@ -1380,6 +1433,708 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script> -->
 
+<<<<<<< HEAD
+<style>
+    /* Banner Section */
+    #banner {
+        background: #FBDEE7;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #banner .container {
+        padding: 0;
+    }
+
+    #banner .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    #banner .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+        /* Adjust height as needed */
+    }
+
+    #banner .img-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #banner .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Ensures the image covers the area without distortion */
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        /* Smooth transition for scale and opacity */
+    }
+
+    /* Hover effect on the image */
+    #banner .banner-image:hover {
+        transform: scale(1.05);
+        /* Slight zoom on hover */
+        opacity: 0.9;
+        /* Slight fade on hover */
+    }
+
+    /* Smooth transition for Swiper slides */
+    #banner .swiper-slide {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    #banner .swiper-slide-active {
+        opacity: 1;
+    }
+
+    /* Optional: Style the pagination dots */
+    #banner .swiper-pagination-bullet {
+        background: #fff;
+        opacity: 0.5;
+    }
+
+    #banner .swiper-pagination-bullet-active {
+        background: #ff6f61;
+        /* Matches your theme color */
+        opacity: 1;
+    }
+</style>
+
+<style>
+    .dropdown-user .dropdown-toggle::after {
+        display: none;
+    }
+    
+    .dropdown-menu {
+        min-width: 240px;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem !important;
+        animation: dropdownFade 0.2s ease;
+    }
+
+    @keyframes dropdownFade {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .avatar-online {
+        position: relative;
+    }
+
+    .avatar-online::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #28a745;
+        border: 2px solid #fff;
+    }
+    .profile-dropdown {
+        position: relative;
+    }
+
+    .profile-menu {
+        min-width: 300px;
+        padding: 1rem;
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
+        margin: -1rem -1rem 1rem -1rem;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .profile-img-lg {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        object-fit: cover;
+    }
+
+    .profile-info {
+        margin-left: 1rem;
+        color: #fff;
+    }
+
+    .profile-links a {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        color: #333;
+        transition: all 0.3s ease;
+        border-radius: 0.5rem;
+    }
+
+    .profile-links a:hover {
+        background-color: #f8f9fa;
+        color: #FF69B4;
+    }
+
+    .profile-links i {
+        margin-right: 0.75rem;
+        font-size: 1.1rem;
+        width: 20px;
+    }
+    .profile-dropdown {
+        position: relative;
+    }
+
+    .profile-menu {
+        min-width: 250px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    }
+
+    .profile-header {
+        padding: 20px;
+        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
+        border-radius: 10px 10px 0 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .profile-pic {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid white;
+        object-fit: cover;
+    }
+
+    .profile-info h6 {
+        color: white;
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .profile-info span {
+        color: rgba(255,255,255,0.9);
+        font-size: 0.9rem;
+    }
+
+    .menu-items {
+        padding: 10px 0;
+    }
+
+    .menu-items a {
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #666;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .menu-items a:hover {
+        background: #f8f9fa;
+        color: #FF69B4;
+    }
+
+    .menu-items i {
+        font-size: 1.2rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    .divider {
+        height: 1px;
+        background: #eee;
+        margin: 10px 0;
+    }
+
+    .notification-badge {
+        background: #ff4757;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        margin-left: auto;
+    }
+
+    /* User Dropdown Styles */
+    .user-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .user-dropdown-content {
+        position: absolute;
+        right: 0;
+        background: white;
+        min-width: 280px;
+        border-radius: 10px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+
+    .user-dropdown-content.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .user-header {
+        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: 3px solid white;
+        object-fit: cover;
+    }
+
+    .user-info {
+        color: white;
+    }
+
+    .user-info h6 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .user-info span {
+        font-size: 0.85rem;
+        opacity: 0.9;
+    }
+
+    .user-menu {
+        padding: 8px 0;
+    }
+
+    .user-menu a {
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        color: #666;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .user-menu a:hover {
+        background: #f8f9fa;
+        color: #FF69B4;
+    }
+
+    .user-menu i {
+        margin-right: 12px;
+        font-size: 1.1rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    .menu-divider {
+        height: 1px;
+        background: #eee;
+        margin: 8px 0;
+    }
+    .profile-panel {
+        width: 380px;
+        border: none;
+    }
+
+    .profile-header {
+        background: linear-gradient(to right, #FFB6C1, #FFC0CB);
+        padding: 20px;
+        color: white;
+    }
+
+    .profile-pic {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid white;
+        object-fit: cover;
+    }
+
+    .profile-pic-lg {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid #FFB6C1;
+        object-fit: cover;
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        color: #666;
+        transition: all 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+        color: #FF69B4;
+    }
+
+    .section-header {
+        padding: 15px 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .back-btn {
+        padding: 0;
+        color: #666;
+        text-decoration: none;
+    }
+
+    .back-btn:hover {
+        color: #FF69B4;
+    }
+
+    .profile-section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-section.d-none {
+        transform: translateX(100%);
+    }
+
+    /* Profile Panel Styles */
+    .profile-panel {
+        width: 380px;
+        border: none;
+        background: #fff;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+        padding: 25px;
+        border: none;
+    }
+
+    .profile-image-container {
+        position: relative;
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile-pic {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.8);
+        object-fit: cover;
+    }
+
+    .profile-pic-lg {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid #FFB6C1;
+        object-fit: cover;
+    }
+
+    .online-status {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #22c55e;
+        border: 2px solid #fff;
+    }
+
+    .profile-tabs {
+        border-bottom: 1px solid #eee;
+        padding: 0 10px;
+    }
+
+    .nav-tabs .nav-link {
+        border: none;
+        color: #666;
+        padding: 15px 20px;
+        font-weight: 500;
+        position: relative;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #FF69B4;
+        background: none;
+    }
+
+    .nav-tabs .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #FF69B4;
+    }
+
+    .profile-form .form-control {
+        border: 1px solid #eee;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .profile-form .form-control:focus {
+        border-color: #FF69B4;
+        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+    }
+
+    .profile-picture-upload {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .upload-btn {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 35px;
+        height: 35px;
+        background: #FF69B4;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .upload-btn:hover {
+        transform: scale(1.1);
+    }
+
+    .notification-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        transition: background-color 0.3s ease;
+    }
+
+    .notification-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .notification-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 15px;
+    }
+
+    .settings-item {
+        display: flex;
+        align-items: center;    
+        padding: 15px;
+        color: #666;
+        text-decoration: none;
+        border-bottom: 1px solid #eee;
+        transition: all 0.3s ease;
+    }
+
+    .settings-item:hover {
+        background-color: #f8f9fa;
+        color: #FF69B4;
+    }
+
+    .settings-item i {
+        font-size: 1.2rem;
+        margin-right: 15px;
+    }
+    .admin-login-panel {
+        max-width: 400px;
+        background: linear-gradient(145deg, #fff, #FFF5F6);
+    }
+
+    .admin-login-panel .offcanvas-header {
+        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+        color: white;
+        padding: 1.5rem;
+    }
+
+    .admin-login-panel .offcanvas-title {
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+
+    .admin-login-form {
+        padding: 1rem;
+    }
+
+    .admin-login-form label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #666;
+    }
+
+    .admin-login-form .form-control {
+        padding: 0.75rem;
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .admin-login-form .form-control:focus {
+        border-color: #FF69B4;
+        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+    }
+
+    .admin-login-form .btn-primary {
+        background: linear-gradient(45deg, #FF69B4, #FFB6C1);
+        border: none;
+        padding: 0.75rem;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+    .admin-modal-header {
+        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+        color: white;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .admin-login-form {
+        padding: 1rem 0;
+    }
+
+    .admin-login-form .form-group label {
+        font-weight: 500;
+        color: #666;
+        margin-bottom: 0.5rem;
+    }
+
+    .admin-login-form .form-control {
+        padding: 0.75rem;
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .admin-login-form .form-control:focus {
+        border-color: #FF69B4;
+        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+    }
+
+    .admin-login-form .btn-primary {
+        background: linear-gradient(45deg, #FF69B4, #FFB6C1);
+        border: none;
+        padding: 0.75rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .admin-login-form .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    }
+    .login-container {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .left-section {
+        background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+    }
+
+    .admin-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.8);
+        object-fit: cover;
+    }
+
+    .admin-login-form .form-control {
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        padding: 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .admin-login-form .form-control:focus {
+        border-color: #FF69B4;
+        box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+    }
+
+    .admin-login-form .btn-primary {
+        background: linear-gradient(45deg, #FF69B4, #FFB6C1);
+        border: none;
+        padding: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .admin-login-form .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    }
+
+    .admin-modal-header {
+        border-bottom: none;
+        padding: 1rem;
+    }
+
+    .modal-content {
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script>
+function confirmLogout() {
+    Swal.fire({
+        title: 'Ready to Leave?',
+        text: "You will be logged out of your session",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#FF69B4',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, logout'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Show loading state
+=======
     <style>
         /* Banner Section */
         #banner {
@@ -2082,6 +2837,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <script>
         function confirmLogout() {
+>>>>>>> 2fbfc2039bdd777ebc02c41e88ce09f7246f967f
             Swal.fire({
                 title: 'Ready to Leave?',
                 text: "You will be logged out of your session",
@@ -2338,7 +3094,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span>Change Password</span>
                         </a>
 
-                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Shopowner')): ?>
+                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'ShopOwner')): ?>
                             <a href="/dashboard" class="settings-item">
                                 <i class="bi bi-speedometer2"></i>
                                 <span>Dashboard</span>
