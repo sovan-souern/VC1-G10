@@ -8,39 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        .slideshow-container {
-            display: none;
-        }
-        .dot-container{
-            display: none;
-        }
         body {
             font-family: 'Poppins', Arial, sans-serif;
-
             margin: 0;
         }
 
-        .contact-wrapper {
-            width: 100%;
-        } 
-
-        .contact-layout {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 60px 0;
-            align-items: stretch;
-        } 
-
-        .col-md-7 {
-            flex: 0 0 48%;
-            max-width: 48%;
+        /* Navbar Styles */
+        .navbar {
+        
         }
 
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f0f0f0 !important;
+        }
+
+        /* Banner Styles */
         .banner {
             position: relative;
             width: 100%;
-            height: 50vh;
+            height: 40vh;
             background: linear-gradient(135deg, #CC88D8, #5CB58D);
             color: white;
             text-align: center;
@@ -50,25 +41,40 @@
         }
 
         .banner-content h1 {
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 700;
             margin-bottom: 10px;
         }
 
         .banner-content h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 300;
         }
 
-        .contact-info {
+        /* Contact Wrapper */
+        .contact-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .contact-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .contact-info, .contact-container {
+            flex: 1 1 48%;
             background: white;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            height: 100%;
+            min-height: 400px; /* Balanced height */
         }
 
-        .contact-info h3 {
+        .contact-info h3, .contact-container h3 {
             font-size: 28px;
             color: #333;
             margin-bottom: 25px;
@@ -80,7 +86,6 @@
             gap: 15px;
             padding: 15px;
             margin-bottom: 15px;
-            /* background: #f8f9fa; */
             border-radius: 10px;
             transition: all 0.3s ease;
         }
@@ -92,20 +97,18 @@
 
         .contact-card i {
             font-size: 22px;
-            color: black;
+            color: #5CB58D;
             width: 45px;
             height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* background: #fce4ec; */
             border-radius: 50%;
             transition: all 0.4s ease;
         }
 
         .contact-card:hover i {
-            /* background: #5CB58D; */
-            color: black;
+            color: #41AD55;
             transform: rotate(360deg);
         }
 
@@ -117,19 +120,6 @@
         .contact-card .info .label {
             font-weight: 600;
             color: #333;
-        }
-
-        .contact-container {
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            height: 100%;
-        }
-
-        .contact-container h3 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 25px;
         }
 
         .contact-container .form-control {
@@ -160,13 +150,11 @@
             transform: translateY(-2px);
         }
 
+        /* Map Styles */
         .map-container {
             width: 100%;
-            padding: 10px;
-            margin: 0;
+            margin-top: 40px;
             position: relative;
-            opacity: 1;
-            transform: scale(1);
         }
 
         #map {
@@ -178,11 +166,11 @@
         .search-container {
             position: absolute;
             top: 20px;
-            right: 20px; /* Position on the right side */
+            right: 20px;
             display: flex;
             justify-content: flex-end;
             z-index: 1000;
-            width: 300px; /* Fixed width for the search bar */
+            width: 300px;
         }
 
         .search-container input {
@@ -191,34 +179,27 @@
             border-radius: 5px 0 0 5px;
             border: 1px solid #ccc;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s ease;
-        }
-
-        .search-container input:focus {
-            border-color: #5CB58D;
-            outline: none;
         }
 
         .search-container button {
             padding: 10px 20px;
             border-radius: 0 5px 5px 0;
-            background-color: rgb(92, 181, 141);
+            background-color: #5CB58D;
             color: white;
             border: none;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transition: all 0.3s ease;
         }
 
         .search-container button:hover {
-            background-color: rgb(41, 173, 85);
+            background-color: #41AD55;
             transform: scale(1.05);
         }
 
         .suggestions {
             position: absolute;
             top: 100%;
-            right: 0; /* Align suggestions with the right edge of the search bar */
+            right: 0;
             width: 100%;
             background-color: white;
             border: 1px solid #ccc;
@@ -240,57 +221,23 @@
             background-color: #f0f0f0;
         }
 
-       
-
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .contact-layout {
                 flex-direction: column;
                 padding: 20px 10px;
             }
 
-            .contact-info,
-            .contact-container {
-                width: 100%;
+            .contact-info, .contact-container {
+                flex: 1 1 100%;
             }
 
-            .banner-content {
-                padding: 100px 20px;
+            .banner {
+                height: 30vh;
             }
 
             .banner-content h1 {
-                font-size: 36px;
-            }
-
-            .banner-content h2 {
-                font-size: 18px;
-            }
-
-            .search-container {
-                width: 250px; /* Slightly smaller on smaller screens */
-                right: 10px;
-            }
-
-            .contact-card {
-                max-width: 100%;
-            }
-
-            .contact-container h3 {
-                margin-right: 0;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-column {
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .banner-content h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .banner-content h2 {
@@ -298,93 +245,93 @@
             }
 
             .search-container {
-                width: 200px; /* Even smaller on very small screens */
+                width: 250px;
                 right: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .banner-content h1 {
+                font-size: 24px;
+            }
+
+            .banner-content h2 {
+                font-size: 14px;
+            }
+
+            .search-container {
+                width: 200px;
             }
 
             #map {
                 height: 300px;
             }
         }
-
-        .visible {
-            opacity: 1 !important;
-            transform: translateX(0) translateY(0) scale(1) !important;
-            transition: all 0.6s ease-in-out;
-        }
     </style>
 </head>
 <body>
-    <div class="banner">
-        <div class="banner-content">
-            <h1>Contact Us</h1>
-            <h2>We'd love to hear from you!</h2>
-        </div>
-    </div>
-
+    
+    <!-- Contact Section -->
     <div class="contact-wrapper">
         <div class="contact-layout">
-            <div class="col-md-7">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="contact-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="info">
-                            <span class="label">Address:</span>
-                            <span class="value">Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh</span>
-                        </div>
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="info">
+                        <span class="label">Address:</span>
+                        <span class="value">Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh</span>
                     </div>
-                    <div class="contact-card">
-                        <i class="fas fa-phone"></i>
-                        <div class="info">
-                            <span class="label">Phone:</span>
-                            <span class="value">016 224 335</span>
-                        </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <div class="info">
+                        <span class="label">Phone:</span>
+                        <span class="value">016 224 335</span>
                     </div>
-                    <div class="contact-card">
-                        <i class="fab fa-facebook"></i>
-                        <div class="info">
-                            <span class="label">Facebook:</span>
-                            <span class="value">Yin Cheariddeth</span>
-                        </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fab fa-facebook"></i>
+                    <div class="info">
+                        <span class="label">Facebook:</span>
+                        <span class="value">Yin Cheariddeth</span>
                     </div>
-                    <div class="contact-card">
-                        <i class="fab fa-telegram"></i>
-                        <div class="info">
-                            <span class="label">Telegram:</span>
-                            <span class="value">016 224 335</span>
-                        </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fab fa-telegram"></i>
+                    <div class="info">
+                        <span class="label">Telegram:</span>
+                        <span class="value">016 224 335</span>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="contact-container">
-                    <h3>Get in Touch</h3>
-                    <form id="contactForm" action="/contact/store" method="POST">
-                        <div class="mb-3">
-                            <label class="form-label">First Name</label>
-                            <input type="text" name="first_name" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Phone Number</label>
-                            <input type="text" name="phone_number" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Message</label>
-                            <textarea name="message" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">Submit</button>
-                    </form>
-                </div>
+            <div class="contact-container">
+                <h3>Get in Touch</h3>
+                <form id="contactForm" action="/contact/store" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" name="first_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" name="last_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" name="phone_number" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea name="message" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
             </div>
         </div>
 
-        <div class="map-container mt-4">
+        <!-- Map -->
+        <div class="map-container">
             <div id="map"></div>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search for a location...">
@@ -397,82 +344,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Initialize the OpenStreetMap
-        let map = L.map('map').setView([11.550132, 104.880024], 15); // Default coordinates for Psa Trapeang Chhouk, Phnom Penh
-
-        // Add OpenStreetMap tiles
+        // Map Initialization
+        let map = L.map('map').setView([11.550132, 104.880024], 15);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add a marker for the default location
         let marker = L.marker([11.550132, 104.880024]).addTo(map)
             .bindPopup('Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh')
             .openPopup();
 
-        // Hardcoded locations with English and Khmer names
-        const knownLocations = [{
-                english: 'national police',
-                khmer: 'នគរបាលជាតិ',
-                lat: 11.562108, // National Police Headquarters, Phnom Penh
-                lng: 104.916009,
-                name: 'National Police Headquarters, Phnom Penh'
-            },
-            {
-                english: 'the university of cambodia',
-                khmer: 'សាកលវិទ្យាល័យកម្ពុជា',
-                lat: 11.581981, // The University of Cambodia, Phnom Penh
-                lng: 104.918614,
-                name: 'The University of Cambodia, Phnom Penh'
-            },
-            {
-                english: 'psa trapeang chhouk',
-                khmer: 'ផ្សារត្រពាំងឈូក',
-                lat: 11.550132, // Default location
-                lng: 104.880024,
-                name: 'Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh'
-            },
-            {
-                english: 'royal palace',
-                khmer: 'ព្រះបរមរាជវាំង',
-                lat: 11.563346, // Royal Palace, Phnom Penh
-                lng: 104.931701,
-                name: 'Royal Palace, Phnom Penh'
-            },
-            {
-                english: 'royal university of phnom penh',
-                khmer: 'សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ',
-                lat: 11.5683, // Royal University of Phnom Penh (RUPP)
-                lng: 104.8903,
-                name: 'Royal University of Phnom Penh (RUPP), Kampuchea Krom Boulevard (Street 128), Sangkat Teuk Laak I Muoy, Khan Toul Kork, Phnom Penh 120404, Cambodia'
-            }
+        const knownLocations = [
+            { english: 'national police', khmer: 'នគរបាលជាតិ', lat: 11.562108, lng: 104.916009, name: 'National Police Headquarters, Phnom Penh' },
+            { english: 'the university of cambodia', khmer: 'សាកលវិទ្យាល័យកម្ពុជា', lat: 11.581981, lng: 104.918614, name: 'The University of Cambodia, Phnom Penh' },
+            { english: 'psa trapeang chhouk', khmer: 'ផ្សារត្រពាំងឈូក', lat: 11.550132, lng: 104.880024, name: 'Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh' },
+            { english: 'royal palace', khmer: 'ព្រះបរមរាជវាំង', lat: 11.563346, lng: 104.931701, name: 'Royal Palace, Phnom Penh' },
+            { english: 'royal university of phnom penh', khmer: 'សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ', lat: 11.5683, lng: 104.8903, name: 'Royal University of Phnom Penh (RUPP)' }
         ];
 
-        // Function to check if element is in viewport
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
-
-        // Animate elements when they come into view
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.banner-content, .contact-info h3, .contact-card, .contact-container, .contact-container input, .contact-container textarea, .btn-submit, .search-container, .map-container');
-
-            elements.forEach((element, index) => {
-                if (isInViewport(element)) {
-                    setTimeout(() => {
-                        element.classList.add('visible');
-                    }, index * 150); // Staggered animation
-                }
-            });
-        }
-
-        // Autocomplete suggestions
         const searchInput = document.getElementById('searchInput');
         const suggestionsDiv = document.getElementById('suggestions');
 
@@ -483,10 +372,8 @@
 
             if (input) {
                 const matches = knownLocations.filter(location =>
-                    location.english.toLowerCase().includes(input) ||
-                    location.khmer.toLowerCase().includes(input)
+                    location.english.toLowerCase().includes(input) || location.khmer.toLowerCase().includes(input)
                 );
-
                 if (matches.length > 0) {
                     suggestionsDiv.style.display = 'block';
                     matches.forEach(location => {
@@ -503,34 +390,28 @@
             }
         });
 
-        // Hide suggestions when clicking outside
         document.addEventListener('click', (e) => {
             if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
                 suggestionsDiv.style.display = 'none';
             }
         });
 
-        // Add Enter key functionality for search
         searchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                e.preventDefault(); // Prevent form submission if the input is inside a form
+                e.preventDefault();
                 searchLocation();
             }
         });
 
-        // Search functionality
         window.searchLocation = async function() {
             const input = searchInput.value.toLowerCase().trim();
-
             if (!input) {
                 alert('Please enter a location to search.');
                 return;
             }
 
-            // Check if the search term matches a hardcoded location
             const location = knownLocations.find(loc =>
-                loc.english.toLowerCase().includes(input) ||
-                loc.khmer.toLowerCase().includes(input)
+                loc.english.toLowerCase().includes(input) || loc.khmer.toLowerCase().includes(input)
             );
 
             if (location) {
@@ -539,71 +420,29 @@
                 return;
             }
 
-            // Fallback to Nominatim if no match is found
             try {
                 const query = input.includes('phnom penh') ? input : `${input}, Phnom Penh`;
                 const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`);
                 const data = await response.json();
-
                 if (data.length > 0) {
                     const lat = parseFloat(data[0].lat);
                     const lon = parseFloat(data[0].lon);
                     const displayName = data[0].display_name;
-
                     map.setView([lat, lon], 15);
-                    marker.setLatLng([lat, lon])
-                        .bindPopup(displayName)
-                        .openPopup();
+                    marker.setLatLng([lat, lon]).bindPopup(displayName).openPopup();
                 } else {
-                    alert('Location not found. Please try a more specific search term (e.g., "The University of Cambodia, Phnom Penh" or "សាកលវិទ្យាល័យកម្ពុជា").');
+                    alert('Location not found.');
                 }
             } catch (error) {
-                alert('An error occurred while searching for the location: ' + error.message);
+                alert('An error occurred: ' + error.message);
             }
             suggestionsDiv.style.display = 'none';
         };
 
-        // Function to update the map with a location
         function updateMap(location) {
             map.setView([location.lat, location.lng], 15);
-            marker.setLatLng([location.lat, location.lng])
-                .bindPopup(location.name)
-                .openPopup();
+            marker.setLatLng([location.lat, location.lng]).bindPopup(location.name).openPopup();
         }
-
-        // Initial animation and event listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            //     // Form submission animation
-            // const form = document.getElementById('contactForm');
-            // form.addEventListener('submit', (e) => {
-            //     e.preventDefault();
-            //     const submitBtn = form.querySelector('.btn-submit');
-            //     submitBtn.style.transform = 'scale(0.95)';
-            //     setTimeout(() => {
-            //         submitBtn.style.transform = 'scale(1.05)';
-            //         alert('Message sent successfully!');
-            //         form.reset();
-            //     }, 200);
-            // });
-
-            // Trigger initial animation
-            // animateOnScroll();
-        });
-
-        // Listen for scroll events
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-
-        // Rotate animation for icons on hover
-        const icons = document.querySelectorAll('.contact-card i');
-        icons.forEach(icon => {
-            icon.addEventListener('mouseenter', () => {
-                icon.style.transition = 'transform 0.5s ease-in-out';
-            });
-            icon.addEventListener('mouseleave', () => {
-                icon.style.transform = 'rotate(0deg)';
-            });
-        });
     </script>
 </body>
 </html>

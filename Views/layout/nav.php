@@ -634,6 +634,7 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
             <style>
               .nav-item {
                 position: relative;
+               
               }
 
               .notification-badge {
