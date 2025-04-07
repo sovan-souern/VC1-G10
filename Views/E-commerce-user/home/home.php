@@ -70,8 +70,8 @@
         }
 
         .card img {
-            width: 100%;
-            height: 200px;
+            width: 120%;
+            height: 220px;
             object-fit: cover;
             animation: spinFromRight 4s linear infinite;
         }
@@ -103,6 +103,14 @@
 
         .card-content a:hover {
             background: #ff3b2f;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spin {
+            animation: spin 4s linear infinite; /* Adjust timing as needed */
         }
 
         /* Spinning Animation Starting from Right */
@@ -901,9 +909,13 @@
             <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
             <div class="info">Nail​​​​​​ polish.</div>
         </div>
-
-
-
+        
+        <script>document.querySelectorAll('.card img').forEach(img => {
+            img.addEventListener('click', function() {
+                this.classList.toggle('spin');
+            });
+        });
+        </script>
 
     </div>
     <section class="discount-products">
