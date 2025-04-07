@@ -117,7 +117,7 @@
                 <tr>
                     <th>ID</th>
                     <th><i class="fas fa-user"></i> Full Name</th>
-                    <th><i class="fas fa-phone"></i> Phone</th>
+                    <th><i class="fas fa-phone"></i> Phone/Email</th>
                     <th><i class="fas fa-user-tag"></i> Role</th>
                     <th><i class="fas fa-calendar-alt"></i> Login At</th>
                     <th><i class="fas fa-user-tag"></i> Profile</th>
@@ -131,12 +131,25 @@
                 try {
                     $activeUsers = $userModel->getActiveUsers();
 
-                    if (!empty($activeUsers)): ?>
-                        <?php foreach ($activeUsers as $user): ?>
+                    // Filter to show only admins and shopowners
+                    $filteredUsers = array_filter($activeUsers, function($user) {
+                        return in_array(strtolower($user['role']), ['admin', 'shopowner']);
+                    });
+
+                    if (!empty($filteredUsers)): ?>
+                        <?php foreach ($filteredUsers as $user): ?>
                             <tr>
                                 <td><?php echo isset($user['admin_id']) ? (int)$user['admin_id'] : 'N/A'; ?></td>
                                 <td><?php echo htmlspecialchars($user['name']); ?></td>
-                                <td><?php echo htmlspecialchars($user['phone']); ?></td>
+                                <td>
+                                    <?php if (!empty($user['email'])): ?>
+                                        <?php echo htmlspecialchars($user['email']); ?>
+                                    <?php elseif (!empty($user['phone'])): ?>
+                                        <?php echo htmlspecialchars($user['phone']); ?>
+                                    <?php else: ?>
+                                        <span class="text-muted">N/A</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?php echo htmlspecialchars($user['role']); ?></td>
                                 <td><?php echo htmlspecialchars($user['login_at']); ?></td>
                                 <td>
