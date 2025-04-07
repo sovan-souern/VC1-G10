@@ -915,10 +915,6 @@
             <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
             <div class="info">Nail​​​​​​ polish.</div>
         </div>
-
-
-
-
     </div>
     <section class="discount-products">
     <div class="discount-header">
@@ -926,82 +922,77 @@
         <p>Limited time offers - save up to 30%</p>
     </div>
 
-    <div class="container">
-        <div class="products-container">
+    <div class="container"> 
+        <div class="products-container"> 
         <?php foreach ($products as $index => $product): ?>
-            <?php $hasDiscount = false; ?>
-            <?php foreach ($discounts as $key => $discount): ?>
-                <?php if ($product["product_id"] == $discount["product_id"]): ?>
-                    <?php if ($discount["end_date"] >= date("Y-m-d") && $discount["start_date"] <= date("Y-m-d")): ?>
-                        <?php
-                        // Calculate discounted price
-                        $original_price = floatval($product["price"]);
-                        $discount_percentage = floatval($discount["discount_percentage"]);
-                        $discounted_price = $original_price * (1 - $discount_percentage / 100);
+    <?php 
+    $hasDiscount = false;
+    foreach ($discounts as $key => $discount):
+        if ($product["product_id"] == $discount["product_id"]):
+            if ($discount["end_date"] >= date("Y-m-d") && $discount["start_date"] <= date("Y-m-d")):
+                // Calculate discounted price
+                $original_price = floatval($product["price"]);
+                $discount_percentage = floatval($discount["discount_percentage"]);
+                $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                        // Sanitize and prepare data
-                        $product_name = htmlspecialchars($product["product_name"]);
-                        $image_url = !empty($product["image"]) ? htmlspecialchars($product["image"]) : 'https://via.placeholder.com/150';
-                        $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                        $original_price_formatted = "$" . number_format($original_price, 2);
-                        $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                // Sanitize and prepare data
+                $product_name = htmlspecialchars($product["product_name"]);
+                $image_url = !empty($product["image"]) ? htmlspecialchars($product["image"]) : 'https://via.placeholder.com/150';
+                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                $original_price_formatted = "$" . number_format($original_price, 2);
+                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
 
-                        // Get product description from the product table
-                        $product_content = isset($product["product_content"]) ? htmlspecialchars($product["product_content"]) : "No description available.";
-                        $product_content = isset($product["quantity"]) ? htmlspecialchars($product["quantity"]) : "No quantity";
-                        ?>
-                        <!-- Product Card -->
-                        <div class="product-card">
-                            <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                                <ul class="general-product-hover product-hover-shared">
-                                    <li>
-                                        <a href="#" class="view-details-btn" 
-                                        data-name="<?php echo $product_name; ?>"
-                                        data-price="<?php echo $discounted_price_formatted; ?>"
-                                        data-discount="<?php echo $discount_percentage; ?>"
-                                        data-image="<?php echo $image_url; ?>"
-                                        data-description="<?php echo isset($product['product_content']) ? htmlspecialchars($product['product_content']) : 'No description available'; ?>"
-                                        data-quantity="<?php echo isset($product['quantity']) ? htmlspecialchars($product['quantity']) : 'No quantity available'; ?>">
-                                            <i class="arrow_expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <span class="icon_heart_alt"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="icon_bag_alt"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-info">
-                                <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                <div class="price">
-                                    <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                    <?php echo $discounted_price_formatted; ?>
-                                </div>
-                                <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
-                            </div>
+                // Get product description and quantity
+                $product_content = isset($product["product_content"]) ? htmlspecialchars($product["product_content"]) : "No description available";
+                $product_quantity = isset($product["quantity"]) ? htmlspecialchars($product["quantity"]) : "No quantity available";
+    ?>
+                <!-- Product Card -->
+                <div class="product-card">
+                    <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                        <ul class="general-product-hover product-hover-shared">
+                            <li>
+                                <a href="#" class="view-details-btn"
+                                   data-name="<?php echo $product_name; ?>"
+                                   data-price="<?php echo $discounted_price_formatted; ?>"
+                                   data-discount="<?php echo $discount_percentage; ?>"
+                                   data-image="<?php echo $image_url; ?>"
+                                   data-description="<?php echo $product_content; ?>"
+                                   data-quantity="<?php echo $product_quantity; ?>">
+                                    <i class="arrow_expand"></i>
+                                </a>
+                            </li>
+                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-info">
+                        <h5 class="product-name"><?php echo $product_name; ?></h5>
+                        <div class="price">
+                            <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                            <?php echo $discounted_price_formatted; ?>
                         </div>
-
-                        <?php $hasDiscount = true; ?>
-                        <?php break; ?>
-                    <?php endif; ?>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        <?php endforeach; ?>
+                        <button class="add-to-cart"
+                                data-product-name="<?php echo $product_name; ?>"
+                                data-product-price="<?php echo $discounted_price; ?>"
+                                data-product-image="<?php echo $image_url; ?>">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <?php 
+                $hasDiscount = true;
+                break; // exit inner loop once a discount is applied
+            endif;
+        endif;
+    endforeach;
+    ?>
+<?php endforeach; ?>
     </div>
-
 </div>
 
 <!-- Modal -->
-<!-- Modal -->
-<!-- Product Details Modal -->
-<div id="product-modal" class="modal">
+<div id="product-modal" class="modal" style="display: none;">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
         <div class="modal-inner">
@@ -1015,9 +1006,8 @@
                 <p><strong>Price: </strong><span id="modal-product-price"></span></p>
                 <p><strong>Quantity: </strong><span id="modal-product-quantity"></span></p>
                 <p id="modal-product-description"></p>
-                <p><strong>Discount: </strong><span id="modal-product-discount"></span></p>
-                <!-- <button id="add-to-cart-modal" class="add-to-cart">Add to Cart</button> -->
-                <button id="add-to-cart-modal" onclick="window.history.back()">Back</button>
+                <p><strong>Discount: %</strong><span id="modal-product-discount"></span></p>
+                <button id="add-to-cart-modal" class="add-to-cart">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -1029,51 +1019,48 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    // When a user clicks on the view-details-btn (arrow icon)
     $('.view-details-btn').click(function(e) {
-        e.preventDefault(); // Prevent default link behavior
+        e.preventDefault();
 
-        // Get the product details from the data attributes
+        // Retrieve product details from data attributes
         var productName = $(this).data('name');
         var productPrice = $(this).data('price');
         var productImage = $(this).data('image');
         var productDescription = $(this).data('description');
         var productQuantity = $(this).data('quantity');
-        var productDiscount = $(this).data('discount_percentage');
-        
-        // Populate modal with product details
+        var productDiscount = $(this).data('discount') || "No discount available";
+
+        // Populate modal fields
         $('#modal-product-name').text(productName);
         $('#modal-product-price').text(productPrice);
         $('#modal-product-image').attr('src', productImage);
         $('#modal-product-description').text(productDescription);
         $('#modal-product-quantity').text(productQuantity);
         $('#modal-product-discount').text(productDiscount);
-        
+
         // Show the modal
         $('#product-modal').fadeIn();
     });
 
-    // Close the modal when the user clicks on the close button
+    // Close the modal when clicking the close button
     $('.close-btn').click(function() {
         $('#product-modal').fadeOut();
     });
 
-    // Close the modal if the user clicks anywhere outside the modal content
+    // Close the modal when clicking outside the modal content
     $(window).click(function(event) {
         if ($(event.target).is('#product-modal')) {
             $('#product-modal').fadeOut();
         }
     });
 
-    // Optional: Handle "Add to Cart" button in the modal
-
+    // "Add to Cart" button in modal
+    // $('#add-to-cart-modal').click(function() {
+    //     var productName = $('#modal-product-name').text();
+    //     alert(productName + " has been added to the cart.");
+    // });
 });
-
 </script>
-
-
-
-
 
 
 </section>
