@@ -2349,7 +2349,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span>Change Password</span>
                         </a>
 
-                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Shopowner')): ?>
+                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'ShopOwner')): ?>
                             <a href="/dashboard" class="settings-item">
                                 <i class="bi bi-speedometer2"></i>
                                 <span>Dashboard</span>

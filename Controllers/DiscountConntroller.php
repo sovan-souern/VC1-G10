@@ -12,18 +12,25 @@ class DiscountController extends BaseController
     }
     function index()
     {
-        $discounts = $this->model->getDiscounts();  
+        $discounts = $this->model->getDiscounts();
         $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
-
     }
-    
+
     function create($id)
     {
-       
+
         $products = $this->model->getProduct($id);
         $discount = $this->model->getDiscount($id);
-        
-        $this->views('Inventory/Discounts/create.php', ["product" => $products,"discount"=>$discount]);
+
+        $this->views('Inventory/Discounts/create.php', ["product" => $products, "discount" => $discount]);
+    }
+    function discountCategory($id)
+    {
+
+        $products = $this->model->getProduct($id);
+        $discount = $this->model->getDiscount($id);
+
+        $this->views('Inventory/Discounts/create.php', ["product" => $products, "discount" => $discount]);
     }
 
     function store()
@@ -56,11 +63,10 @@ class DiscountController extends BaseController
 
     function edit($id)
     {
-       
+
         $products = $this->model->getProduct($id);
-        $discount = $this->model->getDiscount($id); 
-        $this->views('Inventory/Discounts/edit.php', ["discount" => $discount, "product" => $products]);  
-        
+        $discount = $this->model->getDiscount($id);
+        $this->views('Inventory/Discounts/edit.php', ["discount" => $discount, "product" => $products]);
     }
     function update()
     {
@@ -98,12 +104,39 @@ class DiscountController extends BaseController
             echo "Failed to delete discount.";
         }
     }
-    function view($id){
+    function view($id)
+    {
         $products = $this->model->getProduct($id);
-        $discount = $this->model->getDiscount($id); 
+        $discount = $this->model->getDiscount($id);
         $categories = $this->model->getCategories($id);
         $brands = $this->model->getBrands($id);
-        $this->views("Inventory/Discounts/view.php", ["discount"=>$discount,"products" => $products, "categories" => $categories, "brands" => $brands]);
-        
+        $this->views("Inventory/Discounts/view.php", ["discount" => $discount, "products" => $products, "categories" => $categories, "brands" => $brands]);
+    }
+    function discountProductCategory($id)
+    {
+        $categories = $this->model->discountCategory($id);
+        // var_dump($categories["category_name"]); 
+        // var_dump($id);
+        $brands = $this->model->getBrands();
+        // $products = $this->model->getProducts();  
+        $this->views('/Inventory/Discounts/descoutCategory.php', ["categories" => $categories]);
+    }
+    function storeCategory($id)
+    {
+        $products = $this->model->getProducts(); // Get all products
+        foreach ($products as $product) {
+            if ($product['category_id'] == $id) { 
+                $data = [
+                    'product_id' => $product['product_id'], 
+                    'discount_percentage' => $_POST['discount'],
+                    'start_date' => $_POST['start_date'],
+                    'end_date' => $_POST['end_date'],
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+                $this->model->createDiscount($data); 
+            }
+        }
+        $this->redirect('/discount'); 
     }
 }
