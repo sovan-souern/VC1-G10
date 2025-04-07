@@ -888,11 +888,7 @@
                             <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
                             <!--icon favorite , view   -->
                             <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
-                                        <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
-                                    </a>
-                                </li>
+                            <li><a href="/detail"  data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
                                 <li>
                                     <a href="#">
                                         <span class="icon_heart_alt"></span>
