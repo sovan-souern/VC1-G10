@@ -29,6 +29,21 @@
                     <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: pink;">Skin care</span>
                 </div>
             </div>
+            <script>
+                const logoText = document.querySelector('.app-brand-text');
+                if (logoText) {
+                    const text = logoText.textContent;
+                    const coloredText = text
+                    .split('')
+                    .map((char, i) => {
+                        const colors =  ['#FF69B4', '#FFD700', '#800080']; // dark red, purple, orange
+                        return `<span style="color: ${colors[i % colors.length]};">${char}</span>`;
+                    })
+                    .join('');
+                    logoText.innerHTML = coloredText;
+                }
+                </script>
+
 
             <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
                 <div class="search-bar border rounded-2 px-3 border-dark-subtle">
@@ -167,9 +182,164 @@
                         </li>
                     </ul>
 
+         <style>
+                /* Style for the header to make it look cool and pink */
+                header {
+                    background-color: rgb(255, 221, 241) !important; /* Light pink background */
+                    }
+
+                .navbar-nav.menu-list {
+                    padding: 10px 0;
+                }
+
+                .nav-item {
+                    position: relative;
+                    padding: 5px 15px;
+                }
+
+                                /* Enhanced styling for nav links to make all titles cool and prominent */
+                /* Enhanced styling for nav links to make all titles cool and prominent */
+                .nav-link {
+                    display: block;
+                    padding: 12px 20px; /* Consistent padding for larger click area */
+                    color: #333;
+                    text-decoration: none;
+                    font-size: 20px !important; /* Force 20px size for all titles */
+                    font-weight: 600; /* Bold for emphasis */
+                    transition: all 0.3s ease;
+                    border-radius: 8px;
+                    background: linear-gradient(90deg, rgb(228, 110, 189), rgb(239, 126, 194) 50%, rgb(212, 84, 161));
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                /* Hover effect with cool animation */
+                .nav-link:hover {
+                    background-color: rgb(247, 216, 232);
+                    color: rgb(228, 110, 189);
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 15px rgba(228, 110, 189, 0.3);
+                    -webkit-background-clip: initial;
+                    background-clip: initial;
+                    background: none;
+                }
+
+                /* Active link style with solid pink for ALL active links */
+                .nav-link.active {
+                    background-color: rgb(239, 126, 194) !important; /* Solid pink background */
+                    color: white !important; /* White text for all active links */
+                    font-weight: 600;
+                    box-shadow: 0 5px 15px rgba(212, 84, 161, 0.4);
+                    -webkit-background-clip: initial;
+                    background-clip: initial;
+                    background: rgb(239, 126, 194); /* Override gradient */
+                }
+
+                /* Ensure ALL active links (including Contact) have consistent styling */
+                .nav-item .nav-link.active[href="/home"],
+                .nav-item .nav-link.active[href="/shop"],
+                .nav-item .nav-link.active[href="/productuser"],
+                .nav-item .nav-link.active[href="/about"],
+                .nav-item .nav-link.active[href="/contact"] {
+                    background-color: rgb(239, 126, 194) !important; /* Consistent pink background */
+                    color: #ffffff !important; /* Consistent white text */
+                    font-size: 20px !important; /* Consistent size */
+                }
+
+                /* Adjust for mobile to keep it readable and clickable */
+                @media (max-width: 767px) {
+                    .nav-link {
+                        padding: 14px 22px;
+                        font-size: 18px !important; /* Consistent size on mobile */
+                    }
+                    
+                    .nav-link:hover {
+                        transform: translateY(-2px);
+                    }
+                }
+               /* Cool pink styling for filter-categories */
+                .filter-categories {
+                    padding: 12px 20px;
+                    font-size: 16px;
+                    background-color: #fff;
+                    border-radius: 30px; /* Smooth rounded corners */
+                    outline: none;
+                    cursor: pointer;
+                    transition: all 0.4s ease;
+                    position: relative;
+                    overflow: hidden;
+                    box-shadow: 0 3px 10px rgba(212, 84, 161, 0.2); /* Pink shadow */
+                    border: 2px solid transparent; /* Base for fiery effect */
+                    color: #333;
+                }
+
+                /* Hover effect with pink glow */
+                .filter-categories:hover {
+                    background-color: rgb(245, 230, 237); /* Light pink */
+                    box-shadow: 0 6px 20px rgba(228, 110, 189, 0.4);
+                    transform: scale(1.05); /* Slight grow effect */
+                }
+
+                /* Focus effect with flash and fiery border */
+                .filter-categories:focus {
+                    animation: flashFadePink 1s ease-out, fieryBorder 2s infinite alternate;
+                    background-color: #fff;
+                    border: 2px solid rgb(228, 110, 189); /* Pink border base */
+                    color: rgb(212, 84, 161); /* Pink text */
+                }
+
+                /* Flash animation in pink tones */
+                @keyframes flashFadePink {
+                    0% {
+                        background-color: rgb(212, 84, 161); /* Deep pink flash */
+                        color: white;
+                    }
+                    50% {
+                        background-color: rgb(228, 110, 189); /* Lighter pink */
+                        color: white;
+                    }
+                    100% {
+                        background-color: #fff; /* Fade back to white */
+                        color: rgb(212, 84, 161); /* Pink text */
+                    }
+                }
+
+                /* Fiery border animation */
+                @keyframes fieryBorder {
+                    0% {
+                        box-shadow: 0 0 5px rgb(228, 110, 189),
+                                    0 0 10px rgb(212, 84, 161),
+                                    0 0 15px rgba(255, 105, 180, 0.7); /* Hot pink glow */
+                    }
+                    50% {
+                        box-shadow: 0 0 10px rgb(228, 110, 189),
+                                    0 0 20px rgb(212, 84, 161),
+                                    0 0 25px rgba(255, 105, 180, 0.9); /* Intense pink fire */
+                    }
+                    100% {
+                        box-shadow: 0 0 5px rgb(228, 110, 189),
+                                    0 0 15px rgb(212, 84, 161),
+                                    0 0 20px rgba(255, 105, 180, 0.6); /* Subtle pink flame */
+                    }
+                }
+
+                /* Style for options */
+                .filter-categories option {
+                    padding: 10px;
+                    background-color: #fff;
+                    color: rgb(212, 84, 161); /* Pink text for options */
+                }
+                </style>
+
+
+
             <!-- Navbar -->
             <div class="d-none d-lg-flex align-items-end">
                 <ul class="d-flex justify-content-end list-unstyled m-0">
+
                     <!-- Favorite Icon -->
                     <li class="d-flex align-items-center">
                         <a href="/favorite" class="mx-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
@@ -196,6 +366,7 @@
                     </li>
                 </ul>
             </div>
+    
 
 
             <div class="cart-panel">
