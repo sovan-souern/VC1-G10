@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create shoponwer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #f6d3e3, #fff);
-            min-height: 100vh;
+<style>
+        .container{
+            margin-top: -40px;
         }
         .card {
             border: none;
@@ -16,24 +8,27 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            
+           
         }
         .card:hover {
             transform: translateY(-5px);
         }
         .card-header {
-            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+            background: linear-gradient(135deg, #007bff, #0056b3);
             padding: 1.5rem;
             text-align: center;
+            color: white;
         }
         .form-control, .form-select {
             border-radius: 10px;
             padding: 12px;
-            border: 2px solid #eee;
+            border: 2px solid #ced4da;
             transition: all 0.3s ease;
         }
         .form-control:focus, .form-select:focus {
-            border-color: #FF69B4;
-            box-shadow: 0 0 0 0.2rem rgba(255,105,180,0.25);
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
         .profile-upload {
             position: relative;
@@ -59,34 +54,36 @@
             right: 0;
             width: 35px;
             height: 35px;
-            background: #FF69B4;
+            background: #007bff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: white;
         }
         .upload-btn:hover {
             transform: scale(1.1);
-            background: #ff4da6;
+            background: #0056b3;
         }
         .upload-btn i {
             color: white;
         }
         .btn-submit {
-            background: linear-gradient(45deg, #FF69B4, #FFB6C1);
+            background: linear-gradient(45deg, #007bff, #0056b3);
             border: none;
             border-radius: 10px;
             padding: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: white;
             transition: all 0.3s ease;
         }
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
         }
         .form-label {
             font-weight: 500;
@@ -132,7 +129,7 @@
 <body>
     <div class="container">
         <div class="row justify-content-center align-items-center min-vh-100">
-            <div class="col-md-6 animate-form">
+            <div class="col-md-10 animate-form">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="text-white mb-0">Create Shop Owner Account</h4>
@@ -160,10 +157,10 @@
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label class="form-label">Contact Number</label>
+                                    <label class="form-label">Contact (Phone or Email)</label>
                                     <div class="input-group">
-                                        <i class="bi bi-phone-fill input-icon"></i>
-                                        <input type="tel" name="phone" class="form-control input-with-icon" pattern="[0-9]{9,10}" placeholder="Enter mobile number" required>
+                                        <i class="bi bi-envelope-fill input-icon"></i>
+                                        <input type="text" name="identifier" class="form-control input-with-icon" placeholder="Enter phone number or email" required>
                                     </div>
                                 </div>
 
@@ -236,7 +233,7 @@
                 if (data.status === 'success') {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Success!',
+                        title: 'Account Created!',
                         text: data.message,
                         confirmButtonColor: '#FF69B4'
                     }).then(() => {
@@ -265,13 +262,12 @@
         }
 
         function nextStep() {
-            // Validate current step
             const currentStepElement = document.getElementById(`step${currentStep}`);
             const inputs = currentStepElement.querySelectorAll('input[required]');
             let isValid = true;
 
             inputs.forEach(input => {
-                if (!input.value) {
+                if (!input.value.trim()) {
                     isValid = false;
                     input.classList.add('is-invalid');
                 } else {
@@ -279,26 +275,27 @@
                 }
             });
 
-            // Phone number validation for step 1
             if (currentStep === 1) {
-                const phone = document.querySelector('input[name="phone"]').value;
-                if (!/^[0-9]{9,10}$/.test(phone)) {
+                const identifier = document.querySelector('input[name="identifier"]').value.trim();
+                const phoneRegex = /^[0-9]{9,10}$/;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!phoneRegex.test(identifier) && !emailRegex.test(identifier)) {
                     isValid = false;
                     Swal.fire({
                         icon: 'error',
-                        title: 'Invalid Phone Number',
-                        text: 'Please enter a valid phone number (9-10 digits)',
+                        title: 'Invalid Contact',
+                        text: 'Please enter a valid phone number (9-10 digits) or email address.',
                         confirmButtonColor: '#FF69B4'
                     });
                     return;
                 }
             }
 
-            // Password validation moved to step 2
             if (currentStep === 2) {
-                const password = document.querySelector('input[name="password"]').value;
-                const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
-                
+                const password = document.querySelector('input[name="password"]').value.trim();
+                const confirmPassword = document.querySelector('input[name="confirm_password"]').value.trim();
+
                 if (password !== confirmPassword) {
                     isValid = false;
                     Swal.fire({
@@ -313,7 +310,6 @@
 
             if (!isValid) return;
 
-            // Proceed to next step
             document.getElementById(`step${currentStep}`).classList.remove('active');
             currentStep++;
             document.getElementById(`step${currentStep}`).classList.add('active');

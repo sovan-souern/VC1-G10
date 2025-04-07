@@ -8,38 +8,44 @@ class LoginRegisterModel {
         $this->db = new Database("localhost", "beauty_store", "root", "");
     }
 
-    public function registerAdmin($name, $phone, $password, $profilePicture = null, $role = 'user') {
+    public function registerAdmin($name, $identifier, $password, $profilePicture = null, $role = 'user') {
         try {
-            // Check if phone number already exists
-            $stmt = $this->db->query("SELECT admin_ID FROM admins WHERE phone = :phone", [':phone' => $phone]);
+            // Check if identifier (email or phone) already exists
+            $stmt = $this->db->query("SELECT admin_ID FROM admins WHERE phone = :identifier OR email = :identifier", [':identifier' => $identifier]);
             if ($stmt->rowCount() > 0) {
-                throw new Exception("Phone number already registered!");
+                throw new Exception("Email or phone number already registered!");
+            }
+
+            // Determine if identifier is email or phone
+            $isPhone = preg_match('/^\+?[0-9]{9,15}$/', $identifier);
+            $isEmail = filter_var($identifier, FILTER_VALIDATE_EMAIL);
+
+            if (!$isPhone && !$isEmail) {
+                throw new Exception("Invalid email or phone number format!");
             }
 
             // Insert new admin
-            $sql = "INSERT INTO admins (name, phone, password, profile_picture, role, created_at) 
-                    VALUES (:name, :phone, :password, :profile_picture, :role, NOW())";
-            
+            $sql = "INSERT INTO admins (name, phone, email, password, profile_picture, role, created_at) 
+                    VALUES (:name, :phone, :email, :password, :profile_picture, :role, NOW())";
+
             $params = [
                 ':name' => $name,
-                ':phone' => $phone,
+                ':phone' => $isPhone ? $identifier : null, // Set phone to NULL if identifier is an email
+                ':email' => $isEmail ? $identifier : null, // Set email to NULL if identifier is a phone
                 ':password' => password_hash($password, PASSWORD_DEFAULT),
                 ':profile_picture' => $profilePicture,
                 ':role' => $role
             ];
 
             $stmt = $this->db->query($sql, $params);
-            
+
             if ($stmt->rowCount() > 0) {
-                error_log("Successfully registered user with phone: $phone");
                 return true;
             }
-            
-            error_log("Failed to insert user into database");
+
             return false;
-            
+
         } catch (PDOException $e) {
-            error_log("Database error in registerAdmin: " . $e->getMessage());
             throw $e;
         }
     }
@@ -54,36 +60,27 @@ class LoginRegisterModel {
         }
     }
 
-    public function authenticateAdmin($phone, $password) {
+    public function authenticateAdmin($identifier, $password) {
         try {
-            error_log("Debug - Attempting to authenticate with phone: " . $phone);
-            
-            // Update query to include role
-            $sql = "SELECT admin_ID, name, phone, password, profile_picture, role FROM admins WHERE phone = :phone LIMIT 1";
-            $result = $this->db->query($sql, [':phone' => $phone]);
+            // Update query to check both email and phone
+            $sql = "SELECT admin_ID, name, phone, email, password, profile_picture, role 
+                    FROM admins 
+                    WHERE phone = :identifier OR email = :identifier 
+                    LIMIT 1";
+            $result = $this->db->query($sql, [':identifier' => $identifier]);
             $user = $result->fetch(PDO::FETCH_ASSOC);
 
             if (!$user) {
-                error_log("Debug - No user found with phone: " . $phone);
                 return false;
             }
 
-            error_log("Debug - User found, verifying password");
-            error_log("Debug - Stored password hash: " . $user['password']);
-
             if (password_verify($password, $user['password'])) {
-                error_log("Debug - Password verified successfully");
                 return $user;
             }
 
-            error_log("Debug - Password verification failed");
             return false;
 
         } catch (PDOException $e) {
-            error_log("Database error in authenticateAdmin: " . $e->getMessage());
-            error_log("SQL State: " . $e->errorInfo[0]);
-            error_log("Error Code: " . $e->errorInfo[1]);
-            error_log("Error Message: " . $e->errorInfo[2]);
             return false;
         }
     }

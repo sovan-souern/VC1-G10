@@ -40,6 +40,7 @@
         <?php
 
         foreach ($discounts as $discount) : ?>
+         <?php if ($discount["end_date"] >= date("Y-m-d") ): ?>
           <div class="product-card">
             <?php if (!empty($discount["image"])) : ?>
               <img src="<?php echo htmlspecialchars($discount["image"]); ?>" alt="Product Image" class="product-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -67,6 +68,7 @@
               </a>
             </div>
           </div>
+        <?php endif?>
         <?php endforeach; ?>
       </div>
       <div class="pagination" id="pagination">

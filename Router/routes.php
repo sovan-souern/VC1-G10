@@ -15,6 +15,7 @@ require_once 'Controllers/LoginRegisterController.php';
 require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 require_once "Controllers/checkoutUser.php";
+require_once "Controllers/HistoryController.php";
 
 $routes = new Router();
 
@@ -35,7 +36,7 @@ function checkAuthentication() {
         '/products/create', '/products/edit', '/products/update', '/products/delete',
         '/category/create', '/category/edit', '/category/update', '/category/delete',
         '/brand/create', '/brand/edit', '/brand/update', '/brand/delete',
-        '/dashboard',
+        '/dashboard','/reset', 
     ];
 
     // Redirect if not authenticated
@@ -91,11 +92,15 @@ $routes->get('/invoice', [InvoiceController::class, 'index']);
 
 // User Routes
 $routes->get('/users', [UserController::class, 'index']);
-$routes->get('/user/create', [UserController::class, 'create']);
+// $routes->get('/user/create', [UserController::class, 'create']);
 $routes->post('/user/store', [UserController::class, 'store']);
+$routes->post('/user/create', [UserController::class, 'create']);
 $routes->get('/user/edit', [UserController::class, 'edit']);
 $routes->put('/user/update', [UserController::class, 'update']);
-$routes->delete('/user/delete', [UserController::class, 'destroy']);
+$routes->delete('/user/delete', [UserController::class, 'delete']);
+$routes->get('/user/delete', [UserController::class, 'delete']); // Ensure this route exists
+$routes->get('/users/active', [UserController::class, 'getActiveUsers']); // Add this line
+$routes->get('/user/profile', [UserController::class, 'profile']); // Add this line
 
 // Notification Routes
 $routes->get('/notifications', [NotificationController::class, 'index']); 
@@ -118,6 +123,10 @@ $routes->get('/products/view', [ProductController::class, 'view']);
 // Discount Routes
 $routes->get('/discount', [DiscountController::class, 'index']);
 $routes->get('/create-discount', [DiscountController::class, 'create']);
+$routes->get('/diescoutCategory', [DiscountController::class, 'discountProductCategory']);
+$routes->post('/discount/storeCategory', [DiscountController::class, 'storeCategory']);
+
+
 $routes->post('/discount/store', [DiscountController::class, 'store']);
 $routes->get('/discount/edit', [DiscountController::class, 'edit']);
 $routes->put('/discount/update', [DiscountController::class, 'update']);
@@ -182,6 +191,8 @@ $routes->get('/contact', [ContactController::class, 'index']);
 $routes->get('/shop', [ShopController::class, 'index']);
 
 
+//history
+$routes->get('/history', [HistoryController::class, 'index']); 
 
 
 

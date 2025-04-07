@@ -11,134 +11,123 @@ class UserController extends BaseController
         $this->model = new UserModel();
     }
 
+    function trackActivity()
+    {
+        if (isset($_SESSION['admin_ID'])) {
+            $this->model->updateLastActivity($_SESSION['admin_ID']); // Update last activity timestamp
+        }
+    }
+
     function index()
     {
-        $users = $this->model->getUsers();
-        $this->views('/E-comerce/users/user.php', ['users' => $users]);
+        $this->trackActivity(); // Track activity
+        $search = $_GET['search'] ?? null; // Get the search query
+        $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Get the current page, default to 1
+        $limit = 10; // Number of users per page
+        $offset = ($page - 1) * $limit; // Calculate the offset
+
+        $users = $this->model->getUsers($search, $limit, $offset); // Fetch paginated users
+        $totalUsers = $this->model->getTotalUsers($search); // Get the total number of users
+        $totalPages = ceil($totalUsers / $limit); // Calculate total pages
+
+        $this->views('/E-comerce/users/user.php', [
+            'users' => $users,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'totalUsers' => $totalUsers // Pass totalUsers to the view
+        ]);
+    }
+
+    function getActiveUsers()
+    {
+        $this->trackActivity(); // Track activity
+        $activeUsers = $this->model->getActiveUsers();
+        $this->views('/E-comerce/users/user.php', ['users' => $activeUsers]);
+    }
+
+    function delete()
+    {
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            if ($this->model->deleteUser($id)) {
+                header("Location: /users?message=User deleted successfully");
+                exit;
+            } else {
+                header("Location: /users?error=Failed to delete user from database");
+                exit;
+            }
+        } else {
+            header("Location: /users?error=Invalid user ID");
+            exit;
+        }
+    }
+
+    function edit()
+    {
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $data = [
+                    'name' => $_POST['name'],
+                    'phone' => $_POST['phone'],
+                    'role' => $_POST['role']
+                ];
+                if ($this->model->updateUser($id, $data)) {
+                    header("Location: /users?message=User updated successfully");
+                    exit;
+                } else {
+                    header("Location: /users?error=Failed to update user in database");
+                    exit;
+                }
+            } else {
+                $user = $this->model->getUser($id);
+                if ($user) {
+                    $this->views('/E-comerce/users/edit.php', ['user' => $user]);
+                } else {
+                    header("Location: /users?error=User not found");
+                    exit;
+                }
+            }
+        } else {
+            header("Location: /users?error=Invalid user ID");
+            exit;
+        }
+    }
+
+    function create()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'name' => $_POST['name'],
+                'phone' => $_POST['phone'],
+                'role' => $_POST['role']
+            ];
+            if ($this->model->createUser($data)) {
+                header("Location: /users?message=User created successfully");
+                exit;
+            } else {
+                header("Location: /users?error=Failed to create user");
+                exit;
+            }
+        } else {
+            $this->views('/E-comerce/auth/register.php');
+        }
+    }
+
+    function profile()
+    {
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $user = $this->model->getUser($id);
+            if ($user) {
+                $this->views('/E-comerce/users/profile.php', ['user' => $user]);
+            } else {
+                header("Location: /users?error=User not found");
+                exit;
+            }
+        } else {
+            header("Location: /users?error=Invalid user ID");
+            exit;
+        }
     }
 }
-
-//     function create()
-//     {
-//         // Fetch roles and admins for the form dropdowns
-//         $roles = $this->model->getRoles();
-//         $admins = $this->model->getAdmins();
-//         $this->views('/E-comerce/users/create.php', [
-//             'roles' => $roles,
-//             'admins' => $admins
-//         ]);
-//     }
-
-//     function store()
-//     {
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//             $profile = null;
-//             if (isset($_FILES['profile']['name']) && $_FILES['profile']['name'] != '') {
-//                 $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
-//                 if (!is_dir($uploadDir)) {
-//                     mkdir($uploadDir, 0777, true);
-//                 }
-//                 $profile = time() . basename($_FILES['profile']['name']);
-//                 $targetPath = $uploadDir . $profile;
-
-//                 if (!move_uploaded_file($_FILES['profile']['tmp_name'], $targetPath)) {
-//                     die("File upload failed!");
-//                 }
-//             }
-
-//             $data = [
-//                 'role_id' => $_POST['role_id'],
-//                 'username' => $_POST['username'],
-//                 'email' => $_POST['email'],
-//                 'phone' => $_POST['phone'] ?? null,
-//                 'gender' => $_POST['gender'] ?? null,
-//                 'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
-//                 'profile' => $profile,
-//                 'created_at' => date('Y-m-d H:i:s')
-//             ];
-
-//             try {
-//                 $this->model->createUser($data);
-//                 $this->redirect('/users');
-//             } catch (Exception $e) {
-//                 // Handle error (e.g., duplicate email)
-//                 $this->views('/E-comerce/users/create.php', [
-//                     'error' => $e->getMessage(),
-//                     'data' => $data
-//                 ]);
-//             }
-//         }
-//     }
-
-//     function edit($id)
-//     {
-//         $user = $this->model->getUser($id);
-//         $roles = $this->model->getRoles();
-//         $admins = $this->model->getAdmins();
-//         $this->views('/E-comerce/users/edit.php', [
-//             'user' => $user,
-//             'roles' => $roles,
-//             'admins' => $admins
-//         ]);
-//     }
-
-//     function update($id)
-//     {
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//             $user = $this->model->getUser($id);
-//             $profile = $user['profile'];
-
-//             if (isset($_FILES['profile']['name']) && $_FILES['profile']['name'] != '') {
-//                 $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
-//                 if (!is_dir($uploadDir)) {
-//                     mkdir($uploadDir, 0777, true);
-//                 }
-//                 $profile = time() . basename($_FILES['profile']['name']);
-//                 $targetPath = $uploadDir . $profile;
-
-//                 if (!move_uploaded_file($_FILES['profile']['tmp_name'], $targetPath)) {
-//                     die("File upload failed!");
-//                 }
-//             }
-
-//             $data = [
-//                 'role_id' => $_POST['role_id'],
-//                 'username' => $_POST['username'],
-//                 'email' => $_POST['email'],
-//                 'phone' => $_POST['phone'] ?? null,
-//                 'gender' => $_POST['gender'] ?? null,
-//                 'admin_id' => !empty($_POST['admin_id']) ? $_POST['admin_id'] : null,
-//                 'profile' => $profile,
-//                 'created_at' => $user['created_at']
-//             ];
-
-//             try {
-//                 $this->model->updateUser($id, $data);
-//                 $this->redirect('/users');
-//             } catch (Exception $e) {
-//                 $this->views('/E-comerce/users/edit.php', [
-//                     'error' => $e->getMessage(),
-//                     'user' => $data,
-//                     'id' => $id
-//                 ]);
-//             }
-//         }
-//     }
-
-//     function destroy()
-//     {
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//             $id = $_POST['id'];
-//             try {
-//                 $this->model->deleteUser($id);
-//                 $this->redirect('/users');
-//             } catch (Exception $e) {
-//                 $users = $this->model->getUsers();
-//                 $this->views('/E-comerce/users/user.php', [
-//                     'users' => $users,
-//                     'error' => $e->getMessage()
-//                 ]);
-//             }
-//         }
-//     }
-// }
