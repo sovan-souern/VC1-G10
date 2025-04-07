@@ -98,13 +98,6 @@ class CheckoutUserController extends BaseController
         'product_ids' => $selectedProductIds, // Pass product IDs as an array
         'address_id' => $addressId // Pass the created address_id
       ];
-
-      $orderId = $this->model->createOrder($data, $id);
-      if ($orderId) {
-        echo "Order created successfully with ID: $orderId";
-      } else {
-        echo "Failed to create order.";
-      }
     }
   }
 

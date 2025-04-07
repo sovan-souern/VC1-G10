@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -42,32 +41,15 @@
                     <span>Delivery</span>
                     <span class="delivery-cost">$5.99</span>
                 </div>
-                <div class="location">
-                    <span>Arkansas, United States</span>
-                </div>
-                <div class="shipping-method">
-                    <select id="shipping-method">
-                        <option value="5.99">Standard Shipping - $5.99</option>
-                        <option value="12.99">Express Shipping - $12.99</option>
-                    </select>
-                </div>
-                <div class="summary-row">
-                    <div class="tax-label">
-                        <span>Sales Tax</span>
-                        <i class="fa-solid fa-circle-question"></i>
-                    </div>
-                    <span class="tax-amount">$0.00</span>
-                </div>
+             
+               
                 <hr>
                 <div class="summary-row total">
                     <span>Total</span>
                     <span class="total-amount">$0.00</span>
                 </div>
                 <button class="checkout-btn primary" onclick="window.location.href='checkout';">Checkout</button>
-                <button class="checkout-btn paypal">
-                    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" class="paypal-logo">
-                    Checkout
-                </button>
+               
                 <div class="secure-checkout">
                     <i class="fa-solid fa-lock"></i>
                     <span>Secure Checkout</span>
@@ -360,19 +342,19 @@ hr {
 
 <script>
     // cart-script.js
+// cart-script.js
 document.addEventListener('DOMContentLoaded', function() {
     // Get elements
     const cartItemsContainer = document.querySelector('.cart-items');
     const subtotalEl = document.querySelector('.subtotal');
     const totalEl = document.querySelector('.total-amount');
     const deliveryCostEl = document.querySelector('.delivery-cost');
-    const shippingMethodSelect = document.querySelector('#shipping-method');
     const promoCode = document.querySelector('.promo-code');
     const addNote = document.querySelector('.add-note');
 
     // Initialize cart items
     let cartItems = [];
-    let deliveryCost = parseFloat(shippingMethodSelect.value) || 5.99;
+    const deliveryCost = 5.99; // Fixed delivery cost
 
     // Load cart from localStorage on page load
     try {
@@ -472,14 +454,8 @@ document.addEventListener('DOMContentLoaded', function() {
         subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
         const total = subtotal + deliveryCost;
         totalEl.textContent = `$${total.toFixed(2)}`;
-    }
-
-    // Update delivery cost when shipping method changes
-    shippingMethodSelect.addEventListener('change', function() {
-        deliveryCost = parseFloat(this.value);
         deliveryCostEl.textContent = `$${deliveryCost.toFixed(2)}`;
-        updateSummary();
-    });
+    }
 
     // Promo code and note functionality
     promoCode.addEventListener('click', function() {
