@@ -69,13 +69,18 @@
                                     </td>
                                     <td><?= htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8') ?></td>
                                     <td>
-                                        <a class="me-3" href="/category/edit?id=<?= $category['category_id'] ?>">
-                                            <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
-                                        </a>
-                                        <a class="delete-product" href="/category/delete?id=<?= $category['category_id'] ?>">
-                                            <img src="/Views/assets/img1/icons/delete.svg" alt="img">
-                                            <?php require "delete.php" ?>
-                                        </a>
+                                        <div class="action-buttons">
+                                            <a class="action-btn discount-btn" href="/diescoutCategory?id=<?= $category['category_id'] ?>">
+                                                <img src="/Views/assets/img/descount.png" alt="discount">
+                                            </a>
+                                            <a class="action-btn edit-btn" href="/category/edit?id=<?= $category['category_id'] ?>">
+                                                <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
+                                            </a>
+                                            <a class="action-btn delete-btn delete-product" href="/category/delete?id=<?= $category['category_id'] ?>">
+                                                <img src="/Views/assets/img1/icons/delete.svg" alt="img">
+                                                <?php require "delete.php" ?>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -89,3 +94,8 @@
 
 </body>
 </html>
+<style>
+    .discount-btn img{
+        width: 20px;
+    }
+</style>

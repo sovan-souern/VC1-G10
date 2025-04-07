@@ -24,6 +24,16 @@ class DiscountModel
             return false;
         }
     }
+    function getProducts()
+    {
+        try {
+            $stmt = $this->pdo->query('SELECT * FROM products ');
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Error fetching product: " . $e->getMessage();
+            return false;
+        }
+    }
 
     function createDiscount($data)
     {
@@ -44,7 +54,7 @@ class DiscountModel
             return false;
         }
     }
-    
+
     function getDiscounts()
     {
         try {
@@ -66,8 +76,8 @@ class DiscountModel
             LEFT JOIN products ON discounts.product_id = products.product_id
             LEFT JOIN categories ON products.category_id = categories.category_id
             LEFT JOIN brand ON products.brand_id = brand.id
-            ORDER BY discounts.created_at DESC");  
-        
+            ORDER BY discounts.created_at DESC");
+
             return $stmt->fetchAll();
         } catch (Exception $e) {
             die("Error fetching discounts: " . $e->getMessage());
@@ -75,9 +85,9 @@ class DiscountModel
     }
     function getDiscount($id)
     {
-    //   var_dump($id );
-            $stmt = $this->pdo->query('SELECT * FROM discounts WHERE product_id = :id', ['id' => $id]);
-            return $stmt->fetch();
+        //   var_dump($id );
+        $stmt = $this->pdo->query('SELECT * FROM discounts WHERE product_id = :id', ['id' => $id]);
+        return $stmt->fetch();
     }
     function updateDiscount($data)
     {
@@ -125,7 +135,14 @@ class DiscountModel
             die("Error fetching brands: " . $e->getMessage());
         }
     }
-
-
-
+    function discountCategory($id) // Fixed method name
+    {
+        // var_dump($id);
+        try {
+            $stmt = $this->pdo->query('SELECT * FROM categories where category_id = :id', ['id' => $id]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            die("Error fetching categories: " . $e->getMessage());
+        }
+    }
 }
