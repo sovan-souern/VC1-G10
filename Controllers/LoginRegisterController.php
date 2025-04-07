@@ -220,7 +220,7 @@ class LoginRegisterController extends BaseController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $name = htmlspecialchars($_POST['name'] ?? '');
-                $phone = htmlspecialchars($_POST['phone'] ?? '');
+                $identifier = htmlspecialchars($_POST['identifier'] ?? '');
                 $password = htmlspecialchars($_POST['password'] ?? '');
                 $confirmPassword = htmlspecialchars($_POST['confirm_password'] ?? '');
                 $role = htmlspecialchars($_POST['role'] ?? '');
@@ -235,6 +235,13 @@ class LoginRegisterController extends BaseController {
                 $allowedRoles = ['admin', 'shopowner'];
                 if (!in_array($role, $allowedRoles)) {
                     throw new Exception("Invalid role selected!");
+                }
+
+                // Validate identifier (phone or email)
+                $phoneRegex = '/^\+?[0-9]{9,15}$/';
+                $emailRegex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+                if (!preg_match($phoneRegex, $identifier) && !preg_match($emailRegex, $identifier)) {
+                    throw new Exception("Invalid email or phone number format!");
                 }
 
                 // Handle profile picture upload if provided
@@ -256,7 +263,7 @@ class LoginRegisterController extends BaseController {
                 }
 
                 // Register admin
-                $result = $this->user->registerAdmin($name, $phone, $password, $profilePicture, $role);
+                $result = $this->user->registerAdmin($name, $identifier, $password, $profilePicture, $role);
                 
                 if (!$result) {
                     throw new Exception("Registration failed!");
