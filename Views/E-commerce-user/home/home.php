@@ -1016,7 +1016,8 @@
                 <p><strong>Quantity: </strong><span id="modal-product-quantity"></span></p>
                 <p id="modal-product-description"></p>
                 <p><strong>Discount: </strong><span id="modal-product-discount"></span></p>
-                <button id="add-to-cart-modal" class="add-to-cart">Add to Cart</button>
+                <!-- <button id="add-to-cart-modal" class="add-to-cart">Add to Cart</button> -->
+                <button id="add-to-cart-modal" onclick="window.history.back()">Back</button>
             </div>
         </div>
     </div>
@@ -1065,14 +1066,7 @@ $(document).ready(function() {
     });
 
     // Optional: Handle "Add to Cart" button in the modal
-    $('#add-to-cart-modal').click(function() {
-        var productName = $('#modal-product-name').text();
-        var productPrice = $('#modal-product-price').text();
-        var productImage = $('#modal-product-image').attr('src');
-        
-        // Here you can add the product to the cart or show a confirmation message
-        alert(productName + " has been added to the cart.");
-    });
+
 });
 
 </script>
