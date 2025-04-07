@@ -51,7 +51,7 @@
                                 <th>ID</th>
                                 <th>Profile</th> 
                                 <th>Username</th>
-                                <th>Phone</th>
+                                <th>Phone/Email</th> <!-- Updated header -->
                                 <th>
                                     <div class="dropdown">
                                         <button class="btn btn-link dropdown-toggle p-0 d-flex align-items-center" type="button" id="roleFilterDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Filter by Role">
@@ -84,10 +84,18 @@
                                                  alt="Profile Picture" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
                                         </td>
                                         <td><?= htmlspecialchars($user["name"]) ?></td>
-                                        <td><?= htmlspecialchars($user["phone"]) ?></td>
+                                        <td>
+                                            <?php if (!empty($user["email"])) : ?>
+                                                <?= htmlspecialchars($user["email"]) ?>
+                                            <?php elseif (!empty($user["phone"])) : ?>
+                                                <?= htmlspecialchars($user["phone"]) ?>
+                                            <?php else : ?>
+                                                <span class="text-muted">N/A</span>
+                                            <?php endif; ?>
+                                        </td>
                                         <td><?= ucfirst(htmlspecialchars($user["role"])) ?></td>
                                         <td><?= htmlspecialchars($user["created_at"]) ?></td>
-                                        <td>
+                                            <td>
                                             <?php if ($user["status"] == 1) : ?>
                                                 <span class="badge bg-success" title="User is active">Active</span>
                                             <?php else : ?>
