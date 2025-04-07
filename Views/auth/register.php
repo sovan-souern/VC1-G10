@@ -367,9 +367,8 @@ require_once __DIR__ . "/../layout/header.php";
                     <input type="text" class="form-control" name="name" id="name" placeholder="Enter your full name" required>
                 </div>
                 <div class="input-group">
-                    <input type="tel" class="form-control" name="phone" id="phone" 
-                           placeholder="Enter your phone number (9-10 digits)" 
-                           pattern="[0-9]{9,10}" required>
+                    <input type="text" class="form-control" name="identifier" id="identifier" 
+                           placeholder="Enter your email or phone number" required>
                 </div>
                 <div class="input-group">
                     <input type="password" class="form-control" name="password" id="password" 
