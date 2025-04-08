@@ -148,58 +148,7 @@
             color: white;
         }
         
-        /* Newsletter Section */
-        .newsletter {
-            background-color: #f8f9fa;
-            padding: 50px 0;
-            margin: 40px 0;
-        }
-        
-        .newsletter-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .newsletter h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #f8a4b9;
-        }
-        
-        .newsletter p {
-            color: #666;
-            margin-bottom: 25px;
-        }
-        
-        .newsletter-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .newsletter-form input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 30px 0 0 30px;
-            font-size: 1rem;
-        }
-        
-        .newsletter-form button {
-            background-color: #f8a4b9;
-            color: white;
-            border: none;
-            padding: 0 25px;
-            border-radius: 0 30px 30px 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .newsletter-form button:hover {
-            background-color: #f5809e;
-        }
+    
         
         /* Featured Products Carousel */
         .featured-products {
@@ -396,19 +345,7 @@
                 font-size: 1.8rem;
             }
             
-            .newsletter-form {
-                flex-direction: column;
-            }
             
-            .newsletter-form input {
-                border-radius: 30px;
-                margin-bottom: 10px;
-            }
-            
-            .newsletter-form button {
-                border-radius: 30px;
-                padding: 10px;
-            }
             
             .featured-carousel .carousel-control-prev,
             .featured-carousel .carousel-control-next {
@@ -1081,7 +1018,7 @@
                             <div class="col-md-3">
                                 <div class="discount-product-card">
                                     <div class="discount-badge">-15%</div>
-                                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1611930022073-84f3bb4caa2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80')">
+                                    <div class="product-image" style="background-image: url('https://i.pinimg.com/474x/a6/97/bd/a697bd0bfc20e23ac9e9f5ed9198abd0.jpg')">
                                         <ul class="discount-product-hover">
                                             <li><a href="#" class="image-zoom"><span class="arrow_expand"></span></a></li>
                                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -1089,7 +1026,7 @@
                                         </ul>
                                     </div>
                                     <div class="product-info">
-                                        <h5 class="product-name">Hyaluronic Acid Moisturizer</h5>
+                                        <h5 class="product-name">Hyaluronic Acid</h5>
                                         <div class="price">
                                             <span class="original-price">$39.99</span>
                                             $33.99
@@ -1237,19 +1174,7 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <h3>Join Our Skincare Community</h3>
-                <p>Subscribe to receive skincare tips, exclusive offers, and early access to new products</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </section>
+  
 
     <!-- Your existing Shop Section -->
     <section class="shop spad">
@@ -1395,7 +1320,7 @@
                         </div>
                         <div class="trend__item">
                             <div class="trend__item__pic">
-                                <img src="https://images.unsplash.com/photo-1611930022073-84f3bb4caa2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Hyaluronic Acid">
+                                <img src="https://i.pinimg.com/474x/a6/97/bd/a697bd0bfc20e23ac9e9f5ed9198abd0.jpg" alt="Hyaluronic Acid">
                             </div>
                             <div class="trend__item__text">
                                 <h6>Hydrating Hyaluronic Acid</h6>
