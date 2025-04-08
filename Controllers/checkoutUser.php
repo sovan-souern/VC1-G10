@@ -24,11 +24,12 @@ class CheckoutUserController extends BaseController
 
     $admin_id = $users[0]['admin_id'] ?? null;
 
-    $this->ViewsUser('E-commerce-user/card/checkout.php', [
+    extract([
       "users" => $users,
       "products" => $products,
-      "admin_id" => $admin_id // Pass admin_id to the view
-    ]);
+      "admin_id" => $admin_id
+  ]);
+  require_once 'Views/E-commerce-user/card/checkout.php';
   }
 
 
