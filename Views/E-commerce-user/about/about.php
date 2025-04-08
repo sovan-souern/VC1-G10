@@ -239,6 +239,7 @@
   @media (min-width: 768px) {
     .site-blocks-cover h1 {
       font-size: 50px;
+      
     }
   }
 

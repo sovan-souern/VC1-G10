@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-          .slideshow-container {
+        .slideshow-container {
             display: none;
         }
         .dot-container{
@@ -180,6 +180,40 @@
         .product-image.pink {
             background-color: #f8d7e3;
         }
+        
+        /* Add this to your existing <style> */
+        .order-items-container {
+            max-height: 300px;
+            /* Limit initial height */
+            overflow-y: auto;
+            /* Add scrollbar if content exceeds height */
+            transition: max-height 0.3s ease;
+            /* Smooth transition for expansion */
+        }
+
+        .order-items-container.expanded {
+            max-height: none;
+            /* Remove height restriction when expanded */
+        }
+
+        .show-all-btn {
+            background: none;
+            border: none;
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .show-all-btn:hover {
+            color: #0056b3;
+        }
+        
+        .mb-3 #buy_at{
+            display: none;
+        }
     </style>
 </head>
 
@@ -188,7 +222,7 @@
         <div class="row">
             <!-- Left Column - Forms -->
             <div class="col-md-7">
-                <form action="/checkout/store?id=<?php echo htmlspecialchars($admin_id ?? ''); ?>" method="POST" id="checkout-form">
+                <form action="/checkout/store" method="POST" id="checkout-form">
                     <!-- Add a hidden input for admin_id -->
                     <input type="hidden" name="admin_id" value="<?php echo htmlspecialchars($admin_id ?? ''); ?>">
                     <!-- Customer Details -->
@@ -237,14 +271,15 @@
                             <input type="text" class="form-control" id="order_status" name="order_status" value="Pending" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="buy_at" class="form-label">Buy At <span class="text-danger">*</span></label>
+                            <label for="buy_at" class="form-label"><span class="text-danger"></span></label>
                             <input type="datetime-local" class="form-control" id="buy_at" name="buy_at" required>
                         </div>
+                        
                         <!-- Hidden inputs for cart items and total -->
                         <input type="hidden" name="items" id="items">
                         <input type="hidden" name="total" id="total_input">
                         <input type="hidden" name="product_id" id="product_id">
-                        <button type="submit" class="continue-btn" onclick="window.location.href='https://pay.ababank.com/efRPcMcXvMLRihKq6'">Continue</button>
+                        <button type="button" id="continue-btn" class="continue-btn">Continue</button>
                     </div>
 
                     <!-- Delivery Method -->
@@ -392,7 +427,22 @@
         }
     }
 
-    // Handle form submission and payment redirect
+    // Handle continue button click to redirect to payment with total amount
+    document.getElementById('continue-btn').addEventListener('click', function() {
+        // Get the total amount from the hidden input
+        const totalAmount = parseFloat(document.getElementById('total_input').value) || 0;
+        
+        // Base payment URL
+        const basePaymentUrl = 'https://link.payway.com.kh/aba?id=3EACF56C17F7&code=105187&acc=008471110&dynamic=true';
+        
+        // Append the total amount to the URL
+        const paymentUrl = `${basePaymentUrl}&amount=${totalAmount}`;
+        
+        // Redirect to the payment URL
+        window.location.href = paymentUrl;
+    });
+
+    // Handle form submission for server-side processing
     document.getElementById('checkout-form').addEventListener('submit', async function (e) {
         e.preventDefault(); // Prevent default form submission
 
@@ -411,7 +461,9 @@
 
             if (response.ok) {
                 // On success, redirect to payment URL
-                window.location.href = 'https://pay.ababank.com/efRPcMcXvMLRihKq6';
+                const totalAmount = parseFloat(document.getElementById('total_input').value) || 0;
+                const paymentUrl = `https://link.payway.com.kh/aba?id=3EACF56C17F7&code=105187&acc=008471110&dynamic=true&amount=${totalAmount}`;
+                window.location.href = paymentUrl;
             } else {
                 const errorText = await response.text();
                 console.error('Form submission failed:', errorText);
@@ -423,46 +475,14 @@
         }
     });
 
+    // Set current date and time for the hidden buy_at field
+    document.getElementById('buy_at').value = new Date().toISOString().slice(0, 16);
+
     // Initial render
     renderOrderSummary();
 </script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-</html>
-
-
-<style>
-    /* Add this to your existing <style> */
-    .order-items-container {
-        max-height: 300px;
-        /* Limit initial height */
-        overflow-y: auto;
-        /* Add scrollbar if content exceeds height */
-        transition: max-height 0.3s ease;
-        /* Smooth transition for expansion */
-    }
-
-    .order-items-container.expanded {
-        max-height: none;
-        /* Remove height restriction when expanded */
-    }
-
-    .show-all-btn {
-        background: none;
-        border: none;
-        color: #007bff;
-        text-decoration: underline;
-        cursor: pointer;
-        padding: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
-
-    .show-all-btn:hover {
-        color: #0056b3;
-    }
-</style>
 
 </html>

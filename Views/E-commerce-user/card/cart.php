@@ -39,7 +39,7 @@
                 </div>
                 <div class="summary-row">
                     <span>Delivery</span>
-                    <span class="delivery-cost">$5.99</span>
+                    <span class="delivery-cost"></span>
                 </div>
              
                
