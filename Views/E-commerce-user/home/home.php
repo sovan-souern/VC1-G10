@@ -992,8 +992,11 @@
 
 </div>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/main
 <!-- Modal -->
 <!-- Modal -->
 <!-- Product Details Modal -->

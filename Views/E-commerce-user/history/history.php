@@ -127,54 +127,62 @@
             } = window.jspdf;
             const doc = new jsPDF();
 
-            // Set styles matching your modal's color scheme
-            doc.setFillColor(168, 114, 154); // Your purple color
-            doc.rect(0, 0, 210, 30, 'F'); // Header background
+            // Header background
+            doc.setFillColor(168, 114, 154);
+            doc.rect(0, 0, 210, 30, 'F');
 
-            // Header
+            // Header - Bold
+            doc.setFont("helvetica", "bold");
             doc.setFontSize(20);
             doc.setTextColor(255, 255, 255);
             doc.text("ORDER RECEIPT", 105, 20, {
                 align: 'center'
             });
 
-            // Customer info (from your modal)
+            // Customer Info
+            doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
             doc.setTextColor(0, 0, 0);
             doc.text("Customer: Anna", 15, 40);
             doc.text("Invoice Date: 22 Dec, 2019", 15, 50);
             doc.text("Receipt Voucher: 1KAU9-84UIL", 15, 60);
 
-            // Order details (matching your modal structure)
+            // Section Title
+            doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
             doc.text("Order Details:", 15, 75);
 
-            // Simple table structure
-            doc.text("Total", 15, 85);
-            doc.text("$898.00", 150, 85);
+            // Table Rows - Labels in bold, values normal
+            const labels = ["Total", "Discount", "GST 18%", "Delivery Charges"];
+            const values = ["$898.00", "$19.00", "$123.00", "Free"];
+            let y = 85;
 
-            doc.text("Discount", 15, 95);
-            doc.text("$19.00", 150, 95);
+            for (let i = 0; i < labels.length; i++) {
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(12);
+                doc.text(labels[i], 15, y);
+                doc.setFont("helvetica", "normal");
+                doc.text(values[i], 195, y, {
+                    align: 'right'
+                });
+                y += 10;
+            }
 
-            doc.text("GST 18%", 15, 105);
-            doc.text("$123.00", 150, 105);
-
-            doc.text("Delivery Charges", 15, 115);
-            doc.text("Free", 150, 115);
-
-            // Total (matching your card-footer style)
-            doc.setFillColor(185, 172, 185); // Your footer color
-            doc.rect(0, 130, 210, 20, 'F');
+            // Footer Total (Bold with background)
+            doc.setFillColor(185, 172, 185);
+            doc.rect(0, y + 5, 210, 20, 'F');
+            doc.setFont("helvetica", "bold");
             doc.setFontSize(16);
             doc.setTextColor(255, 255, 255);
-            doc.text("TOTAL PAID: $1040", 105, 143, {
+            doc.text("TOTAL PAID: $1040", 105, y + 18, {
                 align: 'center'
             });
 
-            // Footer note
+            // Thank you note
             doc.setTextColor(100, 100, 100);
+            doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
-            doc.text("Thank you for your order!", 105, 160, {
+            doc.text("Thank you for your order!", 105, y + 33, {
                 align: 'center'
             });
 
@@ -254,12 +262,12 @@
         background-color:rgb(226, 226, 226);
     } */
     thead {
-        background: rgb(230, 169, 210);
+        background-color: #ffb6c1;
         color: white;
     }
 
     thead:hover {
-        background-color: rgb(235, 153, 216);
+        background-color: #ff6699;
     }
 
     th,

@@ -16,14 +16,20 @@ class DiscountController extends BaseController
         $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/main
     function history()
     {
         $discounts = $this->model->getDiscounts();
         $this->views('/Inventory/Discounts/history.php', ["discounts" => $discounts]);
         // require_once 'Views/Inventory/Discounts/history.php';
     }
+<<<<<<< HEAD
 >>>>>>> feature/user-home
+=======
+>>>>>>> origin/main
 
     function create($id)
     {
@@ -178,5 +184,33 @@ class DiscountController extends BaseController
             echo "Error: Invalid request method.";
         }
 >>>>>>> feature/user-home
+    }
+    function discountBrand($id)
+    {
+        	
+        $brands = $this->model->discountBrand($id);
+        $this->views('/Inventory/Discounts/descountBrand.php', ["brands" => $brands]);
+    }
+    function storeBrand($id)
+    {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $products = $this->model->getProducts(); // Get all products
+            foreach ($products as $product) {
+                if ($product['brand_id'] == $id) { 
+                    $data = [
+                        'product_id' => $product['product_id'], 
+                        'discount_percentage' => $_POST['discount'],
+                        'start_date' => $_POST['start_date'],
+                        'end_date' => $_POST['end_date'],
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ];
+                    $this->model->createDiscount($data); 
+                }
+            }
+            $this->redirect('/discount'); 
+        } else {
+            echo "Error: Invalid request method.";
+        }
     }
 }

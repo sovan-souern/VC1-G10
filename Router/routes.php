@@ -124,6 +124,7 @@ $routes->get('/products/view', [ProductController::class, 'view']);
 $routes->get('/discount', [DiscountController::class, 'index']);
 $routes->get('/create-discount', [DiscountController::class, 'create']);
 <<<<<<< HEAD
+<<<<<<< HEAD
 $routes->get('/diescoutCategory', [DiscountController::class, 'discountProductCategory']);
 $routes->post('/discount/storeCategory', [DiscountController::class, 'storeCategory']);
 
@@ -134,6 +135,13 @@ $routes->post('/discount/storeCategory', [DiscountController::class, 'storeCateg
 $routes->get('/descount/brand', [DiscountController::class, 'discountBrand']);
 $routes->post('/descount/brand/store', [DiscountController::class, 'storeBrand']); 
 >>>>>>> feature/user-home
+=======
+$routes->get('/discount/history', [DiscountController::class, 'history']);
+$routes->get('/diescoutCategory', [DiscountController::class, 'discountProductCategory']);
+$routes->post('/discount/storeCategory', [DiscountController::class, 'storeCategory']);
+$routes->get('/descount/brand', [DiscountController::class, 'discountBrand']);
+$routes->post('/descount/brand/store', [DiscountController::class, 'storeBrand']); 
+>>>>>>> origin/main
 
 $routes->post('/discount/store', [DiscountController::class, 'store']);
 $routes->get('/discount/edit', [DiscountController::class, 'edit']);

@@ -146,7 +146,10 @@ class DiscountModel
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/main
     function discountBrand($id) // Fixed method name
     {
         try {
@@ -156,5 +159,8 @@ class DiscountModel
             die("Error fetching brands: " . $e->getMessage());
         }
     }
+<<<<<<< HEAD
 >>>>>>> feature/user-home
+=======
+>>>>>>> origin/main
 }
