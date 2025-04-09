@@ -244,13 +244,13 @@
     }
 
     .btn {
-        background: rgb(230, 147, 129) !important;
+        background: rgb(233, 163, 147) !important;
         border: none !important;
         color: white !important;
     }
 
     .btn:hover {
-        background: rgb(223, 160, 144) !important;
+        background: rgb(233, 180, 167) !important;
     }
 
     table {
@@ -262,12 +262,12 @@
         background-color:rgb(226, 226, 226);
     } */
     thead {
-        background-color: #ffb6c1;
-        color: white;
+        background-color: #FFCCCC;
+        color: black;
     }
 
     thead:hover {
-        background-color: #ff6699;
+        background-color:rgb(236, 217, 217);
     }
 
     th,
@@ -329,4 +329,5 @@
     .card-header {
         height: 2vh;
     }
+    
 </style>
