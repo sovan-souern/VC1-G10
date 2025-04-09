@@ -6,6 +6,7 @@
 
 <meta name="description" content="" />
 
+
 <!-- Favicon -->
 <!-- <link rel="icon" type="image/x-icon" href="../Views/assets/img/favicon/favicon.ico" /> -->
  <link rel="shortcut icon" href="/Views/assets/img/login/logo1 (1).png" type="/Views/assets/img/favicon/favicon.icon">
@@ -54,6 +55,7 @@
 
 
     <style>
+        
         .footer {
             background: var(--bs-dark) !important;
 

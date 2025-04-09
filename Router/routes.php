@@ -16,6 +16,7 @@ require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 require_once "Controllers/checkoutUser.php";
 require_once "Controllers/HistoryController.php";
+require_once "Controllers/DetailhomeController.php";
 
 $routes = new Router();
 
@@ -193,6 +194,11 @@ $routes->get('/shop', [ShopController::class, 'index']);
 
 //history
 $routes->get('/history', [HistoryController::class, 'index']); 
+//detail
+
+// Routes.php (or your route configuration file)
+$routes->get('/detail', [DetailController::class, 'index']);
+
 
 
 
