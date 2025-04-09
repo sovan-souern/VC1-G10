@@ -1,107 +1,41 @@
+<!-- cart.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container py-5">
-        <h1 class="text-center mb-5">Your Shopping Cart</h1>
-        
-        <!-- Loading Spinner (initially hidden) -->
-        <div id="loading-spinner" class="text-center py-5">
-            <div class="spinner-border text-pink" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        
-        <!-- Empty Cart Message (initially hidden) -->
-        <div id="empty-cart" class="card p-5 text-center d-none">
-            <div class="mb-4">
-                <div class="rounded-circle bg-pink-light p-3 d-inline-flex justify-content-center align-items-center" style="width: 80px; height: 80px;">
-                    <i class="bi bi-cart text-pink" style="font-size: 2rem;"></i>
+    <div class="container">
+        <div class="cart-container">
+            <div class="cart-section">
+                <h2>My cart</h2>
+                <hr>
+                <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
                 </div>
-            </div>
-            <h2 class="fs-3 mb-2">Your cart is empty</h2>
-            <p class="text-muted mb-4">Looks like you haven't added anything to your cart yet.</p>
-            <button class="btn btn-pink mx-auto" style="max-width: 200px;" onclick="window.location.href='/'">
-                Continue Shopping
-            </button>
-        </div>
-        
-        <!-- Cart Content -->
-        <div id="cart-content" class="d-none">
-            <div class="row g-4">
-                <!-- Cart Items Section -->
-                <div class="col-lg-8">
-                    <div class="card shadow-sm">
-                        <div class="card-body p-4">
-                            <h2 class="fs-3 mb-3">My Cart</h2>
-                            <hr>
-                            
-                            <!-- Cart Items Container -->
-                            <div id="cart-items" class="py-2">
-                                <!-- Items will be added here dynamically -->
-                            </div>
-                            
-                            <hr>
-                            
-                            <!-- Cart Actions -->
-                            <div class="d-flex align-items-center text-muted cursor-pointer" id="add-note">
-                                <i class="bi bi-sticky me-2"></i>
-                                <span>Add a note</span>
-                            </div>
-                        </div>
+                <hr>
+                <div class="cart-actions">
+                    <div class="promo-code">
+                        <i class="fa-solid fa-tag"></i>
+                        <span>Enter a promo code</span>
                     </div>
-                </div>
-                
-                <!-- Order Summary Section -->
-                <div class="col-lg-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body p-4">
-                            <h2 class="fs-3 mb-3">Order Summary</h2>
-                            <hr>
-                            
-                            <div class="d-flex justify-content-between mb-3">
-                                <span class="text-muted">Subtotal</span>
-                                <span id="subtotal">$0.00</span>
-                            </div>
-                            
-                            <hr>
-                            
-                            <div class="d-flex justify-content-between mb-4">
-                                <span class="fs-5 fw-semibold">Total</span>
-                                <span id="total" class="fs-5 fw-semibold">$0.00</span>
-                            </div>
-                            
-                            <button id="checkout-btn" class="btn btn-pink w-100 py-3 mb-3 fw-medium">
-                                Checkout
-                            </button>
-                            
-                            <div class="d-flex justify-content-center align-items-center text-muted small">
-                                <i class="bi bi-lock me-1"></i>
-                                <span>Secure Checkout</span>
-                            </div>
-                        </div>
+                    <div class="add-note">
+                        <i class="fa-solid fa-note-sticky"></i>
+                        <span>Add a note</span>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Toast Container for Notifications -->
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto" id="toast-title">Notification</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            
+            <div class="summary-section">
+                <h2>Order summary</h2>
+                <hr>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span class="subtotal">$0.00</span>
                 </div>
                 <div class="summary-row">
                     <span>Delivery</span>
@@ -123,127 +57,289 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+    
+    <script src="cart-script.js"></script>
 </body>
 </html>
-<style>
-    /* Custom Colors */
-:root {
-    --pink: #ffb6c1;
-    --pink-hover: #ffaab8;
-    --pink-light: #ffe0e5;
-}
 
-body {
-    background-color: #f8f9fa;
+<style>
+    /* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-/* Custom Button Styles */
-.btn-pink {
-    background-color: var(--pink);
-    color: #212529;
+body {
+    background-color: #fdf2f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.cart-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.summary-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+hr {
     border: none;
-}
-
-.btn-pink:hover, .btn-pink:focus {
-    background-color: var(--pink-hover);
-    color: #212529;
-}
-
-/* Text Colors */
-.text-pink {
-    color: var(--pink) !important;
-}
-
-.bg-pink-light {
-    background-color: var(--pink-light) !important;
+    border-top: 1px solid #e0e0e0;
+    margin: 15px 0;
 }
 
 /* Cart Item Styles */
+.cart-items {
+    min-height: 150px;
+}
+
 .cart-item {
-    transition: all 0.3s ease;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.cart-item:not(:last-child) {
-    border-bottom: 1px solid #eee;
-}
-
-.cart-item-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    background-color: #f1f1f1;
-}
-
-.quantity-control {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    border: 1px solid #dee2e6;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.product-image {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-details {
+    flex: 1;
+}
+
+.product-details h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
     border-radius: 4px;
 }
 
 .quantity-btn {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 40px;
+    height: 40px;
     background: none;
     border: none;
-    font-size: 1rem;
+    font-size: 18px;
     cursor: pointer;
 }
 
 .quantity-input {
     width: 40px;
-    height: 32px;
+    height: 40px;
     text-align: center;
     border: none;
-    border-left: 1px solid #dee2e6;
-    border-right: 1px solid #dee2e6;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    font-size: 16px;
     background-color: white;
 }
 
+.item-price {
+    font-weight: 600;
+    font-size: 16px;
+    width: 80px;
+    text-align: right;
+}
+
 .remove-btn {
-    color: #6c757d;
     background: none;
     border: none;
+    color: #999;
     cursor: pointer;
-    transition: color 0.2s;
+    font-size: 16px;
 }
 
 .remove-btn:hover {
-    color: #dc3545;
+    color: #666;
 }
 
-/* Cursor Pointer */
-.cursor-pointer {
+.empty-cart-message {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+/* Cart Actions */
+.cart-actions {
+    margin-top: 20px;
+}
+
+.promo-code, .add-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    color: #555;
+}
+
+.promo-code i, .add-note i {
+    font-size: 14px;
+}
+
+/* Summary Section */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.location {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.shipping-method {
+    margin: 15px 0;
+}
+
+.shipping-method select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+.tax-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tax-label i {
+    font-size: 14px;
+    color: #999;
     cursor: pointer;
 }
 
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.total {
+    font-size: 20px;
+    font-weight: 600;
 }
 
-.fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.primary {
+    background-color: #ffb6c1;
+    color: #333;
+}
+
+.paypal {
+    background-color: #ffc439;
+    color: #333;
+}
+
+.paypal-logo {
+    height: 20px;
+    margin-right: 10px;
+}
+
+.secure-checkout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cart-container {
+        flex-direction: column;
+    }
+    
+    .cart-item {
+        flex-wrap: wrap;
+    }
+    
+    .product-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .quantity-controls {
+        order: 3;
+        margin-top: 10px;
+    }
+    
+    .item-price {
+        order: 4;
+        margin-top: 10px;
+    }
+    
+    .remove-item {
+        order: 5;
+        margin-top: 10px;
+    }
+}
 </style>
+
 <script>
     // cart-script.js
 // cart-script.js
@@ -260,189 +356,97 @@ document.addEventListener('DOMContentLoaded', function() {
     let cartItems = [];
     const deliveryCost = 5.99; // Fixed delivery cost
 
-  // Cart Data
-  let cartItems = []
+    // Load cart from localStorage on page load
+    try {
+        cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (e) {
+        console.error("Error parsing cart from localStorage:", e);
+        cartItems = [];
+    }
 
-  // Initialize
-  initializeCart()
+    // Render cart items on page load
+    renderCartItems();
 
-  // Event Listeners
-  addNoteButton.addEventListener("click", addNote)
-  checkoutButton.addEventListener("click", handleCheckout)
-
-  // Functions
-  function initializeCart() {
-    // Show loading spinner
-    loadingSpinner.classList.remove("d-none")
-
-    // Simulate loading delay (remove in production)
-    setTimeout(() => {
-      // Load cart from localStorage
-      try {
-        const savedCart = localStorage.getItem("cart")
-        const parsedCart = savedCart ? JSON.parse(savedCart) : []
-
-        // If there's no saved cart, add some sample items for demo purposes
-        if (!savedCart || parsedCart.length === 0) {
-          const sampleItems = [
-            {
-              id: "1",
-              name: "Stylish T-Shirt",
-              price: 29.99,
-              quantity: 1,
-              image: "https://via.placeholder.com/100",
-            },
-            {
-              id: "2",
-              name: "Designer Jeans",
-              price: 59.99,
-              quantity: 2,
-              image: "https://via.placeholder.com/100",
-            },
-          ]
-          cartItems = sampleItems
-          localStorage.setItem("cart", JSON.stringify(sampleItems))
-        } else {
-          cartItems = parsedCart
+    // Function to render cart items
+    function renderCartItems() {
+        cartItemsContainer.innerHTML = ''; // Clear existing items
+        if (cartItems.length === 0) {
+            cartItemsContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty.</p>';
+            updateSummary();
+            return;
         }
 
-        // Render cart
-        renderCart()
-      } catch (e) {
-        console.error("Error parsing cart from localStorage:", e)
-        cartItems = []
-        renderCart()
-      }
-
-      // Hide loading spinner
-      loadingSpinner.classList.add("d-none")
-    }, 500)
-  }
-
-  function renderCart() {
-    if (cartItems.length === 0) {
-      // Show empty cart message
-      emptyCartMessage.classList.remove("d-none")
-      cartContent.classList.add("d-none")
-    } else {
-      // Show cart content
-      emptyCartMessage.classList.add("d-none")
-      cartContent.classList.remove("d-none")
-
-      // Clear cart items container
-      cartItemsContainer.innerHTML = ""
-
-      // Render each cart item
-      cartItems.forEach((item) => {
-        const cartItemElement = createCartItemElement(item)
-        cartItemsContainer.appendChild(cartItemElement)
-      })
-
-      // Update summary
-      updateSummary()
-    }
-  }
-
-  function createCartItemElement(item) {
-    const cartItem = document.createElement("div")
-    cartItem.className = "cart-item py-3"
-    cartItem.dataset.id = item.id
-
-    cartItem.innerHTML = `
-            <div class="row align-items-center g-3">
-                <div class="col-md-2 col-4">
-                    <img src="${item.image}" alt="${item.name}" class="cart-item-image rounded">
+        cartItems.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <div class="product-image">
+                    <img src="${item.image}" alt="${item.name}" class="product-img">
                 </div>
-                <div class="col-md-4 col-8">
-                    <h3 class="fs-5 mb-1">${item.name}</h3>
-                    <p class="text-muted mb-0">$${item.price.toFixed(2)}</p>
+                <div class="product-details">
+                    <h3>${item.name}</h3>
+                    <p class="price">$${item.price.toFixed(2)}</p>
                 </div>
-                <div class="col-md-3 col-6">
-                    <div class="quantity-control">
-                        <button class="quantity-btn minus">−</button>
-                        <input type="text" class="quantity-input" value="${item.quantity}" readonly>
-                        <button class="quantity-btn plus">+</button>
-                    </div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus">−</button>
+                    <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                    <button class="quantity-btn plus">+</button>
                 </div>
-                <div class="col-md-2 col-4 text-end">
-                    <span class="fw-semibold">$${(item.price * item.quantity).toFixed(2)}</span>
-                </div>
-                <div class="col-md-1 col-2 text-end">
+                <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                <div class="remove-item">
                     <button class="remove-btn">
-                        <i class="bi bi-trash"></i>
+                        <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </div>
-            </div>
-        `
+            `;
+            cartItemsContainer.appendChild(cartItem);
 
-    // Add event listeners
-    const minusButton = cartItem.querySelector(".minus")
-    const plusButton = cartItem.querySelector(".plus")
-    const removeButton = cartItem.querySelector(".remove-btn")
+            // Attach event listeners to the buttons
+            attachItemListeners(cartItem, item);
+        });
 
-    minusButton.addEventListener("click", () => updateItemQuantity(item.id, item.quantity - 1))
-    plusButton.addEventListener("click", () => updateItemQuantity(item.id, item.quantity + 1))
-    removeButton.addEventListener("click", () => removeItem(item.id))
-
-    return cartItem
-  }
-
-  function updateItemQuantity(id, newQuantity) {
-    if (newQuantity < 1) return
-
-    // Update cart items
-    cartItems = cartItems.map((item) => {
-      if (item.id === id) {
-        return { ...item, quantity: newQuantity }
-      }
-      return item
-    })
-
-    // Update localStorage
-    localStorage.setItem("cart", JSON.stringify(cartItems))
-
-    // Update UI
-    const cartItem = document.querySelector(`.cart-item[data-id="${id}"]`)
-    if (cartItem) {
-      const quantityInput = cartItem.querySelector(".quantity-input")
-      const itemTotal = cartItem.querySelector(".fw-semibold")
-      const item = cartItems.find((item) => item.id === id)
-
-      quantityInput.value = newQuantity
-      itemTotal.textContent = `$${(item.price * newQuantity).toFixed(2)}`
-
-      // Update summary
-      updateSummary()
+        updateSummary();
     }
-  }
 
-  function removeItem(id) {
-    // Remove item from cart
-    cartItems = cartItems.filter((item) => item.id !== id)
+    // Attach event listeners to cart item buttons
+    function attachItemListeners(cartItem, item) {
+        const minusBtn = cartItem.querySelector('.minus');
+        const plusBtn = cartItem.querySelector('.plus');
+        const quantityInput = cartItem.querySelector('.quantity-input');
+        const removeBtn = cartItem.querySelector('.remove-btn');
+        const itemPrice = cartItem.querySelector('.item-price');
 
-    // Update localStorage
-    localStorage.setItem("cart", JSON.stringify(cartItems))
+        // Decrease quantity
+        minusBtn.addEventListener('click', function() {
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantity--;
+                quantityInput.value = quantity;
+                item.quantity = quantity;
+                itemPrice.textContent = `$${(item.price * quantity).toFixed(2)}`;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                updateSummary();
+            }
+        });
 
-    // Show toast notification
-    showToast("Item removed", "The item has been removed from your cart")
+        // Increase quantity
+        plusBtn.addEventListener('click', function() {
+            let quantity = parseInt(quantityInput.value);
+            quantity++;
+            quantityInput.value = quantity;
+            item.quantity = quantity;
+            itemPrice.textContent = `$${(item.price * quantity).toFixed(2)}`;
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            updateSummary();
+        });
 
-    // Re-render cart
-    renderCart()
-  }
-
-  function updateSummary() {
-    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-
-    subtotalElement.textContent = `$${subtotal.toFixed(2)}`
-    totalElement.textContent = `$${subtotal.toFixed(2)}`
-  }
-
-  function addNote() {
-    const note = prompt("Add a note to your order:")
-    if (note) {
-      showToast("Note added", `"${note}" has been added to your order`)
+        // Remove item
+        removeBtn.addEventListener('click', function() {
+            cartItems = cartItems.filter(i => i.name !== item.name);
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            renderCartItems();
+        });
     }
-  }
 
     // Update order summary
     function updateSummary() {
@@ -453,4 +457,20 @@ document.addEventListener('DOMContentLoaded', function() {
         deliveryCostEl.textContent = `$${deliveryCost.toFixed(2)}`;
     }
 
+    // Promo code and note functionality
+    promoCode.addEventListener('click', function() {
+        const code = prompt('Enter your promo code:');
+        if (code) {
+            alert(`Promo code "${code}" applied!`);
+            // Add promo code logic here (e.g., apply discount)
+        }
+    });
+
+    addNote.addEventListener('click', function() {
+        const note = prompt('Add a note to your order:');
+        if (note) {
+            alert(`Note added: "${note}"`);
+        }
+    });
+});
 </script>
