@@ -244,13 +244,13 @@
     }
 
     .btn {
-        background: rgb(230, 147, 129) !important;
+        background: rgb(233, 163, 147) !important;
         border: none !important;
         color: white !important;
     }
 
     .btn:hover {
-        background: rgb(223, 160, 144) !important;
+        background: rgb(233, 180, 167) !important;
     }
 
     table {
@@ -262,12 +262,12 @@
         background-color:rgb(226, 226, 226);
     } */
     thead {
-        background-color: #ffb6c1;
-        color: white;
+        background-color: #FFCCCC;
+        color: black;
     }
 
     thead:hover {
-        background-color: #ff6699;
+        background-color: rgb(236, 217, 217);
     }
 
     th,
@@ -328,5 +328,134 @@
 
     .card-header {
         height: 2vh;
+    }
+
+    /* Responsive table */
+    @media (max-width: 768px) {
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-controls {
+            display: flex;
+            flex-direction: row;
+            align-items: self-start;
+            gap: 5px;
+            margin-bottom: 10px;
+
+        }
+
+        th,
+        td {
+            padding: 8px;
+            font-size: 8px;
+        }
+
+        .btn {
+            font-size: 6px;
+        }
+
+        .lead {
+            font-size: 10px;
+        }
+
+        .modal-content {
+            width: 70%;
+        }
+
+        .card-body,
+        .card-header,
+        .card-footer {
+            padding: 10px !important;
+        }
+
+        .d-flex {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        h5 {
+            font-size: 10px;
+        }
+
+        .h2 {
+            font-size: 10px !important;
+            font-weight: bold !important;
+            color: white !important;
+            margin-left: 8px;
+        }
+
+        .d-flex.justify-content-between {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+        }
+
+        .h2 {
+            font-size: 22px;
+        }
+
+        .text-muted {
+            font-size: 10px;
+        }
+
+        .card {
+            font-size: 10px;
+            height: 100%;
+        }
+
+        .card-body {
+            height: 100%;
+        }
+
+        /* Adjust this for spacing between elements */
+        .d-flex.align-items-center.justify-content-end {
+            justify-content: end !important;
+            /* Space between items */
+            align-items: center !important;
+            /* Vertically center */
+            text-align: center !important;
+            /* Center text */
+        }
+
+        .h5 .h2 {
+            margin-left: 10px !important;
+            /* Add space between the elements */
+        }
+            #search {
+        width: 50%;
+        /* Make the search bar full width on small screens */
+        font-size: 12px;
+        /* Adjust font size for better fit */
+        height: 5%;
+    }
+    }
+    @media (max-width: 480px) {
+        .table-controls {
+            flex-direction: column;
+        }
+
+        input {
+            max-width: 100%;
+        }
+
+        .d-flex.justify-content-between>* {
+            width: 100%;
+        }
+
+        .modal-content {
+            width: 100%;
+            margin: 10px;
+            border-radius: 0;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .card-footer h5 {
+            flex-direction: column;
+            text-align: center;
+        }
     }
 </style>

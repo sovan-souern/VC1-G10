@@ -11,10 +11,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <style>
-        .slideshow-container, .dot-container, .footer {
+          .slideshow-container {
             display: none;
         }
-        
+        .dot-container{
+            display: none;
+        }
+        .footer{
+            display: none;
+        }
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -748,6 +753,11 @@
     Continue to Payment
 </button>
                         </div>
+                        <!-- Hidden inputs for cart items and total -->
+                        <input type="hidden" name="items" id="items">
+                        <input type="hidden" name="total" id="total_input">
+                        <input type="hidden" name="product_id" id="product_id">
+                        <button type="submit" class="continue-btn" onclick="window.location.href='https://pay.ababank.com/efRPcMcXvMLRihKq6'">Continue</button>
                     </div>
 
                     <!-- Payment Method Section -->
@@ -871,30 +881,6 @@
 
     console.log("Cart loaded from localStorage in checkout:", cart);
 
-    // Toast notification function
-    function showToast(type, title, message) {
-        const toastContainer = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        
-        const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
-        
-        toast.innerHTML = `
-            <i class="fas ${icon}"></i>
-            <div class="toast-message">
-                <div class="toast-title">${title}</div>
-                <div class="toast-body">${message}</div>
-            </div>
-        `;
-        
-        toastContainer.appendChild(toast);
-        
-        // Remove toast after 3 seconds
-        setTimeout(() => {
-            toast.remove();
-        }, 3000);
-    }
-
     // Render cart items in the order summary
     function renderOrderSummary() {
         const orderItemsContainer = document.getElementById('order-items');
@@ -903,15 +889,30 @@
             orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
         } else {
             cart.forEach((item, index) => {
+                const collapseId = `product-details-${index}`;
                 const productItem = document.createElement('div');
                 productItem.classList.add('product-item');
                 productItem.innerHTML = `
                     <div class="product-image">
-                        <img src="${item.image}" alt="${item.name}">
+                        <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
                     </div>
                     <div class="product-details">
-                        <div class="product-name">${item.name}</div>
-                        <div class="product-quantity">Qty: ${item.quantity}</div>
+                        <div class="fw-bold">${item.name}</div>
+                        <div class="text-muted">Qty: ${item.quantity}</div>
+                        <div class="text-muted">
+                            <a href="#${collapseId}" class="text-decoration-none" data-bs-toggle="collapse" aria-expanded="false" aria-controls="${collapseId}">
+                                More Details ▼
+                            </a>
+                        </div>
+                        <div class="collapse mt-2" id="${collapseId}">
+                            <div class="card card-body">
+                                <p><strong>Name:</strong> ${item.name}</p>
+                                <p><strong>Price per Unit:</strong> $${item.price.toFixed(2)}</p>
+                                <p><strong>Quantity:</strong> ${item.quantity}</p>
+                                <p><strong>Total:</strong> $${(item.price * item.quantity).toFixed(2)}</p>
+                                <img src="${item.image}" alt="${item.name}" style="max-width: 100px; border-radius: 4px;">
+                            </div>
+                        </div>
                     </div>
                     <div class="product-price">$${(item.price * item.quantity).toFixed(2)}</div>
                 `;
@@ -919,6 +920,7 @@
             });
         }
         updateOrderSummary();
+        setupShowAllButton();
     }
 
     // Update order summary and prepare data for submission
@@ -939,285 +941,62 @@
         console.log("Cart being submitted:", cart);
     }
 
-    // Form validation
-    function validateSection(sectionId) {
-        const section = document.getElementById(sectionId);
-        const requiredFields = section.querySelectorAll('[required]');
-        let isValid = true;
+    // Setup "Show All" button functionality
+    function setupShowAllButton() {
+        const showAllBtn = document.getElementById('show-all-btn');
+        const orderItemsContainer = document.getElementById('order-items');
+        let isExpanded = false;
 
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                field.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                field.classList.remove('is-invalid');
-            }
-        });
-
-        // Additional validation for specific fields
-        if (sectionId === 'customer-section') {
-            const emailField = document.getElementById('email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailField.value && !emailRegex.test(emailField.value)) {
-                emailField.classList.add('is-invalid');
-                isValid = false;
-            }
-
-            const phoneField = document.getElementById('phone');
-            if (phoneField.value && phoneField.value.length < 8) {
-                phoneField.classList.add('is-invalid');
-                isValid = false;
-            }
-        }
-
-        if (sectionId === 'payment-section') {
-            const selectedPayment = document.querySelector('.payment-option.selected');
-            if (!selectedPayment) {
-                showToast('error', 'Payment Method Required', 'Please select a payment method to continue');
-                isValid = false;
-            }
-        }
-
-        return isValid;
-    }
-
-    // Navigation between sections
-    function navigateToSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll('.form-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        // Show the target section
-        document.getElementById(`${sectionId}-section`).classList.add('active');
-        
-        // Update stepper
-        document.querySelectorAll('.step').forEach(step => {
-            step.classList.remove('active', 'completed');
-        });
-        
-        const steps = ['customer', 'delivery', 'payment'];
-        const currentIndex = steps.indexOf(sectionId);
-        
-        // Mark current step as active
-        document.querySelector(`.step[data-step="${sectionId}"]`).classList.add('active');
-        
-        // Mark previous steps as completed
-        for (let i = 0; i < currentIndex; i++) {
-            document.querySelector(`.step[data-step="${steps[i]}"]`).classList.add('completed');
-        }
-
-        // Enable/disable payment button based on payment selection
-        if (sectionId === 'payment') {
-            updatePaymentButton();
-        }
-    }
-
-    // Update payment button state
-    function updatePaymentButton() {
-        const proceedBtn = document.getElementById('proceed-payment-btn');
-        const selectedPayment = document.querySelector('.payment-option.selected');
-        
-        if (selectedPayment) {
-            proceedBtn.disabled = false;
+        if (cart.length > 0) {
+            showAllBtn.style.display = 'block';
+            showAllBtn.addEventListener('click', () => {
+                isExpanded = !isExpanded;
+                if (isExpanded) {
+                    orderItemsContainer.classList.add('expanded');
+                    showAllBtn.textContent = 'Hide All';
+                } else {
+                    orderItemsContainer.classList.remove('expanded');
+                    showAllBtn.textContent = 'Show All';
+                }
+            });
         } else {
-            proceedBtn.disabled = true;
+            showAllBtn.style.display = 'none';
         }
     }
 
-// Remove the animatePaymentButton function and its calls
-// Remove this function
-function animatePaymentButton() {
-    const proceedBtn = document.getElementById('proceed-payment-btn');
-    proceedBtn.classList.add('pulse-animation');
-    
-    setTimeout(() => {
-        proceedBtn.classList.remove('pulse-animation');
-    }, 1000);
-}
-
-    // Next button click handler
-    document.querySelectorAll('.next-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const currentSection = this.closest('.form-section').id;
-            const nextSection = this.getAttribute('data-next');
-            
-            if (validateSection(currentSection)) {
-                navigateToSection(nextSection);
-            } else {
-                showToast('error', 'Required Fields', 'Please fill in all required fields correctly');
-            }
-        });
-    });
-
-    // Back button click handler
-    document.querySelectorAll('.back-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const prevSection = this.getAttribute('data-prev');
-            navigateToSection(prevSection);
-        });
-    });
-
-    // Stepper click handler
-    document.querySelectorAll('.step').forEach(step => {
-        step.addEventListener('click', function() {
-            const targetSection = this.getAttribute('data-step');
-            const steps = ['customer', 'delivery', 'payment'];
-            const currentSection = document.querySelector('.form-section.active').id.replace('-section', '');
-            const currentIndex = steps.indexOf(currentSection);
-            const targetIndex = steps.indexOf(targetSection);
-            
-            // Only allow clicking on completed steps or the next step
-            if (targetIndex < currentIndex || (targetIndex === currentIndex + 1 && validateSection(`${currentSection}-section`))) {
-                navigateToSection(targetSection);
-            } else if (targetIndex > currentIndex + 1) {
-                showToast('error', 'Complete Previous Step', 'Please complete the current step first');
-            } else if (targetIndex === currentIndex + 1) {
-                showToast('error', 'Required Fields', 'Please fill in all required fields correctly');
-            }
-        });
-    });
-
-    // Payment option selection
-    const paymentOptions = document.querySelectorAll('.payment-option');
-    paymentOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            // Remove selected class from all options
-            paymentOptions.forEach(opt => {
-                opt.classList.remove('selected');
-                opt.querySelector('input[type="radio"]').checked = false;
-            });
-            
-            // Add selected class to clicked option
-            this.classList.add('selected');
-            this.querySelector('input[type="radio"]').checked = true;
-            
-            // Store selected payment method
-            const paymentMethod = this.getAttribute('data-payment');
-            document.getElementById('payment_method').value = paymentMethod;
-            
-            // Update payment button
-            updatePaymentButton();
-        
-            // Remove this line that calls the animation
-            // if (!document.getElementById('proceed-payment-btn').disabled) {
-            //     animatePaymentButton();
-            // }
-        });
-    });
-
-    // Contact option selection
-    const contactOptions = document.querySelectorAll('.contact-option');
-    contactOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            // Remove selected class from all options
-            contactOptions.forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            // Add selected class to clicked option
-            this.classList.add('selected');
-            
-            // Store selected contact method
-            const contactMethod = this.getAttribute('data-contact');
-            document.getElementById('contact_method').value = contactMethod;
-        });
-    });
-
-    // Form field validation on input
-    document.querySelectorAll('.form-control, .form-select').forEach(field => {
-        field.addEventListener('input', function() {
-            if (this.hasAttribute('required') && this.value.trim()) {
-                this.classList.remove('is-invalid');
-            }
-        });
-    });
-
-    // Handle form submission
+    // Handle form submission and payment redirect
     document.getElementById('checkout-form').addEventListener('submit', async function (e) {
-    e.preventDefault(); // Prevent default form submission
+        e.preventDefault(); // Prevent default form submission
 
-    // Validate payment section
-    if (!validateSection('payment-section')) {
-        return false;
-    }
+        const form = this;
+        const formData = new FormData(form);
 
-    const form = this;
-    const formData = new FormData(form);
-    const paymentMethod = document.querySelector('.payment-option.selected').getAttribute('data-payment');
-    const totalAmount = parseFloat(document.getElementById('total_input').value) || 0;
+        // Add a return URL to the form data (configure this based on your domain)
+        formData.append('return_url', window.location.origin + '/checkout/success');
 
-    // Add a return URL to the form data
-    formData.append('return_url', window.location.origin + '/checkout/success');
+        try {
+            // Send form data to server
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
 
-    try {
-        // Show loading state
-        const submitBtn = document.getElementById('proceed-payment-btn');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Processing...';
-
-        // Send form data to server
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.ok) {
-            // On success, redirect to appropriate payment URL based on selected method
-            let paymentUrl = '';
-            
-            switch(paymentMethod) {
-                case 'aba':
-                    paymentUrl = `https://link.payway.com.kh/aba?id=3EACF56C17F7&code=105187&acc=008471110&dynamic=true&amount=${totalAmount}`;
-                    break;
-                case 'acleda':
-                    paymentUrl = `/payment/acleda?amount=${totalAmount}&order_id=${response.orderId}`;
-                    break;
-                case 'wing':
-                    paymentUrl = `/payment/wing?amount=${totalAmount}&order_id=${response.orderId}`;
-                    break;
-                default:
-                    paymentUrl = `https://link.payway.com.kh/aba?id=3EACF56C17F7&code=105187&acc=008471110&dynamic=true&amount=${totalAmount}`;
+            if (response.ok) {
+                // On success, redirect to payment URL
+                window.location.href = 'https://pay.ababank.com/efRPcMcXvMLRihKq6';
+            } else {
+                const errorText = await response.text();
+                console.error('Form submission failed:', errorText);
+                alert('There was an error processing your order. Please try again.');
             }
-            
-            window.location.href = paymentUrl;
-        } else {
-            const errorText = await response.text();
-            console.error('Form submission failed:', errorText);
-            showToast('error', 'Submission Error', 'There was an error processing your order. Please try again.');
-            
-            // Reset button state
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Proceed to Payment';
+        } catch (error) {
+            console.error('Error during form submission:', error);
+            alert('An unexpected error occurred. Please try again.');
         }
-    } catch (error) {
-        console.error('Error during form submission:', error);
-        showToast('error', 'Connection Error', 'An unexpected error occurred. Please check your connection and try again.');
-        
-        // Reset button state
-        const submitBtn = document.getElementById('proceed-payment-btn');
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Proceed to Payment';
-    }
-});
-
-    // Set current date and time for the hidden buy_at field
-    document.getElementById('buy_at').value = new Date().toISOString().slice(0, 16);
-
-    // Add input event listeners to all required fields
-    document.querySelectorAll('[required]').forEach(field => {
-        field.addEventListener('input', function() {
-            if (this.value.trim()) {
-                this.classList.remove('is-invalid');
-            }
-        });
     });
 
     // Initial render
     renderOrderSummary();
-
-    // Add this to the JavaScript section to enhance button interactions
-    // Add this after the updatePaymentButton function
 </script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
