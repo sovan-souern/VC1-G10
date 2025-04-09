@@ -95,12 +95,7 @@
             padding: 30px;
             text-align: center;
         }
-        .card-title {
-            /* font-size: 1.8rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px; */
-        }
+        
         .price {
             font-size: 1.6rem;
             font-weight: 600;
