@@ -303,7 +303,6 @@
         margin: 10px auto;
         /* margin: 10px; */
     }
-
     .close {
         float: right;
         font-size: 28px;
