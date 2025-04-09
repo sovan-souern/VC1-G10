@@ -20,22 +20,18 @@
                 </div>
 
             </div>
-            
-            <div class="items-per-page" style="display: flex; align-items: center; gap: 20px;">
-                <div class="tab-buttons">
-                    <a href="/discount" class="tab-btn">Discount</a>
-                    <a href="/discount/history" class="tab-btn active">history</a>
-                </div>
-                <div>
-                    <label for="itemsPerPage">Show</label>
-                    <select id="itemsPerPage">
-                        <option value="1000">All</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
+            <div class="items-per-page">
+                <a href="/discount">Discount</a>/
+                <a href="/discount/history">history</a>
+
+                <label for="itemsPerPage">Show</label>
+                <select id="itemsPerPage">
+                    <option value="1000">All</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
             </div>
         </div>
         <div id="filter_inputs">
@@ -44,7 +40,7 @@
         </div>
         <div class="page" id="productPage">
             <?php foreach ($discounts as $discount) : ?>
-              <?php if ($discount["end_date"] >= date("Y-m-d") ): ?>
+                <?php if (isset($discount["end_date"]) && $discount["end_date"] < date("Y-m-d")) : ?>
                     <div class="product-card">
                         <?php if (!empty($discount["image"])) : ?>
                             <img src="../../../<?php echo htmlspecialchars($discount["image"]); ?>" alt="Product Image" class="product-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -149,58 +145,3 @@
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<style>
-    .tab-buttons {
-        display: flex;
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid #e0e0e0;
-    }
-
-        .tab-btn {
-            padding: 10px 25px;
-            text-decoration: none;
-            color: #333;
-            background-color: #f5f5f5;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-    .tab-btn:first-child {
-        border-right: 1px solid #e0e0e0;
-    }
-
-    .tab-btn.active {
-        background-color: #fff;
-        color: #333;
-    }
-
-    .tab-btn:hover {
-        background-color: #f0f0f0;
-    }
-
-    @media (max-width: 768px) {
-        .items-per-page {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .tab-buttons {
-            width: 100%;
-            justify-content: space-between;
-           
-        }
-
-        .tab-btn {
-          
-            flex: 1;
-            text-align: center;
-        }
-
-        .items-per-page label,
-        .items-per-page select {
-            width: 100%;
-        }
-    }
-</style>

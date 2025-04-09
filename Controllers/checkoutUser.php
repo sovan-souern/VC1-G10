@@ -24,11 +24,12 @@ class CheckoutUserController extends BaseController
 
     $admin_id = $users[0]['admin_id'] ?? null;
 
-    $this->ViewsUser('E-commerce-user/card/checkout.php', [
+    extract([
       "users" => $users,
       "products" => $products,
-      "admin_id" => $admin_id // Pass admin_id to the view
-    ]);
+      "admin_id" => $admin_id
+  ]);
+  require_once 'Views/E-commerce-user/card/checkout.php';
   }
 
 
@@ -98,13 +99,6 @@ class CheckoutUserController extends BaseController
         'product_ids' => $selectedProductIds, // Pass product IDs as an array
         'address_id' => $addressId // Pass the created address_id
       ];
-
-      $orderId = $this->model->createOrder($data, $id);
-      if ($orderId) {
-        echo "Order created successfully with ID: $orderId";
-      } else {
-        echo "Failed to create order.";
-      }
     }
   }
 

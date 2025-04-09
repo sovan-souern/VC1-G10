@@ -102,6 +102,12 @@
 </html>
 
 <style>
+      .slideshow-container {
+        display: none;
+    }
+    .dot-container {
+        display: none;
+    }
   .shop-container {
     text-align: center;
     max-width: 1100px;
@@ -233,6 +239,7 @@
   @media (min-width: 768px) {
     .site-blocks-cover h1 {
       font-size: 50px;
+      
     }
   }
 
