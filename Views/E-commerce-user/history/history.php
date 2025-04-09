@@ -401,4 +401,13 @@
     }
     }
     
+
+    .card-footer {
+        height: 2vh;
+    }
+
+    .card-header {
+        height: 2vh;
+    }
+    
 </style>

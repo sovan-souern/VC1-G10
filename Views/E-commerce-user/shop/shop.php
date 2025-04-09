@@ -327,8 +327,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="discount-badge"><?php echo $discount_badge; ?></div>
                             <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
                                 <ul class="discount-product-hover product-hover-shared">
-                                    <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
-                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a href="/detail"><span class="arrow_expand"></span></a></li>
+                                    <li><a href="/detail"><span class="icon_heart_alt"></span></a></li>
                                     <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                 </ul>
                             </div>

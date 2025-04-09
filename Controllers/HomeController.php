@@ -21,5 +21,12 @@ class HomeController extends BaseController {
         $this->ViewsUser('E-commerce-user/home/home.php', ["discounts" => $discounts,"products" => $products]);
         $this->ViewsUser('E-commerce-user/home/home.php', []); 
     }
+    function detail(){
+        {
+            require_once 'Views/E-commerce-user/card/detail.php';
+            // $this->ViewsUser('Views/E-commerce-user/card/cart.php');
+        
+          }
 
-}
+        }
+    }
