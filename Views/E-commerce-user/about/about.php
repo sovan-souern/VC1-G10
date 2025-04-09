@@ -258,4 +258,21 @@
     letter-spacing: .05em;
     font-size: 18px;
   }
+
+  /* Add padding to all 3 key sections */
+.site-section,
+.shop-container,
+.site-blocks-1 {
+  padding: 60px 20px;
+}
+
+/* Improve padding on smaller screens */
+@media (max-width: 768px) {
+  .site-section,
+  .shop-container,
+  .site-blocks-1 {
+    padding: 40px 15px;
+  }
+}
+
 </style>
