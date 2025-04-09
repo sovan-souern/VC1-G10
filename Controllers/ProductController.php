@@ -147,11 +147,11 @@ class ProductController extends BaseController
         $this->views('/Inventory/products/outstock.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
     }
     // notification 
-    function Notification()
-    {
-        $products = $this->model->getProducts();
-        $brand = $this->model->getBrands();
-        $category = $this->model->getCategories();
-        $this->views('/Inventory/products/outstock.php', ["products" => $products, "brands" => $brand, "categories" => $category]);
-    }
+    function Notification()  
+    {   
+        $products = $this->model->getProducts();  
+        $brand = $this->model->getBrands();   
+        $category = $this->model->getCategories();   
+        $this->views('/Inventory/products/outstock.php', ["products" => $products, "brands" => $brand, "categories" => $category]);   
+    } 
 }
