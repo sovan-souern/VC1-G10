@@ -161,20 +161,20 @@
   }
 
   .shop-caption button {
-    margin-top: 10px;
+    margin-top: 25px;
     font-size: 14px;
-    background: #f8d7da;
+    background:rgb(245, 169, 174);
     padding: 8px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     width: 340px;
+    color:white;
+
 
   }
 
-  .shop-caption button:hover {
-    background: #f5c6cb;
-  }
+
 
   @media (max-width: 768px) {
     .shop-gallery {
@@ -212,20 +212,36 @@
     }
   }
 
-  .site-section.site-section-sm {
-    padding: 4em 0;
-  }
+/* Center icon and text in each feature block */
+.site-blocks-1 .d-lg-flex {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
 
-  .icon span {
-    padding: 10px;
-    margin-right: 10px;
-  }
+.site-blocks-1 .icon {
+  margin: 0 auto 20px auto; /* Center icon with space below */
+}
 
-  .site-section-heading {
-    font-size: 30px;
-    color: #25262a;
-    position: relative;
-  }
+.site-blocks-1 .icon span {
+  font-size: 50px;
+  color: #7971ea;
+  display: inline-block;
+}
+
+/* Optional: make text more visually balanced */
+.site-blocks-1 .text h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.site-blocks-1 .text p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
 
 
 
