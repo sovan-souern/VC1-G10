@@ -39,8 +39,6 @@
         <input type="text" placeholder="Max Price">
       </div>
       <div class="page" id="productPage">
-        <?php
-
             </div>
             
             <div class="items-per-page" style="display: flex; align-items: center; gap: 20px;">
