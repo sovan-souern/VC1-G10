@@ -19,22 +19,25 @@
     <!-- Font Awesome for rating stars -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashion | Shop</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css">
+    <!-- Font Awesome for rating stars -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
         body {
             padding: 20px;
         }
-        .discount-product-card:hover .price {
-            color: #e7ab3c; /* Added hover effect for price in discount card */
-        }
-        /* Header Styles */
-      
 
-        /* Container */
         .container {
             padding: 20px;
         }
 
-        /* Cards Section */
         .cards {
             display: flex;
             overflow-x: auto;
@@ -61,7 +64,20 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            animation: spinFromRight 4s linear infinite;
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth feedback */
+        }
+
+        /* Touch/Click Interaction */
+        .card img:active {
+            transform: scale(0.98); /* Slight shrink effect */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle inset shadow */
+        }
+
+        /* Ensure no zoom or pop-up on touch/click */
+        .card img {
+            pointer-events: auto; /* Allow interaction */
+            user-select: none; /* Prevent selection */
+            -webkit-user-drag: none; /* Prevent dragging */
         }
 
         .card-content {
@@ -91,6 +107,29 @@
 
         .card-content a:hover {
             background: #ff3b2f;
+        }
+
+        /* Info overlay (unchanged) */
+        .info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(224, 116, 116, 0.7);
+            color: white;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+   
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spin {
+            animation: spin 4s linear infinite; /* Adjust timing as needed */
         }
 
     
@@ -149,13 +188,14 @@
         .text-content .cta-button:hover {
             background: #ff3b2f;
         }
-
-        
+          /* Add this to your existing CSS */
         .image-content-right img {
             width: 100%;
             height: auto;
             border-radius: 10px 70px 10px 70px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: none !important;
+
         }
 
         .image-content-left img {
@@ -163,6 +203,7 @@
             height: auto;
             border-radius: 10px 70px 10px 70px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: none !important;
         }
 
         /* Full Screen Image */
@@ -442,6 +483,7 @@
         object-fit: cover;
         border-radius: 10px !important;
     }
+
     
     /* Product cards in product-container */
     .product-container {
@@ -461,6 +503,22 @@
     }
     
     /* Cards carousel */
+
+    /* Add this to your existing CSS */
+.card img {
+    animation: slideLeftRight 3s infinite alternate ease-in-out;
+    background: none; /* Ensure no background */
+}
+
+/* Keyframes for left-to-right animation */
+@keyframes slideLeftRight {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(10px);
+    }
+}
     .cards {
         gap: 10px;
         padding-bottom: 15px;
@@ -812,110 +870,90 @@
         align-items: center;
     }
     /* Default icon styling */
-.general-product-hover a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px; /* Icon button size */
-    height: 20px;
-    border-radius: 50%;
-    background-color: white; /* Default background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; /* Smooth effect */
-    color: black; /* Default icon color */
-}
+    .general-product-hover a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px; /* Icon button size */
+        height: 20px;
+        border-radius: 50%;
+        background-color: white; /* Default background */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease; /* Smooth effect */
+        color: black; /* Default icon color */
+    }
 
-/* Change color on hover */
-.general-product-hover a:hover {
-    background-color: #ff5252; /* Background changes to red */
-    transform: scale(1.2); /* Slightly enlarge */
-}
+    /* Change color on hover */
+    .general-product-hover a:hover {
+        background-color: #ff5252; /* Background changes to red */
+        transform: scale(1.2); /* Slightly enlarge */
+    }
 
-/* Ensure icon inside the button also changes color */
-.general-product-hover a:hover span,
-.general-product-hover a:hover i {
-    color: white !important; /* White icon inside */
-}
+    /* Ensure icon inside the button also changes color */
+    .general-product-hover a:hover span,
+    .general-product-hover a:hover i {
+        color: white !important; /* White icon inside */
+    }
 
 </style>
-</head>
 
 <body>
-
-
     <!-- Cards of Products -->
     <div class="cards">
         <div class="card">
             <img src="https://m.media-amazon.com/images/I/61tBEdmPRcL._AC_UF350,350_QL80_.jpg" alt="Hydrating Moisturizer">
-            <div class="info">lipstick Vaseline.</div>
         </div>
         <div class="card">
             <img src="https://www.thaibynature.com/export/image/cache/catalog/wholesale/health-beauty/body-cream-lotion/vaseline/vaseline-gluta-hya/vaseline-gluta-hya-all-1200x800.jpg" alt="Hydrating Moisturizer">
-            <div class="info">Vaseline.</div>
         </div>
-
         <div class="card">
             <img src="https://i0.wp.com/callalilly.shop/wp-content/uploads/2023/09/lotion-serum-1-1.jpg?fit=460%2C460" alt="Hydrating Moisturizer">
-            <div class="info">Callalilly.</div>
         </div>
         <div class="card">
             <img src="https://i0.wp.com/callalilly.shop/wp-content/uploads/2023/09/Brand-Ambassador-Album-02.png?fit=1500%2C1500" alt="Hydrating Moisturizer">
-            <div class="info">Callalilly.</div>
         </div>
         <div class="card">
             <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <div class="info">Dove.</div>
         </div>
         <div class="card">
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
-            <div class="info">Miss sunflower.</div>
         </div>
         <div class="card">
             <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lt6p39pn7bgk55" alt="Sunscreen SPF 50">
-            <div class="info">Miss sunflower body lotion.</div>
         </div>
         <div class="card">
             <img src="https://www.thaibynature.com/export/image/cache/catalog/discover/beauty-products/body-care/body-lotion/citra-whitening-lotion/citra-lotion-all-1200x800.jpg" alt="Sunscreen SPF 50">
-            <div class="info">SPF citra.</div>
         </div>
         <div class="card">
             <img src="https://www.thaibynature.com/export/image/cache/catalog/startup-sme/beauty/body-care/soap/citra-bar-soap/Main-1200x800.jpg" alt="Sunscreen SPF 50">
-            <div class="info">Soap citra.</div>
         </div>
         <div class="card">
             <img src="https://www.beautypackaging.com/wp-content/uploads/sites/8/2024/11/017_main-13.jpg" alt="Sunscreen SPF 50">
-            <div class="info">Nivea.</div>
         </div>
         <div class="card">
             <img src="https://assets.ajio.com/medias/sys_master/root/20230130/8F8S/63d803e2aeb269c6510329d0/-473Wx593H-4915693380-multi-MODEL.jpg" alt="Sunscreen SPF 50">
-            <div class="info">Nivea.</div>
         </div>
         <div class="card">
             <img src="https://down-vn.img.susercontent.com/file/e51b7974a1af0f2ea03f5a96804217f5" alt="Sunscreen SPF 50">
-            <div class="info">Body oil.</div>
         </div>
         <div class="card">
             <img src="https://s9.kh1.co/__image/w=600,h=600,fit=cover/1b/1be5d7c51a56e185757cc60b646d9e97d51a3a71.jpg" alt="Sunscreen SPF 50">
-            <div class="info">Felix hair.</div>
         </div>
         <div class="card">
             <img src="https://m.media-amazon.com/images/I/51Z2sQyCB-L.jpg" alt="Sunscreen SPF 50">
-            <div class="info">lipstick.</div>
         </div>
         <div class="card">
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98p-lyt0fqimk128fd" alt="Sunscreen SPF 50">
-            <div class="info">Yasaka.</div>
         </div>
         <div class="card">
             <img src="https://bellavitaorganic.com/cdn/shop/files/download_0315aafb-8c5d-4b3d-a00e-6cc8cc1b00b2.jpg?v=1732609831&width=1000" alt="Sunscreen SPF 50">
-            <div class="info">Nail​​​​​​ polish.</div>
         </div>
         <div class="card">
             <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
-            <div class="info">Nail​​​​​​ polish.</div>
         </div>
     </div>
+
     <section class="discount-products">
     <div class="discount-header">
         <h2>Special Discounts</h2>
@@ -935,134 +973,58 @@
                 $discount_percentage = floatval($discount["discount_percentage"]);
                 $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                // Sanitize and prepare data
-                $product_name = htmlspecialchars($product["product_name"]);
-                $image_url = !empty($product["image"]) ? htmlspecialchars($product["image"]) : 'https://via.placeholder.com/150';
-                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                $original_price_formatted = "$" . number_format($original_price, 2);
-                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                                // Sanitize and prepare data
+                                $product_name = htmlspecialchars($discount["product_name"]);
+                                $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
+                                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                                $original_price_formatted = "$" . number_format($original_price, 2); 
+                                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                            ?>
+                    <!-- Product Card -->
+                            <div class="product-card">
+                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                    <!--icon favorite , view   -->
+                                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                    <!--icon favorite , view   -->
+                                    <ul class="general-product-hover product-hover-shared">
+                                        <li>
+                                            <a href="#" class="image-zoom" data-image="<?php echo $image; ?>">
+                                                <i class="arrow_expand"></i> <!-- Font Awesome's expand icon -->
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon_heart_alt"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon_bag_alt"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                
+                                    <div class="price">
+                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                        <?php echo $discounted_price_formatted; ?>
+                                    </div>
+                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                                </div>
+                            </div>
 
-                // Product content and quantity
-                $product_content = isset($product["product_content"]) ? htmlspecialchars($product["product_content"]) : "No description available";
-                $product_quantity = isset($product["quantity"]) ? htmlspecialchars($product["quantity"]) : "No quantity available";
-                ?>
-                <!-- Product Card -->
-                <div class="product-card">
-                    <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                        <ul class="general-product-hover product-hover-shared">
-                            <li>
-                                <a href="#" class="view-details-btn" 
-                                   data-name="<?php echo $product_name; ?>"
-                                   data-price="<?php echo $discounted_price_formatted; ?>"
-                                   data-discount="<?php echo $discount_percentage; ?>"
-                                   data-image="<?php echo $image_url; ?>"
-                                   data-description="<?php echo $product_content; ?>"
-                                   data-quantity="<?php echo $product_quantity; ?>">
-                                    <i class="arrow_expand"></i>
-                                </a>
-                            </li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product-info">
-                        <h5 class="product-name"><?php echo $product_name; ?></h5>
-                        <div class="price">
-                            <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                            <?php echo $discounted_price_formatted; ?>
-                        </div>
-                        <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
-                    </div>
-                </div>
-                <?php $hasDiscount = true; ?>
-                <?php break; ?>
-            <?php endif; ?>
-        <?php endif; ?>
-    <?php endforeach; ?>
-<?php endforeach; ?>
-
-    </div>
-
-</div>
-
-<!-- Modal -->
-<!-- Modal -->
-<!-- Product Details Modal -->
-<!-- Product Details Modal -->
-<div id="product-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <div class="modal-inner">
-            <!-- Product Image -->
-            <div class="modal-product-image">
-                <img id="modal-product-image" src="" alt="Product Image" style="width: 100%; height: 300px; object-fit: cover;">
-            </div>
-            <!-- Product Information -->
-            <div class="modal-product-info">
-                <h2 id="modal-product-name"></h2>
-                <p><strong>Price: </strong><span id="modal-product-price"></span></p>
-                <p><strong>Quantity: </strong><span id="modal-product-quantity"></span></p>
-                <p id="modal-product-description"></p>
-                <p><strong>Discount: </strong><span id="modal-product-discount"></span></p>
-                <button id="add-to-cart-modal" class="add-to-cart">Add to Cart</button>
-            </div>
+                            <?php $hasDiscount = true; ?>
+                             <?php break; ?>
+                          <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
         </div>
     </div>
-</div>
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('.view-details-btn').click(function(e) {
-        e.preventDefault();
-
-        // Get the product details from data attributes
-        var productName = $(this).data('name');
-        var productPrice = $(this).data('price');
-        var productImage = $(this).data('image');
-        var productDescription = $(this).data('description');
-        var productQuantity = $(this).data('quantity');
-        var productDiscount = $(this).data('discount') || "No discount available";
-
-        // Populate modal fields
-        $('#modal-product-name').text(productName);
-        $('#modal-product-price').text(productPrice);
-        $('#modal-product-image').attr('src', productImage);
-        $('#modal-product-description').text(productDescription);
-        $('#modal-product-quantity').text(productQuantity);
-        $('#modal-product-discount').text(productDiscount);
-
-        // Show modal
-        $('#product-modal').fadeIn();
-    });
-
-    $('.close-btn').click(function() {
-        $('#product-modal').fadeOut();
-    });
-
-    $(window).click(function(event) {
-        if ($(event.target).is('#product-modal')) {
-            $('#product-modal').fadeOut();
-        }
-    });
-
-    $('#add-to-cart-modal').click(function() {
-        var productName = $('#modal-product-name').text();
-        alert(productName + " has been added to the cart.");
-    });
-});
-</script>
-
-
-
-
-
-
 </section>
     <!-- Left Paragraph Right Image -->
     <div class="container">

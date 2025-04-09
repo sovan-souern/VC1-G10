@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container py-5">
@@ -102,8 +103,22 @@
                     <strong class="me-auto" id="toast-title">Notification</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <div class="toast-body" id="toast-message">
-                    Message here
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span class="delivery-cost">$5.99</span>
+                </div>
+             
+               
+                <hr>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span class="total-amount">$0.00</span>
+                </div>
+                <button class="checkout-btn primary" onclick="window.location.href='checkout';">Checkout</button>
+               
+                <div class="secure-checkout">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Secure Checkout</span>
                 </div>
             </div>
         </div>
@@ -230,22 +245,20 @@ body {
 
 </style>
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-  // DOM Elements
-  const loadingSpinner = document.getElementById("loading-spinner")
-  const emptyCartMessage = document.getElementById("empty-cart")
-  const cartContent = document.getElementById("cart-content")
-  const cartItemsContainer = document.getElementById("cart-items")
-  const subtotalElement = document.getElementById("subtotal")
-  const totalElement = document.getElementById("total")
-  const addNoteButton = document.getElementById("add-note")
-  const checkoutButton = document.getElementById("checkout-btn")
+    // cart-script.js
+// cart-script.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const subtotalEl = document.querySelector('.subtotal');
+    const totalEl = document.querySelector('.total-amount');
+    const deliveryCostEl = document.querySelector('.delivery-cost');
+    const promoCode = document.querySelector('.promo-code');
+    const addNote = document.querySelector('.add-note');
 
-  // Bootstrap Toast
-  const toastElement = document.getElementById("toast")
-  const toast = new bootstrap.Toast(toastElement)
-  const toastTitle = document.getElementById("toast-title")
-  const toastMessage = document.getElementById("toast-message")
+    // Initialize cart items
+    let cartItems = [];
+    const deliveryCost = 5.99; // Fixed delivery cost
 
   // Cart Data
   let cartItems = []
@@ -431,17 +444,13 @@ body {
     }
   }
 
-  function handleCheckout() {
-    // Redirect to checkout page
-    window.location.href = "/checkout"
-  }
-
-  function showToast(title, message) {
-    toastTitle.textContent = title
-    toastMessage.textContent = message
-    const toast = new bootstrap.Toast(toastElement) // Re-declare toast here
-    toast.show()
-  }
-})
+    // Update order summary
+    function updateSummary() {
+        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+        const total = subtotal + deliveryCost;
+        totalEl.textContent = `$${total.toFixed(2)}`;
+        deliveryCostEl.textContent = `$${deliveryCost.toFixed(2)}`;
+    }
 
 </script>
