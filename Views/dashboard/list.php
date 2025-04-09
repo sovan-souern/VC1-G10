@@ -60,8 +60,8 @@
             </div>
           
           </div>
-          <span class="fw-semibold d-block mb-1">Order (2025)</span>
-          <h3 class="card-title mb-2"></h3>
+          <span class="fw-semibold d-block mb-1">Orders</span>
+          <h3 class="card-title mb-2">0</h3>
           <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
         </div>
       </div>

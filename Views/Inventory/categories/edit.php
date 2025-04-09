@@ -108,4 +108,8 @@
             width: 70px;
         }
     }
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> feature/user-home

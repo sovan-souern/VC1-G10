@@ -37,11 +37,9 @@ class BrandModel {
             'id' => $data['id'],
         ]);
     }
-
     function deleteBrand($id) {
         $stmt = $this->pdo->query('DELETE FROM brand WHERE id = :id', ['id' => $id]);
     }
-
 }
 ?>
 

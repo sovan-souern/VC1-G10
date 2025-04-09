@@ -5,6 +5,7 @@
         top: 0;
         z-index: 1000;
     }
+   
 </style>
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch" aria-labelledby="Search">
@@ -879,6 +880,8 @@ document.addEventListener('DOMContentLoaded', function() {
     .view-cart-btn:hover {
         background-color: #ff9eb5;
     }
+        
+        
 </style>
 
 <!-- JavaScript (Corrected) -->
@@ -2253,7 +2256,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         }
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('.search-bar input');
+        const searchIcon = document.querySelector('.search-bar svg');
 
+        // Function to check if the current page is "Shop" or "Products"
+        function isSearchPage() {
+            const currentPath = window.location.pathname;
+            return currentPath.includes('/shop') || currentPath.includes('/productuser');
+        }
+
+        // Enable or disable search functionality based on the current page
+        if (isSearchPage()) {
+            searchInput.addEventListener('focus', function() {
+                this.parentElement.style.borderColor = '#ff85a2'; // Adjust the border color
+                this.parentElement.style.boxShadow = '0 0 0 4px rgba(255, 105, 180, 0.2)'; // Adjust the box shadow
+            });
+
+            searchInput.addEventListener('blur', function() {
+                this.parentElement.style.borderColor = '';
+                this.parentElement.style.boxShadow = '';
+            });
+
+            searchIcon.addEventListener('click', function() {
+                if (searchInput.value.trim() !== '') {
+                    searchInput.form.submit();
+                }
+            });
+        } else {
+            // Disable search input if not on the correct pages
+            searchInput.disabled = true; // Disable the input
+            searchIcon.style.pointerEvents = 'none'; // Disable the search icon click
+        }
+    });
+</script>
     <!-- Profile Panel -->
     <div class="offcanvas offcanvas-end profile-panel" tabindex="-1" id="profileOffcanvas">
         <div class="offcanvas-header profile-header">

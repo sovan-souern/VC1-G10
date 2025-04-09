@@ -9,6 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
+          .slideshow-container {
+            display: none;
+        }
+        .dot-container{
+            display: none;
+        }
+        .footer{
+            display: none;
+        }
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
@@ -235,7 +244,7 @@
                         <input type="hidden" name="items" id="items">
                         <input type="hidden" name="total" id="total_input">
                         <input type="hidden" name="product_id" id="product_id">
-                        <button type="submit" class="continue-btn">Continue</button>
+                        <button type="submit" class="continue-btn" onclick="window.location.href='https://pay.ababank.com/efRPcMcXvMLRihKq6'">Continue</button>
                     </div>
 
                     <!-- Delivery Method -->
@@ -288,112 +297,135 @@
         </div>
     </div>
 
-    <!-- JavaScript for Checkout -->
     <script>
-        // Load cart from localStorage
-        let cart = [];
+    // Load cart from localStorage
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (e) {
+        console.error("Error parsing cart from localStorage:", e);
+        cart = [];
+    }
+
+    console.log("Cart loaded from localStorage in checkout:", cart);
+
+    // Render cart items in the order summary
+    function renderOrderSummary() {
+        const orderItemsContainer = document.getElementById('order-items');
+        orderItemsContainer.innerHTML = '';
+        if (cart.length === 0) {
+            orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            cart.forEach((item, index) => {
+                const collapseId = `product-details-${index}`;
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.innerHTML = `
+                    <div class="product-image">
+                        <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
+                    <div class="product-details">
+                        <div class="fw-bold">${item.name}</div>
+                        <div class="text-muted">Qty: ${item.quantity}</div>
+                        <div class="text-muted">
+                            <a href="#${collapseId}" class="text-decoration-none" data-bs-toggle="collapse" aria-expanded="false" aria-controls="${collapseId}">
+                                More Details ▼
+                            </a>
+                        </div>
+                        <div class="collapse mt-2" id="${collapseId}">
+                            <div class="card card-body">
+                                <p><strong>Name:</strong> ${item.name}</p>
+                                <p><strong>Price per Unit:</strong> $${item.price.toFixed(2)}</p>
+                                <p><strong>Quantity:</strong> ${item.quantity}</p>
+                                <p><strong>Total:</strong> $${(item.price * item.quantity).toFixed(2)}</p>
+                                <img src="${item.image}" alt="${item.name}" style="max-width: 100px; border-radius: 4px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                `;
+                orderItemsContainer.appendChild(productItem);
+            });
+        }
+        updateOrderSummary();
+        setupShowAllButton();
+    }
+
+    // Update order summary and prepare data for submission
+    function updateOrderSummary() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = subtotal;
+
+        document.getElementById('order-item-count').textContent = totalItems;
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
+        const productIds = cart.map(item => item.id).filter(id => id).join(',');
+        document.getElementById('items').value = JSON.stringify(cart);
+        document.getElementById('product_id').value = productIds;
+        document.getElementById('total_input').value = total.toFixed(2);
+
+        console.log("Cart being submitted:", cart);
+    }
+
+    // Setup "Show All" button functionality
+    function setupShowAllButton() {
+        const showAllBtn = document.getElementById('show-all-btn');
+        const orderItemsContainer = document.getElementById('order-items');
+        let isExpanded = false;
+
+        if (cart.length > 0) {
+            showAllBtn.style.display = 'block';
+            showAllBtn.addEventListener('click', () => {
+                isExpanded = !isExpanded;
+                if (isExpanded) {
+                    orderItemsContainer.classList.add('expanded');
+                    showAllBtn.textContent = 'Hide All';
+                } else {
+                    orderItemsContainer.classList.remove('expanded');
+                    showAllBtn.textContent = 'Show All';
+                }
+            });
+        } else {
+            showAllBtn.style.display = 'none';
+        }
+    }
+
+    // Handle form submission and payment redirect
+    document.getElementById('checkout-form').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const form = this;
+        const formData = new FormData(form);
+
+        // Add a return URL to the form data (configure this based on your domain)
+        formData.append('return_url', window.location.origin + '/checkout/success');
+
         try {
-            cart = JSON.parse(localStorage.getItem('cart')) || [];
-        } catch (e) {
-            console.error("Error parsing cart from localStorage:", e);
-            cart = [];
-        }
+            // Send form data to server
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
 
-        // Debug: Log the cart to console to verify data
-        console.log("Cart loaded from localStorage in checkout:", cart);
-
-        // Render cart items in the order summary
-        function renderOrderSummary() {
-            const orderItemsContainer = document.getElementById('order-items');
-            orderItemsContainer.innerHTML = '';
-            if (cart.length === 0) {
-                orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            if (response.ok) {
+                // On success, redirect to payment URL
+                window.location.href = 'https://pay.ababank.com/efRPcMcXvMLRihKq6';
             } else {
-                cart.forEach((item, index) => {
-                    const collapseId = `product-details-${index}`; // Unique ID for each item
-                    const productItem = document.createElement('div');
-                    productItem.classList.add('product-item');
-                    productItem.innerHTML = `
-                        <div class="product-image">
-                            <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
-                        </div>
-                        <div class="product-details">
-                            <div class="fw-bold">${item.name}</div>
-                            <div class="text-muted">Qty: ${item.quantity}</div>
-                            <div class="text-muted">
-                                <a href="#${collapseId}" class="text-decoration-none" data-bs-toggle="collapse" aria-expanded="false" aria-controls="${collapseId}">
-                                    More Details ▼
-                                </a>
-                            </div>
-                            <div class="collapse mt-2" id="${collapseId}">
-                                <div class="card card-body">
-                                    <p><strong>Name:</strong> ${item.name}</p>
-                                    <p><strong>Price per Unit:</strong> $${item.price.toFixed(2)}</p>
-                                    <p><strong>Quantity:</strong> ${item.quantity}</p>
-                                    <p><strong>Total:</strong> $${(item.price * item.quantity).toFixed(2)}</p>
-                                    <img src="${item.image}" alt="${item.name}" style="max-width: 100px; border-radius: 4px;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                    `;
-                    orderItemsContainer.appendChild(productItem);
-                });
+                const errorText = await response.text();
+                console.error('Form submission failed:', errorText);
+                alert('There was an error processing your order. Please try again.');
             }
-            updateOrderSummary();
-            setupShowAllButton(); // Setup the "Show All" button functionality
+        } catch (error) {
+            console.error('Error during form submission:', error);
+            alert('An unexpected error occurred. Please try again.');
         }
+    });
 
-        // Update order summary and prepare data for submission
-        function updateOrderSummary() {
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            const total = subtotal;
-
-            document.getElementById('order-item-count').textContent = totalItems;
-            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
-
-            // Prepare data for submission
-            const productIds = cart.map(item => item.id).filter(id => id).join(','); // Collect valid product IDs
-            const amountProducts = cart.map(item => item.quantity || 1); // Default to 1 if quantity is missing
-            document.getElementById('items').value = JSON.stringify(cart); // Store full cart details as JSON
-            document.getElementById('product_id').value = productIds; // Store product IDs in product_id field
-            document.getElementById('total_input').value = total.toFixed(2);
-
-            // Debug: Log the quantities being submitted
-            console.log("Quantities being submitted:", amountProducts);
-
-            // Debug: Log the cart being submitted
-            console.log("Cart being submitted:", cart);
-        }
-
-        // Setup "Show All" button functionality
-        function setupShowAllButton() {
-            const showAllBtn = document.getElementById('show-all-btn');
-            const orderItemsContainer = document.getElementById('order-items');
-            let isExpanded = false;
-
-            if (cart.length > 0) { // Only show button if there are items
-                showAllBtn.style.display = 'block';
-                showAllBtn.addEventListener('click', () => {
-                    isExpanded = !isExpanded;
-                    if (isExpanded) {
-                        orderItemsContainer.classList.add('expanded');
-                        showAllBtn.textContent = 'Hide All';
-                    } else {
-                        orderItemsContainer.classList.remove('expanded');
-                        showAllBtn.textContent = 'Show All';
-                    }
-                });
-            } else {
-                showAllBtn.style.display = 'none'; // Hide button if cart is empty
-            }
-        }
-
-        // Initial render
-        renderOrderSummary();
-    </script>
+    // Initial render
+    renderOrderSummary();
+</script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
