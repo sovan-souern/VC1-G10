@@ -25,7 +25,7 @@
             --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
-        
+
         body {
             background-color: var(--light-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -122,8 +122,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-title {
@@ -156,7 +163,8 @@
             color: #495057;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ced4da;
@@ -165,12 +173,14 @@
             font-size: 15px;
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
         }
 
-        .form-control.is-invalid, .form-select.is-invalid {
+        .form-control.is-invalid,
+        .form-select.is-invalid {
             border-color: var(--danger-color);
         }
 
@@ -182,7 +192,7 @@
             color: var(--danger-color);
         }
 
-        .form-control.is-invalid ~ .invalid-feedback {
+        .form-control.is-invalid~.invalid-feedback {
             display: block;
         }
 
@@ -484,7 +494,8 @@
             transform: translateY(-2px);
         }
 
-        .next-btn, .proceed-payment-btn {
+        .next-btn,
+        .proceed-payment-btn {
             background-color: var(--primary-color);
             color: white;
             border: none;
@@ -497,13 +508,15 @@
             text-align: center;
         }
 
-        .next-btn:hover, .proceed-payment-btn:hover {
+        .next-btn:hover,
+        .proceed-payment-btn:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0, 102, 204, 0.3);
         }
 
-        .next-btn:disabled, .proceed-payment-btn:disabled {
+        .next-btn:disabled,
+        .proceed-payment-btn:disabled {
             background-color: #6c757d;
             cursor: not-allowed;
             opacity: 0.65;
@@ -795,9 +808,11 @@
             0% {
                 top: 0;
             }
+
             50% {
                 top: 100%;
             }
+
             100% {
                 top: 0;
             }
@@ -1019,7 +1034,7 @@
         .toast {
             background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
             padding: 15px 20px;
             margin-bottom: 15px;
             display: flex;
@@ -1030,13 +1045,26 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; visibility: hidden; }
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
         }
 
         .toast.error {
@@ -1088,13 +1116,13 @@
             .checkout-container {
                 margin: 15px auto;
             }
-            
+
             .checkout-stepper {
                 flex-direction: column;
                 align-items: flex-start;
                 margin-left: 20px;
             }
-            
+
             .checkout-stepper::before {
                 top: 0;
                 bottom: 0;
@@ -1103,77 +1131,81 @@
                 height: 100%;
                 width: 3px;
             }
-            
+
             .step {
                 flex-direction: row;
                 width: 100%;
                 margin-bottom: 20px;
             }
-            
+
             .step-number {
                 margin-right: 15px;
                 margin-bottom: 0;
             }
-            
+
             .form-row {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             .payment-options-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .contact-options {
                 flex-direction: column;
             }
-            
+
             .nav-buttons {
                 flex-direction: column;
                 gap: 10px;
             }
-            
-            .back-btn, .next-btn {
+
+            .back-btn,
+            .next-btn {
                 width: 100%;
                 text-align: center;
             }
-            
+
             .order-summary {
                 position: static;
                 margin-top: 20px;
             }
-            
-            .qr-popup-content, .bank-info-content {
+
+            .qr-popup-content,
+            .bank-info-content {
                 width: 90%;
                 padding: 25px;
             }
-            
-            .qr-logo, .bank-info-logo {
+
+            .qr-logo,
+            .bank-info-logo {
                 width: 50px;
                 height: 50px;
             }
-            
-            .qr-bank-name, .bank-info-name {
+
+            .qr-bank-name,
+            .bank-info-name {
                 font-size: 16px;
             }
-            
+
             .qr-timer {
                 font-size: 16px;
                 padding: 6px 12px;
             }
-            
+
             .qr-amount {
                 font-size: 32px;
             }
-            
+
             .qr-instruction {
                 font-size: 16px;
             }
-            
+
             .qr-code-container {
                 width: 180px;
             }
-            
+
             .qr-code-wrapper {
                 height: 150px;
             }
@@ -1183,17 +1215,17 @@
             .form-section {
                 padding: 20px;
             }
-            
+
             .qr-header {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             .qr-bank-info {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .qr-close-btn {
                 top: 10px;
                 right: 10px;
@@ -1201,34 +1233,35 @@
                 height: 30px;
                 font-size: 16px;
             }
-            
+
             .qr-amount {
                 font-size: 28px;
             }
-            
+
             .qr-footer {
                 flex-direction: column;
                 gap: 10px;
             }
-            
-            .qr-help-btn, .qr-cancel-btn {
+
+            .qr-help-btn,
+            .qr-cancel-btn {
                 width: 100%;
             }
-            
+
             .bank-info-header {
                 flex-direction: column;
                 text-align: center;
             }
-            
+
             .bank-info-logo {
                 margin-right: 0;
                 margin-bottom: 10px;
             }
-            
+
             .bank-info-row {
                 flex-direction: column;
             }
-            
+
             .bank-info-label {
                 width: 100%;
                 margin-bottom: 5px;
@@ -1248,12 +1281,12 @@
                 <button class="bank-info-close" id="bank-info-close">
                     <i class="fas fa-times"></i>
                 </button>
-                
+
                 <div class="bank-info-header">
                     <img id="bank-info-logo" src="/placeholder.svg" alt="Bank Logo" class="bank-info-logo">
                     <div class="bank-info-name" id="bank-info-name">Bank Name</div>
                 </div>
-                
+
                 <div class="bank-info-details">
                     <div class="bank-info-row">
                         <div class="bank-info-label">Type</div>
@@ -1268,7 +1301,7 @@
                         <div class="bank-info-value" id="bank-info-fee">No additional fees</div>
                     </div>
                 </div>
-                
+
                 <div class="bank-info-features">
                     <div class="bank-info-features-title">Features</div>
                     <div class="bank-feature">
@@ -1288,7 +1321,7 @@
                         <span>Bank-specific feature</span>
                     </div>
                 </div>
-                
+
                 <button class="bank-info-select-btn" id="bank-info-select-btn">
                     <i class="fas fa-check"></i> Select This Payment Method
                 </button>
@@ -1301,7 +1334,7 @@
                 <button class="qr-close-btn" id="qr-close-btn">
                     <i class="fas fa-times"></i>
                 </button>
-                
+
                 <div class="qr-header">
                     <div class="qr-bank-info">
                         <img id="qr-payment-logo" src="/placeholder.svg" alt="Bank Logo" class="qr-logo">
@@ -1315,10 +1348,10 @@
                         <span id="qr-timer-text">03:00</span>
                     </div>
                 </div>
-                
+
                 <div class="qr-amount" id="qr-amount">$5.00</div>
                 <div class="qr-instruction">Scan to pay</div>
-                
+
                 <div class="qr-code-container">
                     <div class="qr-code-wrapper">
                         <img id="qr-code-image" src="/placeholder.svg" alt="QR Code" class="qr-code-image">
@@ -1333,7 +1366,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="qr-footer">
                     <button class="qr-help-btn" id="qr-help-btn">
                         <i class="fas fa-question-circle"></i> Need Help?
@@ -1345,7 +1378,7 @@
             </div>
         </div>
 
-        
+
 
         <div class="row">
             <!-- Left Column - Forms -->
@@ -1441,7 +1474,7 @@
                         <input type="hidden" name="items" id="items">
                         <input type="hidden" name="total" id="total_input">
                         <input type="hidden" name="product_id" id="product_id">
-                        <button type="submit" class="continue-btn" onclick="window.location.href='https://pay.ababank.com/efRPcMcXvMLRihKq6'">Continue</button>
+
                     </div>
 
                     <!-- Payment Method Section -->
@@ -1459,7 +1492,7 @@
                                     <div class="payment-description">Scan to pay with ABA Mobile</div>
                                 </div>
                             </div>
-                            
+
                             <!-- ACLEDA PAY -->
                             <div class="payment-option" data-payment="acleda">
                                 <input type="radio" name="payment_option" id="acleda_pay" class="payment-radio">
@@ -1471,7 +1504,7 @@
                                     <div class="payment-description">Pay securely with ACLEDA</div>
                                 </div>
                             </div>
-                            
+
                             <!-- Wing Bank -->
                             <div class="payment-option" data-payment="wing">
                                 <input type="radio" name="payment_option" id="wing_bank" class="payment-radio">
@@ -1506,8 +1539,11 @@
                             <button type="button" class="back-btn" data-prev="delivery">
                                 Back
                             </button>
-                            <button type="submit" id="proceed-payment-btn" class="proceed-payment-btn" disabled>
-                                <i class="fas fa-lock"></i> Proceed to Payment
+                            <button type="submit" id="proceed-payment-btn" class="proceed-payment-btn" disabled style="background-color: #cccccc; color: #666666; padding: 10px 20px; border: none; border-radius: 5px; cursor: not-allowed;">
+                                <i class="fas fa-lock"></i> Proceed to Secure Payment
+                            </button>
+                            <button type="submit" class="payment-btn" onclick="window.location.href='https://pay.ababank.com/efRPcMcXvMLRihKq6'" style="background-color: #28a745; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                                <i class="fas fa-credit-card"></i> Complete Payment
                             </button>
                         </div>
                     </div>
@@ -1555,8 +1591,7 @@
 
     <script>
         // Sample cart data for demonstration
-        const sampleCart = [
-            {
+        const sampleCart = [{
                 id: 1,
                 name: "William Shirt",
                 price: 29.99,
@@ -1618,10 +1653,10 @@
             const toastContainer = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            
-            const icon = type === 'error' ? 'fa-exclamation-circle' : 
-                         type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
-            
+
+            const icon = type === 'error' ? 'fa-exclamation-circle' :
+                type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
+
             toast.innerHTML = `
                 <i class="fas ${icon}"></i>
                 <div class="toast-message">
@@ -1629,9 +1664,9 @@
                     <div class="toast-body">${message}</div>
                 </div>
             `;
-            
+
             toastContainer.appendChild(toast);
-            
+
             // Remove toast after 3 seconds
             setTimeout(() => {
                 toast.remove();
@@ -1642,7 +1677,7 @@
         function renderOrderSummary() {
             const orderItemsContainer = document.getElementById('order-items');
             orderItemsContainer.innerHTML = '';
-            
+
             if (cart.length === 0) {
                 orderItemsContainer.innerHTML = '<p class="text-center py-3">Your cart is empty.</p>';
             } else {
@@ -1729,21 +1764,21 @@
             document.querySelectorAll('.form-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
+
             // Show the target section
             document.getElementById(`${sectionId}-section`).classList.add('active');
-            
+
             // Update stepper
             document.querySelectorAll('.step').forEach(step => {
                 step.classList.remove('active', 'completed');
             });
-            
+
             const steps = ['customer', 'delivery', 'payment'];
             const currentIndex = steps.indexOf(sectionId);
-            
+
             // Mark current step as active
             document.querySelector(`.step[data-step="${sectionId}"]`).classList.add('active');
-            
+
             // Mark previous steps as completed
             for (let i = 0; i < currentIndex; i++) {
                 document.querySelector(`.step[data-step="${steps[i]}"]`).classList.add('completed');
@@ -1759,7 +1794,7 @@
         function updatePaymentButton() {
             const proceedBtn = document.getElementById('proceed-payment-btn');
             const selectedPayment = document.querySelector('.payment-option.selected');
-            
+
             if (selectedPayment) {
                 proceedBtn.disabled = false;
             } else {
@@ -1772,7 +1807,7 @@
             btn.addEventListener('click', function() {
                 const currentSection = this.closest('.form-section').id;
                 const nextSection = this.getAttribute('data-next');
-                
+
                 if (validateSection(currentSection)) {
                     navigateToSection(nextSection);
                 } else {
@@ -1797,7 +1832,7 @@
                 const currentSection = document.querySelector('.form-section.active').id.replace('-section', '');
                 const currentIndex = steps.indexOf(currentSection);
                 const targetIndex = steps.indexOf(targetSection);
-                
+
                 // Only allow clicking on completed steps or the next step
                 if (targetIndex < currentIndex || (targetIndex === currentIndex + 1 && validateSection(`${currentSection}-section`))) {
                     navigateToSection(targetSection);
@@ -1818,9 +1853,9 @@
             const bankInfoTime = document.getElementById('bank-info-time');
             const bankInfoFee = document.getElementById('bank-info-fee');
             const bankFeatureSpecific = document.getElementById('bank-feature-specific');
-            
+
             const bank = bankInfo[paymentMethod];
-            
+
             // Set bank info
             bankInfoLogo.src = bank.logo;
             bankInfoName.textContent = bank.name;
@@ -1828,10 +1863,10 @@
             bankInfoTime.textContent = bank.processingTime;
             bankInfoFee.textContent = bank.fee;
             bankFeatureSpecific.querySelector('span').textContent = bank.specificFeature;
-            
+
             // Store selected payment method for the select button
             document.getElementById('bank-info-select-btn').setAttribute('data-payment', paymentMethod);
-            
+
             // Show the popup with animation
             bankInfoPopup.style.display = 'flex';
             setTimeout(() => {
@@ -1843,7 +1878,7 @@
         function closeBankInfo() {
             const bankInfoPopup = document.getElementById('bank-info-popup');
             bankInfoPopup.classList.remove('active');
-            
+
             setTimeout(() => {
                 bankInfoPopup.style.display = 'none';
             }, 300);
@@ -1885,26 +1920,26 @@
             const qrBankName = document.getElementById('qr-bank-name');
             const qrAmount = document.getElementById('qr-amount');
             const qrCodeImage = document.getElementById('qr-code-image');
-            
+
             const bank = bankInfo[paymentMethod];
-            
+
             // Set the payment logo and bank name
             qrPaymentLogo.src = bank.logo;
             qrBankName.textContent = bank.name;
-            
+
             // Set the amount
             const totalAmount = document.getElementById('total').textContent;
             qrAmount.textContent = totalAmount;
-            
+
             // Set the QR code image
             qrCodeImage.src = bank.qrCode;
-            
+
             // Show the popup with animation
             qrPopup.style.display = 'flex';
             setTimeout(() => {
                 qrPopup.classList.add('active');
             }, 10);
-            
+
             // Start the timer
             startQrTimer();
         }
@@ -1913,11 +1948,11 @@
         function closeQrPopup() {
             const qrPopup = document.getElementById('qr-popup');
             qrPopup.classList.remove('active');
-            
+
             setTimeout(() => {
                 qrPopup.style.display = 'none';
             }, 300);
-            
+
             clearInterval(qrTimerInterval);
         }
 
@@ -1933,27 +1968,27 @@
         // Bank info select button click handler
         document.getElementById('bank-info-select-btn').addEventListener('click', function() {
             const paymentMethod = this.getAttribute('data-payment');
-            
+
             // Remove selected class from all options
             paymentOptions.forEach(opt => {
                 opt.classList.remove('selected');
                 opt.querySelector('input[type="radio"]').checked = false;
             });
-            
+
             // Add selected class to the selected option
             const selectedOption = document.querySelector(`.payment-option[data-payment="${paymentMethod}"]`);
             selectedOption.classList.add('selected');
             selectedOption.querySelector('input[type="radio"]').checked = true;
-            
+
             // Store selected payment method
             document.getElementById('payment_method').value = paymentMethod;
-            
+
             // Update payment button
             updatePaymentButton();
-            
+
             // Close bank info popup
             closeBankInfo();
-            
+
             // Show success toast
             showToast('success', 'Payment Method Selected', `${bankInfo[paymentMethod].name} has been selected as your payment method.`);
         });
@@ -1978,10 +2013,10 @@
                 contactOptions.forEach(opt => {
                     opt.classList.remove('selected');
                 });
-                
+
                 // Add selected class to clicked option
                 this.classList.add('selected');
-                
+
                 // Store selected contact method
                 const contactMethod = this.getAttribute('data-contact');
                 document.getElementById('contact_method').value = contactMethod;
@@ -2007,18 +2042,18 @@
             }
 
             const paymentMethod = document.querySelector('.payment-option.selected').getAttribute('data-payment');
-            
+
             // Show loading state
             const submitBtn = document.getElementById('proceed-payment-btn');
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            
+
             // Simulate form submission (in a real app, you would submit to server)
             setTimeout(() => {
                 // Reset button state
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Payment';
-                
+
                 // Show QR code popup for payment
                 openQrPopup(paymentMethod);
             }, 1000);
@@ -2026,21 +2061,20 @@
 
         // Set current date and time for the hidden buy_at field
         document.getElementById('buy_at').value = new Date().toISOString().slice(0, 16);
-// Handle form submission
-document.getElementById('checkout-form').addEventListener('submit', async function (e) {
-    e.preventDefault(); // Prevent default form submission
+        // Handle form submission
+        document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Prevent default form submission
 
-    // Validate payment section
-    if (!validateSection('payment-section')) {
-        return false;
-    }
+            // Validate payment section
+            if (!validateSection('payment-section')) {
+                return false;
+            }
 
-    
-});
+
+        });
 
         // Initial render
         renderOrderSummary();
-        
     </script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

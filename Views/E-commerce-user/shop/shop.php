@@ -984,61 +984,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* Cart Panel Styles */
-    .cart-panel {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 350px;
-        height: 100%;
-        background: #fff;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        transform: translateX(100%);
-        transition: transform 0.33s ease;
-    }
-
-    .cart-panel.active {
-        transform: translateX(0);
-    }
-
-    .cart-header {
-        background-color: #ffb6c1;
-        color: #000;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .cart-header h3 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    .close-cart {
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: #000;
-        transition: transform 0.33s ease;
-    }
-
-    .close-cart:hover {
-        transform: rotate(90deg);
-    }
-
-    .cart-items {
-        padding: 20px;
-        max-height: calc(100% - 150px);
-        overflow-y: auto;
-    }
-
-    .cart-item {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-    }
 
     .cart-item img {
         width: 60px;

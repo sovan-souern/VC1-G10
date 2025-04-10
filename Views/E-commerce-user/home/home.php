@@ -868,36 +868,33 @@
 <body>
 
 
-    <header>
-        <h1>Welcome to Glow Skincare</h1>
-        <p>Your journey to radiant skin starts here!</p>
-    </header>
+  
 
     <!-- Cards of Products -->
     <div class="cards">
         <div class="card">
             <img src="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg" alt="Hydrating Moisturizer">
-            <div class="info">Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</div>
+
         </div>
         <div class="card">
             <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <div class="info">Brighten your complexion with our powerful Vitamin C serum.</div>
+
         </div>
         <div class="card">
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
-            <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
+
         </div>
         <div class="card">
             <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <div class="info">Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</div>
+
         </div>
         <div class="card">
             <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <div class="info">Brighten your complexion with our powerful Vitamin C serum.</div>
+
         </div>
         <div class="card">
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
-            <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
+
         </div>
     </div>
  <!-- Hero Section -->
@@ -991,68 +988,63 @@
         </div>
     </div>
 </section>
-    <!-- Left Paragraph Right Image -->
-    <div class="container">
-        <div class="content-section">
-            <div class="text-content">
-                <h2>Why Choose Glow Skincare?</h2>
-                <p>At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, scientifically proven to nourish and rejuvenate your skin.</p>
-                <a href="#" class="cta-button">Discover Our Story</a>
-            </div>
-            <div class="image-content-right">
-                <img src="https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg" alt="Glow Skincare Products">
+   <!-- About Section -->
+   <section class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="About Our Products" class="img-fluid rounded-4 shadow">
+                </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <h2 class="section-title mb-4">Why Choose Glow Skincare?</h2>
+                    <p class="lead mb-4">At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, scientifically proven to nourish and rejuvenate your skin.</p>
+                    <div class="features mb-4">
+                        <div class="feature d-flex align-items-center mb-3">
+                            <div class="feature-icon me-3">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h5 class="mb-1">100% Natural Ingredients</h5>
+                                <p class="mb-0 text-muted">We use only the finest natural ingredients in our products.</p>
+                            </div>
+                        </div>
+                        <div class="feature d-flex align-items-center mb-3">
+                            <div class="feature-icon me-3">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h5 class="mb-1">No Harmful Chemicals</h5>
+                                <p class="mb-0 text-muted">Free from parabens, sulfates, and other harmful chemicals.</p>
+                            </div>
+                        </div>
+                        <div class="feature d-flex align-items-center">
+                            <div class="feature-icon me-3">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h5 class="mb-1">Cruelty-Free</h5>
+                                <p class="mb-0 text-muted">We never test our products on animals.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-lg">Discover Our Story</a>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Left Image  Paragraph -->
-    <div class="container">
-        <div class="content-section">
-            <div class="image-content-left">
-                <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="Glow Skincare Products" style="   border-radius: 10px 70px 10px 70px;
-                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
-            </div>
-            <div class="image-content-lefts">
-                <img src="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
-                    alt="Glow Skincare Products"
-                    style="   border-radius: 10px 70px 10px 70px;
-                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; height: auto; display: block; margin: 20px auto;">
-            </div>
+    </section>
 
-        </div>
-    </div>
+   
+   
 
-    <!-- Product Cards -->
-    <div class="product-container">
-        <div class="product-card1">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-        <div class="product-card1">
-            <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
-            <p>Brighten your complexion with our powerful Vitamin C serum.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-        <div class="product-card1">
-            <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
-            <p>Deeply nourish your skin with our hydrating moisturizer. Perfect for all skin types.</p>
-            <button class="learn-more">Learn More</button>
-        </div>
-    </div>
 
+  
     <!-- Full-Screen Image Section -->
     <!-- <div class="full-screen-image">
         <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Hydrating Moisturizer">
     </div> -->
 
     <!-- Information Section -->
-    <div class="info-section">
-        <div class="container">
-            <h2>About Our Skincare Philosophy</h2>
-            <p>At Glow Skincare, we are committed to providing you with products that are not only effective but also safe and sustainable.</p>
-            <a href="#" class="cta-button">Learn More About Us</a>
-        </div>
-    </div>
+   
     <!-- Discount Products Section -->
     <script>
         // Simple script for the discount section
@@ -1130,24 +1122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    <div class="cart-panel">
-        <div class="cart-header">
-            <h3>Cart (<span id="cart-item-count">0 items</span>)</h3>
-            <div class="close-cart">x</div>
-        </div>
-        <div class="cart-items">
-            <!-- Cart items will be dynamically added here -->
-        </div>
-        <div class="cart-footer">
-            <div class="subtotal">
-                <span>Subtotal</span>
-                <span id="subtotal-amount">$0.00</span>
-            </div>
-            <button class="view-cart-btn" onclick="window.location.href='checkout';">Checkout</button>
-        </div>
-    </div>
-
-
+   
     <!-- Inline CSS -->
     <style>
         body {
@@ -1742,176 +1717,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     </style>
 
-    <!-- JavaScript -->
-<!-- JavaScript -->
-<script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
-<script src="Views/E-commerce-user/assets/js/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cartPanel = document.querySelector('.cart-panel');
-    const closeCart = document.querySelector('.close-cart');
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const cartItemCount = document.querySelector('#cart-item-count');
-    const subtotalAmount = document.querySelector('#subtotal-amount');
-    const imageZoomModal = document.querySelector('.image-zoom-modal');
-    const zoomedImage = document.querySelector('#zoomed-image');
-    const backBtn = document.querySelector('.back-btn');
-    const zoomButtons = document.querySelectorAll('.image-zoom');
-    let cartItems = [];
 
-    // Load cart from localStorage on page load
-    try {
-        cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (e) {
-        console.error("Error parsing cart from localStorage:", e);
-        cartItems = [];
-    }
-
-    // Render cart items on page load
-    cartItems.forEach(item => addCartItem(item));
-    updateCartSummary();
-
-    // Cart Functionality
-    function toggleCart() {
-        cartPanel.classList.toggle('active');
-    }
-
-    closeCart.addEventListener('click', toggleCart);
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productName = this.getAttribute('data-product-name');
-            const productPrice = parseFloat(this.getAttribute('data-product-price'));
-            const productImage = this.getAttribute('data-product-image');
-
-            const existingItem = cartItems.find(item => item.name === productName);
-            if (existingItem) {
-                existingItem.quantity += 1;
-                updateCartItem(existingItem);
-            } else {
-                const newItem = {
-                    name: productName,
-                    price: productPrice,
-                    image: productImage,
-                    quantity: 1
-                };
-                cartItems.push(newItem);
-                addCartItem(newItem);
-            }
-
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-            console.log("Cart after adding item:", cartItems);
-
-            if (!cartPanel.classList.contains('active')) {
-                toggleCart();
-            }
-            updateCartSummary();
-        });
-    });
-
-    function addCartItem(item) {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <div class="cart-item-details">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                <div class="cart-item-quantity">
-                    <button class="quantity-btn decrease-btn">-</button>
-                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
-                    <button class="quantity-btn increase-btn">+</button>
-                </div>
-            </div>
-            <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
-            <div class="delete-btn"><i class="fa fa-trash"></i></div>
-        `;
-        cartItemsContainer.appendChild(cartItem);
-
-        attachItemListeners(cartItem, item);
-    }
-
-    function updateCartItem(item) {
-        const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
-            el => el.querySelector('.cart-item-name').textContent === item.name
-        );
-        const input = cartItem.querySelector('.quantity-input');
-        input.value = item.quantity;
-        cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-        updateCartSummary();
-        // Save to localStorage
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-    }
-
-    function attachItemListeners(cartItem, item) {
-        const decreaseBtn = cartItem.querySelector('.decrease-btn');
-        const increaseBtn = cartItem.querySelector('.increase-btn');
-        const quantityInput = cartItem.querySelector('.quantity-input');
-        const deleteBtn = cartItem.querySelector('.delete-btn');
-
-        decreaseBtn.addEventListener('click', () => {
-            if (item.quantity > 1) {
-                item.quantity--;
-                updateCartItem(item);
-            }
-        });
-
-        increaseBtn.addEventListener('click', () => {
-            item.quantity++;
-            updateCartItem(item);
-        });
-
-        quantityInput.addEventListener('change', () => {
-            let value = parseInt(quantityInput.value);
-            if (value < 1 || isNaN(value)) value = 1;
-            item.quantity = value;
-            updateCartItem(item);
-        });
-
-        deleteBtn.addEventListener('click', () => {
-            cartItem.remove();
-            cartItems = cartItems.filter(i => i.name !== item.name);
-            updateCartSummary();
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-        });
-    }
-
-    function updateCartSummary() {
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        cartItemCount.textContent = `${totalItems} items`;
-        subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
-    }
-
-    // Image Zoom Functionality
-    zoomButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const imageUrl = this.getAttribute('data-image');
-            zoomedImage.src = imageUrl;
-            imageZoomModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        });
-    });
-
-    backBtn.addEventListener('click', function() {
-        imageZoomModal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Restore scrolling
-    });
-
-    // Close modal when clicking outside the image
-    imageZoomModal.addEventListener('click', function(e) {
-        if (e.target === imageZoomModal) {
-            imageZoomModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-});
-</script>
 
 </body>
 
@@ -1926,97 +1732,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* Footer Section
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glow Skincare | Premium Beauty Products</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <span class="brand-text">Glow</span><span class="brand-accent">Skincare</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Collections</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <a href="#" class="nav-icon me-3"><i class="fas fa-search"></i></a>
-                    <a href="#" class="nav-icon me-3"><i class="fas fa-user"></i></a>
-                    <a href="#" class="nav-icon position-relative" id="cart-icon">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-badge" id="cart-count">0</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <h1 class="display-4 fw-bold mb-4">Discover Your Natural Beauty</h1>
-                    <p class="lead mb-4">Premium skincare products made with natural ingredients to help you achieve radiant, healthy skin.</p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
-                        <a href="#" class="btn btn-outline-secondary btn-lg">Learn More</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Skincare Products" class="img-fluid rounded-4 shadow">
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <!-- Featured Products Carousel -->
     <section class="featured-products py-5">
@@ -2317,229 +2033,8 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about-section py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="About Our Products" class="img-fluid rounded-4 shadow">
-                </div>
-                <div class="col-lg-6 ps-lg-5">
-                    <h2 class="section-title mb-4">Why Choose Glow Skincare?</h2>
-                    <p class="lead mb-4">At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, scientifically proven to nourish and rejuvenate your skin.</p>
-                    <div class="features mb-4">
-                        <div class="feature d-flex align-items-center mb-3">
-                            <div class="feature-icon me-3">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h5 class="mb-1">100% Natural Ingredients</h5>
-                                <p class="mb-0 text-muted">We use only the finest natural ingredients in our products.</p>
-                            </div>
-                        </div>
-                        <div class="feature d-flex align-items-center mb-3">
-                            <div class="feature-icon me-3">
-                                <i class="fas fa-ban"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h5 class="mb-1">No Harmful Chemicals</h5>
-                                <p class="mb-0 text-muted">Free from parabens, sulfates, and other harmful chemicals.</p>
-                            </div>
-                        </div>
-                        <div class="feature d-flex align-items-center">
-                            <div class="feature-icon me-3">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h5 class="mb-1">Cruelty-Free</h5>
-                                <p class="mb-0 text-muted">We never test our products on animals.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary btn-lg">Discover Our Story</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">What Our Customers Say</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <div class="testimonial-card h-100">
-                        <div class="testimonial-rating mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text mb-4">"I've been using the Vitamin C Serum for a month now, and my skin has never looked better! The dark spots have faded, and my complexion is so much brighter."</p>
-                        <div class="testimonial-author d-flex align-items-center">
-                            <div class="testimonial-avatar me-3">
-                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah J." class="rounded-circle">
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Sarah Johnson</h6>
-                                <p class="mb-0 text-muted">Verified Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <div class="testimonial-card h-100">
-                        <div class="testimonial-rating mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p class="testimonial-text mb-4">"The Hydrating Moisturizer is a game-changer for my dry skin. It's lightweight but incredibly moisturizing. My skin feels plump and hydrated all day long."</p>
-                        <div class="testimonial-author d-flex align-items-center">
-                            <div class="testimonial-avatar me-3">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T." class="rounded-circle">
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Michael Thompson</h6>
-                                <p class="mb-0 text-muted">Verified Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card h-100">
-                        <div class="testimonial-rating mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text mb-4">"I love that these products are all-natural and cruelty-free. The Overnight Repair Cream has made such a difference in my skin's texture. I wake up with glowing skin!"</p>
-                        <div class="testimonial-author d-flex align-items-center">
-                            <div class="testimonial-avatar me-3">
-                                <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Emily R." class="rounded-circle">
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Emily Rodriguez</h6>
-                                <p class="mb-0 text-muted">Verified Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="section-title mb-3">Join Our Newsletter</h2>
-                    <p class="section-subtitle mb-4">Subscribe to receive updates, access to exclusive deals, and more.</p>
-                    <form class="newsletter-form">
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control form-control-lg" placeholder="Your email address" aria-label="Email address">
-                            <button class="btn btn-primary btn-lg" type="submit">Subscribe</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="footer-heading mb-4">About Glow Skincare</h5>
-                    <p class="footer-text">We create premium skincare products using natural ingredients to help you achieve healthy, radiant skin. Our mission is to make effective skincare accessible to everyone.</p>
-                    <div class="social-icons mt-4">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-                    <h5 class="footer-heading mb-4">Quick Links</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-                    <h5 class="footer-heading mb-4">Categories</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Moisturizers</a></li>
-                        <li><a href="#">Serums</a></li>
-                        <li><a href="#">Cleansers</a></li>
-                        <li><a href="#">Sunscreen</a></li>
-                        <li><a href="#">Gift Sets</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <h5 class="footer-heading mb-4">Contact Us</h5>
-                    <ul class="footer-contact">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Beauty Lane, Skincare City, SC 12345</li>
-                        <li><i class="fas fa-phone-alt"></i> (123) 456-7890</li>
-                        <li><i class="fas fa-envelope"></i> info@glowskincare.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom py-4 mt-5">
-                <div class="row align-items-center">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <p class="copyright mb-0">© 2023 Glow Skincare. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <div class="payment-methods">
-                            <span class="payment-method"><i class="fab fa-cc-visa"></i></span>
-                            <span class="payment-method"><i class="fab fa-cc-mastercard"></i></span>
-                            <span class="payment-method"><i class="fab fa-cc-amex"></i></span>
-                            <span class="payment-method"><i class="fab fa-cc-paypal"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Shopping Cart Sidebar -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h5 class="mb-0">Your Cart</h5>
-            <button type="button" class="btn-close" id="close-cart"></button>
-        </div>
-        <div class="cart-body" id="cart-items">
-            <!-- Cart items will be added here dynamically -->
-            <div class="empty-cart text-center py-5" id="empty-cart-message">
-                <i class="fas fa-shopping-cart fa-3x mb-3"></i>
-                <p>Your cart is empty</p>
-                <a href="#" class="btn btn-outline-primary">Start Shopping</a>
-            </div>
-        </div>
-        <div class="cart-footer">
-            <div class="d-flex justify-content-between mb-3">
-                <span>Subtotal:</span>
-                <span id="cart-subtotal">$0.00</span>
-            </div>
-            <div class="d-grid gap-2">
-                <a href="#" class="btn btn-primary">Checkout</a>
-                <button class="btn btn-outline-secondary" id="clear-cart">Clear Cart</button>
-            </div>
-        </div>
-    </div>
-    <div class="cart-overlay" id="cart-overlay"></div>
-
+   
+ 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
@@ -3176,6 +2671,13 @@ a:hover {
     }
 }
 </style>
+<div class="info-section">
+        <div class="container">
+            <h2>About Our Skincare Philosophy</h2>
+            <p>At Glow Skincare, we are committed to providing you with products that are not only effective but also safe and sustainable.</p>
+            <a href="#" class="cta-button">Learn More About Us</a>
+        </div>
+    </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
