@@ -16,6 +16,7 @@ require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 require_once "Controllers/checkoutUser.php";
 require_once "Controllers/HistoryController.php";
+require_once "Controllers/AuthController.php";
 
 $routes = new Router();
 
@@ -160,6 +161,8 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 // Dashboard Route
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
+// user reset pw
+$routes->get('/resetPw', [AuthController::class, 'reset']);
 // Dispatch the routes
 
 
