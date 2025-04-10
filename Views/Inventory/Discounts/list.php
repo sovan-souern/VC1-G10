@@ -48,7 +48,7 @@
                 </div>
                 <div>
                     <label for="itemsPerPage">Show</label>
-                    <select id="itemsPerPage">
+                    <select id="itemsPerPage">  
                         <option value="1000">All</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
