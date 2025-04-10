@@ -148,7 +148,7 @@ $notifications = $model->getNotifications();
           </a>
         </li>
         <li class="menu-item">
-          <a href="/reset" class="menu-link">
+          <a href="/resetPw" class="menu-link">
             <div data-i18n="Notifications">Reset Password</div>
           </a>
         </li>
@@ -720,7 +720,7 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                 <li>
                   <a class="dropdown-item" href="/reset">
                     <i class="bi bi-key me-2"></i>
-                    <span class="align-middle">Reset Password</span>
+                    <span class="align-middle">Forgot Password</span>
                   </a>
                 </li>
                 <!-- create admin -->

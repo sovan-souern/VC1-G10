@@ -1,138 +1,284 @@
-<div class="container-fluid footer py-5">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Our Services</h4>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Facials</a>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Waxing</a>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Massage</a>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Mineral Baths</a>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Body Treatments</a>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Aroma Therapy</a>
+<style>
+
+    /* Footer */
+.footer {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.footer-heading {
+    color: white;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact li {
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: flex-start;
+}
+
+.footer-contact li i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copyright {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+}
+
+.payment-method {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Shopping Cart Sidebar */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.active {
+    right: 0;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+}
+
+.cart-overlay.active {
+    display: block;
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-item-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.quantity-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 0 5px;
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    margin: 0 5px;
+}
+
+.cart-item-remove {
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+
+</style>
+
+ <!-- Footer -->
+    <footer class="footer pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="footer-heading mb-4">About Glow Skincare</h5>
+                    <p class="footer-text">We create premium skincare products using natural ingredients to help you achieve healthy, radiant skin. Our mission is to make effective skincare accessible to everyone.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-heading mb-4">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-heading mb-4">Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Moisturizers</a></li>
+                        <li><a href="#">Serums</a></li>
+                        <li><a href="#">Cleansers</a></li>
+                        <li><a href="#">Sunscreen</a></li>
+                        <li><a href="#">Gift Sets</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="footer-heading mb-4">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Beauty Lane, Skincare City, SC 12345</li>
+                        <li><i class="fas fa-phone-alt"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@glowskincare.com</li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Schedule</h4>
-                    <p class="text-white mb-2">Monday: <span>09:00 AM - 10:00 PM</span></p>
-                    <p class="text-white mb-2">Saturday: <span>09:00 AM - 08:00 PM</span></p>
-                    <p class="text-white mb-2">Sunday: <span>09:00 AM - 05:00 PM</span></p>
-                    <h4 class="my-4 text-white">Address</h4>
-                    <p class="mb-0"><i class="fas fa-map-marker-alt text-secondary me-2"></i> 123 Ranking Street, North Tower, New York, USA</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Follow Us</h4>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Facebook</a>
-                    <a href="#"><i class="fas fa-angle-right me-2"></i> Instagram</a>
-                    <h4 class="my-4 text-white">Contact Us</h4>
-                    <p class="mb-2"><i class="fas fa-envelope text-secondary me-2"></i> info@example.com</p>
-                    <p class="mb-0"><i class="fas fa-phone text-secondary me-2"></i> (+012) 3456 7890</p>
+            <div class="footer-bottom py-4 mt-5">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <p class="copyright mb-0">© 2023 Glow Skincare. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="payment-methods">
+                            <span class="payment-method"><i class="fab fa-cc-visa"></i></span>
+                            <span class="payment-method"><i class="fab fa-cc-mastercard"></i></span>
+                            <span class="payment-method"><i class="fab fa-cc-amex"></i></span>
+                            <span class="payment-method"><i class="fab fa-cc-paypal"></i></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </footer>
 
-<script src="js/jquery-1.11.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
-<script src="js/plugins.js"></script>
-<script src="js/script.js"></script>
-<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-</body>
-</html>
+    
 
-<style>
-    .footer {
-        background-color: rgb(202, 20, 20); /* Red background */
-        color: #fff;
-    }
-
-    .footer-item {
-        padding: 20px;
-        border-radius: 10px;
-        text-decoration: none;
-        /* border: 1px solid rgba(255, 255, 255, 0.1); */
-    }
-
-    .footer .row {
-        display: flex;
-        justify-content: space-between;
-        gap: 30px;
-    }
-
-    .footer-item h4 {
-        font-size: 22px;
-        font-weight: bold;
-        padding-bottom: 8px;
-        margin-bottom: 25px;
-        color: #fff;
-        border-bottom: 2px solid #7971ea; 
-        display: inline-block;
-    }
-
-    .footer-item a {
-        color: #ddd;
-        text-decoration: none;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        transition: color 0.3s ease, padding-left 0.3s ease;
-    }
-
-    .footer-item a:hover {
-        color: #fff;
-        padding-left: 8px; /* Slight shift on hover */
-    }
-
-    .footer-item i {
-        color: #7971ea; /* Purple icons */
-        margin-right: 10px;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .footer-item p {
-        margin-bottom: 12px;
-        font-size: 15px;
-        color: #ccc;
-    }
-
-    .footer-item p span {
-        color: #fff; /* White time text */
-    }
-
-    @media (max-width: 992px) {
-        .footer .row {
-            flex-direction: column;
-            text-align: start;
-        }
-
-        .footer-item {
-            align-items: start;
-        }
-
-        .footer-item a {
-            display: block;
-        }
-    }
-
-    .footer {
-        animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
