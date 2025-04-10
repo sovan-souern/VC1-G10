@@ -13,11 +13,11 @@
                 </div>
                 <div class="input-price">
                     <label for="price">Price</label>
-                    <input type="number" name="price" id="price" class="form-control" min="0" value="<?= $product["price"] ?>">
+                    <input type="number" step="0.01" name="price" id="price" class="form-control" min="0" value="<?= $product["price"] ?>">
                 </div>
                 <div class="input-category">
                     <label for="category_id"> Category</label>
-                    <select name="category_id" id="category_id" class="form-select" required>
+                    <select name="category_id" id="category_id" class="form-select" >
                         <option value=""> Choose Category</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?php echo $category['category_id']; ?>" <?php echo $category['category_id'] == $product['category_id'] ? 'selected' : ''; ?>>
