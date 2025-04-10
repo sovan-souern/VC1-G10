@@ -72,7 +72,7 @@
 }
 
 body {
-    background-color: #fdf2f4;
+    /* background-color: #fdf2f4; */
     color: #333;
     line-height: 1.6;
 }
