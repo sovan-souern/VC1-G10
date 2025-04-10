@@ -899,6 +899,38 @@
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
             <div class="info">Protect your skin from harmful UV rays with our lightweight sunscreen.</div>
         </div>
+        <div class="card">
+            <img src="https://www.beautypackaging.com/wp-content/uploads/sites/8/2024/11/017_main-13.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Nivea.</div>
+        </div>
+        <div class="card">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20230130/8F8S/63d803e2aeb269c6510329d0/-473Wx593H-4915693380-multi-MODEL.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Nivea.</div>
+        </div>
+        <div class="card">
+            <img src="https://down-vn.img.susercontent.com/file/e51b7974a1af0f2ea03f5a96804217f5" alt="Sunscreen SPF 50">
+            <div class="info">Body oil.</div>
+        </div>
+        <div class="card">
+            <img src="https://s9.kh1.co/__image/w=600,h=600,fit=cover/1b/1be5d7c51a56e185757cc60b646d9e97d51a3a71.jpg" alt="Sunscreen SPF 50">
+            <div class="info">Felix hair.</div>
+        </div>
+        <div class="card">
+            <img src="https://m.media-amazon.com/images/I/51Z2sQyCB-L.jpg" alt="Sunscreen SPF 50">
+            <div class="info">lipstick.</div>
+        </div>
+        <div class="card">
+            <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98p-lyt0fqimk128fd" alt="Sunscreen SPF 50">
+            <div class="info">Yasaka.</div>
+        </div>
+        <div class="card">
+            <img src="https://bellavitaorganic.com/cdn/shop/files/download_0315aafb-8c5d-4b3d-a00e-6cc8cc1b00b2.jpg?v=1732609831&width=1000" alt="Sunscreen SPF 50">
+            <div class="info">Nail​​​​​​ polish.</div>
+        </div>
+        <div class="card">
+            <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
+            <div class="info">Nail​​​​​​ polish.</div>
+        </div>
     </div>
  <!-- Hero Section -->
  <section class="hero-section">
@@ -924,72 +956,147 @@
         <p>Limited time offers - save up to 30%</p>
     </div>
 
-    <div class="container">
-        <div class="products-container">
-            <?php
-            if (isset($discounts) && is_array($discounts) && !empty($discounts)) {
-                foreach ($discounts as $discount) {
-                    // Calculate discounted price
-                    $original_price = floatval($discount["price"]);
-                    $discount_percentage = floatval($discount["discount_percentage"]);
-                    $discounted_price = $original_price * (1 - $discount_percentage / 100);
+    <div class="container"> 
+        <div class="products-container"> 
+        <?php foreach ($products as $index => $product): ?>
+    <?php 
+    $hasDiscount = false;
+    foreach ($discounts as $key => $discount):
+        if ($product["product_id"] == $discount["product_id"]):
+            if ($discount["end_date"] >= date("Y-m-d") && $discount["start_date"] <= date("Y-m-d")):
+                // Calculate discounted price
+                $original_price = floatval($product["price"]);
+                $discount_percentage = floatval($discount["discount_percentage"]);
+                $discounted_price = $original_price * (1 - $discount_percentage / 100);
 
-                    // Sanitize and prepare data
-                    $product_name = htmlspecialchars($discount["product_name"]);
-                    $image_url = !empty($discount["image"]) ? htmlspecialchars($discount["image"]) : 'https://via.placeholder.com/150';
-                    $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                    $original_price_formatted = "$" . number_format($original_price, 2); 
-                    $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-            ?>
-                    <!-- Product Card -->
-                    <div class="product-card">
-                        <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                        <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                            <!--icon favorite , view   -->
-                            <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                            <!--icon favorite , view   -->
-                            <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="/detail?id=<?php echo $discount['product_id']; ?>"> 
+                // Sanitize and prepare data
+                $product_name = htmlspecialchars($product["product_name"]);
+                $image_url = !empty($product["image"]) ? htmlspecialchars($product["image"]) : 'https://via.placeholder.com/150';
+                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                $original_price_formatted = "$" . number_format($original_price, 2);
+                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
 
-                                        <i class="arrow_expand"></i> 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/detail">
-                                        <span class="icon_heart_alt"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon_bag_alt"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name"><?php echo $product_name; ?></h5>
-                          
-                            <div class="price">
-                                <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                <?php echo $discounted_price_formatted; ?>
-                            </div>
-                            <!-- Updated add-to-cart button with correct variables -->
-                            <button class="add-to-cart" 
-                                    data-product-name="<?php echo $product_name; ?>" 
-                                    data-product-price="<?php echo $discounted_price; ?>" 
-                                    data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
-                        </div>
+                // Get product description and quantity
+                $product_content = isset($product["product_content"]) ? htmlspecialchars($product["product_content"]) : "No description available";
+                $product_quantity = isset($product["quantity"]) ? htmlspecialchars($product["quantity"]) : "No quantity available";
+    ?>
+                <!-- Product Card -->
+                <div class="product-card">
+                    <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                        <ul class="general-product-hover product-hover-shared">
+                            <li>
+                                <a href="#" class="view-details-btn"
+                                   data-name="<?php echo $product_name; ?>"
+                                   data-price="<?php echo $discounted_price_formatted; ?>"
+                                   data-discount="<?php echo $discount_percentage; ?>"
+                                   data-image="<?php echo $image_url; ?>"
+                                   data-description="<?php echo $product_content; ?>"
+                                   data-quantity="<?php echo $product_quantity; ?>">
+                                    <i class="arrow_expand"></i>
+                                </a>
+                            </li>
+                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                        </ul>
                     </div>
-            <?php
-                }
-            } else {
-                echo '<p>No discounted products available.</p>';
-            }
-            ?>
+                    <div class="product-info">
+                        <h5 class="product-name"><?php echo $product_name; ?></h5>
+                        <div class="price">
+                            <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                            <?php echo $discounted_price_formatted; ?>
+                        </div>
+                        <button class="add-to-cart"
+                                data-product-name="<?php echo $product_name; ?>"
+                                data-product-price="<?php echo $discounted_price; ?>"
+                                data-product-image="<?php echo $image_url; ?>">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <?php 
+                $hasDiscount = true;
+                break; // exit inner loop once a discount is applied
+            endif;
+        endif;
+    endforeach;
+    ?>
+<?php endforeach; ?>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="product-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div class="modal-inner">
+            <!-- Product Image -->
+            <div class="modal-product-image">
+                <img id="modal-product-image" src="" alt="Product Image" style="width: 100%; height: 300px; object-fit: cover;">
+            </div>
+            <!-- Product Information -->
+            <div class="modal-product-info">
+                <h2 id="modal-product-name"></h2>
+                <p><strong>Price: </strong><span id="modal-product-price"></span></p>
+                <p><strong>Quantity: </strong><span id="modal-product-quantity"></span></p>
+                <p id="modal-product-description"></p>
+                <p><strong>Discount: %</strong><span id="modal-product-discount"></span></p>
+                <button id="add-to-cart-modal" class="add-to-cart">Add to Cart</button>
+            </div>
         </div>
     </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.view-details-btn').click(function(e) {
+        e.preventDefault();
+
+        // Retrieve product details from data attributes
+        var productName = $(this).data('name');
+        var productPrice = $(this).data('price');
+        var productImage = $(this).data('image');
+        var productDescription = $(this).data('description');
+        var productQuantity = $(this).data('quantity');
+        var productDiscount = $(this).data('discount') || "No discount available";
+
+        // Populate modal fields
+        $('#modal-product-name').text(productName);
+        $('#modal-product-price').text(productPrice);
+        $('#modal-product-image').attr('src', productImage);
+        $('#modal-product-description').text(productDescription);
+        $('#modal-product-quantity').text(productQuantity);
+        $('#modal-product-discount').text(productDiscount);
+
+        // Show the modal
+        $('#product-modal').fadeIn();
+    });
+
+    // Close the modal when clicking the close button
+    $('.close-btn').click(function() {
+        $('#product-modal').fadeOut();
+    });
+
+    // Close the modal when clicking outside the modal content
+    $(window).click(function(event) {
+        if ($(event.target).is('#product-modal')) {
+            $('#product-modal').fadeOut();
+        }
+    });
+
+    // "Add to Cart" button in modal
+    // $('#add-to-cart-modal').click(function() {
+    //     var productName = $('#modal-product-name').text();
+    //     alert(productName + " has been added to the cart.");
+    // });
+});
+</script>
+
+
 </section>
     <!-- Left Paragraph Right Image -->
     <div class="container">
@@ -1150,243 +1257,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Inline CSS -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* Shared Styles for Add to Cart Button */
-        .add-to-cart {
-            background-color: pink;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin-top: 10px;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .add-to-cart:hover {
-            background-color: #ff6699;
-            transform: translateY(-2px);
-        }
-
-        .add-to-cart a {
-            text-decoration: none;
-            color: white;
-            transition: color 0.3s ease;
-        }
-
-        /* Discounted Product Card Styles */
-        .discount-product-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-
-        .discount-product-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-image {
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            transition: filter 0.3s ease;
-        }
-
-        .discount-product-card:hover .product-image {
-            filter: brightness(110%);
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff5252;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            z-index: 1;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .discount-product-card:hover .discount-badge {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .discount-product-hover {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 0;
-            z-index: 2;
-        }
-
-        .discount-product-card:hover .discount-product-hover {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .discount-product-hover li {
-            list-style: none;
-            margin: 0;
-            transition: all 0.3s ease;
-        }
-
-        .discount-product-hover li a {
-            display: block;
-            width: 40px;
-            height: 40px;
-            background: #ffffff;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .discount-product-hover li a:hover {
-            background: #ff5252;
-            color: #ffffff;
-            transform: scale(1.15);
-        }
-
-        .discount-product-hover li a span {
-            font-size: 16px;
-            color: #111111;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-hover li a:hover span {
-            color: #ffffff;
-        }
-
-        .product-info {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .product-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-card:hover .product-name {
-            color: #ff5252;
-        }
-
-        .rating {
-            color: #ffc107;
-            margin-bottom: 5px;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #0d6efd;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-card:hover .price {
-            color: #ff5252;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-right: 8px;
-        }
-
-        /* General Product Item Styles */
-        .general-product-item {
-            position: relative;
-            background: #fff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .general-product-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .general-product-pic {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .general-product-pic img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .general-product-item:hover .general-product-pic img {
-            transform: scale(1.1);
-        }
-
-        .general-product-hover {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 0;
-            z-index: 2;
-        }
-
-        .general-product-item:hover .general-product-hover {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .general-product-hover li {
-            list-style: none;
-            margin: 0;
-            transition: all 0.3s ease;
-        }
 
         .general-product-hover li a {
             display: block;
@@ -1912,6 +1782,125 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<style>
+ /* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    overflow: auto;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex; /* Use Flexbox for two-column layout */
+    align-items: center; /* Vertically center items */
+}
+
+/* Modal Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: black;
+}
+
+/* Modal Inner (container) */
+.modal-inner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Product Image Styling */
+.modal-product-image {
+    flex: 1; /* Allow image to take up equal space */
+    max-width: 40%; /* Limit image width to 40% */
+    margin-right: 20px; /* Space between image and text */
+}
+
+.modal-product-image img {
+    width: 100%; /* Make the image fill the container */
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Product Information Styling */
+.modal-product-info {
+    flex: 2; /* Take up more space for the info */
+    max-width: 60%; /* Limit the text section width */
+    padding-left: 20px;
+}
+
+/* Title Styling */
+.modal-product-info h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Paragraph Styling */
+.modal-product-info p {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0;
+}
+
+/* Button Styling */
+#add-to-cart-modal {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+#add-to-cart-modal:hover {
+    background-color: #218838;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .modal-inner {
+        flex-direction: column; /* Stack the image and info vertically */
+    }
+    .modal-product-image {
+        max-width: 100%; /* Allow image to take up full width on mobile */
+        margin-right: 0; /* No margin on mobile */
+    }
+    .modal-product-info {
+        max-width: 100%; /* Info section also takes full width on mobile */
+        padding-left: 0;
+    }
+}
+
+</style>
+
+
+
 
 </body>
 
