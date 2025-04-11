@@ -41,7 +41,7 @@
       <div class="page" id="productPage">
             </div>
             
-            <div class="items-per-page" style="display: flex; align-items: center; gap: 20px;">
+            <!-- <div class="items-per-page" style="display: flex; align-items: center; gap: 20px;">
                 <div class="tab-buttons">
                     <a href="/discount" class="tab-btn">Discount</a>
                     <a href="/discount/history" class="tab-btn active">history</a>
@@ -61,7 +61,7 @@
         <div id="filter_inputs">
             <input type="text" placeholder="Min Price">
             <input type="text" placeholder="Max Price">
-        </div>
+        </div> -->
         <div class="page" id="productPage">
             <?php foreach ($discounts as $discount) : ?>
               <?php if ($discount["end_date"] >= date("Y-m-d") ): ?>

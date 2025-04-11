@@ -1378,8 +1378,6 @@
             </div>
         </div>
 
-
-
         <div class="row">
             <!-- Left Column - Forms -->
             <div class="col-md-7">
@@ -1474,7 +1472,6 @@
                         <input type="hidden" name="items" id="items">
                         <input type="hidden" name="total" id="total_input">
                         <input type="hidden" name="product_id" id="product_id">
-
                     </div>
 
                     <!-- Payment Method Section -->
@@ -1542,7 +1539,7 @@
                             <button type="submit" id="proceed-payment-btn" class="proceed-payment-btn" disabled style="background-color: #cccccc; color: #666666; padding: 10px 20px; border: none; border-radius: 5px; cursor: not-allowed;">
                                 <i class="fas fa-lock"></i> Proceed to Secure Payment
                             </button>
-                            <button type="submit" class="payment-btn" onclick="window.location.href='https://pay.ababank.com/efRPcMcXvMLRihKq6'" style="background-color: #28a745; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                            <button type="button" class="payment-btn" id="complete-payment-btn" style="background-color: #28a745; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
                                 <i class="fas fa-credit-card"></i> Complete Payment
                             </button>
                         </div>
@@ -1590,19 +1587,13 @@
     </div>
 
     <script>
-        // Sample cart data for demonstration
-        const sampleCart = [{
+        // Sample cart data for demonstration (total $5.00)
+        const sampleCart = [
+            {
                 id: 1,
                 name: "William Shirt",
-                price: 29.99,
+                price: 2.50,
                 quantity: 2,
-                image: "https://via.placeholder.com/70"
-            },
-            {
-                id: 2,
-                name: "Boris Sandals",
-                price: 49.99,
-                quantity: 1,
                 image: "https://via.placeholder.com/70"
             }
         ];
@@ -1612,7 +1603,6 @@
             aba: {
                 name: "ABA Bank",
                 logo: "https://media.licdn.com/dms/image/v2/C510BAQEnYW7qoK68EQ/company-logo_200_200/company-logo_200_200/0/1630579892170/aba_bank_logo?e=2147483647&v=beta&t=CNGsdiQOwm9PB1VAqw8aqn7Iau72Zen8WZmsqrdC1sY",
-                qrCode: "https://i.pinimg.com/736x/d8/11/10/d81110f74b45542aa26eddc290592ed8.jpg",
                 type: "Mobile Banking",
                 processingTime: "Instant",
                 fee: "No additional fees",
@@ -1621,7 +1611,6 @@
             acleda: {
                 name: "ACLEDA Bank",
                 logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM37KLHTgu31C4LMRGMBzIu7QwwJXVeOC-EA&s",
-                qrCode: "https://i.pinimg.com/736x/d8/11/10/d81110f74b45542aa26eddc290592ed8.jpg",
                 type: "Mobile & Internet Banking",
                 processingTime: "Within 15 minutes",
                 fee: "No additional fees",
@@ -1630,7 +1619,6 @@
             wing: {
                 name: "Wing Bank",
                 logo: "https://play-lh.googleusercontent.com/-deHHbwBUh2I4dzTjq9n4ggBGPqJwKzj9pwvPqyaR-hPxzKN9QVJOBsZP_ShlCDmX60",
-                qrCode: "https://i.pinimg.com/736x/d8/11/10/d81110f74b45542aa26eddc290592ed8.jpg",
                 type: "Mobile Banking",
                 processingTime: "Instant",
                 fee: "No additional fees",
@@ -1927,12 +1915,20 @@
             qrPaymentLogo.src = bank.logo;
             qrBankName.textContent = bank.name;
 
-            // Set the amount
-            const totalAmount = document.getElementById('total').textContent;
+            // Get the total amount from the order summary
+            const totalAmount = document.getElementById('total').textContent; // e.g., "$5.00"
+            const totalAmountValue = parseFloat(totalAmount.replace('$', '')); // Extract numeric value, e.g., 5.00
+
+            // Set the amount in the QR popup
             qrAmount.textContent = totalAmount;
 
-            // Set the QR code image
-            qrCodeImage.src = bank.qrCode;
+            // Update the QR code image with the dynamic amount in the payment link
+            const basePaymentLink = "https://link.payway.com.kh/aba?id=3EACF56C17F7&code=105187&acc=008471110&dynamic=true";
+            const paymentLinkWithAmount = `${basePaymentLink}&amount=${totalAmountValue.toFixed(2)}`;
+
+            // Use a QR code generation API to create a QR code with the payment link
+            const qrCodeApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(paymentLinkWithAmount)}`;
+            qrCodeImage.src = qrCodeApiUrl;
 
             // Show the popup with animation
             qrPopup.style.display = 'flex';
@@ -2059,19 +2055,17 @@
             }, 1000);
         });
 
+        // Complete Payment button click handler
+        document.getElementById('complete-payment-btn').addEventListener('click', function() {
+            const totalAmount = document.getElementById('total').textContent;
+            const totalAmountValue = parseFloat(totalAmount.replace('$', ''));
+            const basePaymentLink = "https://link.payway.com.kh/aba?id=3EACF56C17F7&code=105187&acc=008471110&dynamic=true";
+            const paymentLinkWithAmount = `${basePaymentLink}&amount=${totalAmountValue.toFixed(2)}`;
+            window.location.href = paymentLinkWithAmount;
+        });
+
         // Set current date and time for the hidden buy_at field
         document.getElementById('buy_at').value = new Date().toISOString().slice(0, 16);
-        // Handle form submission
-        document.getElementById('checkout-form').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            // Validate payment section
-            if (!validateSection('payment-section')) {
-                return false;
-            }
-
-
-        });
 
         // Initial render
         renderOrderSummary();

@@ -1,284 +1,233 @@
-<style>
-
-    /* Footer */
-.footer {
-    background-color: var(--secondary-color);
-    color: white;
-}
-
-.footer-heading {
-    color: white;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.footer-heading::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    background-color: var(--primary-color);
-}
-
-.footer-text {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-links li {
-    margin-bottom: 10px;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.7);
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: white;
-    padding-left: 5px;
-}
-
-.footer-contact {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-contact li {
-    margin-bottom: 15px;
-    color: rgba(255, 255, 255, 0.7);
-    display: flex;
-    align-items: flex-start;
-}
-
-.footer-contact li i {
-    margin-right: 10px;
-    color: var(--primary-color);
-}
-.social-icons {
-    display: flex;
-    gap: 15px;
-}
-
-.social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    color: white;
-    transition: var(--transition);
-}
-
-.social-icon:hover {
-    background-color: var(--primary-color);
-    color: white;
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.copyright {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.payment-methods {
-    display: flex;
-    gap: 10px;
-}
-
-.payment-method {
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* Shopping Cart Sidebar */
-.cart-sidebar {
-    position: fixed;
-    top: 0;
-    right: -400px;
-    width: 350px;
-    height: 100%;
-    background-color: white;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 1050;
-    transition: right 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.cart-sidebar.active {
-    right: 0;
-}
-
-.cart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1040;
-    display: none;
-}
-
-.cart-overlay.active {
-    display: block;
-}
-
-.cart-header {
-    padding: 20px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cart-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-}
-
-.cart-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.cart-item-image {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 15px;
-}
-
-.cart-item-details {
-    flex: 1;
-}
-
-.cart-item-title {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.cart-item-price {
-    color: var(--primary-color);
-    font-weight: 600;
-}
-
-.cart-item-quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-}
-
-.quantity-btn {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: var(--text-color);
-    padding: 0 5px;
-}
-
-.quantity-input {
-    width: 40px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    margin: 0 5px;
-}
-
-.cart-item-remove {
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-
-</style>
-
- <!-- Footer -->
-    <footer class="footer pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="footer-heading mb-4">About Glow Skincare</h5>
-                    <p class="footer-text">We create premium skincare products using natural ingredients to help you achieve healthy, radiant skin. Our mission is to make effective skincare accessible to everyone.</p>
-                    <div class="social-icons mt-4">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-                    <h5 class="footer-heading mb-4">Quick Links</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-                    <h5 class="footer-heading mb-4">Categories</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Moisturizers</a></li>
-                        <li><a href="#">Serums</a></li>
-                        <li><a href="#">Cleansers</a></li>
-                        <li><a href="#">Sunscreen</a></li>
-                        <li><a href="#">Gift Sets</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <h5 class="footer-heading mb-4">Contact Us</h5>
-                    <ul class="footer-contact">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Beauty Lane, Skincare City, SC 12345</li>
-                        <li><i class="fas fa-phone-alt"></i> (123) 456-7890</li>
-                        <li><i class="fas fa-envelope"></i> info@glowskincare.com</li>
-                    </ul>
+<div class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Glow Skincare</h3>
+                <p>We create premium skincare products using natural ingredients to help you achieve healthy, radiant skin. Our mission is to make effective skincare accessible to everyone.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom py-4 mt-5">
-                <div class="row align-items-center">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <p class="copyright mb-0">© 2023 Glow Skincare. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <div class="payment-methods">
-                            <span class="payment-method"><i class="fab fa-cc-visa"></i></span>
-                            <span class="payment-method"><i class="fab fa-cc-mastercard"></i></span>
-                            <span class="payment-method"><i class="fab fa-cc-amex"></i></span>
-                            <span class="payment-method"><i class="fab fa-cc-paypal"></i></span>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Moisturizers</a></li>
+                    <li><a href="#">Serums</a></li>
+                    <li><a href="#">Cleansers</a></li>
+                    <li><a href="#">Sunscreen</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    123 Beauty Lane, Skincare City, SC 12345
+                </p>
+                <p class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    (123) 456-7890
+                </p>
+                <p class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    info@glowskincare.com
+                </p>
             </div>
         </div>
-    </footer>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Glow Skincare. All rights reserved.</p>
+            <div class="payment-methods">
+                <img src="https://cdn-icons-png.flaticon.com/128/349/349221.png" alt="Visa">
+                <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="Mastercard">
+                <img src="https://cdn-icons-png.flaticon.com/128/349/349230.png" alt="American Express">
+                <img src="https://cdn-icons-png.flaticon.com/128/196/196566.png" alt="PayPal">
+            </div>
+        </div>
+    </div>
+</div>
 
+<style>
+    /* Reset and base styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+    }
+    
+    /* Footer styles */
+    .footer {
+        background-color: #1e2022;
+        color: #fff;
+        padding: 70px 0 30px;
+    }
+    
+    .container {
+        width: 85%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 50px;
+    }
+    
+    .footer-section {
+        width: 23%;
+        min-width: 250px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-section h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    
+    .footer-section h3::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #ff6b6b;
+    }
+    
+    .footer-section p {
+        color: #adb5bd;
+        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.7;
+    }
+    
+    .footer-section ul {
+        list-style: none;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 12px;
+    }
+    
+    .footer-section ul li a {
+        color: #adb5bd;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .footer-section ul li a:hover {
+        color: #fff;
+        padding-left: 5px;
+    }
+    
+    /* Social icons */
+    .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .social-icons a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #2c3034;
+        border-radius: 50%;
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+        background-color: #ff6b6b;
+    }
+    
+    /* Contact items */
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    
+    .contact-item i {
+        color: #ff6b6b;
+        margin-right: 10px;
+        font-size: 16px;
+        margin-top: 3px;
+    }
+    
+    /* Footer bottom */
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+        border-top: 1px solid #2c3034;
+    }
+    
+    .footer-bottom p {
+        color: #adb5bd;
+        font-size: 14px;
+    }
+    
+    .payment-methods {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .payment-methods img {
+        width: 35px;
+        height: auto;
+        filter: grayscale(100%) brightness(70%);
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .footer-content {
+            flex-direction: column;
+        }
+        
+        .footer-section {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        .footer-bottom {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+    }
+</style>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

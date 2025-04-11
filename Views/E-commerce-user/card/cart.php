@@ -1,4 +1,3 @@
-<!-- cart.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,19 +36,12 @@
                     <span>Subtotal</span>
                     <span class="subtotal">$0.00</span>
                 </div>
-                <div class="summary-row">
-                    <span>Delivery</span>
-                    <span class="delivery-cost">$5.99</span>
-                </div>
-             
-               
                 <hr>
                 <div class="summary-row total">
                     <span>Total</span>
                     <span class="total-amount">$0.00</span>
                 </div>
                 <button class="checkout-btn primary" onclick="window.location.href='checkout';">Checkout</button>
-               
                 <div class="secure-checkout">
                     <i class="fa-solid fa-lock"></i>
                     <span>Secure Checkout</span>
@@ -342,19 +334,16 @@ hr {
 
 <script>
     // cart-script.js
-// cart-script.js
 document.addEventListener('DOMContentLoaded', function() {
     // Get elements
     const cartItemsContainer = document.querySelector('.cart-items');
     const subtotalEl = document.querySelector('.subtotal');
     const totalEl = document.querySelector('.total-amount');
-    const deliveryCostEl = document.querySelector('.delivery-cost');
     const promoCode = document.querySelector('.promo-code');
     const addNote = document.querySelector('.add-note');
 
     // Initialize cart items
     let cartItems = [];
-    const deliveryCost = 5.99; // Fixed delivery cost
 
     // Load cart from localStorage on page load
     try {
@@ -452,9 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateSummary() {
         const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
         subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-        const total = subtotal + deliveryCost;
-        totalEl.textContent = `$${total.toFixed(2)}`;
-        deliveryCostEl.textContent = `$${deliveryCost.toFixed(2)}`;
+        totalEl.textContent = `$${subtotal.toFixed(2)}`; // Total is now equal to subtotal
     }
 
     // Promo code and note functionality

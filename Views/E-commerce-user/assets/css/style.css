@@ -365,6 +365,7 @@
 
 .categories__accordion .card-body li {
 	list-style: none;
+	/* display: none; */
 	position: relative;
 	padding-left: 16px;
 }
