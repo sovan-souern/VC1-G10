@@ -3,52 +3,46 @@
 
 <div class="container">
     <div class="card-page">
-        <h4>Discount History</h4>
+        <div class="card-header">
+            <h4>Discount History</h4>
+            <div class="create-discount-container">
+                <a href="javascript:void(0)" class="btn btn-primary" id="createDiscountBtn">+ Create Discount</a>
+                <div id="createDiscountForm" class="discount-form-aside" style="display: none;">
+                    <div class="form-group">
+                        <label for="categorySelect">Create by</label>
+                        <select id="categorySelect" name="category" class="form-control">
+                            <option value=""> Choose Option </option>
+                            <option value="product/discount">Product</option>
+                            <option value="category">Category</option>
+                            <option value="brand">Brand</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="serch-group">
-
-        <div class="search-set">
-          <div class="search-path">
-            <a class="btn btn-filter" id="filter_search">
-              <img src="/Views/assets/img1/icons/filter.svg" alt="Filter">
-              <span><img src="/Views/assets/img1/icons/closes.svg" alt="Close"></span>
-            </a>
-          </div>
-          <div class="search-input">
-            <form class="form-inline" onsubmit="return false;">
-              <input id="brandSearch" class="form-control mr-sm-2" type="search" placeholder="Search Brand Name" aria-label="Search">
-            </form>
-          </div>
-          
-        </div>
-        <div class="items-per-page">
-           <a href="/discount">Discount</a>/
-           <a href="/discount/history">history</a>
-          
-          <label for="itemsPerPage">Show</label>
-          <select id="itemsPerPage">
-            <option value="1000">All</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-          </select>
-        </div>
-      </div>
-      <div id="filter_inputs">
-        <input type="text" placeholder="Min Price">
-        <input type="text" placeholder="Max Price">
-      </div>
-      <div class="page" id="productPage">
+            <div class="search-set">
+                <div class="search-path">
+                    <a class="btn btn-filter" id="filter_search">
+                        <img src="/Views/assets/img1/icons/filter.svg" alt="Filter">
+                        <span><img src="/Views/assets/img1/icons/closes.svg" alt="Close"></span>
+                    </a>
+                </div>
+                <div class="search-input">
+                    <form class="form-inline" onsubmit="return false;">
+                        <input id="brandSearch" class="form-control mr-sm-2" type="search" placeholder="Search Brand Name" aria-label="Search">
+                    </form>
+                </div>
             </div>
             
-            <!-- <div class="items-per-page" style="display: flex; align-items: center; gap: 20px;">
+            <div class="items-per-page" style="display: flex; align-items: center; gap: 20px;">
                 <div class="tab-buttons">
                     <a href="/discount" class="tab-btn">Discount</a>
                     <a href="/discount/history" class="tab-btn active">history</a>
                 </div>
                 <div>
                     <label for="itemsPerPage">Show</label>
-                    <select id="itemsPerPage">  
+                    <select id="itemsPerPage">
                         <option value="1000">All</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -61,7 +55,7 @@
         <div id="filter_inputs">
             <input type="text" placeholder="Min Price">
             <input type="text" placeholder="Max Price">
-        </div> -->
+        </div>
         <div class="page" id="productPage">
             <?php foreach ($discounts as $discount) : ?>
               <?php if ($discount["end_date"] >= date("Y-m-d") ): ?>
@@ -122,7 +116,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Get all delete buttons
+        // Existing delete button functionality
         const deleteButtons = document.querySelectorAll('.delete-product');
         let deleteUrl = '';
 
@@ -131,29 +125,21 @@
                 e.preventDefault();
                 deleteUrl = this.getAttribute('href');
 
-                // Show Bootstrap modal instead of default alert
                 const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
                 modal.show();
             });
         });
 
-        // Handle confirm delete button click
         document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
-            // Make AJAX request to delete
             fetch(deleteUrl, {
-                method: 'GET' // or 'POST' depending on your backend
+                method: 'GET'
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Hide modal
                         const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
                         modal.hide();
-
-                        // Show success alert
                         alert('Product successfully deleted!');
-
-                        // Optionally remove the product card from the DOM
                         const productCard = document.querySelector(`a[href="${deleteUrl}"]`).closest('.product-card');
                         if (productCard) {
                             productCard.remove();
@@ -166,196 +152,106 @@
                     console.error('Error:', error);
                 });
         });
+
+        // Create discount form toggle functionality
+        const createDiscountBtn = document.getElementById('createDiscountBtn');
+        const createDiscountForm = document.getElementById('createDiscountForm');
+        const categorySelect = document.getElementById('categorySelect');
+
+        createDiscountBtn.addEventListener('click', function () {
+            createDiscountForm.style.display = createDiscountForm.style.display === 'block' ? 'none' : 'block';
+            // Reset select to default when opening
+            categorySelect.value = '';
+        });
+
+        // Redirect on select change
+        categorySelect.addEventListener('change', function () {
+            const selectedValue = this.value;
+            if (selectedValue) {
+                // Hide the form after selection
+                createDiscountForm.style.display = 'none';
+                // Redirect to the corresponding page
+                window.location.href = `/${selectedValue}`;
+            }
+        });
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-  /* Container and Card Styling */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.card-page {
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* Button Group Styling */
-.items-per-page {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 15px 0;
-}
-
-/* Main Discount/History Buttons */
-.items-per-page a {
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Discount Button */
-.items-per-page a[href="/discount"] {
-    background: linear-gradient(45deg, #4CAF50, #81C784);
-    color: white;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-}
-
-/* History Button */
-.items-per-page a[href="/discount/history"] {
-    background: linear-gradient(45deg, #2196F3, #64B5F6);
-    color: white;
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
-}
-
-/* Hover Effects for Main Buttons */
-.items-per-page a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    color: white;
-}
-
-/* Ripple Effect */
-.items-per-page a::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.items-per-page a:hover::after {
-    width: 200px;
-    height: 200px;
-}
-
-/* Action Buttons (View/Edit/Delete) */
-.action-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.action-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: none;
-}
-
-/* Specific Action Button Styles */
-.view-btn {
-    background: linear-gradient(45deg, #2196F3, #42A5F5);
-}
-
-.edit-btn {
-    background: linear-gradient(45deg, #FFB300, #FFD54F);
-}
-
-.delete-btn {
-    background: linear-gradient(45deg, #F44336, #EF5350);
-}
-
-/* Action Button Hover Effects */
-.action-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* Action Button Images */
-.action-btn img {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1); /* Makes icons white */
-}
-
-/* Pagination Buttons */
-.pagination {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.pagination button {
-    padding: 8px 20px;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #4CAF50, #81C784);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.pagination button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-}
-
-.pagination button:disabled {
-    background: #cccccc;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-/* Modal Buttons */
-.modal-footer .btn {
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background: linear-gradient(45deg, #2196F3, #42A5F5);
-    border: none;
-}
-
-.btn-danger {
-    background: linear-gradient(45deg, #F44336, #EF5350);
-    border: none;
-}
-
-.modal-footer .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .items-per-page {
-        flex-direction: column;
-        align-items: flex-start;
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-    
-    .action-buttons {
-        justify-content: center;
+    .create-discount-container {
+        position: relative;
     }
-    
-    .pagination {
-        flex-direction: column;
-        gap: 10px;
+    .discount-form-aside {
+        margin-top: 10px;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        max-width: 300px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-}
+    .discount-form-aside .form-group {
+        margin-bottom: 15px;
+    }
+    .discount-form-aside .form-group label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    .discount-form-aside .form-control {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+    }
+    .tab-buttons {
+        display: flex;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+    }
+    .tab-btn {
+        padding: 10px 25px;
+        text-decoration: none;
+        color: #333;
+        background-color: #f5f5f5;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    .tab-btn:first-child {
+        border-right: 1px solid #e0e0e0;
+    }
+    .tab-btn.active {
+        background-color: #fff;
+        color: #333;
+    }
+    .tab-btn:hover {
+        background-color: #f0f0f0;
+    }
+    @media (max-width: 768px) {
+        .items-per-page {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .tab-buttons {
+            width: 100%;
+            justify-content: space-between;
+        }
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+        }
+        .items-per-page label,
+        .items-per-page select {
+            width: 100%;
+        }
+        .discount-form-aside {
+            max-width: 100%;
+        }
+    }
 </style>
