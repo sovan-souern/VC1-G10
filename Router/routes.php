@@ -130,6 +130,7 @@ $routes->get('/diescoutCategory', [DiscountController::class, 'discountProductCa
 $routes->post('/discount/storeCategory', [DiscountController::class, 'storeCategory']);
 $routes->get('/descount/brand', [DiscountController::class, 'discountBrand']);
 $routes->post('/descount/brand/store', [DiscountController::class, 'storeBrand']); 
+$routes->get('/discount/product', [DiscountController::class, 'createProuductDiscount']);
 
 $routes->post('/discount/store', [DiscountController::class, 'store']);
 $routes->get('/discount/edit', [DiscountController::class, 'edit']);

@@ -12,7 +12,7 @@
                         <label for="categorySelect">Create by</label>
                         <select id="categorySelect" name="category" class="form-control">
                             <option value=""> Choose Option </option>
-                            <option value="product/discount">Product</option>
+                            <option value="discount/product">Product</option>
                             <option value="category">Category</option>
                             <option value="brand">Brand</option>
                         </select>
