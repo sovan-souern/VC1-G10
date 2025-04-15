@@ -56,10 +56,10 @@
                             <td colspan="8" class="text-center">No expired discounts found.</td>
                         </tr>
                     <?php else : ?>
-                        <?php foreach ($discounts as $index=>$discount) : ?>
+                        <?php foreach ($discounts as $index => $discount) : ?>
                             <?php if (isset($discount["end_date"]) && $discount["end_date"] < date("Y-m-d")) : ?>
                                 <tr>
-                                    <td><?php echo $index+1?></td>
+                                    <td><?php echo $index + 1 ?></td>
                                     <td style="width: 80px;">
                                         <?php if (!empty($discount["image"])) : ?>
                                             <img src="../../../<?php echo htmlspecialchars($discount["image"]); ?>" alt="Product Image" class="product-table-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -75,7 +75,7 @@
                                         <span class="original-price">$<?php echo number_format($discount["price"], 2); ?></span>
                                     </td>
                                     <td>
-                                        <span class="discount_bage"><?php echo($discount["discount_percentage"])?> %</span>
+                                        <span class="discount_bage"><?php echo $discount["discount_percentage"] ?> %</span>
                                     </td>
                                     <td>
                                         <span class="discounted-price">$<?php echo number_format($discount["price"] * (1 - $discount["discount_percentage"] / 100), 2); ?></span>
@@ -88,9 +88,10 @@
                                             <a class="action-btn edit-btn" href="/discount/edit?id=<?php echo $discount["product_id"]; ?>">
                                                 <img src="/Views/assets/img1/icons/edit.svg" alt="edit">
                                             </a>
-                                            <a class="action-btn delete-btn delete-product" href="/discount/delete?id=<?php echo $discount["product_id"]; ?>">
+                                            <a class="action-btn delete-btn" href="/discount/delete?id=<?php echo $discount["product_id"]; ?>" >
+                                               
                                                 <img src="/Views/assets/img1/icons/delete.svg" alt="delete">
-                                                <?php require "delete.php" ?>
+                                                 <?php require "delete.php"?>
                                             </a>
                                         </div>
                                     </td>
@@ -109,63 +110,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteConfirmLabel">Confirm Deletion</h5>
-                <i class="material-icons" data-bs-dismiss="modal" aria-label="Close">close</i>
-            </div>
-            <div class="modal-body text-dark">
-                Are you sure you want to delete this product?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                <button id="confirmDeleteBtn" type="button" class="btn btn-danger">Yes, Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Delete functionality
-    const deleteButtons = document.querySelectorAll('.delete-product');
-    let deleteUrl = '';
-
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            deleteUrl = this.getAttribute('href');
-            const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
-            modal.show();
-        });
-    });
-
-    document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
-        fetch(deleteUrl, {
-            method: 'GET'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
-                modal.hide();
-                alert('Product successfully deleted!');
-                const productRow = document.querySelector(`a[href="${deleteUrl}"]`).closest('tr');
-                if (productRow) {
-                    productRow.remove();
-                    updateTableDisplay();
-                }
-            } else {
-                alert('Error deleting product: ' + (data.message || 'Unknown error'));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    });
-
     // Filter toggle
     document.getElementById('filter_search').addEventListener('click', function() {
         const filterInputs = document.getElementById('filter_inputs');

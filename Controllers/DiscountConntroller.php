@@ -15,10 +15,10 @@ class DiscountController extends BaseController
         $discounts = $this->model->getDiscounts();
         $this->views('Inventory/Discounts/list.php', ["discounts" => $discounts]);
     }
-    function history()
+    function historyDiscount()
     {
         $discounts = $this->model->getDiscounts();
-        $this->views('/Inventory/Discounts/history.php', ["discounts" => $discounts]);
+        $this->views('/Inventory/Discounts/historyDiscount.php', ["discounts" => $discounts]);
         // require_once 'Views/Inventory/Discounts/history.php';
     }
 
@@ -106,7 +106,7 @@ class DiscountController extends BaseController
 
         if ($this->model->delete($id)) {
             $this->redirect('/discount');
-        } else {
+        } else {    
             echo "Failed to delete discount.";
         }
     }
@@ -121,16 +121,14 @@ class DiscountController extends BaseController
     function discountProductCategory($id)
     {
         $categories = $this->model->discountCategory($id);
-        // var_dump($categories["category_name"]); 
-        // var_dump($id);
         $brands = $this->model->getBrands();
-        // $products = $this->model->getProducts();  
         $this->views('/Inventory/Discounts/descoutCategory.php', ["categories" => $categories]);
     }
     function storeCategory($id)
     {
         $products = $this->model->getProducts(); // Get all products
         foreach ($products as $product) {
+            var_dump($id);
             if ($product['category_id'] == $id) { 
                 $data = [
                     'product_id' => $product['product_id'], 
@@ -143,13 +141,20 @@ class DiscountController extends BaseController
                 $this->model->createDiscount($data); 
             }
         }
-        $this->redirect('/discount'); 
+        $this->redirect('/discount');   	
     }
     function discountBrand($id)
     {
         	
         $brands = $this->model->discountBrand($id);
         $this->views('/Inventory/Discounts/descountBrand.php', ["brands" => $brands]);
+    }
+    function DiscountBrandProduct()
+    {
+        	
+        $brands = $this->model->discountBrands();
+        $this->views('/Inventory/Discounts/descountBrand.php', ["brands" => $brands]);
+        
     }
     function storeBrand($id)
     {
@@ -180,5 +185,10 @@ class DiscountController extends BaseController
 
         $this->views('Inventory/Discounts/DisountProduct.php', ["products" => $products, "discounts" => $discount]);
         
+    }
+    function CreateCategoryDiscount(){
+        $categories=$this->model->getCategories();
+       $this->views('Inventory/Discounts/DiscountCategory.php',["categories"=>$categories]);
+    //    var_dump($categories);
     }
 }

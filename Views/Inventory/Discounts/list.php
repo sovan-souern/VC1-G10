@@ -13,7 +13,7 @@
                         <select id="categorySelect" name="category" class="form-control">
                             <option value=""> Choose Option </option>
                             <option value="discount/product">Product</option>
-                            <option value="category">Category</option>
+                            <option value="discount/category">Category</option>
                             <option value="brand">Brand</option>
                         </select>
                     </div>
