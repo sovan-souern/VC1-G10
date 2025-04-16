@@ -129,6 +129,7 @@ $routes->get('/discount/history', [DiscountController::class, 'historyDiscount']
 $routes->get('/diescoutCategory', [DiscountController::class, 'discountProductCategory']);
 $routes->post('/discount/storeCategory', [DiscountController::class, 'storeCategory']);
 $routes->get('/descount/brand', [DiscountController::class, 'discountBrand']);
+$routes->get('/discount/brand', [DiscountController::class, 'DiscountBrandProduct']);
 $routes->post('/descount/brand/store', [DiscountController::class, 'storeBrand']); 
 $routes->get('/discount/product', [DiscountController::class, 'createProuductDiscount']);
 $routes->get('/discount/category', [DiscountController::class, 'CreateCategoryDiscount']);

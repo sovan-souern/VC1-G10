@@ -14,7 +14,7 @@
                             <option value=""> Choose Option </option>
                             <option value="discount/product">Product</option>
                             <option value="discount/category">Category</option>
-                            <option value="brand">Brand</option>
+                            <option value="discount/brand">Brand</option>
                         </select>
                     </div>
                 </div>

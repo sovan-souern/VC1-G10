@@ -153,7 +153,7 @@ class DiscountController extends BaseController
     {
         	
         $brands = $this->model->discountBrands();
-        $this->views('/Inventory/Discounts/descountBrand.php', ["brands" => $brands]);
+        $this->views('/Inventory/Discounts/DiscountBrand.php', ["brands" => $brands]);
         
     }
     function storeBrand($id)

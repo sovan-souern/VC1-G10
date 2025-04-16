@@ -1,15 +1,15 @@
-<div class="container mt-4">
+    <div class="container mt-4">
     <div class="card p-4">
         <h4>Add Discount</h4>
-        <form class="my-3" id="discountForm" action="/discount/storeCategory" method="POST" onsubmit="return validateForm()">
+        <form class="my-3" id="discountForm" action="/descount/brand/store" method="POST" onsubmit="return validateForm()">
             <div class="row">
                 <div class="input-name">
-                    <label for="product_name">Category Name</label>
+                    <label for="product_name">Brand Name</label>
                     <select name="category_id" id="product_name" class="form-control" required onchange="updateFormAction()">
-                        <option value="" disabled selected>Select a category</option>
-                        <?php foreach ($categories as $category): ?>
-                            <option value="<?= htmlspecialchars($category['category_id']) ?>">
-                                <?= htmlspecialchars($category['category_name']) ?>
+                        <option value="" disabled selected>Select Brand</option>
+                        <?php foreach ($brands as $brand): ?>
+                            <option value="<?= htmlspecialchars($brand['id']) ?>">
+                                <?= htmlspecialchars($brand['brand_name']) ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -53,7 +53,7 @@
         const selectedCategoryId = categorySelect.value;
 
         if (selectedCategoryId) {
-            form.action = `/discount/storeCategory?id=${selectedCategoryId}`;
+            form.action = `/descount/brand/store?id=${selectedCategoryId}`; // Correctly pass the ID
         }
     }
 </script>
