@@ -143,5 +143,17 @@ class ProductModel
             return false;
         }
     }
+
+    function getLastProductId()
+    {
+        try {
+            $stmt = $this->pdo->query("SELECT MAX(product_id) AS last_id FROM products");
+            $result = $stmt->fetch();
+            return $result ? $result['last_id'] : null;
+        } catch (Exception $e) {
+            echo "Error fetching last product ID: " . $e->getMessage();
+            return false;
+        }
+    }
 }
 

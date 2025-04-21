@@ -11,21 +11,84 @@ class NotificationModel
 
     public function getNotifications()
     {
-        $stmt = $this->pdo->query("SELECT * FROM notifications");
+        $stmt = $this->pdo->query("
+            SELECT 
+                notifications.id,
+                notifications.first_name,
+                notifications.last_name,
+                notifications.phone_number,
+                notifications.message,
+                notifications.product_id,
+                notifications.created_at,
+                notifications.status,
+                notifications.type,
+                notifications.user_id AS notification_user_id,
+                users.name AS user_name,
+                users.email AS user_email,
+                users.profile_picture AS user_profile_picture
+            FROM 
+                notifications
+            LEFT JOIN 
+                admins AS users ON notifications.user_id = users.admin_id
+        ");
         return $stmt->fetchAll();
     }
 
     function createNotification($data)
     {
-        $stmt = "INSERT INTO notifications (first_name, last_name, phone_number, message, created_at, status) 
-                 VALUES ('{$data["first_name"]}', '{$data["last_name"]}', '{$data["phone_number"]}', 
-                         '{$data["message"]}', '{$data["created_at"]}', '{$data["status"]}')";
-        $this->pdo->query($stmt); // Execute the query directly
+        $stmt = $this->pdo->prepare("INSERT INTO notifications (first_name, last_name, phone_number, message, product_id, created_at, status, type,user_id) 
+                                     VALUES (:first_name, :last_name, :phone_number, :message, :product_id, :created_at, :status, :type, :user_id)");
+        $stmt->execute([
+            'user_id' => $data['user_id'], // Add user_id to the data array
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'phone_number' => $data['phone_number'],
+            'message' => $data['message'],
+            'product_id' => $data['product_id'] ?? null, // Explicitly pass null if product_id is not provided
+            'created_at' => $data['created_at'],
+            'status' => $data['status'],
+            'type' => $data['type'] // Use the type from the data array
+        ]);
+    }
+    function NotificationProduct($data)
+    {
+        $stmt = "INSERT INTO notifications (product_id, message, created_at, type, status) 
+                 VALUES (:product_id, :message, :created_at, :type, :status)";
+        $query = $this->pdo->prepare($stmt);
+        $query->execute([
+            'product_id' => $data['product_id'],
+            'message' => $data['message'],
+            'created_at' => $data['created_at'],
+            'type' => $data['type'],
+            'status' => $data['status']
+        ]);
     }
 
     function getNotification($id)
     {
-        $stmt = $this->pdo->query("SELECT * FROM notifications WHERE id = $id");
+        $stmt = $this->pdo->prepare("
+            SELECT 
+                notifications.id,
+                notifications.first_name,
+                notifications.last_name,
+                notifications.phone_number,
+                notifications.message,
+                notifications.product_id,
+                notifications.created_at,
+                notifications.status,
+                notifications.type,
+                notifications.user_id AS notification_user_id,
+                users.name AS user_name,
+                users.email AS user_email,
+                users.profile_picture AS user_profile_picture
+            FROM 
+                notifications
+            LEFT JOIN 
+                admins AS users ON notifications.user_id = users.admin_id
+            WHERE 
+                notifications.id = :id
+        ");
+        $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
 
@@ -42,4 +105,5 @@ class NotificationModel
             "id" => $data["id"] // Use the ID from the data array
         ]);
     }
+    
 }

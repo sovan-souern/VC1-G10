@@ -1,3 +1,10 @@
+<?php foreach ($users as $key => $user) : ?>
+    <?php if($user["name"]==$_SESSION["name"]):?>
+        <?php  echo($user["admin_id"])?>
+    <?php endif?>
+    <?php endforeach?>
+
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -311,7 +318,14 @@
 
             <div class="contact-container">
                 <h3>Get in Touch</h3>
-                <form id="contactForm" action="/contact/store" method="POST">
+                <form id="contactForm" action="/contact/store?id=<?php 
+                    foreach ($users as $key => $user) {
+                        if ($user["name"] == $_SESSION["name"]) {
+                            echo htmlspecialchars($user["admin_id"]);
+                            break; // Exit loop after finding the matching user
+                        }
+                    }
+                ?>" method="POST">
                     <div class="mb-3">
                         <label class="form-label">First Name</label>
                         <input type="text" name="first_name" class="form-control" required>

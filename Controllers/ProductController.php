@@ -1,14 +1,16 @@
 <?php
 require_once 'Models/ProductModel.php';
 require_once 'BaseController.php';
-
+require_once 'Models/NotificationModel.php';
 class ProductController extends BaseController
 {
     private $model;
+    private $model_Notification;
 
     function __construct()
     {
         $this->model = new ProductModel();
+        $this->model_Notification= new NotificationModel();
     }
 
     function index()
@@ -62,6 +64,23 @@ class ProductController extends BaseController
             ];
 
             if ($this->model->createProduct($data)) {
+                // Get the last inserted product ID
+                $lastProductId = $this->model->getLastProductId();
+
+                if ($lastProductId) { // Ensure the product ID is valid
+                    // Create a notification for the new product
+                    $dataNotification = [
+                        'product_id' => $lastProductId,
+                        'message' => 'New product created',
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'type' => 'product',
+                        'status' => 'unread',
+                    ];
+                    $this->model_Notification->NotificationProduct($dataNotification);
+                } else {
+                    echo "Error: Failed to retrieve last product ID.";
+                }
+
                 $this->redirect('/products');
             } else {
                 echo "Failed to create product.";
@@ -112,6 +131,14 @@ class ProductController extends BaseController
                 'image' => $imagePath,
                 'created_at' => date('Y-m-d H:i:s')
             ];
+            $dataNotification=[
+               'product_id' => $id,
+                'message' =>  'Product Out of Stock',
+                'created_at' => date('Y-m-d H:i:s'),
+                'type' => 'product',
+                'status' => "unread",
+            ];
+            // $this->model_Notification->NotificationProduct($dataNotification);
             if ($this->model->updateProduct($data)) {
                 $this->redirect('/products');
             } else {

@@ -194,6 +194,8 @@ $routes->get('/cart', [CheckoutUserController::class, 'cartview']);
 
 
 $routes->post('/contact/store', [NotificationController::class, 'store']);
+$routes->get('/Notification/UserContact', [NotificationController::class, 'UserContact']);
+$routes->get('/Notification/stock', [NotificationController::class, 'Stock']);
 $routes->get('/contact', [ContactController::class, 'index']);
 
 

@@ -627,9 +627,6 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                   }
                   echo $totalIndex;
                   ?>
-
-
-
                 </span>
               </a>
             </li>

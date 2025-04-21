@@ -1,11 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications</title>
     <style>
-        Base styles
+        /* Base styles */
         * {
             margin: 0;
             padding: 0;
@@ -247,7 +249,7 @@
                 min-width: 120px;
             }
 
-            .menu-item {
+            .menu-item1 {
                 padding: 6px 10px;
                 font-size: 0.8rem;
             }
@@ -307,61 +309,121 @@
                 margin-right: 6px;
             }
         }
+
+        .notification {
+            position: relative;
+
+
+        }
+
+        .bell {
+            position: absolute;
+            /* top: 10; */
+            bottom: 10px;
+            /* margin-bottom: 100px; */
+            left: 50px;
+            font-size: 30px;
+            color: #000;
+            color: #f97316;
+        }
+
+        .notification-bg {
+            position: absolute;
+
+            bottom: 12px;
+            /* margin-bottom: 20px; */
+            left: 76px;
+            background-color: red;
+
+            /* Change this color for different badge colors */
+            color: white;
+            border-radius: 25px;
+            padding: 0px 6px;
+            font-size: 12px;
+            /* Base font size */
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* color: red; */
+        }
     </style>
 </head>
-            
+
 <body>
     <div class="container">
         <h2>Your Notifications</h2>
         <a href="" class="btn btn-outline-dark">Order</a>
-        <a href="Notification/UserContact" class="btn btn-outline-dark">User Contact</a>
-        <a href="/Notification/stock" class="btn btn-outline-dark">Stock</a>
-        <a href="" class="btn btn-outline-dark">Rigister</a>
+        <span class="notification">
+
+            <a href="" class="btn btn-outline-dark">Contact</a>
+
+            <span class="notification-bg" id="notification-badge">
+
+                <?php
+                $totalIndex = 0;
+                foreach ($notifications as $index => $notification) {
+                    if ($notification["status"] == "unread") {
+                        if ($notification["type"] == "contact") {
+                            $totalIndex++;
+                        }
+                    }
+                }
+                echo $totalIndex;
+                ?>
+            </span>
+        </span>
+        <a href="" class="btn btn-outline-dark">Stock</a>
+        <a href="" class="btn btn-outline-dark">Register</a>
+
         <div class="notifications-container">
             <?php if (!empty($notifications) || (isset($lowStockProducts) && !empty($lowStockProducts)) || (isset($outStockProducts) && !empty($outStockProducts))): ?>
                 <?php foreach ($notifications as $index => $notification): ?>
-                    <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>">
-                        <div class="notification-icon">
-                            <?php echo substr($notification['first_name'], 0, 1); ?>
-                        </div>
-                        <div class="notification-content">
-                            <div class="notification-title">
-                                <?php echo $notification['first_name']; ?> <?php echo $notification['last_name']; ?>
-                                <?php if ($notification['status'] == 'unread'): ?>
-                                    <span class="dot"></span>
-                                <?php endif; ?>
-                            </div>
-                            <div class="notification-time">
-                                <?php echo $notification['created_at']; ?>
-                            </div>
-                            <div class="notification-message">
-                                <?php echo $notification['message']; ?>
-                            </div>
-                        </div>
-                        <div class="menu-container">
-                            <button class="menu-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v.01M12 12v.01M12 18v.01" />
-                                </svg>
-                            </button>
-                            <div class="menu-dropdown">
-                                <div class="menu-item1 view-details">
-                                   
-                                    <a href="notifications/view?id=<?= $notification['id'] ?>">View Details</a>
-                                </div>
-                                <?php if ($notification['status'] === 'unread'): ?>
-                                    <div class="menu-item1 mark-read">
-                                        
-                                        <a href="notifications/update?id=<?= $notification['id'] ?>">Mark as read</a>
+                    <?php if ($notification["type"] == "contact"): ?>
+                        <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>">
+                            
+                                
+                                    <div class="notification-icon">
+                                        <img src="../../../<?php echo $notification["user_profile_picture"] ?>" alt="">
                                     </div>
-                                <?php endif; ?>
-                                <div class="menu-item1 delete">
-                                  
-                                    <a href="notifications/delete?id=<?= $notification['id'] ?>">Delete</a>
+                                
+                       
+                            <div class="notification-content">
+                                <div class="notification-title">
+                                    <?php echo $notification['user_name']; ?>
+                                    <?php if ($notification['status'] == 'unread'): ?>
+                                        <span class="dot"></span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="notification-time">
+                                    Posted: <span><?= timeAgo($notification['created_at']); ?></span>
+                                </div>
+                                <div class="notification-message">
+                                  <span>Message: </span>  <?php echo $notification['message']; ?>
+                                </div>
+                            </div>
+                            <div class="menu-container">
+                                <button class="menu-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v.01M12 12v.01M12 18v.01" />
+                                    </svg>
+                                </button>
+                                <div class="menu-dropdown">
+                                    <div class="menu-item1 view-details">
+                                        <a href="/notifications/view?id=<?= $notification['id'] ?>">View Details</a>
+                                    </div>
+                                    <?php if ($notification['status'] === 'unread'): ?>
+                                        <div class="menu-item1 mark-read">
+                                            <a href="/notifications/update?id=<?= $notification['id'] ?>">Mark as read</a>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="menu-item1 delete">
+                                        <a href="/notifications/delete?id=<?= $notification['id'] ?>">Delete</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
 
                 <!-- Low stock notifications -->
@@ -375,7 +437,7 @@
                                         Low Stock Notification: <?= htmlspecialchars($product['product_name']) ?>
                                         <span class="dot"></span>
                                     </div>
-                                    <div class="notification-time"><?= date('Y-m-d H:i:s') ?></div>
+                                    <div class="notification-time"><?= date('c'); ?></div>
                                 </div>
                             </div>
                             <div class="notification-message">
@@ -396,7 +458,9 @@
                                         Out of Stock Notification: <?= htmlspecialchars($product['product_name']) ?>
                                         <span class="dot"></span>
                                     </div>
-                                    <div class="notification-time"><?= date('Y-m-d H:i:s') ?></div>
+                                    <div class="notification-time">
+                                        <span>Posted:</span> <span> <?= timeAgo(date('Y-m-d H:i:s')); ?></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="notification-message">
@@ -412,6 +476,31 @@
             <?php endif; ?>
         </div>
     </div>
+
+    <?php
+    function timeAgo($created_at)
+    {
+        $created_time = strtotime($created_at);
+        $current_time = time();
+        $diff = $current_time - $created_time;
+
+        if ($diff < 60) {
+            return $diff . " seconds ago";
+        } elseif ($diff < 3600) {
+            return floor($diff / 60) . " minutes ago";
+        } elseif ($diff < 86400) {
+            return floor($diff / 3600) . " hours ago";
+        } elseif ($diff < 604800) {
+            return floor($diff / 86400) . " days ago";
+        } elseif ($diff < 2419200) {
+            return floor($diff / 604800) . " weeks ago";
+        } elseif ($diff < 29030400) {
+            return floor($diff / 2419200) . " months ago";
+        } else {
+            return floor($diff / 29030400) . " years ago";
+        }
+    }
+    ?>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -442,7 +531,7 @@
             });
 
             // Handle View Details
-            const viewDetailItems = document.querySelectorAll('.menu-item.view-details a');
+            const viewDetailItems = document.querySelectorAll('.menu-item1.view-details a');
             viewDetailItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     console.log('View details clicked');
@@ -450,19 +539,19 @@
             });
 
             // Handle Mark as read
-            const markReadItems = document.querySelectorAll('.menu-item.mark-read a');
+            const markReadItems = document.querySelectorAll('.menu-item1.mark-read a');
             markReadItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     const card = this.closest('.notification-card');
                     card.classList.remove('unread');
                     const dot = card.querySelector('.dot');
                     if (dot) dot.style.display = 'none';
-                    this.closest('.menu-item').remove();
+                    this.closest('.menu-item1').remove();
                 });
             });
 
             // Handle Delete
-            const deleteItems = document.querySelectorAll('.menu-item.delete a');
+            const deleteItems = document.querySelectorAll('.menu-item1.delete a');
             deleteItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     const card = this.closest('.notification-card');
@@ -470,55 +559,25 @@
                     const remainingCards = document.querySelectorAll('.notification-card');
                     if (remainingCards.length === 0) {
                         const container = document.querySelector('.notifications-container');
-                        container.innerHTML = '<div class="empty-state"><p>No notifications found</p></div>';
-                    }
-                });
+                        deleteItems.forEach(item => {
+                            item.addEventListener('click', function(e) {
+                                const card = this.closest('.notification-card');
+                                card.remove();
+                                const remainingCards = document.querySelectorAll('.notification-card');
+                                if (remainingCards.length === 0) {
+                                    const container = document.querySelector('.notifications-container');
+                                    container.innerHTML = '<div class="empty-state"><p>No notifications found</p></div>';
+                                }
+                            });
+                        });
+
+                        // Updated timeAgo function to handle timezone correctly
+
+                    };
+                })
             });
-
-            // Time ago function
-            function timeAgo(dateString) {
-                const date = new Date(dateString);
-                const now = new Date();
-                const seconds = Math.floor((now - date) / 1000);
-
-                let interval = Math.floor(seconds / 31536000);
-                if (interval >= 1) {
-                    return interval + " year" + (interval === 1 ? "" : "s") + " ago";
-                }
-
-                interval = Math.floor(seconds / 2592000);
-                if (interval >= 1) {
-                    return interval + " month" + (interval === 1 ? "" : "s") + " ago";
-                }
-
-                interval = Math.floor(seconds / 86400);
-                if (interval >= 1) {
-                    return interval + " day" + (interval === 1 ? "" : "s") + " ago";
-                }
-
-                interval = Math.floor(seconds / 3600);
-                if (interval >= 1) {
-                    return interval + " hour" + (interval === 1 ? "" : "s") + " ago";
-                }
-
-                interval = Math.floor(seconds / 60);
-                if (interval >= 1) {
-                    return interval + " minute" + (interval === 1 ? "" : "s") + " ago";
-                }
-
-                return "just now";
-            }
-
-            const timestamps = document.querySelectorAll('.notification-time');
-            timestamps.forEach(timestamp => {
-                const originalDate = timestamp.textContent.trim();
-                if (originalDate) {
-                    timestamp.textContent = timeAgo(originalDate);
-                    timestamp.title = originalDate;
-                }
-            });
-        });
+        })
     </script>
 </body>
-</html>
 
+</html>
