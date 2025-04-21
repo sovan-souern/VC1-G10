@@ -872,10 +872,7 @@
 
     <!-- Cards of Products -->
     <div class="cards">
-        <div class="card">
-            <img src="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg" alt="Hydrating Moisturizer">
-
-        </div>
+       
         <div class="card">
             <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
 
@@ -898,35 +895,35 @@
         </div>
         <div class="card">
             <img src="https://www.beautypackaging.com/wp-content/uploads/sites/8/2024/11/017_main-13.jpg" alt="Sunscreen SPF 50">
-            <div class="info">Nivea.</div>
+            
         </div>
         <div class="card">
             <img src="https://assets.ajio.com/medias/sys_master/root/20230130/8F8S/63d803e2aeb269c6510329d0/-473Wx593H-4915693380-multi-MODEL.jpg" alt="Sunscreen SPF 50">
-            <div class="info">Nivea.</div>
+            
         </div>
         <div class="card">
             <img src="https://down-vn.img.susercontent.com/file/e51b7974a1af0f2ea03f5a96804217f5" alt="Sunscreen SPF 50">
-            <div class="info">Body oil.</div>
+
         </div>
         <div class="card">
             <img src="https://s9.kh1.co/__image/w=600,h=600,fit=cover/1b/1be5d7c51a56e185757cc60b646d9e97d51a3a71.jpg" alt="Sunscreen SPF 50">
-            <div class="info">Felix hair.</div>
+
         </div>
         <div class="card">
             <img src="https://m.media-amazon.com/images/I/51Z2sQyCB-L.jpg" alt="Sunscreen SPF 50">
-            <div class="info">lipstick.</div>
+           
         </div>
         <div class="card">
             <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98p-lyt0fqimk128fd" alt="Sunscreen SPF 50">
-            <div class="info">Yasaka.</div>
+          
         </div>
         <div class="card">
             <img src="https://bellavitaorganic.com/cdn/shop/files/download_0315aafb-8c5d-4b3d-a00e-6cc8cc1b00b2.jpg?v=1732609831&width=1000" alt="Sunscreen SPF 50">
-            <div class="info">Nail​​​​​​ polish.</div>
+           
         </div>
         <div class="card">
             <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
-            <div class="info">Nail​​​​​​ polish.</div>
+            
         </div>
     </div>
  <!-- Hero Section -->
@@ -937,8 +934,8 @@
                     <h1 class="display-4 fw-bold mb-4">Discover Your Natural Beauty</h1>
                     <p class="lead mb-4">Premium skincare products made with natural ingredients to help you achieve radiant, healthy skin.</p>
                     <div class="d-flex gap-3">
-                        <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
-                        <a href="#" class="btn btn-outline-secondary btn-lg">Learn More</a>
+                        <a href="/shop" class="btn btn-primary btn-lg">Shop Now</a>
+                        <a href="/about" class="btn btn-outline-secondary btn-lg">Learn More</a>
                     </div>
                 </div>
                 <div class="col-lg-6">

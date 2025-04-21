@@ -20,68 +20,35 @@
     <section class="shop spad py-5">
         <div class="container">
             <div class="row">
-                <!-- SIDEBAR (Type Products Collapsible) -->
+                <!-- NEW SIDEBAR (Updated) -->
                 <div class="col-lg-2 col-md-2 col-sm-12 custom-width mb-4">
                     <div class="shop__sidebar">
-                        <div class="sidebar__categories">
-                            <div class="section-title">
-                                <h4><i class="fas fa-layer-group"></i> Categories</h4>
-                            </div>
-                            <div class="categories__accordion">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <button class="category-toggle w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                <span>Type Products</span>
-                                                <i class="fas fa-chevron-down toggle-icon"></i>
-                                            </button>
-                                        </div>
-                                        <div id="collapseOne" class="collapse" data-bs-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul class="category-list" id="categoryList">
-                                                    <?php
-                                                    if (isset($categories) && is_array($categories) && !empty($categories)) {
-                                                        foreach ($categories as $category) {
-                                                            echo '<li>
-                                                                <button class="category-filter w-100" data-category-id="' . htmlspecialchars($category["category_id"]) . '">
-                                                                    <span class="category-name">' . htmlspecialchars($category["category_name"]) . '</span>
-                                                                    <span class="category-count badge rounded-pill">' . (isset($category["product_count"]) ? htmlspecialchars($category["product_count"]) : '') . '</span>
-                                                                </button>
-                                                            </li>';
-                                                        }
-                                                    } else {
-                                                        echo '<li class="no-items">No categories available</li>';
-                                                    }
-                                                    ?>
-                                                    <li>
-                                                        <button class="category-filter all-products w-100" data-category-id="all">
-                                                            <span class="category-name">All Products</span>
-                                                            <span class="category-count badge rounded-pill"><?php echo isset($products) ? count($products) : '0'; ?></span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Quick Filters -->
-                            <div class="quick-filters">
-                                <div class="section-title mt-4">
-                                    <h4><i class="fas fa-tag"></i> Quick Filters</h4>
-                                </div>
-                                <button class="filter-item w-100" data-filter="new">
-                                    <i class="fas fa-star"></i> New Arrivals
-                                </button>
-                                <button class="filter-item w-100" data-filter="popular">
-                                    <i class="fas fa-fire"></i> Popular Items
-                                </button>
-                                <button class="filter-item w-100" data-filter="sale">
-                                    <i class="fas fa-tag"></i> On Sale
-                                </button>
-                            </div>
+                        <div class="sidebar__header">
+                            <h4><i class="fas fa-filter"></i> Categories</h4>
+                            <input type="text" class="form-control sidebar-search" id="sidebarSearch" placeholder="Search categories..." aria-label="Search categories">
                         </div>
+                        <ul class="category-list" id="categoryList" role="listbox">
+                            <?php
+                            if (isset($categories) && is_array($categories) && !empty($categories)) {
+                                foreach ($categories as $category) {
+                                    echo '<li role="option">
+                                        <button class="category-filter w-100" data-category-id="' . htmlspecialchars($category["category_id"]) . '" aria-label="Filter by ' . htmlspecialchars($category["category_name"]) . '">
+                                            <span class="category-name">' . htmlspecialchars($category["category_name"]) . '</span>
+                                            <span class="category-count">' . (isset($category["product_count"]) ? htmlspecialchars($category["product_count"]) : '') . '</span>
+                                        </button>
+                                    </li>';
+                                }
+                            } else {
+                                echo '<li class="no-items">No categories available</li>';
+                            }
+                            ?>
+                            <li role="option">
+                                <button class="category-filter w-100 active" data-category-id="all" aria-label="Filter by All Products">
+                                    <span class="category-name">All Products</span>
+                                    <span class="category-count"><?php echo isset($products) ? count($products) : '0'; ?></span>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -97,9 +64,6 @@
                                     <option value="default">Sort by: Default</option>
                                     <option value="price-asc">Price: Low to High</option>
                                     <option value="price-desc">Price: High to Low</option>
-                                    <option value="name-asc">Name: A to Z</option>
-                                    <option value="name-desc">Name: Z to A</option>
-                                    <option value="rating-desc">Highest Rated</option>
                                 </select>
                             </div>
                         </div>
@@ -121,14 +85,12 @@
                                             $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
                                             $original_price_formatted = "$" . number_format($original_price, 2);
                                             $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-                                            $rating = isset($product['rating']) ? floatval($product['rating']) : 4.5;
                                             $brand = isset($product['brand']) ? htmlspecialchars($product['brand']) : 'brand1';
                                         ?>
                                         <div class="col product-col mb-4" 
                                              data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>" 
                                              data-price="<?php echo $discounted_price; ?>" 
                                              data-name="<?php echo $product_name; ?>" 
-                                             data-rating="<?php echo $rating; ?>"
                                              data-brand="<?php echo $brand; ?>">
                                             <div class="discount-product-card">
                                                 <div class="discount-badge"><?php echo $discount_badge; ?></div>
@@ -141,13 +103,6 @@
                                                 </div>
                                                 <div class="product-info">
                                                     <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                                    <div class="rating">
-                                                        <?php
-                                                        for ($i = 1; $i <= 5; $i++) {
-                                                            echo $i <= floor($rating) ? '<i class="fas fa-star"></i>' : ($i <= ceil($rating) ? '<i class="fas fa-star-half-alt"></i>' : '<i class="far fa-star"></i>');
-                                                        }
-                                                        ?>
-                                                    </div>
                                                     <div class="price">
                                                         <span class="original-price"><?php echo $original_price_formatted; ?></span>
                                                         <?php echo $discounted_price_formatted; ?>
@@ -182,14 +137,12 @@
                                         $stock_status = 'Low Stock';
                                         $stock_class = 'low-stock';
                                     }
-                                    $rating = isset($product['rating']) ? floatval($product['rating']) : 4.0;
                                     $brand = isset($product['brand']) ? htmlspecialchars($product['brand']) : 'brand2';
                                 ?>
                                 <div class="col product-col mb-4" 
                                      data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>" 
                                      data-price="<?php echo $price; ?>" 
                                      data-name="<?php echo htmlspecialchars($product['product_name']); ?>" 
-                                     data-rating="<?php echo $rating; ?>"
                                      data-brand="<?php echo $brand; ?>">
                                     <div class="general-product-item">
                                         <?php if ($stock_status): ?>
@@ -205,13 +158,6 @@
                                         </div>
                                         <div class="general-product-text">
                                             <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
-                                            <div class="rating">
-                                                <?php
-                                                for ($i = 1; $i <= 5; $i++) {
-                                                    echo $i <= floor($rating) ? '<i class="fas fa-star"></i>' : ($i <= ceil($rating) ? '<i class="fas fa-star-half-alt"></i>' : '<i class="far fa-star"></i>');
-                                                }
-                                                ?>
-                                            </div>
                                             <div class="general-product-price">$<?php echo $price; ?></div>
                                             <button class="add-to-cart" 
                                                     data-product-id="<?php echo $product['product_id']; ?>" 
@@ -232,12 +178,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Recently Viewed Products -->
-                    <div class="recently-viewed mt-5">
-                        <h3>Recently Viewed</h3>
-                        <div class="row" id="recentlyViewedContainer"></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -245,7 +185,7 @@
 
     <!-- Mobile sidebar toggle button -->
     <button class="sidebar-toggle" id="sidebarToggle">
-        <i class="fas fa-layer-group"></i>
+        <i class="fas fa-filter"></i>
     </button>
 
     <!-- Cart Panel -->
@@ -281,7 +221,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
-    /* RESTORED ORIGINAL STYLES FOR SIDEBAR AND PRODUCT CARDS */
     .slideshow-container, .dot-container {
         display: none;
     }
@@ -451,6 +390,7 @@
 
     body {
         line-height: 1.5;
+        font-family: 'Montserrat', sans-serif;
     }
 
     .container {
@@ -491,90 +431,92 @@
     }
 
     .shop__sidebar {
-        background: linear-gradient(135deg, #ffffff, #f9f9f9);
+        background: rgba(255, 182, 193, 0.15); /* Matches Add to Cart */
+        backdrop-filter: blur(10px);
         border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        transition: transform 0.3s ease;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
 
     .shop__sidebar:hover {
         transform: translateY(-5px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        /* background: rgba(255, 102, 153, 0.2); Matches Add to Cart hover */
     }
 
-    .section-title {
+    .sidebar__header {
         margin-bottom: 20px;
     }
 
-    .section-title h4 {
-        font-size: 20px;
+    .sidebar__header h4 {
+        font-size: 22px;
         font-weight: 700;
-        color: #2c2c2c;
+        color: #1a1a1a;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
+        margin-bottom: 15px;
         position: relative;
-        padding-bottom: 10px;
     }
 
-    .section-title h4:after {
+    .sidebar__header h4 i {
+        color: #ff6699; /* Matches Add to Cart hover */
+        font-size: 20px;
+    }
+
+    .sidebar__header h4:after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: -5px;
         left: 0;
         width: 50px;
         height: 3px;
-        background: linear-gradient(to right, #ff5252, #ff8a8a);
+        background: linear-gradient(to right, #ff6699, #ffb6c1); 
         border-radius: 2px;
     }
 
-    .card {
-        border: none;
-        background: transparent;
-    }
-
-    .card-heading {
-        padding: 5px 0;
-    }
-
-    .category-toggle {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-decoration: none;
+    .sidebar-search {
+        border-radius: 25px;
+        padding: 10px 15px;
+        font-size: 14px;
+        /* background: rgba(255, 255, 255, 0.3); */
+        border: 1px solid rgba(255, 102, 153, 0.5); 
         color: #333;
-        font-weight: 600;
-        font-size: 16px;
-        padding: 12px 15px;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.8);
         transition: all 0.3s ease;
-        border: none;
-        cursor: pointer;
     }
 
-    .category-toggle:hover {
-        background: #ffebee;
-        color: #ff5252;
-        transform: translateX(5px);
-    }
-
-    .toggle-icon {
-        transition: transform 0.3s ease;
-    }
-
-    .category-toggle[aria-expanded="true"] .toggle-icon {
-        transform: rotate(180deg);
-    }
-
-    .card-body {
-        padding: 15px 0 0 10px;
+    .sidebar-search:focus {
+        /* background: rgba(255, 255, 255, 0.5); */
+        border-color: #ff6699; /* Matches Add to Cart hover */
+        outline: none;
+        box-shadow: 0 0 5px rgba(255, 102, 153, 0.3);
     }
 
     .category-list {
         list-style: none;
         padding: 0;
         margin: 0;
+        max-height: 400px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        /* scrollbar-color: #ff6699 rgba(0, 0, 0, 0.1); Matches Add to Cart hover */
+    }
+
+    .category-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .category-list::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+    }
+
+    .category-list::-webkit-scrollbar-thumb {
+        /* background: #ff6699; Matches Add to Cart hover */
+        border-radius: 3px;
     }
 
     .category-list li {
@@ -584,91 +526,74 @@
 
     .category-filter {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        gap: 10px;
         text-decoration: none;
-        color: #555;
-        font-size: 14px;
-        padding: 8px 12px;
-        border-radius: 6px;
-        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        font-size: 13px; /* Smaller font size */
+        font-weight: 500;
+        padding: 12px 15px;
+        border-radius: 10px;
+        background: white; 
+        border: 1px solid rgba(255, 182, 193, 0.5);
         transition: all 0.3s ease;
-        border: none;
         cursor: pointer;
         text-align: left;
+        width: 100%;
     }
 
     .category-filter:hover {
-        background: #ffebee;
-        color: #ff5252;
-        padding-left: 15px;
+        background: rgba(255, 102, 153, 0.4); /* Matches Add to Cart hover */
+        transform: translateX(5px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .category-filter.active {
-        background: #ff5252;
+        background: #ff6699; /* Matches Add to Cart hover */
         color: white;
         font-weight: 600;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-filter.active .category-name {
+        color: white;
+    }
+
+    .category-name {
+        flex-grow: 1;
+        color: #333;
+        transition: color 0.3s ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Single-line truncation */
     }
 
     .category-count {
-        background-color: #f0f0f0;
-        color: #666;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 10px;
+        background: #ff6699; /* Matches Add to Cart hover */
+        color: white;
+        font-size: 10px; /* Smaller font size */
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 12px;
         transition: all 0.3s ease;
     }
 
     .category-filter:hover .category-count {
-        background-color: rgba(255, 82, 82, 0.2);
+        background: #ff4d88; /* Slightly darker hover */
     }
 
     .category-filter.active .category-count {
-        background-color: rgba(255, 255, 255, 0.3);
-        color: white;
+        background: #ffffff;
+        color: #ff6699; /* Matches Add to Cart hover */
     }
 
     .no-items {
         color: #999;
         font-style: italic;
-        padding: 8px 12px;
-    }
-
-    .quick-filters {
-        margin-top: 20px;
-        border-top: 1px solid #eee;
-        padding-top: 15px;
-    }
-
-    .filter-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 12px;
-        margin: 5px 0;
-        border-radius: 6px;
-        color: #444;
-        font-size: 14px;
-        cursor: pointer;
-        background: rgba(255, 255, 255, 0.9);
-        transition: all 0.3s ease;
-        border: none;
-        text-align: left;
-    }
-
-    .filter-item:hover {
-        background: #fff3f3;
-        color: #ff5252;
-        transform: translateX(3px);
-    }
-
-    .filter-item.active {
-        background: #ff5252;
-        color: white;
-    }
-
-    .filter-item i {
-        font-size: 14px;
+        padding: 12px 15px;
+        font-size: 12px; /* Smaller font size */
+        text-align: center;
     }
 
     .sidebar-toggle {
@@ -680,12 +605,19 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: white;
-        border: 1px solid #ddd;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background: #ff6699; /* Matches Add to Cart hover */
+        border: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        color: white;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-toggle:hover {
+        transform: scale(1.1);
+        /* background: #ff4d88; Slightly darker hover */
     }
 
     .overlay {
@@ -831,17 +763,6 @@
     .pagination__option a:hover {
         background: #ff5252;
         color: #fff;
-    }
-
-    /* NEW STYLES FOR ADDED FEATURES */
-    .rating {
-        color: #ffc107;
-        margin-bottom: 5px;
-        font-size: 12px;
-    }
-
-    .rating i {
-        margin-right: 2px;
     }
 
     .recently-viewed h3 {
@@ -1024,17 +945,12 @@
         margin-bottom: 10px;
     }
 
-    .quick-view-details .rating {
-        margin-bottom: 10px;
-    }
-
     .quick-view-details p {
         font-size: 14px;
         color: #666;
         margin-bottom: 15px;
     }
 
-    /* Existing styles for other components */
     .shop-controls {
         margin-bottom: 20px;
     }
@@ -1273,7 +1189,6 @@
         background-color: #4CAF50;
     }
 
-    /* Responsive Styles */
     @media (min-width: 768px) {
         .col-lg-2.custom-width {
             flex: 0 0 20%;
@@ -1340,16 +1255,18 @@
         }
         
         .shop__sidebar {
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px 0 0 12px;
             height: 100vh;
-            width: 280px;
+            width: 300px;
             position: fixed;
-            right: -280px;
+            right: -300px;
             top: 0;
             z-index: 1000;
             transition: right 0.3s ease;
             overflow-y: auto;
+            /* background: rgba(255, 182, 193, 0.9); Matches Add to Cart */
+            backdrop-filter: blur(10px);
         }
         
         .shop__sidebar.active {
@@ -1358,6 +1275,7 @@
         
         .shop__sidebar:hover {
             transform: none;
+            /* background: rgba(255, 182, 193, 0.9); Maintain on mobile */
         }
         
         .overlay.active {
@@ -1419,6 +1337,29 @@
             width: 100%;
             right: -100%;
         }
+
+        .sidebar__header h4 {
+            font-size: 20px;
+        }
+
+        .sidebar__header h4 i {
+            font-size: 18px;
+        }
+
+        .sidebar-search {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .category-filter {
+            padding: 10px 12px;
+            font-size: 12px; /* Smaller font size for mobile */
+        }
+
+        .category-count {
+            padding: 3px 8px;
+            font-size: 9px; /* Smaller font size for mobile */
+        }
     }
 
     @media (max-width: 480px) {
@@ -1461,6 +1402,11 @@
             padding: 2px 5px;
             font-size: 8px;
         }
+
+        .shop__sidebar {
+            width: 280px;
+            right: -280px;
+        }
     }
 
     #product-container:hover {
@@ -1472,7 +1418,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get elements
     const categoryFilters = document.querySelectorAll('.category-filter');
-    const filterItems = document.querySelectorAll('.filter-item');
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.querySelector('.shop__sidebar');
     const overlay = document.getElementById('overlay');
@@ -1489,6 +1434,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const wishlistItemsContainer = document.getElementById('wishlistItems');
     const productSearch = document.getElementById('productSearch');
     const sortSelect = document.getElementById('sortSelect');
+    const sidebarSearch = document.getElementById('sidebarSearch');
     const recentlyViewedContainer = document.getElementById('recentlyViewedContainer');
 
     // Storage management
@@ -1631,14 +1577,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productCol.classList.add('col', 'product-col', 'mb-4');
             productCol.setAttribute('data-price', item.price);
             productCol.setAttribute('data-name', item.name);
-            productCol.setAttribute('data-rating', item.rating || 4.0);
             productCol.setAttribute('data-brand', item.brand || 'brand1');
-
-            const ratingStars = Array.from({ length: 5 }, (_, i) => {
-                if (i < Math.floor(item.rating)) return '<i class="fas fa-star"></i>';
-                if (i < Math.ceil(item.rating)) return '<i class="fas fa-star-half-alt"></i>';
-                return '<i class="far fa-star"></i>';
-            }).join('');
 
             productCol.innerHTML = `
                 <div class="general-product-item">
@@ -1652,7 +1591,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="general-product-text">
                         <h6><a href="product-page.php?id=${item.id}">${item.name}</a></h6>
-                        <div class="rating">${ratingStars}</div>
                         <div class="general-product-price">$${item.price.toFixed(2)}</div>
                         <button class="add-to-cart" 
                                 data-product-id="${item.id}" 
@@ -1691,13 +1629,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Quick filter handling
-    filterItems.forEach(filter => {
-        filter.addEventListener('click', function() {
-            this.classList.toggle('active');
-            filterProducts();
+    // Sidebar search handling
+    if (sidebarSearch) {
+        sidebarSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const categoryItems = document.querySelectorAll('.category-list li');
+            categoryItems.forEach(item => {
+                const categoryName = item.querySelector('.category-name').textContent.toLowerCase();
+                item.style.display = categoryName.includes(searchTerm) ? 'block' : 'none';
+            });
         });
-    });
+    }
 
     // Mobile sidebar toggle
     if (sidebarToggle) {
@@ -1759,6 +1701,8 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', handleAddToCart);
     });
 
+
+
     // Wishlist handler
     function handleWishlist(e) {
         e.preventDefault();
@@ -1769,8 +1713,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: productCol.dataset.name,
             price: parseFloat(productCol.dataset.price),
             image: this.closest('.general-product-pic')?.querySelector('img')?.dataset.src ||
-                   this.closest('.product-image')?.dataset.bg,
-            rating: productCol.dataset.rating
+                   this.closest('.product-image')?.dataset.bg
         };
 
         const existingItem = wishlist.find(item => item.id === productId);
@@ -1800,8 +1743,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: productCol.dataset.name,
             price: parseFloat(productCol.dataset.price),
             image: this.closest('.general-product-pic')?.querySelector('img')?.dataset.src ||
-                   this.closest('.product-image')?.dataset.bg,
-            rating: parseFloat(productCol.dataset.rating)
+                   this.closest('.product-image')?.dataset.bg
         };
 
         // Add to recently viewed
@@ -1809,12 +1751,6 @@ document.addEventListener('DOMContentLoaded', function() {
         recentlyViewed.unshift(product);
         if (recentlyViewed.length > 10) recentlyViewed.pop();
         updateRecentlyViewed();
-
-        const ratingStars = Array.from({ length: 5 }, (_, i) => {
-            if (i < Math.floor(product.rating)) return '<i class="fas fa-star"></i>';
-            if (i < Math.ceil(product.rating)) return '<i class="fas fa-star-half-alt"></i>';
-            return '<i class="far fa-star"></i>';
-        }).join('');
 
         const modal = document.createElement('div');
         modal.classList.add('quick-view-modal');
@@ -1825,7 +1761,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="quick-view-details">
                     <h3>${product.name}</h3>
                     <div class="price">$${product.price.toFixed(2)}</div>
-                    <div class="rating">${ratingStars}</div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <button class="add-to-cart" 
                             data-product-id="${product.id}" 
@@ -1859,9 +1794,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedCategory = document.querySelector('.category-filter.active')?.dataset.categoryId;
         const searchTerm = productSearch.value.toLowerCase();
         const sortValue = sortSelect.value;
-        const activeFilters = Array.from(filterItems)
-            .filter(f => f.classList.contains('active'))
-            .map(f => f.dataset.filter);
 
         let filteredItems = Array.from(productItems);
 
@@ -1877,19 +1809,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.dataset.name.toLowerCase().includes(searchTerm));
         }
 
-        // Quick filters (simplified)
-        if (activeFilters.length > 0) {
-            // Add logic as needed
-        }
-
         // Sort
         filteredItems.sort((a, b) => {
             const priceA = parseFloat(a.dataset.price);
             const priceB = parseFloat(b.dataset.price);
             const nameA = a.dataset.name.toLowerCase();
             const nameB = b.dataset.name.toLowerCase();
-            const ratingA = parseFloat(a.dataset.rating);
-            const ratingB = parseFloat(b.dataset.rating);
 
             switch (sortValue) {
                 case 'price-asc':
@@ -1900,8 +1825,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     return nameA.localeCompare(nameB);
                 case 'name-desc':
                     return nameB.localeCompare(nameA);
-                case 'rating-desc':
-                    return ratingB - ratingA;
                 default:
                     return 0;
             }
