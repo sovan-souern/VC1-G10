@@ -80,73 +80,6 @@
             box-shadow: 0 5px 15px rgba(248, 164, 185, 0.3);
         }
         
-        /* Category Showcase */
-        .category-showcase {
-            margin-bottom: 40px;
-        }
-        
-        .category-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            height: 200px;
-            transition: all 0.3s ease;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .category-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-        
-        .category-card:hover img {
-            transform: scale(1.1);
-        }
-        
-        .category-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
-            padding: 20px;
-            color: #333;
-        }
-        
-        .category-overlay h4 {
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #f8a4b9;
-        }
-        
-        .category-overlay p {
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        
-        .category-overlay .btn-view {
-            background-color: #f8a4b9;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        
-        .category-overlay .btn-view:hover {
-            background-color: #f5809e;
-            color: white;
-        }
         
     
         
@@ -915,7 +848,8 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h2>Natural Skincare Collection</h2>
                         <p>Discover the power of nature for radiant, healthy skin.</p>
-                        <button class="btn btn-shop-now">Shop Now</button>
+                        <!-- <button class="btn btn-shop-now" href="/shop">Shop Now</button> -->
+                        <a href="/shop" class="btn btn-shop-now">Shop Now</a>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -946,43 +880,7 @@
         </div>
     </section>
 
-    <!-- Category Showcase Section -->
-    <section class="category-showcase">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Facial Cleansers">
-                        <div class="category-overlay">
-                            <h4>Facial Cleansers</h4>
-                            <p>Start with a clean canvas</p>
-                            <button class="btn btn-view">View Collection</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Moisturizers">
-                        <div class="category-overlay">
-                            <h4>Moisturizers</h4>
-                            <p>Hydrate and nourish</p>
-                            <button class="btn btn-view">View Collection</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1376&q=80" alt="Serums">
-                        <div class="category-overlay">
-                            <h4>Serums & Treatments</h4>
-                            <p>Target specific concerns</p>
-                            <button class="btn btn-view">View Collection</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <!-- Featured Products Carousel -->
     <section class="featured-products">
