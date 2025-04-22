@@ -1,8 +1,4 @@
-<?php foreach ($users as $key => $user) : ?>
-    <?php if($user["name"]==$_SESSION["name"]):?>
-        <?php  echo($user["admin_id"])?>
-    <?php endif?>
-    <?php endforeach?>
+
 
    
 <!DOCTYPE html>

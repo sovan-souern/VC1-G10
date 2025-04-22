@@ -18,18 +18,23 @@ class NotificationModel
                 notifications.last_name,
                 notifications.phone_number,
                 notifications.message,
-                notifications.product_id,
                 notifications.created_at,
                 notifications.status,
                 notifications.type,
+                notifications.product_id AS productId,
                 notifications.user_id AS notification_user_id,
                 users.name AS user_name,
                 users.email AS user_email,
-                users.profile_picture AS user_profile_picture
+                users.profile_picture AS user_profile_picture,
+                products.image AS product_image,    
+                products.product_name AS product_name,
+                products.quantity AS product_quantity
             FROM 
                 notifications
             LEFT JOIN 
                 admins AS users ON notifications.user_id = users.admin_id
+            LEFT JOIN 
+                products ON notifications.product_id = products.product_id
         ");
         return $stmt->fetchAll();
     }
@@ -80,11 +85,16 @@ class NotificationModel
                 notifications.user_id AS notification_user_id,
                 users.name AS user_name,
                 users.email AS user_email,
-                users.profile_picture AS user_profile_picture
+                users.profile_picture AS user_profile_picture,
+                products.image AS product_image,    
+                products.product_name AS product_name,
+                products.quantity AS product_quantity
             FROM 
                 notifications
             LEFT JOIN 
                 admins AS users ON notifications.user_id = users.admin_id
+            LEFT JOIN 
+                products ON notifications.product_id = products.product_id
             WHERE 
                 notifications.id = :id
         ");
@@ -101,9 +111,16 @@ class NotificationModel
     {
         $stmt = $this->pdo->prepare("UPDATE notifications SET status = :status WHERE id = :id");
         $stmt->execute([
-            "status" => $data["status"], // Use the status from the data array
-            "id" => $data["id"] // Use the ID from the data array
+            "status" => $data["status"], 
+            "id" => $data["id"] 
         ]);
     }
-    
+    function UpdateProductNotification($data)
+    {
+        $stmt = $this->pdo->prepare("UPDATE notifications SET status = :status WHERE product_id = :product_id");
+        $stmt->execute([
+            "status" => $data["status"],
+            "product_id" => $data["product_id"] // Ensure product_id is passed correctly
+        ]);
+    }
 }

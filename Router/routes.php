@@ -110,6 +110,12 @@ $routes->get('/notifications/view', [NotificationController::class, 'view']);
 $routes->get('/notifications/delete', [NotificationController::class, 'destroy']); 
 $routes->get('/notifications/update', [NotificationController::class, 'update']); 
 $routes->get('/out-stock', [ProductController::class, 'OutStock']);
+$routes->post('/contact/store', [NotificationController::class, 'store']);
+$routes->get('/Notification/UserContact', [NotificationController::class, 'UserContact']);
+$routes->get('/Notification/stock', [NotificationController::class, 'stock']);
+$routes->get('/contact', [ContactController::class, 'index']);
+
+
 // Product Routes (Inventory)
 
 $routes->get('/products', [ProductController::class, 'index']);
@@ -193,10 +199,7 @@ $routes->get('/shopping', [CheckoutUserController::class, 'shopping']);
 $routes->get('/cart', [CheckoutUserController::class, 'cartview']);
 
 
-$routes->post('/contact/store', [NotificationController::class, 'store']);
-$routes->get('/Notification/UserContact', [NotificationController::class, 'UserContact']);
-$routes->get('/Notification/stock', [NotificationController::class, 'Stock']);
-$routes->get('/contact', [ContactController::class, 'index']);
+
 
 
 $routes->get('/shop', [ShopController::class, 'index']);

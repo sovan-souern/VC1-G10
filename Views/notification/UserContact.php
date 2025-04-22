@@ -330,7 +330,7 @@
         .notification-bg {
             position: absolute;
 
-            bottom: 12px;
+            bottom: 15px;
             /* margin-bottom: 20px; */
             left: 76px;
             background-color: red;
@@ -347,16 +347,22 @@
             align-items: center;
             /* color: red; */
         }
+        #notification-stock{
+            
+            position: obsolute;
+            left: 65px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <h2>Your Notifications</h2>
-        <a href="" class="btn btn-outline-dark">Order</a>
-        <span class="notification">
+        
+        <a href="" class="btn btn-outline-dark mb-2">Order</a>
+        <span class="notification m-1">
 
-            <a href="" class="btn btn-outline-dark">Contact</a>
+            <a href="/Notification/UserContact" class="btn btn-outline-dark mb-2">Contact</a>
 
             <span class="notification-bg" id="notification-badge">
 
@@ -373,8 +379,29 @@
                 ?>
             </span>
         </span>
-        <a href="" class="btn btn-outline-dark">Stock</a>
-        <a href="" class="btn btn-outline-dark">Register</a>
+        <span class="notification">
+
+        <a href="/Notification/stock" class="btn btn-outline-dark mb-2" >Stock</a>
+
+            <span class="notification-bg" id="notification-stock">
+
+                <?php
+                $totalIndex = 0;
+                foreach ($notifications as $index => $notification) {
+                    if ($notification["status"] == "unread") {
+                        if($notification["product_quantity"]<3){
+                        if ($notification["type"] == "product") {
+                            $totalIndex++;
+                        }
+                    }
+                }
+            }
+                echo $totalIndex;
+                ?>
+            </span>
+        </span>
+        
+
 
         <div class="notifications-container">
             <?php if (!empty($notifications) || (isset($lowStockProducts) && !empty($lowStockProducts)) || (isset($outStockProducts) && !empty($outStockProducts))): ?>

@@ -82,4 +82,10 @@ class NotificationController extends BaseController
         $this->model->updateRead($data);
         $this->redirect('/notifications');
     }
+    function stock()
+    {
+       $Notifications = $this->model_Notification->getNotifications();
+       
+          $this->views("/notification/ProductOutStock.php",["Notifications" => $Notifications]);
+    }
 }

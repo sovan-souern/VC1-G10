@@ -71,7 +71,7 @@ class ProductController extends BaseController
                     // Create a notification for the new product
                     $dataNotification = [
                         'product_id' => $lastProductId,
-                        'message' => 'New product created',
+                        'message' => 'Product out stock',
                         'created_at' => date('Y-m-d H:i:s'),
                         'type' => 'product',
                         'status' => 'unread',
@@ -131,14 +131,11 @@ class ProductController extends BaseController
                 'image' => $imagePath,
                 'created_at' => date('Y-m-d H:i:s')
             ];
-            $dataNotification=[
-               'product_id' => $id,
-                'message' =>  'Product Out of Stock',
-                'created_at' => date('Y-m-d H:i:s'),
-                'type' => 'product',
-                'status' => "unread",
+            $dataNotification = [
+                'product_id' => $id,
+                'status' => "unread"
             ];
-            // $this->model_Notification->NotificationProduct($dataNotification);
+            $this->model_Notification->UpdateProductNotification($dataNotification); // Update notification status
             if ($this->model->updateProduct($data)) {
                 $this->redirect('/products');
             } else {

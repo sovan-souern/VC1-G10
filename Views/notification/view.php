@@ -267,7 +267,7 @@
 </head>
 
 <body>
-  <?php if ($notification["type"] == "contact") : ?>
+  <?php if ($notificationID["type"] == "contact") : ?>
     <div class="container">
       <div class="message-header">
         <div class="sender-avatar">
@@ -294,6 +294,36 @@
       </div>
     </div>
   <?php endif ?>
+
+
+  <?php  if ($notificationID["type"] == "product") :?>
+    <div class="container">
+      <div class="message-header">
+        <div class="sender-avatar">
+          <img class="imgContactView" src="../../../<?php echo $notificationID['product_image'] ?>" alt="">
+        </div>
+        <div class="sender-info">
+          <h2 class="sender-name">
+            <?php echo ($notificationID['product_name']) ?>
+          </h2>
+          <p class="message-date"><?php echo ($notificationID['created_at']); ?></p>
+          
+          <?php if (!empty($notificationID['phone_number'])): ?>
+            <span class="sender-email"><span>Phone: </span><?php echo ($notificationID['phone_number']); ?></span>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div class="message-content">
+        <strong>Message: </strong>
+        <?php echo htmlspecialchars($notificationID['message']); ?> <?php echo($notificationID['product_quantity'])?>
+      </div>
+      <div class="actions">
+        <a href="/notifications/delete?id=<?= htmlspecialchars($notificationID['id']) ?>" class="btn btn-danger">Delete</a>
+        <a href="/products/edit?id=<?= htmlspecialchars($notificationID['product_id']) ?>" class="btn btn-primary">Edit</a>
+        <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
+      </div>
+    </div>
+    <?php endif?>
 </body>
 
 </html>
