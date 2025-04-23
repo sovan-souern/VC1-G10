@@ -18,6 +18,7 @@ class OrderModel
 
     function createOrder($data, $id)
     {
+        
         try {
             // Prepare the SQL statement for inserting each row
             $sql = "INSERT INTO orders (firstName, lastName, phone, order_status, total, buy_at, admin_id, amount_product, product_id, address_id) 
@@ -36,7 +37,7 @@ class OrderModel
                     ':admin_id' => $id,
                     ':amount_product' => $data['amount_products'][$index],
                     ':product_id' => $productId,
-                    ':address_id' => $data['address_id'] // Use the address_id from the created address
+                    ':address_id' => $data['address_id'] 
                 ]);
             }
             return true; // Return true if all rows are inserted successfully
@@ -55,15 +56,19 @@ class OrderModel
     function createAddress($data)
     {
         try {
-            $sql = "INSERT INTO address (city, admin_id, address_text, country, create_at) 
-                    VALUES (:city, :admin_id, :address_text, :country, :create_at)";
+            $sql = "INSERT INTO address (city, admin_id, country, create_at, village, commune, district, province) 
+                    VALUES (:city, :admin_id, :country, :create_at, :village, :commune, :district, :province)";
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->execute([
                 ':city' => $data['city'],
                 ':admin_id' => $data['admin_id'],
-                ':address_text' => $data['address_text'],
+                // ':address_text' => $data['address_text'],
                 ':country' => $data['country'],
+                ':village'=>$data['village'],
+                ':commune'=>$data['commune'],
+              ':district'=>$data['district'],
+              ':province'=>$data['province'],
                 ':create_at' => date('Y-m-d H:i:s') 
             ]);
 

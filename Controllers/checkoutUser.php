@@ -29,13 +29,19 @@ class CheckoutUserController extends BaseController
       "products" => $products,
       "admin_id" => $admin_id
   ]);
-  require_once 'Views/E-commerce-user/card/checkout.php';
+  // require_once 'Views/E-commerce-user/card/checkout.php';
+  $this->ViewsUser('/E-commerce-user/card/checkout.php',[
+    "users" => $users,
+    "products" => $products,
+    "admin_id" => $admin_id
+  ]);
   }
 
 
   function store($id)
   {
-
+    
+    // var_dump($_POST['total']);
     $products = $this->model_product->getProducts();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -57,6 +63,7 @@ class CheckoutUserController extends BaseController
               foreach ($products as $product) {
                 if ($product["image"] == $item["image"]) {
                   $selectedProductIds[] = $product["product_id"];
+                 
                 }
               }
             }
@@ -75,7 +82,11 @@ class CheckoutUserController extends BaseController
       $addressData = [
         'city' => $_POST['city'] ?? '',
         'admin_id' => $id,
-        'address_text' => $_POST['address'] ?? '',
+        	'village'=>$_POST['village'],
+        	'commune'=>$_POST['commune'],
+          'district'=>$_POST['district'],
+          'province'=>$_POST['province'],
+        // 'address_text' => $_POST['address'] ?? '',
         'country' => $_POST['country'] ?? ''
       ];
 
@@ -83,7 +94,7 @@ class CheckoutUserController extends BaseController
       $addressId = $this->model->createAddress($addressData);
       if (!$addressId) {
         echo "Failed to create address.";
-        return;
+        return; 
       }
 
       $data = [
@@ -99,6 +110,21 @@ class CheckoutUserController extends BaseController
         'product_ids' => $selectedProductIds, // Pass product IDs as an array
         'address_id' => $addressId // Pass the created address_id
       ];
+      
+      $storeProduct=$this->model->createOrder($data,$id);
+      $productCaculate=$this->model_product->getProducts();
+      foreach ($selectedProductIds as $index => $product_Id) {
+        foreach ($productCaculate as $product) {
+          if ($product_Id == $product['product_id']) {
+            $amountProduct = $amountProducts[$index] ?? 1; // Match amountProduct by index
+            echo $amountProduct ;
+            // Use updateProductQuantity to only update the quantity field
+            $this->model_product->updateProductQuantity($product['product_id'], $amountProduct);
+            break; 
+          }
+        }
+      }
+
     }
   }
 

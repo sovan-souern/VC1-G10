@@ -155,5 +155,24 @@ class ProductModel
             return false;
         }
     }
+
+    function updateProductQuantity($productId, $amountProduct)
+    {
+        try {
+            $stmt = $this->pdo->query(
+                "UPDATE products SET 
+                    quantity = quantity - :amountProduct 
+                WHERE product_id = :productId",
+                [
+                    'amountProduct' => $amountProduct, // Subtract the provided amount
+                    'productId' => $productId // Match the product by ID
+                ]
+            );
+            return true;
+        } catch (Exception $e) {
+            echo "Error updating product quantity: " . $e->getMessage();
+            return false;
+        }
+    }
 }
 
