@@ -5,140 +5,132 @@ require_once "Models/ProductModel.php";
 
 class CheckoutUserController extends BaseController
 {
-    private $model;
-    private $model_product;
+  private $model;
+  private $model_product;
+  function __construct()
+  {
+    $this->model = new  OrderModel();
+    $this->model_product = new  ProductModel();
+  }
+  function cartview()
+  {
+    require_once 'Views/E-commerce-user/card/cart.php';
+    // $this->ViewsUser('Views/E-commerce-user/card/cart.php');
 
-    function __construct()
-    {
-        $this->model = new OrderModel();
-        $this->model_product = new ProductModel();
-    }
+  }
+  function ProductCheckout()
+  {
+    $products = $this->model_product->getProducts();
+    $users = $this->model->getUser();
 
-    function cartview()
-    {
-        require_once 'Views/E-commerce-user/card/cart.php';
-    }
+    $admin_id = $users[0]['admin_id'] ?? null;
 
-    function ProductCheckout()
-    {
-        $products = $this->model_product->getProducts();
-        $users = $this->model->getUser();
-        $admin_id = $users[0]['admin_id'] ?? null;
+    extract([
+      "users" => $users,
+      "products" => $products,
+      "admin_id" => $admin_id
+  ]);
+  // require_once 'Views/E-commerce-user/card/checkout.php';
+  $this->ViewsUser('/E-commerce-user/card/checkout.php',[
+    "users" => $users,
+    "products" => $products,
+    "admin_id" => $admin_id
+  ]);
+  }
 
-        extract([
-            "users" => $users,
-            "products" => $products,
-            "admin_id" => $admin_id
-        ]);
-        require_once 'Views/E-commerce-user/card/checkout.php';
-    }
 
-    function store($id)
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return json_encode(['status' => 'error', 'message' => 'Invalid request method']);
-        }
+  function store($id)
+  {
+    
+    // var_dump($_POST['total']);
+    $products = $this->model_product->getProducts();
 
-        // Validation rules
-        $rules = [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
-            'country' => 'required|string|max:100',
-            'address' => 'required|string',
-            'city' => 'required|string|max:100',
-            'postal_code' => 'required|string|max:20',
-            'delivery_notes' => 'nullable|string',
-            'items' => 'required|string', // Expect JSON string
-            'total' => 'required|numeric|min:0',
-            'product_id' => 'nullable|string',
-            'payment_method' => 'required|string|in:aba,acleda,wing',
-            'contact_method' => 'required|string|in:phone,telegram,facebook',
-            'order_status' => 'nullable|string|in:Pending,Processing,Completed,Cancelled',
-            'buy_at' => 'required|date',
-        ];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $productIds = $_POST['product_id'] ?? ''; // Get product IDs from the form
+      $productIdsArray = array_filter(explode(',', $productIds)); // Split and filter valid product IDs
+      $totalQuantity = count($productIdsArray); // Count the number of valid products
 
-        // Validate inputs
-        $data = $_POST;
-        $validator = $this->validate($data, $rules);
-        if ($validator['fails']) {
-            return json_encode([
-                'status' => 'error',
-                'errors' => $validator['errors']
-            ], JSON_PRETTY_PRINT);
-        }
+      // Log the received product IDs for debugging
+      error_log("Received product IDs: " . implode(',', $productIdsArray));
 
-        // Parse items JSON
-        $items = json_decode($data['items'], true);
-        if (!is_array($items) || empty($items)) {
-            return json_encode([
-                'status' => 'error',
-                'message' => 'Invalid or empty cart items'
-            ], JSON_PRETTY_PRINT);
-        }
+      // Extract matching product IDs based on images
+      $selectedProductIds = [];
+      if (!empty($_POST['items'])) {
+        $items = is_array($_POST['items']) ? $_POST['items'] : json_decode($_POST['items'], true);
 
-        // Process product IDs
-        $productIds = !empty($data['product_id']) ? array_filter(explode(',', $data['product_id'])) : [];
-        $selectedProductIds = [];
-        foreach ($items as $item) {
-            if (isset($item['id'])) {
-                $selectedProductIds[] = $item['id'];
+        if (is_array($items)) {
+          foreach ($items as $item) {
+            if (isset($item['image'])) {
+              foreach ($products as $product) {
+                if ($product["image"] == $item["image"]) {
+                  $selectedProductIds[] = $product["product_id"];
+                 
+                }
+              }
             }
-        }
-        $selectedProductIds = array_unique(array_merge($productIds, $selectedProductIds));
-
-        // Create address
-        $addressData = [
-            'city' => $data['city'],
-            'admin_id' => $id,
-            'address_text' => $data['address'],
-            'country' => $data['country']
-        ];
-        $addressId = $this->model->createAddress($addressData);
-        if (!$addressId) {
-            return json_encode([
-                'status' => 'error',
-                'message' => 'Failed to create address'
-            ], JSON_PRETTY_PRINT);
-        }
-
-        // Prepare order data
-        $orderData = [
-            'admin_id' => $id,
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'country' => $data['country'],
-            'address' => $data['address'],
-            'city' => $data['city'],
-            'postal_code' => $data['postal_code'],
-            'delivery_notes' => $data['delivery_notes'] ?? null,
-            'items' => $data['items'], // JSON string
-            'total' => $data['total'],
-            'product_id' => implode(',', $selectedProductIds), // Comma-separated string
-            'payment_method' => $data['payment_method'],
-            'contact_method' => $data['contact_method'],
-            'order_status' => $data['order_status'] ?? 'Pending',
-            'buy_at' => $data['buy_at']
-        ];
-
-        // Store order
-        $orderId = $this->model->createOrder($orderData);
-        if ($orderId) {
-            return json_encode([
-                'status' => 'success',
-                'message' => 'Order created successfully',
-                'order_id' => $orderId
-            ], JSON_PRETTY_PRINT);
+          }
         } else {
-            return json_encode([
-                'status' => 'error',
-                'message' => 'Failed to create order'
-            ], JSON_PRETTY_PRINT);
+          error_log("Invalid items format.");
         }
+      } else {
+        error_log("No valid items received.");
+      }
+
+      $amountProducts = array_map(function ($item) {
+        return $item['quantity'] ?? 1; // Default to 1 if quantity is not provided
+      }, $items);
+
+      $addressData = [
+        'city' => $_POST['city'] ?? '',
+        'admin_id' => $id,
+        	'village'=>$_POST['village'],
+        	'commune'=>$_POST['commune'],
+          'district'=>$_POST['district'],
+          'province'=>$_POST['province'],
+        // 'address_text' => $_POST['address'] ?? '',
+        'country' => $_POST['country'] ?? ''
+      ];
+
+      // Create the address and get its ID
+      $addressId = $this->model->createAddress($addressData);
+      if (!$addressId) {
+        echo "Failed to create address.";
+        return; 
+      }
+
+      $data = [
+        'admin_id' => $id, // Ensure admin_id is included in the data array
+        'firstName' => $_POST['first_name'] ?? '',
+        'lastName' => $_POST['last_name'] ?? '',
+        'phone' => $_POST['phone'] ?? '',
+        'order_status' => $_POST['order_status'] ?? 'Pending',
+        'total' => $_POST['total'] ?? '',
+        // 'address' => $_POST['address'] ?? '',
+        'buy_at' => $_POST['buy_at'] ?? date('Y-m-d H:i:s'),
+        'amount_products' => $amountProducts, // Pass amount_product for each product
+        'product_ids' => $selectedProductIds, // Pass product IDs as an array
+        'address_id' => $addressId // Pass the created address_id
+      ];
+      
+      $storeProduct=$this->model->createOrder($data,$id);
+      $productCaculate=$this->model_product->getProducts();
+      foreach ($selectedProductIds as $index => $product_Id) {
+        foreach ($productCaculate as $product) {
+          if ($product_Id == $product['product_id']) {
+            $amountProduct = $amountProducts[$index] ?? 1; // Match amountProduct by index
+            echo $amountProduct ;
+            // Use updateProductQuantity to only update the quantity field
+            $this->model_product->updateProductQuantity($product['product_id'], $amountProduct);
+            break; 
+          }
+        }
+      }
+
     }
+  }
+
+
+
 
     function favorite()
     {

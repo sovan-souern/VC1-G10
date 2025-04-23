@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -389,13 +388,14 @@
                 $totalIndex = 0;
                 foreach ($notifications as $index => $notification) {
                     if ($notification["status"] == "unread") {
-                        if($notification["product_quantity"]<3){
                         if ($notification["type"] == "product") {
-                            $totalIndex++;
+                            if($notification["product_quantity"]<3){
+
+                                $totalIndex++;
+                            }
                         }
                     }
                 }
-            }
                 echo $totalIndex;
                 ?>
             </span>
@@ -405,19 +405,25 @@
 
         <div class="notifications-container">
             <?php if (!empty($notifications) || (isset($lowStockProducts) && !empty($lowStockProducts)) || (isset($outStockProducts) && !empty($outStockProducts))): ?>
-                <?php foreach ($notifications as $index => $notification): ?>
-                    <?php if ($notification["type"] == "contact"): ?>
+                <?php foreach ($Notifications as $index => $notification): ?>
+                    <?php if ($notification["type"] == "product"): ?>
+                        <?php if($notification["product_quantity"]<3):?>
+
                         <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>">
                             
                                 
                                     <div class="notification-icon">
-                                        <img src="../../../<?php echo $notification["user_profile_picture"] ?>" alt="">
+                                        <?php if (!empty($notification["product_image"])): ?>
+                                            <img src="../../../<?php echo $notification["product_image"]; ?>" alt="Product Image">
+                                        <?php else: ?>
+                                            <img src="../../Views/assets/img/productIcon.png" alt="Default Icon">
+                                        <?php endif; ?>
                                     </div>
                                 
                        
                             <div class="notification-content">
                                 <div class="notification-title">
-                                    <?php echo $notification['user_name']; ?>
+                                    <?php echo $notification['product_name']; ?>
                                     <?php if ($notification['status'] == 'unread'): ?>
                                         <span class="dot"></span>
                                     <?php endif; ?>
@@ -450,6 +456,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
 
@@ -607,4 +614,4 @@
     </script>
 </body>
 
-</html> 
+</html>

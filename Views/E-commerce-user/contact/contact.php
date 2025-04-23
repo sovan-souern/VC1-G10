@@ -1,3 +1,6 @@
+
+
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -334,11 +337,17 @@
 
             <div class="contact-container">
                 <h3>Get in Touch</h3>
-                <form id="contactForm" action="/contact/store" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="first_name" class="form-control" id="firstName" placeholder=" " required>
-                        <label for="firstName" class="form-label">First Name</label>
-                        <div class="invalid-feedback">Please enter your first name.</div>
+                <form id="contactForm" action="/contact/store?id=<?php 
+                    foreach ($users as $key => $user) {
+                        if ($user["name"] == $_SESSION["name"]) {
+                            echo htmlspecialchars($user["admin_id"]);
+                            break; // Exit loop after finding the matching user
+                        }
+                    }
+                ?>" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" name="first_name" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="last_name" class="form-control" id="lastName" placeholder=" " required>

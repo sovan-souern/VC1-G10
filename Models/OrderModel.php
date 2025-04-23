@@ -12,50 +12,35 @@ class OrderModel
 
     function getOrder()
     {
-        try {
-            $stmt = $this->pdo->query("SELECT * FROM orders1");
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            error_log("Failed to fetch orders: " . $e->getMessage());
-            return [];
-        }
+        $stmt = $this->pdo->query("SELECT * FROM orders");
+        return $stmt->fetchAll();
     }
 
-    function createOrder($data)
+    function createOrder($data, $id)
     {
+        
         try {
-            $sql = "INSERT INTO orders1 (
-                admin_id, first_name, last_name, phone, email, country, address, city, 
-                postal_code, delivery_notes, items, total, product_id, payment_method, 
-                contact_method, order_status, buy_at
-            ) VALUES (
-                :admin_id, :first_name, :last_name, :phone, :email, :country, :address, :city, 
-                :postal_code, :delivery_notes, :items, :total, :product_id, :payment_method, 
-                :contact_method, :order_status, :buy_at
-            )";
+            // Prepare the SQL statement for inserting each row
+            $sql = "INSERT INTO orders (firstName, lastName, phone, order_status, total, buy_at, admin_id, amount_product, product_id, address_id) 
+                    VALUES (:firstName, :lastName, :phone, :order_status, :total, :buy_at, :admin_id, :amount_product, :product_id, :address_id)";
             $stmt = $this->pdo->prepare($sql);
 
-            $stmt->execute([
-                ':admin_id' => $data['admin_id'],
-                ':first_name' => $data['first_name'],
-                ':last_name' => $data['last_name'],
-                ':phone' => $data['phone'],
-                ':email' => $data['email'],
-                ':country' => $data['country'],
-                ':address' => $data['address'],
-                ':city' => $data['city'],
-                ':postal_code' => $data['postal_code'],
-                ':delivery_notes' => $data['delivery_notes'],
-                ':items' => $data['items'],
-                ':total' => $data['total'],
-                ':product_id' => $data['product_id'],
-                ':payment_method' => $data['payment_method'],
-                ':contact_method' => $data['contact_method'],
-                ':order_status' => $data['order_status'],
-                ':buy_at' => $data['buy_at']
-            ]);
-
-            return $this->pdo->lastInsertId();
+            // Insert a row for each product_id
+            foreach ($data['product_ids'] as $index => $productId) {
+                $stmt->execute([
+                    ':firstName' => $data['firstName'],
+                    ':lastName' => $data['lastName'],
+                    ':phone' => $data['phone'],
+                    ':order_status' => $data['order_status'],
+                    ':total' => $data['total'],
+                    ':buy_at' => $data['buy_at'],
+                    ':admin_id' => $id,
+                    ':amount_product' => $data['amount_products'][$index],
+                    ':product_id' => $productId,
+                    ':address_id' => $data['address_id'] 
+                ]);
+            }
+            return true; // Return true if all rows are inserted successfully
         } catch (Exception $e) {
             error_log("Failed to create order: " . $e->getMessage());
             return false;
@@ -76,16 +61,20 @@ class OrderModel
     function createAddress($data)
     {
         try {
-            $sql = "INSERT INTO address (city, admin_id, address_text, country, create_at) 
-                    VALUES (:city, :admin_id, :address_text, :country, :create_at)";
+            $sql = "INSERT INTO address (city, admin_id, country, create_at, village, commune, district, province) 
+                    VALUES (:city, :admin_id, :country, :create_at, :village, :commune, :district, :province)";
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->execute([
                 ':city' => $data['city'],
                 ':admin_id' => $data['admin_id'],
-                ':address_text' => $data['address_text'],
+                // ':address_text' => $data['address_text'],
                 ':country' => $data['country'],
-                ':create_at' => date('Y-m-d H:i:s')
+                ':village'=>$data['village'],
+                ':commune'=>$data['commune'],
+              ':district'=>$data['district'],
+              ':province'=>$data['province'],
+                ':create_at' => date('Y-m-d H:i:s') 
             ]);
 
             return $this->pdo->lastInsertId();

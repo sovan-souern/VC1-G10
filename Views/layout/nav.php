@@ -621,15 +621,14 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                   <?php
                   $totalIndex = 0;
                   foreach ($notifications as $index => $notification) {
+                    if($notification["product_quantity"]<3){
                     if ($notification["status"] == "unread") {
                       $totalIndex++;
                     }
                   }
+                }
                   echo $totalIndex;
                   ?>
-
-
-
                 </span>
               </a>
             </li>
