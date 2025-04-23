@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css" type="text/css">
     
     <style>
-        /* Hero Banner Styles */
+        /* Existing styles unchanged */
         .hero-banner {
             position: relative;
             overflow: hidden;
@@ -71,7 +71,6 @@
             box-shadow: 0 5px 15px rgba(248, 164, 185, 0.3);
         }
         
-        /* Featured Products Carousel */
         .featured-products {
             margin-bottom: 40px;
         }
@@ -109,7 +108,6 @@
             opacity: 1;
         }
         
-        /* Testimonials Section */
         .testimonials {
             background-color: #f8f9fa;
             padding: 60px 0;
@@ -172,7 +170,6 @@
             font-size: 0.9rem;
         }
         
-        /* Brands Section */
         .brands {
             padding: 40px 0;
             margin-bottom: 40px;
@@ -208,7 +205,6 @@
             max-height: 70px;
         }
         
-        /* Back to Top Button */
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -238,7 +234,6 @@
             transform: translateY(-3px);
         }
         
-        /* Responsive Adjustments */
         @media (max-width: 992px) {
             .hero-banner .carousel-item {
                 height: 400px;
@@ -293,7 +288,6 @@
             display: none;
         }
 
-        /* Shared Styles for Add to Cart Button */
         .add-to-cart {
             background-color: #f8a4b9;
             color: white;
@@ -310,13 +304,19 @@
             transform: translateY(-2px);
         }
 
+        .add-to-cart:disabled {
+            background-color: #d3d3d3;
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .add-to-cart a {
             text-decoration: none;
             color: white;
             transition: color 0.3s ease;
         }
 
-        /* Stock Status Badge Styles */
         .stock-status-badge {
             position: absolute;
             top: 10px;
@@ -339,7 +339,6 @@
             background-color: #ef4444;
         }
 
-        /* Discounted Product Card Styles */
         .discount-product-card {
             background-color: white;
             border-radius: 10px;
@@ -471,7 +470,6 @@
             margin-right: 8px;
         }
 
-        /* General Product Item Styles */
         .general-product-item {
             position: relative;
             background: #fff;
@@ -587,7 +585,6 @@
             color: #f5809e;
         }
 
-        /* Cart Panel Styles */
         .product-hover-shared {
             position: absolute;
             bottom: 5px;
@@ -664,7 +661,6 @@
             transform: scale(1.05);
         }
 
-        /* Trend Section Styles */
         .trend {
             padding: 30px 0;
         }
@@ -719,7 +715,6 @@
             color: #f8a4b9;
         }
 
-        /* Pagination Styles */
         .pagination__option {
             margin-top: 30px;
         }
@@ -748,7 +743,6 @@
             line-height: 40px;
         }
 
-        /* See More Button Styles */
         .see-more-btn {
             background-color: #f8a4b9;
             color: white;
@@ -775,7 +769,6 @@
             box-shadow: 0 2px 5px rgba(248, 164, 185, 0.2);
         }
 
-        /* Hidden Product Styles */
         .product-item.hidden-product {
             display: none;
             opacity: 0;
@@ -787,9 +780,7 @@
             opacity: 1;
         }
 
-        /* Media Query for Smaller Screens */
         @media (max-width: 736px) {
-            /* Shop Section - 2 cards per row */
             .col-lg-3,
             .col-md-4,
             .col-sm-6 {
@@ -797,7 +788,6 @@
                 max-width: 50%;
             }
 
-            /* Adjust product card styling for smaller screens */
             .discount-product-card,
             .general-product-item {
                 margin-bottom: 15px;
@@ -828,13 +818,11 @@
                 font-size: 14px;
             }
 
-            /* Adjust stock status badge for smaller screens */
             .stock-status-badge {
                 padding: 4px 8px;
                 font-size: 0.75em;
             }
 
-            /* Trend Section - Stack items vertically */
             .trend .col-lg-4,
             .trend .col-md-4,
             .trend .col-sm-6 {
@@ -856,7 +844,6 @@
                 font-size: 14px;
             }
 
-            /* See More Button */
             .see-more-btn {
                 padding: 10px 25px;
                 font-size: 1rem;
@@ -866,7 +853,7 @@
 </head>
 
 <body>
-    <!-- Hero Banner Section -->
+    <!-- Hero Banner Section unchanged -->
     <section class="hero-banner">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -911,7 +898,7 @@
         </div>
     </section>
 
-    <!-- Featured Products Carousel -->
+    <!-- Featured Products Carousel unchanged -->
     <section class="featured-products">
         <div class="container">
             <div class="section-title">
@@ -985,15 +972,15 @@
                             <div class="col-md-3">
                                 <div class="discount-product-card">
                                     <div class="discount-badge">-30%</div>
-                                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG  alt="Gentle Exfoliating Scrub">
-                                    <ul class="discount-product-hover">
-                                        <li><a href="#" class="image-zoom"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
+                                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
+                                        <ul class="discount-product-hover">
+                                            <li><a href="#" class="image-zoom"><span class="arrow_expand"></span></a></li>
+                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                        </ul>
                                     </div>
                                     <div class="product-info">
-                                        <h5 class="product-name">Gentle Exfoliating</h5>
+                                        <h5 class="product-name">Gentle Exfoliating Scrub</h5>
                                         <div class="price">
                                             <span class="original-price">$34.99</span>
                                             $24.49
@@ -1127,9 +1114,11 @@
                                         $quantity = isset($product['quantity']) ? intval($product['quantity']) : 0;
                                         $stock_status = '';
                                         $stock_class = '';
+                                        $is_out_of_stock = false;
                                         if ($quantity == 0) {
                                             $stock_status = 'Out of Stock';
                                             $stock_class = 'out-of-stock';
+                                            $is_out_of_stock = true;
                                         } elseif ($quantity < 10) {
                                             $stock_status = 'Low Stock';
                                             $stock_class = 'low-stock';
@@ -1154,7 +1143,7 @@
                                                         <span class="original-price"><?php echo $original_price_formatted; ?></span>
                                                         <?php echo $discounted_price_formatted; ?>
                                                     </div>
-                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>" <?php echo $is_out_of_stock ? 'disabled' : ''; ?>>Add to Cart</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1173,9 +1162,11 @@
                                 $quantity = isset($product['quantity']) ? intval($product['quantity']) : 0;
                                 $stock_status = '';
                                 $stock_class = '';
+                                $is_out_of_stock = false;
                                 if ($quantity == 0) {
                                     $stock_status = 'Out of Stock';
                                     $stock_class = 'out-of-stock';
+                                    $is_out_of_stock = true;
                                 } elseif ($quantity < 10) {
                                     $stock_status = 'Low Stock';
                                     $stock_class = 'low-stock';
@@ -1197,7 +1188,7 @@
                                         <div class="general-product-text">
                                             <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
                                             <div class="general-product-price">$<?php echo $price; ?></div>
-                                            <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>">Add to Cart</button>
+                                            <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>" <?php echo $is_out_of_stock ? 'disabled' : ''; ?>>Add to Cart</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1218,7 +1209,7 @@
         </div>
     </section>
 
-    <!-- Trend Section -->
+    <!-- Trend Section unchanged -->
     <section class="trend spad">
         <div class="container">
             <div class="row">
@@ -1414,32 +1405,27 @@
             const seeMoreBtn = document.getElementById('see-more-btn');
             const productItems = document.querySelectorAll('.product-item.hidden-product');
             let visibleCount = 0;
-            const itemsPerClick = 4; // Number of products to reveal per click
+            const itemsPerClick = 4;
 
-            // Check if there are hidden products to show the button
             if (productItems.length === 0) {
                 seeMoreBtn.style.display = 'none';
             }
 
             seeMoreBtn.addEventListener('click', function() {
-                // Calculate the range of products to reveal
                 const start = visibleCount;
                 const end = Math.min(start + itemsPerClick, productItems.length);
 
-                // Show the next set of products
                 for (let i = start; i < end; i++) {
                     const item = productItems[i];
                     item.classList.remove('hidden-product');
                     item.classList.add('visible');
-                    // Trigger fade-in animation
                     setTimeout(() => {
                         item.style.opacity = '1';
-                    }, 100 * (i - start)); // Staggered animation
+                    }, 100 * (i - start));
                 }
 
                 visibleCount += itemsPerClick;
 
-                // Hide the button if all products are visible
                 if (visibleCount >= productItems.length) {
                     seeMoreBtn.style.display = 'none';
                 }
