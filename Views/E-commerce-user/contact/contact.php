@@ -9,194 +9,214 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body {
-            font-family: 'Poppins', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
+            background: #F3F4F6;
         }
 
-        /* Navbar Styles */
-        .slideshow-container {
-        display: none;
-    }
-    .dot-container {
-        display: none;
-    }
-
-        .navbar-brand, .nav-link {
-            color: white !important;
-            font-weight: 500;
+        .slideshow-container, .dot-container {
+            display: none;
         }
 
-        .nav-link:hover {
-            color: #f0f0f0 !important;
-        }
-
-        /* Banner Styles */
+        /* Banner */
         .banner {
-            position: relative;
-            width: 100%;
-            height: 40vh;
-            background: linear-gradient(135deg, #CC88D8, #5CB58D);
+            background: linear-gradient(135deg, #ffb6c1, #F48FB1);
             color: white;
             text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 4rem 1rem;
         }
 
         .banner-content h1 {
-            font-size: 38px;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
+            color: #FFFFFF;
         }
 
-        .banner-content h2 {
-            font-size: 18px;
-            font-weight: 300;
+        .banner-content p {
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #FCE4EC;
         }
 
         /* Contact Wrapper */
         .contact-wrapper {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
         .contact-layout {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
         }
 
         .contact-info, .contact-container {
-            flex: 1 1 48%;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            min-height: 400px; /* Balanced height */
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .contact-info h3, .contact-container h3 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 25px;
+            font-size: 1.75rem;
+            color: #1F2A1A;
+            margin-bottom: 1.5rem;
         }
 
+        /* Contact Cards */
         .contact-card {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+            background: #F9FAFB;
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            background: #FCE4EC;
         }
 
         .contact-card i {
-            font-size: 22px;
-            color: #5CB58D;
-            width: 45px;
-            height: 45px;
+            font-size: 1.5rem;
+            color: #6D28D9;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #F3E8FF;
             border-radius: 50%;
-            transition: all 0.4s ease;
-        }
-
-        .contact-card:hover i {
-            color: #41AD55;
-            transform: rotate(360deg);
         }
 
         .contact-card .info span {
-            font-size: 16px;
-            color: #555;
+            display: block;
+            color: #4B5563;
         }
 
         .contact-card .info .label {
             font-weight: 600;
-            color: #333;
+            color: #1F2A1A;
+            font-size: 0.95rem;
         }
 
-        .contact-container .form-control {
+        /* Form Styles */
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border: 1px solid #D1D5DB;
             border-radius: 8px;
-            border: 1px solid #ddd;
-            padding: 12px;
-            transition: border-color 0.3s ease;
+            padding: 2.5rem 0.75rem 0.75rem;
+            transition: all 0.2s ease;
+            width: 100%;
         }
 
-        .contact-container .form-control:focus {
-            border-color: #5CB58D;
-            box-shadow: 0 0 5px rgba(92, 181, 141, 0.3);
+        .form-control:focus {
+            border-color: #D81B60;
+            box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.1);
+            outline: none;
+        }
+
+        .form-label {
+            position: absolute;
+            top: 0.75rem;
+            left: 1rem;
+            font-size: 0.875rem;
+            color: #4B5563;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .form-control:focus + .form-label,
+        .form-control:not(:placeholder-shown) + .form-label {
+            top: -0.5rem;
+            left: 0.75rem;
+            font-size: 0.75rem;
+            color: #D81B60;
+            background: #FFFFFF;
+            padding: 0 0.25rem;
+        }
+
+        .form-control.is-invalid {
+            border-color: #EF4444;
+        }
+
+        .invalid-feedback {
+            font-size: 0.875rem;
+            color: #EF4444;
+            margin-top: 0.25rem;
         }
 
         .btn-submit {
-            background: #5CB58D;
-            color: white;
-            padding: 12px;
+            background: #D81B60;
+            color: #FFFFFF;
+            padding: 0.75rem;
             border-radius: 8px;
             border: none;
             width: 100%;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
         .btn-submit:hover {
-            background: #41AD55;
-            transform: translateY(-2px);
+            background: #AD1457;
+            transform: translateY(-1px);
         }
 
-        /* Map Styles */
+        /* Map */
         .map-container {
-            width: 100%;
-            margin-top: 40px;
+            margin-top: 2rem;
             position: relative;
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1rem;
         }
 
         #map {
             width: 100%;
-            height: 500px;
-            border-radius: 10px;
+            height: 400px;
+            border-radius: 8px;
         }
 
         .search-container {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: flex-end;
+            top: 2rem;
+            right: 2rem;
             z-index: 1000;
-            width: 300px;
+            display: flex;
+            width: 280px;
         }
 
         .search-container input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px 0 0 5px;
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #D1D5DB;
+            border-radius: 8px 0 0 8px;
+            padding: 0.75rem;
+            flex: 1;
+            background: #FFFFFF;
         }
 
         .search-container button {
-            padding: 10px 20px;
-            border-radius: 0 5px 5px 0;
-            background-color: #5CB58D;
-            color: white;
+            background: #D81B60;
+            color: #FFFFFF;
             border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0 8px 8px 0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .search-container button:hover {
-            background-color: #41AD55;
-            transform: scale(1.05);
+            background: #AD1457;
         }
 
         .suggestions {
@@ -204,76 +224,79 @@
             top: 100%;
             right: 0;
             width: 100%;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            background: #FFFFFF;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
             max-height: 200px;
             overflow-y: auto;
             z-index: 1000;
             display: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .suggestions div {
-            padding: 10px;
+            padding: 0.75rem;
             cursor: pointer;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #FCE4EC;
+            color: #4B5563;
         }
 
         .suggestions div:hover {
-            background-color: #f0f0f0;
+            background: #FCE4EC;
+            color: #1F2A1A;
         }
 
-        /* Responsive Adjustments */
+        /* Responsive */
         @media (max-width: 768px) {
             .contact-layout {
-                flex-direction: column;
-                padding: 20px 10px;
-            }
-
-            .contact-info, .contact-container {
-                flex: 1 1 100%;
+                grid-template-columns: 1fr;
             }
 
             .banner {
-                height: 30vh;
+                padding: 3rem 1rem;
             }
 
             .banner-content h1 {
-                font-size: 32px;
-            }
-
-            .banner-content h2 {
-                font-size: 16px;
+                font-size: 2rem;
             }
 
             .search-container {
-                width: 250px;
-                right: 10px;
+                width: 100%;
+                padding: 0 1rem;
+                top: 1rem;
+                right: 1rem;
             }
         }
 
         @media (max-width: 576px) {
             .banner-content h1 {
-                font-size: 24px;
+                font-size: 1.5rem;
             }
 
-            .banner-content h2 {
-                font-size: 14px;
-            }
-
-            .search-container {
-                width: 200px;
+            .banner-content p {
+                font-size: 1rem;
             }
 
             #map {
                 height: 300px;
             }
+
+            .search-container {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    
+    <!-- Banner -->
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Contact Us</h1>
+            <p>We're here to help. Reach out to us through any of the following methods.</p>
+        </div>
+    </div>
+
     <!-- Contact Section -->
     <div class="contact-wrapper">
         <div class="contact-layout">
@@ -282,29 +305,29 @@
                 <div class="contact-card">
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="info">
-                        <span class="label">Address:</span>
-                        <span class="value">Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh</span>
+                        <span class="label">Address</span>
+                        <span>Psa Trapeang Chhouk, Theok Thla Sangkat, Sen Sok District, Phnom Penh</span>
                     </div>
                 </div>
                 <div class="contact-card">
                     <i class="fas fa-phone"></i>
                     <div class="info">
-                        <span class="label">Phone:</span>
-                        <span class="value">016 224 335</span>
+                        <span class="label">Phone</span>
+                        <span>016 224 335</span>
                     </div>
                 </div>
                 <div class="contact-card">
                     <i class="fab fa-facebook"></i>
                     <div class="info">
-                        <span class="label">Facebook:</span>
-                        <span class="value">Yin Cheariddeth</span>
+                        <span class="label">Facebook</span>
+                        <span>Yin Cheariddeth</span>
                     </div>
                 </div>
                 <div class="contact-card">
                     <i class="fab fa-telegram"></i>
                     <div class="info">
-                        <span class="label">Telegram:</span>
-                        <span class="value">016 224 335</span>
+                        <span class="label">Telegram</span>
+                        <span>016 224 335</span>
                     </div>
                 </div>
             </div>
@@ -312,23 +335,27 @@
             <div class="contact-container">
                 <h3>Get in Touch</h3>
                 <form id="contactForm" action="/contact/store" method="POST">
-                    <div class="mb-3">
-                        <label class="form-label">First Name</label>
-                        <input type="text" name="first_name" class="form-control" required>
+                    <div class="form-group">
+                        <input type="text" name="first_name" class="form-control" id="firstName" placeholder=" " required>
+                        <label for="firstName" class="form-label">First Name</label>
+                        <div class="invalid-feedback">Please enter your first name.</div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Last Name</label>
-                        <input type="text" name="last_name" class="form-control" required>
+                    <div class="form-group">
+                        <input type="text" name="last_name" class="form-control" id="lastName" placeholder=" " required>
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <div class="invalid-feedback">Please enter your last name.</div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phone Number</label>
-                        <input type="text" name="phone_number" class="form-control" required>
+                    <div class="form-group">
+                        <input type="tel" name="phone_number" class="form-control" id="phoneNumber" placeholder=" " required pattern="[0-9]{9,10}">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <div class="invalid-feedback">Please enter a valid phone number.</div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Message</label>
-                        <textarea name="message" class="form-control" rows="4" required></textarea>
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" id="message" rows="4" placeholder=" " required></textarea>
+                        <label for="message" class="form-label">Message</label>
+                        <div class="invalid-feedback">Please enter a message.</div>
                     </div>
-                    <button type="submit" class="btn-submit">Submit</button>
+                    <button type="submit" class="btn-submit">Send Message</button>
                 </form>
             </div>
         </div>
@@ -337,7 +364,7 @@
         <div class="map-container">
             <div id="map"></div>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search for a location...">
+                <input type="text" id="searchInput" placeholder="Search location...">
                 <button onclick="searchLocation()">Search</button>
                 <div class="suggestions" id="suggestions"></div>
             </div>
@@ -446,6 +473,15 @@
             map.setView([location.lat, location.lng], 15);
             marker.setLatLng([location.lat, location.lng]).bindPopup(location.name).openPopup();
         }
+
+        // Form Validation
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            const form = this;
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                form.classList.add('was-validated');
+            }
+        });
     </script>
 </body>
 </html>

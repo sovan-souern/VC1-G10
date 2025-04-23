@@ -1660,7 +1660,55 @@
                 toast.remove();
             }, 3000);
         }
+// Handle form submission
+document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
 
+    // Validate payment section
+    if (!validateSection('payment-section')) {
+        return false;
+    }
+
+    const paymentMethod = document.querySelector('.payment-option.selected').getAttribute('data-payment');
+    const formData = new FormData(this);
+
+    // Show loading state
+    const submitBtn = document.getElementById('proceed-payment-btn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+    // Submit form data via AJAX
+    fetch('/checkout/store', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Include CSRF token if using Laravel's CSRF protection
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Payment';
+
+        if (data.status === 'success') {
+            showToast('success', 'Order Placed', 'Your order has been successfully placed! Order ID: ' + data.order_id);
+            // Open QR code popup for payment
+            openQrPopup(paymentMethod);
+            // Optionally clear cart
+            localStorage.removeItem('cart');
+            cart = [];
+            renderOrderSummary();
+        } else {
+            showToast('error', 'Order Failed', data.message || 'Please check your input and try again.');
+        }
+    })
+    .catch(error => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Payment';
+        showToast('error', 'Submission Error', 'An error occurred while submitting your order. Please try again.');
+        console.error('Error:', error);
+    });
+});
         // Render cart items in the order summary
         function renderOrderSummary() {
             const orderItemsContainer = document.getElementById('order-items');
