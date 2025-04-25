@@ -16,10 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-        body {
-            padding: 20px;
-            font-family: 'Montserrat', sans-serif;
-        }
+        
 
         /* Header Styles */
         header h1 {
@@ -29,6 +26,7 @@
             text-align: center;
             margin: 0;
             font-size: 2.5rem;
+            width: 100%;
         }
 
         header p {
@@ -40,6 +38,7 @@
 
         .container {
             padding: 20px;
+       
         }
 
         .cards {
@@ -368,7 +367,7 @@
                 font-size: 0.9rem;
             }
 
-            .discount-products {
+            . {
                 padding: 20px 10px;
             }
 
@@ -1048,29 +1047,9 @@
                 <?php endforeach; ?>
             </div>
         </div>
-
-        <!-- Product Modal -->
-        <div id="product-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">×</span>
-                <div class="modal-inner">
-                    <div class="modal-product-image">
-                        <img id="modal-product-image" src="" alt="Product Image">
-                    </div>
-                    <div class="modal-product-info">
-                        <h2 id="modal-product-name"></h2>
-                        <p><strong>Price:</strong> <span id="modal-product-price" class="price"></span></p>
-                        <p><strong>Description:</strong> <span id="modal-product-description"></span></p>
-                        <p><strong>Quantity Available:</strong> <span id="modal-product-quantity"></span></p>
-                        <p><strong>Discount:</strong> <span id="modal-product-discount"></span>%</p>
-                        <button id="add-to-cart-modal">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- About Section -->
-        <section class="about-section py-5">
+    </section>
+     <!-- About Section -->
+     <section class="about-section py-5">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0">
