@@ -80,9 +80,11 @@
                                             $quantity = isset($product['quantity']) ? intval($product['quantity']) : 0;
                                             $stock_status = '';
                                             $stock_class = '';
+                                            $is_out_of_stock = false;
                                             if ($quantity == 0) {
                                                 $stock_status = 'Out of Stock';
                                                 $stock_class = 'out-of-stock';
+                                                $is_out_of_stock = true;
                                             } elseif ($quantity < 10) {
                                                 $stock_status = 'Low Stock';
                                                 $stock_class = 'low-stock';
@@ -108,7 +110,7 @@
                                                         <span class="original-price"><?php echo $original_price_formatted; ?></span>
                                                         <span class="discounted-price"><?php echo $discounted_price_formatted; ?></span>
                                                     </div>
-                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
+                                                    <button class="add-to-cart" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price; ?>" data-product-image="<?php echo $image_url; ?>" <?php echo $is_out_of_stock ? 'disabled' : ''; ?>>Add to Cart</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,9 +129,11 @@
                                     $quantity = isset($product['quantity']) ? intval($product['quantity']) : 0;
                                     $stock_status = '';
                                     $stock_class = '';
+                                    $is_out_of_stock = false;
                                     if ($quantity == 0) {
                                         $stock_status = 'Out of Stock';
                                         $stock_class = 'out-of-stock';
+                                        $is_out_of_stock = true;
                                     } elseif ($quantity < 10) {
                                         $stock_status = 'Low Stock';
                                         $stock_class = 'low-stock';
@@ -151,20 +155,13 @@
                                         <div class="general-product-text">
                                             <h6><a href="<?php echo $productLink; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a></h6>
                                             <div class="general-product-price">$<?php echo $price; ?></div>
-                                            <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>">Add to Cart</button>
+                                            <button class="add-to-cart" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="<?php echo $price; ?>" data-product-image="<?php echo $image; ?>" <?php echo $is_out_of_stock ? 'disabled' : ''; ?>>Add to Cart</button>
                                         </div>
                                     </div>
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
-                        <div class="col-12 text-center">
-                            <div class="pagination__option">
-                                <a href="#" class="active">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -203,12 +200,12 @@
         top: 10px;
         left: 10px;
         color: white;
-        padding: 4px 8px; /* Reduced padding for smaller badge */
+        padding: 4px 8px;
         border-radius: 5px;
         font-weight: 500;
         z-index: 1;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        font-size: 10px; /* Reduced font size */
+        font-size: 10px;
         text-transform: uppercase;
     }
 
@@ -324,15 +321,20 @@
         padding: 5px 10px;
         cursor: pointer;
         width: 100%;
-        /* font-weight: 500; */
         font-size: 12px;
         transition: background-color 0.3s ease;
         border-radius: 0px;
         text-transform: uppercase;
     }
 
-    .add-to-cart:hover {
+    .add-to-cart:hover:not(:disabled) {
         background-color: #ff6699;
+    }
+
+    .add-to-cart:disabled {
+        background-color: #d3d3d3;
+        color: #666;
+        cursor: not-allowed;
     }
 
     body {
@@ -1043,8 +1045,8 @@
         }
 
         .stock-status-badge {
-            padding: 3px 6px; /* Adjusted padding */
-            font-size: 9px; /* Reduced font size */
+            padding: 3px 6px;
+            font-size: 9px;
         }
 
         .discount-badge {
@@ -1124,12 +1126,12 @@
 
         .add-to-cart {
             padding: 6px;
-            font-size: 1px;
+            font-size: 11px;
         }
 
         .stock-status-badge {
-            padding: 2px 5px; /* Further reduced padding */
-            font-size: 8px; /* Further reduced font size */
+            padding: 2px 5px;
+            font-size: 8px;
         }
 
         .discount-badge {
@@ -1207,8 +1209,8 @@
         }
 
         .stock-status-badge {
-            padding: 2px 4px; /* Further reduced padding */
-            font-size: 7px; /* Further reduced font size */
+            padding: 2px 4px;
+            font-size: 7px;
         }
 
         .discount-badge {
@@ -1348,6 +1350,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add to cart functionality
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function() {
+            if (this.disabled) return; // Prevent action if button is disabled
+            
             let productName;
             let productPrice;
             
