@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        header{
+        header {
             display: none;
         }
-        .footer{
+
+        .footer {
             display: none;
         }
-        .slideshow-container, .dot-container {
+
+        .slideshow-container,
+        .dot-container {
             display: none;
         }
+
         :root {
             --primary-color: #0066cc;
             --secondary-color: #f8f9fa;
@@ -361,7 +366,13 @@
     <div class="container checkout-container">
         <div class="row">
             <div class="col-md-7">
-                <form action="/checkout/store?id=<?php echo $admin_id?>" method="POST" id="checkout-form">
+                <form action="/checkout/store?id=
+<?php foreach ($users as $user) {
+    if ($user['name'] == $_SESSION['name']) {
+        echo $user['admin_id'];
+    }
+}
+?>" method="POST" id="checkout-form">
                     <input type="hidden" name="admin_id" value="">
                     <input type="hidden" name="items" id="items">
                     <input type="hidden" name="total" id="total_input">
@@ -495,7 +506,8 @@
             height: 100vh;
         }
 
-        .loading-modal , .modal-content {
+        .loading-modal,
+        .modal-content {
             background-color: #ffffff;
             border: none;
             box-shadow: var(--box-shadow);
@@ -521,8 +533,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text {
@@ -535,15 +552,13 @@
     </style>
 
     <script>
-        const sampleCart = [
-            {
-                id: 1,
-                name: "William Shirt",
-                price: 2.50,
-                quantity: 2,
-                image: "https://via.placeholder.com/60"
-            }
-        ];
+        const sampleCart = [{
+            id: 1,
+            name: "William Shirt",
+            price: 2.50,
+            quantity: 2,
+            image: "https://via.placeholder.com/60"
+        }];
 
         let cart = [];
         try {
@@ -556,9 +571,9 @@
 
         const renderOrderSummary = () => {
             const orderItemsContainer = document.getElementById('order-items');
-            orderItemsContainer.innerHTML = cart.length === 0
-                ? '<p class="text-center py-3">Your cart is empty.</p>'
-                : cart.map(item => `
+            orderItemsContainer.innerHTML = cart.length === 0 ?
+                '<p class="text-center py-3">Your cart is empty.</p>' :
+                cart.map(item => `
                     <div class="product-item">
                         <div class="product-image">
                             <img src="${item.image}" alt="${item.name}">
@@ -660,4 +675,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
+
 </html>
