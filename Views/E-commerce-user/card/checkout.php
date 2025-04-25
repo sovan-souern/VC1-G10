@@ -356,11 +356,12 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container checkout-container">
         <div class="row">
             <div class="col-md-7">
-                <form action="/checkout/store" method="POST" id="checkout-form">
+                <form action="/checkout/store?id=<?php echo $admin_id?>" method="POST" id="checkout-form">
                     <input type="hidden" name="admin_id" value="">
                     <input type="hidden" name="items" id="items">
                     <input type="hidden" name="total" id="total_input">
@@ -440,7 +441,7 @@
                             </div>
                         </div>
                         <div class="nav-buttons">
-                            <button type="submit" class="next-btn" id="submit-btn" aria-label="Submit Checkout Form">Submit</button>
+                            <button type="submit" class="next-btn" id="submit-btn" aria-label="Submit Checkout Form"><a href="https://t.me/skincareshop2026">Submit</a></button>
                             <button type="button" class="next-btn" onclick="history.back()" aria-label="Go Back">Back</button>
                         </div>
                     </div>
@@ -478,10 +479,10 @@
 
     <!-- Loading Modal -->
     <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px; margin: 0 auto;">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content loading-modal">
                 <div class="loading-spinner"></div>
-                <div class="loading-text">System will access to telegram......</div>
+                <div class="loading-text">Telegram contact......</div>
             </div>
         </div>
     </div>
@@ -491,10 +492,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
         }
 
-        .loading-modal .modal-content {
+        .loading-modal , .modal-content {
             background-color: #ffffff;
             border: none;
             box-shadow: var(--box-shadow);
@@ -504,7 +505,7 @@
             align-items: center;
             padding: 40px 30px;
             border-radius: var(--border-radius);
-            min-height: 180px;
+            /* min-height: 180px; */
         }
 
         .loading-spinner {
@@ -515,6 +516,8 @@
             height: 50px;
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
+            /* position: relative;
+            left: 100px; */
         }
 
         @keyframes spin {
@@ -634,7 +637,7 @@
             document.getElementById('submit-btn').disabled = true;
 
             // Configurable loading delay (in milliseconds)
-            const loadingDelay = 10000; // 10 seconds (change to 20000 for 20 seconds)
+            const loadingDelay = 3000; // 10 seconds (change to 20000 for 20 seconds)
 
             // Simulate processing with setTimeout before submitting the form
             setTimeout(() => {
