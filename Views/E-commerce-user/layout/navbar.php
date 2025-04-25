@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div class="container ">
+    <div class="container">
         <nav class="main-menu d-flex navbar navbar-expand-lg sticky-top">
             <div class="d-flex d-lg-none align-items-end mt-3">
                 <ul class="d-flex justify-content-end list-unstyled m-0">
@@ -163,7 +163,7 @@
         </nav>
     </div>
 </header>
-                            
+
 <style>
 :root {
     --primary-color: #ff85a2;
