@@ -34,6 +34,13 @@ class NotificationController extends BaseController
         $this->views('/notification/UserCOntact.php', ["notifications" => $notifications, "UsersName" => $UsersName]);
         $this->views('/layout/nav.php', ["notifications" => $notifications]);
     }
+    function UserOrder()
+    {
+        $notifications = $this->model->getNotifications();
+        $UsersName= $this->model_admin->getAllAdmins();
+        $this->views('/notification/OrderNotification.php', ["notifications" => $notifications, "UsersName" => $UsersName]);
+        $this->views('/layout/nav.php', ["notifications" => $notifications]);
+    }
 
     function store($id)
     {

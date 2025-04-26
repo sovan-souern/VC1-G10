@@ -16,35 +16,23 @@ class OrderModel
         return $stmt->fetchAll();
     }
 
-    function createOrder($data, $id)
+    public function createOrder($data, $adminId)
     {
-        
-        try {
-            // Prepare the SQL statement for inserting each row
-            $sql = "INSERT INTO orders (firstName, lastName, phone, order_status, total, buy_at, admin_id, amount_product, product_id, address_id) 
-                    VALUES (:firstName, :lastName, :phone, :order_status, :total, :buy_at, :admin_id, :amount_product, :product_id, :address_id)";
-            $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->pdo->prepare("
+            INSERT INTO orders (admin_id, phone, order_status, total, buy_at, address_id) 
+            VALUES (:admin_id, :phone, :order_status, :total, :buy_at, :address_id)
+        ");
+        $stmt->execute([
+            'admin_id' => $data['admin_id'],
+            'phone' => $data['phone'],
+            'order_status' => $data['order_status'],
+            'total' => $data['total'],
+            'buy_at' => $data['buy_at'],
+            'address_id' => $data['address_id']
+        ]);
 
-            // Insert a row for each product_id
-            foreach ($data['product_ids'] as $index => $productId) {
-                $stmt->execute([
-                    ':firstName' => $data['firstName'],
-                    ':lastName' => $data['lastName'],
-                    ':phone' => $data['phone'],
-                    ':order_status' => $data['order_status'],
-                    ':total' => $data['total'],
-                    ':buy_at' => $data['buy_at'],
-                    ':admin_id' => $id,
-                    ':amount_product' => $data['amount_products'][$index],
-                    ':product_id' => $productId,
-                    ':address_id' => $data['address_id'] 
-                ]);
-            }
-            return true; // Return true if all rows are inserted successfully
-        } catch (Exception $e) {
-            error_log("Failed to create order: " . $e->getMessage());
-            return false;
-        }
+        // Return the last inserted order_id
+        return $this->pdo->lastInsertId();
     }
 
     function getUser()
@@ -83,4 +71,6 @@ class OrderModel
             return false;
         }
     }
+
+
 }

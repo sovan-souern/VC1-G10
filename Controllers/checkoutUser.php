@@ -2,15 +2,18 @@
 require_once "Models/OrderModel.php";
 require_once "Controllers/BaseController.php";
 require_once "Models/ProductModel.php";
+require_once "Models/NotificationModel.php";
 
 class CheckoutUserController extends BaseController
 {
   private $model;
   private $model_product;
+  private $model_Notification;
   function __construct()
   {
     $this->model = new  OrderModel();
     $this->model_product = new  ProductModel();
+    $this->model_Notification = new NotificationModel();
   }
   function cartview()
   {
@@ -100,8 +103,6 @@ class CheckoutUserController extends BaseController
 
       $data = [
         'admin_id' => $id, // Ensure admin_id is included in the data array
-        'firstName' => $_POST['first_name'] ?? '',
-        'lastName' => $_POST['last_name'] ?? '',
         'phone' => $_POST['phone'] ?? '',
         'order_status' => $_POST['order_status'] ?? 'Pending',
         'total' => $_POST['total'] ?? '',
@@ -112,7 +113,17 @@ class CheckoutUserController extends BaseController
         'address_id' => $addressId // Pass the created address_id
       ];
       
-      $storeProduct=$this->model->createOrder($data,$id);
+      $storeProduct = $this->model->createOrder($data, $id);
+
+      if (!$storeProduct) {
+          error_log("Failed to store product order."); // Log the error for debugging
+          echo "Failed to store product order.";
+          return; // Stop further execution if storing the product fails
+      }
+
+      $orderId = $storeProduct; // Ensure $storeProduct contains the order ID
+      error_log("Order ID: " . $orderId); // Log the order ID for debugging
+
       $productCaculate=$this->model_product->getProducts();
       foreach ($selectedProductIds as $index => $product_Id) {
         foreach ($productCaculate as $product) {
@@ -124,8 +135,28 @@ class CheckoutUserController extends BaseController
             break; 
           }
         }
-      }
+        $users = $this->model->getUser();
+       $name= null;
+        foreach ($users as $user) {
+          
+          
+          if( $id == $user['admin_id']){
+            $name = $user["name"]; // Assign the name without using echo
+          };
 
+        }
+        // Create a notification for each product in the order
+        $dataNotification = [
+            'user_id' => $id,
+            'product_id' => $product_Id,
+            'order_id' => $orderId, // Use the retrieved order ID
+            'created_at' => date('Y-m-d H:i:s'),
+            'status' => "unread",
+            'message' => "You have a new order from : $name",
+            'type' => "order"
+        ];
+        $this->model_Notification->createOrderNotification($dataNotification);
+      }
     }
   }
 

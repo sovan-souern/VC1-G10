@@ -68,6 +68,24 @@ class NotificationModel
             'status' => $data['status']
         ]);
     }
+    function createOrderNotification($data)
+    {
+        // var_dump($data["user_id"]);
+            
+            $stmt = $this->pdo->prepare("INSERT INTO notifications (order_id, user_id, created_at, status, type,product_id, message) 
+                                         VALUES (:order_id, :user_id, :created_at, :status, :type, :product_id, :message)");
+            $stmt->execute([
+                'user_id' => $data['user_id'],   // Ensure user_id is provided                
+                'order_id' => $data['order_id'], // Ensure order_id is provided
+                'created_at' => $data['created_at'] , // Default to current timestamp
+                'status' => $data['status'] ?? 'unread', // Default to 'unread' if not provided
+                'type' => $data['type'],
+                'message' => $data['message'] ?? null, 
+                'product_id' => $data['product_id'] ,    
+            ]);
+
+        }
+
 
     function getNotification($id)
     {
