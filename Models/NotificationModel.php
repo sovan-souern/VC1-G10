@@ -35,6 +35,8 @@ class NotificationModel
                 admins AS users ON notifications.user_id = users.admin_id
             LEFT JOIN 
                 products ON notifications.product_id = products.product_id
+            ORDER BY 
+                notifications.created_at DESC
         ");
         return $stmt->fetchAll();
     }
@@ -148,11 +150,28 @@ class NotificationModel
             "product_id" => $data["product_id"] // Ensure product_id is passed correctly
         ]);
     }
-    function getOrder(){
-        $stmt = $this->pdo->query("SELECT * FROM orders");
-        $orders=$stmt->fetchAll();
+    function getOrder()
+    {
+        $stmt = $this->pdo->query("
+            SELECT 
+                orders.order_id,
+                orders.admin_id,
+                orders.amount_product,
+                orders.firstName,
+                orders.lastName,
+                orders.phone,
+                orders.order_status,
+                orders.total,
+                orders.buy_at,
+                products.product_name
+            FROM 
+                orders
+            LEFT JOIN 
+                products ON orders.product_id = products.product_id
+            ORDER BY 
+                orders.buy_at DESC
+        ");
+        $orders = $stmt->fetchAll();
         return $orders;
-        // var_dump($orders);
-        
     }
 }
