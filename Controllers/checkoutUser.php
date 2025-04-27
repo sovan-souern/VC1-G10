@@ -82,9 +82,10 @@ class CheckoutUserController extends BaseController
       $amountProducts = array_map(function ($item) {
         return $item['quantity'] ?? 1; // Default to 1 if quantity is not provided
       }, $items);
-
+      var_dump($_POST["last_name"]);
       $addressData = [
         'city' => $_POST['city'] ?? '',
+        
         'admin_id' => $id,
         	'village'=>$_POST['village'],
         	'commune'=>$_POST['commune'],
@@ -100,16 +101,17 @@ class CheckoutUserController extends BaseController
         echo "Failed to create address.";
         return; 
       }
-
+      
+      // var_dump();
       $data = [
         'admin_id' => $id, // Ensure admin_id is included in the data array
         'phone' => $_POST['phone'] ?? '',
         'order_status' => $_POST['order_status'] ?? 'Pending',
         'total' => $_POST['total'] ?? '',
-        // 'address' => $_POST['address'] ?? '',
+        'first_name' => $_POST['first_name'] ?? '',
+        'last_name' => $_POST['last_name'] ?? '',
         'buy_at' => $_POST['buy_at'] ?? date('Y-m-d H:i:s'),
-        'amount_products' => $amountProducts, // Pass amount_product for each product
-        'product_ids' => $selectedProductIds, // Pass product IDs as an array
+        'product_ids' => $selectedProductIds, // Ensure this is an array of product IDs
         'address_id' => $addressId // Pass the created address_id
       ];
       

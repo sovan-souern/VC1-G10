@@ -18,17 +18,25 @@ class OrderModel
 
     public function createOrder($data, $adminId)
     {
+        // Convert product_ids array to a comma-separated string
+        $productIdsString = isset($data['product_ids']) && is_array($data['product_ids']) 
+            ? implode(',', $data['product_ids']) 
+            : null;
+
         $stmt = $this->pdo->prepare("
-            INSERT INTO orders (admin_id, phone, order_status, total, buy_at, address_id) 
-            VALUES (:admin_id, :phone, :order_status, :total, :buy_at, :address_id)
+            INSERT INTO orders (admin_id, phone, order_status, total, buy_at, address_id, firstName, lastName, product_id) 
+            VALUES (:admin_id, :phone, :order_status, :total, :buy_at, :address_id, :firstName, :lastName, :product_id)
         ");
         $stmt->execute([
-            'admin_id' => $data['admin_id'],
-            'phone' => $data['phone'],
-            'order_status' => $data['order_status'],
-            'total' => $data['total'],
-            'buy_at' => $data['buy_at'],
-            'address_id' => $data['address_id']
+            'admin_id' => $data['admin_id'] ?? null,
+            'firstName' => $data['first_name'] ?? '',
+            'lastName' => $data['last_name'] ?? '',
+            'product_id' => $productIdsString, // Store as a comma-separated string
+            'phone' => $data['phone'] ?? '',
+            'order_status' => $data['order_status'] ?? 'Pending',
+            'total' => $data['total'] ?? 0,
+            'buy_at' => $data['buy_at'] ?? date('Y-m-d H:i:s'),
+            'address_id' => $data['address_id'] ?? null
         ]);
 
         // Return the last inserted order_id
