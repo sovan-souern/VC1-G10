@@ -476,7 +476,7 @@
                                         </div>
                                     <?php endif; ?>
                                     <div class="menu-item1 delete">
-                                        <a href="/notifications/delete?id=<?= $notification['id'] ?>">Delete</a>
+                                        <a href="/notifications/outstock/delete?id=<?= $notification['id'] ?>">Delete</a>
                                     </div>
                                 </div>
                             </div>

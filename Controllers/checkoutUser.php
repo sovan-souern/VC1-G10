@@ -123,39 +123,35 @@ class CheckoutUserController extends BaseController
       $orderId = $storeProduct; 
       error_log("Order ID: " . $orderId); 
 
-      $productCaculate=$this->model_product->getProducts();
+      $productCaculate = $this->model_product->getProducts();
       foreach ($selectedProductIds as $product_Id) {
-        $amountProduct = $amountProducts[$product_Id] ?? 1; 
-        foreach ($productCaculate as $product) {
-          if ($product_Id == $product['product_id']) {
-            // echo $amountProduct ;
-           
-            $this->model_product->updateProductQuantity($product['product_id'], $amountProduct);
-            break; 
+          $amountProduct = $amountProducts[$product_Id] ?? 1; 
+          foreach ($productCaculate as $product) {
+              if ($product_Id == $product['product_id']) {
+                  $this->model_product->updateProductQuantity($product['product_id'], $amountProduct); 
+                  break; 
+              }
           }
-        }
-        $users = $this->model->getUser();
-       $name= null;
-        foreach ($users as $user) {
-          
-          
-          if( $id == $user['admin_id']){
-            $name = $user["name"]; 
-          };
-
-        }
-        
-        $dataNotification = [
-            'user_id' => $id,
-            'product_id' => $product_Id,
-            'order_id' => $orderId, 
-            'created_at' => date('Y-m-d H:i:s'),
-            'status' => "unread",
-            'message' => "You have a new order from : $name",
-            'type' => "order"
-        ];
-        $this->model_Notification->createOrderNotification($dataNotification);
       }
+      $users = $this->model->getUser();
+      $name = null;
+      foreach ($users as $user) {
+          if ($id == $user['admin_id']) {
+              $name = $user["name"]; 
+          }
+      }
+
+      // Create a single notification for the last order
+      $dataNotification = [
+          'user_id' => $id,
+          'product_id' => end($selectedProductIds), // Use the last product ID
+          'order_id' => $orderId, 
+          'created_at' => date('Y-m-d H:i:s'),
+          'status' => "unread",
+          'message' => "You have a new order from : $name",
+          'type' => "order"
+      ];
+      $this->model_Notification->createOrderNotification($dataNotification);
     }
   }
 

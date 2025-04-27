@@ -346,14 +346,18 @@
         </div>
       </div>
       <div class="product">
-        <p>product name: </p>
+      
         <?php foreach ($orders as $key => $order):?>
+          
          
               <?php if ($order['admin_id'] == $notificationID['notification_user_id']&& $notificationID["order_buy_at"]==$order["buy_at"]): ?>
                 
-                <?php echo ($notificationID['product_name']) ?>,
+                <p><strong>product name:</strong> <?php echo ($order['product_name']) ?> <?php echo($order["amount_product"])?></p>
               <?php endif; ?>
         <?php endforeach; ?>
+      </div>
+      <div class="total">
+        <strong>Total: <?php echo ($notificationID['order_total']) ?>$</strong>
       </div>
       <div class="message-content">
         <strong>Message: </strong>

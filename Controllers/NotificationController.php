@@ -36,10 +36,10 @@ class NotificationController extends BaseController
     }
     function UserOrder()
     {
-        
+        $orders= $this->model->getOrder();
         $notifications = $this->model->getNotifications();
         $UsersName= $this->model_admin->getAllAdmins();
-        $this->views('/notification/OrderNotification.php', ["notifications" => $notifications, "UsersName" => $UsersName]);
+        $this->views('/notification/OrderNotification.php', ["notifications" => $notifications, "UsersName" => $UsersName, "orders" => $orders]);
         $this->views('/layout/nav.php', ["notifications" => $notifications]);
     }
 
@@ -80,6 +80,16 @@ class NotificationController extends BaseController
     {
         $this->model->delete($id); // Call the delete method from the model
         $this->redirect('/notifications'); // Fix the redirect URL
+    }
+    function destroyOrder($id)
+    {
+        $this->model->delete($id); // Call the delete method from the model
+        $this->redirect('/Notification/order'); // Fix the redirect URL
+    }
+    function destroyOutstock($id)
+    {
+        $this->model->delete($id); // Call the delete method from the model
+        $this->redirect('/Notification/stock'); // Fix the redirect URL
     }
 
     function update($id)

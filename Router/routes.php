@@ -108,6 +108,8 @@ $routes->get('/user/profile', [UserController::class, 'profile']); // Add this l
 $routes->get('/notifications', [NotificationController::class, 'index']); 
 $routes->get('/notifications/view', [NotificationController::class, 'view']); 
 $routes->get('/notifications/delete', [NotificationController::class, 'destroy']); 
+$routes->get('/notifications/order/delete', [NotificationController::class, 'destroyOrder']); 
+$routes->get('/notifications/outstock/delete', [NotificationController::class, 'destroyOutstock']); 
 $routes->get('/notifications/update', [NotificationController::class, 'update']); 
 $routes->get('/out-stock', [ProductController::class, 'OutStock']);
 $routes->post('/contact/store', [NotificationController::class, 'store']);
