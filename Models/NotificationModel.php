@@ -68,6 +68,24 @@ class NotificationModel
             'status' => $data['status']
         ]);
     }
+    function createOrderNotification($data)
+    {
+        // var_dump($data["user_id"]);
+            
+            $stmt = $this->pdo->prepare("INSERT INTO notifications (order_id, user_id, created_at, status, type,product_id, message) 
+                                         VALUES (:order_id, :user_id, :created_at, :status, :type, :product_id, :message)");
+            $stmt->execute([
+                'user_id' => $data['user_id'],   // Ensure user_id is provided                
+                'order_id' => $data['order_id'], // Ensure order_id is provided
+                'created_at' => $data['created_at'] , // Default to current timestamp
+                'status' => $data['status'] ?? 'unread', // Default to 'unread' if not provided
+                'type' => $data['type'],
+                'message' => $data['message'] ?? null, 
+                'product_id' => $data['product_id'] ,    
+            ]);
+
+        }
+
 
     function getNotification($id)
     {
@@ -82,19 +100,26 @@ class NotificationModel
                 notifications.created_at,
                 notifications.status,
                 notifications.type,
+                notifications.order_id AS notification_order_id,
                 notifications.user_id AS notification_user_id,
                 users.name AS user_name,
                 users.email AS user_email,
                 users.profile_picture AS user_profile_picture,
                 products.image AS product_image,    
                 products.product_name AS product_name,
-                products.quantity AS product_quantity
+                products.quantity AS product_quantity,
+                orders.total AS order_total,
+                orders.order_status AS order_status,
+                orders.buy_at AS order_buy_at,
+                orders.amount_product AS order_amount_product
             FROM 
                 notifications
             LEFT JOIN 
                 admins AS users ON notifications.user_id = users.admin_id
             LEFT JOIN 
                 products ON notifications.product_id = products.product_id
+            LEFT JOIN 
+                orders ON notifications.order_id = orders.order_id
             WHERE 
                 notifications.id = :id
         ");
@@ -122,5 +147,12 @@ class NotificationModel
             "status" => $data["status"],
             "product_id" => $data["product_id"] // Ensure product_id is passed correctly
         ]);
+    }
+    function getOrder(){
+        $stmt = $this->pdo->query("SELECT * FROM orders");
+        $orders=$stmt->fetchAll();
+        return $orders;
+        // var_dump($orders);
+        
     }
 }

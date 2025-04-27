@@ -113,6 +113,7 @@ $routes->get('/out-stock', [ProductController::class, 'OutStock']);
 $routes->post('/contact/store', [NotificationController::class, 'store']);
 $routes->get('/Notification/UserContact', [NotificationController::class, 'UserContact']);
 $routes->get('/Notification/stock', [NotificationController::class, 'stock']);
+$routes->get('/Notification/order', [NotificationController::class, 'UserOrder']);
 $routes->get('/contact', [ContactController::class, 'index']);
 
 

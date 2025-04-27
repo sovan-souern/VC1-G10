@@ -34,6 +34,14 @@ class NotificationController extends BaseController
         $this->views('/notification/UserCOntact.php', ["notifications" => $notifications, "UsersName" => $UsersName]);
         $this->views('/layout/nav.php', ["notifications" => $notifications]);
     }
+    function UserOrder()
+    {
+        
+        $notifications = $this->model->getNotifications();
+        $UsersName= $this->model_admin->getAllAdmins();
+        $this->views('/notification/OrderNotification.php', ["notifications" => $notifications, "UsersName" => $UsersName]);
+        $this->views('/layout/nav.php', ["notifications" => $notifications]);
+    }
 
     function store($id)
     {
@@ -59,11 +67,12 @@ class NotificationController extends BaseController
 
     function view($id)
     {
-
+        $orders= $this->model->getOrder();
+        // var_dump($orders);
         $notificationID = $this->model->getNotification($id);
     
         $UsersName= $this->model_admin->getAllAdmins();
-        $this->views('/notification/view.php', ["notificationID" => $notificationID, "UsersName" => $UsersName]);
+        $this->views('/notification/view.php', ["notificationID" => $notificationID, "UsersName" => $UsersName, "orders" => $orders]);
         
     }
 

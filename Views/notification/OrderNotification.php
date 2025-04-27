@@ -1,4 +1,4 @@
-
+<!-- <?php var_dump($notifications)?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -358,13 +358,6 @@
             left: 68px;
             bottom : 17px;
         }
-        #notification-order{
-            
-            position: obsolute;
-            left: 68px;
-            bottom : 17px;
-        
-        }
     </style>
 </head>
 
@@ -437,7 +430,7 @@
         <div class="notifications-container">
             <?php if (!empty($notifications) || (isset($lowStockProducts) && !empty($lowStockProducts)) || (isset($outStockProducts) && !empty($outStockProducts))): ?>
                 <?php foreach ($notifications as $index => $notification): ?>
-                    <?php if ($notification["type"] == "contact"): ?>
+                    <?php if ($notification["type"] == "order"): ?>
                         <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>">
                             
                                 
