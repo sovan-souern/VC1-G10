@@ -15,32 +15,34 @@ class OrderModel
         $stmt = $this->pdo->query("SELECT * FROM orders");
         return $stmt->fetchAll();
     }
-
     public function createOrder($data, $adminId)
     {
-        // Convert product_ids array to a comma-separated string
-        $productIdsString = isset($data['product_ids']) && is_array($data['product_ids']) 
-            ? implode(',', $data['product_ids']) 
-            : null;
+        $orderId = null;
 
-        $stmt = $this->pdo->prepare("
-            INSERT INTO orders (admin_id, phone, order_status, total, buy_at, address_id, firstName, lastName, product_id) 
-            VALUES (:admin_id, :phone, :order_status, :total, :buy_at, :address_id, :firstName, :lastName, :product_id)
-        ");
-        $stmt->execute([
-            'admin_id' => $data['admin_id'] ?? null,
-            'firstName' => $data['first_name'] ?? '',
-            'lastName' => $data['last_name'] ?? '',
-            'product_id' => $productIdsString, // Store as a comma-separated string
-            'phone' => $data['phone'] ?? '',
-            'order_status' => $data['order_status'] ?? 'Pending',
-            'total' => $data['total'] ?? 0,
-            'buy_at' => $data['buy_at'] ?? date('Y-m-d H:i:s'),
-            'address_id' => $data['address_id'] ?? null
-        ]);
+        foreach ($data['product_ids'] as $productId) {
+            $stmt = $this->pdo->prepare("
+                INSERT INTO orders (admin_id, phone, order_status, total, buy_at, address_id, firstName, lastName, product_id, amount_product) 
+                VALUES (:admin_id, :phone, :order_status, :total, :buy_at, :address_id, :firstName, :lastName, :product_id, :amount_product)
+            ");
+            $stmt->execute([
+                'admin_id' => $data['admin_id'] ?? null,
+                'firstName' => $data['first_name'] ?? '',
+                'lastName' => $data['last_name'] ?? '',
+                'product_id' => $productId, // Insert each product ID individually
+                'amount_product' => $data['amount_products'][$productId] ?? 1, // Insert the corresponding quantity
+                'phone' => $data['phone'] ?? '',
+                'order_status' => $data['order_status'] ?? 'Pending',
+                'total' => $data['total'] ?? 0,
+                'buy_at' => $data['buy_at'] ?? date('Y-m-d H:i:s'),
+                'address_id' => $data['address_id'] ?? null
+            ]);
 
-        // Return the last inserted order_id
-        return $this->pdo->lastInsertId();
+            // Store the last inserted order ID (useful for notifications)
+            $orderId = $this->pdo->lastInsertId();
+        }
+
+        // Return the last inserted order ID
+        return $orderId;
     }
 
     function getUser()
