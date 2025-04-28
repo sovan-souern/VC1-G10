@@ -12,15 +12,9 @@
                 <h6 class="text-muted">Manage your Users</h6>
             </div>
             <div class="page-btn">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="createUserDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/Views/assets/img1/icons/plus.svg" alt="img" class="me-1">Add New User
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="createUserDropdown">
-                        <li><a class="dropdown-item" href="/admin-register">Create Shopowner</a></li>
-                        <li><a class="dropdown-item" href="">Create User</a></li>
-                    </ul>
-                </div>
+                <a href="/admin-register" class="btn btn-primary">
+                    <img src="/Views/assets/img1/icons/plus.svg" alt="img" class="me-1">Add New User
+                </a>
             </div>
         </div>
 
