@@ -138,11 +138,6 @@ $notifications = $model->getNotifications();
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a class="menu-link" href="/admin-register">
-            <div data-i18n="Account">Create Shop Owner</div>
-          </a>
-        </li>
-        <li class="menu-item">
           <a href="/editProfile" class="menu-link">
             <div data-i18n="Account">Update Profile</div>
           </a>
@@ -722,13 +717,6 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                     <span class="align-middle">Forgot Password</span>
                   </a>
                 </li>
-                <!-- create admin -->
-                 <li>
-                  <a class="dropdown-item" href="/admin-register">
-                    <i class="bi bi-person-plus me-2"></i>
-                    <span class="align-middle">Create ShopOwner</span>
-                  </a>
-                <li>
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
@@ -769,7 +757,6 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
               dropdown.classList.add("open");
             }
           });
-
           // Store active menu item
           menuItems.forEach(link => {
             link.addEventListener("click", function() {

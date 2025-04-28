@@ -1,4 +1,4 @@
-
+<!-- <?php var_dump($notifications)?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -352,11 +352,6 @@
             position: obsolute;
             left: 65px;
         }
-        #notification-stock{
-            
-            position: obsolute;
-            left: 65px;
-        }
         #notification-order{
             
             position: obsolute;
@@ -430,55 +425,58 @@
             </span>
         </span>
         
-
+<!-- <?php var_dump($orders) ?> -->
 
         <div class="notifications-container">
             <?php if (!empty($notifications) || (isset($lowStockProducts) && !empty($lowStockProducts)) || (isset($outStockProducts) && !empty($outStockProducts))): ?>
                 <?php foreach ($notifications as $index => $notification): ?>
-                    <?php if ($notification["type"] == "contact"): ?>
-                        <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>">
-                            
-                                
+                    <?php if ($notification["type"] == "order"): ?>
+                        <?php 
+                        $shown = false; // Track if a notification has been shown
+                        foreach ($orders as $order): ?>
+                            <?php if (!$shown && $order['buy_at'] == $notification['created_at'] && $order['admin_id'] == $notification['notification_user_id']): ?>
+                                <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>">
                                     <div class="notification-icon">
                                         <img src="../../../<?php echo $notification["user_profile_picture"] ?>" alt="">
                                     </div>
-                                
-                       
-                            <div class="notification-content">
-                                <div class="notification-title">
-                                    <?php echo $notification['user_name']; ?>
-                                    <?php if ($notification['status'] == 'unread'): ?>
-                                        <span class="dot"></span>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="notification-time">
-                                    Posted: <span><?= timeAgo($notification['created_at']); ?></span>
-                                </div>
-                                <div class="notification-message">
-                                  <span>Message: </span>  <?php echo $notification['message']; ?>
-                                </div>
-                            </div>
-                            <div class="menu-container">
-                                <button class="menu-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v.01M12 12v.01M12 18v.01" />
-                                    </svg>
-                                </button>
-                                <div class="menu-dropdown">
-                                    <div class="menu-item1 view-details">
-                                        <a href="/notifications/view?id=<?= $notification['id'] ?>">View Details</a>
-                                    </div>
-                                    <?php if ($notification['status'] === 'unread'): ?>
-                                        <div class="menu-item1 mark-read">
-                                            <a href="/notifications/update?id=<?= $notification['id'] ?>">Mark as read</a>
+                                    <div class="notification-content">
+                                        <div class="notification-title">
+                                            <?php echo $notification['user_name']; ?>
+                                            <?php if ($notification['status'] == 'unread'): ?>
+                                                <span class="dot"></span>
+                                            <?php endif; ?>
                                         </div>
-                                    <?php endif; ?>
-                                    <div class="menu-item1 delete">
-                                        <a href="/notifications/delete?id=<?= $notification['id'] ?>">Delete</a>
+                                        <div class="notification-time">
+                                            Posted: <span><?= timeAgo($notification['created_at']); ?></span>
+                                        </div>
+                                        <div class="notification-message">
+                                            <span>Message: </span> <?php echo $notification['message']; ?>
+                                        </div>
+                                    </div>
+                                    <div class="menu-container">
+                                        <button class="menu-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v.01M12 12v.01M12 18v.01" />
+                                            </svg>
+                                        </button>
+                                        <div class="menu-dropdown">
+                                            <div class="menu-item1 view-details">
+                                                <a href="/notifications/view?id=<?= $notification['id'] ?>">View Details</a>
+                                            </div>
+                                            <?php if ($notification['status'] === 'unread'): ?>
+                                                <div class="menu-item1 mark-read">
+                                                    <a href="/notifications/update?id=<?= $notification['id'] ?>">Mark as read</a>
+                                                </div>
+                                            <?php endif; ?>
+                                            <div class="menu-item1 delete">
+                                                <a href="/notifications/order/delete?id=<?= $notification['id'] ?>">Delete</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                                <?php $shown = true; // Mark as shown to prevent duplicates ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
 
@@ -536,7 +534,14 @@
     <?php
     function timeAgo($created_at)
     {
-        $created_time = strtotime($created_at);
+        // Ensure the timezone is set correctly
+        date_default_timezone_set('Asia/Ho_Chi_Minh'); // Replace with your actual timezone
+
+        $created_time = strtotime($created_at); // Convert the created_at string to a timestamp
+        if ($created_time === false || $created_time > time()) {
+            return "Invalid date"; // Handle invalid or future dates
+        }
+
         $current_time = time();
         $diff = $current_time - $created_time;
 
@@ -636,4 +641,4 @@
     </script>
 </body>
 
-</html> 
+</html>

@@ -7,15 +7,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        header{
+        header {
             display: none;
         }
-        .footer{
+
+        .footer {
             display: none;
         }
-        .slideshow-container, .dot-container {
+
+        .slideshow-container,
+        .dot-container {
             display: none;
         }
+
         :root {
             --primary-color: #0066cc;
             --secondary-color: #f8f9fa;
@@ -119,9 +123,9 @@
         .order-summary {
             background-color: white;
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 30px;
             position: sticky;
-            top: 15px;
+            top: 20px;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
         }
@@ -130,30 +134,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #e9ecef;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
         .order-header h5 {
             font-weight: 600;
             color: var(--dark-color);
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
         }
 
         .edit-link {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
-            font-size: 13px;
+            font-size: 14px;
             transition: var(--transition);
             display: flex;
             align-items: center;
         }
 
         .edit-link i {
-            margin-right: 4px;
+            margin-right: 5px;
         }
 
         .edit-link:hover {
@@ -162,39 +166,39 @@
         }
 
         .order-items-container {
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
-            margin-bottom: 15px;
-            padding-right: 4px;
+            margin-bottom: 20px;
+            padding-right: 5px;
         }
 
         .order-items-container::-webkit-scrollbar {
-            width: 4px;
+            width: 5px;
         }
 
         .order-items-container::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .order-items-container::-webkit-scrollbar-thumb {
             background: #c1c1c1;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .product-item {
             display: flex;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #f1f1f1;
         }
 
         .product-image {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background-color: #f8f9fa;
-            border-radius: var(--border-radius);
-            margin-right: 12px;
+            border-radius: 8px;
+            margin-right: 15px;
             flex-shrink: 0;
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -212,13 +216,13 @@
 
         .product-name {
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             color: var(--dark-color);
             font-size: 14px;
         }
 
         .product-quantity {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--gray-color);
         }
 
@@ -227,14 +231,14 @@
             text-align: right;
             white-space: nowrap;
             color: var(--dark-color);
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .summary-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 10px;
+            font-size: 15px;
             color: #495057;
         }
 
@@ -242,11 +246,25 @@
             display: flex;
             justify-content: space-between;
             font-weight: 600;
-            font-size: 18px;
-            margin-top: 12px;
-            padding-top: 12px;
+            font-size: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
             border-top: 1px solid #e9ecef;
             color: var(--dark-color);
+        }
+
+        .secure-checkout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        .secure-checkout i {
+            margin-right: 8px;
+            color: var(--success-color);
         }
 
         .nav-buttons {
@@ -281,20 +299,6 @@
             opacity: 0.65;
             transform: none;
             box-shadow: none;
-        }
-
-        .secure-checkout {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 15px;
-            color: var(--gray-color);
-            font-size: 13px;
-        }
-
-        .secure-checkout i {
-            margin-right: 6px;
-            color: var(--success-color);
         }
 
         @media (max-width: 768px) {
@@ -334,7 +338,7 @@
 
             .order-summary {
                 position: static;
-                margin-top: 15px;
+                margin-top: 20px;
             }
         }
 
@@ -354,14 +358,66 @@
                 font-size: 11px;
             }
         }
+
+        .modal-dialog {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .loading-modal,
+        .modal-content {
+            background-color: #ffffff;
+            border: none;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+        }
+
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: var(--dark-color);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
+        }
     </style>
 </head>
-
 <body>
     <div class="container checkout-container">
         <div class="row">
             <div class="col-md-7">
-                <form action="/checkout/store?id=<?php echo $admin_id?>" method="POST" id="checkout-form">
+                <form action="/checkout/store?id=<?php foreach ($users as $user) {
+                                                        if ($user['name'] == $_SESSION['name']) {
+                                                            echo $user['admin_id'];
+                                                        }
+                                                    }
+                                                    ?>" method="POST" id="checkout-form">
                     <input type="hidden" name="admin_id" value="">
                     <input type="hidden" name="items" id="items">
                     <input type="hidden" name="total" id="total_input">
@@ -451,26 +507,29 @@
             <div class="col-md-5">
                 <div class="order-summary">
                     <div class="order-header">
-                        <h5>Order Summary (<span id="order-item-count">0</span>)</h5>
-                        <a href="/cart" class="edit-link" aria-label="Edit Cart">
+                        <h5>Order summary (<span id="order-item-count">0</span>)</h5>
+                        <a href="#" class="edit-link">
                             <i class="fas fa-edit"></i> Edit Cart
                         </a>
                     </div>
-                    <div id="order-items" class="order-items-container"></div>
+                    <div id="order-items" class="order-items-container">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
                     <div class="summary-row">
                         <div>Subtotal</div>
                         <div id="subtotal">$0.00</div>
                     </div>
                     <div class="summary-row">
                         <div>Delivery</div>
-                        <div id="delivery-cost">To be determined</div>
+                        <div>pay by yourself</div>
                     </div>
                     <div class="total-row">
                         <div>Total</div>
                         <div id="total">$0.00</div>
                     </div>
                     <div class="secure-checkout">
-                        <i class="fas fa-shield-alt"></i> Secure Checkout
+                        <i class="fas fa-shield-alt"></i>
+                        Secure Checkout
                     </div>
                 </div>
             </div>
@@ -487,63 +546,14 @@
         </div>
     </div>
 
-    <style>
-        .modal-dialog {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .loading-modal , .modal-content {
-            background-color: #ffffff;
-            border: none;
-            box-shadow: var(--box-shadow);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 30px;
-            border-radius: var(--border-radius);
-            /* min-height: 180px; */
-        }
-
-        .loading-spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-            /* position: relative;
-            left: 100px; */
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-size: 18px;
-            color: var(--dark-color);
-            font-weight: 500;
-            text-align: center;
-            line-height: 1.5;
-        }
-    </style>
-
     <script>
-        const sampleCart = [
-            {
-                id: 1,
-                name: "William Shirt",
-                price: 2.50,
-                quantity: 2,
-                image: "https://via.placeholder.com/60"
-            }
-        ];
+        const sampleCart = [{
+            id: 1,
+            name: "Germaine Stein",
+            price: 677.00,
+            quantity: 1,
+            image: "https://via.placeholder.com/70"
+        }];
 
         let cart = [];
         try {
@@ -556,10 +566,15 @@
 
         const renderOrderSummary = () => {
             const orderItemsContainer = document.getElementById('order-items');
-            orderItemsContainer.innerHTML = cart.length === 0
-                ? '<p class="text-center py-3">Your cart is empty.</p>'
-                : cart.map(item => `
-                    <div class="product-item">
+            orderItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = '<p class="text-center py-3">Your cart is empty.</p>';
+            } else {
+                cart.forEach((item) => {
+                    const productItem = document.createElement('div');
+                    productItem.classList.add('product-item');
+                    productItem.innerHTML = `
                         <div class="product-image">
                             <img src="${item.image}" alt="${item.name}">
                         </div>
@@ -568,20 +583,22 @@
                             <div class="product-quantity">Qty: ${item.quantity}</div>
                         </div>
                         <div class="product-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                    </div>
-                `).join('');
+                    `;
+                    orderItemsContainer.appendChild(productItem);
+                });
+            }
             updateOrderSummary();
         };
 
         const updateOrderSummary = () => {
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            const deliveryCost = 0;
-            const total = subtotal + deliveryCost;
+            const total = subtotal;
+
             document.getElementById('order-item-count').textContent = totalItems;
             document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('delivery-cost').textContent = deliveryCost ? `$${deliveryCost.toFixed(2)}` : 'To be determined';
             document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
             document.getElementById('items').value = JSON.stringify(cart);
             document.getElementById('product_id').value = cart.map(item => item.id).filter(id => id).join(',');
             document.getElementById('total_input').value = total.toFixed(2);
@@ -616,7 +633,7 @@
         };
 
         document.querySelector('#checkout-form').addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault();
             if (!validateSection()) {
                 console.log('Form validation failed');
                 return;
@@ -626,22 +643,17 @@
                 return;
             }
 
-            // Show loading modal
             const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'), {
                 backdrop: 'static',
                 keyboard: false
             });
             loadingModal.show();
 
-            // Disable submit button
             document.getElementById('submit-btn').disabled = true;
 
-            // Configurable loading delay (in milliseconds)
-            const loadingDelay = 3000; // 10 seconds (change to 20000 for 20 seconds)
+            const loadingDelay = 3000;
 
-            // Simulate processing with setTimeout before submitting the form
             setTimeout(() => {
-                // Submit the form programmatically
                 document.getElementById('checkout-form').submit();
             }, loadingDelay);
         });

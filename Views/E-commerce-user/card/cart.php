@@ -332,8 +332,8 @@ hr {
 }
 </style>
 
+<!-- Inside cart.html -->
 <script>
-    // cart-script.js
 document.addEventListener('DOMContentLoaded', function() {
     // Get elements
     const cartItemsContainer = document.querySelector('.cart-items');
@@ -437,11 +437,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Update order summary
+    // Update order summary and save total to localStorage
     function updateSummary() {
         const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
         subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-        totalEl.textContent = `$${subtotal.toFixed(2)}`; // Total is now equal to subtotal
+        totalEl.textContent = `$${subtotal.toFixed(2)}`; // Total is equal to subtotal for now
+        // Save the total to localStorage
+        localStorage.setItem('checkoutTotal', subtotal.toFixed(2));
     }
 
     // Promo code and note functionality
@@ -450,6 +452,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (code) {
             alert(`Promo code "${code}" applied!`);
             // Add promo code logic here (e.g., apply discount)
+            // After applying discount, call updateSummary to update the total
+            updateSummary();
         }
     });
 
@@ -458,6 +462,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (note) {
             alert(`Note added: "${note}"`);
         }
+    });
+
+    // Ensure total is saved before navigating to checkout
+    document.querySelector('.checkout-btn').addEventListener('click', function() {
+        updateSummary(); // Ensure the latest total is saved
+        if (cartItems.length === 0) {
+            alert('Your cart is empty. Please add items before checking out.');
+            return;
+        }
+        window.location.href = 'checkout'; // Navigate to checkout page
     });
 });
 </script>

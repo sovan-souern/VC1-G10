@@ -351,6 +351,12 @@
             position: obsolute;
             left: 65px;
         }
+        #notification-order{
+            
+            position: obsolute;
+            left: 68px;
+            bottom : 17px;
+        }
     </style>
 </head>
 
@@ -358,7 +364,26 @@
     <div class="container">
         <h2>Your Notifications</h2>
         
-        <a href="" class="btn btn-outline-dark mb-2">Order</a>
+       
+        <span class="notification m-1">
+
+            <!-- <a href="" class="btn btn-outline-dark mb-2">Contact</a> -->
+            <a href="/Notification/order" class="btn btn-outline-dark mb-2">Order</a>
+            <span class="notification-bg" id="notification-order">
+
+                <?php
+                $totalIndex = 0;
+                foreach ($notifications as $index => $notification) {
+                    if ($notification["status"] == "unread") {
+                        if ($notification["type"] == "order") {
+                            $totalIndex++;
+                        }
+                    }
+                }
+                echo $totalIndex;
+                ?>
+            </span>
+        </span>
         <span class="notification m-1">
 
             <a href="/Notification/UserContact" class="btn btn-outline-dark mb-2">Contact</a>
@@ -451,7 +476,7 @@
                                         </div>
                                     <?php endif; ?>
                                     <div class="menu-item1 delete">
-                                        <a href="/notifications/delete?id=<?= $notification['id'] ?>">Delete</a>
+                                        <a href="/notifications/outstock/delete?id=<?= $notification['id'] ?>">Delete</a>
                                     </div>
                                 </div>
                             </div>
