@@ -57,7 +57,7 @@
                                     <td>
                                         <a href="/E-comerce/order/cancel/<?php echo $order['id']; ?>" class="btn btn-danger">Cancel</a>
                                         <a href="/E-comerce/order/confirm/<?php echo $order['id']; ?>" class="btn btn-success">Confirm</a>
-                                        <a href="/E-comerce/order/views/<?php echo $order['id']; ?>" class="btn btn-success">Views</a>
+                                        <a href="/order_detail?id=<?php echo $order['id']; ?>" class="btn btn-success">Views</a>
                                     </td>
                                 </tr>
                             <?php 

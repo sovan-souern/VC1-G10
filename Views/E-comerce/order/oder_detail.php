@@ -63,6 +63,7 @@
                                     </table>
                                 </td>
                             </tr>
+
                             <tr class="heading" style="background: #F3F2F7;">
                                 <td style="padding: 5px;vertical-align: middle;font-weight: 600;color: #5E5873;font-size: 14px;padding: 10px;">
                                     Product Name
@@ -83,52 +84,42 @@
                                     Subtotal
                                 </td>
                             </tr>
+                            <?php foreach ($orders as $index => $order):?>
+                 =
+                                <?php if($orderID["admin_id"]==$order["admin_id"]):?>
+                                    <?php if($orderID["created_at"]==$order["created_at"]):?>
+                                        
+                                   
                             <tr class="details" style="border-bottom:1px solid #E9ECEF;">
                                 <td style="padding: 10px;vertical-align: top; display: flex;align-items: center;">
-                                    <img src="assets/img/product/product1.jpg" alt="img" class="me-2" style="width:40px;height:40px;">
-                                    Macbook pro
+                                    <img src="../../../<?php echo $order["product_image"]?>" alt="img" class="me-2" style="width:40px;height:40px;">
+                                    <?php echo($order["product_name"])?>
                                 </td>
                                 <td style="padding: 10px;vertical-align: top;">
-                                    1.00
+                                <?php echo($order["amount_product"])?>
+                            </td>
+                            <td style="padding: 10px;vertical-align: top;">
+                                    <?php echo($order["product_price"])?>
+                                    
                                 </td>
                                 <td style="padding: 10px;vertical-align: top;">
-                                    1500.00
+                                    <?php echo($order["amount_product"])?>
                                 </td>
                                 <td style="padding: 10px;vertical-align: top;">
                                     0.00
                                 </td>
                                 <td style="padding: 10px;vertical-align: top;">
-                                    0.00
-                                </td>
-                                <td style="padding: 10px;vertical-align: top;">
-                                    1500.00
+                                    <?php echo($order["amount_product"] * $order["product_price"]) ?>
                                 </td>
                             </tr>
-                            <tr class="details" style="border-bottom:1px solid #E9ECEF;">
-                                <td style="padding: 10px;vertical-align: top; display: flex;align-items: center;">
-                                    <img src="assets/img/product/product7.jpg" alt="img" class="me-2" style="width:40px;height:40px;">
-                                    Apple Earpods
-                                </td>
-                                <td style="padding: 10px;vertical-align: top;">
-                                    1.00
-                                </td>
-                                <td style="padding: 10px;vertical-align: top;">
-                                    2000.00
-                                </td>
-                                <td style="padding: 10px;vertical-align: top;">
-                                    0.00
-                                </td>
-                                <td style="padding: 10px;vertical-align: top;">
-                                    0.00
-                                </td>
-                                <td style="padding: 10px;vertical-align: top;">
-                                    2000.00
-                                </td>
-                            </tr>
+                            <?php endif?>
+                            <?php endif?>
+                            <?php endforeach?>
+                           
                             <!-- Total Price Row -->
                             <tr class="total-price" style="background: #F3F2F7; font-weight: bold;">
                                 <td colspan="5" style="padding: 10px; text-align: right;">Total Price</td>
-                                <td style="padding: 10px; vertical-align: top;">$ 3500.00</td>
+                                <td style="padding: 10px; vertical-align: top;">$ <?php echo($order["total"])?></td>
                             </tr>
                         </tbody>
                     </table>

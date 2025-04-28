@@ -23,8 +23,12 @@ class OrderController extends BaseController
     function view($id)
     {
         // echo "View Product";
-        $orders = $this->model->getOrder($id);
-        $this->views('/E-comerce/order/oder_detail.php', ['orders' => $orders]);
+        // $orders = $this->model->getOrder($id);
+        $orderID = $this->model->getOrderID($id);
+        var_dump($orderID);
+        $orders = $this->model->getOrderDetail();
+       
+        $this->views('/E-comerce/order/oder_detail.php', ['orderID' => $orderID, 'orders' => $orders]);
     }
 
 
