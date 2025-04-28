@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="card p-4">
-        <h4>Add Discount</h4>
+        <h4>Add Product Discount</h4>
         <form class="my-3" action="/descount/brand/store?id=<?= $brands['id'] ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-name">
