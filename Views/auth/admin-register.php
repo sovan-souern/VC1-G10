@@ -1,7 +1,5 @@
 <style>
-        .container{
-            margin-top: -40px;
-        }
+        
         .card {
             border: none;
             border-radius: 15px;
@@ -149,7 +147,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Shop Owner Name</label>
+                                    <label class="form-label">Full Name</label>
                                     <div class="input-group">
                                         <i class="bi bi-person-fill input-icon"></i>
                                         <input type="text" name="name" class="form-control input-with-icon" placeholder="Enter your full name" required>
@@ -161,6 +159,17 @@
                                     <div class="input-group">
                                         <i class="bi bi-envelope-fill input-icon"></i>
                                         <input type="text" name="identifier" class="form-control input-with-icon" placeholder="Enter phone number or email" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Role</label>
+                                    <div class="input-group">
+                                        <i class="bi bi-person-badge-fill input-icon"></i>
+                                        <select name="role" class="form-select input-with-icon" id="roleSelect" required>
+                                            <option value="user">User</option>
+                                            <option value="shopowner">Shopowner</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -187,15 +196,12 @@
                                     </div>
                                 </div>
 
-                                <!-- Hidden role input -->
-                                <input type="hidden" name="role" value="shopowner">
-
                                 <div class="d-flex gap-2">
                                     <button type="button" class="btn btn-outline-secondary w-50" onclick="previousStep()">
                                         Back
                                     </button>
                                     <button type="submit" class="btn btn-primary btn-submit w-50">
-                                        Create Shop Account
+                                        Create Account
                                     </button>
                                 </div>
                             </div>
@@ -325,6 +331,21 @@
 
         // Initialize progress bar
         updateProgressBar();
+
+        document.getElementById('roleSelect').addEventListener('change', function () {
+            const form = document.getElementById('adminRegisterForm');
+            const selectedRole = this.value;
+
+            // Update the form action based on the selected role
+            if (selectedRole === 'user') {
+                form.action = '/users/store';
+            } else if (selectedRole === 'shopowner') {
+                form.action = '/users/store-admin';
+            }
+        });
+
+        // Initialize the form action based on the default role
+        document.getElementById('roleSelect').dispatchEvent(new Event('change'));
     </script>
 </body>
 </html>
