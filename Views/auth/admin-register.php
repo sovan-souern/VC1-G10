@@ -1,7 +1,5 @@
 <style>
-        .container{
-            margin-top: -40px;
-        }
+        
         .card {
             border: none;
             border-radius: 15px;
@@ -149,7 +147,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Shop Owner Name</label>
+                                    <label class="form-label">Full Name</label>
                                     <div class="input-group">
                                         <i class="bi bi-person-fill input-icon"></i>
                                         <input type="text" name="name" class="form-control input-with-icon" placeholder="Enter your full name" required>
@@ -157,10 +155,21 @@
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label class="form-label">Contact Number</label>
+                                    <label class="form-label">Contact (Phone or Email)</label>
                                     <div class="input-group">
-                                        <i class="bi bi-phone-fill input-icon"></i>
-                                        <input type="tel" name="phone" class="form-control input-with-icon" pattern="[0-9]{9,10}" placeholder="Enter mobile number" required>
+                                        <i class="bi bi-envelope-fill input-icon"></i>
+                                        <input type="text" name="identifier" class="form-control input-with-icon" placeholder="Enter phone number or email" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Role</label>
+                                    <div class="input-group">
+                                        <i class="bi bi-person-badge-fill input-icon"></i>
+                                        <select name="role" class="form-select input-with-icon" id="roleSelect" required>
+                                            <option value="user">User</option>
+                                            <option value="shopowner">Shopowner</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -187,15 +196,12 @@
                                     </div>
                                 </div>
 
-                                <!-- Hidden role input -->
-                                <input type="hidden" name="role" value="shopowner">
-
                                 <div class="d-flex gap-2">
                                     <button type="button" class="btn btn-outline-secondary w-50" onclick="previousStep()">
                                         Back
                                     </button>
                                     <button type="submit" class="btn btn-primary btn-submit w-50">
-                                        Create Shop Account
+                                        Create Account
                                     </button>
                                 </div>
                             </div>
@@ -233,7 +239,7 @@
                 if (data.status === 'success') {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Success!',
+                        title: 'Account Created!',
                         text: data.message,
                         confirmButtonColor: '#FF69B4'
                     }).then(() => {
@@ -262,13 +268,12 @@
         }
 
         function nextStep() {
-            // Validate current step
             const currentStepElement = document.getElementById(`step${currentStep}`);
             const inputs = currentStepElement.querySelectorAll('input[required]');
             let isValid = true;
 
             inputs.forEach(input => {
-                if (!input.value) {
+                if (!input.value.trim()) {
                     isValid = false;
                     input.classList.add('is-invalid');
                 } else {
@@ -276,26 +281,27 @@
                 }
             });
 
-            // Phone number validation for step 1
             if (currentStep === 1) {
-                const phone = document.querySelector('input[name="phone"]').value;
-                if (!/^[0-9]{9,10}$/.test(phone)) {
+                const identifier = document.querySelector('input[name="identifier"]').value.trim();
+                const phoneRegex = /^[0-9]{9,10}$/;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!phoneRegex.test(identifier) && !emailRegex.test(identifier)) {
                     isValid = false;
                     Swal.fire({
                         icon: 'error',
-                        title: 'Invalid Phone Number',
-                        text: 'Please enter a valid phone number (9-10 digits)',
+                        title: 'Invalid Contact',
+                        text: 'Please enter a valid phone number (9-10 digits) or email address.',
                         confirmButtonColor: '#FF69B4'
                     });
                     return;
                 }
             }
 
-            // Password validation moved to step 2
             if (currentStep === 2) {
-                const password = document.querySelector('input[name="password"]').value;
-                const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
-                
+                const password = document.querySelector('input[name="password"]').value.trim();
+                const confirmPassword = document.querySelector('input[name="confirm_password"]').value.trim();
+
                 if (password !== confirmPassword) {
                     isValid = false;
                     Swal.fire({
@@ -310,7 +316,6 @@
 
             if (!isValid) return;
 
-            // Proceed to next step
             document.getElementById(`step${currentStep}`).classList.remove('active');
             currentStep++;
             document.getElementById(`step${currentStep}`).classList.add('active');
@@ -326,4 +331,21 @@
 
         // Initialize progress bar
         updateProgressBar();
+
+        document.getElementById('roleSelect').addEventListener('change', function () {
+            const form = document.getElementById('adminRegisterForm');
+            const selectedRole = this.value;
+
+            // Update the form action based on the selected role
+            if (selectedRole === 'user') {
+                form.action = '/users/store';
+            } else if (selectedRole === 'shopowner') {
+                form.action = '/users/store-admin';
+            }
+        });
+
+        // Initialize the form action based on the default role
+        document.getElementById('roleSelect').dispatchEvent(new Event('change'));
     </script>
+</body>
+</html>

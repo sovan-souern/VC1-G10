@@ -1,120 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout Page</title>
-    <!-- Bootstrap CSS -->
+    <title>Modern Checkout Experience</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        header {
+            display: none;
+        }
+
+        .footer {
+            display: none;
+        }
+
+        .slideshow-container,
+        .dot-container {
+            display: none;
+        }
+
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #f8f9fa;
+            --accent-color: #00a3e0;
+            --success-color: #28a745;
+            --warning-color: #f5c518;
+            --danger-color: #dc3545;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
+            background-color: var(--light-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-color);
         }
 
         .checkout-container {
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 20px auto;
         }
 
         .form-section {
             background-color: white;
-            border-radius: 4px;
-            padding: 20px;
+            border-radius: var(--border-radius);
+            padding: 25px;
             margin-bottom: 20px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
         }
 
         .section-title {
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 20px;
+            font-weight: 600;
             margin-bottom: 20px;
+            color: var(--dark-color);
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 10px;
         }
 
-        .paypal-btn {
-            background-color: #ffc439;
-            color: #000;
-            font-weight: bold;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 4px;
-        }
-
-        .divider {
+        .form-row {
             display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 15px 0;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        .divider::before,
-        .divider::after {
-            content: '';
+        .form-group {
             flex: 1;
-            border-bottom: 1px solid #dee2e6;
+            min-width: 0;
+            margin-bottom: 15px;
         }
 
-        .divider span {
-            padding: 0 10px;
-            color: #6c757d;
+        .form-label {
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 500;
+            font-size: 13px;
+            color: #495057;
         }
 
-        .product-item {
-            display: flex;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .product-image {
-            width: 80px;
-            height: 80px;
-            background-color: #f0f0f0;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
-
-        .product-details {
-            flex-grow: 1;
-        }
-
-        .product-price {
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #dee2e6;
-        }
-
-        .continue-btn {
-            background-color: #000;
-            color: white;
-            border: none;
-            padding: 12px;
+        .form-control,
+        .form-select {
             width: 100%;
-            border-radius: 4px;
-            font-weight: bold;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-size: 14px;
+            height: 38px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.15rem rgba(0, 102, 204, 0.25);
+        }
+
+        .form-control.is-invalid,
+        .form-select.is-invalid {
+            border-color: var(--danger-color);
+        }
+
+        .invalid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: 0.2rem;
+            font-size: 12px;
+            color: var(--danger-color);
+        }
+
+        .form-control.is-invalid~.invalid-feedback,
+        .form-select.is-invalid~.invalid-feedback {
+            display: block;
         }
 
         .order-summary {
             background-color: white;
-            border-radius: 4px;
-            padding: 20px;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            position: sticky;
+            top: 20px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
         }
 
         .order-header {
@@ -122,147 +135,386 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+
+        .order-header h5 {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+            font-size: 20px;
         }
 
         .edit-link {
-            color: #000;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .edit-link i {
+            margin-right: 5px;
+        }
+
+        .edit-link:hover {
+            color: #0056b3;
             text-decoration: underline;
         }
 
-        .rewards-box {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 15px 0;
+        .order-items-container {
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 5px;
         }
 
-        .icon-text {
+        .order-items-container::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .order-items-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .order-items-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+
+        .product-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .product-image {
+            width: 70px;
+            height: 70px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details {
+            flex-grow: 1;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+            font-size: 14px;
+        }
+
+        .product-quantity {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        .product-price {
+            font-weight: 600;
+            text-align: right;
+            white-space: nowrap;
+            color: var(--dark-color);
+            font-size: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #495057;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+            color: var(--dark-color);
+        }
+
+        .secure-checkout {
             display: flex;
             align-items: center;
-            margin-bottom: 5px;
+            justify-content: center;
+            margin-top: 20px;
+            color: var(--gray-color);
+            font-size: 14px;
         }
 
-        .icon-text svg {
-            margin-right: 10px;
+        .secure-checkout i {
+            margin-right: 8px;
+            color: var(--success-color);
         }
 
-        .dropdown-select {
-            position: relative;
+        .nav-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 25px;
+            gap: 12px;
         }
 
-        .dropdown-select select {
-            appearance: none;
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            background-color: white;
+        .next-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            min-width: 100px;
+            text-align: center;
         }
 
-        .dropdown-select::after {
-            content: '▼';
-            position: absolute;
-            right: 15px;
-            top: 12px;
-            pointer-events: none;
-            font-size: 12px;
+        .next-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.3);
         }
 
-        .product-image.pink {
-            background-color: #f8d7e3;
+        .next-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.65;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                margin: 10px auto;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-control,
+            .form-select {
+                padding: 7px 10px;
+                font-size: 13px;
+                height: 36px;
+            }
+
+            .form-label {
+                font-size: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .next-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .order-summary {
+                position: static;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-section {
+                padding: 15px;
+            }
+
+            .form-control,
+            .form-select {
+                padding: 6px 8px;
+                font-size: 12px;
+                height: 34px;
+            }
+
+            .form-label {
+                font-size: 11px;
+            }
+        }
+
+        .modal-dialog {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .loading-modal,
+        .modal-content {
+            background-color: #ffffff;
+            border: none;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+        }
+
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: var(--dark-color);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
         }
     </style>
 </head>
-
 <body>
     <div class="container checkout-container">
         <div class="row">
-            <!-- Left Column - Forms -->
             <div class="col-md-7">
-                <form action="/checkout/store?id=<?php echo htmlspecialchars($admin_id ?? ''); ?>" method="POST" id="checkout-form">
-                    <!-- Add a hidden input for admin_id -->
-                    <input type="hidden" name="admin_id" value="<?php echo htmlspecialchars($admin_id ?? ''); ?>">
-                    <!-- Customer Details -->
+                <form action="/checkout/store?id=<?php foreach ($users as $user) {
+                                                        if ($user['name'] == $_SESSION['name']) {
+                                                            echo $user['admin_id'];
+                                                        }
+                                                    }
+                                                    ?>" method="POST" id="checkout-form">
+                    <input type="hidden" name="admin_id" value="">
+                    <input type="hidden" name="items" id="items">
+                    <input type="hidden" name="total" id="total_input">
+                    <input type="hidden" name="product_id" id="product_id">
+                    <input type="hidden" name="buy_at" id="buy_at">
 
-                    <div class="form-section">
-                        <div class="section-title">Customer Checkout</div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="firstName" class="form-label">First name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="firstName" name="first_name" required>
+                    <div class="form-section" id="customer-section">
+                        <div class="section-title">Customer Information</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="firstName" name="first_name" required aria-required="true" aria-describedby="firstNameFeedback">
+                                <div class="invalid-feedback" id="firstNameFeedback">Please enter your first name.</div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="lastName" class="form-label">Last name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="lastName" name="last_name" required>
+                            <div class="form-group">
+                                <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="lastName" name="last_name" required aria-required="true" aria-describedby="lastNameFeedback">
+                                <div class="invalid-feedback" id="lastNameFeedback">Please enter your last name.</div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
-                            <input type="tel" class="form-control" id="phone" name="phone" required>
-                        </div>
-                    </div>
-
-                    <!-- Delivery Details -->
-                    <div class="form-section">
-                        <div class="section-title">Delivery details</div>
-                        <div class="mb-3">
-                            <label for="country" class="form-label">Country/Region <span class="text-danger">*</span></label>
-                            <div class="dropdown-select">
-                                <select class="form-select" id="country" name="country" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required aria-required="true" aria-describedby="phoneFeedback">
+                                <div class="invalid-feedback" id="phoneFeedback">Please enter a valid phone number.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="country" class="form-label">Country/Region <span class="text-danger">*</span></label>
+                                <select class="form-select" id="country" name="country" required aria-required="true" aria-describedby="countryFeedback">
+                                    <option value="">Select a country</option>
                                     <option value="Cambodia">Cambodia</option>
                                     <option value="Canada">Canada</option>
                                     <option value="United Kingdom">United Kingdom</option>
+                                    <option value="United States">United States</option>
                                 </select>
+                                <div class="invalid-feedback" id="countryFeedback">Please select a country.</div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="address1" class="form-label">Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="address1" name="address" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="village" class="form-label">Village <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="village" name="village" required aria-required="true" aria-describedby="villageFeedback">
+                                <div class="invalid-feedback" id="villageFeedback">Please enter your village.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="commune" class="form-label">Commune <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="commune" name="commune" required aria-required="true" aria-describedby="communeFeedback">
+                                <div class="invalid-feedback" id="communeFeedback">Please enter your commune.</div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="city" class="form-label">City <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="city" name="city" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="district" class="form-label">District <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="district" name="district" required aria-required="true" aria-describedby="districtFeedback">
+                                <div class="invalid-feedback" id="districtFeedback">Please enter your district.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="province" class="form-label">Province/City <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="province" name="province" required aria-required="true" aria-describedby="provinceFeedback">
+                                <div class="invalid-feedback" id="provinceFeedback">Please enter your province or city.</div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="order_status" class="form-label">Order Status <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="order_status" name="order_status" value="Pending" readonly>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="deliveryMethod" class="form-label">Delivery Method <span class="text-danger">*</span></label>
+                                <select class="form-select" id="deliveryMethod" name="delivery_method" aria-required="true" aria-describedby="deliveryFeedback">
+                                    <option value="">Select delivery method</option>
+                                    <option value="J&T">J&T</option>
+                                    <option value="Virakbuntang">Virakbuntang</option>
+                                </select>
+                                <div class="invalid-feedback" id="deliveryFeedback">Please select a delivery method.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="orderAddress" class="form-label">Order Address <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="orderAddress" name="order_address" aria-required="true" aria-describedby="orderAddressFeedback">
+                                <div class="invalid-feedback" id="orderAddressFeedback">Please enter the order address.</div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="buy_at" class="form-label">Buy At <span class="text-danger">*</span></label>
-                            <input type="datetime-local" class="form-control" id="buy_at" name="buy_at" required>
+                        <div class="nav-buttons">
+                            <button type="submit" class="next-btn" id="submit-btn" aria-label="Submit Checkout Form">Submit</button>
+                            <button type="button" class="next-btn" onclick="history.back()" aria-label="Go Back">Back</button>
                         </div>
-                        <!-- Hidden inputs for cart items and total -->
-                        <input type="hidden" name="items" id="items">
-                        <input type="hidden" name="total" id="total_input">
-                        <input type="hidden" name="product_id" id="product_id">
-                        <button type="submit" class="continue-btn">Continue</button>
-                    </div>
-
-                    <!-- Delivery Method -->
-                    <div class="form-section">
-                        <div class="section-title">Delivery method</div>
-                        <!-- This section is empty in the image -->
                     </div>
                 </form>
             </div>
 
-            <!-- Right Column - Order Summary -->
             <div class="col-md-5">
                 <div class="order-summary">
                     <div class="order-header">
-                        <h5 class="mb-0">Order summary (<span id="order-item-count">0</span>)</h5>
-                        <a href="#" class="edit-link">Edit Cart</a>
+                        <h5>Order summary (<span id="order-item-count">0</span>)</h5>
+                        <a href="#" class="edit-link">
+                            <i class="fas fa-edit"></i> Edit Cart
+                        </a>
                     </div>
-
-                    <!-- Show All Button -->
-                    <button class="show-all-btn" id="show-all-btn">Show All</button>
-
-                    <!-- Product Items (Dynamically Populated) -->
                     <div id="order-items" class="order-items-container">
                         <!-- Cart items will be dynamically added here -->
                     </div>
-
-                    <!-- Price Summary -->
                     <div class="summary-row">
                         <div>Subtotal</div>
                         <div id="subtotal">$0.00</div>
@@ -275,12 +527,8 @@
                         <div>Total</div>
                         <div id="total">$0.00</div>
                     </div>
-
-                    <!-- Secure Checkout -->
-                    <div class="d-flex align-items-center justify-content-center mt-4" href='confirmation'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill me-2" viewBox="0 0 16 16">
-                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-                        </svg>
+                    <div class="secure-checkout">
+                        <i class="fas fa-shield-alt"></i>
                         Secure Checkout
                     </div>
                 </div>
@@ -288,52 +536,51 @@
         </div>
     </div>
 
-    <!-- JavaScript for Checkout -->
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content loading-modal">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Telegram contact......</div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Load cart from localStorage
+        const sampleCart = [{
+            id: 1,
+            name: "Germaine Stein",
+            price: 677.00,
+            quantity: 1,
+            image: "https://via.placeholder.com/70"
+        }];
+
         let cart = [];
         try {
-            cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const storedCart = localStorage.getItem('cart');
+            cart = storedCart ? JSON.parse(storedCart) : sampleCart;
         } catch (e) {
             console.error("Error parsing cart from localStorage:", e);
-            cart = [];
+            cart = sampleCart;
         }
 
-        // Debug: Log the cart to console to verify data
-        console.log("Cart loaded from localStorage in checkout:", cart);
-
-        // Render cart items in the order summary
-        function renderOrderSummary() {
+        const renderOrderSummary = () => {
             const orderItemsContainer = document.getElementById('order-items');
             orderItemsContainer.innerHTML = '';
+
             if (cart.length === 0) {
-                orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                orderItemsContainer.innerHTML = '<p class="text-center py-3">Your cart is empty.</p>';
             } else {
-                cart.forEach((item, index) => {
-                    const collapseId = `product-details-${index}`; // Unique ID for each item
+                cart.forEach((item) => {
                     const productItem = document.createElement('div');
                     productItem.classList.add('product-item');
                     productItem.innerHTML = `
                         <div class="product-image">
-                            <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                            <img src="${item.image}" alt="${item.name}">
                         </div>
                         <div class="product-details">
-                            <div class="fw-bold">${item.name}</div>
-                            <div class="text-muted">Qty: ${item.quantity}</div>
-                            <div class="text-muted">
-                                <a href="#${collapseId}" class="text-decoration-none" data-bs-toggle="collapse" aria-expanded="false" aria-controls="${collapseId}">
-                                    More Details ▼
-                                </a>
-                            </div>
-                            <div class="collapse mt-2" id="${collapseId}">
-                                <div class="card card-body">
-                                    <p><strong>Name:</strong> ${item.name}</p>
-                                    <p><strong>Price per Unit:</strong> $${item.price.toFixed(2)}</p>
-                                    <p><strong>Quantity:</strong> ${item.quantity}</p>
-                                    <p><strong>Total:</strong> $${(item.price * item.quantity).toFixed(2)}</p>
-                                    <img src="${item.image}" alt="${item.name}" style="max-width: 100px; border-radius: 4px;">
-                                </div>
-                            </div>
+                            <div class="product-name">${item.name}</div>
+                            <div class="product-quantity">Qty: ${item.quantity}</div>
                         </div>
                         <div class="product-price">$${(item.price * item.quantity).toFixed(2)}</div>
                     `;
@@ -341,11 +588,9 @@
                 });
             }
             updateOrderSummary();
-            setupShowAllButton(); // Setup the "Show All" button functionality
-        }
+        };
 
-        // Update order summary and prepare data for submission
-        function updateOrderSummary() {
+        const updateOrderSummary = () => {
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
             const total = subtotal;
@@ -354,83 +599,77 @@
             document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
             document.getElementById('total').textContent = `$${total.toFixed(2)}`;
 
-            // Prepare data for submission
-            const productIds = cart.map(item => item.id).filter(id => id).join(','); // Collect valid product IDs
-            const amountProducts = cart.map(item => item.quantity || 1); // Default to 1 if quantity is missing
-            document.getElementById('items').value = JSON.stringify(cart); // Store full cart details as JSON
-            document.getElementById('product_id').value = productIds; // Store product IDs in product_id field
+            document.getElementById('items').value = JSON.stringify(cart);
+            document.getElementById('product_id').value = cart.map(item => item.id).filter(id => id).join(',');
             document.getElementById('total_input').value = total.toFixed(2);
+        };
 
-            // Debug: Log the quantities being submitted
-            console.log("Quantities being submitted:", amountProducts);
+        const validateSection = () => {
+            const section = document.getElementById('customer-section');
+            const requiredFields = section.querySelectorAll('[required]');
+            let isValid = true;
 
-            // Debug: Log the cart being submitted
-            console.log("Cart being submitted:", cart);
-        }
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
 
-        // Setup "Show All" button functionality
-        function setupShowAllButton() {
-            const showAllBtn = document.getElementById('show-all-btn');
-            const orderItemsContainer = document.getElementById('order-items');
-            let isExpanded = false;
-
-            if (cart.length > 0) { // Only show button if there are items
-                showAllBtn.style.display = 'block';
-                showAllBtn.addEventListener('click', () => {
-                    isExpanded = !isExpanded;
-                    if (isExpanded) {
-                        orderItemsContainer.classList.add('expanded');
-                        showAllBtn.textContent = 'Hide All';
-                    } else {
-                        orderItemsContainer.classList.remove('expanded');
-                        showAllBtn.textContent = 'Show All';
-                    }
-                });
+            const phoneField = document.getElementById('phone');
+            const phoneRegex = /^\+?\d{8,}$/;
+            if (phoneField.value && !phoneRegex.test(phoneField.value.replace(/\s/g, ''))) {
+                phoneField.classList.add('is-invalid');
+                document.getElementById('phoneFeedback').textContent = 'Please enter a valid phone number (minimum 8 digits).';
+                isValid = false;
             } else {
-                showAllBtn.style.display = 'none'; // Hide button if cart is empty
+                phoneField.classList.remove('is-invalid');
+                document.getElementById('phoneFeedback').textContent = 'Please enter a valid phone number.';
             }
-        }
 
-        // Initial render
+            return isValid;
+        };
+
+        document.querySelector('#checkout-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (!validateSection()) {
+                console.log('Form validation failed');
+                return;
+            }
+            if (!cart.length) {
+                alert('Your cart is empty. Please add items before checking out.');
+                return;
+            }
+
+            const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'), {
+                backdrop: 'static',
+                keyboard: false
+            });
+            loadingModal.show();
+
+            document.getElementById('submit-btn').disabled = true;
+
+            const loadingDelay = 3000;
+
+            setTimeout(() => {
+                document.getElementById('checkout-form').submit();
+            }, loadingDelay);
+        });
+
+        document.querySelectorAll('.form-control, .form-select').forEach(field => {
+            field.addEventListener('input', () => {
+                if (field.hasAttribute('required') && field.value.trim()) {
+                    field.classList.remove('is-invalid');
+                }
+            });
+        });
+
+        document.getElementById('buy_at').value = new Date().toISOString().slice(0, 16);
         renderOrderSummary();
     </script>
-    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
-
-</html>
-
-
-<style>
-    /* Add this to your existing <style> */
-    .order-items-container {
-        max-height: 300px;
-        /* Limit initial height */
-        overflow-y: auto;
-        /* Add scrollbar if content exceeds height */
-        transition: max-height 0.3s ease;
-        /* Smooth transition for expansion */
-    }
-
-    .order-items-container.expanded {
-        max-height: none;
-        /* Remove height restriction when expanded */
-    }
-
-    .show-all-btn {
-        background: none;
-        border: none;
-        color: #007bff;
-        text-decoration: underline;
-        cursor: pointer;
-        padding: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
-
-    .show-all-btn:hover {
-        color: #0056b3;
-    }
-</style>
-
 </html>

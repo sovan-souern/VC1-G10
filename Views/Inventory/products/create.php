@@ -13,7 +13,7 @@
                 </div>
                 <div class="input-price">
                     <label for="price">Price</label>
-                    <input type="number" name="price" id="price" class="form-control" step="0.01" min="0" required>
+                    <input type="number" step="0.01" name="price" id="price" class="form-control" step="0.01" min="0" required>
                 </div>
                 <div class="input-category">
                     <label for="category_id">Category</label>
@@ -65,6 +65,9 @@
 </div>
 
 <style>
+    .container{
+        max-width: 172vh;
+    }
     .row {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;

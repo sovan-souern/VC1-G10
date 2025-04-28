@@ -1,296 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Orders</title>
-    <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        header, .footer, .slideshow-container, .dot-container {
+            display: none;
+        }
+        .table-container {
+            width: 90%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        input#search {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 40%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            background-color: #FFCCCC;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn {
+            background: rgb(233, 163, 147) !important;
+            border: none !important;
+            color: white !important;
+        }
+        .btn:hover {
+            background: rgb(233, 180, 167) !important;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            width: 60%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+        .close {
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        .card-footer {
+            background-color: rgb(185, 172, 185);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        @media (max-width: 768px) {
+            .table-container {
+                width: 95%;
+            }
+            .modal-content {
+                width: 80%;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+            #search {
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            .table-controls {
+                flex-direction: column;
+            }
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+            }
+        }
+    </style>
 </head>
-
 <body>
     <div class="table-container">
         <h1>History Order</h1>
         <div class="table-controls">
             <input type="text" id="search" placeholder="Search by name">
         </div>
-
-        <table>
+        <table class="table-responsive">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Customer</th>
                     <th>Order Date</th>
-                    <th>Quantity</th>
-                    <th>Net Amount</th>
+                    <th>Total</th>
                     <th>Details</th>
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                $displayedOrders = [];
+                $rowIndex = 1;
+                foreach ($users as $user) :
+                    foreach ($orders as $order) :
+                        $uniqueKey = $order["buy_at"] . '-' . $order["admin_id"];
+                        if (!isset($displayedOrders[$uniqueKey]) && 
+                            isset($_SESSION["name"], $user["name"], $order["admin_id"], $user["admin_id"]) && 
+                            $_SESSION["name"] == $user["name"] && 
+                            $order["admin_id"] == $user["admin_id"]) :
+                            $displayedOrders[$uniqueKey] = true;
+                ?>
                 <tr>
-                    <td>1</td>
-                    <td>Michael Holz</td>
-                    <td>Jun 15, 2017</td>
-                    <td>2</td>
-                    <td>$254</td>
+                    <td><?= $rowIndex++ ?></td>
+                    <td><?= htmlspecialchars($order["user_name"]) ?></td>
+                    <td><?= htmlspecialchars($order["buy_at"]) ?></td>
+                    <td><?= htmlspecialchars($order["total"]) ?> $</td>
                     <td>
-                        <button class="btn view-details-btn" onclick="showDetails()">View Details</button>
+                        <button class="btn view-details-btn"
+                            onclick="showDetails('<?= htmlspecialchars($order['admin_id']) ?>', 
+                                               '<?= htmlspecialchars($order['buy_at']) ?>')">
+                            View Details
+                        </button>
                     </td>
                 </tr>
+                <?php endif; endforeach; endforeach; ?>
             </tbody>
         </table>
     </div>
 
-    <!-- Order Details Modal -->
     <div id="orderDetailsModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div class="card" style="border-radius: 10px;">
-                <div class="card-header px-4 py-5">
-                    <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">Anna</span>!</h5>
+            <span class="close" onclick="closeModal()">×</span>
+            <div class="card">
+                <div class="card-header px-4 py-3">
+                    <h5 class="text-muted mb-0">Thanks for your Order!</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
-                        <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
                     </div>
                     <div class="d-flex justify-content-between pt-2">
                         <p class="fw-bold mb-0">Order Details</p>
-                        <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> $898.00</p>
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Total Product</span> <span id="totalProduct"></span></p>
                     </div>
-
-                    <div class="d-flex justify-content-between pt-2">
-                        <p class="text-muted mb-0">Invoice Number : 788152</p>
-                        <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
-                    </div>
-
                     <div class="d-flex justify-content-between">
-                        <p class="text-muted mb-0">Invoice Date : 22 Dec,2019</p>
-                        <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
+                        <p class="text-muted mb-0">Customer: <span id="customerName"></span></p>
                     </div>
-
+                    <div class="d-flex justify-content-between">
+                        <p class="text-muted mb-0">Recipient: <span id="recipientName"></span></p>
+                    </div>
+                    <div class="d-flex justify-content-between pt-2">
+                        <p class="text-muted mb-0">Product Name: <span id="productNames"></span></p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="text-muted mb-0">Buy at: <span id="buyAt"></span></p>
+                    </div>
                     <div class="d-flex justify-content-between mb-5">
-                        <p class="text-muted mb-0">Receipts Voucher : 18KU-62IIK</p>
                         <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
                     </div>
-
-                    <!-- Download Receipt Button -->
                     <div class="text-center">
                         <button class="btn" onclick="downloadReceipt()">Download Receipt</button>
                     </div>
                 </div>
-
-                <div class="card-footer border-0 px-4 py-5"
-                    style="background-color:rgb(185, 172, 185); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-                    <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
-                        paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
+                <div class="card-footer border-0 px-4 py-3">
+                    <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                        Total paid: <span class="h2 mb-0 ms-2" id="totalPaid"></span>
+                    </h5>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Show the modal when the button is clicked
-        function showDetails() {
+        function showDetails(adminId, buyAt) {
             const modal = document.getElementById("orderDetailsModal");
-            modal.style.display = "block"; // Show the modal
+            modal.style.display = "block";
+
+            const orders = <?php echo json_encode($orders); ?>;
+            const filteredOrders = orders.filter(order => order.admin_id == adminId && order.buy_at == buyAt);
+
+            const productNamesContainer = document.getElementById("productNames");
+            const buyAtContainer = document.getElementById("buyAt");
+            const totalProductContainer = document.getElementById("totalProduct");
+            const totalPaidContainer = document.getElementById("totalPaid");
+            const customerNameContainer = document.getElementById("customerName");
+            const recipientNameContainer = document.getElementById("recipientName");
+
+            let productNames = [];
+            let totalProduct = 0;
+            filteredOrders.forEach(order => {
+                const quantity = parseInt(order.amount_product) || 1;
+                productNames.push(`${order.product_name} (${quantity})`);
+                totalProduct += quantity;
+            });
+
+            productNamesContainer.textContent = productNames.join(", ");
+            buyAtContainer.textContent = buyAt;
+            totalProductContainer.textContent = totalProduct;
+            totalPaidContainer.textContent = `$${filteredOrders[0]?.total || 0}`;
+            customerNameContainer.textContent = filteredOrders[0]?.user_name || '';
+            recipientNameContainer.textContent = `${filteredOrders[0]?.firstName || ''} ${filteredOrders[0]?.lastName || ''}`;
         }
 
-        // Close the modal
         function closeModal() {
-            const modal = document.getElementById("orderDetailsModal");
-            modal.style.display = "none"; // Hide the modal
+            document.getElementById("orderDetailsModal").style.display = "none";
         }
 
-        // Close modal when clicking outside of it
         window.onclick = function(event) {
             const modal = document.getElementById("orderDetailsModal");
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
+        };
 
-        // Download receipt as a PDF
         function downloadReceipt() {
-            const {
-                jsPDF
-            } = window.jspdf;
+            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Set styles matching your modal's color scheme
-            doc.setFillColor(168, 114, 154); // Your purple color
-            doc.rect(0, 0, 210, 30, 'F'); // Header background
-
             // Header
+            doc.setFillColor(168, 114, 154);
+            doc.rect(0, 0, 210, 30, 'F');
+            doc.setFont("helvetica", "bold");
             doc.setFontSize(20);
             doc.setTextColor(255, 255, 255);
-            doc.text("ORDER RECEIPT", 105, 20, {
-                align: 'center'
-            });
+            doc.text("ORDER RECEIPT", 105, 20, { align: 'center' });
 
-            // Customer info (from your modal)
+            // Customer Info
+            const customer = document.getElementById("customerName").textContent;
+            const recipient = document.getElementById("recipientName").textContent;
+            const buyAt = document.getElementById("buyAt").textContent;
+            const totalPaid = document.getElementById("totalPaid").textContent;
+            const productNames = document.getElementById("productNames").textContent.split(", ");
+            const totalProduct = document.getElementById("totalProduct").textContent;
+
+            doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
             doc.setTextColor(0, 0, 0);
-            doc.text("Customer: Anna", 15, 40);
-            doc.text("Invoice Date: 22 Dec, 2019", 15, 50);
-            doc.text("Receipt Voucher: 1KAU9-84UIL", 15, 60);
+            doc.text(`Customer: ${customer}`, 15, 40);
+            doc.text(`Recipient: ${recipient}`, 15, 50);
+            doc.text(`Order Date: ${buyAt}`, 15, 60);
 
-            // Order details (matching your modal structure)
+            // Order Details
+            doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
             doc.text("Order Details:", 15, 75);
 
-            // Simple table structure
-            doc.text("Total", 15, 85);
-            doc.text("$898.00", 150, 85);
+            // Products
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            let y = 85;
+            productNames.forEach((product, index) => {
+                doc.text(`${index + 1}. ${product}`, 15, y);
+                y += 10;
+            });
 
-            doc.text("Discount", 15, 95);
-            doc.text("$19.00", 150, 95);
+            // Summary
+            doc.setFont("helvetica", "bold");
+            doc.text("Summary:", 15, y + 10);
+            doc.setFont("helvetica", "normal");
+            y += 20;
+            doc.text(`Total Products: ${totalProduct}`, 15, y);
+            doc.text(`Delivery Charges: Free`, 15, y + 10);
+            doc.text(`Total: ${totalPaid}`, 15, y + 20);
 
-            doc.text("GST 18%", 15, 105);
-            doc.text("$123.00", 150, 105);
-
-            doc.text("Delivery Charges", 15, 115);
-            doc.text("Free", 150, 115);
-
-            // Total (matching your card-footer style)
-            doc.setFillColor(185, 172, 185); // Your footer color
-            doc.rect(0, 130, 210, 20, 'F');
+            // Footer
+            doc.setFillColor(185, 172, 185);
+            doc.rect(0, y + 30, 210, 20, 'F');
+            doc.setFont("helvetica", "bold");
             doc.setFontSize(16);
             doc.setTextColor(255, 255, 255);
-            doc.text("TOTAL PAID: $1040", 105, 143, {
-                align: 'center'
-            });
+            doc.text(`TOTAL PAID: ${totalPaid}`, 105, y + 42, { align: 'center' });
 
-            // Footer note
-            doc.setTextColor(100, 100, 100);
+            // Thank You
+            doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
-            doc.text("Thank you for your order!", 105, 160, {
-                align: 'center'
-            });
+            doc.setTextColor(100, 100, 100);
+            doc.text("Thank you for your order!", 105, y + 57, { align: 'center' });
 
-            doc.save("receipt.pdf");
+            doc.save(`receipt_${buyAt}.pdf`);
         }
+
+        // Search functionality
+        document.getElementById("search").addEventListener("input", function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+            rows.forEach(row => {
+                const customerName = row.cells[1].textContent.toLowerCase();
+                row.style.display = customerName.includes(searchValue) ? "" : "none";
+            });
+        });
     </script>
 </body>
-
 </html>
-
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 20px;
-    }
-
-    .table-container {
-        width: 90%;
-        margin: auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .table-controls {
-        display: flex;
-        flex-direction: row;
-        align-items: self-start;
-        gap: 5px;
-        margin-bottom: 15px;
-    }
-
-    input,
-    select,
-    button {
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    h1 {
-        font-family: sans-serif;
-    }
-
-    input {
-        width: 40%;
-    }
-
-    .d-grid {
-        width: 51%;
-
-    }
-
-    .btn {
-        background: rgb(230, 147, 129) !important;
-        border: none !important;
-        color: white !important;
-    }
-
-    .btn:hover {
-        background: rgb(223, 160, 144) !important;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    /* tr:hover{
-        background-color:rgb(226, 226, 226);
-    } */
-    thead {
-        background: rgb(230, 169, 210);
-        color: white;
-    }
-
-    thead:hover {
-        background-color: rgb(235, 153, 216);
-    }
-
-    th,
-    td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        z-index: 1000;
-    }
-
-    .modal-content {
-        background-color: #fff;
-        margin: 15% auto;
-        padding: 20px;
-        width: 50%;
-        border-radius: 10px;
-    }
-
-    .close {
-        float: right;
-        font-size: 28px;
-        cursor: pointer;
-    }
-
-    /* Styling for the gradient background */
-    .gradient-custom {
-        background: #cd9cf2;
-        background: -webkit-linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1));
-        background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1));
-    }
-
-    .d-flex {
-        color: black;
-    }
-</style>
