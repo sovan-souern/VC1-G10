@@ -87,6 +87,8 @@ $routes->get('/viewlogin', [AdminController::class, 'viewlogin']);
 // Order Routes
 $routes->get('/order', [OrderController::class, 'index']);
 $routes->get('/order_detail', [OrderController::class, 'view']);
+$routes->get('/order/confirm', [OrderController::class, 'confirm']);
+$routes->get('//order/cancel', [OrderController::class, 'cancel']);
 
 
 // Invoice Routes

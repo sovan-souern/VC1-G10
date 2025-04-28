@@ -31,7 +31,7 @@
                                 <th>Phone</th>
                                 <th>Buy at</th>
                                 <th>Total Price</th>
-                                <th>Action</th>
+                                <th>Status</th>
                                
                             </tr>
                         </thead>
@@ -39,31 +39,23 @@
                             <?php 
                             $shownOrders = []; // Track shown orders
                             foreach ($orders as $index => $order): 
+                                if (!isset($order['created_at'])) {
+                                    continue; // Skip this order if 'created_at' is not set
+                                }
                                 $uniqueKey = $order['admin_id'] . $order['created_at']; // Unique key for each order
                                 if (!in_array($uniqueKey, $shownOrders)): 
                                     $shownOrders[] = $uniqueKey; // Mark this order as shown
                             ?>
                                 <tr>
+                                    <?php
+                                    var_dump($order);
+                                    ?>
                                 <td><?php echo $index + 1; ?></td>
-                                        <td><?php echo htmlspecialchars($order['admin_name']); ?></td>
-                                        <td><?php echo htmlspecialchars($order['phone_number']); ?></td>
-                                        <td><?php echo htmlspecialchars($order['created_at']); ?></td>
-                                        <td><?php echo number_format($order['total'], 2); ?></td>
-                                        <td class="action-buttons">
-                                            <div class="dropdown">
-                                                <button class="btn btn-more" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <!-- Use text-based ellipsis as fallback; replace with your icon -->
-                                                    <span>⋮</span>
-                                                    <!-- If you have the icon, uncomment below -->
-                                                    <!-- <img src="/Views/assets/img1/icons/more-vertical.svg" alt="More" style="width: 20px;"> -->
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a class="dropdown-item confirm-action"  href="order/confirm?id=<?= $order['id'] ?>">Confirm</a></li>
-                                                    <li><a class="dropdown-item cancel-action" href="/E-comerce/order/cancel/<?php echo $order['id']; ?>">Cancel</a></li>
-                                                    <li><a class="dropdown-item view-action" href="/E-comerce/order/order_detail?id=<?php echo $order['id']; ?>">View</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
+                                        <!-- <td><?php echo htmlspecialchars($order['admin_name']); ?></td> -->
+                                        <!-- <td><?php echo htmlspecialchars($order['phone_number']); ?></td> -->
+                                        <!-- <td><?php echo htmlspecialchars($order['created_at']); ?></td> -->
+                                        <!-- <td><?php echo number_format($order['total'], 2); ?></td> -->
+                                        
                                     </tr>
                                 <?php 
                                     endif; 
