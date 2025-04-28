@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="card p-4">
-        <h4>Add Discount</h4>
+        <h4>Add Product Discount</h4>
         <form class="my-3" action="/discount/store" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="input-name">
@@ -17,9 +17,13 @@
                     </select>
                 </div>
                 <div class="input-price">
-                    <label for="price">Price</label>
-                    <input type="number" name="price" id="price" class="form-control" min="0" value="<?= $product["price"] ?>">
+        `            <label for="price">Price</label>
+                    <input type="number" name="price" id="price" class="form-control" min="0" value="0"> <!-- Changed from $product["price"] to 0 -->
                 </div>
+                <!-- ... other code ... -->
+                <!-- <div class="total">
+                    <h6>Total: <span id="total-price">0</span></h6> 
+                </div> -->
                 <div class="input-discount">
                     <label for="discount">Discount</label>
                     <input type="number" name="discount" id="discount" class="form-control" min="0" value="" placeholder="Discount %">
@@ -57,48 +61,64 @@
         </form>
 
         <script>
-            // Get DOM elements
-            const productDropdown = document.getElementById('product_name');
-            const productImage = document.getElementById('product-image');
+    // Get DOM elements
+    const productDropdown = document.getElementById('product_name');
+    const productImage = document.getElementById('product-image');
+    const priceInput = document.getElementById('price');
+    const discountInput = document.getElementById('discount');
+    const totalPrice = document.getElementById('total-price');
+    const productIdHidden = document.querySelector('input[name="product_id"]');
+    const existingImageHidden = document.querySelector('input[name="existing_image"]');
 
-            // Default upload icon
-            const defaultIcon = '/Views/assets/img1/icons/upload.svg';
+    // Default upload icon
+    const defaultIcon = '/Views/assets/img1/icons/upload.svg';
 
-            // Update image based on selected product
-            productDropdown.addEventListener('change', function() {
-                const selectedOption = productDropdown.options[productDropdown.selectedIndex];
-                const imageUrl = selectedOption.getAttribute('data-image');
-                productImage.src = imageUrl && imageUrl !== 'null' && imageUrl !== '' ? `../../../${imageUrl}` : defaultIcon;
-                productImage.alt = imageUrl && imageUrl !== 'null' && imageUrl !== '' ? 'product' : 'upload';
-            });
+    // Initialize with default values
+    priceInput.value = '0';
+    totalPrice.textContent = '0.00';
 
-            // Set default icon on page load
-            productImage.src = defaultIcon;
-            productImage.alt = 'upload';
+    // Update product details when selection changes
+    productDropdown.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        
+        // Update image
+        const imageUrl = selectedOption.getAttribute('data-image');
+        productImage.src = imageUrl && imageUrl !== 'null' && imageUrl !== '' ? `../../../${imageUrl}` : defaultIcon;
+        productImage.alt = imageUrl && imageUrl !== 'null' && imageUrl !== '' ? 'product' : 'upload';
+        
+        // Update price
+        const productPrice = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+        priceInput.value = productPrice.toFixed(2);
+        
+        // Update hidden fields
+        productIdHidden.value = selectedOption.value;
+        existingImageHidden.value = imageUrl;
+        
+        // Update total
+        updateTotal();
+    });
 
-            // Get DOM elements for price and discount
-            const priceInput = document.getElementById('price');
-            const discountInput = document.getElementById('discount');
-            const totalPrice = document.getElementById('total-price');
+    // Function to calculate and update total
+    function updateTotal() {
+        const price = parseFloat(priceInput.value) || 0;
+        const discount = parseFloat(discountInput.value) || 0;
+        const discountedPrice = price - (price * (discount / 100));
+        totalPrice.textContent = discountedPrice.toFixed(2);
+    }
 
-            // Function to calculate and update total
-            function updateTotal() {
-                const price = parseFloat(priceInput.value) || 0;
-                const discount = parseFloat(discountInput.value) || 0;
-                const discountedPrice = price - (price * (discount / 100));
-                totalPrice.textContent = discountedPrice.toFixed(2);
-            }
+    // Add event listeners
+    discountInput.addEventListener('input', updateTotal);
 
-            // Add event listeners
-            priceInput.addEventListener('input', updateTotal);
-            discountInput.addEventListener('input', updateTotal);
-
-            // Initial calculation
-            updateTotal();
-        </script>
+    // Set default icon on page load
+    productImage.src = defaultIcon;
+    productImage.alt = 'upload';
+</script>
     </div>
 </div>
 <style>
+    .container {
+        max-width: 99%;
+    }
     /* Style for the product name dropdown */
     #product_name.form-control {
         appearance: none;

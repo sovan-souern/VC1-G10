@@ -271,7 +271,7 @@ class LoginRegisterController extends BaseController {
 
                 echo json_encode([
                     "status" => "success",
-                    "message" => "Admin registration successful!",
+                    "message" => "registration successful!",
                     "redirect" => "/login"
                 ]);
 

@@ -130,6 +130,43 @@
             </p>
             <p><strong>Quantity:</strong> <?php echo htmlspecialchars($product['quantity'] ?? 'N/A'); ?></p>
 
+<<<<<<< HEAD
+<div class="container">
+    <!-- <h1 >Product Detail</h1> -->
+    
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+            
+                <?php if ($products) : ?> <!-- Check if products are present -->
+                    <img class="card-img-top product-image" src="<?php echo htmlspecialchars($products['image']); ?>" alt="<?php echo htmlspecialchars($products['product_name']); ?>">
+                    <div class="card-body text-center">
+                        <h2 class="card-title"><?php echo htmlspecialchars($products['product_name']); ?></h2>
+                        
+                        <div class="price-container">
+                            <p class="original-price">
+                                <span class="price-label"><b>Original Price:</b></span>
+                                <span class="text-muted"><s>$<?php echo htmlspecialchars(number_format($products['price'], 2)); ?></s></span>
+                            </p>
+                            
+                            <?php 
+                                $discountedPrice = $products['price'];
+                                if (!empty($products['discount_percentage'])) {
+                                    $discountedPrice -= ($discountedPrice * ($products['discount_percentage'] / 100)); 
+                            ?>
+                                    <p class="discounted-price">
+                                        <span class="price-label">Discounted Price:</span>
+                                        <span class="text-danger">$<?php echo htmlspecialchars(number_format($discountedPrice, 2)); ?></span>
+                                    </p>
+                                    <p class="text-danger"><strong><?php echo htmlspecialchars($products['discount_percentage']); ?>% off</strong></p>
+                            <?php } else { ?>
+                                    <p class="discounted-price">
+                                        <span class="price-label">Price:</span>
+                                        <span>$<?php echo htmlspecialchars(number_format($products['price'], 2)); ?></span>
+                                    </p>
+                            <?php } ?>
+                        </div>
+=======
             <!-- Category Name -->
             <p>
                 <strong>Category:</strong>
@@ -146,6 +183,7 @@
                 echo htmlspecialchars($categoryName);
                 ?>
             </p>
+>>>>>>> 5d4a1790692a54f7061e803dfc60d515fb8cd11a
 
             <!-- Brand Name -->
             <p>

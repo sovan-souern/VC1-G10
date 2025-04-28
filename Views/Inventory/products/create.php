@@ -65,6 +65,9 @@
 </div>
 
 <style>
+    .container{
+        max-width: 172vh;
+    }
     .row {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;

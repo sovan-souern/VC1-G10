@@ -367,9 +367,6 @@
                 font-size: 0.9rem;
             }
 
-            . {
-                padding: 20px 10px;
-            }
 
             .discount-header h2 {
                 font-size: 1.5rem;
@@ -621,12 +618,12 @@
             text-decoration: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
+/* 
         .general-product-hover li a:hover {
             background: #f8a4b9;
             color: #ffffff;
             transform: scale(1.15);
-        }
+        } */
 
         .general-product-hover li a span {
             font-size: 16px;
