@@ -77,9 +77,9 @@
             <h6 class="text-primary text-uppercase">Our Journey</h6>
             <h2 class="mb-4">How We Started</h2>
           </div>
-          <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum.</p>
+          <p class="mb-4">Our skincare journey began with a passion for helping people feel confident in their own skin. We noticed a lack of natural, effective, and affordable skincare options, so we decided to create our own. </p>
           <div class="story-expanded-content" id="storyExpandedContent">
-            <p>Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.</p>
+            <p>What started as a small dream quickly grew into a trusted brand focused on quality ingredients and real results. Today, we continue to share our love for skincare with every product we make.</p>
             <p>Our passion for quality and service has driven us since day one. We believe in creating products that not only look good but also stand the test of time. Every item in our collection is carefully selected to ensure it meets our high standards.</p>
           </div>
           <button id="storyLearnMoreBtn" class="btn btn-primary mt-3">Learn More</button>
@@ -240,10 +240,10 @@
             <div class="feature-icon">
               <i class="fas fa-truck"></i>
             </div>
-            <h3>Free Shipping</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
+            <h3>Shipping by yourself </h3>
+            <p>Shipping fees apply to all orders based on your location and order size. We work with trusted carriers to ensure fast, secure delivery. Tracking information will be provided</p>
             <div class="feature-expanded-content">
-              <p>We offer free shipping on all orders over $50. Our shipping partners ensure your items arrive safely and on time. We also provide tracking information so you can monitor your delivery every step of the way.</p>
+              <p> once your order ships. Our goal is to get your skincare essentials to you as quickly and carefully as possible.</p>
             </div>
             <button class="btn btn-sm btn-outline-primary learn-more-btn mt-3">Learn More</button>
           </div>
@@ -255,9 +255,9 @@
               <i class="fas fa-redo"></i>
             </div>
             <h3>Free Returns</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
+            <p>We want you to be happy with every product you buy. If you don't love it, you can return it within 30 days — no questions asked! Just contact us, and we'll help you with the return.</p>
             <div class="feature-expanded-content">
-              <p>Not satisfied with your purchase? No problem! We offer hassle-free returns within 30 days of delivery. Simply contact our customer service team, and they'll guide you through the return process.</p>
+              <p>and we'll help you with the return. We'll even cover the shipping cost for you. Shopping with us is easy and worry-free.</p>
             </div>
             <button class="btn btn-sm btn-outline-primary learn-more-btn mt-3">Learn More</button>
           </div>
@@ -269,9 +269,9 @@
               <i class="fas fa-question-circle"></i>
             </div>
             <h3>Customer Support</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
+            <p>Our friendly skincare team is always ready to help you. Need advice on which product to choose? Have a question about your order? No problem! You can reach us by chat, email -whatever</p>
             <div class="feature-expanded-content">
-              <p>Our dedicated customer support team is available 24/7 to assist you with any questions or concerns. Whether you need help with an order, product information, or after-sales support, we're here for you.</p>
+              <p> works best for you. We try to answer all messages within 24 hours because we care about making you happy.</p>
             </div>
             <button class="btn btn-sm btn-outline-primary learn-more-btn mt-3">Learn More</button>
           </div>
