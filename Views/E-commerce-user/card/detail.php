@@ -261,6 +261,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
+            
                 <?php if ($products) : ?> <!-- Check if products are present -->
                     <img class="card-img-top product-image" src="<?php echo htmlspecialchars($products['image']); ?>" alt="<?php echo htmlspecialchars($products['product_name']); ?>">
                     <div class="card-body text-center">

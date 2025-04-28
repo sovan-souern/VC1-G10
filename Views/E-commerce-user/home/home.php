@@ -924,6 +924,7 @@
                                     data-product-price="<?php echo $discounted_price; ?>" 
                                     data-product-image="<?php echo $image_url; ?>">Add to Cart</button>
                         </div>
+                        
                     </div>
             <?php
                 }
@@ -1343,12 +1344,12 @@ document.addEventListener('DOMContentLoaded', function() {
             text-decoration: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
+/* 
         .general-product-hover li a:hover {
             background: #e7ab3c;
             color: #ffffff;
             transform: scale(1.15);
-        }
+        } */
 
         .general-product-hover li a span {
             font-size: 16px;
