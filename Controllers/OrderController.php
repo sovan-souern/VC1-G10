@@ -14,8 +14,10 @@ class OrderController extends BaseController
     function index()
     {
         // echo "Order";
-        $orders = $this->model->getOrder();
+        $orders = $this->model->getOrderDetail();
+        
         $this->views('/E-comerce/order/order.php', ['orders' => $orders]);
+        
     }
     
     function view($id)
@@ -24,6 +26,7 @@ class OrderController extends BaseController
         $orders = $this->model->getOrder($id);
         $this->views('/E-comerce/order/oder_detail.php', ['orders' => $orders]);
     }
+
 
    
 }

@@ -81,6 +81,32 @@ class OrderModel
             return false;
         }
     }
+     function getOrderDetail(){
+        $stmt = $this->pdo->query("
+        SELECT 
+            orders.order_id AS id,
+            orders.admin_id AS admin_id,
+            orders.firstName AS first_name,
+            orders.lastName AS last_name,
+            orders.phone AS phone_number,
+            orders.buy_at AS created_at,
+            orders.order_status AS status,
+            orders.total AS total,
+            orders.product_id AS productId,
+            orders.admin_id AS notification_user_id,
+            admins.name AS admin_name,
+            products.image AS product_image,    
+            products.product_name AS product_name,
+            products.quantity AS product_quantity
+        FROM 
+            orders
+        LEFT JOIN 
+            admins ON orders.admin_id = admins.admin_id
+        LEFT JOIN 
+            products ON orders.product_id = products.product_id
+    ");
+    return $stmt->fetchAll();
+    }
 
 
 }

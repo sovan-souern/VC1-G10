@@ -3,7 +3,7 @@
         <div class="page-header">
             <div class="page-title">
                 <h4>Order list</h4>
- 
+
             </div>
         </div>
         <div class="card">
@@ -28,45 +28,42 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Product</th>
-                                <th>Item</th>
+                                <th>User Name</th>
+                                <!-- <th>Item</th> -->
                                 <th>Phone</th>
-                                <th>Status</th>
                                 <th>Buy at</th>
-                                <th>Adress</th>
+                                <!-- <th>Adress</th> -->
                                 <th>Total Price</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($orders as $index => $order): ?>
+                            <?php 
+                            $shownOrders = []; // Track shown orders
+                            foreach ($orders as $index => $order): 
+                                // var_dump($order);
+                                
+                                $uniqueKey = $order['admin_id'] . '_' . $order['created_at']; // Unique key for each order
+                                if (!in_array($uniqueKey, $shownOrders)): 
+                                    $shownOrders[] = $uniqueKey; // Mark this order as shown
+                            ?>
                                 <tr>
-                                    <!-- <td><?= $index + 1 ?></td>
+                                    <td><?php echo $index + 1; ?></td>
+                                    <td><?php echo $order['admin_name']; ?></td>
+                                    <td><?php echo $order['phone_number']; ?></td>
+                                    <td><?php echo $order['created_at']; ?></td>
+                                    <td><?php echo $order['total']; ?></td>
                                     <td>
-                                        <?= htmlspecialchars($order['product_name'], ENT_QUOTES, 'UTF-8') ?>
+                                        <a href="/E-comerce/order/cancel/<?php echo $order['id']; ?>" class="btn btn-danger">Cancel</a>
+                                        <a href="/E-comerce/order/confirm/<?php echo $order['id']; ?>" class="btn btn-success">Confirm</a>
+                                        <a href="/E-comerce/order/views/<?php echo $order['id']; ?>" class="btn btn-success">Views</a>
                                     </td>
-                                    <td><?= htmlspecialchars($order['item'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
-                                    <td><?= htmlspecialchars($order['phone_number'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
-                                    <td><?= htmlspecialchars($order['status'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
-                                    <td><?= htmlspecialchars($order['buy_at'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
-                                    <td><?= htmlspecialchars($order['adress'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
-                                    <td><?= htmlspecialchars($order['total_price'], ENT_QUOTES, 'UTF-8') ?></td> -->
-                                    <!-- <td>
-                                        <a class="me-3" href="/category/edit?id=<?= $order[''] ?>">
-                                            <img src="/Views/assets/img1/icons/edit.svg" alt="Edit">
-                                        </a>
-                                        <a class="delete-product" href="/category/delete?id=<?= $order[''] ?>">
-                                            <img src="/Views/assets/img1/icons/delete.svg" alt="img">
-                                            <?php require "delete.php" ?>
-                                        </a>
-                                    </td> -->
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php 
+                                endif; 
+                            endforeach; 
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -76,4 +73,5 @@
 </div>
 
 </body>
+
 </html>
