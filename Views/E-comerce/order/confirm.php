@@ -39,22 +39,16 @@
                             <?php 
                             $shownOrders = []; // Track shown orders
                             foreach ($orders as $index => $order): 
-                                if (!isset($order['created_at'])) {
-                                    continue; // Skip this order if 'created_at' is not set
-                                }
                                 $uniqueKey = $order['admin_id'] . $order['created_at']; // Unique key for each order
                                 if (!in_array($uniqueKey, $shownOrders)): 
                                     $shownOrders[] = $uniqueKey; // Mark this order as shown
                             ?>
                                 <tr>
-                                    <?php
-                                    var_dump($order);
-                                    ?>
                                 <td><?php echo $index + 1; ?></td>
-                                        <!-- <td><?php echo htmlspecialchars($order['admin_name']); ?></td> -->
-                                        <!-- <td><?php echo htmlspecialchars($order['phone_number']); ?></td> -->
-                                        <!-- <td><?php echo htmlspecialchars($order['created_at']); ?></td> -->
-                                        <!-- <td><?php echo number_format($order['total'], 2); ?></td> -->
+                                        <td><?php echo htmlspecialchars($order['admin_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($order['phone_number']); ?></td>
+                                        <td><?php echo htmlspecialchars($order['created_at']); ?></td>
+                                        <td><?php echo number_format($order['total'], 2); ?></td>
                                         
                                     </tr>
                                 <?php 

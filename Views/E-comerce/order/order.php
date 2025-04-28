@@ -32,14 +32,13 @@
                                 <th>Buy at</th>
                                 <th>Total Price</th>
                                 <th>Action</th>
-                               
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                             $shownOrders = []; // Track shown orders
                             foreach ($orders as $index => $order): 
-                                $uniqueKey = $order['admin_id'] . $order['created_at']; // Unique key for each order
+                                $uniqueKey = $order['admin_id'] . '_' . $order['created_at']; // Unique key for each order
                                 if (!in_array($uniqueKey, $shownOrders)): 
                                     $shownOrders[] = $uniqueKey; // Mark this order as shown
                             ?>
@@ -58,9 +57,9 @@
                                                     <!-- <img src="/Views/assets/img1/icons/more-vertical.svg" alt="More" style="width: 20px;"> -->
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a class="dropdown-item confirm-action"  href="order/confirm?id=<?= $order['id'] ?>">Confirm</a></li>
-                                                    <li><a class="dropdown-item cancel-action" href="/E-comerce/order/cancel/<?php echo $order['id']; ?>">Cancel</a></li>
-                                                    <li><a class="dropdown-item view-action" href="/E-comerce/order/order_detail?id=<?php echo $order['id']; ?>">View</a></li>
+                                                    <li><a class="dropdown-item confirm-action" href="order/confirm?id=<?= $order['id'] ?>">Confirm</a></li>
+                                                    <li><a class="dropdown-item cancel-action"  href="order/cancel?id=<?= $order['id'] ?>">Cancel</a></li>
+                                                    <li><a class="dropdown-item view-action"  href="order/view?id=<?= $order['id'] ?>">View</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -68,7 +67,7 @@
                                 <?php 
                                     endif; 
                                 endforeach; 
-                                ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -78,60 +77,80 @@
 </div>
 
 <style>
-/* Custom styles for status buttons */
-.status-buttons {
+/* Custom styles for action buttons */
+.action-buttons {
+    position: relative;
     display: flex;
-    gap: 6px; /* Space between buttons */
-    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
     align-items: center;
 }
 
-.btn-sm {
-    padding: 4px 8px; /* Smaller padding for compact size */
-    font-size: 12px; /* Smaller font size */
-    border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.2s, transform 0.1s; /* Smooth hover effects */
-    border: none; /* Remove default border */
+.btn-more {
+    background: none;
+    border: none;
+    padding: 5px;
     cursor: pointer;
-    text-transform: uppercase; /* Modern touch */
-    font-weight: 500; /* Slightly bold text */
-    color: white; /* White text for contrast */
+    transition: background-color 0.2s;
 }
 
-.btn-sm:hover {
-    transform: translateY(-1px); /* Slight lift on hover */
-    opacity: 0.9; /* Subtle fade */
+.btn-more:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
 }
 
-.btn-cancel {
-    background-color: #e57373; /* Muted red for cancel */
+/* Dropdown menu styles */
+.dropdown-menu {
+    min-width: 120px;
+    padding: 5px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: none;
 }
 
-.btn-cancel:hover {
-    background-color: #d32f2f; /* Slightly darker red on hover */
+.dropdown-item {
+    font-size: 13px;
+    padding: 8px 15px;
+    color: #333;
+    transition: background-color 0.2s;
 }
 
-.btn-confirm {
-    background-color: #81c784; /* Soft green for confirm */
+.dropdown-item:hover {
+    background-color: #f5f5f5;
 }
 
-.btn-confirm:hover {
-    background-color: #388e3c; /* Slightly darker green on hover */
+/* Color-coded actions for better UX */
+.confirm-action {
+    color: #388e3c; /* Green for confirm */
 }
 
-.btn-view {
-    background-color: #64b5f6; /* Calm blue for view */
+.cancel-action {
+    color: #d32f2f; /* Red for cancel */
 }
 
-.btn-view:hover {
-    background-color: #1976d2; /* Slightly darker blue on hover */
+.view-action {
+    color: #1976d2; /* Blue for view */
 }
 
-/* Ensure buttons are readable on small screens */
+/* Responsive adjustments */
 @media (max-width: 576px) {
-    .btn-sm {
-        padding: 3px 6px;
-        font-size: 11px;
+    .dropdown-menu {
+        min-width: 100px;
+        font-size: 12px;
+    }
+    .dropdown-item {
+        padding: 6px 12px;
     }
 }
 </style>
+
+<script>
+// Ensure dropdowns work with Bootstrap's JavaScript (if using Bootstrap)
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Bootstrap dropdowns if not already handled
+    if (typeof bootstrap !== 'undefined') {
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+        dropdownElementList.forEach(function (dropdownToggleEl) {
+            new bootstrap.Dropdown(dropdownToggleEl);
+        });
+    }
+});
+</script>

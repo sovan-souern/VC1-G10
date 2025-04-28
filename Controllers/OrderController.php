@@ -22,23 +22,28 @@ class OrderController extends BaseController
     
     function view($id)
     {
-        echo "View Product";
-        $orders = $this->model->getOrder($id);
-        $this->views('/E-comerce/order/oder_detail.php', ['orders' => $orders]);
+        // echo "View Product";
+        // $orders = $this->model->getOrder($id);
+        $orderID = $this->model->getOrderID($id);
+        var_dump($orderID);
+        $orders = $this->model->getOrderDetail();
+       
+        $this->views('/E-comerce/order/oder_detail.php', ['orderID' => $orderID, 'orders' => $orders]);
     }
-    function confirm($id)
+    function confirm()
     {
-        echo "Confirm Order";
-        $orders = $this->model->getOrder($id);
+        // echo "Confirm Order";
+        $orders = $this->model->getOrderDetail();
         $this->views('/E-comerce/order/confirm.php', ['orders' => $orders]);
     }
-    function cancel($id)
+    function cancel()
     {
-        echo "Cancel Order";
-        $orders = $this->model->getOrder($id);
+        // echo "Cancel Order";
+        $orders = $this->model->getOrderDetail();
         $this->views('/E-comerce/order/cancel.php', ['orders' => $orders]);
     }
-   
+
+
    
 }
 

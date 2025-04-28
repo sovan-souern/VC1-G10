@@ -54,10 +54,9 @@ $notifications = $model->getNotifications();
           </a>
         </li>
         <li class="menu-item">
-          <a href="/invoice" class="menu-link">
-            <div data-i18n="Fluid">Invoice</div>
+          <a href="/order/confirm" class="menu-link">
+            <div data-i18n="Fluid">Confirm Order</div>
           </a>
-        </li>
       </ul>
     </li>
     <li class="menu-item">
