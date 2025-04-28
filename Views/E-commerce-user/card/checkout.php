@@ -441,7 +441,7 @@
                             </div>
                         </div>
                         <div class="nav-buttons">
-                            <button type="submit" class="next-btn" id="submit-btn" aria-label="Submit Checkout Form"><a href="https://t.me/skincareshop2026">Submit</a></button>
+                            <button type="submit" class="next-btn" id="submit-btn" aria-label="Submit Checkout Form">Submit</button>
                             <button type="button" class="next-btn" onclick="history.back()" aria-label="Go Back">Back</button>
                         </div>
                     </div>
