@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Message Detail</title>
 
   <style>
@@ -17,8 +19,8 @@
 
     /* Container */
     .container {
-      max-width: 900px; /* Reduced max-width for better readability */
-      width: 95%;
+      max-width: 95%;
+      width: 100%;
       margin: 40px auto;
       background: white;
       border-radius: 10px;
@@ -29,52 +31,53 @@
     /* Message Header */
     .message-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start; /* Changed to flex-start to align tops */
       gap: 15px;
       padding-bottom: 15px;
-      border-bottom: 1px solid #e5e7eb; /* Added divider for separation */
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .sender-avatar {
-      width: 48px;
-      height: 48px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background-color: #e0e7ff; /* Softer blue background */
-      color: #4f46e5; /* Matching text color */
+      background-color: #e0e7ff;
+      color: #4f46e5;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 20px;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
     .sender-info {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start; /* Align content to the top */
+      align-items: flex-start;
+      margin-top: 0; /* Ensure no extra margin pushes it down */
     }
 
     .sender-name {
-      font-size: 1.25rem; /* Slightly larger for emphasis */
+      font-size: 1.35rem;
       font-weight: 600;
-      margin: 0;
+      margin: 0; /* Remove any default margin */
       color: #1f2937;
+      line-height: 1.2;
     }
 
     .sender-email,
     .message-date {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #6b7280;
-      margin: 2px 0;
+      margin: 1px 0;
     }
 
     /* Message Content */
     .message-content {
-      background-color: #f9fafb;
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px 0;
+      padding: 20px 0;
       color: #4b5563;
       font-size: 1rem;
       line-height: 1.5;
@@ -105,18 +108,36 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      min-width: 120px; /* Consistent width for buttons */
+      min-width: 120px;
       height: 40px;
+      transition: background-color 0.2s ease;
     }
 
     .btn-danger {
-      background-color: #f97316;
+      background-color: #ff6200;
       color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #e55a00;
     }
 
     .btn-secondary {
       background-color: #e5e7eb;
       color: #4b5563;
+    }
+
+    .btn-secondary:hover {
+      background-color: #d1d5db;
+    }
+
+    /* Image Styling */
+    .imgContactView {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #ff6200;
     }
 
     /* Responsive Design */
@@ -128,18 +149,24 @@
         padding: 20px;
       }
 
+      .sender-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+      }
+
       .sender-name {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
 
       .sender-email,
       .message-date {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
 
       .message-content {
         font-size: 0.95rem;
-        padding: 15px;
+        padding: 15px 0;
       }
 
       .btn {
@@ -158,29 +185,27 @@
       }
 
       .message-header {
-        flex-direction: row; /* Keep row layout for better UX */
-        align-items: center;
         gap: 12px;
       }
 
       .sender-avatar {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
       }
 
       .sender-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
 
       .sender-email,
       .message-date {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
       }
 
       .message-content {
         font-size: 0.9rem;
-        padding: 12px;
+        padding: 12px 0;
       }
 
       .actions {
@@ -204,29 +229,27 @@
       }
 
       .message-header {
-        flex-direction: column;
-        align-items: flex-start;
         gap: 8px;
       }
 
       .sender-avatar {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
+        width: 46px;
+        height: 46px;
+        font-size: 16px;
       }
 
       .sender-name {
-        font-size: 0.95rem;
+        font-size: 1rem;
       }
 
       .sender-email,
       .message-date {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
       }
 
       .message-content {
         font-size: 0.85rem;
-        padding: 10px;
+        padding: 10px 0;
       }
 
       .actions {
@@ -245,31 +268,108 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="message-header">
-      <div class="sender-avatar">
-        <?php echo substr($notification['first_name'], 0, 1); ?>
+  <?php if ($notificationID["type"] == "contact") : ?>
+    <div class="container">
+      <div class="message-header">
+        <div class="sender-avatar">
+          <img class="imgContactView" src="../../../<?php echo $notificationID['user_profile_picture'] ?>" alt="contact">
+        </div>
+        <div class="sender-info">
+          <h2 class="sender-name">
+            <?php echo ($notificationID['user_name']) ?>
+          </h2>
+          <p class="message-date"><?php echo ($notificationID['created_at']); ?></p>
+          <p class="message-date"> Contact by: <?php echo ($notificationID['first_name']); ?> <?php echo ($notificationID['last_name']); ?></p>
+          <?php if (!empty($notificationID['phone_number'])): ?>
+            <span class="sender-email"><span>Phone: </span><?php echo ($notificationID['phone_number']); ?></span>
+          <?php endif; ?>
+        </div>
       </div>
-      <div class="sender-info">
-        <h2 class="sender-name">
-          <?php echo htmlspecialchars($notification['first_name'] . ' ' . $notification['last_name']); ?>
-        </h2>
-        <?php if (!empty($notification['phone_number'])): ?>
-          <p class="sender-email"><?php echo htmlspecialchars($notification['phone_number']); ?></p>
-        <?php endif; ?>
-        <p class="message-date"><?php echo htmlspecialchars($notification['created_at']); ?></p>
+      <div class="message-content">
+        <strong>Message: </strong>
+        <?php echo htmlspecialchars($notificationID['message']); ?>
+      </div>
+      <div class="actions">
+        <a href="/notifications/delete?id=<?= htmlspecialchars($notificationID['id']) ?>" class="btn btn-danger">Delete</a>
+        <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
       </div>
     </div>
+  <?php endif ?>
 
-    <div class="message-content">
-      <strong>Message: </strong> 
-      <?php echo htmlspecialchars($notification['message']); ?>
-    </div>
 
-    <div class="actions">
-      <a href="/notifications/delete?id=<?= htmlspecialchars($notification['id']) ?>" class="btn btn-danger">Delete</a>
-      <button onclick="window.history.back()" class="btn btn-dark">Back</button>
+  <?php  if ($notificationID["type"] == "product") :?>
+    <div class="container">
+      <div class="message-header">
+        <div class="sender-avatar">
+          <img class="imgContactView" src="../../../<?php echo $notificationID['product_image'] ?>" alt="">
+        </div>
+        <div class="sender-info">
+          <h2 class="sender-name">
+            <?php echo ($notificationID['product_name']) ?>
+          </h2>
+          <p class="message-date"><?php echo ($notificationID['created_at']); ?></p>
+          
+          <?php if (!empty($notificationID['phone_number'])): ?>
+            <span class="sender-email"><span>Phone: </span><?php echo ($notificationID['phone_number']); ?></span>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div class="message-content">
+        <strong>Message: </strong>
+        <?php echo htmlspecialchars($notificationID['message']); ?> <?php echo($notificationID['product_quantity'])?>
+      </div>
+      <div class="actions">
+        <a href="/notifications/delete?id=<?= htmlspecialchars($notificationID['id']) ?>" class="btn btn-danger">Delete</a>
+        <a href="/products/edit?id=<?= htmlspecialchars($notificationID['product_id']) ?>" class="btn btn-primary">Edit</a>
+        <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
+      </div>
     </div>
-  </div>
+    <?php endif?>
+
+
+  <?php  if ($notificationID["type"] == "order") :?>
+    <!-- <?php var_dump($notificationID)?> -->
+    <div class="container">
+      <div class="message-header">
+        <div class="sender-avatar">
+          <img class="imgContactView" src="../../../<?php echo $notificationID['user_profile_picture'] ?>" alt="">
+        </div>
+        <div class="sender-info">
+          <h2 class="sender-name">
+            <?php echo ($notificationID['product_name']) ?>
+          </h2>
+          <p class="message-date"><?php echo ($notificationID['created_at']); ?></p>
+          
+          <?php if (!empty($notificationID['phone_number'])): ?>
+            <span class="sender-email"><span>Phone: </span><?php echo ($notificationID['phone_number']); ?></span>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div class="product">
+      
+        <?php foreach ($orders as $key => $order):?>
+          
+         
+              <?php if ($order['admin_id'] == $notificationID['notification_user_id']&& $notificationID["order_buy_at"]==$order["buy_at"]): ?>
+                
+                <p><strong>product name:</strong> <?php echo ($order['product_name']) ?> <?php echo($order["amount_product"])?></p>
+              <?php endif; ?>
+        <?php endforeach; ?>
+      </div>
+      <div class="total">
+        <strong>Total: <?php echo ($notificationID['order_total']) ?>$</strong>
+      </div>
+      <div class="message-content">
+        <strong>Message: </strong>
+        <?php echo htmlspecialchars($notificationID['message']); ?> 
+      </div>
+      <div class="actions">
+        <a href="/notifications/delete?id=<?= htmlspecialchars($notificationID['id']) ?>" class="btn btn-danger">Delete</a>
+        <a href="/products/edit?id=<?= htmlspecialchars($notificationID['product_id']) ?>" class="btn btn-primary">Edit</a>
+        <button onclick="window.history.back()" class="btn btn-secondary">Back</button>
+      </div>
+    </div>
+    <?php endif?>
 </body>
+
 </html>

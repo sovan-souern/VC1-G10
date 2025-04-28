@@ -143,4 +143,36 @@ class ProductModel
             return false;
         }
     }
+
+    function getLastProductId()
+    {
+        try {
+            $stmt = $this->pdo->query("SELECT MAX(product_id) AS last_id FROM products");
+            $result = $stmt->fetch();
+            return $result ? $result['last_id'] : null;
+        } catch (Exception $e) {
+            echo "Error fetching last product ID: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function updateProductQuantity($productId, $amountProduct)
+    {
+        try {
+            $stmt = $this->pdo->query(
+                "UPDATE products SET 
+                    quantity = quantity - :amountProduct 
+                WHERE product_id = :productId",
+                [
+                    'amountProduct' => $amountProduct, // Subtract the provided amount
+                    'productId' => $productId // Match the product by ID
+                ]
+            );
+            return true;
+        } catch (Exception $e) {
+            echo "Error updating product quantity: " . $e->getMessage();
+            return false;
+        }
+    }
 }
+

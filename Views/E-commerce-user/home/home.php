@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,25 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashion | Shop</title>
 
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS Styles -->
-     <!-- tre 3 nav bar -->
-    <!-- <link rel="stylesheet" href="Views/E-commerce-user/assets/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="Views/E-commerce-user/assets/css/style.css">
     <!-- Font Awesome for rating stars -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<style>
-        body {
-            padding: 20px;
-        }
-        .discount-product-card:hover .price {
-            color: #e7ab3c; /* Added hover effect for price in discount card */
-        }
+    <style>
+        
+
         /* Header Styles */
         header h1 {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -34,6 +26,7 @@
             text-align: center;
             margin: 0;
             font-size: 2.5rem;
+            width: 100%;
         }
 
         header p {
@@ -43,12 +36,11 @@
             text-align: center;
         }
 
-        /* Container */
         .container {
             padding: 20px;
+       
         }
 
-        /* Cards Section */
         .cards {
             display: flex;
             overflow-x: auto;
@@ -75,7 +67,18 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            animation: spinFromRight 4s linear infinite;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card img:active {
+            transform: scale(0.98);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            pointer-events: auto;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .card-content {
@@ -107,18 +110,6 @@
             background: #ff3b2f;
         }
 
-        /* Spinning Animation Starting from Right */
-
-        /* @keyframes spinFromRight {
-            0% {
-                transform: rotate(90deg); Starts from right
-            }
-            100% {
-                transform: rotate(450deg); Completes full circle + starting point
-            } 
-        }  */
-
-        /* Info Overlay */
         .info {
             position: absolute;
             bottom: 0;
@@ -136,7 +127,6 @@
             opacity: 1;
         }
 
-        /* Content Section */
         .content-section {
             display: flex;
             align-items: center;
@@ -175,22 +165,6 @@
             background: #ff3b2f;
         }
 
-        /* 
-        .image-content-right img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px 70px 10px 70px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .image-content-left img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px 70px 10px 70px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        } */
-
-        /* Full Screen Image */
         .full-screen-image {
             width: 80%;
             height: 80vh;
@@ -203,7 +177,6 @@
             object-fit: cover;
         }
 
-        /* Info Section */
         .info-section {
             background-color: #fff;
             padding: 40px 0;
@@ -237,22 +210,27 @@
         .info-section .cta-button:hover {
             background: #ff3b2f;
         }
-        .product-name:hover{
+
+        .product-name:hover {
             color: #e7ab3c;
         }
-        .price:hover{
+
+        .price:hover {
             color: #e7ab3c;
         }
-        .add-to-cart:hover{
-            color:white;
+
+        .add-to-cart:hover {
+            color: white;
         }
-        .original-price:hover{
-                color: #e7ab3c;
-        }
-        .product-card:hover{
+
+        .original-price:hover {
             color: #e7ab3c;
         }
-        /* Product Container */
+
+        .product-card:hover {
+            color: #e7ab3c;
+        }
+
         .product-container {
             display: flex;
             flex-wrap: wrap;
@@ -260,10 +238,10 @@
             gap: 20px;
             padding: 20px;
         }
+
         .product-card1 img {
             width: 100%;
             border-radius: 10px;
-            animation: spinFromRight 4s linear infinite;
         }
 
         .product-card1 p {
@@ -282,7 +260,6 @@
             border-radius: 5px;
         }
 
-
         .discount-cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -290,13 +267,11 @@
             padding: 20px;
         }
 
-
-
-
         .discount-products {
             padding: 40px 20px;
             background: #f9f3f3;
             margin: 40px 0;
+            width: 100%;
         }
 
         .discount-header {
@@ -315,15 +290,12 @@
             font-size: 1.1rem;
         }
 
-
         .original-price {
             text-decoration: line-through;
             color: #999;
             font-size: 1rem;
             margin-right: 10px;
         }
-
-
 
         .products-container {
             display: grid;
@@ -342,300 +314,183 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-/* phone */
-        /* @media (max-width: 575px) {
-            
+
+        @media (max-width: 575px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+                padding: 15px;
+            }
+
+            header p {
+                font-size: 1.2rem;
+            }
+
             .products-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
 
-            .text-content{
-                h2{
-                    width: 30vh;
-                    font-size :25px;
-                }
-                p{
-                    width: 20vh;
-                    margin-bottom: 50%;
-                    font-size :15px;
-                }
-                .cta-button{
-                    a{
-                        width: 20vh;
-                        margin-bottom: 40%;
-                    }
-                }
+            .product-card {
+                object-fit: cover;
+                width: 100%;
+                margin: 0;
+                height: auto;
             }
-            .image-content-right{
-                img{
-                }
+
+            .product-image {
+                object-fit: cover;
+                height: 150px !important;
+                border-radius: 8px 8px 0 0;
             }
-        } */
-        /* Existing styles remain unchanged except for the media query and related adjustments */
 
-/* Phone-specific styles */
-/* Phone-specific styles */
-@media (max-width: 575px) {
-    /* General adjustments */
-    body {
-        
-        padding: 10px;
-        font-size: 14px;
-    }
-    
-    header h1 {
-        font-size: 1.8rem;
-        padding: 15px;
-    }
-    
-    header p {
-        font-size: 1.2rem;
-    }
-    
-    /* Product cards container */
-    .products-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    /* Product cards */
-    .product-card {
-        object-fit:cover;
-        width: 100%;
-        margin: 0;
-        height: auto;
-    }
-    
-    .product-image {
-        object-fit:cover;
-        height: 150px !important; /* Adjusted for better proportions */
-        border-radius: 8px 8px 0 0;
-        object-fit:cover;
-    }
-    
-    .product-info {
-        padding: 10px;
-    }
-    
-    .product-name {
-        font-size: 1.2rem;
-        margin-bottom: 5px;
-        font-family:serif;
-    }
-    
-    .price {
-        font-size: 1.5rem;
-    }
-    
-    .add-to-cart {
-        padding: 5px;
-        font-size: 0.9rem;
-    }
-    
-    /* Discount section */
-    .discount-products {
-        padding: 20px 10px;
-    }
-    
-    .discount-header h2 {
-        font-size: 1.5rem;
-    }
-    
-    /* Content sections */
-    .content-section {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .text-content {
-        order: 2;
-    }
-    
-    .image-content-right,
-    .image-content-left,
-    .image-content-lefts {
-        order: 1;
-        width: 100%;
-    }
-    
-    .image-content-right img,
-    .image-content-left img,
-    .image-content-lefts img {
-        width: 100%;
-        height: auto;
-        max-height: 250px;
-        object-fit: cover;
-        border-radius: 10px !important;
-    }
-    
-    /* Product cards in product-container */
-    .product-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .product-card1 {
-        width: 100%;
-        max-width: 300px;
-        margin-bottom: 20px;
-    }
-    
-    .product-card1 img {
-        height: 180px;
-        object-fit: cover;
-    }
-    
-    /* Cards carousel */
-    .cards {
-        gap: 10px;
-        padding-bottom: 15px;
-    }
-    
-    .card {
-        width: 200px;
-        flex: 0 0 auto;
-    }
-    
-    .card img {
-        height: 150px;
-    }
-    
-    /* Info overlay */
-    .info {
-        font-size: 0.85rem;
-        padding: 8px;
-    }
-    
-    /* Info section */
-    .info-section {
-        padding: 20px 10px;
-    }
-    
-    .info-section h2 {
-        font-size: 1.5rem;
-    }
-    
-    /* Buttons */
-    .cta-button, 
-    .info-section .cta-button,
-    .learn-more {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-    }
-    
-    /* Ensure all images maintain aspect ratio */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    /* Cart panel adjustments */
-    .cart-panel {
-        width: 90%;
-        max-width: none;
-    }
-    
-    /* Discount badge */
-    .discount-badge {
-        font-size: 0.8rem;
-        padding: 3px 8px;
-    }
-    
-    /* Remove animations on mobile */
-    .card img {
-        animation: none !important;
-    }
-    
-    /* Adjust spacing */
-    .container {
-        padding: 10px;
-    }
-    
-    /* Full width for text content */
-    .text-content {
-        width: 100%;
-    }
-    
-    .text-content h2 {
-        font-size: 1.5rem;
-    }
-    
-    .text-content p {
-        font-size: 0.95rem;
-    }
-    .product-card {
-        position: relative; /* Required for absolutely positioned children */
-        }
+            .product-info {
+                padding: 10px;
+            }
 
-        .general-product-hover {
-            display: flex;
-            justify-content: center; /* Center icons */
-            gap: 15px; /* Space between icons */
-            opacity: 0; /* Hide icons initially */
-            transition: opacity 0.3s ease; /* Smooth fade effect */
-            position: absolute; /* Position the icons absolutely */
-            bottom: 15px; /* Position from the bottom */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Correct centering of icons */
-            pointer-events: none; /* Prevent mouse events when hidden */
-        }
+            .product-name {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+                font-family: serif;
+            }
 
-        .product-card:hover .general-product-hover {
-            opacity: 1; /* Show icons when hovering over the card */
-            pointer-events: auto; /* Enable interactions on hover */
-        }
+            .price {
+                font-size: 1.5rem;
+            }
 
-        .general-product-hover li {
-            list-style: none; /* Remove bullet points */
-        }
+            .add-to-cart {
+                padding: 5px;
+                font-size: 0.9rem;
+            }
 
-        .general-product-hover a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50px; /* Width for circular icons */
-            height: 50px; /* Height for circular icons */
-            border-radius: 50%; /* Create circular shape */
-            background-color: white; /* Set background color */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-            text-decoration: none; /* Remove underline */
-            transition: background-color 0.3s ease; /* Transition for hover */
-            color: black; /* Set default icon color */
-        }
+            . {
+                padding: 20px 10px;
+            }
 
-        .general-product-hover a:hover {
-            background-color: #f0f0f0; /* Background color on hover */
-        }
+            .discount-header h2 {
+                font-size: 1.5rem;
+            }
 
-        /* Specific icon size adjustment if needed */
-        .general-product-hover a span {
-            font-size: 1.5em; /* Adjust font size to fit within circle */
-            height: 100%; /* Ensure it takes full height */
-            width: 100%; /* Ensure it takes full width */
-            display: flex; /* Center the icon within the circle */
-            justify-content: center;
-            align-items: center;
-        }
-}
-        /* card */
-        .product-card{
-            /* height: 70vh; */
-            .product-info{
-                display: flex;
-                flex-direction:column;
-                flex:wrap;
+            .content-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .text-content {
+                order: 2;
+            }
+
+            .image-content-right,
+            .image-content-left,
+            .image-content-lefts {
+                order: 1;
+                width: 100%;
+            }
+
+            .image-content-right img,
+            .image-content-left img,
+            .image-content-lefts img {
+                width: 100%;
+                height: auto;
+                max-height: 250px;
+                object-fit: cover;
+                border-radius: 10px !important;
+            }
+
+            .product-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-card1 {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+
+            .product-card1 img {
+                height: 180px;
+                object-fit: cover;
+            }
+
+            .cards {
+                gap: 10px;
+                padding-bottom: 15px;
+            }
+
+            .card {
+                width: 200px;
+                flex: 0 0 auto;
+            }
+
+            .card img {
+                height: 150px;
+                animation: none !important;
+            }
+
+            .info {
+                font-size: 0.85rem;
+                padding: 8px;
+            }
+
+            .info-section {
+                padding: 20px 10px;
+            }
+
+            .info-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .cta-button,
+            .info-section .cta-button,
+            .learn-more {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .cart-panel {
+                width: 90%;
+                max-width: none;
+            }
+
+            .discount-badge {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .text-content {
+                width: 100%;
+            }
+
+            .text-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .text-content p {
+                font-size: 0.95rem;
             }
         }
 
         .product-card {
+            position: relative;
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-
-
         }
 
         .product-card:hover {
@@ -667,6 +522,9 @@
         .product-info {
             padding: 15px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
         }
 
         .product-name {
@@ -694,7 +552,6 @@
         }
 
         .product-card1 {
-
             width: 400px;
             background: white;
             padding: 20px;
@@ -705,6 +562,7 @@
         }
 
         .add-to-cart {
+<<<<<<< HEAD
         background-color: pink;
         color: white;
         border: none;
@@ -1103,6 +961,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         /* Shared Styles for Add to Cart Button */
         .add-to-cart {
+=======
+>>>>>>> 5d4a1790692a54f7061e803dfc60d515fb8cd11a
             background-color: pink;
             color: white;
             border: none;
@@ -1110,7 +970,6 @@ document.addEventListener('DOMContentLoaded', function() {
             margin-top: 10px;
             cursor: pointer;
             width: 100%;
-            border-radius: 5px;
             transition: all 0.3s ease;
         }
 
@@ -1123,187 +982,6 @@ document.addEventListener('DOMContentLoaded', function() {
             text-decoration: none;
             color: white;
             transition: color 0.3s ease;
-        }
-
-        /* Discounted Product Card Styles */
-        .discount-product-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-
-        .discount-product-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-image {
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            transition: filter 0.3s ease;
-        }
-
-        .discount-product-card:hover .product-image {
-            filter: brightness(110%);
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff5252;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            z-index: 1;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .discount-product-card:hover .discount-badge {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .discount-product-hover {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 0;
-            z-index: 2;
-        }
-
-        .discount-product-card:hover .discount-product-hover {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .discount-product-hover li {
-            list-style: none;
-            margin: 0;
-            transition: all 0.3s ease;
-        }
-
-        .discount-product-hover li a {
-            display: block;
-            width: 40px;
-            height: 40px;
-            background: #ffffff;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .discount-product-hover li a:hover {
-            background: #ff5252;
-            color: #ffffff;
-            transform: scale(1.15);
-        }
-
-        .discount-product-hover li a span {
-            font-size: 16px;
-            color: #111111;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-hover li a:hover span {
-            color: #ffffff;
-        }
-
-        .product-info {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .product-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-card:hover .product-name {
-            color: #ff5252;
-        }
-
-        .rating {
-            color: #ffc107;
-            margin-bottom: 5px;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #0d6efd;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .discount-product-card:hover .price {
-            color: #ff5252;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-right: 8px;
-        }
-
-        /* General Product Item Styles */
-        .general-product-item {
-            position: relative;
-            background: #fff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .general-product-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .general-product-pic {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .general-product-pic img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .general-product-item:hover .general-product-pic img {
-            transform: scale(1.1);
         }
 
         .general-product-hover {
@@ -1346,7 +1024,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 /* 
         .general-product-hover li a:hover {
-            background: #e7ab3c;
+            background: #f8a4b9;
             color: #ffffff;
             transform: scale(1.15);
         } */
@@ -1360,44 +1038,158 @@ document.addEventListener('DOMContentLoaded', function() {
         .general-product-hover li a:hover span {
             color: #ffffff;
         }
-
-        .general-product-text {
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
+     
+        .product-card:hover .general-product-hover {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
-        .general-product-text h6 {
-            font-size: 16px;
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #ff5252;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #e63946;
+        }
+
+        .modal-inner {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        .modal-product-image {
+            flex: 1;
+            max-width: 40%;
+            margin-right: 20px;
+        }
+
+        .modal-product-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            max-height: 400px;
+        }
+
+        .modal-product-info {
+            flex: 2;
+            max-width: 60%;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-product-info h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #333;
             margin-bottom: 10px;
         }
 
-        .general-product-text h6 a {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .modal-product-info p {
+            font-size: 1rem;
+            color: #666;
+            margin: 8px 0;
+            line-height: 1.5;
         }
 
-        .general-product-item:hover .general-product-text h6 a {
-            color: #e7ab3c;
-        }
-
-        .general-product-price {
+        .modal-product-info .price {
+            font-size: 1.2rem;
+            color: #ff5252;
             font-weight: bold;
-            font-size: 16px;
-            color: #333;
-            transition: color 0.3s ease;
+            margin: 10px 0;
         }
 
-        .general-product-item:hover .general-product-price {
-            color: #e7ab3c;
+        #add-to-cart-modal {
+            background-color: #ff6699;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
-        .discount-product-card:hover .price {
-            color: #e7ab3c; /* Added hover effect for price in discount card */
-        } 
-        .general-product-item:hover .general-product-price {
-            color: #e7ab3c;
+
+        #add-to-cart-modal:hover {
+            background-color: #e63946;
+            transform: translateY(-2px);
         }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 10% auto;
+                padding: 15px;
+                width: 95%;
+            }
+
+            .modal-inner {
+                flex-direction: column;
+            }
+
+            .modal-product-image {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .modal-product-info {
+                max-width: 100%;
+                padding-left: 0;
+            }
+
+            .modal-product-info h2 {
+                font-size: 1.5rem;
+            }
+
+            .modal-product-info p {
+                font-size: 0.9rem;
+            }
+
+            #add-to-cart-modal {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+
         /* Cart Panel Styles */
         .cart-panel {
             position: fixed;
@@ -1550,313 +1342,909 @@ document.addEventListener('DOMContentLoaded', function() {
             background-color: #ff9eb5;
         }
 
-        /* Image Zoom Modal Styles */
-        .image-zoom-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s ease;
+        /* Additional Styles */
+        .discount-product-card:hover .price {
+            color: #e7ab3c;
         }
 
-        .image-zoom-modal.active {
-            display: flex;
-            opacity: 1;
+        .card img {
+            animation: slideLeftRight 3s infinite alternate ease-in-out;
+            background: none;
         }
 
-        .image-zoom-content {
-            position: relative;
-            text-align: center;
+        @keyframes slideLeftRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(10px);
+            }
         }
 
-        #zoomed-image {
-            max-width: 90%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ffffff;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #ff5252;
-            color: #ffffff;
-            transform: scale(1.05);
-        }
-
-        /* Trend Section Styles */
-        .trend {
-            padding: 30px 0;
-        }
-
-        .section-title h4 {
-            font-size: 20px;
-            font-weight: bold;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        .section-title h4::after {
-            content: "";
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: red;
-            margin-top: 5px;
-        }
-
-        .trend__content {
-            padding: 10px;
-        }
-
-        .trend__item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .trend__item__pic img {
-            width: 200px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .trend__item__text {
-            margin-left: 15px;
-        }
-
-        .trend__item__text h6 {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .product__price {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* Pagination Styles */
-        .pagination__option {
-            margin-top: 30px;
-        }
-
-        .pagination__option a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            border-radius: 50%;
-            margin: 0 5px;
-            color: #333;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .pagination__option a.active,
-        .pagination__option a:hover {
-            background: #e7ab3c;
-            color: #fff;
-        }
-
-        .pagination__option i {
-            font-size: 16px;
-            line-height: 40px;
+        @media (max-width: 575px) {
+            .card img {
+                animation: none !important;
+            }
         }
     </style>
+</head>
 
-    <!-- JavaScript -->
-<!-- JavaScript -->
-<script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
-<script src="Views/E-commerce-user/assets/js/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cartPanel = document.querySelector('.cart-panel');
-    const closeCart = document.querySelector('.close-cart');
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const cartItemCount = document.querySelector('#cart-item-count');
-    const subtotalAmount = document.querySelector('#subtotal-amount');
-    const imageZoomModal = document.querySelector('.image-zoom-modal');
-    const zoomedImage = document.querySelector('#zoomed-image');
-    const backBtn = document.querySelector('.back-btn');
-    const zoomButtons = document.querySelectorAll('.image-zoom');
-    let cartItems = [];
+<body>
+    <section class="discount-products">
+        <div class="discount-header">
+            <h2>Special Discounts</h2>
+            <p>Limited time offers - save up to 30%</p>
+        </div>
 
-    // Load cart from localStorage on page load
-    try {
-        cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (e) {
-        console.error("Error parsing cart from localStorage:", e);
-        cartItems = [];
-    }
-
-    // Render cart items on page load
-    cartItems.forEach(item => addCartItem(item));
-    updateCartSummary();
-
-    // Cart Functionality
-    function toggleCart() {
-        cartPanel.classList.toggle('active');
-    }
-
-    closeCart.addEventListener('click', toggleCart);
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productName = this.getAttribute('data-product-name');
-            const productPrice = parseFloat(this.getAttribute('data-product-price'));
-            const productImage = this.getAttribute('data-product-image');
-
-            const existingItem = cartItems.find(item => item.name === productName);
-            if (existingItem) {
-                existingItem.quantity += 1;
-                updateCartItem(existingItem);
-            } else {
-                const newItem = {
-                    name: productName,
-                    price: productPrice,
-                    image: productImage,
-                    quantity: 1
-                };
-                cartItems.push(newItem);
-                addCartItem(newItem);
-            }
-
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-            console.log("Cart after adding item:", cartItems);
-
-            if (!cartPanel.classList.contains('active')) {
-                toggleCart();
-            }
-            updateCartSummary();
-        });
-    });
-
-    function addCartItem(item) {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <div class="cart-item-details">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                <div class="cart-item-quantity">
-                    <button class="quantity-btn decrease-btn">-</button>
-                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
-                    <button class="quantity-btn increase-btn">+</button>
+        <div class="container">
+            <div class="products-container">
+                <?php foreach ($products as $index => $product): ?>
+                    <?php 
+                    $hasDiscount = false;
+                    foreach ($discounts as $key => $discount):
+                        if ($product["product_id"] == $discount["product_id"]):
+                            if ($discount["end_date"] >= date("Y-m-d") && $discount["start_date"] <= date("Y-m-d")):
+                                $original_price = floatval($product["price"]);
+                                $discount_percentage = floatval($discount["discount_percentage"]);
+                                $discounted_price = $original_price * (1 - $discount_percentage / 100);
+                                $product_name = htmlspecialchars($product["product_name"]);
+                                $image_url = !empty($product["image"]) ? htmlspecialchars($product["image"]) : 'https://via.placeholder.com/150';
+                                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                                $original_price_formatted = "$" . number_format($original_price, 2);
+                                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                                $product_content = isset($product["product_content"]) ? htmlspecialchars($product["product_content"]) : "No description available";
+                                $product_quantity = isset($product["quantity"]) ? htmlspecialchars($product["quantity"]) : "No quantity available";
+                    ?>
+                                <div class="product-card">
+                                    <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                        <ul class="general-product-hover product-hover-shared">
+                                            <li>
+                                                <a href="#" class="view-details-btn"
+                                                   data-name="<?php echo $product_name; ?>"
+                                                   data-price="<?php echo $discounted_price_formatted; ?>"
+                                                   data-discount="<?php echo $discount_percentage; ?>"
+                                                   data-image="<?php echo $image_url; ?>"
+                                                   data-description="<?php echo $product_content; ?>"
+                                                   data-quantity="<?php echo $product_quantity; ?>">
+                                                    <i class="arrow_expand"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="add-to-favorites"
+                                                   data-name="<?php echo $product_name; ?>"
+                                                   data-price="<?php echo $discounted_price_formatted; ?>"
+                                                   data-discount="<?php echo $discount_percentage; ?>"
+                                                   data-image="<?php echo $image_url; ?>"
+                                                   data-description="<?php echo $product_content; ?>"
+                                                   data-quantity="<?php echo $product_quantity; ?>">
+                                                    <span class="icon_heart_alt"></span>
+                                                </a>
+                                            </li>
+                                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                        <div class="price">
+                                            <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                            <?php echo $discounted_price_formatted; ?>
+                                        </div>
+                                        <button class="add-to-cart"
+                                data-product-name="<?php echo $product_name; ?>"
+                                data-product-price="<?php echo $discounted_price; ?>"
+                                data-product-image="<?php echo $image_url; ?>">
+                            Add to Cart
+                        </button>
+                                    </div>
+                                </div>
+                                <?php 
+                                $hasDiscount = true;
+                                break;
+                                ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+     <!-- About Section -->
+     <section class="about-section py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <img src="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830" alt="About Our Products" class="img-fluid rounded-4 shadow">
+                    </div>
+                    <div class="col-lg-6 ps-lg-5">
+                        <h2 class="section-title mb-4">Why Choose Glow Skincare?</h2>
+                        <p class="lead mb-4">At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, scientifically proven to nourish and rejuvenate your skin.</p>
+                        <div class="features mb-4">
+                            <div class="feature d-flex align-items-center mb-3">
+                                <div class="feature-icon me-3">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h5 class="mb-1">100% Natural Ingredients</h5>
+                                    <p class="mb-0 text-muted">We use only the finest natural ingredients in our products.</p>
+                                </div>
+                            </div>
+                            <div class="feature d-flex align-items-center mb-3">
+                                <div class="feature-icon me-3">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h5 class="mb-1">No Harmful Chemicals</h5>
+                                    <p class="mb-0 text-muted">Free from parabens, sulfates, and other harmful chemicals.</p>
+                                </div>
+                            </div>
+                            <div class="feature d-flex align-items-center">
+                                <div class="feature-icon me-3">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h5 class="mb-1">Cruelty-Free</h5>
+                                    <p class="mb-0 text-muted">We never test our products on animals.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-lg">Discover Our Story</a>
+                    </div>
                 </div>
             </div>
-            <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
-            <div class="delete-btn"><i class="fa fa-trash"></i></div>
-        `;
-        cartItemsContainer.appendChild(cartItem);
+        </section>
 
-        attachItemListeners(cartItem, item);
-    }
+        <!-- Cards of Products -->
+        <div class="cards">
+            <div class="card">
+                <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
+            </div>
+            <div class="card">
+                <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg" alt="Hydrating Moisturizer">
+            </div>
+            <div class="card">
+                <img src="https://assets.unileversolutions.com/v1/104900175.jpg" alt="Vitamin C Serum">
+            </div>
+            <div class="card">
+                <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://www.beautypackaging.com/wp-content/uploads/sites/8/2024/11/017_main-13.jpg" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://assets.ajio.com/medias/sys_master/root/20230130/8F8S/63d803e2aeb269c6510329d0/-473Wx593H-4915693380-multi-MODEL.jpg" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://down-vn.img.susercontent.com/file/e51b7974a1af0f2ea03f5a96804217f5" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://s9.kh1.co/__image/w=600,h=600,fit=cover/1b/1be5d7c51a56e185757cc60b646d9e97d51a3a71.jpg" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://m.media-amazon.com/images/I/51Z2sQyCB-L.jpg" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://down-my.img.susercontent.com/file/my-11134207-7r98p-lyt0fqimk128fd" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://bellavitaorganic.com/cdn/shop/files/download_0315aafb-8c5d-4b3d-a00e-6cc8cc1b00b2.jpg?v=1732609831&width=1000" alt="Sunscreen SPF 50">
+            </div>
+            <div class="card">
+                <img src="https://images.meesho.com/images/products/456587797/fwf1e_512.webp" alt="Sunscreen SPF 50">
+            </div>
+        </div>
 
-    function updateCartItem(item) {
-        const cartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(
-            el => el.querySelector('.cart-item-name').textContent === item.name
-        );
-        const input = cartItem.querySelector('.quantity-input');
-        input.value = item.quantity;
-        cartItem.querySelector('.cart-item-total').textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-        updateCartSummary();
-        // Save to localStorage
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-    }
+        <!-- Bestsellers Section -->
+        <section class="featured-products py-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-5">Bestsellers</h2>
+                <div class="products-container">
+                    <div class="product-card">
+                        <div class="discount-badge">New</div>
+                        <div class="product-image" style="background-image: url('https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Hydrating Moisturizer"
+                                       data-price="$34.99"
+                                       data-discount="0"
+                                       data-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg"
+                                       data-description="A lightweight, hydrating moisturizer for all skin types."
+                                       data-quantity="50">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Hydrating Moisturizer"
+                                       data-price="$34.99"
+                                       data-discount="0"
+                                       data-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg"
+                                       data-description="A lightweight, hydrating moisturizer for all skin types."
+                                       data-quantity="50">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Hydrating Moisturizer</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="price">$34.99</div>
+                            <button class="add-to-cart"
+                                    data-product-name="Hydrating Moisturizer"
+                                    data-product-price="34.99"
+                                    data-product-discount="0"
+                                    data-product-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="discount-badge">Popular</div>
+                        <div class="product-image" style="background-image: url('https://assets.unileversolutions.com/v1/104900175.jpg')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Vitamin C Serum"
+                                       data-price="$42.99"
+                                       data-discount="0"
+                                       data-image="https://assets.unileversolutions.com/v1/104900175.jpg"
+                                       data-description="Brightening serum with 20% Vitamin C."
+                                       data-quantity="30">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Vitamin C Serum"
+                                       data-price="$42.99"
+                                       data-discount="0"
+                                       data-image="https://assets.unileversolutions.com/v1/104900175.jpg"
+                                       data-description="Brightening serum with 20% Vitamin C."
+                                       data-quantity="30">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Vitamin C Serum</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="price">$42.99</div>
+                            <button class="add-to-cart"
+                                    data-product-name="Vitamin C Serum"
+                                    data-product-price="42.99"
+                                    data-product-discount="0"
+                                    data-product-image="https://assets.unileversolutions.com/v1/104900175.jpg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="discount-badge">Organic</div>
+                        <div class="product-image" style="background-image: url('https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Sunscreen SPF 50"
+                                       data-price="$28.99"
+                                       data-discount="0"
+                                       data-image="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d"
+                                       data-description="Broad-spectrum SPF 50 sunscreen."
+                                       data-quantity="40">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Sunscreen SPF 50"
+                                       data-price="$28.99"
+                                       data-discount="0"
+                                       data-image="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d"
+                                       data-description="Broad-spectrum SPF 50 sunscreen."
+                                       data-quantity="40">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Sunscreen SPF 50</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="price">$28.99</div>
+                            <button class="add-to-cart"
+                                    data-product-name="Sunscreen SPF 50"
+                                    data-product-price="28.99"
+                                    data-product-discount="0"
+                                    data-product-image="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="discount-badge">Limited</div>
+                        <div class="product-image" style="background-image: url('https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Complete Skincare Set"
+                                       data-price="$89.99"
+                                       data-discount="0"
+                                       data-image="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg"
+                                       data-description="Complete skincare set for daily routine."
+                                       data-quantity="20">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Complete Skincare Set"
+                                       data-price="$89.99"
+                                       data-discount="0"
+                                       data-image="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg"
+                                       data-description="Complete skincare set for daily routine."
+                                       data-quantity="20">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Complete Skincare</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="price">$89.99</div>
+                            <button class="add-to-cart"
+                                    data-product-name="Complete Skincare Set"
+                                    data-product-price="89.99"
+                                    data-product-discount="0"
+                                    data-product-image="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    function attachItemListeners(cartItem, item) {
-        const decreaseBtn = cartItem.querySelector('.decrease-btn');
-        const increaseBtn = cartItem.querySelector('.increase-btn');
-        const quantityInput = cartItem.querySelector('.quantity-input');
-        const deleteBtn = cartItem.querySelector('.delete-btn');
+        <!-- Special Offers Section -->
+        <section class="special-offers py-5 bg-light">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2 class="section-title">Special Offers</h2>
+                        <p class="section-subtitle">Limited time deals with amazing discounts</p>
+                    </div>
+                </div>
+                <div class="products-container">
+                    <div class="product-card">
+                        <div class="discount-badge">-20%</div>
+                        <div class="product-image" style="background-image: url('https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Anti-Aging Cream"
+                                       data-price="$47.99"
+                                       data-discount="20"
+                                       data-image="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
+                                       data-description="Reduces fine lines and wrinkles."
+                                       data-quantity="25">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Anti-Aging Cream"
+                                       data-price="$47.99"
+                                       data-discount="20"
+                                       data-image="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
+                                       data-description="Reduces fine lines and wrinkles."
+                                       data-quantity="25">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Anti-Aging Cream</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="price">
+                                <span class="original-price">$59.99</span>
+                                $47.99
+                            </div>
+                            <button class="add-to-cart"
+                                    data-product-name="Anti-Aging Cream"
+                                    data-product-price="47.99"
+                                    data-product-discount="20"
+                                    data-product-image="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="discount-badge">-15%</div>
+                        <div class="product-image" style="background-image: url('https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Facial Cleanser"
+                                       data-price="$28.04"
+                                       data-discount="15"
+                                       data-image="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830"
+                                       data-description="Gentle cleanser for all skin types."
+                                       data-quantity="35">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Facial Cleanser"
+                                       data-price="$28.04"
+                                       data-discount="15"
+                                       data-image="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830"
+                                       data-description="Gentle cleanser for all skin types."
+                                       data-quantity="35">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Facial Cleanser</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="price">
+                                <span class="original-price">$32.99</span>
+                                $28.04
+                            </div>
+                            <button class="add-to-cart"
+                                    data-product-name="Facial Cleanser"
+                                    data-product-price="28.04"
+                                    data-product-discount="15"
+                                    data-product-image="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="discount-badge">-25%</div>
+                        <div class="product-image" style="background-image: url('https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Nourishing Body Lotion"
+                                       data-price="$29.99"
+                                       data-discount="25"
+                                       data-image="https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg"
+                                       data-description="Deeply moisturizing body lotion."
+                                       data-quantity="45">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Nourishing Body Lotion"
+                                       data-price="$29.99"
+                                       data-discount="25"
+                                       data-image="https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg"
+                                       data-description="Deeply moisturizing body lotion."
+                                       data-quantity="45">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Nourishing Body</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="price">
+                                <span class="original-price">$39.99</span>
+                                $29.99
+                            </div>
+                            <button class="add-to-cart"
+                                    data-product-name="Nourishing Body Lotion"
+                                    data-product-price="29.99"
+                                    data-product-discount="25"
+                                    data-product-image="https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="discount-badge">-30%</div>
+                        <div class="product-image" style="background-image: url('https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg')">
+                            <ul class="general-product-hover product-hover-shared">
+                                <li>
+                                    <a href="#" class="view-details-btn"
+                                       data-name="Overnight Repair Cream"
+                                       data-price="$34.99"
+                                       data-discount="30"
+                                       data-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg"
+                                       data-description="Repairs skin overnight for a youthful glow."
+                                       data-quantity="15">
+                                        <i class="arrow_expand"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-favorites"
+                                       data-name="Overnight Repair Cream"
+                                       data-price="$34.99"
+                                       data-discount="30"
+                                       data-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg"
+                                       data-description="Repairs skin overnight for a youthful glow."
+                                       data-quantity="15">
+                                        <span class="icon_heart_alt"></span>
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Overnight Repair</h5>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="price">
+                                <span class="original-price">$49.99</span>
+                                $34.99
+                            </div>
+                            <button class="add-to-cart"
+                                    data-product-name="Overnight Repair Cream"
+                                    data-product-price="34.99"
+                                    data-product-discount="30"
+                                    data-product-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        decreaseBtn.addEventListener('click', () => {
-            if (item.quantity > 1) {
-                item.quantity--;
-                updateCartItem(item);
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Cart Functionality
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const closeCart = document.getElementById('close-cart');
+            const cartItems = document.getElementById('cart-items');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartCount = document.getElementById('cart-count');
+            const clearCartBtn = document.getElementById('clear-cart');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            function updateCartUI() {
+                while (cartItems.firstChild && cartItems.firstChild !== emptyCartMessage) {
+                    cartItems.removeChild(cartItems.firstChild);
+                }
+
+                if (cart.length === 0) {
+                    emptyCartMessage.style.display = 'block';
+                } else {
+                    emptyCartMessage.style.display = 'none';
+                    cart.forEach((item, index) => {
+                        const cartItem = document.createElement('div');
+                        cartItem.classList.add('cart-item');
+                        cartItem.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <h6 class="cart-item-title">${item.name}</h6>
+                                <div class="cart-item-price">$${item.price}</div>
+                                <div class="cart-item-discount">Discount: ${item.discount}%</div>
+                                <div class="cart-item-quantity">
+                                    <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
+                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-index="${index}">
+                                    <button class="quantity-btn increase-btn" data-index="${index}">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-item-remove" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        `;
+                        cartItems.insertBefore(cartItem, emptyCartMessage);
+                        cartItem.querySelector('.decrease-btn').addEventListener('click', decreaseQuantity);
+                        cartItem.querySelector('.increase-btn').addEventListener('click', increaseQuantity);
+                        cartItem.querySelector('.quantity-input').addEventListener('change', updateQuantity);
+                        cartItem.querySelector('.cart-item-remove').addEventListener('click', removeItem);
+                    });
+                }
+
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                cartCount.textContent = totalItems || 0;
+                cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+                localStorage.setItem('cart', JSON.stringify(cart));
             }
+
+            function addToCart(e) {
+                const button = e.target;
+                const name = button.getAttribute('data-product-name');
+                const price = parseFloat(button.getAttribute('data-product-price'));
+                const image = button.getAttribute('data-product-image');
+                const discount = parseFloat(button.getAttribute('data-product-discount')) || 0;
+
+                const existingItemIndex = cart.findIndex(item => item.name === name);
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity++;
+                } else {
+                    cart.push({ name, price, image, discount, quantity: 1 });
+                }
+
+                const toast = document.createElement('div');
+                toast.classList.add('toast', 'show', 'position-fixed', 'bottom-0', 'end-0', 'm-3');
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'assertive');
+                toast.setAttribute('aria-atomic', 'true');
+                toast.innerHTML = `
+                    <div class="toast-header">
+                        <strong class="me-auto">Added to Cart</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${name} has been added to your cart.
+                    </div>
+                `;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+
+                updateCartUI();
+            }
+
+            function decreaseQuantity(e) {
+                const index = e.target.getAttribute('data-index');
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                } else {
+                    cart.splice(index, 1);
+                }
+                updateCartUI();
+            }
+
+            function increaseQuantity(e) {
+                const index = e.target.getAttribute('data-index');
+                cart[index].quantity++;
+                updateCartUI();
+            }
+
+            function updateQuantity(e) {
+                const index = e.target.getAttribute('data-index');
+                const quantity = parseInt(e.target.value);
+                if (quantity > 0) {
+                    cart[index].quantity = quantity;
+                } else {
+                    cart.splice(index, 1);
+                }
+                updateCartUI();
+            }
+
+            function removeItem(e) {
+                const index = e.target.closest('.cart-item-remove').getAttribute('data-index');
+                cart.splice(index, 1);
+                updateCartUI();
+            }
+
+            function clearCart() {
+                cart = [];
+                updateCartUI();
+            }
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+
+            // Favorites Functionality
+            const addToFavoritesButtons = document.querySelectorAll('.add-to-favorites');
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+            function addToFavorites(e) {
+                e.preventDefault();
+                const button = e.target.closest('.add-to-favorites');
+                const name = button.getAttribute('data-name');
+                const price = button.getAttribute('data-price');
+                const image = button.getAttribute('data-image');
+                const discount = parseFloat(button.getAttribute('data-discount')) || 0;
+                const description = button.getAttribute('data-description');
+                const quantity = button.getAttribute('data-quantity');
+
+                const existingItemIndex = favorites.findIndex(item => item.name === name);
+                if (existingItemIndex === -1) {
+                    favorites.push({ name, price, image, discount, description, quantity });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+
+                    const toast = document.createElement('div');
+                    toast.classList.add('toast', 'show', 'position-fixed', 'bottom-0', 'end-0', 'm-3');
+                    toast.setAttribute('role', 'alert');
+                    toast.setAttribute('aria-live', 'assertive');
+                    toast.setAttribute('aria-atomic', 'true');
+                    toast.innerHTML = `
+                        <div class="toast-header">
+                            <strong class="me-auto">Added to Favorites</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            ${name} has been added to your favorites.
+                        </div>
+                    `;
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 3000);
+                }
+            }
+
+            addToFavoritesButtons.forEach(button => {
+                button.addEventListener('click', addToFavorites);
+            });
+
+            // Modal Functionality
+            $('.view-details-btn').click(function(e) {
+                e.preventDefault();
+                const productName = $(this).data('name');
+                const productPrice = $(this).data('price');
+                const productImage = $(this).data('image');
+                const productDescription = $(this).data('description');
+                const productQuantity = $(this).data('quantity');
+                const productDiscount = $(this).data('discount') || 0;
+
+                $('#modal-product-name').text(productName);
+                $('#modal-product-price').text(productPrice);
+                $('#modal-product-image').attr('src', productImage);
+                $('#modal-product-description').text(productDescription);
+                $('#modal-product-quantity').text(productQuantity);
+                $('#modal-product-discount').text(productDiscount);
+                $('#product-modal').fadeIn();
+
+                // Add to Cart from Modal
+                $('#add-to-cart-modal').off('click').on('click', function() {
+                    const name = productName;
+                    const price = parseFloat(productPrice.replace('$', ''));
+                    const image = productImage;
+                    const discount = parseFloat(productDiscount);
+
+                    const existingItemIndex = cart.findIndex(item => item.name === name);
+                    if (existingItemIndex > -1) {
+                        cart[existingItemIndex].quantity++;
+                    } else {
+                        cart.push({ name, price, image, discount, quantity: 1 });
+                    }
+
+                    const toast = document.createElement('div');
+                    toast.classList.add('toast', 'show', 'position-fixed', 'bottom-0', 'end-0', 'm-3');
+                    toast.innerHTML = `
+                        <div class="toast-header">
+                            <strong class="me-auto">Added to Cart</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            ${name} has been added to your cart.
+                        </div>
+                    `;
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 3000);
+
+                    updateCartUI();
+                    $('#product-modal').fadeOut();
+                });
+            });
+
+            $('.close-btn').click(function() {
+                $('#product-modal').fadeOut();
+            });
+
+            $(window).click(function(event) {
+                if ($(event.target).is('#product-modal')) {
+                    $('#product-modal').fadeOut();
+                }
+            });
+
+            // Cards Carousel Animation
+            const container = document.querySelector('.cards');
+            container.style.overflowX = 'hidden';
+            const originalScrollWidth = container.scrollWidth;
+            const cards = Array.from(container.querySelectorAll('.card'));
+            cards.forEach(card => {
+                const clone = card.cloneNode(true);
+                container.appendChild(clone);
+            });
+            container.scrollLeft = originalScrollWidth;
+            const speed = 100;
+            let lastTime = performance.now();
+
+            function animate(currentTime) {
+                const deltaTime = (currentTime - lastTime) / 1000;
+                container.scrollLeft -= speed * deltaTime;
+                if (container.scrollLeft <= 0) {
+                    container.scrollLeft += originalScrollWidth;
+                }
+                lastTime = currentTime;
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+
+            const images = document.querySelectorAll('.card img');
+            images.forEach(img => {
+                img.style.animation = 'none';
+            });
+
+            // Animate on Scroll
+            const animateElements = document.querySelectorAll('.product-card, .feature');
+            function checkIfInView() {
+                animateElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('animate');
+                    }
+                });
+            }
+            window.addEventListener('scroll', checkIfInView);
+            checkIfInView();
         });
-
-        increaseBtn.addEventListener('click', () => {
-            item.quantity++;
-            updateCartItem(item);
-        });
-
-        quantityInput.addEventListener('change', () => {
-            let value = parseInt(quantityInput.value);
-            if (value < 1 || isNaN(value)) value = 1;
-            item.quantity = value;
-            updateCartItem(item);
-        });
-
-        deleteBtn.addEventListener('click', () => {
-            cartItem.remove();
-            cartItems = cartItems.filter(i => i.name !== item.name);
-            updateCartSummary();
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-        });
-    }
-
-    function updateCartSummary() {
-        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        cartItemCount.textContent = `${totalItems} items`;
-        subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
-    }
-
-    // Image Zoom Functionality
-    zoomButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const imageUrl = this.getAttribute('data-image');
-            zoomedImage.src = imageUrl;
-            imageZoomModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        });
-    });
-
-    backBtn.addEventListener('click', function() {
-        imageZoomModal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Restore scrolling
-    });
-
-    // Close modal when clicking outside the image
-    imageZoomModal.addEventListener('click', function(e) {
-        if (e.target === imageZoomModal) {
-            imageZoomModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-});
-</script>
-
+    </script>
 </body>
-
 </html>

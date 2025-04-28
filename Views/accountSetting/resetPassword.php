@@ -252,7 +252,7 @@
     <div class="container">
         <div id="error-message" class="error"></div>
         
-        <!-- Step 1: Phone Number Form -->
+        <!-- Step 1: Phone Number or Email Form -->
         <div id="step1" class="step active">
             <div class="checkmark">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -263,9 +263,9 @@
             <h2>Reset Password</h2>
             <p>Forgot your password? No worries, we'll send you a 4-digit code.</p>
             
-            <form id="phone-form">
+            <form id="contact-form">
                 <div class="form-group">
-                    <input type="tel" id="phone" name="phone" placeholder="Enter your Phone Number" required>
+                    <input type="text" id="contact" name="contact" placeholder="Enter your Phone Number or Email" required>
                 </div>
                 <button type="submit">Get a 4-digit Code</button>
             </form>
@@ -353,7 +353,7 @@
         // DOM Elements
         const steps = document.querySelectorAll('.step');
         const errorMessage = document.getElementById('error-message');
-        const phoneForm = document.getElementById('phone-form');
+        const contactForm = document.getElementById('contact-form');
         const codeForm = document.getElementById('code-form');
         const passwordForm = document.getElementById('password-form');
         const resetFlowLink = document.getElementById('reset-flow');
@@ -385,27 +385,42 @@
             errorMessage.style.display = 'none';
         }
         
-        // Phone form submission
-        phoneForm.addEventListener('submit', function(e) {
+        // Contact form submission (handles both phone and email)
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const phone = document.getElementById('phone').value;
-            
-            // Validate phone number
-            if (!phone || !/^\d{10,15}$/.test(phone)) {
-                showError('Please enter a valid phone number');
+            const contact = document.getElementById('contact').value.trim();
+            const phoneRegex = /^\d{10,15}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Validate input as either phone number or email
+            if (!phoneRegex.test(contact) && !emailRegex.test(contact)) {
+                showError('Please enter a valid phone number or email address');
                 return;
             }
-            
-            // In a real app, you would call an API to send the code
-            // For demo purposes, we'll just move to the next step
-            phoneDisplay.textContent = phone;
-            hideError();
-            showStep(2);
-            
-            // Focus the first code input
-            setTimeout(() => {
-                document.querySelector('.code-input').focus();
-            }, 100);
+
+            // Send the code to the server
+            fetch('/user/resetPassword', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contact })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('phone-display').textContent = contact;
+                    hideError();
+
+                    // Display the reset code for debugging or testing purposes
+                    alert(`Your reset code is: ${data.resetCode}`);
+
+                    showStep(2);
+                } else {
+                    showError(data.message || 'Failed to send the code. Please try again.');
+                }
+            })
+            .catch(() => {
+                showError('An error occurred. Please try again.');
+            });
         });
         
         // Code form submission
@@ -454,7 +469,7 @@
             e.preventDefault();
             
             // Reset forms
-            phoneForm.reset();
+            contactForm.reset();
             codeForm.reset();
             passwordForm.reset();
             

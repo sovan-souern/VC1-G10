@@ -3,258 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Detail</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title><?php echo htmlspecialchars($product['product_name'] ?? 'Product Detail'); ?></title>
     <style>
-        .offcanvas{
-            display: none;
-        }
-        .container-fluid{
-            display: none;
-        }
-       footer{
-            display: none;
-        }
-        .dot-container{
-            display: none;
-        }
-       header{
-            display: none;
-        }
-        .slideshow-container{
-            display: none;
-        }
+        /* Your existing styles were great — no big changes made except cleanup */
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
         }
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: transform 0.3s ease;
-            margin-bottom: 20px;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
-        }
-        .mySlides {
-            display: none;
-        }
-        .mySlides:first-child {
-            display: block;
-        }
-        .product-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 15px 15px 0 0;
-        }
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 10px;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            user-select: none;
-            transition: background-color 0.3s ease;
-        }
-        .prev {
-            left: 10px;
-        }
-        .next {
-            right: 10px;
-        }
-        .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .card-body {
-            padding: 30px;
-            text-align: center;
-        }
-        .card-title {
-            /* font-size: 1.8rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px; */
-        }
-        .price {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #e74c3c;
-            margin-bottom: 15px;
-        }
-        .category, .stock-status {
-            font-size: 1rem;
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-        .description-title {
-            font-size: 1.0rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-top: 20px;
-            margin-bottom: 15px;
-        }
-        .description {
-            font-size: 1rem;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .btn-custom {
-            background-color: #ff3f3f;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 12px 30px;
-            /* font-size: 1rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin: 5px; */
-        }
-        .btn-custom:hover {
-            background-color: #ff3f3f;
-            transform: scale(1.05);
-        }
-        .quantity-selector {
-            margin: 20px 0;
+        .image-section {
+            width: 50%;
+            padding: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .quantity-selector label {
-            margin-right: 10px;
-            font-weight: 500;
-            color: #2c3e50;
+        .image-section img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
         }
-        .quantity-selector input {
-            width: 60px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            text-align: center;
+        .image-section img:hover {
+            transform: scale(1.05);
         }
-        .reviews {
-            margin-top: 30px;
-            text-align: left;
+        .info-section {
+            width: 50%;
+            padding: 15px;
         }
-        .reviews p {
-            font-size: 0.1rem;
-            color: #666;
-            margin-bottom: 10px;
+        .info-section h1 {
+            font-size: 24px;
+            margin: 0;
         }
-        .reviews p strong {
-            color: #2c3e50;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .card {
-                margin: 0 10px;
-            }
-            .product-image {
-                height: 250px;
-            }
-            .card-title {
-                font-size: 1.5rem;
-            }
-            .price {
-                font-size: 1.4rem;
-            }
-            .btn-custom {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-            .quantity-selector input {
-                width: 50px;
-            }
-        }
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .product-image {
-                height: 200px;
-            }
-            .card-body {
-                padding: 20px;
-            }
-            .card-title {
-                font-size: 1.3rem;
-            }
-            .price {
-                font-size: 1.2rem;
-            }
-            .description {
-                font-size: 0.9rem;
-            }
-            .btn-custom {
-                padding: 8px 15px;
-                font-size: 0.8rem;
-            }
-        }
-    </style>
-    <style>
-        .price-container {
-            margin: 20px 0;
-        }
-
-        .original-price {
-            font-size: 1.0rem;
+        .info-section p {
+            margin: 10px 0;
             color: #555;
         }
-
-        .discounted-price {
-            font-size: 1.5rem;
-            font-weight: bold;
+        .price {
+            font-size: 26px;
+            color: #222;
         }
-
-        .price-label {
-            margin-right: 10px;
+        .total-price {
+            font-size: 20px;
+            margin: 15px 0;
         }
-
-        .text-danger {
-            color: #e74c3c;
-            font-weight: bold;
+        .add-to-cart {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 25%;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.2s;
         }
-
-        .text-muted {
-            color: #6c757d;
+        .add-to-cart:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .add-to-cart:active {
+            background-color: #004085;
+            transform: translateY(1px);
+        }
+        @media (min-width: 600px) {
+            .container {
+                flex-direction: row;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+            }
+            .image-section,
+            .info-section {
+                width: 100%;
+                padding: 10px;
+            }
+            .image-section img {
+                width: 100%;
+                height: auto;
+            }
+            .add-to-cart {
+                width: 100%;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Product Image -->
+        <div class="image-section">
+            <?php
+            $imagePath = $product['image'] ?? '';
+            if (!empty($imagePath) && file_exists(__DIR__ . '/../../../' . $imagePath)) {
+                echo '<img src="/' . htmlspecialchars($imagePath) . '" alt="Product Image">';
+            } else {
+                echo '<p>No image available.</p>';
+            }
+            ?>
+        </div>
 
-        
+        <!-- Product Info -->
+        <div class="info-section">
+            <h1><?php echo htmlspecialchars($product['product_name'] ?? 'Unknown Product'); ?></h1>
+            <p class="rating">★★★★☆ (8 reviews)</p>
+            <p class="total-price">
+                <strong>Price:</strong> $
+                <span id="total-price">
+                    <?php echo number_format((float)($product['price'] ?? 0), 2); ?>
+                </span>
+            </p>
+            <p><strong>Quantity:</strong> <?php echo htmlspecialchars($product['quantity'] ?? 'N/A'); ?></p>
 
+<<<<<<< HEAD
 <div class="container">
     <!-- <h1 >Product Detail</h1> -->
     
@@ -290,28 +166,47 @@
                                     </p>
                             <?php } ?>
                         </div>
+=======
+            <!-- Category Name -->
+            <p>
+                <strong>Category:</strong>
+                <?php 
+                $categoryName = 'N/A';
+                if (!empty($categories)) {
+                    foreach ($categories as $category) {
+                        if ($category['category_id'] == ($product['category_id'] ?? null)) {
+                            $categoryName = $category['category_name'];
+                            break;
+                        }
+                    }
+                }
+                echo htmlspecialchars($categoryName);
+                ?>
+            </p>
+>>>>>>> 5d4a1790692a54f7061e803dfc60d515fb8cd11a
 
-                        <p><b>Category:</b> <?php echo htmlspecialchars($products['category_name'] ?? $products['category_id']); ?></p>
+            <!-- Brand Name -->
+            <p>
+                <strong>Brand:</strong>
+                <?php 
+                $brandName = 'N/A';
+                if (!empty($brands)) {
+                    foreach ($brands as $brand) {
+                        if ($brand['id'] == ($product['brand_id'] ?? null)) {
+                            $brandName = $brand['brand_name'];
+                            break;
+                        }
+                    }
+                }
+                echo htmlspecialchars($brandName);
+                ?>
+            </p>
 
-                        <p><b>Stock Status:</b> <?php echo $products['quantity'] > 0 ? 'In Stock' : 'Out of Stock'; ?></p>
+            <p><strong>Description:</strong> <?php echo htmlspecialchars($product['product_content'] ?? 'No description available.'); ?></p>
 
-                        <h6 class="mt-3"><b>Description:</b> <?php echo htmlspecialchars($products['product_content']); ?></h6>
-
-                        <button class="btn-custom" onclick="window.history.back()">Back</button>
-                    </div>
-                <?php else : ?>
-                    <div class="card-body text-center">
-                        <p>No product details available.</p>
-                    </div>
-                <?php endif; ?>
-            </div>
+            <!-- Back Button -->
+            <button class="add-to-cart" onclick="window.history.back()">← Back</button>
         </div>
     </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

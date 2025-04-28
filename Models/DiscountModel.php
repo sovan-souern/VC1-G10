@@ -145,4 +145,22 @@ class DiscountModel
             die("Error fetching categories: " . $e->getMessage());
         }
     }
+    function discountBrand($id) // Fixed method name
+    {
+        try {
+            $stmt = $this->pdo->query('SELECT * FROM brand where id = :id', ['id' => $id]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            die("Error fetching brands: " . $e->getMessage());
+        }
+    }
+    function discountBrands() // Fixed method name
+    {
+        try {
+            $stmt = $this->pdo->query('SELECT * FROM brand' );
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            die("Error fetching brands: " . $e->getMessage());
+        }
+    }
 }

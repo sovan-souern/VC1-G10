@@ -16,7 +16,8 @@ require_once 'Controllers/DiscountConntroller.php';
 require_once 'Controllers/AdminController.php';
 require_once "Controllers/checkoutUser.php";
 require_once "Controllers/HistoryController.php";
-require_once "Controllers/DetailhomeController.php";
+// require_once "Controllers/DetailController.php";
+
 
 $routes = new Router();
 
@@ -107,8 +108,17 @@ $routes->get('/user/profile', [UserController::class, 'profile']); // Add this l
 $routes->get('/notifications', [NotificationController::class, 'index']); 
 $routes->get('/notifications/view', [NotificationController::class, 'view']); 
 $routes->get('/notifications/delete', [NotificationController::class, 'destroy']); 
+$routes->get('/notifications/order/delete', [NotificationController::class, 'destroyOrder']); 
+$routes->get('/notifications/outstock/delete', [NotificationController::class, 'destroyOutstock']); 
 $routes->get('/notifications/update', [NotificationController::class, 'update']); 
 $routes->get('/out-stock', [ProductController::class, 'OutStock']);
+$routes->post('/contact/store', [NotificationController::class, 'store']);
+$routes->get('/Notification/UserContact', [NotificationController::class, 'UserContact']);
+$routes->get('/Notification/stock', [NotificationController::class, 'stock']);
+$routes->get('/Notification/order', [NotificationController::class, 'UserOrder']);
+$routes->get('/contact', [ContactController::class, 'index']);
+
+
 // Product Routes (Inventory)
 
 $routes->get('/products', [ProductController::class, 'index']);
@@ -124,9 +134,14 @@ $routes->get('/products/view', [ProductController::class, 'view']);
 // Discount Routes
 $routes->get('/discount', [DiscountController::class, 'index']);
 $routes->get('/create-discount', [DiscountController::class, 'create']);
+$routes->get('/discount/history', [DiscountController::class, 'historyDiscount']);
 $routes->get('/diescoutCategory', [DiscountController::class, 'discountProductCategory']);
 $routes->post('/discount/storeCategory', [DiscountController::class, 'storeCategory']);
-
+$routes->get('/descount/brand', [DiscountController::class, 'discountBrand']);
+$routes->get('/discount/brand', [DiscountController::class, 'DiscountBrandProduct']);
+$routes->post('/descount/brand/store', [DiscountController::class, 'storeBrand']); 
+$routes->get('/discount/product', [DiscountController::class, 'createProuductDiscount']);
+$routes->get('/discount/category', [DiscountController::class, 'CreateCategoryDiscount']);
 
 $routes->post('/discount/store', [DiscountController::class, 'store']);
 $routes->get('/discount/edit', [DiscountController::class, 'edit']);
@@ -159,6 +174,8 @@ $routes->get('/reset', [ProfileController::class, 'reset']);
 // Dashboard Route
 $routes->get('/dashboard', [DashboardController::class, 'index']);
 
+// user reset pw
+$routes->get('/resetPw', [AuthController::class, 'reset']);
 // Dispatch the routes
 
 
@@ -185,8 +202,7 @@ $routes->get('/shopping', [CheckoutUserController::class, 'shopping']);
 $routes->get('/cart', [CheckoutUserController::class, 'cartview']);
 
 
-$routes->post('/contact/store', [NotificationController::class, 'store']);
-$routes->get('/contact', [ContactController::class, 'index']);
+
 
 
 $routes->get('/shop', [ShopController::class, 'index']);
@@ -199,6 +215,9 @@ $routes->get('/history', [HistoryController::class, 'index']);
 // Routes.php (or your route configuration file)
 $routes->get('/detail', [DetailController::class, 'index']);
 
+
+// Detail
+$routes->get("/detail",[DetailController::class, 'index']); 
 
 
 

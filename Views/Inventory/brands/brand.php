@@ -58,6 +58,9 @@
                                     <td class="brand-name"><?= $brand["brand_name"] ?></td>
                                     <td class="description-column"><?= $brand["description"] ?></td>
                                     <td class="action-column">
+                                    <a class="action-btn discount-btn" href="/descount/brand?id=<?= $brand['id'] ?>">
+                                                <img src="/Views/assets/img/descount.png" alt="discount">
+                                            </a>
                                         <a class="me-3" href="brand/edit?id=<?= $brand["id"] ?>">
                                             <img class="icon" src="/Views/assets/img1/icons/edit.svg" alt="edit">
                                         </a>
@@ -78,6 +81,10 @@
 
 <style>
 /* General Styles */
+.discount-btn img{
+    width: 20px;
+    margin: 0px 15px;
+}
 .page {
     width: 100%;
     padding: 1rem;

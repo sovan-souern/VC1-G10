@@ -143,7 +143,7 @@ $notifications = $model->getNotifications();
           </a>
         </li>
         <li class="menu-item">
-          <a href="/reset" class="menu-link">
+          <a href="/resetPw" class="menu-link">
             <div data-i18n="Notifications">Reset Password</div>
           </a>
         </li>
@@ -616,15 +616,14 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                   <?php
                   $totalIndex = 0;
                   foreach ($notifications as $index => $notification) {
+                    if($notification["product_quantity"]<3){
                     if ($notification["status"] == "unread") {
                       $totalIndex++;
                     }
                   }
+                }
                   echo $totalIndex;
                   ?>
-
-
-
                 </span>
               </a>
             </li>
@@ -715,16 +714,9 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
                 <li>
                   <a class="dropdown-item" href="/reset">
                     <i class="bi bi-key me-2"></i>
-                    <span class="align-middle">Reset Password</span>
+                    <span class="align-middle">Forgot Password</span>
                   </a>
                 </li>
-                <!-- create admin -->
-                 <li>
-                  <a class="dropdown-item" href="/admin-register">
-                    <i class="bi bi-person-plus me-2"></i>
-                    <span class="align-middle">Create ShopOwner</span>
-                  </a>
-                <li>
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
@@ -765,7 +757,6 @@ document.getElementById('profile-upload').addEventListener('change', function(e)
               dropdown.classList.add("open");
             }
           });
-
           // Store active menu item
           menuItems.forEach(link => {
             link.addEventListener("click", function() {
