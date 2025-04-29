@@ -109,6 +109,8 @@ class OrderModel
     ");
     return $stmt->fetchAll();
     }
+
+
      function getOrderID($id){
         $stmt = $this->pdo->query("
         SELECT 
@@ -118,21 +120,32 @@ class OrderModel
             orders.lastName AS last_name,
             orders.phone AS phone_number,
             orders.buy_at AS created_at,
+            
             orders.order_status AS status,
             orders.total AS total,
             orders.product_id AS productId,
             orders.admin_id AS notification_user_id,
+            orders.address_id AS address_id,
+            address.city AS city,
+            address.country AS country,
+            address.village AS village,
+            address.commune AS commune,
+            address.district AS district,
+            address.province AS province,
+
             admins.name AS admin_name,
             products.image AS product_image,    
             products.product_name AS product_name,
             products.price AS product_price,
             products.quantity AS product_quantity
-        FROM 
+            FROM 
             orders
         LEFT JOIN 
             admins ON orders.admin_id = admins.admin_id
         LEFT JOIN 
             products ON orders.product_id = products.product_id
+        LEFT JOIN 
+            address ON orders.address_id = address.address_id
         WHERE orders.order_id = $id
     ");
     return $stmt->fetch();
