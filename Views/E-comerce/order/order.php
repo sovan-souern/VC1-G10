@@ -38,10 +38,14 @@
                             <?php 
                             $shownOrders = []; // Track shown orders
                             foreach ($orders as $index => $order): 
+                                
                                 $uniqueKey = $order['admin_id'] . '_' . $order['created_at']; // Unique key for each order
                                 if (!in_array($uniqueKey, $shownOrders)): 
-                                    $shownOrders[] = $uniqueKey; // Mark this order as shown
+                                    $shownOrders[] = $uniqueKey; // Mark this order as 
+                                    
                             ?>
+                            
+                            
                                 <tr>
                                 <td><?php echo $index + 1; ?></td>
                                         <td><?php echo htmlspecialchars($order['admin_name']); ?></td>
@@ -51,15 +55,14 @@
                                         <td class="action-buttons">
                                             <div class="dropdown">
                                                 <button class="btn btn-more" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <!-- Use text-based ellipsis as fallback; replace with your icon -->
+                                                 
                                                     <span>⋮</span>
-                                                    <!-- If you have the icon, uncomment below -->
-                                                    <!-- <img src="/Views/assets/img1/icons/more-vertical.svg" alt="More" style="width: 20px;"> -->
+                                               
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-right">
                                                     <li><a class="dropdown-item confirm-action" href="order/confirm?id=<?= $order['id'] ?>">Confirm</a></li>
                                                     <li><a class="dropdown-item cancel-action"  href="order/cancel?id=<?= $order['id'] ?>">Cancel</a></li>
-                                                    <li><a class="dropdown-item view-action"  href="order/view?id=<?= $order['id'] ?>">View</a></li>
+                                                    <li><a class="dropdown-item view-action"  href="/order_detail?id=<?= $order['id'] ?>">View</a></li>
                                                 </ul>
                                             </div>
                                         </td>

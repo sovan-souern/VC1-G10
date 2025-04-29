@@ -34,8 +34,7 @@ $notifications = $model->getNotifications();
         <div data-i18n="Analytics">Dashboard</div>
       </a>
     </li>
-
-    <!-- Layouts -->
+    
     <li class="menu-item">
       <a href="/E-comerce" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bi bi-shop"></i>
@@ -48,11 +47,7 @@ $notifications = $model->getNotifications();
             <div data-i18n="Container">Orders</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="/order_detail" class="menu-link">
-            <div data-i18n="Container">Order Detail</div>
-          </a>
-        </li>
+       
         <li class="menu-item">
           <a href="/order/confirm" class="menu-link">
             <div data-i18n="Fluid">Confirm Order</div>
