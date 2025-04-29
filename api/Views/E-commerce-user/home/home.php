@@ -969,85 +969,88 @@
 </head>
 
 <body>
-    <section class="discount-products">
-        <div class="discount-header">
-            <h2>Special Discounts</h2>
-            <p>Limited time offers - save up to 30%</p>
-        </div>
 
-        <div class="container">
-            <div class="products-container">
-                <?php foreach ($products as $index => $product): ?>
-                    <?php 
-                    $hasDiscount = false;
-                    foreach ($discounts as $key => $discount):
-                        if ($product["product_id"] == $discount["product_id"]):
-                            if ($discount["end_date"] >= date("Y-m-d") && $discount["start_date"] <= date("Y-m-d")):
-                                $original_price = floatval($product["price"]);
-                                $discount_percentage = floatval($discount["discount_percentage"]);
-                                $discounted_price = $original_price * (1 - $discount_percentage / 100);
-                                $product_name = htmlspecialchars($product["product_name"]);
-                                $image_url = !empty($product["image"]) ? htmlspecialchars($product["image"]) : 'https://via.placeholder.com/150';
-                                $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
-                                $original_price_formatted = "$" . number_format($original_price, 2);
-                                $discounted_price_formatted = "$" . number_format($discounted_price, 2);
-                                $product_content = isset($product["product_content"]) ? htmlspecialchars($product["product_content"]) : "No description available";
-                                $product_quantity = isset($product["quantity"]) ? htmlspecialchars($product["quantity"]) : "No quantity available";
-                    ?>
-                                <div class="product-card">
-                                    <div class="discount-badge"><?php echo $discount_badge; ?></div>
-                                    <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                                        <ul class="general-product-hover product-hover-shared">
-                                            <li>
-                                                <a href="#" class="view-details-btn"
-                                                   data-name="<?php echo $product_name; ?>"
-                                                   data-price="<?php echo $discounted_price_formatted; ?>"
-                                                   data-discount="<?php echo $discount_percentage; ?>"
-                                                   data-image="<?php echo $image_url; ?>"
-                                                   data-description="<?php echo $product_content; ?>"
-                                                   data-quantity="<?php echo $product_quantity; ?>">
-                                                    <i class="arrow_expand"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="add-to-favorites"
-                                                   data-name="<?php echo $product_name; ?>"
-                                                   data-price="<?php echo $discounted_price_formatted; ?>"
-                                                   data-discount="<?php echo $discount_percentage; ?>"
-                                                   data-image="<?php echo $image_url; ?>"
-                                                   data-description="<?php echo $product_content; ?>"
-                                                   data-quantity="<?php echo $product_quantity; ?>">
-                                                    <span class="icon_heart_alt"></span>
-                                                </a>
-                                            </li>
-                                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name"><?php echo $product_name; ?></h5>
-                                        <div class="price">
-                                            <span class="original-price"><?php echo $original_price_formatted; ?></span>
-                                            <?php echo $discounted_price_formatted; ?>
-                                        </div>
-                                        <button class="add-to-cart"
-                                data-product-name="<?php echo $product_name; ?>"
-                                data-product-price="<?php echo $discounted_price; ?>"
-                                data-product-image="<?php echo $image_url; ?>">
-                            Add to Cart
-                        </button>
-                                    </div>
+<section class="discount-products">
+    <div class="discount-header">
+        <h2>Special Discounts</h2>
+    </div>
+
+    <div class="container">
+        <div class="products-container">
+            <?php foreach ($products as $index => $product): ?>
+                <?php 
+                $hasDiscount = false;
+                foreach ($discounts as $key => $discount):
+                    if ($product["product_id"] == $discount["product_id"]):
+                        if ($discount["end_date"] >= date("Y-m-d") && $discount["start_date"] <= date("Y-m-d")):
+                            $original_price = floatval($product["price"]);
+                            $discount_percentage = floatval($discount["discount_percentage"]);
+                            $discounted_price = $original_price * (1 - $discount_percentage / 100);
+                            $product_name = htmlspecialchars($product["product_name"]);
+                            $image_url = !empty($product["image"]) ? htmlspecialchars($product["image"]) : 'https://via.placeholder.com/150';
+                            $discount_badge = "-" . number_format($discount_percentage, 0) . "%";
+                            $original_price_formatted = "$" . number_format($original_price, 2);
+                            $discounted_price_formatted = "$" . number_format($discounted_price, 2);
+                            $product_content = isset($product["product_content"]) ? htmlspecialchars($product["product_content"]) : "No description available";
+                            $product_quantity = isset($product["quantity"]) ? htmlspecialchars($product["quantity"]) : "No quantity available";
+                ?>
+                            <div class="product-card">
+                                <div class="discount-badge"><?php echo $discount_badge; ?></div>
+                                <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
+                                    <ul class="general-product-hover product-hover-shared">
+                                        <li>
+                                            <a href="#" class="view-details-btn"
+                                               data-name="<?php echo $product_name; ?>"
+                                               data-price="<?php echo $discounted_price_formatted; ?>"
+                                               data-discount="<?php echo $discount_percentage; ?>"
+                                               data-image="<?php echo $image_url; ?>"
+                                               data-description="<?php echo $product_content; ?>"
+                                               data-quantity="<?php echo $product_quantity; ?>">
+                                                <i class="arrow_expand"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="add-to-favorites"
+                                               data-name="<?php echo $product_name; ?>"
+                                               data-price="<?php echo $discounted_price_formatted; ?>"
+                                               data-discount="<?php echo $discount_percentage; ?>"
+                                               data-image="<?php echo $image_url; ?>"
+                                               data-description="<?php echo $product_content; ?>"
+                                               data-quantity="<?php echo $product_quantity; ?>">
+                                                <span class="icon_heart_alt"></span>
+                                            </a>
+                                        </li>
+                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
                                 </div>
-                                <?php 
-                                $hasDiscount = true;
-                                break;
-                                ?>
-                            <?php endif; ?>
+                                <div class="product-info">
+                                    <h5 class="product-name"><?php echo $product_name; ?></h5>
+                                    <div class="price">
+                                        <span class="original-price"><?php echo $original_price_formatted; ?></span>
+                                        <?php echo $discounted_price_formatted; ?>
+                                    </div>
+                                    <button class="add-to-cart"
+                                            data-product-name="<?php echo $product_name; ?>"
+                                            data-product-price="<?php echo $discounted_price; ?>"
+                                            data-product-image="<?php echo $image_url; ?>">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                            <?php 
+                            $hasDiscount = true;
+                            break;
+                            ?>
                         <?php endif; ?>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
-            </div>
+            <?php endforeach; ?>
         </div>
-    </section>
+    </div>
+</section>
+
+
+    
      <!-- About Section -->
      <section class="about-section py-5">
             <div class="container">
@@ -1057,7 +1060,7 @@
                     </div>
                     <div class="col-lg-6 ps-lg-5">
                         <h2 class="section-title mb-4">Why Choose Glow Skincare?</h2>
-                        <p class="lead mb-4">At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, scientifically proven to nourish and rejuvenate your skin.</p>
+                        <p class="lead mb-4">At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, smooth skin .</p>
                         <div class="features mb-4">
                             <div class="feature d-flex align-items-center mb-3">
                                 <div class="feature-icon me-3">
@@ -1073,20 +1076,17 @@
                                     <i class="fas fa-ban"></i>
                                 </div>
                                 <div class="feature-text">
-                                    <h5 class="mb-1">No Harmful Chemicals</h5>
-                                    <p class="mb-0 text-muted">Free from parabens, sulfates, and other harmful chemicals.</p>
+                                    <h5 class="mb-1">Transparent skin from the inside</h5>
+                                    <p class="mb-0 text-muted">Paraben, sulfate, and chemical-free.</p>
                                 </div>
                             </div>
                             <div class="feature d-flex align-items-center">
                                 <div class="feature-icon me-3">
                                     <i class="fas fa-heart"></i>
                                 </div>
-                                <div class="feature-text">
-                                    <h5 class="mb-1">Cruelty-Free</h5>
-                                    <p class="mb-0 text-muted">We never test our products on animals.</p>
-                                </div>
+        
                             </div>
-                        </div>
+                    
                         <a href="#" class="btn btn-primary btn-lg">Discover Our Story</a>
                     </div>
                 </div>
