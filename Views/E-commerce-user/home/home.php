@@ -969,7 +969,6 @@
     <section class="discount-products">
         <div class="discount-header">
             <h2>Special Discounts</h2>
-            <p>Limited time offers - save up to 30%</p>
         </div>
 
         <div class="container">
@@ -1054,7 +1053,7 @@
                     </div>
                     <div class="col-lg-6 ps-lg-5">
                         <h2 class="section-title mb-4">Why Choose Glow Skincare?</h2>
-                        <p class="lead mb-4">At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, scientifically proven to nourish and rejuvenate your skin.</p>
+                        <p class="lead mb-4">At Glow Skincare, we believe that everyone deserves to feel confident in their skin. Our products are crafted with the finest natural ingredients, smooth skin .</p>
                         <div class="features mb-4">
                             <div class="feature d-flex align-items-center mb-3">
                                 <div class="feature-icon me-3">
@@ -1070,18 +1069,14 @@
                                     <i class="fas fa-ban"></i>
                                 </div>
                                 <div class="feature-text">
-                                    <h5 class="mb-1">No Harmful Chemicals</h5>
-                                    <p class="mb-0 text-muted">Free from parabens, sulfates, and other harmful chemicals.</p>
+                                    <h5 class="mb-1">Transparent skin from the inside</h5>
+                                    <p class="mb-0 text-muted">Paraben, sulfate, and chemical-free.</p>
                                 </div>
                             </div>
                             <div class="feature d-flex align-items-center">
                                 <div class="feature-icon me-3">
                                     <i class="fas fa-heart"></i>
-                                </div>
-                                <div class="feature-text">
-                                    <h5 class="mb-1">Cruelty-Free</h5>
-                                    <p class="mb-0 text-muted">We never test our products on animals.</p>
-                                </div>
+                                </div>  
                             </div>
                         </div>
                         <a href="#" class="btn btn-primary btn-lg">Discover Our Story</a>
@@ -1334,223 +1329,7 @@
             </div>
         </section>
 
-        <!-- Special Offers Section -->
-        <section class="special-offers py-5 bg-light">
-            <div class="container">
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <h2 class="section-title">Special Offers</h2>
-                        <p class="section-subtitle">Limited time deals with amazing discounts</p>
-                    </div>
-                </div>
-                <div class="products-container">
-                    <div class="product-card">
-                        <div class="discount-badge">-20%</div>
-                        <div class="product-image" style="background-image: url('https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg')">
-                            <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="#" class="view-details-btn"
-                                       data-name="Anti-Aging Cream"
-                                       data-price="$47.99"
-                                       data-discount="20"
-                                       data-image="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
-                                       data-description="Reduces fine lines and wrinkles."
-                                       data-quantity="25">
-                                        <i class="arrow_expand"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="add-to-favorites"
-                                       data-name="Anti-Aging Cream"
-                                       data-price="$47.99"
-                                       data-discount="20"
-                                       data-image="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg"
-                                       data-description="Reduces fine lines and wrinkles."
-                                       data-quantity="25">
-                                        <span class="icon_heart_alt"></span>
-                                    </a>
-                                </li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Anti-Aging Cream</h5>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <div class="price">
-                                <span class="original-price">$59.99</span>
-                                $47.99
-                            </div>
-                            <button class="add-to-cart"
-                                    data-product-name="Anti-Aging Cream"
-                                    data-product-price="47.99"
-                                    data-product-discount="20"
-                                    data-product-image="https://jfkhealthworld.com/wp-content/uploads/2020/03/Facial-Skin-Care.jpg">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="discount-badge">-15%</div>
-                        <div class="product-image" style="background-image: url('https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830')">
-                            <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="#" class="view-details-btn"
-                                       data-name="Facial Cleanser"
-                                       data-price="$28.04"
-                                       data-discount="15"
-                                       data-image="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830"
-                                       data-description="Gentle cleanser for all skin types."
-                                       data-quantity="35">
-                                        <i class="arrow_expand"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="add-to-favorites"
-                                       data-name="Facial Cleanser"
-                                       data-price="$28.04"
-                                       data-discount="15"
-                                       data-image="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830"
-                                       data-description="Gentle cleanser for all skin types."
-                                       data-quantity="35">
-                                        <span class="icon_heart_alt"></span>
-                                    </a>
-                                </li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Facial Cleanser</h5>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="price">
-                                <span class="original-price">$32.99</span>
-                                $28.04
-                            </div>
-                            <button class="add-to-cart"
-                                    data-product-name="Facial Cleanser"
-                                    data-product-price="28.04"
-                                    data-product-discount="15"
-                                    data-product-image="https://cdn.shopify.com/s/files/1/0251/2184/9419/files/shutterstock_1051577057_1024x1024.jpg?v=1659125830">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="discount-badge">-25%</div>
-                        <div class="product-image" style="background-image: url('https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg')">
-                            <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="#" class="view-details-btn"
-                                       data-name="Nourishing Body Lotion"
-                                       data-price="$29.99"
-                                       data-discount="25"
-                                       data-image="https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg"
-                                       data-description="Deeply moisturizing body lotion."
-                                       data-quantity="45">
-                                        <i class="arrow_expand"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="add-to-favorites"
-                                       data-name="Nourishing Body Lotion"
-                                       data-price="$29.99"
-                                       data-discount="25"
-                                       data-image="https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg"
-                                       data-description="Deeply moisturizing body lotion."
-                                       data-quantity="45">
-                                        <span class="icon_heart_alt"></span>
-                                    </a>
-                                </li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Nourishing Body</h5>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="price">
-                                <span class="original-price">$39.99</span>
-                                $29.99
-                            </div>
-                            <button class="add-to-cart"
-                                    data-product-name="Nourishing Body Lotion"
-                                    data-product-price="29.99"
-                                    data-product-discount="25"
-                                    data-product-image="https://www.arfaana.com/wp-content/uploads/2020/10/dove-nourishing-body-care-beauty-cream-deep-moisturisation-with-non-greasy-feel.jpg">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="discount-badge">-30%</div>
-                        <div class="product-image" style="background-image: url('https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg')">
-                            <ul class="general-product-hover product-hover-shared">
-                                <li>
-                                    <a href="#" class="view-details-btn"
-                                       data-name="Overnight Repair Cream"
-                                       data-price="$34.99"
-                                       data-discount="30"
-                                       data-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg"
-                                       data-description="Repairs skin overnight for a youthful glow."
-                                       data-quantity="15">
-                                        <i class="arrow_expand"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="add-to-favorites"
-                                       data-name="Overnight Repair Cream"
-                                       data-price="$34.99"
-                                       data-discount="30"
-                                       data-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg"
-                                       data-description="Repairs skin overnight for a youthful glow."
-                                       data-quantity="15">
-                                        <span class="icon_heart_alt"></span>
-                                    </a>
-                                </li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Overnight Repair</h5>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="price">
-                                <span class="original-price">$49.99</span>
-                                $34.99
-                            </div>
-                            <button class="add-to-cart"
-                                    data-product-name="Overnight Repair Cream"
-                                    data-product-price="34.99"
-                                    data-product-discount="30"
-                                    data-product-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+     
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
