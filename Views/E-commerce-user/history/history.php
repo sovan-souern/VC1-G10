@@ -21,6 +21,7 @@
             margin: auto;
             background: #fff;
             padding: 20px;
+            margin-bottom: 50%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
@@ -185,7 +186,7 @@
                         <p class="text-muted mb-0">Buy at: <span id="buyAt"></span></p>
                     </div>
                     <div class="d-flex justify-content-between mb-5">
-                        <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Order by yourself</p>
                     </div>
                     <div class="text-center">
                         <button class="btn" onclick="downloadReceipt()">Download Receipt</button>
