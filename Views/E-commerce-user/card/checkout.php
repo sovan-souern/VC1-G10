@@ -689,11 +689,15 @@
     </style>
 </head>
 <body>
-    <div class="container checkout-container">
-        <div class="toast-container" id="toast-container"></div>
+<div class="container checkout-container">
         <div class="row">
-            <div class="col-md-7">
-                <form action="/checkout/store" method="POST" id="checkout-form">
+            <div class="col-md-7">=
+                <form action="/checkout/store?id=<?php foreach ($users as $user) {
+                                                        if ($user['name'] == $_SESSION['name']) {
+                                                            echo $user['admin_id'];
+                                                        }
+                                                    }
+                                                    ?>" method="POST" id="checkout-form">
                     <input type="hidden" name="admin_id" value="">
                     <input type="hidden" name="items" id="items">
                     <input type="hidden" name="total" id="total_input">
