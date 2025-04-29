@@ -2,7 +2,7 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Order List</h4>
+                <h4>Order Cancel</h4>
             </div>
         </div>
         <div class="card">
@@ -11,8 +11,8 @@
                     <div class="search-set">
                         <div class="search-path">
                             <a class="btn btn-filter" id="filter_search">
-                                <img src="/Views/assets/img1/icons/filter.svg" alt="img">
-                                <span><img src="/Views/assets/img1/icons/closes.svg" alt="img"></span>
+                                <img src="/Views/assets/img1/icons/filter.svg" alt="Filter">
+                                <span><img src="/Views/assets/img1/icons/closes.svg" alt="Close"></span>
                             </a>
                         </div>
                         <div class="search-input">
@@ -34,7 +34,7 @@
                                 <th>Phone</th>
                                 <th>Buy at</th>
                                 <th>Total Price</th>
-                                <th>Action</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody id="orderTableBody">
@@ -42,10 +42,10 @@
                             $shownOrders = []; // Track shown orders
                             $displayIndex = 1; // Initialize display index
                             foreach ($orders as $order): 
-                                $uniqueKey = $order['admin_id'] . '_' . $order['created_at']; // Unique key for each order
+                                $uniqueKey = $order['admin_id'] . $order['created_at']; // Unique key for each order
                                 if (!in_array($uniqueKey, $shownOrders)): 
                                     $shownOrders[] = $uniqueKey; // Mark this order as shown
-                                    if ($order["status"] != "Cancelled" && $order["status"] != "Comfirm"):
+                                    if ($order["status"] === "Cancelled"): // Correct condition to check status
                             ?>
                                         <tr>
                                             <td><?php echo $displayIndex++; ?></td> <!-- Increment display index -->
@@ -57,12 +57,11 @@
                                                 <div class="dropdown dropstart">
                                                     <button class="btn btn-more" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="More actions">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                                            <path d="M3 4.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm5 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm5 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0z"/>
+                                                            <path d="M3 4.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm5 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm5 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0z" />
                                                         </svg>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item confirm-action" href="/order/confirm/store?id=<?= $order['id'] ?>"><i class="fas fa-check"></i> Confirm</a></li>
-                                                        <li><a class="dropdown-item cancel-action" href="/order/cancel/store?id=<?= $order['id'] ?>"><i class="fas fa-times"></i> Cancel</a></li>
+                                                        <li><a class="dropdown-item unconfirm-action" href="/order/uncancel/store?id=<?= $order['id'] ?>"><i class="fas fa-times"></i> Uncancel</a></li>
                                                         <li><a class="dropdown-item view-action" href="/order_detail?id=<?= $order['id'] ?>"><i class="fas fa-eye"></i> View</a></li>
                                                     </ul>
                                                 </div>
@@ -126,12 +125,8 @@
     }
 
     /* Color-coded actions for better UX */
-    .confirm-action {
-        color: #388e3c; /* Green for confirm */
-    }
-
-    .cancel-action {
-        color: #d32f2f; /* Red for cancel */
+    .unconfirm-action {
+        color: #d32f2f; /* Red for unconfirm */
     }
 
     .view-action {
