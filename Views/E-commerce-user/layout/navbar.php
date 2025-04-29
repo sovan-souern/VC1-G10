@@ -75,8 +75,9 @@
                     </a>
                 <?php else: ?>
                     <a href="/login" class="d-flex align-items-center text-decoration-none">
-                        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                    </a>
+    <i class="bi bi-person fs-4 text-dark"></i>
+    <span class="ms-1 d-none d-lg-inline"></span>
+</a>
                 <?php endif; ?>
             </div>
         </div>

@@ -43,20 +43,20 @@
         }
 
         .management-header h1 {
-            font-size: 1.92em; /* Kept smaller as requested */
+            font-size: 1.92em;
             font-weight: 600;
             margin: 0;
         }
 
         .management-controls {
             display: flex;
-            gap: 25px; /* Increased gap for more spacing between search input and filter */
+            gap: 25px;
             align-items: center;
         }
 
         .search-wrapper {
             position: relative;
-            margin: 0 10px; /* Added margin around search input for extra gap */
+            margin: 0 10px;
         }
 
         .search-input {
@@ -283,16 +283,17 @@
         }
 
         .btn {
-            padding: 6px 12px;
+            padding: 8px 14px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
-            font-size: 0.8em;
-            display: flex;
+            font-size: 0.9em;
+            display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            text-align: center;
         }
 
         .btn:hover {
@@ -302,14 +303,28 @@
 
         .btn-restock { background: #10b981; color: white; }
         .btn-order { background: #f59e0b; color: #1f2937; }
-        .btn-icon { padding: 6px; background: none; color: #6b7280; font-size: 1em; }
-        .btn-icon:hover { color: #4f46e5; box-shadow: none; transform: translateY(-1px); }
+        .btn-icon { 
+            padding: 8px; 
+            background: none; 
+            color: #6b7280; 
+            font-size: 1.1em; 
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            justify-content: center;
+        }
+        .btn-icon:hover { 
+            color: #4f46e5; 
+            box-shadow: none; 
+            transform: translateY(-1px); 
+            background: rgba(79, 70, 229, 0.1);
+        }
         .btn-bulk-restock { background: #10b981; color: white; }
         .btn-report { background: #7c3aed; color: white; }
 
         .secondary-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             margin-top: 8px;
             justify-content: center;
         }
@@ -343,17 +358,17 @@
             }
 
             .management-header h1 {
-                font-size: 1.4em; /* Kept smaller for responsive design */
+                font-size: 1.4em;
             }
 
             .management-controls {
                 flex-direction: column;
                 width: 100%;
-                gap: 20px; /* Adjusted gap for mobile */
+                gap: 20px;
             }
 
             .search-wrapper {
-                margin: 0; /* Reset margin for mobile */
+                margin: 0;
             }
 
             .search-input {
@@ -410,6 +425,17 @@
             .product-image {
                 width: 50px;
                 height: 50px;
+            }
+
+            .btn {
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+
+            .btn-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 1em;
             }
         }
     </style>
@@ -506,7 +532,7 @@
                                 <button class="btn <?= $actionClass ?>" 
                                         data-id="<?= $product['product_id'] ?>" 
                                         title="<?= $actionText ?>">
-                                    <?= $actionText ?>
+                                    <i class="fas fa-cart-plus"></i> <?= $actionText ?>
                                 </button>
                                 <div class="secondary-actions">
                                     <a href="products/edit?id=<?= $product['product_id'] ?>" 
@@ -568,13 +594,13 @@
                     row.classList.add('out-of-stock');
                     actionBtn.classList.remove('btn-order');
                     actionBtn.classList.add('btn-restock');
-                    actionBtn.textContent = 'Restock Now';
+                    actionBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Restock Now';
                     statusBadge.textContent = 'Out of Stock';
                 } else if (qty < 10) {
                     row.classList.add('low-stock');
                     actionBtn.classList.remove('btn-restock');
                     actionBtn.classList.add('btn-order');
-                    actionBtn.textContent = 'Order More';
+                    actionBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Order More';
                     statusBadge.textContent = 'Low Stock';
                 }
             }

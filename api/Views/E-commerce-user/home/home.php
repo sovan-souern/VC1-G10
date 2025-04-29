@@ -268,15 +268,16 @@
         }
 
         .discount-products {
-            padding: 40px 20px;
+            padding: 20px 10px;
             background: #f9f3f3;
-            margin: 40px 0;
+            margin: 30px 0;
             width: 100%;
         }
 
         .discount-header {
             text-align: center;
             margin-bottom: 30px;
+            
         }
 
         .discount-header h2 {
@@ -972,9 +973,7 @@
     <section class="discount-products">
         <div class="discount-header">
             <h2>Special Discounts</h2>
-            <p>Limited time offers - save up to 30%</p>
         </div>
-
         <div class="container">
             <div class="products-container">
                 <?php foreach ($products as $index => $product): ?>

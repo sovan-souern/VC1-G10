@@ -1,4 +1,7 @@
 <?php
+
+require_once 'Controllers/AuthController.php'; // Ensure this path is correct
+
 class Router
 {
     private $routes = [];
@@ -31,13 +34,6 @@ class Router
             'action' => $action
         ];
     }
-    // function ($uri, $action)
-    // {
-    //     $this->routes[$uri] = [
-    //         'method' => 'POST',
-    //         'action' => $action
-    //     ];
-    // }
 
     public function dispatch()
     {

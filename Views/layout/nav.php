@@ -78,7 +78,7 @@ $notifications = $model->getNotifications();
         </li>
         <li class="menu-item">
           <a href="/out-stock" class="menu-link">
-            <div data-i18n="Blank">OutStock</div>
+            <div data-i18n="Blank">Product Stock</div>
           </a>
         </li>
         <li class="menu-item">
