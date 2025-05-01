@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,6 +88,13 @@
             font-weight: bold;
             font-size: 1.1rem;
             flex-shrink: 0;
+        }
+
+        .notification-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .notification-content {
@@ -183,10 +188,7 @@
             color: #3b82f6;
         }
 
-        .menu-item1.mark-read {
-            color: #f97316;
-        }
-
+        .menu-item1.mark-read,
         .menu-item1.delete {
             color: #f97316;
         }
@@ -207,6 +209,65 @@
             color: #6b7280;
         }
 
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(135deg, #4e73df 0%, #36b9cc 100%);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .nav-button.active {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-button.active:hover {
+            background-color: #2563eb;
+            border-color: #2563eb;
+        }
+
+        .notification-bg {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #f97316;
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 20px;
+            height: 20px;
+        }
+
         /* Responsive styles */
         @media (max-width: 768px) {
             .container {
@@ -216,6 +277,24 @@
 
             h2 {
                 font-size: 1.8rem;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .nav-button {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .notification-bg {
+                top: -6px;
+                right: -6px;
+                font-size: 0.7rem;
+                min-width: 18px;
+                height: 18px;
+                padding: 2px 5px;
             }
 
             .notification-card {
@@ -255,6 +334,23 @@
             }
         }
 
+        @media (max-width: 576px) {
+            .nav-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .notification-bg {
+                top: -5px;
+                right: 5px;
+            }
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 12px;
@@ -262,6 +358,18 @@
 
             h2 {
                 font-size: 1.5rem;
+            }
+
+            .nav-button {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            .notification-bg {
+                font-size: 0.65rem;
+                min-width: 16px;
+                height: 16px;
+                padding: 1px 4px;
             }
 
             .notification-card {
@@ -310,143 +418,60 @@
             }
         }
 
-        .notification {
-            position: relative;
-
-
-        }
-
-        .bell {
-            position: absolute;
-            /* top: 10; */
-            bottom: 10px;
-            /* margin-bottom: 100px; */
-            left: 50px;
-            font-size: 30px;
-            color: #000;
-            color: #f97316;
-        }
-
-        .notification-bg {
-            position: absolute;
-
-            bottom: 15px;
-            /* margin-bottom: 20px; */
-            left: 76px;
-            background-color: red;
-
-            /* Change this color for different badge colors */
-            color: white;
-            border-radius: 25px;
-            padding: 0px 6px;
-            font-size: 12px;
-            /* Base font size */
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* color: red; */
-        }
-        #notification-stock{
-            
-            position: obsolute;
-            left: 65px;
-        }
-        #notification-stock{
-            
-            position: obsolute;
-            left: 65px;
-        }
-        #notification-order{
-            
-            position: obsolute;
-            left: 68px;
-            bottom : 17px;
+        /* Prevent conflicts with Dashboard */
+        aside {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h2>Your Notifications</h2>
-        
-        <span class="notification m-1">
-
-            <!-- <a href="" class="btn btn-outline-dark mb-2">Contact</a> -->
-            <a href="/Notification/order" class="btn btn-outline-dark mb-2">Order</a>
-            <span class="notification-bg" id="notification-order">
-
-                <?php
-                $totalIndex = 0;
-                foreach ($notifications as $index => $notification) {
-                    if ($notification["status"] == "unread") {
-                        if ($notification["type"] == "order") {
+        <div class="nav-buttons">
+            <a href="/Notification/order" class="nav-button" data-page="order" aria-label="View Order Notifications">Order</a>
+            <a href="/Notification/UserContact" class="nav-button" data-page="UserContact" aria-label="View Contact Notifications">
+                Contact
+                <span class="notification-bg" id="notification-badge">
+                    <?php
+                    $totalIndex = 0;
+                    foreach ($notifications as $index => $notification) {
+                        if ($notification["status"] == "unread" && $notification["type"] == "contact") {
                             $totalIndex++;
                         }
                     }
-                }
-                echo $totalIndex;
-                ?>
-            </span>
-        </span>
-        <span class="notification m-1">
-
-            <a href="/Notification/UserContact" class="btn btn-outline-dark mb-2">Contact</a>
-
-            <span class="notification-bg" id="notification-badge">
-
-                <?php
-                $totalIndex = 0;
-                foreach ($notifications as $index => $notification) {
-                    if ($notification["status"] == "unread") {
-                        if ($notification["type"] == "contact") {
+                    echo $totalIndex;
+                    ?>
+                </span>
+            </a>
+            <a href="/Notification/stock" class="nav-button" data-page="stock" aria-label="View Stock Notifications">
+                Stock
+                <span class="notification-bg" id="notification-stock">
+                    <?php
+                    $totalIndex = 0;
+                    foreach ($notifications as $index => $notification) {
+                        if ($notification["status"] == "unread" && $notification["type"] == "product" && $notification["product_quantity"] < 3) {
                             $totalIndex++;
                         }
                     }
-                }
-                echo $totalIndex;
-                ?>
-            </span>
-        </span>
-        <span class="notification">
-
-        <a href="/Notification/stock" class="btn btn-outline-dark mb-2" >Stock</a>
-
-            <span class="notification-bg" id="notification-stock">
-
-                <?php
-                $totalIndex = 0;
-                foreach ($notifications as $index => $notification) {
-                    if ($notification["status"] == "unread") {
-                        if($notification["product_quantity"]<3){
-                        if ($notification["type"] == "product") {
-                            $totalIndex++;
-                        }
-                    }
-                }
-            }
-                echo $totalIndex;
-                ?>
-            </span>
-        </span>
-        
-
+                    echo $totalIndex;
+                    ?>
+                </span>
+            </a>
+        </div>
 
         <div class="notifications-container">
             <?php if (!empty($notifications) || (isset($lowStockProducts) && !empty($lowStockProducts)) || (isset($outStockProducts) && !empty($outStockProducts))): ?>
                 <?php foreach ($notifications as $index => $notification): ?>
                     <?php if ($notification["type"] == "contact"): ?>
                         <div class="notification-card <?= $notification['status'] === 'unread' ? 'unread' : '' ?>">
-                            
-                                
-                                    <div class="notification-icon">
-                                        <img src="../../../<?php echo $notification["user_profile_picture"] ?>" alt="">
-                                    </div>
-                                
-                       
+                            <div class="notification-icon">
+                                <img src="../../../<?php echo htmlspecialchars($notification['user_profile_picture']); ?>" alt="User Profile Picture">
+                            </div>
                             <div class="notification-content">
                                 <div class="notification-title">
-                                    <?php echo $notification['user_name']; ?>
+                                    <?php echo htmlspecialchars($notification['user_name']); ?>
                                     <?php if ($notification['status'] == 'unread'): ?>
                                         <span class="dot"></span>
                                     <?php endif; ?>
@@ -455,26 +480,26 @@
                                     Posted: <span><?= timeAgo($notification['created_at']); ?></span>
                                 </div>
                                 <div class="notification-message">
-                                  <span>Message: </span>  <?php echo $notification['message']; ?>
+                                    <span>Message: </span><?php echo htmlspecialchars($notification['message']); ?>
                                 </div>
                             </div>
                             <div class="menu-container">
-                                <button class="menu-button">
+                                <button class="menu-button" aria-label="Notification Options">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v.01M12 12v.01M12 18v.01" />
                                     </svg>
                                 </button>
                                 <div class="menu-dropdown">
                                     <div class="menu-item1 view-details">
-                                        <a href="/notifications/view?id=<?= $notification['id'] ?>">View Details</a>
+                                        <a href="/notifications/view?id=<?= htmlspecialchars($notification['id']); ?>">View Details</a>
                                     </div>
                                     <?php if ($notification['status'] === 'unread'): ?>
                                         <div class="menu-item1 mark-read">
-                                            <a href="/notifications/update?id=<?= $notification['id'] ?>">Mark as read</a>
+                                            <a href="/notifications/update?id=<?= htmlspecialchars($notification['id']); ?>">Mark as read</a>
                                         </div>
                                     <?php endif; ?>
                                     <div class="menu-item1 delete">
-                                        <a href="/notifications/delete?id=<?= $notification['id'] ?>">Delete</a>
+                                        <a href="/notifications/delete?id=<?= htmlspecialchars($notification['id']); ?>">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -515,7 +540,7 @@
                                         <span class="dot"></span>
                                     </div>
                                     <div class="notification-time">
-                                        <span>Posted:</span> <span> <?= timeAgo(date('Y-m-d H:i:s')); ?></span>
+                                        <span>Posted:</span> <span><?= timeAgo(date('Y-m-d H:i:s')); ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -534,8 +559,7 @@
     </div>
 
     <?php
-    function timeAgo($created_at)
-    {
+    function timeAgo($created_at) {
         $created_time = strtotime($created_at);
         $current_time = time();
         $diff = $current_time - $created_time;
@@ -560,17 +584,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Set active button based on current URL
+            const currentPath = window.location.pathname.toLowerCase();
+            const navButtons = document.querySelectorAll('.nav-button');
+            navButtons.forEach(button => {
+                const page = button.getAttribute('data-page').toLowerCase();
+                if (currentPath.includes(page)) {
+                    button.classList.add('active');
+                    button.setAttribute('aria-current', 'page');
+                }
+            });
+
             // Toggle dropdown menu
             const menuButtons = document.querySelectorAll('.menu-button');
             menuButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const dropdown = this.nextElementSibling;
                     const isActive = dropdown.classList.contains('active');
-                    // Close all other dropdowns
-                    document.querySelectorAll('.menu-dropdown').forEach(d => {
-                        d.classList.remove('active');
-                    });
-                    // Toggle the clicked dropdown
+                    document.querySelectorAll('.menu-dropdown').forEach(d => d.classList.remove('active'));
                     if (!isActive) {
                         dropdown.classList.add('active');
                     }
@@ -584,14 +615,6 @@
                         dropdown.classList.remove('active');
                     });
                 }
-            });
-
-            // Handle View Details
-            const viewDetailItems = document.querySelectorAll('.menu-item1.view-details a');
-            viewDetailItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    console.log('View details clicked');
-                });
             });
 
             // Handle Mark as read
@@ -615,25 +638,11 @@
                     const remainingCards = document.querySelectorAll('.notification-card');
                     if (remainingCards.length === 0) {
                         const container = document.querySelector('.notifications-container');
-                        deleteItems.forEach(item => {
-                            item.addEventListener('click', function(e) {
-                                const card = this.closest('.notification-card');
-                                card.remove();
-                                const remainingCards = document.querySelectorAll('.notification-card');
-                                if (remainingCards.length === 0) {
-                                    const container = document.querySelector('.notifications-container');
-                                    container.innerHTML = '<div class="empty-state"><p>No notifications found</p></div>';
-                                }
-                            });
-                        });
-
-                        // Updated timeAgo function to handle timezone correctly
-
-                    };
-                })
+                        container.innerHTML = '<div class="empty-state"><p>No notifications found</p></div>';
+                    }
+                });
             });
-        })
+        });
     </script>
 </body>
-
-</html> 
+</html>

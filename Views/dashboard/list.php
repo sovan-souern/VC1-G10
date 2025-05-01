@@ -1,293 +1,537 @@
-<div class="container-xxl flex-grow-1 container-p-y">
-  <div class="row">
-    <!-- Profit Card -->
-    <div class="col-lg-3 col-md-6 col-6 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="card-title d-flex align-items-start justify-content-between">
-            <div class="avatar flex-shrink-0">
-              <img src="../Views/assets/img/icons/unicons/chart-success.png" alt="chart success" class="rounded" />
-            </div>
-          </div>
-          <span class="fw-semibold d-block mb-1">Profit (2025)</span>
-          <h3 class="card-title mb-2">0</h3>
-          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sales Card -->
-    <div class="col-lg-3 col-md-6 col-6 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="card-title d-flex align-items-start justify-content-between">
-            <div class="avatar flex-shrink-0">
-              <img src="../Views/assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded" />
-            </div>
-           
-          </div>
-          <span>Sales (2025)</span>
-          <h3 class="card-title text-nowrap mb-1">0</h3>
-          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- Payments Card -->
-    <div class="col-lg-3 col-md-6 col-6 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="card-title d-flex align-items-start justify-content-between">
-            <div class="avatar flex-shrink-0">
-              <img src="../Views/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
-            </div>
-           
-          </div>
-          <span class="d-block mb-1">Payments (2025)</span>
-          <h3 class="card-title text-nowrap mb-2">0</h3>
-          <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- Transactions Card -->
-    <div class="col-lg-3 col-md-6 col-6 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="card-title d-flex align-items-start justify-content-between">
-            <div class="avatar flex-shrink-0">
-              <img src="../Views/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
-            </div>
-          
-          </div>
-          <span class="fw-semibold d-block mb-1">Orders</span>
-          <h3 class="card-title mb-2">0</h3>
-          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <!-- Total Revenue Chart -->
-    <div class="col-lg-8 col-md-12 mb-4">
-      <div class="card h-100">
-        <h5 class="card-header m-0 me-2 pb-3">Total Revenue (2024 vs 2025)</h5>
-        <div id="totalRevenueChart" class="px-2"></div>
-      </div>
-    </div>
-
-    <!-- Company Growth Card -->
-    <div class="col-lg-4 col-md-12 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="text-center">
-            <div class="dropdown">
-              <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="growthReportId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                2025
-              </button>
-              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                <a class="dropdown-item" href="javascript:void(0);">2025</a>
-                <a class="dropdown-item" href="javascript:void(0);">2024</a>
-                <a class="dropdown-item" href="javascript:void(0);">2023</a>
-              </div>
-            </div>
-          </div>
-          <div id="growthChart"></div>
-          <div class="text-center fw-semibold pt-3 mb-2">Revenue Change: -21.12%</div>
-          <div class="d-flex px-4 p-4 gap-3 justify-content-between">
-            <div class="d-flex">
-              <div class="me-2">
-                <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-              </div>
-              <div class="d-flex flex-column">
-                <small>2025</small>
-                <h6 class="mb-0">$32.5k</h6>
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="me-2">
-                <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-              </div>
-              <div class="d-flex flex-column">
-                <small>2024</small>
-                <h6 class="mb-0">$41.2k</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Rest of the dashboard (Order Statistics, Expense Overview, etc.) remains unchanged -->
-  <!-- ... -->
-</div>
 
 
-<div class="container-xxl flex-grow-1 container-p-y">
-  <div class="row">
-   
+<div class="dashboard-container">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h2 class="mb-4" style="font-weight: 700; background: var(--gradient-bg); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      Dashboard Overview
+    </h2>
 
-  <div class="row align-items-stretch">
-    <!-- Product Table -->
-    <div class="col-lg-7 col-xxl-8 mb-6 mb-lg-0">
-      <div class="card h-100">
-        <div class="table-responsive text-nowrap" style="max-height: 400px; overflow-y: auto;">
-          <table class="table table-sm text-nowrap table-border-top-0">
-            <thead>
-              <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Category</th>
-                <th scope="col">Payment</th>
-                <th scope="col">Order Status</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-              </tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <img src="../assets/img/products/iphone.png" alt="iPhone 11 Pro product image" height="32" width="32" class="me-3" />
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-0">iPhone 11 Pro</h6>
-                      <small class="text-body">Apple</small>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <span class="badge bg-label-primary rounded-pill p-1_5 me-3"><i class="icon-base bx bx-mobile-alt icon-xs"></i></span> Smart Phone
-                </td>
-                <td>
-                  <div><span class="text-primary fw-medium">$399</span></div>
-                  <small class="text-body">Fully Paid</small>
-                </td>
-                <td><span class="badge bg-label-success">Completed</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-label="More actions for iPhone 11 Pro"><i class="icon-base bx bx-dots-vertical-rounded"></i></button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#"><i class="icon-base bx bx-edit-alt me-1"></i> View Details</a>
-                      <a class="dropdown-item" href="#"><i class="icon-base bx bx-trash me-1"></i> Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Conversion Rate Card -->
-    <div class="col-md-12 col-xxl-4 mb-6">
-      <div class="card h-100">
-        <div class="card-header d-flex justify-content-between">
-          <div class="card-title mb-0">
-            <h5 class="mb-1 me-2">Conversion Rate</h5>
-            <p class="card-subtitle">Compared To Last Month</p>
-          </div>
-          <div class="dropdown">
-            <button class="btn text-body-secondary p-0" type="button" id="conversionRate" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="More options">
-              <i class="icon-base bx bx-dots-vertical-rounded icon-lg"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="conversionRate">
-              <a class="dropdown-item" href="#">Select All</a>
-              <a class="dropdown-item" href="#">Refresh</a>
-              <a class="dropdown-item" href="#">Share</a>
-            </div>
-          </div>
-        </div>
-        <div class="card-body pt-3 d-flex flex-column justify-content-between">
-          <div>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <div class="d-flex flex-row align-items-center gap-2">
-                <h3 class="mb-0">8.72%</h3>
-                <small class="text-success">
-                  <i class="icon-base bx bx-chevron-up icon-lg"></i>
-                  4.8%
-                </small>
-              </div>
-              <div id="conversionRateChart" style="width: 80px; height: 40px;"></div>
-            </div>
-            <ul class="p-0 m-0">
-              <li class="d-flex mb-3">
-                <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
-                  <div class="me-2">
-                    <span class="fw-normal">Impressions: 12.4k Visits</span>
-                  </div>
-                  <div class="user-progress">
-                    <i class="icon-base bx bx-up-arrow-alt text-success me-1"></i>
-                    <span class="fw-bold">12.8%</span>
-                  </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <div class="row">
+        <!-- Profit Card -->
+        <div class="col-lg-3 col-md-6 col-6 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between">
+                <div class="avatar flex-shrink-0">
+                  <img src="../Views/assets/img/icons/unicons/chart-success.png" alt="chart success" class="rounded" />
                 </div>
-              </li>
-              <li class="d-flex mb-3">
-                <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
-                  <div class="me-2">
-                    <span class="fw-normal">Added To Cart: 32 Product in cart</span>
-                  </div>
-                  <div class="user-progress">
-                    <i class="icon-base bx bx-down-arrow-alt text-danger me-1"></i>
-                    <span class="fw-bold">-8.5%</span>
-                  </div>
+              </div>
+              <span class="fw-semibold d-block mb-1">Profit</span>
+              <h3 class="card-title mb-2">$<?php echo number_format($data['profit'], 2); ?></h3>
+              <small class="<?php echo $data['profitPercentageChange'] >= 0 ? 'text-success' : 'text-danger'; ?> fw-semibold">
+                <i class="bx <?php echo $data['profitPercentageChange'] >= 0 ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt'; ?>"></i>
+                <?php echo abs($data['profitPercentageChange']); ?>%
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-6 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between">
+                <div class="avatar flex-shrink-0">
+                  <img src="../Views/assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded" />
                 </div>
-              </li>
-              <li class="d-flex mb-3">
-                <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
-                  <div class="me-2">
-                    <span class="fw-normal">Checkout: 21 Products checkout</span>
-                  </div>
-                  <div class="user-progress">
-                    <i class="icon-base bx bx-up-arrow-alt text-success me-1"></i>
-                    <span class="fw-bold">9.12%</span>
-                  </div>
+              </div>
+              <span>Sales</span>
+              <h3 class="card-title text-nowrap mb-1"><?php echo number_format($data['sales'], 0); ?></h3>
+              <small class="<?php echo $data['salesPercentageChange'] >= 0 ? 'text-success' : 'text-danger'; ?> fw-semibold">
+                <i class="bx <?php echo $data['salesPercentageChange'] >= 0 ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt'; ?>"></i>
+                <?php echo abs($data['salesPercentageChange']); ?>%
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-6 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between">
+                <div class="avatar flex-shrink-0">
+                  <img src="../Views/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
                 </div>
-              </li>
-              <li class="d-flex">
-                <div class="d-flex w-100 flex-wrap justify-content-between gap-2">
-                  <div class="me-2">
-                    <span class="fw-normal">Purchased: 12 Orders</span>
-                  </div>
-                  <div class="user-progress">
-                    <i class="icon-base bx bx-up-arrow-alt text-success me-1"></i>
-                    <span class="fw-bold">2.83%</span>
-                  </div>
+              </div>
+              <span class="d-block mb-1">Payments</span>
+              <h3 class="card-title text-nowrap mb-2">$<?php echo number_format($data['totalRevenue2025'], 2); ?></h3>
+              <small class="<?php echo $data['revenuePercentageChange'] >= 0 ? 'text-success' : 'text-danger'; ?> fw-semibold">
+                <i class="bx <?php echo $data['revenuePercentageChange'] >= 0 ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt'; ?>"></i>
+                <?php echo abs($data['revenuePercentageChange']); ?>%
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-6 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="card-title d-flex align-items-start justify-content-between">
+                <div class="avatar flex-shrink-0">
+                  <img src="../Views/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
                 </div>
-              </li>
-            </ul>
+              </div>
+              <span class="fw-semibold d-block mb-1">Orders</span>
+              <h3 class="card-title mb-2"><?php echo number_format($data['orders'], 0); ?></h3>
+              <small class="<?php echo $data['orderPercentageChange'] >= 0 ? 'text-success' : 'text-danger'; ?> fw-semibold">
+                <i class="bx <?php echo $data['orderPercentageChange'] >= 0 ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt'; ?>"></i>
+                <?php echo abs($data['orderPercentageChange']); ?>%
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Total Revenue Chart -->
+          <div class="col-lg-6 col-md-12 mb-4">
+            <div class="card h-100" role="region" aria-label="Total Revenue Chart">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="m-0">Total Revenue</h5>
+                <button class="btn btn-sm btn-outline-primary chart-download-btn" onclick="downloadChart('totalRevenueChart', 'Total_Revenue.png')">
+                  <i class="bx bx-download"></i> Download
+                </button>
+              </div>
+              <div class="chart-controls">
+                <div>
+                  <button class="btn btn-sm btn-outline-secondary me-2" onclick="toggleChartType('totalRevenueChart', 'bar')">Bar</button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="toggleChartType('totalRevenueChart', 'line')">Line</button>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-outline-info" onclick="totalRevenueChart.zoom(1.1)">Zoom In</button>
+                  <button class="btn btn-sm btn-outline-info ms-1" onclick="totalRevenueChart.zoom(0.9)">Zoom Out</button>
+                  <button class="btn btn-sm btn-outline-info ms-1" onclick="totalRevenueChart.resetZoom()">Reset</button>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="totalRevenueChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monthly Revenue Chart -->
+          <div class="col-lg-6 col-md-12 mb-4">
+            <div class="card h-100" role="region" aria-label="Monthly Revenue Chart">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="m-0">Monthly Revenue</h5>
+                <select id="yearSelect" class="form-select form-select-sm w-auto" aria-label="Select Year">
+                  <option value="2025" selected>2025</option>
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                </select>
+              </div>
+              <div class="chart-controls">
+                <div>
+                  <button class="btn btn-sm btn-outline-secondary me-2" onclick="toggleChartFill('growthChart')">Toggle Fill</button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="toggleChartType('growthChart', 'line')">Line</button>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-outline-info" onclick="growthChart.zoom(1.1)">Zoom In</button>
+                  <button class="btn btn-sm btn-outline-info ms-1" onclick="growthChart.zoom(0.9)">Zoom Out</button>
+                  <button class="btn btn-sm btn-outline-info ms-1" onclick="growthChart.resetZoom()">Reset</button>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="growthChart"></canvas>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Footer -->
-  <footer class="content-footer footer bg-footer-theme">
-    <div class="container-xxl">
-      <div class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
-        <div class="mb-2 mb-md-0">
-          ©
-          <script>
-            document.write(new Date().getFullYear());
-          </script>, made with ❤️ by <a href="#" target="_blank" class="footer-link">ThemeSelection</a>
-        </div>
-        <div class="d-none d-lg-inline-block">
 
-          <a href="#" class="footer-link me-4" target="_blank">License</a>
-          <a href="#" target="_blank" class="footer-link me-4">More Themes</a>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+      // Register Zoom Plugin
+      Chart.register(ChartZoom);
 
-          <a href="#" target="_blank" class="footer-link me-4">Documentation</a>
+      // Total Revenue Chart
+      const yearlyRevenue = <?php echo json_encode($data['yearlyRevenue'] ?? ['2023' => 0, '2024' => 0, '2025' => 0]); ?>;
+      const totalRevenueCtx = document.getElementById('totalRevenueChart').getContext('2d');
+
+      // Create gradients for bars
+      const createBarGradients = () => {
+        const gradients = [];
+        ['2023', '2024', '2025'].forEach(year => {
+          const gradient = totalRevenueCtx.createLinearGradient(0, 0, 0, 300);
+          gradient.addColorStop(0, year === '2023' ? '#4e73df' : year === '2024' ? '#1cc88a' : '#36b9cc');
+          gradient.addColorStop(1, year === '2023' ? '#224abe' : year === '2024' ? '#13855c' : '#1c8fa1');
+          gradients.push(gradient);
+        });
+        return gradients;
+      };
+
+      const totalRevenueChart = new Chart(totalRevenueCtx, {
+        type: 'bar',
+        data: {
+          labels: ['2023', '2024', '2025'],
+          datasets: [{
+            label: 'Total Revenue',
+            data: [yearlyRevenue['2023'] || 0, yearlyRevenue['2024'] || 0, yearlyRevenue['2025'] || 0],
+            backgroundColor: createBarGradients(),
+            borderColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+            borderWidth: 1,
+            borderRadius: 10,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1500,
+            easing: 'easeOutQuart'
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M';
+                  if (value >= 1000) return '$' + (value / 1000).toFixed(1) + 'K';
+                  return '$' + value;
+                },
+                color: '#333333',
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#333333',
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                display: false
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: '#ffffff',
+              titleColor: '#333333',
+              bodyColor: '#333333',
+              borderColor: '#4e73df',
+              borderWidth: 1,
+              callbacks: {
+                label: function(context) {
+                  return '$' + context.parsed.y.toLocaleString();
+                }
+              }
+            },
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: true
+                },
+                pinch: {
+                  enabled: true
+                },
+                mode: 'xy'
+              },
+              pan: {
+                enabled: true,
+                mode: 'xy'
+              }
+            }
+          },
+          onClick: (e, elements) => {
+            if (elements.length) {
+              const year = totalRevenueChart.data.labels[elements[0].index];
+              alert(`Revenue for ${year}: $${yearlyRevenue[year].toLocaleString()}`);
+            }
+          }
+        }
+      });
+
+      // Monthly Revenue Chart
+      const monthlyRevenueData = {
+        2025: <?php echo json_encode(array_values($data['monthlyRevenue2025'] ?? array_fill(0, 12, 0))); ?>,
+        2024: <?php echo json_encode(array_values($data['monthlyRevenue2024'] ?? array_fill(0, 12, 0))); ?>,
+        2023: <?php echo json_encode(array_values($data['monthlyRevenue2023'] ?? array_fill(0, 12, 0))); ?>
+      };
+
+      const growthChartCtx = document.getElementById('growthChart').getContext('2d');
+      const createLineGradient = () => {
+        const gradient = growthChartCtx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, '#36b9cc');
+        gradient.addColorStop(1, '#1c8fa1');
+        return gradient;
+      };
+
+      const growthChart = new Chart(growthChartCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [{
+            label: 'Monthly Revenue 2025',
+            data: monthlyRevenueData['2025'],
+            borderColor: '#36b9cc',
+            backgroundColor: createLineGradient(),
+            tension: 0.4,
+            fill: true,
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: '#36b9cc',
+            pointHoverBackgroundColor: '#36b9cc',
+            pointHoverBorderColor: '#ffffff',
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1500,
+            easing: 'easeOutQuart'
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M';
+                  if (value >= 1000) return '$' + (value / 1000).toFixed(1) + 'K';
+                  return '$' + value;
+                },
+                color: '#333333',
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#333333',
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                display: false
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                color: '#333333',
+                font: {
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: '#ffffff',
+              titleColor: '#333333',
+              bodyColor: '#333333',
+              borderColor: '#36b9cc',
+              borderWidth: 1,
+              callbacks: {
+                label: function(context) {
+                  return '$' + context.parsed.y.toLocaleString();
+                }
+              }
+            },
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: true
+                },
+                pinch: {
+                  enabled: true
+                },
+                mode: 'xy'
+              },
+              pan: {
+                enabled: true,
+                mode: 'xy'
+              }
+            },
+            annotation: {
+              annotations: {
+                peak: {
+                  type: 'point',
+                  xValue: () => {
+                    const data = growthChart.data.datasets[0].data;
+                    return data.indexOf(Math.max(...data));
+                  },
+                  yValue: () => Math.max(...growthChart.data.datasets[0].data),
+                  backgroundColor: '#e74a3b',
+                  radius: 6,
+                  label: {
+                    content: 'Peak',
+                    enabled: true,
+                    position: 'top',
+                    color: '#333333',
+                    backgroundColor: '#ffffff'
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Year Selection for Monthly Revenue Chart
+      document.getElementById('yearSelect').addEventListener('change', function() {
+        const year = this.value;
+        growthChart.data.datasets[0].data = monthlyRevenueData[year];
+        growthChart.data.datasets[0].label = `Monthly Revenue ${year}`;
+        growthChart.update();
+      });
+
+      // Toggle Chart Type
+      function toggleChartType(chartId, type) {
+        const chart = chartId === 'totalRevenueChart' ? totalRevenueChart : growthChart;
+        chart.config.type = type;
+        if (chartId === 'totalRevenueChart' && type === 'line') {
+          chart.data.datasets[0].backgroundColor = createLineGradient();
+          chart.data.datasets[0].fill = true;
+        } else if (chartId === 'totalRevenueChart' && type === 'bar') {
+          chart.data.datasets[0].backgroundColor = createBarGradients();
+          chart.data.datasets[0].fill = false;
+        }
+        chart.update();
+      }
+
+      // Toggle Fill for Monthly Revenue Chart
+      function toggleChartFill(chartId) {
+        const chart = growthChart;
+        chart.data.datasets[0].fill = !chart.data.datasets[0].fill;
+        chart.update();
+      }
+
+      // Download Chart
+      function downloadChart(chartId, filename) {
+        const canvas = document.getElementById(chartId);
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = filename;
+        link.click();
+      }
+    </script>
+    </body>
+
+    </html>
 
 
-          <a href="#" target="_blank" class="footer-link d-none d-sm-inline-block">Support</a>
+    <style>
+      /* Scope styles to dashboard container */
+      .dashboard-container {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f9fc;
+        color: #333333;
+      }
 
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- / Footer -->
+      .dashboard-container .container-p-y {
+        padding: 2rem 1rem;
+      }
 
+      .dashboard-container .card {
+        background: #ffffff;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-  <script src="../Views/assets/js/dashboards-analytics.js"></script>
+      .dashboard-container .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
 
- 
+      .dashboard-container .card-body {
+        padding: 1.5rem;
+      }
+
+      .dashboard-container .card-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      .dashboard-container .chart-container {
+        position: relative;
+        padding: 1rem;
+        border: none;
+        outline: none;
+      }
+
+      .dashboard-container #totalRevenueChart,
+      .dashboard-container #growthChart {
+        max-height: 350px;
+        width: 100%;
+        border: none;
+        outline: none;
+      }
+
+      .dashboard-container .chart-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .dashboard-container .chart-download-btn {
+        font-size: 0.85rem;
+      }
+
+      /* Chart-specific styles */
+      .dashboard-container {
+        --primary-color: #4e73df;
+        --success-color: #1cc88a;
+        --info-color: #36b9cc;
+        --danger-color: #e74a3b;
+        --gradient-bg: linear-gradient(135deg, #4e73df 0%, #36b9cc 100%);
+        --chart-gradient-2023: linear-gradient(180deg, #4e73df 0%, #224abe 100%);
+        --chart-gradient-2024: linear-gradient(180deg, #1cc88a 0%, #13855c 100%);
+        --chart-gradient-2025: linear-gradient(180deg, #36b9cc 0%, #1c8fa1 100%);
+      }
+
+      .dashboard-container canvas {
+        border: none !important;
+        outline: none !important;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 576px) {
+        .dashboard-container .container-p-y {
+          padding: 1rem 0.5rem;
+        }
+
+        .dashboard-container #totalRevenueChart,
+        .dashboard-container #growthChart {
+          max-height: 250px;
+        }
+
+        .dashboard-container .chart-controls {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      /* Neutralize potential aside conflicts */
+      aside {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    </style>

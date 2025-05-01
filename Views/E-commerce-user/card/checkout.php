@@ -691,7 +691,7 @@
 <body>
 <div class="container checkout-container">
         <div class="row">
-            <div class="col-md-7">=
+            <div class="col-md-7">
                 <form action="/checkout/store?id=<?php foreach ($users as $user) {
                                                         if ($user['name'] == $_SESSION['name']) {
                                                             echo $user['admin_id'];

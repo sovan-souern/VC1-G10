@@ -47,6 +47,11 @@ $notifications = $model->getNotifications();
             <div data-i18n="Container">Orders</div>
           </a>
         </li>
+        <li class="menu-item">
+          <a href="/order/cancel" class="menu-link">
+            <div data-i18n="Container">Cancel</div>
+          </a>
+        </li>
        
         <li class="menu-item">
           <a href="/order/confirm" class="menu-link">
@@ -166,24 +171,7 @@ $notifications = $model->getNotifications();
         </li>
       </ul>
     </li>
-    <li class="menu-item">
-      <a href="/" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bi bi-tools"></i>
-        <div data-i18n="Misc">Misc</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="/404" class="menu-link">
-            <div data-i18n="Error">Error</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="" class="menu-link">
-            <div data-i18n="Under Maintenance">Under Maintenance</div>
-          </a>
-        </li>
-      </ul>
-    </li>
+   
   </ul>
 </aside>
 
