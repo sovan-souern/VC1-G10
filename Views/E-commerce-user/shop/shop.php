@@ -1217,7 +1217,15 @@
                                                 <div class="product-image">
                                                     <img src="<?php echo $image_url; ?>" alt="<?php echo $product_name; ?>">
                                                     <ul class="discount-product-hover product-hover-shared">
-                                                        <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
+                                                        <li>
+                                                            <a href="#" class="view-details-btn" 
+                                                               data-name="<?php echo $product_name; ?>" 
+                                                               data-price="<?php echo $discounted_price_formatted; ?>" 
+                                                               data-image="<?php echo $image_url; ?>" 
+                                                               data-description="<?php echo $product['description'] ?? 'No description available'; ?>">
+                                                                <span class="fas fa-eye"></span>
+                                                            </a>
+                                                        </li>
                                                         <li><a href="#" class="favorite-btn" data-product-id="<?php echo htmlspecialchars($product["product_id"]); ?>" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price_formatted; ?>" data-product-image="<?php echo $image_url; ?>" data-product-discount="<?php echo $discount_percentage; ?>" data-product-quantity="<?php echo $quantity; ?>" data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>"><span class="icon_heart_alt"></span></a></li>
                                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                                     </ul>
@@ -1265,7 +1273,15 @@
                                         <div class="general-product-pic">
                                             <img src="<?php echo $image; ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
                                             <ul class="general-product-hover product-hover-shared">
-                                                <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
+                                                <li>
+                                                    <a href="#" class="view-details-btn" 
+                                                       data-name="<?php echo htmlspecialchars($product['product_name']); ?>" 
+                                                       data-price="$<?php echo $price; ?>" 
+                                                       data-image="<?php echo $image; ?>" 
+                                                       data-description="<?php echo $product['description'] ?? 'No description available'; ?>">
+                                                        <span class="fas fa-eye"></span>
+                                                    </a>
+                                                </li>
                                                 <li><a href="#" class="favorite-btn" data-product-id="<?php echo htmlspecialchars($product["product_id"]); ?>" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="$<?php echo $price; ?>" data-product-image="<?php echo $image; ?>" data-product-discount="0" data-product-quantity="<?php echo $quantity; ?>" data-category-id="<?php echo htmlspecialchars($product["category_id"]); ?>"><span class="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -1293,6 +1309,26 @@
     <!-- Overlay for mobile sidebar -->
     <div class="overlay" id="overlay"></div>
 
+    <!-- Product Details Modal -->
+    <div id="product-details-modal" class="modal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-product-name"></h5>
+                    <button type="button" class="btn-close" id="close-modal-btn" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modal-product-image" src="" alt="Product Image" class="img-fluid mb-3">
+                    <p id="modal-product-description"></p>
+                    <p><strong>Price:</strong> <span id="modal-product-price"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="close-modal-footer-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript Files -->
     <script src="Views/E-commerce-user/assets/js/jquery-3.3.1.min.js"></script>
     <script src="Views/E-commerce-user/assets/js/bootstrap.min.js"></script>
@@ -1308,10 +1344,15 @@
             const sidebar = document.querySelector('.shop__sidebar');
             const overlay = document.getElementById('overlay');
             const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const zoomButtons = document.querySelectorAll('.image-zoom');
             const favoriteButtons = document.querySelectorAll('.favorite-btn');
             const sidebarSearch = document.getElementById('sidebarSearch');
             const clearSearch = document.getElementById('clearSearch');
+            const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+            const modal = document.getElementById('product-details-modal');
+            const modalName = document.getElementById('modal-product-name');
+            const modalImage = document.getElementById('modal-product-image');
+            const modalDescription = document.getElementById('modal-product-description');
+            const modalPrice = document.getElementById('modal-product-price');
 
             // Initialize favorites from localStorage
             let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -1492,41 +1533,26 @@
                 });
             });
 
-            // Image zoom functionality
-            zoomButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    let imageUrl;
-                    if (this.closest('.general-product-pic')) {
-                        imageUrl = this.closest('.general-product-pic').querySelector('img').src;
-                    } else if (this.closest('.product-image')) {
-                        imageUrl = this.closest('.product-image').querySelector('img').src;
-                    }
-                    
-                    const modal = document.createElement('div');
-                    modal.classList.add('zoom-modal');
-                    modal.innerHTML = `
-                        <div class="zoom-modal-content">
-                            <span class="zoom-close">×</span>
-                            <img src="${imageUrl}" alt="Zoomed Image">
-                        </div>
-                    `;
-                    
-                    document.body.appendChild(modal);
-                    setTimeout(() => modal.style.opacity = '1', 10);
-                    
-                    modal.querySelector('.zoom-close').addEventListener('click', () => closeZoomModal(modal));
-                    modal.addEventListener('click', (e) => {
-                        if (e.target === modal) closeZoomModal(modal);
-                    });
+            // Modal close functionality
+            const closeModalButtons = [document.getElementById('close-modal-btn'), document.getElementById('close-modal-footer-btn')];
+
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    modal.style.display = 'none';
                 });
             });
 
-            function closeZoomModal(modal) {
-                modal.style.opacity = '0';
-                setTimeout(() => document.body.removeChild(modal), 300);
-            }
+            // View details functionality
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modalName.textContent = this.dataset.name;
+                    modalImage.src = this.dataset.image;
+                    modalDescription.textContent = this.dataset.description;
+                    modalPrice.textContent = this.dataset.price;
+                    modal.style.display = 'block';
+                });
+            });
 
             function showToast(header, message) {
                 // Remove any existing toast

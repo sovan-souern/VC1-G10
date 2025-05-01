@@ -983,8 +983,16 @@
                                                 <?php endif; ?>
                                                 <div class="discount-badge"><?php echo $discount_badge; ?></div>
                                                 <div class="product-image" style="background-image: url('<?php echo $image_url; ?>')">
-                                                    <ul class="discount-product-hover">
-                                                        <li><a href="#" class="image-zoom" data-image="<?php echo $image_url; ?>"><span class="arrow_expand"></span></a></li>
+                                                    <ul class="discount-product-hover product-hover-shared">
+                                                        <li>
+                                                            <a href="#" class="view-details-btn" 
+                                                               data-name="<?php echo $product_name; ?>" 
+                                                               data-price="<?php echo $discounted_price_formatted; ?>" 
+                                                               data-image="<?php echo $image_url; ?>" 
+                                                               data-description="<?php echo $product['description'] ?? 'No description available'; ?>">
+                                                                <span class="fas fa-eye"></span>
+                                                            </a>
+                                                        </li>
                                                         <li><a href="#" class="favorite-btn" data-product-name="<?php echo $product_name; ?>" data-product-price="<?php echo $discounted_price_formatted; ?>" data-product-image="<?php echo $image_url; ?>" data-product-discount="<?php echo $discount_percentage; ?>"><span class="icon_heart_alt"></span></a></li>
                                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                                     </ul>
@@ -1032,7 +1040,15 @@
                                         <div class="general-product-pic">
                                             <img src="<?php echo $image; ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="width: 100%; height: 300px; object-fit: cover;">
                                             <ul class="general-product-hover product-hover-shared">
-                                                <li><a href="#" class="image-zoom" data-image="<?php echo $image; ?>"><span class="arrow_expand"></span></a></li>
+                                                <li>
+                                                    <a href="#" class="view-details-btn" 
+                                                       data-name="<?php echo htmlspecialchars($product['product_name']); ?>" 
+                                                       data-price="$<?php echo $price; ?>" 
+                                                       data-image="<?php echo $image; ?>" 
+                                                       data-description="<?php echo $product['description'] ?? 'No description available'; ?>">
+                                                        <span class="fas fa-eye"></span>
+                                                    </a>
+                                                </li>
                                                 <li><a href="#" class="favorite-btn" data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>" data-product-price="$<?php echo $price; ?>" data-product-image="<?php echo $image; ?>" data-product-discount="0"><span class="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -1060,6 +1076,26 @@
             </div>
         </div>
     </section>
+
+    <!-- Product Details Modal -->
+    <div id="product-details-modal" class="modal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-product-name"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modal-product-image" src="" alt="Product Image" class="img-fluid mb-3">
+                    <p id="modal-product-description"></p>
+                    <p><strong>Price:</strong> <span id="modal-product-price"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Back to Top Button -->
     <div class="back-to-top">
@@ -1254,6 +1290,25 @@
 
                 // Update favorite icons for newly visible items
                 updateFavoriteIcons();
+            });
+
+            // View Details Button Functionality
+            const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+            const modal = document.getElementById('product-details-modal');
+            const modalName = document.getElementById('modal-product-name');
+            const modalImage = document.getElementById('modal-product-image');
+            const modalDescription = document.getElementById('modal-product-description');
+            const modalPrice = document.getElementById('modal-product-price');
+
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    modalName.textContent = this.dataset.name;
+                    modalImage.src = this.dataset.image;
+                    modalDescription.textContent = this.dataset.description;
+                    modalPrice.textContent = this.dataset.price;
+                    new bootstrap.Modal(modal).show();
+                });
             });
         });
     </script>

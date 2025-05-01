@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-        
-
         /* Header Styles */
         header h1 {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -38,7 +36,6 @@
 
         .container {
             padding: 20px;
-       
         }
 
         .cards {
@@ -618,12 +615,6 @@
             text-decoration: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-/* 
-        .general-product-hover li a:hover {
-            background: #f8a4b9;
-            color: #ffffff;
-            transform: scale(1.15);
-        } */
 
         .general-product-hover li a span {
             font-size: 16px;
@@ -634,7 +625,7 @@
         .general-product-hover li a:hover span {
             color: #ffffff;
         }
-     
+
         .product-card:hover .general-product-hover {
             opacity: 1;
             visibility: visible;
@@ -1002,7 +993,7 @@
                                                    data-image="<?php echo $image_url; ?>"
                                                    data-description="<?php echo $product_content; ?>"
                                                    data-quantity="<?php echo $product_quantity; ?>">
-                                                    <i class="arrow_expand"></i>
+                                                    <i class="fas fa-eye"></i> <!-- Changed icon to "view" -->
                                                 </a>
                                             </li>
                                             <li>
@@ -1145,7 +1136,7 @@
                                        data-image="https://assets.vogue.com/photos/62f6a40746ad3eb633efe1aa/3:4/w_748%2Cc_limit/slide_12.jpg"
                                        data-description="A lightweight, hydrating moisturizer for all skin types."
                                        data-quantity="50">
-                                        <i class="arrow_expand"></i>
+                                        <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
                                 <li>
@@ -1193,7 +1184,7 @@
                                        data-image="https://assets.unileversolutions.com/v1/104900175.jpg"
                                        data-description="Brightening serum with 20% Vitamin C."
                                        data-quantity="30">
-                                        <i class="arrow_expand"></i>
+                                        <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
                                 <li>
@@ -1241,7 +1232,7 @@
                                        data-image="https://down-my.img.susercontent.com/file/my-11134207-7r98o-ll243lh6bn3z4d"
                                        data-description="Broad-spectrum SPF 50 sunscreen."
                                        data-quantity="40">
-                                        <i class="arrow_expand"></i>
+                                        <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
                                 <li>
@@ -1289,7 +1280,7 @@
                                        data-image="https://images-cdn.ubuy.co.in/645ebfeaec6ec921c03cc12e-dove-hair-and-skin-care-regimen-pack.jpg"
                                        data-description="Complete skincare set for daily routine."
                                        data-quantity="20">
-                                        <i class="arrow_expand"></i>
+                                        <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
                                 <li>
@@ -1329,7 +1320,23 @@
             </div>
         </section>
 
-     
+        <!-- Product Details Modal -->
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div class="modal-inner">
+                    <div class="modal-product-image">
+                        <img id="modal-product-image" src="" alt="Product Image">
+                    </div>
+                    <div class="modal-product-info">
+                        <h2 id="modal-product-name"></h2>
+                        <p id="modal-product-description"></p>
+                        <p><strong>Price:</strong> <span id="modal-product-price"></span></p>
+                        <button id="add-to-cart-modal">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -1517,63 +1524,40 @@
             });
 
             // Modal Functionality
-            $('.view-details-btn').click(function(e) {
-                e.preventDefault();
-                const productName = $(this).data('name');
-                const productPrice = $(this).data('price');
-                const productImage = $(this).data('image');
-                const productDescription = $(this).data('description');
-                const productQuantity = $(this).data('quantity');
-                const productDiscount = $(this).data('discount') || 0;
+            const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+            const modal = document.getElementById('product-modal');
+            const modalName = document.getElementById('modal-product-name');
+            const modalImage = document.getElementById('modal-product-image');
+            const modalDescription = document.getElementById('modal-product-description');
+            const modalPrice = document.getElementById('modal-product-price');
+            const addToCartModal = document.getElementById('add-to-cart-modal');
+            const closeModalButton = document.querySelector('.close-btn');
 
-                $('#modal-product-name').text(productName);
-                $('#modal-product-price').text(productPrice);
-                $('#modal-product-image').attr('src', productImage);
-                $('#modal-product-description').text(productDescription);
-                $('#modal-product-quantity').text(productQuantity);
-                $('#modal-product-discount').text(productDiscount);
-                $('#product-modal').fadeIn();
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modalName.textContent = this.dataset.name;
+                    modalImage.src = this.dataset.image;
+                    modalDescription.textContent = this.dataset.description;
+                    modalPrice.textContent = this.dataset.price;
+                    modal.style.display = 'block';
 
-                // Add to Cart from Modal
-                $('#add-to-cart-modal').off('click').on('click', function() {
-                    const name = productName;
-                    const price = parseFloat(productPrice.replace('$', ''));
-                    const image = productImage;
-                    const discount = parseFloat(productDiscount);
-
-                    const existingItemIndex = cart.findIndex(item => item.name === name);
-                    if (existingItemIndex > -1) {
-                        cart[existingItemIndex].quantity++;
-                    } else {
-                        cart.push({ name, price, image, discount, quantity: 1 });
-                    }
-
-                    const toast = document.createElement('div');
-                    toast.classList.add('toast', 'show', 'position-fixed', 'bottom-0', 'end-0', 'm-3');
-                    toast.innerHTML = `
-                        <div class="toast-header">
-                            <strong class="me-auto">Added to Cart</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            ${name} has been added to your cart.
-                        </div>
-                    `;
-                    document.body.appendChild(toast);
-                    setTimeout(() => toast.remove(), 3000);
-
-                    updateCartUI();
-                    $('#product-modal').fadeOut();
+                    // Add to cart functionality for modal
+                    addToCartModal.onclick = () => {
+                        alert(`${this.dataset.name} added to cart!`);
+                        modal.style.display = 'none';
+                    };
                 });
             });
 
-            $('.close-btn').click(function() {
-                $('#product-modal').fadeOut();
+            // Close modal functionality
+            closeModalButton.addEventListener('click', function() {
+                modal.style.display = 'none';
             });
 
-            $(window).click(function(event) {
-                if ($(event.target).is('#product-modal')) {
-                    $('#product-modal').fadeOut();
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
                 }
             });
 
