@@ -1,7 +1,7 @@
 <?php
 require_once 'Controllers/BaseController.php';
 require_once 'Models/HistoryModel.php';
-require_once "Models/orderModel.php";
+require_once "Models/OrderModel.php";
 require_once "Models/ProductModel.php";
 require_once "Models/AdminModel.php";
 
